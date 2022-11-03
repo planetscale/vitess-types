@@ -85,6 +85,8 @@ type VTAdminClient interface {
 	GetTablet(context.Context, *connect_go.Request[vtadmin.GetTabletRequest]) (*connect_go.Response[vtadmin.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
 	GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error)
+	// GetTopologyPath returns the cell located at the specified path in the topology server.
+	GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
 	GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error)
@@ -287,6 +289,11 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 			baseURL+"/vtadmin.VTAdmin/GetTablets",
 			opts...,
 		),
+		getTopologyPath: connect_go.NewClient[vtadmin.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/GetTopologyPath",
+			opts...,
+		),
 		getVSchema: connect_go.NewClient[vtadmin.GetVSchemaRequest, vtadmin.VSchema](
 			httpClient,
 			baseURL+"/vtadmin.VTAdmin/GetVSchema",
@@ -444,6 +451,7 @@ type vTAdminClient struct {
 	getSrvVSchemas                 *connect_go.Client[vtadmin.GetSrvVSchemasRequest, vtadmin.GetSrvVSchemasResponse]
 	getTablet                      *connect_go.Client[vtadmin.GetTabletRequest, vtadmin.Tablet]
 	getTablets                     *connect_go.Client[vtadmin.GetTabletsRequest, vtadmin.GetTabletsResponse]
+	getTopologyPath                *connect_go.Client[vtadmin.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse]
 	getVSchema                     *connect_go.Client[vtadmin.GetVSchemaRequest, vtadmin.VSchema]
 	getVSchemas                    *connect_go.Client[vtadmin.GetVSchemasRequest, vtadmin.GetVSchemasResponse]
 	getVtctlds                     *connect_go.Client[vtadmin.GetVtctldsRequest, vtadmin.GetVtctldsResponse]
@@ -580,6 +588,11 @@ func (c *vTAdminClient) GetTablet(ctx context.Context, req *connect_go.Request[v
 // GetTablets calls vtadmin.VTAdmin.GetTablets.
 func (c *vTAdminClient) GetTablets(ctx context.Context, req *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
+}
+
+// GetTopologyPath calls vtadmin.VTAdmin.GetTopologyPath.
+func (c *vTAdminClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
 // GetVSchema calls vtadmin.VTAdmin.GetVSchema.
@@ -771,6 +784,8 @@ type VTAdminHandler interface {
 	GetTablet(context.Context, *connect_go.Request[vtadmin.GetTabletRequest]) (*connect_go.Response[vtadmin.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
 	GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error)
+	// GetTopologyPath returns the cell located at the specified path in the topology server.
+	GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
 	GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error)
@@ -968,6 +983,11 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 	mux.Handle("/vtadmin.VTAdmin/GetTablets", connect_go.NewUnaryHandler(
 		"/vtadmin.VTAdmin/GetTablets",
 		svc.GetTablets,
+		opts...,
+	))
+	mux.Handle("/vtadmin.VTAdmin/GetTopologyPath", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/GetTopologyPath",
+		svc.GetTopologyPath,
 		opts...,
 	))
 	mux.Handle("/vtadmin.VTAdmin/GetVSchema", connect_go.NewUnaryHandler(
@@ -1192,6 +1212,10 @@ func (UnimplementedVTAdminHandler) GetTablet(context.Context, *connect_go.Reques
 
 func (UnimplementedVTAdminHandler) GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablets is not implemented"))
+}
+
+func (UnimplementedVTAdminHandler) GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTopologyPath is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error) {
