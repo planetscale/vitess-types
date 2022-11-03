@@ -197,6 +197,8 @@ type VtctldClient interface {
 	GetTablet(context.Context, *connect_go.Request[vtctldata.GetTabletRequest]) (*connect_go.Response[vtctldata.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
 	GetTablets(context.Context, *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error)
+	// GetTopologyPath returns the topology cell at a given path.
+	GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
 	GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
@@ -343,6 +345,8 @@ type VtctldClient interface {
 	ValidateShard(context.Context, *connect_go.Request[vtctldata.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of shard 0 matches all of the other tablets in the keyspace.
 	ValidateVersionKeyspace(context.Context, *connect_go.Request[vtctldata.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error)
+	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
+	ValidateVersionShard(context.Context, *connect_go.Request[vtctldata.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect_go.Request[vtctldata.ValidateVSchemaRequest]) (*connect_go.Response[vtctldata.ValidateVSchemaResponse], error)
 }
@@ -557,6 +561,11 @@ func NewVtctldClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 			baseURL+"/vtctlservice.Vtctld/GetTablets",
 			opts...,
 		),
+		getTopologyPath: connect_go.NewClient[vtctldata.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse](
+			httpClient,
+			baseURL+"/vtctlservice.Vtctld/GetTopologyPath",
+			opts...,
+		),
 		getVersion: connect_go.NewClient[vtctldata.GetVersionRequest, vtctldata.GetVersionResponse](
 			httpClient,
 			baseURL+"/vtctlservice.Vtctld/GetVersion",
@@ -757,6 +766,11 @@ func NewVtctldClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 			baseURL+"/vtctlservice.Vtctld/ValidateVersionKeyspace",
 			opts...,
 		),
+		validateVersionShard: connect_go.NewClient[vtctldata.ValidateVersionShardRequest, vtctldata.ValidateVersionShardResponse](
+			httpClient,
+			baseURL+"/vtctlservice.Vtctld/ValidateVersionShard",
+			opts...,
+		),
 		validateVSchema: connect_go.NewClient[vtctldata.ValidateVSchemaRequest, vtctldata.ValidateVSchemaResponse](
 			httpClient,
 			baseURL+"/vtctlservice.Vtctld/ValidateVSchema",
@@ -807,6 +821,7 @@ type vtctldClient struct {
 	getSrvVSchemas              *connect_go.Client[vtctldata.GetSrvVSchemasRequest, vtctldata.GetSrvVSchemasResponse]
 	getTablet                   *connect_go.Client[vtctldata.GetTabletRequest, vtctldata.GetTabletResponse]
 	getTablets                  *connect_go.Client[vtctldata.GetTabletsRequest, vtctldata.GetTabletsResponse]
+	getTopologyPath             *connect_go.Client[vtctldata.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse]
 	getVersion                  *connect_go.Client[vtctldata.GetVersionRequest, vtctldata.GetVersionResponse]
 	getVSchema                  *connect_go.Client[vtctldata.GetVSchemaRequest, vtctldata.GetVSchemaResponse]
 	getWorkflows                *connect_go.Client[vtctldata.GetWorkflowsRequest, vtctldata.GetWorkflowsResponse]
@@ -847,6 +862,7 @@ type vtctldClient struct {
 	validateSchemaKeyspace      *connect_go.Client[vtctldata.ValidateSchemaKeyspaceRequest, vtctldata.ValidateSchemaKeyspaceResponse]
 	validateShard               *connect_go.Client[vtctldata.ValidateShardRequest, vtctldata.ValidateShardResponse]
 	validateVersionKeyspace     *connect_go.Client[vtctldata.ValidateVersionKeyspaceRequest, vtctldata.ValidateVersionKeyspaceResponse]
+	validateVersionShard        *connect_go.Client[vtctldata.ValidateVersionShardRequest, vtctldata.ValidateVersionShardResponse]
 	validateVSchema             *connect_go.Client[vtctldata.ValidateVSchemaRequest, vtctldata.ValidateVSchemaResponse]
 }
 
@@ -1050,6 +1066,11 @@ func (c *vtctldClient) GetTablets(ctx context.Context, req *connect_go.Request[v
 	return c.getTablets.CallUnary(ctx, req)
 }
 
+// GetTopologyPath calls vtctlservice.Vtctld.GetTopologyPath.
+func (c *vtctldClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return c.getTopologyPath.CallUnary(ctx, req)
+}
+
 // GetVersion calls vtctlservice.Vtctld.GetVersion.
 func (c *vtctldClient) GetVersion(ctx context.Context, req *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error) {
 	return c.getVersion.CallUnary(ctx, req)
@@ -1250,6 +1271,11 @@ func (c *vtctldClient) ValidateVersionKeyspace(ctx context.Context, req *connect
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
 }
 
+// ValidateVersionShard calls vtctlservice.Vtctld.ValidateVersionShard.
+func (c *vtctldClient) ValidateVersionShard(ctx context.Context, req *connect_go.Request[vtctldata.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error) {
+	return c.validateVersionShard.CallUnary(ctx, req)
+}
+
 // ValidateVSchema calls vtctlservice.Vtctld.ValidateVSchema.
 func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect_go.Request[vtctldata.ValidateVSchemaRequest]) (*connect_go.Response[vtctldata.ValidateVSchemaResponse], error) {
 	return c.validateVSchema.CallUnary(ctx, req)
@@ -1365,6 +1391,8 @@ type VtctldHandler interface {
 	GetTablet(context.Context, *connect_go.Request[vtctldata.GetTabletRequest]) (*connect_go.Response[vtctldata.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
 	GetTablets(context.Context, *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error)
+	// GetTopologyPath returns the topology cell at a given path.
+	GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
 	GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
@@ -1511,6 +1539,8 @@ type VtctldHandler interface {
 	ValidateShard(context.Context, *connect_go.Request[vtctldata.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of shard 0 matches all of the other tablets in the keyspace.
 	ValidateVersionKeyspace(context.Context, *connect_go.Request[vtctldata.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error)
+	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
+	ValidateVersionShard(context.Context, *connect_go.Request[vtctldata.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect_go.Request[vtctldata.ValidateVSchemaRequest]) (*connect_go.Response[vtctldata.ValidateVSchemaResponse], error)
 }
@@ -1722,6 +1752,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect_go.HandlerOption) (stri
 		svc.GetTablets,
 		opts...,
 	))
+	mux.Handle("/vtctlservice.Vtctld/GetTopologyPath", connect_go.NewUnaryHandler(
+		"/vtctlservice.Vtctld/GetTopologyPath",
+		svc.GetTopologyPath,
+		opts...,
+	))
 	mux.Handle("/vtctlservice.Vtctld/GetVersion", connect_go.NewUnaryHandler(
 		"/vtctlservice.Vtctld/GetVersion",
 		svc.GetVersion,
@@ -1922,6 +1957,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect_go.HandlerOption) (stri
 		svc.ValidateVersionKeyspace,
 		opts...,
 	))
+	mux.Handle("/vtctlservice.Vtctld/ValidateVersionShard", connect_go.NewUnaryHandler(
+		"/vtctlservice.Vtctld/ValidateVersionShard",
+		svc.ValidateVersionShard,
+		opts...,
+	))
 	mux.Handle("/vtctlservice.Vtctld/ValidateVSchema", connect_go.NewUnaryHandler(
 		"/vtctlservice.Vtctld/ValidateVSchema",
 		svc.ValidateVSchema,
@@ -2093,6 +2133,10 @@ func (UnimplementedVtctldHandler) GetTablets(context.Context, *connect_go.Reques
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablets is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTopologyPath is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetVersion is not implemented"))
 }
@@ -2251,6 +2295,10 @@ func (UnimplementedVtctldHandler) ValidateShard(context.Context, *connect_go.Req
 
 func (UnimplementedVtctldHandler) ValidateVersionKeyspace(context.Context, *connect_go.Request[vtctldata.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionKeyspace is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect_go.Request[vtctldata.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect_go.Request[vtctldata.ValidateVSchemaRequest]) (*connect_go.Response[vtctldata.ValidateVSchemaResponse], error) {

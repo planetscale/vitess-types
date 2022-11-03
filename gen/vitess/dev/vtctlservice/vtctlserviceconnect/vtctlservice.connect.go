@@ -197,6 +197,8 @@ type VtctldClient interface {
 	GetTablet(context.Context, *connect_go.Request[vtctldata.GetTabletRequest]) (*connect_go.Response[vtctldata.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
 	GetTablets(context.Context, *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error)
+	// GetTopologyPath returns the topology cell at a given path.
+	GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
 	GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
@@ -559,6 +561,11 @@ func NewVtctldClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 			baseURL+"/vtctlservice.Vtctld/GetTablets",
 			opts...,
 		),
+		getTopologyPath: connect_go.NewClient[vtctldata.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse](
+			httpClient,
+			baseURL+"/vtctlservice.Vtctld/GetTopologyPath",
+			opts...,
+		),
 		getVersion: connect_go.NewClient[vtctldata.GetVersionRequest, vtctldata.GetVersionResponse](
 			httpClient,
 			baseURL+"/vtctlservice.Vtctld/GetVersion",
@@ -814,6 +821,7 @@ type vtctldClient struct {
 	getSrvVSchemas              *connect_go.Client[vtctldata.GetSrvVSchemasRequest, vtctldata.GetSrvVSchemasResponse]
 	getTablet                   *connect_go.Client[vtctldata.GetTabletRequest, vtctldata.GetTabletResponse]
 	getTablets                  *connect_go.Client[vtctldata.GetTabletsRequest, vtctldata.GetTabletsResponse]
+	getTopologyPath             *connect_go.Client[vtctldata.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse]
 	getVersion                  *connect_go.Client[vtctldata.GetVersionRequest, vtctldata.GetVersionResponse]
 	getVSchema                  *connect_go.Client[vtctldata.GetVSchemaRequest, vtctldata.GetVSchemaResponse]
 	getWorkflows                *connect_go.Client[vtctldata.GetWorkflowsRequest, vtctldata.GetWorkflowsResponse]
@@ -1056,6 +1064,11 @@ func (c *vtctldClient) GetTablet(ctx context.Context, req *connect_go.Request[vt
 // GetTablets calls vtctlservice.Vtctld.GetTablets.
 func (c *vtctldClient) GetTablets(ctx context.Context, req *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
+}
+
+// GetTopologyPath calls vtctlservice.Vtctld.GetTopologyPath.
+func (c *vtctldClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
 // GetVersion calls vtctlservice.Vtctld.GetVersion.
@@ -1378,6 +1391,8 @@ type VtctldHandler interface {
 	GetTablet(context.Context, *connect_go.Request[vtctldata.GetTabletRequest]) (*connect_go.Response[vtctldata.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
 	GetTablets(context.Context, *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error)
+	// GetTopologyPath returns the topology cell at a given path.
+	GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
 	GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
@@ -1735,6 +1750,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect_go.HandlerOption) (stri
 	mux.Handle("/vtctlservice.Vtctld/GetTablets", connect_go.NewUnaryHandler(
 		"/vtctlservice.Vtctld/GetTablets",
 		svc.GetTablets,
+		opts...,
+	))
+	mux.Handle("/vtctlservice.Vtctld/GetTopologyPath", connect_go.NewUnaryHandler(
+		"/vtctlservice.Vtctld/GetTopologyPath",
+		svc.GetTopologyPath,
 		opts...,
 	))
 	mux.Handle("/vtctlservice.Vtctld/GetVersion", connect_go.NewUnaryHandler(
@@ -2111,6 +2131,10 @@ func (UnimplementedVtctldHandler) GetTablet(context.Context, *connect_go.Request
 
 func (UnimplementedVtctldHandler) GetTablets(context.Context, *connect_go.Request[vtctldata.GetTabletsRequest]) (*connect_go.Response[vtctldata.GetTabletsResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablets is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) GetTopologyPath(context.Context, *connect_go.Request[vtctldata.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTopologyPath is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetVersion(context.Context, *connect_go.Request[vtctldata.GetVersionRequest]) (*connect_go.Response[vtctldata.GetVersionResponse], error) {

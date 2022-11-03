@@ -59,6 +59,8 @@ type VTAdminClient interface {
 	GetCellsAliases(context.Context, *connect_go.Request[vtadmin.GetCellsAliasesRequest]) (*connect_go.Response[vtadmin.GetCellsAliasesResponse], error)
 	// GetClusters returns all configured clusters.
 	GetClusters(context.Context, *connect_go.Request[vtadmin.GetClustersRequest]) (*connect_go.Response[vtadmin.GetClustersResponse], error)
+	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
+	GetFullStatus(context.Context, *connect_go.Request[vtadmin.GetFullStatusRequest]) (*connect_go.Response[vtctldata.GetFullStatusResponse], error)
 	// GetGates returns all gates across all the specified clusters.
 	GetGates(context.Context, *connect_go.Request[vtadmin.GetGatesRequest]) (*connect_go.Response[vtadmin.GetGatesResponse], error)
 	// GetKeyspace returns a keyspace by name in the specified cluster.
@@ -83,6 +85,8 @@ type VTAdminClient interface {
 	GetTablet(context.Context, *connect_go.Request[vtadmin.GetTabletRequest]) (*connect_go.Response[vtadmin.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
 	GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error)
+	// GetTopologyPath returns the cell located at the specified path in the topology server.
+	GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
 	GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error)
@@ -143,6 +147,9 @@ type VTAdminClient interface {
 	// * "orchestrator" here refers to external orchestrator, not the newer,
 	// Vitess-aware orchestrator, VTOrc.
 	TabletExternallyPromoted(context.Context, *connect_go.Request[vtadmin.TabletExternallyPromotedRequest]) (*connect_go.Response[vtadmin.TabletExternallyPromotedResponse], error)
+	// Validate validates all nodes in a cluster that are reachable from the global replication graph,
+	// as well as all tablets in discoverable cells, are consistent
+	Validate(context.Context, *connect_go.Request[vtadmin.ValidateRequest]) (*connect_go.Response[vtctldata.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
 	ValidateKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateKeyspaceResponse], error)
@@ -150,9 +157,13 @@ type VTAdminClient interface {
 	// for shard 0 matches the schema on all of the other tablets in the
 	// keyspace.
 	ValidateSchemaKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateSchemaKeyspaceResponse], error)
+	// ValidateShard validates that that all nodes reachable from the specified shard are consistent.
+	ValidateShard(context.Context, *connect_go.Request[vtadmin.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of
 	// shard 0 matches all of the other tablets in the keyspace.
 	ValidateVersionKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error)
+	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
+	ValidateVersionShard(context.Context, *connect_go.Request[vtadmin.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error)
 	// VTExplain provides information on how Vitess plans to execute a
 	// particular query.
 	VTExplain(context.Context, *connect_go.Request[vtadmin.VTExplainRequest]) (*connect_go.Response[vtadmin.VTExplainResponse], error)
@@ -223,6 +234,11 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 			baseURL+"/vtadmin.VTAdmin/GetClusters",
 			opts...,
 		),
+		getFullStatus: connect_go.NewClient[vtadmin.GetFullStatusRequest, vtctldata.GetFullStatusResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/GetFullStatus",
+			opts...,
+		),
 		getGates: connect_go.NewClient[vtadmin.GetGatesRequest, vtadmin.GetGatesResponse](
 			httpClient,
 			baseURL+"/vtadmin.VTAdmin/GetGates",
@@ -271,6 +287,11 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 		getTablets: connect_go.NewClient[vtadmin.GetTabletsRequest, vtadmin.GetTabletsResponse](
 			httpClient,
 			baseURL+"/vtadmin.VTAdmin/GetTablets",
+			opts...,
+		),
+		getTopologyPath: connect_go.NewClient[vtadmin.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/GetTopologyPath",
 			opts...,
 		),
 		getVSchema: connect_go.NewClient[vtadmin.GetVSchemaRequest, vtadmin.VSchema](
@@ -368,6 +389,11 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 			baseURL+"/vtadmin.VTAdmin/TabletExternallyPromoted",
 			opts...,
 		),
+		validate: connect_go.NewClient[vtadmin.ValidateRequest, vtctldata.ValidateResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/Validate",
+			opts...,
+		),
 		validateKeyspace: connect_go.NewClient[vtadmin.ValidateKeyspaceRequest, vtctldata.ValidateKeyspaceResponse](
 			httpClient,
 			baseURL+"/vtadmin.VTAdmin/ValidateKeyspace",
@@ -378,9 +404,19 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 			baseURL+"/vtadmin.VTAdmin/ValidateSchemaKeyspace",
 			opts...,
 		),
+		validateShard: connect_go.NewClient[vtadmin.ValidateShardRequest, vtctldata.ValidateShardResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/ValidateShard",
+			opts...,
+		),
 		validateVersionKeyspace: connect_go.NewClient[vtadmin.ValidateVersionKeyspaceRequest, vtctldata.ValidateVersionKeyspaceResponse](
 			httpClient,
 			baseURL+"/vtadmin.VTAdmin/ValidateVersionKeyspace",
+			opts...,
+		),
+		validateVersionShard: connect_go.NewClient[vtadmin.ValidateVersionShardRequest, vtctldata.ValidateVersionShardResponse](
+			httpClient,
+			baseURL+"/vtadmin.VTAdmin/ValidateVersionShard",
 			opts...,
 		),
 		vTExplain: connect_go.NewClient[vtadmin.VTExplainRequest, vtadmin.VTExplainResponse](
@@ -404,6 +440,7 @@ type vTAdminClient struct {
 	getCellInfos                   *connect_go.Client[vtadmin.GetCellInfosRequest, vtadmin.GetCellInfosResponse]
 	getCellsAliases                *connect_go.Client[vtadmin.GetCellsAliasesRequest, vtadmin.GetCellsAliasesResponse]
 	getClusters                    *connect_go.Client[vtadmin.GetClustersRequest, vtadmin.GetClustersResponse]
+	getFullStatus                  *connect_go.Client[vtadmin.GetFullStatusRequest, vtctldata.GetFullStatusResponse]
 	getGates                       *connect_go.Client[vtadmin.GetGatesRequest, vtadmin.GetGatesResponse]
 	getKeyspace                    *connect_go.Client[vtadmin.GetKeyspaceRequest, vtadmin.Keyspace]
 	getKeyspaces                   *connect_go.Client[vtadmin.GetKeyspacesRequest, vtadmin.GetKeyspacesResponse]
@@ -414,6 +451,7 @@ type vTAdminClient struct {
 	getSrvVSchemas                 *connect_go.Client[vtadmin.GetSrvVSchemasRequest, vtadmin.GetSrvVSchemasResponse]
 	getTablet                      *connect_go.Client[vtadmin.GetTabletRequest, vtadmin.Tablet]
 	getTablets                     *connect_go.Client[vtadmin.GetTabletsRequest, vtadmin.GetTabletsResponse]
+	getTopologyPath                *connect_go.Client[vtadmin.GetTopologyPathRequest, vtctldata.GetTopologyPathResponse]
 	getVSchema                     *connect_go.Client[vtadmin.GetVSchemaRequest, vtadmin.VSchema]
 	getVSchemas                    *connect_go.Client[vtadmin.GetVSchemasRequest, vtadmin.GetVSchemasResponse]
 	getVtctlds                     *connect_go.Client[vtadmin.GetVtctldsRequest, vtadmin.GetVtctldsResponse]
@@ -433,9 +471,12 @@ type vTAdminClient struct {
 	startReplication               *connect_go.Client[vtadmin.StartReplicationRequest, vtadmin.StartReplicationResponse]
 	stopReplication                *connect_go.Client[vtadmin.StopReplicationRequest, vtadmin.StopReplicationResponse]
 	tabletExternallyPromoted       *connect_go.Client[vtadmin.TabletExternallyPromotedRequest, vtadmin.TabletExternallyPromotedResponse]
+	validate                       *connect_go.Client[vtadmin.ValidateRequest, vtctldata.ValidateResponse]
 	validateKeyspace               *connect_go.Client[vtadmin.ValidateKeyspaceRequest, vtctldata.ValidateKeyspaceResponse]
 	validateSchemaKeyspace         *connect_go.Client[vtadmin.ValidateSchemaKeyspaceRequest, vtctldata.ValidateSchemaKeyspaceResponse]
+	validateShard                  *connect_go.Client[vtadmin.ValidateShardRequest, vtctldata.ValidateShardResponse]
 	validateVersionKeyspace        *connect_go.Client[vtadmin.ValidateVersionKeyspaceRequest, vtctldata.ValidateVersionKeyspaceResponse]
+	validateVersionShard           *connect_go.Client[vtadmin.ValidateVersionShardRequest, vtctldata.ValidateVersionShardResponse]
 	vTExplain                      *connect_go.Client[vtadmin.VTExplainRequest, vtadmin.VTExplainResponse]
 }
 
@@ -494,6 +535,11 @@ func (c *vTAdminClient) GetClusters(ctx context.Context, req *connect_go.Request
 	return c.getClusters.CallUnary(ctx, req)
 }
 
+// GetFullStatus calls vtadmin.VTAdmin.GetFullStatus.
+func (c *vTAdminClient) GetFullStatus(ctx context.Context, req *connect_go.Request[vtadmin.GetFullStatusRequest]) (*connect_go.Response[vtctldata.GetFullStatusResponse], error) {
+	return c.getFullStatus.CallUnary(ctx, req)
+}
+
 // GetGates calls vtadmin.VTAdmin.GetGates.
 func (c *vTAdminClient) GetGates(ctx context.Context, req *connect_go.Request[vtadmin.GetGatesRequest]) (*connect_go.Response[vtadmin.GetGatesResponse], error) {
 	return c.getGates.CallUnary(ctx, req)
@@ -542,6 +588,11 @@ func (c *vTAdminClient) GetTablet(ctx context.Context, req *connect_go.Request[v
 // GetTablets calls vtadmin.VTAdmin.GetTablets.
 func (c *vTAdminClient) GetTablets(ctx context.Context, req *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
+}
+
+// GetTopologyPath calls vtadmin.VTAdmin.GetTopologyPath.
+func (c *vTAdminClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
 // GetVSchema calls vtadmin.VTAdmin.GetVSchema.
@@ -639,6 +690,11 @@ func (c *vTAdminClient) TabletExternallyPromoted(ctx context.Context, req *conne
 	return c.tabletExternallyPromoted.CallUnary(ctx, req)
 }
 
+// Validate calls vtadmin.VTAdmin.Validate.
+func (c *vTAdminClient) Validate(ctx context.Context, req *connect_go.Request[vtadmin.ValidateRequest]) (*connect_go.Response[vtctldata.ValidateResponse], error) {
+	return c.validate.CallUnary(ctx, req)
+}
+
 // ValidateKeyspace calls vtadmin.VTAdmin.ValidateKeyspace.
 func (c *vTAdminClient) ValidateKeyspace(ctx context.Context, req *connect_go.Request[vtadmin.ValidateKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateKeyspaceResponse], error) {
 	return c.validateKeyspace.CallUnary(ctx, req)
@@ -649,9 +705,19 @@ func (c *vTAdminClient) ValidateSchemaKeyspace(ctx context.Context, req *connect
 	return c.validateSchemaKeyspace.CallUnary(ctx, req)
 }
 
+// ValidateShard calls vtadmin.VTAdmin.ValidateShard.
+func (c *vTAdminClient) ValidateShard(ctx context.Context, req *connect_go.Request[vtadmin.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error) {
+	return c.validateShard.CallUnary(ctx, req)
+}
+
 // ValidateVersionKeyspace calls vtadmin.VTAdmin.ValidateVersionKeyspace.
 func (c *vTAdminClient) ValidateVersionKeyspace(ctx context.Context, req *connect_go.Request[vtadmin.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error) {
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
+}
+
+// ValidateVersionShard calls vtadmin.VTAdmin.ValidateVersionShard.
+func (c *vTAdminClient) ValidateVersionShard(ctx context.Context, req *connect_go.Request[vtadmin.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error) {
+	return c.validateVersionShard.CallUnary(ctx, req)
 }
 
 // VTExplain calls vtadmin.VTAdmin.VTExplain.
@@ -692,6 +758,8 @@ type VTAdminHandler interface {
 	GetCellsAliases(context.Context, *connect_go.Request[vtadmin.GetCellsAliasesRequest]) (*connect_go.Response[vtadmin.GetCellsAliasesResponse], error)
 	// GetClusters returns all configured clusters.
 	GetClusters(context.Context, *connect_go.Request[vtadmin.GetClustersRequest]) (*connect_go.Response[vtadmin.GetClustersResponse], error)
+	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
+	GetFullStatus(context.Context, *connect_go.Request[vtadmin.GetFullStatusRequest]) (*connect_go.Response[vtctldata.GetFullStatusResponse], error)
 	// GetGates returns all gates across all the specified clusters.
 	GetGates(context.Context, *connect_go.Request[vtadmin.GetGatesRequest]) (*connect_go.Response[vtadmin.GetGatesResponse], error)
 	// GetKeyspace returns a keyspace by name in the specified cluster.
@@ -716,6 +784,8 @@ type VTAdminHandler interface {
 	GetTablet(context.Context, *connect_go.Request[vtadmin.GetTabletRequest]) (*connect_go.Response[vtadmin.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
 	GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error)
+	// GetTopologyPath returns the cell located at the specified path in the topology server.
+	GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
 	GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error)
@@ -776,6 +846,9 @@ type VTAdminHandler interface {
 	// * "orchestrator" here refers to external orchestrator, not the newer,
 	// Vitess-aware orchestrator, VTOrc.
 	TabletExternallyPromoted(context.Context, *connect_go.Request[vtadmin.TabletExternallyPromotedRequest]) (*connect_go.Response[vtadmin.TabletExternallyPromotedResponse], error)
+	// Validate validates all nodes in a cluster that are reachable from the global replication graph,
+	// as well as all tablets in discoverable cells, are consistent
+	Validate(context.Context, *connect_go.Request[vtadmin.ValidateRequest]) (*connect_go.Response[vtctldata.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
 	ValidateKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateKeyspaceResponse], error)
@@ -783,9 +856,13 @@ type VTAdminHandler interface {
 	// for shard 0 matches the schema on all of the other tablets in the
 	// keyspace.
 	ValidateSchemaKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateSchemaKeyspaceResponse], error)
+	// ValidateShard validates that that all nodes reachable from the specified shard are consistent.
+	ValidateShard(context.Context, *connect_go.Request[vtadmin.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of
 	// shard 0 matches all of the other tablets in the keyspace.
 	ValidateVersionKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error)
+	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
+	ValidateVersionShard(context.Context, *connect_go.Request[vtadmin.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error)
 	// VTExplain provides information on how Vitess plans to execute a
 	// particular query.
 	VTExplain(context.Context, *connect_go.Request[vtadmin.VTExplainRequest]) (*connect_go.Response[vtadmin.VTExplainResponse], error)
@@ -853,6 +930,11 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 		svc.GetClusters,
 		opts...,
 	))
+	mux.Handle("/vtadmin.VTAdmin/GetFullStatus", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/GetFullStatus",
+		svc.GetFullStatus,
+		opts...,
+	))
 	mux.Handle("/vtadmin.VTAdmin/GetGates", connect_go.NewUnaryHandler(
 		"/vtadmin.VTAdmin/GetGates",
 		svc.GetGates,
@@ -901,6 +983,11 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 	mux.Handle("/vtadmin.VTAdmin/GetTablets", connect_go.NewUnaryHandler(
 		"/vtadmin.VTAdmin/GetTablets",
 		svc.GetTablets,
+		opts...,
+	))
+	mux.Handle("/vtadmin.VTAdmin/GetTopologyPath", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/GetTopologyPath",
+		svc.GetTopologyPath,
 		opts...,
 	))
 	mux.Handle("/vtadmin.VTAdmin/GetVSchema", connect_go.NewUnaryHandler(
@@ -998,6 +1085,11 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 		svc.TabletExternallyPromoted,
 		opts...,
 	))
+	mux.Handle("/vtadmin.VTAdmin/Validate", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/Validate",
+		svc.Validate,
+		opts...,
+	))
 	mux.Handle("/vtadmin.VTAdmin/ValidateKeyspace", connect_go.NewUnaryHandler(
 		"/vtadmin.VTAdmin/ValidateKeyspace",
 		svc.ValidateKeyspace,
@@ -1008,9 +1100,19 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 		svc.ValidateSchemaKeyspace,
 		opts...,
 	))
+	mux.Handle("/vtadmin.VTAdmin/ValidateShard", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/ValidateShard",
+		svc.ValidateShard,
+		opts...,
+	))
 	mux.Handle("/vtadmin.VTAdmin/ValidateVersionKeyspace", connect_go.NewUnaryHandler(
 		"/vtadmin.VTAdmin/ValidateVersionKeyspace",
 		svc.ValidateVersionKeyspace,
+		opts...,
+	))
+	mux.Handle("/vtadmin.VTAdmin/ValidateVersionShard", connect_go.NewUnaryHandler(
+		"/vtadmin.VTAdmin/ValidateVersionShard",
+		svc.ValidateVersionShard,
 		opts...,
 	))
 	mux.Handle("/vtadmin.VTAdmin/VTExplain", connect_go.NewUnaryHandler(
@@ -1068,6 +1170,10 @@ func (UnimplementedVTAdminHandler) GetClusters(context.Context, *connect_go.Requ
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetClusters is not implemented"))
 }
 
+func (UnimplementedVTAdminHandler) GetFullStatus(context.Context, *connect_go.Request[vtadmin.GetFullStatusRequest]) (*connect_go.Response[vtctldata.GetFullStatusResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetFullStatus is not implemented"))
+}
+
 func (UnimplementedVTAdminHandler) GetGates(context.Context, *connect_go.Request[vtadmin.GetGatesRequest]) (*connect_go.Response[vtadmin.GetGatesResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetGates is not implemented"))
 }
@@ -1106,6 +1212,10 @@ func (UnimplementedVTAdminHandler) GetTablet(context.Context, *connect_go.Reques
 
 func (UnimplementedVTAdminHandler) GetTablets(context.Context, *connect_go.Request[vtadmin.GetTabletsRequest]) (*connect_go.Response[vtadmin.GetTabletsResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablets is not implemented"))
+}
+
+func (UnimplementedVTAdminHandler) GetTopologyPath(context.Context, *connect_go.Request[vtadmin.GetTopologyPathRequest]) (*connect_go.Response[vtctldata.GetTopologyPathResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTopologyPath is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetVSchema(context.Context, *connect_go.Request[vtadmin.GetVSchemaRequest]) (*connect_go.Response[vtadmin.VSchema], error) {
@@ -1184,6 +1294,10 @@ func (UnimplementedVTAdminHandler) TabletExternallyPromoted(context.Context, *co
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.TabletExternallyPromoted is not implemented"))
 }
 
+func (UnimplementedVTAdminHandler) Validate(context.Context, *connect_go.Request[vtadmin.ValidateRequest]) (*connect_go.Response[vtctldata.ValidateResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.Validate is not implemented"))
+}
+
 func (UnimplementedVTAdminHandler) ValidateKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateKeyspaceResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateKeyspace is not implemented"))
 }
@@ -1192,8 +1306,16 @@ func (UnimplementedVTAdminHandler) ValidateSchemaKeyspace(context.Context, *conn
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateSchemaKeyspace is not implemented"))
 }
 
+func (UnimplementedVTAdminHandler) ValidateShard(context.Context, *connect_go.Request[vtadmin.ValidateShardRequest]) (*connect_go.Response[vtctldata.ValidateShardResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateShard is not implemented"))
+}
+
 func (UnimplementedVTAdminHandler) ValidateVersionKeyspace(context.Context, *connect_go.Request[vtadmin.ValidateVersionKeyspaceRequest]) (*connect_go.Response[vtctldata.ValidateVersionKeyspaceResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionKeyspace is not implemented"))
+}
+
+func (UnimplementedVTAdminHandler) ValidateVersionShard(context.Context, *connect_go.Request[vtadmin.ValidateVersionShardRequest]) (*connect_go.Response[vtctldata.ValidateVersionShardResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) VTExplain(context.Context, *connect_go.Request[vtadmin.VTExplainRequest]) (*connect_go.Response[vtadmin.VTExplainResponse], error) {
