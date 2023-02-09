@@ -19,7 +19,7 @@ limitations under the License.
 syntax = "proto3";
 
 package queryservice;
-option go_package = "vitess.io/vitess/go/vt/proto/queryservice";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/dev/queryservice";
 
 import "query/query.proto";
 import "binlogdata/binlogdata.proto";

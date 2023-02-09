@@ -9,6 +9,7 @@ import (
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
 	binlogdata "github.com/planetscale/vitess-types/gen/vitess/dev/binlogdata"
+	_ "github.com/planetscale/vitess-types/gen/vitess/dev/binlogservice"
 	http "net/http"
 	strings "strings"
 )

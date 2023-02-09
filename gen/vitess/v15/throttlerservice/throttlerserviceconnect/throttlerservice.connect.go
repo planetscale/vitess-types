@@ -9,6 +9,7 @@ import (
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
 	throttlerdata "github.com/planetscale/vitess-types/gen/vitess/v15/throttlerdata"
+	_ "github.com/planetscale/vitess-types/gen/vitess/v15/throttlerservice"
 	http "net/http"
 	strings "strings"
 )

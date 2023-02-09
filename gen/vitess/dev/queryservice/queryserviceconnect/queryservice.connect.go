@@ -10,6 +10,7 @@ import (
 	connect_go "github.com/bufbuild/connect-go"
 	binlogdata "github.com/planetscale/vitess-types/gen/vitess/dev/binlogdata"
 	query "github.com/planetscale/vitess-types/gen/vitess/dev/query"
+	_ "github.com/planetscale/vitess-types/gen/vitess/dev/queryservice"
 	http "net/http"
 	strings "strings"
 )

@@ -18,7 +18,7 @@ limitations under the License.
 // proxy for vt commands.
 
 syntax = "proto3";
-option go_package = "vitess.io/vitess/go/vt/proto/vtctlservice";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/dev/vtctlservice";
 
 package vtctlservice;
 
@@ -130,6 +130,8 @@ service Vtctld {
   // GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
   // cells.
   rpc GetSrvKeyspaces (vtctldata.GetSrvKeyspacesRequest) returns (vtctldata.GetSrvKeyspacesResponse) {};
+  // UpdateThrottlerConfig updates the tablet throttler configuration
+  rpc UpdateThrottlerConfig(vtctldata.UpdateThrottlerConfigRequest) returns (vtctldata.UpdateThrottlerConfigResponse) {};
   // GetSrvVSchema returns the SrvVSchema for a cell.
   rpc GetSrvVSchema(vtctldata.GetSrvVSchemaRequest) returns (vtctldata.GetSrvVSchemaResponse) {};
   // GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,

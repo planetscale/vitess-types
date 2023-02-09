@@ -9,6 +9,7 @@ import (
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
 	vtctldata "github.com/planetscale/vitess-types/gen/vitess/dev/vtctldata"
+	_ "github.com/planetscale/vitess-types/gen/vitess/dev/vtctlservice"
 	http "net/http"
 	strings "strings"
 )
@@ -188,6 +189,8 @@ type VtctldClient interface {
 	// GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
 	// cells.
 	GetSrvKeyspaces(context.Context, *connect_go.Request[vtctldata.GetSrvKeyspacesRequest]) (*connect_go.Response[vtctldata.GetSrvKeyspacesResponse], error)
+	// UpdateThrottlerConfig updates the tablet throttler configuration
+	UpdateThrottlerConfig(context.Context, *connect_go.Request[vtctldata.UpdateThrottlerConfigRequest]) (*connect_go.Response[vtctldata.UpdateThrottlerConfigResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for a cell.
 	GetSrvVSchema(context.Context, *connect_go.Request[vtctldata.GetSrvVSchemaRequest]) (*connect_go.Response[vtctldata.GetSrvVSchemaResponse], error)
 	// GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,
@@ -541,6 +544,11 @@ func NewVtctldClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 			baseURL+"/vtctlservice.Vtctld/GetSrvKeyspaces",
 			opts...,
 		),
+		updateThrottlerConfig: connect_go.NewClient[vtctldata.UpdateThrottlerConfigRequest, vtctldata.UpdateThrottlerConfigResponse](
+			httpClient,
+			baseURL+"/vtctlservice.Vtctld/UpdateThrottlerConfig",
+			opts...,
+		),
 		getSrvVSchema: connect_go.NewClient[vtctldata.GetSrvVSchemaRequest, vtctldata.GetSrvVSchemaResponse](
 			httpClient,
 			baseURL+"/vtctlservice.Vtctld/GetSrvVSchema",
@@ -817,6 +825,7 @@ type vtctldClient struct {
 	getShardRoutingRules        *connect_go.Client[vtctldata.GetShardRoutingRulesRequest, vtctldata.GetShardRoutingRulesResponse]
 	getSrvKeyspaceNames         *connect_go.Client[vtctldata.GetSrvKeyspaceNamesRequest, vtctldata.GetSrvKeyspaceNamesResponse]
 	getSrvKeyspaces             *connect_go.Client[vtctldata.GetSrvKeyspacesRequest, vtctldata.GetSrvKeyspacesResponse]
+	updateThrottlerConfig       *connect_go.Client[vtctldata.UpdateThrottlerConfigRequest, vtctldata.UpdateThrottlerConfigResponse]
 	getSrvVSchema               *connect_go.Client[vtctldata.GetSrvVSchemaRequest, vtctldata.GetSrvVSchemaResponse]
 	getSrvVSchemas              *connect_go.Client[vtctldata.GetSrvVSchemasRequest, vtctldata.GetSrvVSchemasResponse]
 	getTablet                   *connect_go.Client[vtctldata.GetTabletRequest, vtctldata.GetTabletResponse]
@@ -1044,6 +1053,11 @@ func (c *vtctldClient) GetSrvKeyspaceNames(ctx context.Context, req *connect_go.
 // GetSrvKeyspaces calls vtctlservice.Vtctld.GetSrvKeyspaces.
 func (c *vtctldClient) GetSrvKeyspaces(ctx context.Context, req *connect_go.Request[vtctldata.GetSrvKeyspacesRequest]) (*connect_go.Response[vtctldata.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspaces.CallUnary(ctx, req)
+}
+
+// UpdateThrottlerConfig calls vtctlservice.Vtctld.UpdateThrottlerConfig.
+func (c *vtctldClient) UpdateThrottlerConfig(ctx context.Context, req *connect_go.Request[vtctldata.UpdateThrottlerConfigRequest]) (*connect_go.Response[vtctldata.UpdateThrottlerConfigResponse], error) {
+	return c.updateThrottlerConfig.CallUnary(ctx, req)
 }
 
 // GetSrvVSchema calls vtctlservice.Vtctld.GetSrvVSchema.
@@ -1382,6 +1396,8 @@ type VtctldHandler interface {
 	// GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
 	// cells.
 	GetSrvKeyspaces(context.Context, *connect_go.Request[vtctldata.GetSrvKeyspacesRequest]) (*connect_go.Response[vtctldata.GetSrvKeyspacesResponse], error)
+	// UpdateThrottlerConfig updates the tablet throttler configuration
+	UpdateThrottlerConfig(context.Context, *connect_go.Request[vtctldata.UpdateThrottlerConfigRequest]) (*connect_go.Response[vtctldata.UpdateThrottlerConfigResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for a cell.
 	GetSrvVSchema(context.Context, *connect_go.Request[vtctldata.GetSrvVSchemaRequest]) (*connect_go.Response[vtctldata.GetSrvVSchemaResponse], error)
 	// GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,
@@ -1730,6 +1746,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect_go.HandlerOption) (stri
 	mux.Handle("/vtctlservice.Vtctld/GetSrvKeyspaces", connect_go.NewUnaryHandler(
 		"/vtctlservice.Vtctld/GetSrvKeyspaces",
 		svc.GetSrvKeyspaces,
+		opts...,
+	))
+	mux.Handle("/vtctlservice.Vtctld/UpdateThrottlerConfig", connect_go.NewUnaryHandler(
+		"/vtctlservice.Vtctld/UpdateThrottlerConfig",
+		svc.UpdateThrottlerConfig,
 		opts...,
 	))
 	mux.Handle("/vtctlservice.Vtctld/GetSrvVSchema", connect_go.NewUnaryHandler(
@@ -2115,6 +2136,10 @@ func (UnimplementedVtctldHandler) GetSrvKeyspaceNames(context.Context, *connect_
 
 func (UnimplementedVtctldHandler) GetSrvKeyspaces(context.Context, *connect_go.Request[vtctldata.GetSrvKeyspacesRequest]) (*connect_go.Response[vtctldata.GetSrvKeyspacesResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvKeyspaces is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) UpdateThrottlerConfig(context.Context, *connect_go.Request[vtctldata.UpdateThrottlerConfigRequest]) (*connect_go.Response[vtctldata.UpdateThrottlerConfigResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateThrottlerConfig is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSrvVSchema(context.Context, *connect_go.Request[vtctldata.GetSrvVSchemaRequest]) (*connect_go.Response[vtctldata.GetSrvVSchemaResponse], error) {
