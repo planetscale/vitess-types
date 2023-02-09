@@ -9,6 +9,7 @@ import (
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
 	tabletmanagerdata "github.com/planetscale/vitess-types/gen/vitess/v15/tabletmanagerdata"
+	_ "github.com/planetscale/vitess-types/gen/vitess/v15/tabletmanagerservice"
 	http "net/http"
 	strings "strings"
 )

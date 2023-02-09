@@ -9,6 +9,7 @@ import (
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
 	automation "github.com/planetscale/vitess-types/gen/vitess/v14/automation"
+	_ "github.com/planetscale/vitess-types/gen/vitess/v14/automationservice"
 	http "net/http"
 	strings "strings"
 )

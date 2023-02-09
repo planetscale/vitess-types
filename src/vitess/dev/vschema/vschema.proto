@@ -17,7 +17,7 @@ limitations under the License.
 // This file contains the types needed to define a vschema.
 
 syntax = "proto3";
-option go_package = "vitess.io/vitess/go/vt/proto/vschema";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/dev/vschema";
 
 package vschema;
 
@@ -91,6 +91,9 @@ message Table {
   // an authoritative list for the table. This allows
   // us to expand 'select *' expressions.
   bool column_list_authoritative = 6;
+
+  // reference tables may optionally indicate their source table.
+  string source = 7;
 }
 
 // ColumnVindex is used to associate a column to a vindex.

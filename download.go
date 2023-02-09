@@ -44,7 +44,7 @@ func main() {
 	maybePanic(err)
 
 	templates := template.Must(template.ParseFiles(
-		filepath.Join(".", "src", "vitess", "buf.gen.yaml.tmpl"),
+		filepath.Join(".", "src", "vitess", "gen.yaml.tmpl"),
 	))
 
 	if len(os.Args) > 1 {
@@ -92,48 +92,59 @@ func download(templates *template.Template, version, ref string) {
 	r, err := zip.NewReader(bytes.NewReader(b.Bytes()), int64(b.Len()))
 	maybePanic(err)
 
+	os.MkdirAll(dst, 0o755)
+
 	// extract the files we care about
 	for _, f := range r.File {
 		if !f.FileInfo().Mode().IsRegular() {
 			continue
 		}
-		bits := strings.SplitN(f.Name, "/", 3)[1:]
-		if len(bits) != 2 {
-			continue
+		if isLicense(f.Name) {
+			fp, err := f.Open()
+			maybePanic(err)
+			fdst, err := os.Create(filepath.Join(dst, "LICENSE"))
+			maybePanic(err)
+			io.Copy(fdst, fp)
+			fdst.Close()
+			fp.Close()
+		} else {
+			bits := strings.SplitN(f.Name, "/", 3)[1:]
+			if len(bits) != 2 {
+				continue
+			}
+			folder, path := bits[0], bits[1]
+			if folder != "proto" {
+				continue
+			}
+			if filepath.Ext(path) != ".proto" {
+				continue
+			}
+
+			fname := path[:len(path)-6]
+			rc, err := f.Open()
+			maybePanic(err)
+
+			// move each {name}.proto into a {name}/{name}.proto
+			// to better support modules correctly
+			os.MkdirAll(filepath.Join(dst, fname), 0o755)
+			fdst, err := os.Create(filepath.Join(dst, fname, fname+".proto"))
+			maybePanic(err)
+
+			copyAndRewriteImports(fdst, rc, version)
+			fdst.Close()
+			rc.Close()
 		}
-		folder, path := bits[0], bits[1]
-		if folder != "proto" {
-			continue
-		}
-		if filepath.Ext(path) != ".proto" {
-			continue
-		}
-
-		fname := path[:len(path)-6]
-
-		rc, err := f.Open()
-		maybePanic(err)
-
-		// move each {name}.proto into a {name}/{name}.proto
-		// to better support modules correctly
-		os.MkdirAll(filepath.Join(dst, fname), 0o755)
-		fdst, err := os.Create(filepath.Join(dst, fname, fname+".proto"))
-		maybePanic(err)
-
-		copyAndRewriteImports(fdst, rc)
-		fdst.Close()
-		rc.Close()
 	}
 
 	data := struct{ Version string }{version}
-	executeToFile(filepath.Join(dst, "buf.gen.yaml"), templates, data)
+	executeToFile(filepath.Join(dst, "gen.yaml"), templates, data)
 
 	fmt.Printf("==> %s: finished=%s\n", version, time.Since(start))
 }
 
 var importRe = regexp.MustCompile(`([a-z]+).proto`)
 
-func copyAndRewriteImports(dst io.Writer, src io.Reader) error {
+func copyAndRewriteImports(dst io.Writer, src io.Reader, version string) error {
 	scanner := bufio.NewScanner(src)
 	for scanner.Scan() {
 		line := scanner.Bytes()
@@ -142,12 +153,22 @@ func copyAndRewriteImports(dst io.Writer, src io.Reader) error {
 		// in a subdirectory
 		if bytes.HasPrefix(line, []byte("import ")) {
 			line = importRe.ReplaceAll(line, []byte("${1}/${1}.proto"))
+		} else if bytes.HasPrefix(line, []byte("option go_package")) {
+			line = bytes.Replace(line,
+				[]byte("vitess.io/vitess/go/vt/proto/"),
+				[]byte("github.com/planetscale/vitess-types/gen/vitess/"+version+"/"),
+				1,
+			)
 		}
 
 		dst.Write(line)
 		dst.Write([]byte{'\n'})
 	}
 	return scanner.Err()
+}
+
+func isLicense(path string) bool {
+	return strings.SplitN(path, "/", 2)[1:][0] == "LICENSE"
 }
 
 func executeToFile(path string, t *template.Template, data any) error {

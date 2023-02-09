@@ -17,7 +17,7 @@ limitations under the License.
 // Data definitions for service vtgateservice.
 
 syntax = "proto3";
-option go_package = "vitess.io/vitess/go/vt/proto/vtgate";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/dev/vtgate";
 
 package vtgate;
 
