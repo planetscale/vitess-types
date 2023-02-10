@@ -1,0 +1,13 @@
+---
+- - :approve
+  - github.com/bufbuild/connect-go
+  - :who:
+    :why:
+    :versions: []
+    :when: 2023-02-10 16:44:27.391739000 Z
+- - :approve
+  - google.golang.org/protobuf
+  - :who:
+    :why:
+    :versions: []
+    :when: 2023-02-10 16:44:38.631850000 Z
