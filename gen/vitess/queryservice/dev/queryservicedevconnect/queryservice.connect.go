@@ -108,6 +108,8 @@ const (
 	QueryVStreamRowsProcedure = "/vitess.queryservice.dev.Query/VStreamRows"
 	// QueryVStreamResultsProcedure is the fully-qualified name of the Query's VStreamResults RPC.
 	QueryVStreamResultsProcedure = "/vitess.queryservice.dev.Query/VStreamResults"
+	// QueryGetSchemaProcedure is the fully-qualified name of the Query's GetSchema RPC.
+	QueryGetSchemaProcedure = "/vitess.queryservice.dev.Query/GetSchema"
 )
 
 // QueryClient is a client for the vitess.queryservice.dev.Query service.
@@ -169,6 +171,8 @@ type QueryClient interface {
 	VStreamRows(context.Context, *connect_go.Request[dev1.VStreamRowsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamRowsResponse], error)
 	// VStreamResults streams results along with the gtid of the snapshot.
 	VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamResultsResponse], error)
+	// GetSchema returns the schema information.
+	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.ServerStreamForClient[dev.GetSchemaResponse], error)
 }
 
 // NewQueryClient constructs a client for the vitess.queryservice.dev.Query service. By default, it
@@ -311,6 +315,11 @@ func NewQueryClient(httpClient connect_go.HTTPClient, baseURL string, opts ...co
 			baseURL+QueryVStreamResultsProcedure,
 			opts...,
 		),
+		getSchema: connect_go.NewClient[dev.GetSchemaRequest, dev.GetSchemaResponse](
+			httpClient,
+			baseURL+QueryGetSchemaProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -342,6 +351,7 @@ type queryClient struct {
 	vStream                   *connect_go.Client[dev1.VStreamRequest, dev1.VStreamResponse]
 	vStreamRows               *connect_go.Client[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse]
 	vStreamResults            *connect_go.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
+	getSchema                 *connect_go.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
 }
 
 // Execute calls vitess.queryservice.dev.Query.Execute.
@@ -474,6 +484,11 @@ func (c *queryClient) VStreamResults(ctx context.Context, req *connect_go.Reques
 	return c.vStreamResults.CallServerStream(ctx, req)
 }
 
+// GetSchema calls vitess.queryservice.dev.Query.GetSchema.
+func (c *queryClient) GetSchema(ctx context.Context, req *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.ServerStreamForClient[dev.GetSchemaResponse], error) {
+	return c.getSchema.CallServerStream(ctx, req)
+}
+
 // QueryHandler is an implementation of the vitess.queryservice.dev.Query service.
 type QueryHandler interface {
 	// Execute executes the specified SQL query (might be in a
@@ -533,6 +548,8 @@ type QueryHandler interface {
 	VStreamRows(context.Context, *connect_go.Request[dev1.VStreamRowsRequest], *connect_go.ServerStream[dev1.VStreamRowsResponse]) error
 	// VStreamResults streams results along with the gtid of the snapshot.
 	VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest], *connect_go.ServerStream[dev1.VStreamResultsResponse]) error
+	// GetSchema returns the schema information.
+	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest], *connect_go.ServerStream[dev.GetSchemaResponse]) error
 }
 
 // NewQueryHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -672,6 +689,11 @@ func NewQueryHandler(svc QueryHandler, opts ...connect_go.HandlerOption) (string
 		svc.VStreamResults,
 		opts...,
 	))
+	mux.Handle(QueryGetSchemaProcedure, connect_go.NewServerStreamHandler(
+		QueryGetSchemaProcedure,
+		svc.GetSchema,
+		opts...,
+	))
 	return "/vitess.queryservice.dev.Query/", mux
 }
 
@@ -780,4 +802,8 @@ func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect_go.Reques
 
 func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest], *connect_go.ServerStream[dev1.VStreamResultsResponse]) error {
 	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.VStreamResults is not implemented"))
+}
+
+func (UnimplementedQueryHandler) GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest], *connect_go.ServerStream[dev.GetSchemaResponse]) error {
+	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.GetSchema is not implemented"))
 }

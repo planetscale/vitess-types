@@ -88,6 +88,10 @@ const (
 	// VTAdminGetShardReplicationPositionsProcedure is the fully-qualified name of the VTAdmin's
 	// GetShardReplicationPositions RPC.
 	VTAdminGetShardReplicationPositionsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetShardReplicationPositions"
+	// VTAdminGetSrvKeyspaceProcedure is the fully-qualified name of the VTAdmin's GetSrvKeyspace RPC.
+	VTAdminGetSrvKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvKeyspace"
+	// VTAdminGetSrvKeyspacesProcedure is the fully-qualified name of the VTAdmin's GetSrvKeyspaces RPC.
+	VTAdminGetSrvKeyspacesProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvKeyspaces"
 	// VTAdminGetSrvVSchemaProcedure is the fully-qualified name of the VTAdmin's GetSrvVSchema RPC.
 	VTAdminGetSrvVSchemaProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvVSchema"
 	// VTAdminGetSrvVSchemasProcedure is the fully-qualified name of the VTAdmin's GetSrvVSchemas RPC.
@@ -212,6 +216,10 @@ type VTAdminClient interface {
 	// GetShardReplicationPositions returns shard replication positions grouped
 	// by cluster.
 	GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error)
+	// GetSrvKeyspace returns the SrvKeyspace for a keyspace in one or more cells.
+	GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error)
+	// GetSrvKeyspaces returns the SrvKeyspaces for all keyspaces across all the specified clusters.
+	GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for the given cluster and cell.
 	GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error)
 	// GetSrvVSchemas returns all SrvVSchemas across all (or specified) clusters
@@ -406,6 +414,16 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 			baseURL+VTAdminGetShardReplicationPositionsProcedure,
 			opts...,
 		),
+		getSrvKeyspace: connect_go.NewClient[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse](
+			httpClient,
+			baseURL+VTAdminGetSrvKeyspaceProcedure,
+			opts...,
+		),
+		getSrvKeyspaces: connect_go.NewClient[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse](
+			httpClient,
+			baseURL+VTAdminGetSrvKeyspacesProcedure,
+			opts...,
+		),
 		getSrvVSchema: connect_go.NewClient[dev.GetSrvVSchemaRequest, dev.SrvVSchema](
 			httpClient,
 			baseURL+VTAdminGetSrvVSchemaProcedure,
@@ -584,6 +602,8 @@ type vTAdminClient struct {
 	getSchema                      *connect_go.Client[dev.GetSchemaRequest, dev.Schema]
 	getSchemas                     *connect_go.Client[dev.GetSchemasRequest, dev.GetSchemasResponse]
 	getShardReplicationPositions   *connect_go.Client[dev.GetShardReplicationPositionsRequest, dev.GetShardReplicationPositionsResponse]
+	getSrvKeyspace                 *connect_go.Client[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse]
+	getSrvKeyspaces                *connect_go.Client[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse]
 	getSrvVSchema                  *connect_go.Client[dev.GetSrvVSchemaRequest, dev.SrvVSchema]
 	getSrvVSchemas                 *connect_go.Client[dev.GetSrvVSchemasRequest, dev.GetSrvVSchemasResponse]
 	getTablet                      *connect_go.Client[dev.GetTabletRequest, dev.Tablet]
@@ -705,6 +725,16 @@ func (c *vTAdminClient) GetSchemas(ctx context.Context, req *connect_go.Request[
 // GetShardReplicationPositions calls vitess.vtadmin.dev.VTAdmin.GetShardReplicationPositions.
 func (c *vTAdminClient) GetShardReplicationPositions(ctx context.Context, req *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
 	return c.getShardReplicationPositions.CallUnary(ctx, req)
+}
+
+// GetSrvKeyspace calls vitess.vtadmin.dev.VTAdmin.GetSrvKeyspace.
+func (c *vTAdminClient) GetSrvKeyspace(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
+	return c.getSrvKeyspace.CallUnary(ctx, req)
+}
+
+// GetSrvKeyspaces calls vitess.vtadmin.dev.VTAdmin.GetSrvKeyspaces.
+func (c *vTAdminClient) GetSrvKeyspaces(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
+	return c.getSrvKeyspaces.CallUnary(ctx, req)
 }
 
 // GetSrvVSchema calls vitess.vtadmin.dev.VTAdmin.GetSrvVSchema.
@@ -911,6 +941,10 @@ type VTAdminHandler interface {
 	// GetShardReplicationPositions returns shard replication positions grouped
 	// by cluster.
 	GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error)
+	// GetSrvKeyspace returns the SrvKeyspace for a keyspace in one or more cells.
+	GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error)
+	// GetSrvKeyspaces returns the SrvKeyspaces for all keyspaces across all the specified clusters.
+	GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for the given cluster and cell.
 	GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error)
 	// GetSrvVSchemas returns all SrvVSchemas across all (or specified) clusters
@@ -1100,6 +1134,16 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 	mux.Handle(VTAdminGetShardReplicationPositionsProcedure, connect_go.NewUnaryHandler(
 		VTAdminGetShardReplicationPositionsProcedure,
 		svc.GetShardReplicationPositions,
+		opts...,
+	))
+	mux.Handle(VTAdminGetSrvKeyspaceProcedure, connect_go.NewUnaryHandler(
+		VTAdminGetSrvKeyspaceProcedure,
+		svc.GetSrvKeyspace,
+		opts...,
+	))
+	mux.Handle(VTAdminGetSrvKeyspacesProcedure, connect_go.NewUnaryHandler(
+		VTAdminGetSrvKeyspacesProcedure,
+		svc.GetSrvKeyspaces,
 		opts...,
 	))
 	mux.Handle(VTAdminGetSrvVSchemaProcedure, connect_go.NewUnaryHandler(
@@ -1333,6 +1377,14 @@ func (UnimplementedVTAdminHandler) GetSchemas(context.Context, *connect_go.Reque
 
 func (UnimplementedVTAdminHandler) GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetShardReplicationPositions is not implemented"))
+}
+
+func (UnimplementedVTAdminHandler) GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvKeyspace is not implemented"))
+}
+
+func (UnimplementedVTAdminHandler) GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvKeyspaces is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error) {

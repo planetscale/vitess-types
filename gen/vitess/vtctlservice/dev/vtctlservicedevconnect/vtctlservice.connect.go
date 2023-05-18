@@ -253,6 +253,8 @@ const (
 	VtctldValidateVersionShardProcedure = "/vitess.vtctlservice.dev.Vtctld/ValidateVersionShard"
 	// VtctldValidateVSchemaProcedure is the fully-qualified name of the Vtctld's ValidateVSchema RPC.
 	VtctldValidateVSchemaProcedure = "/vitess.vtctlservice.dev.Vtctld/ValidateVSchema"
+	// VtctldWorkflowUpdateProcedure is the fully-qualified name of the Vtctld's WorkflowUpdate RPC.
+	VtctldWorkflowUpdateProcedure = "/vitess.vtctlservice.dev.Vtctld/WorkflowUpdate"
 )
 
 // VtctlClient is a client for the vitess.vtctlservice.dev.Vtctl service.
@@ -579,6 +581,9 @@ type VtctldClient interface {
 	ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect_go.Request[dev.ValidateVSchemaRequest]) (*connect_go.Response[dev.ValidateVSchemaResponse], error)
+	// WorkflowUpdate updates the configuration of a vreplication workflow
+	// using the provided updated parameters.
+	WorkflowUpdate(context.Context, *connect_go.Request[dev.WorkflowUpdateRequest]) (*connect_go.Response[dev.WorkflowUpdateResponse], error)
 }
 
 // NewVtctldClient constructs a client for the vitess.vtctlservice.dev.Vtctld service. By default,
@@ -1011,6 +1016,11 @@ func NewVtctldClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 			baseURL+VtctldValidateVSchemaProcedure,
 			opts...,
 		),
+		workflowUpdate: connect_go.NewClient[dev.WorkflowUpdateRequest, dev.WorkflowUpdateResponse](
+			httpClient,
+			baseURL+VtctldWorkflowUpdateProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -1100,6 +1110,7 @@ type vtctldClient struct {
 	validateVersionKeyspace     *connect_go.Client[dev.ValidateVersionKeyspaceRequest, dev.ValidateVersionKeyspaceResponse]
 	validateVersionShard        *connect_go.Client[dev.ValidateVersionShardRequest, dev.ValidateVersionShardResponse]
 	validateVSchema             *connect_go.Client[dev.ValidateVSchemaRequest, dev.ValidateVSchemaResponse]
+	workflowUpdate              *connect_go.Client[dev.WorkflowUpdateRequest, dev.WorkflowUpdateResponse]
 }
 
 // AddCellInfo calls vitess.vtctlservice.dev.Vtctld.AddCellInfo.
@@ -1522,6 +1533,11 @@ func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect_go.Requ
 	return c.validateVSchema.CallUnary(ctx, req)
 }
 
+// WorkflowUpdate calls vitess.vtctlservice.dev.Vtctld.WorkflowUpdate.
+func (c *vtctldClient) WorkflowUpdate(ctx context.Context, req *connect_go.Request[dev.WorkflowUpdateRequest]) (*connect_go.Response[dev.WorkflowUpdateResponse], error) {
+	return c.workflowUpdate.CallUnary(ctx, req)
+}
+
 // VtctldHandler is an implementation of the vitess.vtctlservice.dev.Vtctld service.
 type VtctldHandler interface {
 	// AddCellInfo registers a local topology service in a new cell by creating
@@ -1786,6 +1802,9 @@ type VtctldHandler interface {
 	ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect_go.Request[dev.ValidateVSchemaRequest]) (*connect_go.Response[dev.ValidateVSchemaResponse], error)
+	// WorkflowUpdate updates the configuration of a vreplication workflow
+	// using the provided updated parameters.
+	WorkflowUpdate(context.Context, *connect_go.Request[dev.WorkflowUpdateRequest]) (*connect_go.Response[dev.WorkflowUpdateResponse], error)
 }
 
 // NewVtctldHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -2215,6 +2234,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect_go.HandlerOption) (stri
 		svc.ValidateVSchema,
 		opts...,
 	))
+	mux.Handle(VtctldWorkflowUpdateProcedure, connect_go.NewUnaryHandler(
+		VtctldWorkflowUpdateProcedure,
+		svc.WorkflowUpdate,
+		opts...,
+	))
 	return "/vitess.vtctlservice.dev.Vtctld/", mux
 }
 
@@ -2555,4 +2579,8 @@ func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect
 
 func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect_go.Request[dev.ValidateVSchemaRequest]) (*connect_go.Response[dev.ValidateVSchemaResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtctlservice.dev.Vtctld.ValidateVSchema is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) WorkflowUpdate(context.Context, *connect_go.Request[dev.WorkflowUpdateRequest]) (*connect_go.Response[dev.WorkflowUpdateResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtctlservice.dev.Vtctld.WorkflowUpdate is not implemented"))
 }

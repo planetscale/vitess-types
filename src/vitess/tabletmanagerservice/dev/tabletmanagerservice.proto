@@ -114,6 +114,7 @@ service TabletManager {
   // VReplication API
   rpc VReplicationExec(vitess.tabletmanagerdata.dev.VReplicationExecRequest) returns(vitess.tabletmanagerdata.dev.VReplicationExecResponse) {};
   rpc VReplicationWaitForPos(vitess.tabletmanagerdata.dev.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.dev.VReplicationWaitForPosResponse) {};
+  rpc UpdateVRWorkflow(vitess.tabletmanagerdata.dev.UpdateVRWorkflowRequest) returns(vitess.tabletmanagerdata.dev.UpdateVRWorkflowResponse) {};
 
   // VDiff API
   rpc VDiff(vitess.tabletmanagerdata.dev.VDiffRequest) returns(vitess.tabletmanagerdata.dev.VDiffResponse) {};
@@ -172,6 +173,4 @@ service TabletManager {
   // RestoreFromBackup deletes all local data and restores it from the latest backup.
   rpc RestoreFromBackup(vitess.tabletmanagerdata.dev.RestoreFromBackupRequest) returns (stream vitess.tabletmanagerdata.dev.RestoreFromBackupResponse) {};
 
-  // Generic VExec request. Can be used for various purposes
-  rpc VExec(vitess.tabletmanagerdata.dev.VExecRequest) returns(vitess.tabletmanagerdata.dev.VExecResponse) {};
 }

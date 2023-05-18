@@ -475,6 +475,56 @@ func (TransactionState) EnumDescriptor() ([]byte, []int) {
 	return file_vitess_query_dev_query_proto_rawDescGZIP(), []int{3}
 }
 
+// SchemaTableType represents the type of table requested.
+type SchemaTableType int32
+
+const (
+	SchemaTableType_VIEWS  SchemaTableType = 0
+	SchemaTableType_TABLES SchemaTableType = 1
+	SchemaTableType_ALL    SchemaTableType = 2
+)
+
+// Enum value maps for SchemaTableType.
+var (
+	SchemaTableType_name = map[int32]string{
+		0: "VIEWS",
+		1: "TABLES",
+		2: "ALL",
+	}
+	SchemaTableType_value = map[string]int32{
+		"VIEWS":  0,
+		"TABLES": 1,
+		"ALL":    2,
+	}
+)
+
+func (x SchemaTableType) Enum() *SchemaTableType {
+	p := new(SchemaTableType)
+	*p = x
+	return p
+}
+
+func (x SchemaTableType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SchemaTableType) Descriptor() protoreflect.EnumDescriptor {
+	return file_vitess_query_dev_query_proto_enumTypes[4].Descriptor()
+}
+
+func (SchemaTableType) Type() protoreflect.EnumType {
+	return &file_vitess_query_dev_query_proto_enumTypes[4]
+}
+
+func (x SchemaTableType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SchemaTableType.Descriptor instead.
+func (SchemaTableType) EnumDescriptor() ([]byte, []int) {
+	return file_vitess_query_dev_query_proto_rawDescGZIP(), []int{4}
+}
+
 type ExecuteOptions_IncludedFields int32
 
 const (
@@ -508,11 +558,11 @@ func (x ExecuteOptions_IncludedFields) String() string {
 }
 
 func (ExecuteOptions_IncludedFields) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[4].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[5].Descriptor()
 }
 
 func (ExecuteOptions_IncludedFields) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[4]
+	return &file_vitess_query_dev_query_proto_enumTypes[5]
 }
 
 func (x ExecuteOptions_IncludedFields) Number() protoreflect.EnumNumber {
@@ -560,11 +610,11 @@ func (x ExecuteOptions_Workload) String() string {
 }
 
 func (ExecuteOptions_Workload) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[5].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[6].Descriptor()
 }
 
 func (ExecuteOptions_Workload) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[5]
+	return &file_vitess_query_dev_query_proto_enumTypes[6]
 }
 
 func (x ExecuteOptions_Workload) Number() protoreflect.EnumNumber {
@@ -625,11 +675,11 @@ func (x ExecuteOptions_TransactionIsolation) String() string {
 }
 
 func (ExecuteOptions_TransactionIsolation) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[6].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[7].Descriptor()
 }
 
 func (ExecuteOptions_TransactionIsolation) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[6]
+	return &file_vitess_query_dev_query_proto_enumTypes[7]
 }
 
 func (x ExecuteOptions_TransactionIsolation) Number() protoreflect.EnumNumber {
@@ -686,11 +736,11 @@ func (x ExecuteOptions_PlannerVersion) String() string {
 }
 
 func (ExecuteOptions_PlannerVersion) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[7].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[8].Descriptor()
 }
 
 func (ExecuteOptions_PlannerVersion) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[7]
+	return &file_vitess_query_dev_query_proto_enumTypes[8]
 }
 
 func (x ExecuteOptions_PlannerVersion) Number() protoreflect.EnumNumber {
@@ -738,11 +788,11 @@ func (x ExecuteOptions_Consolidator) String() string {
 }
 
 func (ExecuteOptions_Consolidator) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[8].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[9].Descriptor()
 }
 
 func (ExecuteOptions_Consolidator) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[8]
+	return &file_vitess_query_dev_query_proto_enumTypes[9]
 }
 
 func (x ExecuteOptions_Consolidator) Number() protoreflect.EnumNumber {
@@ -787,11 +837,11 @@ func (x ExecuteOptions_TransactionAccessMode) String() string {
 }
 
 func (ExecuteOptions_TransactionAccessMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[9].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[10].Descriptor()
 }
 
 func (ExecuteOptions_TransactionAccessMode) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[9]
+	return &file_vitess_query_dev_query_proto_enumTypes[10]
 }
 
 func (x ExecuteOptions_TransactionAccessMode) Number() protoreflect.EnumNumber {
@@ -837,11 +887,11 @@ func (x StreamEvent_Statement_Category) String() string {
 }
 
 func (StreamEvent_Statement_Category) Descriptor() protoreflect.EnumDescriptor {
-	return file_vitess_query_dev_query_proto_enumTypes[10].Descriptor()
+	return file_vitess_query_dev_query_proto_enumTypes[11].Descriptor()
 }
 
 func (StreamEvent_Statement_Category) Type() protoreflect.EnumType {
-	return &file_vitess_query_dev_query_proto_enumTypes[10]
+	return &file_vitess_query_dev_query_proto_enumTypes[11]
 }
 
 func (x StreamEvent_Statement_Category) Number() protoreflect.EnumNumber {
@@ -1283,6 +1333,12 @@ type ExecuteOptions struct {
 	// TransactionAccessMode specifies the access modes to be used while starting the transaction i.e. READ WRITE/READ ONLY/WITH CONSISTENT SNAPSHOT
 	// If not specified, the transaction will be started with the default access mode on the connection.
 	TransactionAccessMode []ExecuteOptions_TransactionAccessMode `protobuf:"varint,14,rep,packed,name=transaction_access_mode,json=transactionAccessMode,proto3,enum=vitess.query.dev.ExecuteOptions_TransactionAccessMode" json:"transaction_access_mode,omitempty"`
+	// WorkloadName specifies the name of the workload as indicated in query directives. This is used for instrumentation
+	// in metrics and tracing spans.
+	WorkloadName string `protobuf:"bytes,15,opt,name=WorkloadName,proto3" json:"WorkloadName,omitempty"`
+	// priority specifies the priority of the query, between 0 and 100. This is leveraged by the transaction
+	// throttler to determine whether, under resource contention, a query should or should not be throttled.
+	Priority string `protobuf:"bytes,16,opt,name=priority,proto3" json:"priority,omitempty"`
 }
 
 func (x *ExecuteOptions) Reset() {
@@ -1385,6 +1441,20 @@ func (x *ExecuteOptions) GetTransactionAccessMode() []ExecuteOptions_Transaction
 		return x.TransactionAccessMode
 	}
 	return nil
+}
+
+func (x *ExecuteOptions) GetWorkloadName() string {
+	if x != nil {
+		return x.WorkloadName
+	}
+	return ""
+}
+
+func (x *ExecuteOptions) GetPriority() string {
+	if x != nil {
+		return x.Priority
+	}
+	return ""
 }
 
 // Field describes a single column returned by a query
@@ -5365,6 +5435,119 @@ func (x *TransactionMetadata) GetParticipants() []*Target {
 	return nil
 }
 
+// GetSchemaRequest is the payload to GetSchema
+type GetSchemaRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Target     *Target         `protobuf:"bytes,1,opt,name=target,proto3" json:"target,omitempty"`
+	TableType  SchemaTableType `protobuf:"varint,2,opt,name=table_type,json=tableType,proto3,enum=vitess.query.dev.SchemaTableType" json:"table_type,omitempty"`
+	TableNames []string        `protobuf:"bytes,3,rep,name=table_names,json=tableNames,proto3" json:"table_names,omitempty"`
+}
+
+func (x *GetSchemaRequest) Reset() {
+	*x = GetSchemaRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vitess_query_dev_query_proto_msgTypes[62]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSchemaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSchemaRequest) ProtoMessage() {}
+
+func (x *GetSchemaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vitess_query_dev_query_proto_msgTypes[62]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSchemaRequest.ProtoReflect.Descriptor instead.
+func (*GetSchemaRequest) Descriptor() ([]byte, []int) {
+	return file_vitess_query_dev_query_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *GetSchemaRequest) GetTarget() *Target {
+	if x != nil {
+		return x.Target
+	}
+	return nil
+}
+
+func (x *GetSchemaRequest) GetTableType() SchemaTableType {
+	if x != nil {
+		return x.TableType
+	}
+	return SchemaTableType_VIEWS
+}
+
+func (x *GetSchemaRequest) GetTableNames() []string {
+	if x != nil {
+		return x.TableNames
+	}
+	return nil
+}
+
+// GetSchemaResponse is the returned value from GetSchema
+type GetSchemaResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// this is for the schema definition for the requested tables.
+	TableDefinition map[string]string `protobuf:"bytes,2,rep,name=table_definition,json=tableDefinition,proto3" json:"table_definition,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *GetSchemaResponse) Reset() {
+	*x = GetSchemaResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vitess_query_dev_query_proto_msgTypes[63]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSchemaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSchemaResponse) ProtoMessage() {}
+
+func (x *GetSchemaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_vitess_query_dev_query_proto_msgTypes[63]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSchemaResponse.ProtoReflect.Descriptor instead.
+func (*GetSchemaResponse) Descriptor() ([]byte, []int) {
+	return file_vitess_query_dev_query_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *GetSchemaResponse) GetTableDefinition() map[string]string {
+	if x != nil {
+		return x.TableDefinition
+	}
+	return nil
+}
+
 // One individual Statement in a transaction.
 type StreamEvent_Statement struct {
 	state         protoimpl.MessageState
@@ -5384,7 +5567,7 @@ type StreamEvent_Statement struct {
 func (x *StreamEvent_Statement) Reset() {
 	*x = StreamEvent_Statement{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vitess_query_dev_query_proto_msgTypes[63]
+		mi := &file_vitess_query_dev_query_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5397,7 +5580,7 @@ func (x *StreamEvent_Statement) String() string {
 func (*StreamEvent_Statement) ProtoMessage() {}
 
 func (x *StreamEvent_Statement) ProtoReflect() protoreflect.Message {
-	mi := &file_vitess_query_dev_query_proto_msgTypes[63]
+	mi := &file_vitess_query_dev_query_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5504,7 +5687,7 @@ var file_vitess_query_dev_query_proto_rawDesc = []byte{
 	0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73,
 	0x73, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x42, 0x69, 0x6e, 0x64,
 	0x56, 0x61, 0x72, 0x69, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a,
-	0x02, 0x38, 0x01, 0x22, 0x8c, 0x0b, 0x0a, 0x0e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x4f,
+	0x02, 0x38, 0x01, 0x22, 0xcc, 0x0b, 0x0a, 0x0e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x4f,
 	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x58, 0x0a, 0x0f, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64,
 	0x65, 0x64, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32,
 	0x2f, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x64,
@@ -5552,6 +5735,10 @@ var file_vitess_query_dev_query_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x73, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x41,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x4d, 0x6f, 0x64, 0x65, 0x52, 0x15, 0x74, 0x72, 0x61, 0x6e, 0x73,
 	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x4d, 0x6f, 0x64, 0x65,
+	0x12, 0x22, 0x0a, 0x0c, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x4e, 0x61, 0x6d, 0x65,
+	0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x57, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64,
+	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72, 0x69, 0x74, 0x79,
+	0x18, 0x10, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72, 0x69, 0x74, 0x79,
 	0x22, 0x3b, 0x0a, 0x0e, 0x49, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x46, 0x69, 0x65, 0x6c,
 	0x64, 0x73, 0x12, 0x11, 0x0a, 0x0d, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x41, 0x4e, 0x44, 0x5f, 0x4e,
 	0x41, 0x4d, 0x45, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x4f, 0x4e,
@@ -6365,77 +6552,102 @@ var file_vitess_query_dev_query_proto_rawDesc = []byte{
 	0x61, 0x72, 0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x18, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79,
 	0x2e, 0x64, 0x65, 0x76, 0x2e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x52, 0x0c, 0x70, 0x61, 0x72,
-	0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x2a, 0x92, 0x03, 0x0a, 0x09, 0x4d, 0x79,
-	0x53, 0x71, 0x6c, 0x46, 0x6c, 0x61, 0x67, 0x12, 0x09, 0x0a, 0x05, 0x45, 0x4d, 0x50, 0x54, 0x59,
-	0x10, 0x00, 0x12, 0x11, 0x0a, 0x0d, 0x4e, 0x4f, 0x54, 0x5f, 0x4e, 0x55, 0x4c, 0x4c, 0x5f, 0x46,
-	0x4c, 0x41, 0x47, 0x10, 0x01, 0x12, 0x10, 0x0a, 0x0c, 0x50, 0x52, 0x49, 0x5f, 0x4b, 0x45, 0x59,
-	0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x02, 0x12, 0x13, 0x0a, 0x0f, 0x55, 0x4e, 0x49, 0x51, 0x55,
-	0x45, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x04, 0x12, 0x15, 0x0a, 0x11,
-	0x4d, 0x55, 0x4c, 0x54, 0x49, 0x50, 0x4c, 0x45, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41,
-	0x47, 0x10, 0x08, 0x12, 0x0d, 0x0a, 0x09, 0x42, 0x4c, 0x4f, 0x42, 0x5f, 0x46, 0x4c, 0x41, 0x47,
-	0x10, 0x10, 0x12, 0x11, 0x0a, 0x0d, 0x55, 0x4e, 0x53, 0x49, 0x47, 0x4e, 0x45, 0x44, 0x5f, 0x46,
-	0x4c, 0x41, 0x47, 0x10, 0x20, 0x12, 0x11, 0x0a, 0x0d, 0x5a, 0x45, 0x52, 0x4f, 0x46, 0x49, 0x4c,
-	0x4c, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x40, 0x12, 0x10, 0x0a, 0x0b, 0x42, 0x49, 0x4e, 0x41,
-	0x52, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x01, 0x12, 0x0e, 0x0a, 0x09, 0x45, 0x4e,
-	0x55, 0x4d, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x02, 0x12, 0x18, 0x0a, 0x13, 0x41, 0x55,
-	0x54, 0x4f, 0x5f, 0x49, 0x4e, 0x43, 0x52, 0x45, 0x4d, 0x45, 0x4e, 0x54, 0x5f, 0x46, 0x4c, 0x41,
-	0x47, 0x10, 0x80, 0x04, 0x12, 0x13, 0x0a, 0x0e, 0x54, 0x49, 0x4d, 0x45, 0x53, 0x54, 0x41, 0x4d,
-	0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x08, 0x12, 0x0d, 0x0a, 0x08, 0x53, 0x45, 0x54,
-	0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x10, 0x12, 0x1a, 0x0a, 0x15, 0x4e, 0x4f, 0x5f, 0x44,
-	0x45, 0x46, 0x41, 0x55, 0x4c, 0x54, 0x5f, 0x56, 0x41, 0x4c, 0x55, 0x45, 0x5f, 0x46, 0x4c, 0x41,
-	0x47, 0x10, 0x80, 0x20, 0x12, 0x17, 0x0a, 0x12, 0x4f, 0x4e, 0x5f, 0x55, 0x50, 0x44, 0x41, 0x54,
-	0x45, 0x5f, 0x4e, 0x4f, 0x57, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x40, 0x12, 0x0e, 0x0a,
-	0x08, 0x4e, 0x55, 0x4d, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x02, 0x12, 0x13, 0x0a,
-	0x0d, 0x50, 0x41, 0x52, 0x54, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80,
-	0x80, 0x01, 0x12, 0x10, 0x0a, 0x0a, 0x47, 0x52, 0x4f, 0x55, 0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47,
-	0x10, 0x80, 0x80, 0x02, 0x12, 0x11, 0x0a, 0x0b, 0x55, 0x4e, 0x49, 0x51, 0x55, 0x45, 0x5f, 0x46,
-	0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x04, 0x12, 0x11, 0x0a, 0x0b, 0x42, 0x49, 0x4e, 0x43, 0x4d,
-	0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x08, 0x1a, 0x02, 0x10, 0x01, 0x2a, 0x6b,
-	0x0a, 0x04, 0x46, 0x6c, 0x61, 0x67, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00,
-	0x12, 0x0f, 0x0a, 0x0a, 0x49, 0x53, 0x49, 0x4e, 0x54, 0x45, 0x47, 0x52, 0x41, 0x4c, 0x10, 0x80,
-	0x02, 0x12, 0x0f, 0x0a, 0x0a, 0x49, 0x53, 0x55, 0x4e, 0x53, 0x49, 0x47, 0x4e, 0x45, 0x44, 0x10,
-	0x80, 0x04, 0x12, 0x0c, 0x0a, 0x07, 0x49, 0x53, 0x46, 0x4c, 0x4f, 0x41, 0x54, 0x10, 0x80, 0x08,
-	0x12, 0x0d, 0x0a, 0x08, 0x49, 0x53, 0x51, 0x55, 0x4f, 0x54, 0x45, 0x44, 0x10, 0x80, 0x10, 0x12,
-	0x0b, 0x0a, 0x06, 0x49, 0x53, 0x54, 0x45, 0x58, 0x54, 0x10, 0x80, 0x20, 0x12, 0x0d, 0x0a, 0x08,
-	0x49, 0x53, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x10, 0x80, 0x40, 0x2a, 0xc0, 0x03, 0x0a, 0x04,
-	0x54, 0x79, 0x70, 0x65, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x55, 0x4c, 0x4c, 0x5f, 0x54, 0x59, 0x50,
-	0x45, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x04, 0x49, 0x4e, 0x54, 0x38, 0x10, 0x81, 0x02, 0x12, 0x0a,
-	0x0a, 0x05, 0x55, 0x49, 0x4e, 0x54, 0x38, 0x10, 0x82, 0x06, 0x12, 0x0a, 0x0a, 0x05, 0x49, 0x4e,
-	0x54, 0x31, 0x36, 0x10, 0x83, 0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54, 0x31, 0x36,
-	0x10, 0x84, 0x06, 0x12, 0x0a, 0x0a, 0x05, 0x49, 0x4e, 0x54, 0x32, 0x34, 0x10, 0x85, 0x02, 0x12,
-	0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54, 0x32, 0x34, 0x10, 0x86, 0x06, 0x12, 0x0a, 0x0a, 0x05,
-	0x49, 0x4e, 0x54, 0x33, 0x32, 0x10, 0x87, 0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54,
-	0x33, 0x32, 0x10, 0x88, 0x06, 0x12, 0x0a, 0x0a, 0x05, 0x49, 0x4e, 0x54, 0x36, 0x34, 0x10, 0x89,
-	0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54, 0x36, 0x34, 0x10, 0x8a, 0x06, 0x12, 0x0c,
-	0x0a, 0x07, 0x46, 0x4c, 0x4f, 0x41, 0x54, 0x33, 0x32, 0x10, 0x8b, 0x08, 0x12, 0x0c, 0x0a, 0x07,
-	0x46, 0x4c, 0x4f, 0x41, 0x54, 0x36, 0x34, 0x10, 0x8c, 0x08, 0x12, 0x0e, 0x0a, 0x09, 0x54, 0x49,
-	0x4d, 0x45, 0x53, 0x54, 0x41, 0x4d, 0x50, 0x10, 0x8d, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x44, 0x41,
-	0x54, 0x45, 0x10, 0x8e, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x54, 0x49, 0x4d, 0x45, 0x10, 0x8f, 0x10,
-	0x12, 0x0d, 0x0a, 0x08, 0x44, 0x41, 0x54, 0x45, 0x54, 0x49, 0x4d, 0x45, 0x10, 0x90, 0x10, 0x12,
-	0x09, 0x0a, 0x04, 0x59, 0x45, 0x41, 0x52, 0x10, 0x91, 0x06, 0x12, 0x0b, 0x0a, 0x07, 0x44, 0x45,
-	0x43, 0x49, 0x4d, 0x41, 0x4c, 0x10, 0x12, 0x12, 0x09, 0x0a, 0x04, 0x54, 0x45, 0x58, 0x54, 0x10,
-	0x93, 0x30, 0x12, 0x09, 0x0a, 0x04, 0x42, 0x4c, 0x4f, 0x42, 0x10, 0x94, 0x50, 0x12, 0x0c, 0x0a,
-	0x07, 0x56, 0x41, 0x52, 0x43, 0x48, 0x41, 0x52, 0x10, 0x95, 0x30, 0x12, 0x0e, 0x0a, 0x09, 0x56,
-	0x41, 0x52, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x10, 0x96, 0x50, 0x12, 0x09, 0x0a, 0x04, 0x43,
-	0x48, 0x41, 0x52, 0x10, 0x97, 0x30, 0x12, 0x0b, 0x0a, 0x06, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59,
-	0x10, 0x98, 0x50, 0x12, 0x08, 0x0a, 0x03, 0x42, 0x49, 0x54, 0x10, 0x99, 0x10, 0x12, 0x09, 0x0a,
-	0x04, 0x45, 0x4e, 0x55, 0x4d, 0x10, 0x9a, 0x10, 0x12, 0x08, 0x0a, 0x03, 0x53, 0x45, 0x54, 0x10,
-	0x9b, 0x10, 0x12, 0x09, 0x0a, 0x05, 0x54, 0x55, 0x50, 0x4c, 0x45, 0x10, 0x1c, 0x12, 0x0d, 0x0a,
-	0x08, 0x47, 0x45, 0x4f, 0x4d, 0x45, 0x54, 0x52, 0x59, 0x10, 0x9d, 0x10, 0x12, 0x09, 0x0a, 0x04,
-	0x4a, 0x53, 0x4f, 0x4e, 0x10, 0x9e, 0x10, 0x12, 0x0e, 0x0a, 0x0a, 0x45, 0x58, 0x50, 0x52, 0x45,
-	0x53, 0x53, 0x49, 0x4f, 0x4e, 0x10, 0x1f, 0x12, 0x0b, 0x0a, 0x06, 0x48, 0x45, 0x58, 0x4e, 0x55,
-	0x4d, 0x10, 0xa0, 0x20, 0x12, 0x0b, 0x0a, 0x06, 0x48, 0x45, 0x58, 0x56, 0x41, 0x4c, 0x10, 0xa1,
-	0x20, 0x12, 0x0b, 0x0a, 0x06, 0x42, 0x49, 0x54, 0x4e, 0x55, 0x4d, 0x10, 0xa2, 0x20, 0x2a, 0x46,
-	0x0a, 0x10, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61,
-	0x74, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12,
-	0x0b, 0x0a, 0x07, 0x50, 0x52, 0x45, 0x50, 0x41, 0x52, 0x45, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06,
-	0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x52, 0x4f, 0x4c, 0x4c,
-	0x42, 0x41, 0x43, 0x4b, 0x10, 0x03, 0x42, 0x43, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x74, 0x73, 0x63, 0x61, 0x6c, 0x65,
-	0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2d, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x65,
-	0x6e, 0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2f, 0x64,
-	0x65, 0x76, 0x3b, 0x71, 0x75, 0x65, 0x72, 0x79, 0x64, 0x65, 0x76, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x74, 0x69, 0x63, 0x69, 0x70, 0x61, 0x6e, 0x74, 0x73, 0x22, 0xa7, 0x01, 0x0a, 0x10, 0x47, 0x65,
+	0x74, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30,
+	0x0a, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18,
+	0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x64, 0x65,
+	0x76, 0x2e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x52, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74,
+	0x12, 0x40, 0x0a, 0x0a, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75,
+	0x65, 0x72, 0x79, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x54, 0x61,
+	0x62, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x52, 0x09, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65,
+	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x4e, 0x61,
+	0x6d, 0x65, 0x73, 0x22, 0xbc, 0x01, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x53, 0x63, 0x68, 0x65, 0x6d,
+	0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x63, 0x0a, 0x10, 0x74, 0x61, 0x62,
+	0x6c, 0x65, 0x5f, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75, 0x65,
+	0x72, 0x79, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x44, 0x65,
+	0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0f, 0x74,
+	0x61, 0x62, 0x6c, 0x65, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x42,
+	0x0a, 0x14, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x44, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02,
+	0x38, 0x01, 0x2a, 0x92, 0x03, 0x0a, 0x09, 0x4d, 0x79, 0x53, 0x71, 0x6c, 0x46, 0x6c, 0x61, 0x67,
+	0x12, 0x09, 0x0a, 0x05, 0x45, 0x4d, 0x50, 0x54, 0x59, 0x10, 0x00, 0x12, 0x11, 0x0a, 0x0d, 0x4e,
+	0x4f, 0x54, 0x5f, 0x4e, 0x55, 0x4c, 0x4c, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x01, 0x12, 0x10,
+	0x0a, 0x0c, 0x50, 0x52, 0x49, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x02,
+	0x12, 0x13, 0x0a, 0x0f, 0x55, 0x4e, 0x49, 0x51, 0x55, 0x45, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46,
+	0x4c, 0x41, 0x47, 0x10, 0x04, 0x12, 0x15, 0x0a, 0x11, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x50, 0x4c,
+	0x45, 0x5f, 0x4b, 0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x08, 0x12, 0x0d, 0x0a, 0x09,
+	0x42, 0x4c, 0x4f, 0x42, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x10, 0x12, 0x11, 0x0a, 0x0d, 0x55,
+	0x4e, 0x53, 0x49, 0x47, 0x4e, 0x45, 0x44, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x20, 0x12, 0x11,
+	0x0a, 0x0d, 0x5a, 0x45, 0x52, 0x4f, 0x46, 0x49, 0x4c, 0x4c, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10,
+	0x40, 0x12, 0x10, 0x0a, 0x0b, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47,
+	0x10, 0x80, 0x01, 0x12, 0x0e, 0x0a, 0x09, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x46, 0x4c, 0x41, 0x47,
+	0x10, 0x80, 0x02, 0x12, 0x18, 0x0a, 0x13, 0x41, 0x55, 0x54, 0x4f, 0x5f, 0x49, 0x4e, 0x43, 0x52,
+	0x45, 0x4d, 0x45, 0x4e, 0x54, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x04, 0x12, 0x13, 0x0a,
+	0x0e, 0x54, 0x49, 0x4d, 0x45, 0x53, 0x54, 0x41, 0x4d, 0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10,
+	0x80, 0x08, 0x12, 0x0d, 0x0a, 0x08, 0x53, 0x45, 0x54, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80,
+	0x10, 0x12, 0x1a, 0x0a, 0x15, 0x4e, 0x4f, 0x5f, 0x44, 0x45, 0x46, 0x41, 0x55, 0x4c, 0x54, 0x5f,
+	0x56, 0x41, 0x4c, 0x55, 0x45, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x20, 0x12, 0x17, 0x0a,
+	0x12, 0x4f, 0x4e, 0x5f, 0x55, 0x50, 0x44, 0x41, 0x54, 0x45, 0x5f, 0x4e, 0x4f, 0x57, 0x5f, 0x46,
+	0x4c, 0x41, 0x47, 0x10, 0x80, 0x40, 0x12, 0x0e, 0x0a, 0x08, 0x4e, 0x55, 0x4d, 0x5f, 0x46, 0x4c,
+	0x41, 0x47, 0x10, 0x80, 0x80, 0x02, 0x12, 0x13, 0x0a, 0x0d, 0x50, 0x41, 0x52, 0x54, 0x5f, 0x4b,
+	0x45, 0x59, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x01, 0x12, 0x10, 0x0a, 0x0a, 0x47,
+	0x52, 0x4f, 0x55, 0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x02, 0x12, 0x11, 0x0a,
+	0x0b, 0x55, 0x4e, 0x49, 0x51, 0x55, 0x45, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10, 0x80, 0x80, 0x04,
+	0x12, 0x11, 0x0a, 0x0b, 0x42, 0x49, 0x4e, 0x43, 0x4d, 0x50, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x10,
+	0x80, 0x80, 0x08, 0x1a, 0x02, 0x10, 0x01, 0x2a, 0x6b, 0x0a, 0x04, 0x46, 0x6c, 0x61, 0x67, 0x12,
+	0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0a, 0x49, 0x53, 0x49,
+	0x4e, 0x54, 0x45, 0x47, 0x52, 0x41, 0x4c, 0x10, 0x80, 0x02, 0x12, 0x0f, 0x0a, 0x0a, 0x49, 0x53,
+	0x55, 0x4e, 0x53, 0x49, 0x47, 0x4e, 0x45, 0x44, 0x10, 0x80, 0x04, 0x12, 0x0c, 0x0a, 0x07, 0x49,
+	0x53, 0x46, 0x4c, 0x4f, 0x41, 0x54, 0x10, 0x80, 0x08, 0x12, 0x0d, 0x0a, 0x08, 0x49, 0x53, 0x51,
+	0x55, 0x4f, 0x54, 0x45, 0x44, 0x10, 0x80, 0x10, 0x12, 0x0b, 0x0a, 0x06, 0x49, 0x53, 0x54, 0x45,
+	0x58, 0x54, 0x10, 0x80, 0x20, 0x12, 0x0d, 0x0a, 0x08, 0x49, 0x53, 0x42, 0x49, 0x4e, 0x41, 0x52,
+	0x59, 0x10, 0x80, 0x40, 0x2a, 0xc0, 0x03, 0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0d, 0x0a,
+	0x09, 0x4e, 0x55, 0x4c, 0x4c, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x04,
+	0x49, 0x4e, 0x54, 0x38, 0x10, 0x81, 0x02, 0x12, 0x0a, 0x0a, 0x05, 0x55, 0x49, 0x4e, 0x54, 0x38,
+	0x10, 0x82, 0x06, 0x12, 0x0a, 0x0a, 0x05, 0x49, 0x4e, 0x54, 0x31, 0x36, 0x10, 0x83, 0x02, 0x12,
+	0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54, 0x31, 0x36, 0x10, 0x84, 0x06, 0x12, 0x0a, 0x0a, 0x05,
+	0x49, 0x4e, 0x54, 0x32, 0x34, 0x10, 0x85, 0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54,
+	0x32, 0x34, 0x10, 0x86, 0x06, 0x12, 0x0a, 0x0a, 0x05, 0x49, 0x4e, 0x54, 0x33, 0x32, 0x10, 0x87,
+	0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49, 0x4e, 0x54, 0x33, 0x32, 0x10, 0x88, 0x06, 0x12, 0x0a,
+	0x0a, 0x05, 0x49, 0x4e, 0x54, 0x36, 0x34, 0x10, 0x89, 0x02, 0x12, 0x0b, 0x0a, 0x06, 0x55, 0x49,
+	0x4e, 0x54, 0x36, 0x34, 0x10, 0x8a, 0x06, 0x12, 0x0c, 0x0a, 0x07, 0x46, 0x4c, 0x4f, 0x41, 0x54,
+	0x33, 0x32, 0x10, 0x8b, 0x08, 0x12, 0x0c, 0x0a, 0x07, 0x46, 0x4c, 0x4f, 0x41, 0x54, 0x36, 0x34,
+	0x10, 0x8c, 0x08, 0x12, 0x0e, 0x0a, 0x09, 0x54, 0x49, 0x4d, 0x45, 0x53, 0x54, 0x41, 0x4d, 0x50,
+	0x10, 0x8d, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x44, 0x41, 0x54, 0x45, 0x10, 0x8e, 0x10, 0x12, 0x09,
+	0x0a, 0x04, 0x54, 0x49, 0x4d, 0x45, 0x10, 0x8f, 0x10, 0x12, 0x0d, 0x0a, 0x08, 0x44, 0x41, 0x54,
+	0x45, 0x54, 0x49, 0x4d, 0x45, 0x10, 0x90, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x59, 0x45, 0x41, 0x52,
+	0x10, 0x91, 0x06, 0x12, 0x0b, 0x0a, 0x07, 0x44, 0x45, 0x43, 0x49, 0x4d, 0x41, 0x4c, 0x10, 0x12,
+	0x12, 0x09, 0x0a, 0x04, 0x54, 0x45, 0x58, 0x54, 0x10, 0x93, 0x30, 0x12, 0x09, 0x0a, 0x04, 0x42,
+	0x4c, 0x4f, 0x42, 0x10, 0x94, 0x50, 0x12, 0x0c, 0x0a, 0x07, 0x56, 0x41, 0x52, 0x43, 0x48, 0x41,
+	0x52, 0x10, 0x95, 0x30, 0x12, 0x0e, 0x0a, 0x09, 0x56, 0x41, 0x52, 0x42, 0x49, 0x4e, 0x41, 0x52,
+	0x59, 0x10, 0x96, 0x50, 0x12, 0x09, 0x0a, 0x04, 0x43, 0x48, 0x41, 0x52, 0x10, 0x97, 0x30, 0x12,
+	0x0b, 0x0a, 0x06, 0x42, 0x49, 0x4e, 0x41, 0x52, 0x59, 0x10, 0x98, 0x50, 0x12, 0x08, 0x0a, 0x03,
+	0x42, 0x49, 0x54, 0x10, 0x99, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x45, 0x4e, 0x55, 0x4d, 0x10, 0x9a,
+	0x10, 0x12, 0x08, 0x0a, 0x03, 0x53, 0x45, 0x54, 0x10, 0x9b, 0x10, 0x12, 0x09, 0x0a, 0x05, 0x54,
+	0x55, 0x50, 0x4c, 0x45, 0x10, 0x1c, 0x12, 0x0d, 0x0a, 0x08, 0x47, 0x45, 0x4f, 0x4d, 0x45, 0x54,
+	0x52, 0x59, 0x10, 0x9d, 0x10, 0x12, 0x09, 0x0a, 0x04, 0x4a, 0x53, 0x4f, 0x4e, 0x10, 0x9e, 0x10,
+	0x12, 0x0e, 0x0a, 0x0a, 0x45, 0x58, 0x50, 0x52, 0x45, 0x53, 0x53, 0x49, 0x4f, 0x4e, 0x10, 0x1f,
+	0x12, 0x0b, 0x0a, 0x06, 0x48, 0x45, 0x58, 0x4e, 0x55, 0x4d, 0x10, 0xa0, 0x20, 0x12, 0x0b, 0x0a,
+	0x06, 0x48, 0x45, 0x58, 0x56, 0x41, 0x4c, 0x10, 0xa1, 0x20, 0x12, 0x0b, 0x0a, 0x06, 0x42, 0x49,
+	0x54, 0x4e, 0x55, 0x4d, 0x10, 0xa2, 0x20, 0x2a, 0x46, 0x0a, 0x10, 0x54, 0x72, 0x61, 0x6e, 0x73,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x55,
+	0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x45, 0x50,
+	0x41, 0x52, 0x45, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x43, 0x4f, 0x4d, 0x4d, 0x49, 0x54, 0x10,
+	0x02, 0x12, 0x0c, 0x0a, 0x08, 0x52, 0x4f, 0x4c, 0x4c, 0x42, 0x41, 0x43, 0x4b, 0x10, 0x03, 0x2a,
+	0x31, 0x0a, 0x0f, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x09, 0x0a, 0x05, 0x56, 0x49, 0x45, 0x57, 0x53, 0x10, 0x00, 0x12, 0x0a, 0x0a,
+	0x06, 0x54, 0x41, 0x42, 0x4c, 0x45, 0x53, 0x10, 0x01, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x4c, 0x4c,
+	0x10, 0x02, 0x42, 0x43, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x70, 0x6c, 0x61, 0x6e, 0x65, 0x74, 0x73, 0x63, 0x61, 0x6c, 0x65, 0x2f, 0x76, 0x69, 0x74,
+	0x65, 0x73, 0x73, 0x2d, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x76, 0x69,
+	0x74, 0x65, 0x73, 0x73, 0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2f, 0x64, 0x65, 0x76, 0x3b, 0x71,
+	0x75, 0x65, 0x72, 0x79, 0x64, 0x65, 0x76, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -6450,231 +6662,238 @@ func file_vitess_query_dev_query_proto_rawDescGZIP() []byte {
 	return file_vitess_query_dev_query_proto_rawDescData
 }
 
-var file_vitess_query_dev_query_proto_enumTypes = make([]protoimpl.EnumInfo, 11)
-var file_vitess_query_dev_query_proto_msgTypes = make([]protoimpl.MessageInfo, 64)
+var file_vitess_query_dev_query_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
+var file_vitess_query_dev_query_proto_msgTypes = make([]protoimpl.MessageInfo, 67)
 var file_vitess_query_dev_query_proto_goTypes = []interface{}{
 	(MySqlFlag)(0),                            // 0: vitess.query.dev.MySqlFlag
 	(Flag)(0),                                 // 1: vitess.query.dev.Flag
 	(Type)(0),                                 // 2: vitess.query.dev.Type
 	(TransactionState)(0),                     // 3: vitess.query.dev.TransactionState
-	(ExecuteOptions_IncludedFields)(0),        // 4: vitess.query.dev.ExecuteOptions.IncludedFields
-	(ExecuteOptions_Workload)(0),              // 5: vitess.query.dev.ExecuteOptions.Workload
-	(ExecuteOptions_TransactionIsolation)(0),  // 6: vitess.query.dev.ExecuteOptions.TransactionIsolation
-	(ExecuteOptions_PlannerVersion)(0),        // 7: vitess.query.dev.ExecuteOptions.PlannerVersion
-	(ExecuteOptions_Consolidator)(0),          // 8: vitess.query.dev.ExecuteOptions.Consolidator
-	(ExecuteOptions_TransactionAccessMode)(0), // 9: vitess.query.dev.ExecuteOptions.TransactionAccessMode
-	(StreamEvent_Statement_Category)(0),       // 10: vitess.query.dev.StreamEvent.Statement.Category
-	(*Target)(nil),                            // 11: vitess.query.dev.Target
-	(*VTGateCallerID)(nil),                    // 12: vitess.query.dev.VTGateCallerID
-	(*EventToken)(nil),                        // 13: vitess.query.dev.EventToken
-	(*Value)(nil),                             // 14: vitess.query.dev.Value
-	(*BindVariable)(nil),                      // 15: vitess.query.dev.BindVariable
-	(*BoundQuery)(nil),                        // 16: vitess.query.dev.BoundQuery
-	(*ExecuteOptions)(nil),                    // 17: vitess.query.dev.ExecuteOptions
-	(*Field)(nil),                             // 18: vitess.query.dev.Field
-	(*Row)(nil),                               // 19: vitess.query.dev.Row
-	(*QueryResult)(nil),                       // 20: vitess.query.dev.QueryResult
-	(*QueryWarning)(nil),                      // 21: vitess.query.dev.QueryWarning
-	(*StreamEvent)(nil),                       // 22: vitess.query.dev.StreamEvent
-	(*ExecuteRequest)(nil),                    // 23: vitess.query.dev.ExecuteRequest
-	(*ExecuteResponse)(nil),                   // 24: vitess.query.dev.ExecuteResponse
-	(*ResultWithError)(nil),                   // 25: vitess.query.dev.ResultWithError
-	(*StreamExecuteRequest)(nil),              // 26: vitess.query.dev.StreamExecuteRequest
-	(*StreamExecuteResponse)(nil),             // 27: vitess.query.dev.StreamExecuteResponse
-	(*BeginRequest)(nil),                      // 28: vitess.query.dev.BeginRequest
-	(*BeginResponse)(nil),                     // 29: vitess.query.dev.BeginResponse
-	(*CommitRequest)(nil),                     // 30: vitess.query.dev.CommitRequest
-	(*CommitResponse)(nil),                    // 31: vitess.query.dev.CommitResponse
-	(*RollbackRequest)(nil),                   // 32: vitess.query.dev.RollbackRequest
-	(*RollbackResponse)(nil),                  // 33: vitess.query.dev.RollbackResponse
-	(*PrepareRequest)(nil),                    // 34: vitess.query.dev.PrepareRequest
-	(*PrepareResponse)(nil),                   // 35: vitess.query.dev.PrepareResponse
-	(*CommitPreparedRequest)(nil),             // 36: vitess.query.dev.CommitPreparedRequest
-	(*CommitPreparedResponse)(nil),            // 37: vitess.query.dev.CommitPreparedResponse
-	(*RollbackPreparedRequest)(nil),           // 38: vitess.query.dev.RollbackPreparedRequest
-	(*RollbackPreparedResponse)(nil),          // 39: vitess.query.dev.RollbackPreparedResponse
-	(*CreateTransactionRequest)(nil),          // 40: vitess.query.dev.CreateTransactionRequest
-	(*CreateTransactionResponse)(nil),         // 41: vitess.query.dev.CreateTransactionResponse
-	(*StartCommitRequest)(nil),                // 42: vitess.query.dev.StartCommitRequest
-	(*StartCommitResponse)(nil),               // 43: vitess.query.dev.StartCommitResponse
-	(*SetRollbackRequest)(nil),                // 44: vitess.query.dev.SetRollbackRequest
-	(*SetRollbackResponse)(nil),               // 45: vitess.query.dev.SetRollbackResponse
-	(*ConcludeTransactionRequest)(nil),        // 46: vitess.query.dev.ConcludeTransactionRequest
-	(*ConcludeTransactionResponse)(nil),       // 47: vitess.query.dev.ConcludeTransactionResponse
-	(*ReadTransactionRequest)(nil),            // 48: vitess.query.dev.ReadTransactionRequest
-	(*ReadTransactionResponse)(nil),           // 49: vitess.query.dev.ReadTransactionResponse
-	(*BeginExecuteRequest)(nil),               // 50: vitess.query.dev.BeginExecuteRequest
-	(*BeginExecuteResponse)(nil),              // 51: vitess.query.dev.BeginExecuteResponse
-	(*BeginStreamExecuteRequest)(nil),         // 52: vitess.query.dev.BeginStreamExecuteRequest
-	(*BeginStreamExecuteResponse)(nil),        // 53: vitess.query.dev.BeginStreamExecuteResponse
-	(*MessageStreamRequest)(nil),              // 54: vitess.query.dev.MessageStreamRequest
-	(*MessageStreamResponse)(nil),             // 55: vitess.query.dev.MessageStreamResponse
-	(*MessageAckRequest)(nil),                 // 56: vitess.query.dev.MessageAckRequest
-	(*MessageAckResponse)(nil),                // 57: vitess.query.dev.MessageAckResponse
-	(*ReserveExecuteRequest)(nil),             // 58: vitess.query.dev.ReserveExecuteRequest
-	(*ReserveExecuteResponse)(nil),            // 59: vitess.query.dev.ReserveExecuteResponse
-	(*ReserveStreamExecuteRequest)(nil),       // 60: vitess.query.dev.ReserveStreamExecuteRequest
-	(*ReserveStreamExecuteResponse)(nil),      // 61: vitess.query.dev.ReserveStreamExecuteResponse
-	(*ReserveBeginExecuteRequest)(nil),        // 62: vitess.query.dev.ReserveBeginExecuteRequest
-	(*ReserveBeginExecuteResponse)(nil),       // 63: vitess.query.dev.ReserveBeginExecuteResponse
-	(*ReserveBeginStreamExecuteRequest)(nil),  // 64: vitess.query.dev.ReserveBeginStreamExecuteRequest
-	(*ReserveBeginStreamExecuteResponse)(nil), // 65: vitess.query.dev.ReserveBeginStreamExecuteResponse
-	(*ReleaseRequest)(nil),                    // 66: vitess.query.dev.ReleaseRequest
-	(*ReleaseResponse)(nil),                   // 67: vitess.query.dev.ReleaseResponse
-	(*StreamHealthRequest)(nil),               // 68: vitess.query.dev.StreamHealthRequest
-	(*RealtimeStats)(nil),                     // 69: vitess.query.dev.RealtimeStats
-	(*AggregateStats)(nil),                    // 70: vitess.query.dev.AggregateStats
-	(*StreamHealthResponse)(nil),              // 71: vitess.query.dev.StreamHealthResponse
-	(*TransactionMetadata)(nil),               // 72: vitess.query.dev.TransactionMetadata
-	nil,                                       // 73: vitess.query.dev.BoundQuery.BindVariablesEntry
-	(*StreamEvent_Statement)(nil),             // 74: vitess.query.dev.StreamEvent.Statement
-	(dev.TabletType)(0),                       // 75: vitess.topodata.dev.TabletType
-	(*dev1.CallerID)(nil),                     // 76: vitess.vtrpc.dev.CallerID
-	(*dev1.RPCError)(nil),                     // 77: vitess.vtrpc.dev.RPCError
-	(*dev.TabletAlias)(nil),                   // 78: vitess.topodata.dev.TabletAlias
+	(SchemaTableType)(0),                      // 4: vitess.query.dev.SchemaTableType
+	(ExecuteOptions_IncludedFields)(0),        // 5: vitess.query.dev.ExecuteOptions.IncludedFields
+	(ExecuteOptions_Workload)(0),              // 6: vitess.query.dev.ExecuteOptions.Workload
+	(ExecuteOptions_TransactionIsolation)(0),  // 7: vitess.query.dev.ExecuteOptions.TransactionIsolation
+	(ExecuteOptions_PlannerVersion)(0),        // 8: vitess.query.dev.ExecuteOptions.PlannerVersion
+	(ExecuteOptions_Consolidator)(0),          // 9: vitess.query.dev.ExecuteOptions.Consolidator
+	(ExecuteOptions_TransactionAccessMode)(0), // 10: vitess.query.dev.ExecuteOptions.TransactionAccessMode
+	(StreamEvent_Statement_Category)(0),       // 11: vitess.query.dev.StreamEvent.Statement.Category
+	(*Target)(nil),                            // 12: vitess.query.dev.Target
+	(*VTGateCallerID)(nil),                    // 13: vitess.query.dev.VTGateCallerID
+	(*EventToken)(nil),                        // 14: vitess.query.dev.EventToken
+	(*Value)(nil),                             // 15: vitess.query.dev.Value
+	(*BindVariable)(nil),                      // 16: vitess.query.dev.BindVariable
+	(*BoundQuery)(nil),                        // 17: vitess.query.dev.BoundQuery
+	(*ExecuteOptions)(nil),                    // 18: vitess.query.dev.ExecuteOptions
+	(*Field)(nil),                             // 19: vitess.query.dev.Field
+	(*Row)(nil),                               // 20: vitess.query.dev.Row
+	(*QueryResult)(nil),                       // 21: vitess.query.dev.QueryResult
+	(*QueryWarning)(nil),                      // 22: vitess.query.dev.QueryWarning
+	(*StreamEvent)(nil),                       // 23: vitess.query.dev.StreamEvent
+	(*ExecuteRequest)(nil),                    // 24: vitess.query.dev.ExecuteRequest
+	(*ExecuteResponse)(nil),                   // 25: vitess.query.dev.ExecuteResponse
+	(*ResultWithError)(nil),                   // 26: vitess.query.dev.ResultWithError
+	(*StreamExecuteRequest)(nil),              // 27: vitess.query.dev.StreamExecuteRequest
+	(*StreamExecuteResponse)(nil),             // 28: vitess.query.dev.StreamExecuteResponse
+	(*BeginRequest)(nil),                      // 29: vitess.query.dev.BeginRequest
+	(*BeginResponse)(nil),                     // 30: vitess.query.dev.BeginResponse
+	(*CommitRequest)(nil),                     // 31: vitess.query.dev.CommitRequest
+	(*CommitResponse)(nil),                    // 32: vitess.query.dev.CommitResponse
+	(*RollbackRequest)(nil),                   // 33: vitess.query.dev.RollbackRequest
+	(*RollbackResponse)(nil),                  // 34: vitess.query.dev.RollbackResponse
+	(*PrepareRequest)(nil),                    // 35: vitess.query.dev.PrepareRequest
+	(*PrepareResponse)(nil),                   // 36: vitess.query.dev.PrepareResponse
+	(*CommitPreparedRequest)(nil),             // 37: vitess.query.dev.CommitPreparedRequest
+	(*CommitPreparedResponse)(nil),            // 38: vitess.query.dev.CommitPreparedResponse
+	(*RollbackPreparedRequest)(nil),           // 39: vitess.query.dev.RollbackPreparedRequest
+	(*RollbackPreparedResponse)(nil),          // 40: vitess.query.dev.RollbackPreparedResponse
+	(*CreateTransactionRequest)(nil),          // 41: vitess.query.dev.CreateTransactionRequest
+	(*CreateTransactionResponse)(nil),         // 42: vitess.query.dev.CreateTransactionResponse
+	(*StartCommitRequest)(nil),                // 43: vitess.query.dev.StartCommitRequest
+	(*StartCommitResponse)(nil),               // 44: vitess.query.dev.StartCommitResponse
+	(*SetRollbackRequest)(nil),                // 45: vitess.query.dev.SetRollbackRequest
+	(*SetRollbackResponse)(nil),               // 46: vitess.query.dev.SetRollbackResponse
+	(*ConcludeTransactionRequest)(nil),        // 47: vitess.query.dev.ConcludeTransactionRequest
+	(*ConcludeTransactionResponse)(nil),       // 48: vitess.query.dev.ConcludeTransactionResponse
+	(*ReadTransactionRequest)(nil),            // 49: vitess.query.dev.ReadTransactionRequest
+	(*ReadTransactionResponse)(nil),           // 50: vitess.query.dev.ReadTransactionResponse
+	(*BeginExecuteRequest)(nil),               // 51: vitess.query.dev.BeginExecuteRequest
+	(*BeginExecuteResponse)(nil),              // 52: vitess.query.dev.BeginExecuteResponse
+	(*BeginStreamExecuteRequest)(nil),         // 53: vitess.query.dev.BeginStreamExecuteRequest
+	(*BeginStreamExecuteResponse)(nil),        // 54: vitess.query.dev.BeginStreamExecuteResponse
+	(*MessageStreamRequest)(nil),              // 55: vitess.query.dev.MessageStreamRequest
+	(*MessageStreamResponse)(nil),             // 56: vitess.query.dev.MessageStreamResponse
+	(*MessageAckRequest)(nil),                 // 57: vitess.query.dev.MessageAckRequest
+	(*MessageAckResponse)(nil),                // 58: vitess.query.dev.MessageAckResponse
+	(*ReserveExecuteRequest)(nil),             // 59: vitess.query.dev.ReserveExecuteRequest
+	(*ReserveExecuteResponse)(nil),            // 60: vitess.query.dev.ReserveExecuteResponse
+	(*ReserveStreamExecuteRequest)(nil),       // 61: vitess.query.dev.ReserveStreamExecuteRequest
+	(*ReserveStreamExecuteResponse)(nil),      // 62: vitess.query.dev.ReserveStreamExecuteResponse
+	(*ReserveBeginExecuteRequest)(nil),        // 63: vitess.query.dev.ReserveBeginExecuteRequest
+	(*ReserveBeginExecuteResponse)(nil),       // 64: vitess.query.dev.ReserveBeginExecuteResponse
+	(*ReserveBeginStreamExecuteRequest)(nil),  // 65: vitess.query.dev.ReserveBeginStreamExecuteRequest
+	(*ReserveBeginStreamExecuteResponse)(nil), // 66: vitess.query.dev.ReserveBeginStreamExecuteResponse
+	(*ReleaseRequest)(nil),                    // 67: vitess.query.dev.ReleaseRequest
+	(*ReleaseResponse)(nil),                   // 68: vitess.query.dev.ReleaseResponse
+	(*StreamHealthRequest)(nil),               // 69: vitess.query.dev.StreamHealthRequest
+	(*RealtimeStats)(nil),                     // 70: vitess.query.dev.RealtimeStats
+	(*AggregateStats)(nil),                    // 71: vitess.query.dev.AggregateStats
+	(*StreamHealthResponse)(nil),              // 72: vitess.query.dev.StreamHealthResponse
+	(*TransactionMetadata)(nil),               // 73: vitess.query.dev.TransactionMetadata
+	(*GetSchemaRequest)(nil),                  // 74: vitess.query.dev.GetSchemaRequest
+	(*GetSchemaResponse)(nil),                 // 75: vitess.query.dev.GetSchemaResponse
+	nil,                                       // 76: vitess.query.dev.BoundQuery.BindVariablesEntry
+	(*StreamEvent_Statement)(nil),             // 77: vitess.query.dev.StreamEvent.Statement
+	nil,                                       // 78: vitess.query.dev.GetSchemaResponse.TableDefinitionEntry
+	(dev.TabletType)(0),                       // 79: vitess.topodata.dev.TabletType
+	(*dev1.CallerID)(nil),                     // 80: vitess.vtrpc.dev.CallerID
+	(*dev1.RPCError)(nil),                     // 81: vitess.vtrpc.dev.RPCError
+	(*dev.TabletAlias)(nil),                   // 82: vitess.topodata.dev.TabletAlias
 }
 var file_vitess_query_dev_query_proto_depIdxs = []int32{
-	75,  // 0: vitess.query.dev.Target.tablet_type:type_name -> vitess.topodata.dev.TabletType
+	79,  // 0: vitess.query.dev.Target.tablet_type:type_name -> vitess.topodata.dev.TabletType
 	2,   // 1: vitess.query.dev.Value.type:type_name -> vitess.query.dev.Type
 	2,   // 2: vitess.query.dev.BindVariable.type:type_name -> vitess.query.dev.Type
-	14,  // 3: vitess.query.dev.BindVariable.values:type_name -> vitess.query.dev.Value
-	73,  // 4: vitess.query.dev.BoundQuery.bind_variables:type_name -> vitess.query.dev.BoundQuery.BindVariablesEntry
-	4,   // 5: vitess.query.dev.ExecuteOptions.included_fields:type_name -> vitess.query.dev.ExecuteOptions.IncludedFields
-	5,   // 6: vitess.query.dev.ExecuteOptions.workload:type_name -> vitess.query.dev.ExecuteOptions.Workload
-	6,   // 7: vitess.query.dev.ExecuteOptions.transaction_isolation:type_name -> vitess.query.dev.ExecuteOptions.TransactionIsolation
-	7,   // 8: vitess.query.dev.ExecuteOptions.planner_version:type_name -> vitess.query.dev.ExecuteOptions.PlannerVersion
-	8,   // 9: vitess.query.dev.ExecuteOptions.consolidator:type_name -> vitess.query.dev.ExecuteOptions.Consolidator
-	9,   // 10: vitess.query.dev.ExecuteOptions.transaction_access_mode:type_name -> vitess.query.dev.ExecuteOptions.TransactionAccessMode
+	15,  // 3: vitess.query.dev.BindVariable.values:type_name -> vitess.query.dev.Value
+	76,  // 4: vitess.query.dev.BoundQuery.bind_variables:type_name -> vitess.query.dev.BoundQuery.BindVariablesEntry
+	5,   // 5: vitess.query.dev.ExecuteOptions.included_fields:type_name -> vitess.query.dev.ExecuteOptions.IncludedFields
+	6,   // 6: vitess.query.dev.ExecuteOptions.workload:type_name -> vitess.query.dev.ExecuteOptions.Workload
+	7,   // 7: vitess.query.dev.ExecuteOptions.transaction_isolation:type_name -> vitess.query.dev.ExecuteOptions.TransactionIsolation
+	8,   // 8: vitess.query.dev.ExecuteOptions.planner_version:type_name -> vitess.query.dev.ExecuteOptions.PlannerVersion
+	9,   // 9: vitess.query.dev.ExecuteOptions.consolidator:type_name -> vitess.query.dev.ExecuteOptions.Consolidator
+	10,  // 10: vitess.query.dev.ExecuteOptions.transaction_access_mode:type_name -> vitess.query.dev.ExecuteOptions.TransactionAccessMode
 	2,   // 11: vitess.query.dev.Field.type:type_name -> vitess.query.dev.Type
-	18,  // 12: vitess.query.dev.QueryResult.fields:type_name -> vitess.query.dev.Field
-	19,  // 13: vitess.query.dev.QueryResult.rows:type_name -> vitess.query.dev.Row
-	74,  // 14: vitess.query.dev.StreamEvent.statements:type_name -> vitess.query.dev.StreamEvent.Statement
-	13,  // 15: vitess.query.dev.StreamEvent.event_token:type_name -> vitess.query.dev.EventToken
-	76,  // 16: vitess.query.dev.ExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 17: vitess.query.dev.ExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 18: vitess.query.dev.ExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 19: vitess.query.dev.ExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 20: vitess.query.dev.ExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	20,  // 21: vitess.query.dev.ExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	77,  // 22: vitess.query.dev.ResultWithError.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 23: vitess.query.dev.ResultWithError.result:type_name -> vitess.query.dev.QueryResult
-	76,  // 24: vitess.query.dev.StreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 25: vitess.query.dev.StreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 26: vitess.query.dev.StreamExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 27: vitess.query.dev.StreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 28: vitess.query.dev.StreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	20,  // 29: vitess.query.dev.StreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	76,  // 30: vitess.query.dev.BeginRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 31: vitess.query.dev.BeginRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 32: vitess.query.dev.BeginRequest.target:type_name -> vitess.query.dev.Target
-	17,  // 33: vitess.query.dev.BeginRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	78,  // 34: vitess.query.dev.BeginResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 35: vitess.query.dev.CommitRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 36: vitess.query.dev.CommitRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 37: vitess.query.dev.CommitRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 38: vitess.query.dev.RollbackRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 39: vitess.query.dev.RollbackRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 40: vitess.query.dev.RollbackRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 41: vitess.query.dev.PrepareRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 42: vitess.query.dev.PrepareRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 43: vitess.query.dev.PrepareRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 44: vitess.query.dev.CommitPreparedRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 45: vitess.query.dev.CommitPreparedRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 46: vitess.query.dev.CommitPreparedRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 47: vitess.query.dev.RollbackPreparedRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 48: vitess.query.dev.RollbackPreparedRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 49: vitess.query.dev.RollbackPreparedRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 50: vitess.query.dev.CreateTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 51: vitess.query.dev.CreateTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 52: vitess.query.dev.CreateTransactionRequest.target:type_name -> vitess.query.dev.Target
-	11,  // 53: vitess.query.dev.CreateTransactionRequest.participants:type_name -> vitess.query.dev.Target
-	76,  // 54: vitess.query.dev.StartCommitRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 55: vitess.query.dev.StartCommitRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 56: vitess.query.dev.StartCommitRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 57: vitess.query.dev.SetRollbackRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 58: vitess.query.dev.SetRollbackRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 59: vitess.query.dev.SetRollbackRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 60: vitess.query.dev.ConcludeTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 61: vitess.query.dev.ConcludeTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 62: vitess.query.dev.ConcludeTransactionRequest.target:type_name -> vitess.query.dev.Target
-	76,  // 63: vitess.query.dev.ReadTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 64: vitess.query.dev.ReadTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 65: vitess.query.dev.ReadTransactionRequest.target:type_name -> vitess.query.dev.Target
-	72,  // 66: vitess.query.dev.ReadTransactionResponse.metadata:type_name -> vitess.query.dev.TransactionMetadata
-	76,  // 67: vitess.query.dev.BeginExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 68: vitess.query.dev.BeginExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 69: vitess.query.dev.BeginExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 70: vitess.query.dev.BeginExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 71: vitess.query.dev.BeginExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 72: vitess.query.dev.BeginExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 73: vitess.query.dev.BeginExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 74: vitess.query.dev.BeginExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 75: vitess.query.dev.BeginStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 76: vitess.query.dev.BeginStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 77: vitess.query.dev.BeginStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 78: vitess.query.dev.BeginStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 79: vitess.query.dev.BeginStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 80: vitess.query.dev.BeginStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 81: vitess.query.dev.BeginStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 82: vitess.query.dev.BeginStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 83: vitess.query.dev.MessageStreamRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 84: vitess.query.dev.MessageStreamRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 85: vitess.query.dev.MessageStreamRequest.target:type_name -> vitess.query.dev.Target
-	20,  // 86: vitess.query.dev.MessageStreamResponse.result:type_name -> vitess.query.dev.QueryResult
-	76,  // 87: vitess.query.dev.MessageAckRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 88: vitess.query.dev.MessageAckRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 89: vitess.query.dev.MessageAckRequest.target:type_name -> vitess.query.dev.Target
-	14,  // 90: vitess.query.dev.MessageAckRequest.ids:type_name -> vitess.query.dev.Value
-	20,  // 91: vitess.query.dev.MessageAckResponse.result:type_name -> vitess.query.dev.QueryResult
-	76,  // 92: vitess.query.dev.ReserveExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 93: vitess.query.dev.ReserveExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 94: vitess.query.dev.ReserveExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 95: vitess.query.dev.ReserveExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 96: vitess.query.dev.ReserveExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 97: vitess.query.dev.ReserveExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 98: vitess.query.dev.ReserveExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 99: vitess.query.dev.ReserveExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 100: vitess.query.dev.ReserveStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 101: vitess.query.dev.ReserveStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 102: vitess.query.dev.ReserveStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 103: vitess.query.dev.ReserveStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 104: vitess.query.dev.ReserveStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 105: vitess.query.dev.ReserveStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 106: vitess.query.dev.ReserveStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 107: vitess.query.dev.ReserveStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 108: vitess.query.dev.ReserveBeginExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 109: vitess.query.dev.ReserveBeginExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 110: vitess.query.dev.ReserveBeginExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 111: vitess.query.dev.ReserveBeginExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 112: vitess.query.dev.ReserveBeginExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 113: vitess.query.dev.ReserveBeginExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 114: vitess.query.dev.ReserveBeginExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 115: vitess.query.dev.ReserveBeginExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 116: vitess.query.dev.ReserveBeginStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 117: vitess.query.dev.ReserveBeginStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 118: vitess.query.dev.ReserveBeginStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
-	16,  // 119: vitess.query.dev.ReserveBeginStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
-	17,  // 120: vitess.query.dev.ReserveBeginStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
-	77,  // 121: vitess.query.dev.ReserveBeginStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
-	20,  // 122: vitess.query.dev.ReserveBeginStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
-	78,  // 123: vitess.query.dev.ReserveBeginStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
-	76,  // 124: vitess.query.dev.ReleaseRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
-	12,  // 125: vitess.query.dev.ReleaseRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
-	11,  // 126: vitess.query.dev.ReleaseRequest.target:type_name -> vitess.query.dev.Target
-	11,  // 127: vitess.query.dev.StreamHealthResponse.target:type_name -> vitess.query.dev.Target
-	69,  // 128: vitess.query.dev.StreamHealthResponse.realtime_stats:type_name -> vitess.query.dev.RealtimeStats
-	78,  // 129: vitess.query.dev.StreamHealthResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	19,  // 12: vitess.query.dev.QueryResult.fields:type_name -> vitess.query.dev.Field
+	20,  // 13: vitess.query.dev.QueryResult.rows:type_name -> vitess.query.dev.Row
+	77,  // 14: vitess.query.dev.StreamEvent.statements:type_name -> vitess.query.dev.StreamEvent.Statement
+	14,  // 15: vitess.query.dev.StreamEvent.event_token:type_name -> vitess.query.dev.EventToken
+	80,  // 16: vitess.query.dev.ExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 17: vitess.query.dev.ExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 18: vitess.query.dev.ExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 19: vitess.query.dev.ExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 20: vitess.query.dev.ExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	21,  // 21: vitess.query.dev.ExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	81,  // 22: vitess.query.dev.ResultWithError.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 23: vitess.query.dev.ResultWithError.result:type_name -> vitess.query.dev.QueryResult
+	80,  // 24: vitess.query.dev.StreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 25: vitess.query.dev.StreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 26: vitess.query.dev.StreamExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 27: vitess.query.dev.StreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 28: vitess.query.dev.StreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	21,  // 29: vitess.query.dev.StreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	80,  // 30: vitess.query.dev.BeginRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 31: vitess.query.dev.BeginRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 32: vitess.query.dev.BeginRequest.target:type_name -> vitess.query.dev.Target
+	18,  // 33: vitess.query.dev.BeginRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	82,  // 34: vitess.query.dev.BeginResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 35: vitess.query.dev.CommitRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 36: vitess.query.dev.CommitRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 37: vitess.query.dev.CommitRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 38: vitess.query.dev.RollbackRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 39: vitess.query.dev.RollbackRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 40: vitess.query.dev.RollbackRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 41: vitess.query.dev.PrepareRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 42: vitess.query.dev.PrepareRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 43: vitess.query.dev.PrepareRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 44: vitess.query.dev.CommitPreparedRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 45: vitess.query.dev.CommitPreparedRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 46: vitess.query.dev.CommitPreparedRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 47: vitess.query.dev.RollbackPreparedRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 48: vitess.query.dev.RollbackPreparedRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 49: vitess.query.dev.RollbackPreparedRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 50: vitess.query.dev.CreateTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 51: vitess.query.dev.CreateTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 52: vitess.query.dev.CreateTransactionRequest.target:type_name -> vitess.query.dev.Target
+	12,  // 53: vitess.query.dev.CreateTransactionRequest.participants:type_name -> vitess.query.dev.Target
+	80,  // 54: vitess.query.dev.StartCommitRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 55: vitess.query.dev.StartCommitRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 56: vitess.query.dev.StartCommitRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 57: vitess.query.dev.SetRollbackRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 58: vitess.query.dev.SetRollbackRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 59: vitess.query.dev.SetRollbackRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 60: vitess.query.dev.ConcludeTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 61: vitess.query.dev.ConcludeTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 62: vitess.query.dev.ConcludeTransactionRequest.target:type_name -> vitess.query.dev.Target
+	80,  // 63: vitess.query.dev.ReadTransactionRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 64: vitess.query.dev.ReadTransactionRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 65: vitess.query.dev.ReadTransactionRequest.target:type_name -> vitess.query.dev.Target
+	73,  // 66: vitess.query.dev.ReadTransactionResponse.metadata:type_name -> vitess.query.dev.TransactionMetadata
+	80,  // 67: vitess.query.dev.BeginExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 68: vitess.query.dev.BeginExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 69: vitess.query.dev.BeginExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 70: vitess.query.dev.BeginExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 71: vitess.query.dev.BeginExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 72: vitess.query.dev.BeginExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 73: vitess.query.dev.BeginExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 74: vitess.query.dev.BeginExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 75: vitess.query.dev.BeginStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 76: vitess.query.dev.BeginStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 77: vitess.query.dev.BeginStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 78: vitess.query.dev.BeginStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 79: vitess.query.dev.BeginStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 80: vitess.query.dev.BeginStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 81: vitess.query.dev.BeginStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 82: vitess.query.dev.BeginStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 83: vitess.query.dev.MessageStreamRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 84: vitess.query.dev.MessageStreamRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 85: vitess.query.dev.MessageStreamRequest.target:type_name -> vitess.query.dev.Target
+	21,  // 86: vitess.query.dev.MessageStreamResponse.result:type_name -> vitess.query.dev.QueryResult
+	80,  // 87: vitess.query.dev.MessageAckRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 88: vitess.query.dev.MessageAckRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 89: vitess.query.dev.MessageAckRequest.target:type_name -> vitess.query.dev.Target
+	15,  // 90: vitess.query.dev.MessageAckRequest.ids:type_name -> vitess.query.dev.Value
+	21,  // 91: vitess.query.dev.MessageAckResponse.result:type_name -> vitess.query.dev.QueryResult
+	80,  // 92: vitess.query.dev.ReserveExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 93: vitess.query.dev.ReserveExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 94: vitess.query.dev.ReserveExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 95: vitess.query.dev.ReserveExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 96: vitess.query.dev.ReserveExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 97: vitess.query.dev.ReserveExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 98: vitess.query.dev.ReserveExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 99: vitess.query.dev.ReserveExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 100: vitess.query.dev.ReserveStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 101: vitess.query.dev.ReserveStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 102: vitess.query.dev.ReserveStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 103: vitess.query.dev.ReserveStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 104: vitess.query.dev.ReserveStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 105: vitess.query.dev.ReserveStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 106: vitess.query.dev.ReserveStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 107: vitess.query.dev.ReserveStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 108: vitess.query.dev.ReserveBeginExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 109: vitess.query.dev.ReserveBeginExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 110: vitess.query.dev.ReserveBeginExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 111: vitess.query.dev.ReserveBeginExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 112: vitess.query.dev.ReserveBeginExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 113: vitess.query.dev.ReserveBeginExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 114: vitess.query.dev.ReserveBeginExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 115: vitess.query.dev.ReserveBeginExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 116: vitess.query.dev.ReserveBeginStreamExecuteRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 117: vitess.query.dev.ReserveBeginStreamExecuteRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 118: vitess.query.dev.ReserveBeginStreamExecuteRequest.target:type_name -> vitess.query.dev.Target
+	17,  // 119: vitess.query.dev.ReserveBeginStreamExecuteRequest.query:type_name -> vitess.query.dev.BoundQuery
+	18,  // 120: vitess.query.dev.ReserveBeginStreamExecuteRequest.options:type_name -> vitess.query.dev.ExecuteOptions
+	81,  // 121: vitess.query.dev.ReserveBeginStreamExecuteResponse.error:type_name -> vitess.vtrpc.dev.RPCError
+	21,  // 122: vitess.query.dev.ReserveBeginStreamExecuteResponse.result:type_name -> vitess.query.dev.QueryResult
+	82,  // 123: vitess.query.dev.ReserveBeginStreamExecuteResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
+	80,  // 124: vitess.query.dev.ReleaseRequest.effective_caller_id:type_name -> vitess.vtrpc.dev.CallerID
+	13,  // 125: vitess.query.dev.ReleaseRequest.immediate_caller_id:type_name -> vitess.query.dev.VTGateCallerID
+	12,  // 126: vitess.query.dev.ReleaseRequest.target:type_name -> vitess.query.dev.Target
+	12,  // 127: vitess.query.dev.StreamHealthResponse.target:type_name -> vitess.query.dev.Target
+	70,  // 128: vitess.query.dev.StreamHealthResponse.realtime_stats:type_name -> vitess.query.dev.RealtimeStats
+	82,  // 129: vitess.query.dev.StreamHealthResponse.tablet_alias:type_name -> vitess.topodata.dev.TabletAlias
 	3,   // 130: vitess.query.dev.TransactionMetadata.state:type_name -> vitess.query.dev.TransactionState
-	11,  // 131: vitess.query.dev.TransactionMetadata.participants:type_name -> vitess.query.dev.Target
-	15,  // 132: vitess.query.dev.BoundQuery.BindVariablesEntry.value:type_name -> vitess.query.dev.BindVariable
-	10,  // 133: vitess.query.dev.StreamEvent.Statement.category:type_name -> vitess.query.dev.StreamEvent.Statement.Category
-	18,  // 134: vitess.query.dev.StreamEvent.Statement.primary_key_fields:type_name -> vitess.query.dev.Field
-	19,  // 135: vitess.query.dev.StreamEvent.Statement.primary_key_values:type_name -> vitess.query.dev.Row
-	136, // [136:136] is the sub-list for method output_type
-	136, // [136:136] is the sub-list for method input_type
-	136, // [136:136] is the sub-list for extension type_name
-	136, // [136:136] is the sub-list for extension extendee
-	0,   // [0:136] is the sub-list for field type_name
+	12,  // 131: vitess.query.dev.TransactionMetadata.participants:type_name -> vitess.query.dev.Target
+	12,  // 132: vitess.query.dev.GetSchemaRequest.target:type_name -> vitess.query.dev.Target
+	4,   // 133: vitess.query.dev.GetSchemaRequest.table_type:type_name -> vitess.query.dev.SchemaTableType
+	78,  // 134: vitess.query.dev.GetSchemaResponse.table_definition:type_name -> vitess.query.dev.GetSchemaResponse.TableDefinitionEntry
+	16,  // 135: vitess.query.dev.BoundQuery.BindVariablesEntry.value:type_name -> vitess.query.dev.BindVariable
+	11,  // 136: vitess.query.dev.StreamEvent.Statement.category:type_name -> vitess.query.dev.StreamEvent.Statement.Category
+	19,  // 137: vitess.query.dev.StreamEvent.Statement.primary_key_fields:type_name -> vitess.query.dev.Field
+	20,  // 138: vitess.query.dev.StreamEvent.Statement.primary_key_values:type_name -> vitess.query.dev.Row
+	139, // [139:139] is the sub-list for method output_type
+	139, // [139:139] is the sub-list for method input_type
+	139, // [139:139] is the sub-list for extension type_name
+	139, // [139:139] is the sub-list for extension extendee
+	0,   // [0:139] is the sub-list for field type_name
 }
 
 func init() { file_vitess_query_dev_query_proto_init() }
@@ -7427,7 +7646,31 @@ func file_vitess_query_dev_query_proto_init() {
 				return nil
 			}
 		}
+		file_vitess_query_dev_query_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetSchemaRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_vitess_query_dev_query_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetSchemaResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vitess_query_dev_query_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StreamEvent_Statement); i {
 			case 0:
 				return &v.state
@@ -7445,8 +7688,8 @@ func file_vitess_query_dev_query_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_vitess_query_dev_query_proto_rawDesc,
-			NumEnums:      11,
-			NumMessages:   64,
+			NumEnums:      12,
+			NumMessages:   67,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -56,7 +56,7 @@ var file_vitess_vtctlservice_dev_vtctlservice_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x64, 0x61, 0x74,
 	0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x56, 0x74, 0x63,
 	0x74, 0x6c, 0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x30, 0x01, 0x32, 0xd5, 0x4b, 0x0a, 0x06, 0x56, 0x74, 0x63, 0x74, 0x6c, 0x64,
+	0x65, 0x22, 0x00, 0x30, 0x01, 0x32, 0xc4, 0x4c, 0x0a, 0x06, 0x56, 0x74, 0x63, 0x74, 0x6c, 0x64,
 	0x12, 0x64, 0x0a, 0x0b, 0x41, 0x64, 0x64, 0x43, 0x65, 0x6c, 0x6c, 0x49, 0x6e, 0x66, 0x6f, 0x12,
 	0x28, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x64, 0x61,
 	0x74, 0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x41, 0x64, 0x64, 0x43, 0x65, 0x6c, 0x6c, 0x49, 0x6e,
@@ -661,13 +661,20 @@ var file_vitess_vtctlservice_dev_vtctlservice_proto_rawDesc = []byte{
 	0x63, 0x68, 0x65, 0x6d, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x76,
 	0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x64, 0x61, 0x74, 0x61, 0x2e,
 	0x64, 0x65, 0x76, 0x2e, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x56, 0x53, 0x63, 0x68,
-	0x65, 0x6d, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x51, 0x5a,
-	0x4f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6c, 0x61, 0x6e,
-	0x65, 0x74, 0x73, 0x63, 0x61, 0x6c, 0x65, 0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2d, 0x74,
-	0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2f,
-	0x76, 0x74, 0x63, 0x74, 0x6c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x64, 0x65, 0x76,
-	0x3b, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x64, 0x65, 0x76,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x6d, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x6d, 0x0a,
+	0x0e, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12,
+	0x2b, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x64, 0x61,
+	0x74, 0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2c, 0x2e, 0x76,
+	0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x76, 0x74, 0x63, 0x74, 0x6c, 0x64, 0x61, 0x74, 0x61, 0x2e,
+	0x64, 0x65, 0x76, 0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x51, 0x5a, 0x4f,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6c, 0x61, 0x6e, 0x65,
+	0x74, 0x73, 0x63, 0x61, 0x6c, 0x65, 0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2d, 0x74, 0x79,
+	0x70, 0x65, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x2f, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2f, 0x76,
+	0x74, 0x63, 0x74, 0x6c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x64, 0x65, 0x76, 0x3b,
+	0x76, 0x74, 0x63, 0x74, 0x6c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x64, 0x65, 0x76, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_vitess_vtctlservice_dev_vtctlservice_proto_goTypes = []interface{}{
@@ -756,90 +763,92 @@ var file_vitess_vtctlservice_dev_vtctlservice_proto_goTypes = []interface{}{
 	(*dev.ValidateVersionKeyspaceRequest)(nil),      // 82: vitess.vtctldata.dev.ValidateVersionKeyspaceRequest
 	(*dev.ValidateVersionShardRequest)(nil),         // 83: vitess.vtctldata.dev.ValidateVersionShardRequest
 	(*dev.ValidateVSchemaRequest)(nil),              // 84: vitess.vtctldata.dev.ValidateVSchemaRequest
-	(*dev.ExecuteVtctlCommandResponse)(nil),         // 85: vitess.vtctldata.dev.ExecuteVtctlCommandResponse
-	(*dev.AddCellInfoResponse)(nil),                 // 86: vitess.vtctldata.dev.AddCellInfoResponse
-	(*dev.AddCellsAliasResponse)(nil),               // 87: vitess.vtctldata.dev.AddCellsAliasResponse
-	(*dev.ApplyRoutingRulesResponse)(nil),           // 88: vitess.vtctldata.dev.ApplyRoutingRulesResponse
-	(*dev.ApplySchemaResponse)(nil),                 // 89: vitess.vtctldata.dev.ApplySchemaResponse
-	(*dev.ApplyShardRoutingRulesResponse)(nil),      // 90: vitess.vtctldata.dev.ApplyShardRoutingRulesResponse
-	(*dev.ApplyVSchemaResponse)(nil),                // 91: vitess.vtctldata.dev.ApplyVSchemaResponse
-	(*dev.BackupResponse)(nil),                      // 92: vitess.vtctldata.dev.BackupResponse
-	(*dev.ChangeTabletTypeResponse)(nil),            // 93: vitess.vtctldata.dev.ChangeTabletTypeResponse
-	(*dev.CreateKeyspaceResponse)(nil),              // 94: vitess.vtctldata.dev.CreateKeyspaceResponse
-	(*dev.CreateShardResponse)(nil),                 // 95: vitess.vtctldata.dev.CreateShardResponse
-	(*dev.DeleteCellInfoResponse)(nil),              // 96: vitess.vtctldata.dev.DeleteCellInfoResponse
-	(*dev.DeleteCellsAliasResponse)(nil),            // 97: vitess.vtctldata.dev.DeleteCellsAliasResponse
-	(*dev.DeleteKeyspaceResponse)(nil),              // 98: vitess.vtctldata.dev.DeleteKeyspaceResponse
-	(*dev.DeleteShardsResponse)(nil),                // 99: vitess.vtctldata.dev.DeleteShardsResponse
-	(*dev.DeleteSrvVSchemaResponse)(nil),            // 100: vitess.vtctldata.dev.DeleteSrvVSchemaResponse
-	(*dev.DeleteTabletsResponse)(nil),               // 101: vitess.vtctldata.dev.DeleteTabletsResponse
-	(*dev.EmergencyReparentShardResponse)(nil),      // 102: vitess.vtctldata.dev.EmergencyReparentShardResponse
-	(*dev.ExecuteFetchAsAppResponse)(nil),           // 103: vitess.vtctldata.dev.ExecuteFetchAsAppResponse
-	(*dev.ExecuteFetchAsDBAResponse)(nil),           // 104: vitess.vtctldata.dev.ExecuteFetchAsDBAResponse
-	(*dev.ExecuteHookResponse)(nil),                 // 105: vitess.vtctldata.dev.ExecuteHookResponse
-	(*dev.FindAllShardsInKeyspaceResponse)(nil),     // 106: vitess.vtctldata.dev.FindAllShardsInKeyspaceResponse
-	(*dev.GetBackupsResponse)(nil),                  // 107: vitess.vtctldata.dev.GetBackupsResponse
-	(*dev.GetCellInfoResponse)(nil),                 // 108: vitess.vtctldata.dev.GetCellInfoResponse
-	(*dev.GetCellInfoNamesResponse)(nil),            // 109: vitess.vtctldata.dev.GetCellInfoNamesResponse
-	(*dev.GetCellsAliasesResponse)(nil),             // 110: vitess.vtctldata.dev.GetCellsAliasesResponse
-	(*dev.GetFullStatusResponse)(nil),               // 111: vitess.vtctldata.dev.GetFullStatusResponse
-	(*dev.GetKeyspaceResponse)(nil),                 // 112: vitess.vtctldata.dev.GetKeyspaceResponse
-	(*dev.GetKeyspacesResponse)(nil),                // 113: vitess.vtctldata.dev.GetKeyspacesResponse
-	(*dev.GetPermissionsResponse)(nil),              // 114: vitess.vtctldata.dev.GetPermissionsResponse
-	(*dev.GetRoutingRulesResponse)(nil),             // 115: vitess.vtctldata.dev.GetRoutingRulesResponse
-	(*dev.GetSchemaResponse)(nil),                   // 116: vitess.vtctldata.dev.GetSchemaResponse
-	(*dev.GetShardResponse)(nil),                    // 117: vitess.vtctldata.dev.GetShardResponse
-	(*dev.GetShardRoutingRulesResponse)(nil),        // 118: vitess.vtctldata.dev.GetShardRoutingRulesResponse
-	(*dev.GetSrvKeyspaceNamesResponse)(nil),         // 119: vitess.vtctldata.dev.GetSrvKeyspaceNamesResponse
-	(*dev.GetSrvKeyspacesResponse)(nil),             // 120: vitess.vtctldata.dev.GetSrvKeyspacesResponse
-	(*dev.UpdateThrottlerConfigResponse)(nil),       // 121: vitess.vtctldata.dev.UpdateThrottlerConfigResponse
-	(*dev.GetSrvVSchemaResponse)(nil),               // 122: vitess.vtctldata.dev.GetSrvVSchemaResponse
-	(*dev.GetSrvVSchemasResponse)(nil),              // 123: vitess.vtctldata.dev.GetSrvVSchemasResponse
-	(*dev.GetTabletResponse)(nil),                   // 124: vitess.vtctldata.dev.GetTabletResponse
-	(*dev.GetTabletsResponse)(nil),                  // 125: vitess.vtctldata.dev.GetTabletsResponse
-	(*dev.GetTopologyPathResponse)(nil),             // 126: vitess.vtctldata.dev.GetTopologyPathResponse
-	(*dev.GetVersionResponse)(nil),                  // 127: vitess.vtctldata.dev.GetVersionResponse
-	(*dev.GetVSchemaResponse)(nil),                  // 128: vitess.vtctldata.dev.GetVSchemaResponse
-	(*dev.GetWorkflowsResponse)(nil),                // 129: vitess.vtctldata.dev.GetWorkflowsResponse
-	(*dev.InitShardPrimaryResponse)(nil),            // 130: vitess.vtctldata.dev.InitShardPrimaryResponse
-	(*dev.PingTabletResponse)(nil),                  // 131: vitess.vtctldata.dev.PingTabletResponse
-	(*dev.PlannedReparentShardResponse)(nil),        // 132: vitess.vtctldata.dev.PlannedReparentShardResponse
-	(*dev.RebuildKeyspaceGraphResponse)(nil),        // 133: vitess.vtctldata.dev.RebuildKeyspaceGraphResponse
-	(*dev.RebuildVSchemaGraphResponse)(nil),         // 134: vitess.vtctldata.dev.RebuildVSchemaGraphResponse
-	(*dev.RefreshStateResponse)(nil),                // 135: vitess.vtctldata.dev.RefreshStateResponse
-	(*dev.RefreshStateByShardResponse)(nil),         // 136: vitess.vtctldata.dev.RefreshStateByShardResponse
-	(*dev.ReloadSchemaResponse)(nil),                // 137: vitess.vtctldata.dev.ReloadSchemaResponse
-	(*dev.ReloadSchemaKeyspaceResponse)(nil),        // 138: vitess.vtctldata.dev.ReloadSchemaKeyspaceResponse
-	(*dev.ReloadSchemaShardResponse)(nil),           // 139: vitess.vtctldata.dev.ReloadSchemaShardResponse
-	(*dev.RemoveBackupResponse)(nil),                // 140: vitess.vtctldata.dev.RemoveBackupResponse
-	(*dev.RemoveKeyspaceCellResponse)(nil),          // 141: vitess.vtctldata.dev.RemoveKeyspaceCellResponse
-	(*dev.RemoveShardCellResponse)(nil),             // 142: vitess.vtctldata.dev.RemoveShardCellResponse
-	(*dev.ReparentTabletResponse)(nil),              // 143: vitess.vtctldata.dev.ReparentTabletResponse
-	(*dev.RestoreFromBackupResponse)(nil),           // 144: vitess.vtctldata.dev.RestoreFromBackupResponse
-	(*dev.RunHealthCheckResponse)(nil),              // 145: vitess.vtctldata.dev.RunHealthCheckResponse
-	(*dev.SetKeyspaceDurabilityPolicyResponse)(nil), // 146: vitess.vtctldata.dev.SetKeyspaceDurabilityPolicyResponse
-	(*dev.SetShardIsPrimaryServingResponse)(nil),    // 147: vitess.vtctldata.dev.SetShardIsPrimaryServingResponse
-	(*dev.SetShardTabletControlResponse)(nil),       // 148: vitess.vtctldata.dev.SetShardTabletControlResponse
-	(*dev.SetWritableResponse)(nil),                 // 149: vitess.vtctldata.dev.SetWritableResponse
-	(*dev.ShardReplicationAddResponse)(nil),         // 150: vitess.vtctldata.dev.ShardReplicationAddResponse
-	(*dev.ShardReplicationFixResponse)(nil),         // 151: vitess.vtctldata.dev.ShardReplicationFixResponse
-	(*dev.ShardReplicationPositionsResponse)(nil),   // 152: vitess.vtctldata.dev.ShardReplicationPositionsResponse
-	(*dev.ShardReplicationRemoveResponse)(nil),      // 153: vitess.vtctldata.dev.ShardReplicationRemoveResponse
-	(*dev.SleepTabletResponse)(nil),                 // 154: vitess.vtctldata.dev.SleepTabletResponse
-	(*dev.SourceShardAddResponse)(nil),              // 155: vitess.vtctldata.dev.SourceShardAddResponse
-	(*dev.SourceShardDeleteResponse)(nil),           // 156: vitess.vtctldata.dev.SourceShardDeleteResponse
-	(*dev.StartReplicationResponse)(nil),            // 157: vitess.vtctldata.dev.StartReplicationResponse
-	(*dev.StopReplicationResponse)(nil),             // 158: vitess.vtctldata.dev.StopReplicationResponse
-	(*dev.TabletExternallyReparentedResponse)(nil),  // 159: vitess.vtctldata.dev.TabletExternallyReparentedResponse
-	(*dev.UpdateCellInfoResponse)(nil),              // 160: vitess.vtctldata.dev.UpdateCellInfoResponse
-	(*dev.UpdateCellsAliasResponse)(nil),            // 161: vitess.vtctldata.dev.UpdateCellsAliasResponse
-	(*dev.ValidateResponse)(nil),                    // 162: vitess.vtctldata.dev.ValidateResponse
-	(*dev.ValidateKeyspaceResponse)(nil),            // 163: vitess.vtctldata.dev.ValidateKeyspaceResponse
-	(*dev.ValidateSchemaKeyspaceResponse)(nil),      // 164: vitess.vtctldata.dev.ValidateSchemaKeyspaceResponse
-	(*dev.ValidateShardResponse)(nil),               // 165: vitess.vtctldata.dev.ValidateShardResponse
-	(*dev.ValidateVersionKeyspaceResponse)(nil),     // 166: vitess.vtctldata.dev.ValidateVersionKeyspaceResponse
-	(*dev.ValidateVersionShardResponse)(nil),        // 167: vitess.vtctldata.dev.ValidateVersionShardResponse
-	(*dev.ValidateVSchemaResponse)(nil),             // 168: vitess.vtctldata.dev.ValidateVSchemaResponse
+	(*dev.WorkflowUpdateRequest)(nil),               // 85: vitess.vtctldata.dev.WorkflowUpdateRequest
+	(*dev.ExecuteVtctlCommandResponse)(nil),         // 86: vitess.vtctldata.dev.ExecuteVtctlCommandResponse
+	(*dev.AddCellInfoResponse)(nil),                 // 87: vitess.vtctldata.dev.AddCellInfoResponse
+	(*dev.AddCellsAliasResponse)(nil),               // 88: vitess.vtctldata.dev.AddCellsAliasResponse
+	(*dev.ApplyRoutingRulesResponse)(nil),           // 89: vitess.vtctldata.dev.ApplyRoutingRulesResponse
+	(*dev.ApplySchemaResponse)(nil),                 // 90: vitess.vtctldata.dev.ApplySchemaResponse
+	(*dev.ApplyShardRoutingRulesResponse)(nil),      // 91: vitess.vtctldata.dev.ApplyShardRoutingRulesResponse
+	(*dev.ApplyVSchemaResponse)(nil),                // 92: vitess.vtctldata.dev.ApplyVSchemaResponse
+	(*dev.BackupResponse)(nil),                      // 93: vitess.vtctldata.dev.BackupResponse
+	(*dev.ChangeTabletTypeResponse)(nil),            // 94: vitess.vtctldata.dev.ChangeTabletTypeResponse
+	(*dev.CreateKeyspaceResponse)(nil),              // 95: vitess.vtctldata.dev.CreateKeyspaceResponse
+	(*dev.CreateShardResponse)(nil),                 // 96: vitess.vtctldata.dev.CreateShardResponse
+	(*dev.DeleteCellInfoResponse)(nil),              // 97: vitess.vtctldata.dev.DeleteCellInfoResponse
+	(*dev.DeleteCellsAliasResponse)(nil),            // 98: vitess.vtctldata.dev.DeleteCellsAliasResponse
+	(*dev.DeleteKeyspaceResponse)(nil),              // 99: vitess.vtctldata.dev.DeleteKeyspaceResponse
+	(*dev.DeleteShardsResponse)(nil),                // 100: vitess.vtctldata.dev.DeleteShardsResponse
+	(*dev.DeleteSrvVSchemaResponse)(nil),            // 101: vitess.vtctldata.dev.DeleteSrvVSchemaResponse
+	(*dev.DeleteTabletsResponse)(nil),               // 102: vitess.vtctldata.dev.DeleteTabletsResponse
+	(*dev.EmergencyReparentShardResponse)(nil),      // 103: vitess.vtctldata.dev.EmergencyReparentShardResponse
+	(*dev.ExecuteFetchAsAppResponse)(nil),           // 104: vitess.vtctldata.dev.ExecuteFetchAsAppResponse
+	(*dev.ExecuteFetchAsDBAResponse)(nil),           // 105: vitess.vtctldata.dev.ExecuteFetchAsDBAResponse
+	(*dev.ExecuteHookResponse)(nil),                 // 106: vitess.vtctldata.dev.ExecuteHookResponse
+	(*dev.FindAllShardsInKeyspaceResponse)(nil),     // 107: vitess.vtctldata.dev.FindAllShardsInKeyspaceResponse
+	(*dev.GetBackupsResponse)(nil),                  // 108: vitess.vtctldata.dev.GetBackupsResponse
+	(*dev.GetCellInfoResponse)(nil),                 // 109: vitess.vtctldata.dev.GetCellInfoResponse
+	(*dev.GetCellInfoNamesResponse)(nil),            // 110: vitess.vtctldata.dev.GetCellInfoNamesResponse
+	(*dev.GetCellsAliasesResponse)(nil),             // 111: vitess.vtctldata.dev.GetCellsAliasesResponse
+	(*dev.GetFullStatusResponse)(nil),               // 112: vitess.vtctldata.dev.GetFullStatusResponse
+	(*dev.GetKeyspaceResponse)(nil),                 // 113: vitess.vtctldata.dev.GetKeyspaceResponse
+	(*dev.GetKeyspacesResponse)(nil),                // 114: vitess.vtctldata.dev.GetKeyspacesResponse
+	(*dev.GetPermissionsResponse)(nil),              // 115: vitess.vtctldata.dev.GetPermissionsResponse
+	(*dev.GetRoutingRulesResponse)(nil),             // 116: vitess.vtctldata.dev.GetRoutingRulesResponse
+	(*dev.GetSchemaResponse)(nil),                   // 117: vitess.vtctldata.dev.GetSchemaResponse
+	(*dev.GetShardResponse)(nil),                    // 118: vitess.vtctldata.dev.GetShardResponse
+	(*dev.GetShardRoutingRulesResponse)(nil),        // 119: vitess.vtctldata.dev.GetShardRoutingRulesResponse
+	(*dev.GetSrvKeyspaceNamesResponse)(nil),         // 120: vitess.vtctldata.dev.GetSrvKeyspaceNamesResponse
+	(*dev.GetSrvKeyspacesResponse)(nil),             // 121: vitess.vtctldata.dev.GetSrvKeyspacesResponse
+	(*dev.UpdateThrottlerConfigResponse)(nil),       // 122: vitess.vtctldata.dev.UpdateThrottlerConfigResponse
+	(*dev.GetSrvVSchemaResponse)(nil),               // 123: vitess.vtctldata.dev.GetSrvVSchemaResponse
+	(*dev.GetSrvVSchemasResponse)(nil),              // 124: vitess.vtctldata.dev.GetSrvVSchemasResponse
+	(*dev.GetTabletResponse)(nil),                   // 125: vitess.vtctldata.dev.GetTabletResponse
+	(*dev.GetTabletsResponse)(nil),                  // 126: vitess.vtctldata.dev.GetTabletsResponse
+	(*dev.GetTopologyPathResponse)(nil),             // 127: vitess.vtctldata.dev.GetTopologyPathResponse
+	(*dev.GetVersionResponse)(nil),                  // 128: vitess.vtctldata.dev.GetVersionResponse
+	(*dev.GetVSchemaResponse)(nil),                  // 129: vitess.vtctldata.dev.GetVSchemaResponse
+	(*dev.GetWorkflowsResponse)(nil),                // 130: vitess.vtctldata.dev.GetWorkflowsResponse
+	(*dev.InitShardPrimaryResponse)(nil),            // 131: vitess.vtctldata.dev.InitShardPrimaryResponse
+	(*dev.PingTabletResponse)(nil),                  // 132: vitess.vtctldata.dev.PingTabletResponse
+	(*dev.PlannedReparentShardResponse)(nil),        // 133: vitess.vtctldata.dev.PlannedReparentShardResponse
+	(*dev.RebuildKeyspaceGraphResponse)(nil),        // 134: vitess.vtctldata.dev.RebuildKeyspaceGraphResponse
+	(*dev.RebuildVSchemaGraphResponse)(nil),         // 135: vitess.vtctldata.dev.RebuildVSchemaGraphResponse
+	(*dev.RefreshStateResponse)(nil),                // 136: vitess.vtctldata.dev.RefreshStateResponse
+	(*dev.RefreshStateByShardResponse)(nil),         // 137: vitess.vtctldata.dev.RefreshStateByShardResponse
+	(*dev.ReloadSchemaResponse)(nil),                // 138: vitess.vtctldata.dev.ReloadSchemaResponse
+	(*dev.ReloadSchemaKeyspaceResponse)(nil),        // 139: vitess.vtctldata.dev.ReloadSchemaKeyspaceResponse
+	(*dev.ReloadSchemaShardResponse)(nil),           // 140: vitess.vtctldata.dev.ReloadSchemaShardResponse
+	(*dev.RemoveBackupResponse)(nil),                // 141: vitess.vtctldata.dev.RemoveBackupResponse
+	(*dev.RemoveKeyspaceCellResponse)(nil),          // 142: vitess.vtctldata.dev.RemoveKeyspaceCellResponse
+	(*dev.RemoveShardCellResponse)(nil),             // 143: vitess.vtctldata.dev.RemoveShardCellResponse
+	(*dev.ReparentTabletResponse)(nil),              // 144: vitess.vtctldata.dev.ReparentTabletResponse
+	(*dev.RestoreFromBackupResponse)(nil),           // 145: vitess.vtctldata.dev.RestoreFromBackupResponse
+	(*dev.RunHealthCheckResponse)(nil),              // 146: vitess.vtctldata.dev.RunHealthCheckResponse
+	(*dev.SetKeyspaceDurabilityPolicyResponse)(nil), // 147: vitess.vtctldata.dev.SetKeyspaceDurabilityPolicyResponse
+	(*dev.SetShardIsPrimaryServingResponse)(nil),    // 148: vitess.vtctldata.dev.SetShardIsPrimaryServingResponse
+	(*dev.SetShardTabletControlResponse)(nil),       // 149: vitess.vtctldata.dev.SetShardTabletControlResponse
+	(*dev.SetWritableResponse)(nil),                 // 150: vitess.vtctldata.dev.SetWritableResponse
+	(*dev.ShardReplicationAddResponse)(nil),         // 151: vitess.vtctldata.dev.ShardReplicationAddResponse
+	(*dev.ShardReplicationFixResponse)(nil),         // 152: vitess.vtctldata.dev.ShardReplicationFixResponse
+	(*dev.ShardReplicationPositionsResponse)(nil),   // 153: vitess.vtctldata.dev.ShardReplicationPositionsResponse
+	(*dev.ShardReplicationRemoveResponse)(nil),      // 154: vitess.vtctldata.dev.ShardReplicationRemoveResponse
+	(*dev.SleepTabletResponse)(nil),                 // 155: vitess.vtctldata.dev.SleepTabletResponse
+	(*dev.SourceShardAddResponse)(nil),              // 156: vitess.vtctldata.dev.SourceShardAddResponse
+	(*dev.SourceShardDeleteResponse)(nil),           // 157: vitess.vtctldata.dev.SourceShardDeleteResponse
+	(*dev.StartReplicationResponse)(nil),            // 158: vitess.vtctldata.dev.StartReplicationResponse
+	(*dev.StopReplicationResponse)(nil),             // 159: vitess.vtctldata.dev.StopReplicationResponse
+	(*dev.TabletExternallyReparentedResponse)(nil),  // 160: vitess.vtctldata.dev.TabletExternallyReparentedResponse
+	(*dev.UpdateCellInfoResponse)(nil),              // 161: vitess.vtctldata.dev.UpdateCellInfoResponse
+	(*dev.UpdateCellsAliasResponse)(nil),            // 162: vitess.vtctldata.dev.UpdateCellsAliasResponse
+	(*dev.ValidateResponse)(nil),                    // 163: vitess.vtctldata.dev.ValidateResponse
+	(*dev.ValidateKeyspaceResponse)(nil),            // 164: vitess.vtctldata.dev.ValidateKeyspaceResponse
+	(*dev.ValidateSchemaKeyspaceResponse)(nil),      // 165: vitess.vtctldata.dev.ValidateSchemaKeyspaceResponse
+	(*dev.ValidateShardResponse)(nil),               // 166: vitess.vtctldata.dev.ValidateShardResponse
+	(*dev.ValidateVersionKeyspaceResponse)(nil),     // 167: vitess.vtctldata.dev.ValidateVersionKeyspaceResponse
+	(*dev.ValidateVersionShardResponse)(nil),        // 168: vitess.vtctldata.dev.ValidateVersionShardResponse
+	(*dev.ValidateVSchemaResponse)(nil),             // 169: vitess.vtctldata.dev.ValidateVSchemaResponse
+	(*dev.WorkflowUpdateResponse)(nil),              // 170: vitess.vtctldata.dev.WorkflowUpdateResponse
 }
 var file_vitess_vtctlservice_dev_vtctlservice_proto_depIdxs = []int32{
 	0,   // 0: vitess.vtctlservice.dev.Vtctl.ExecuteVtctlCommand:input_type -> vitess.vtctldata.dev.ExecuteVtctlCommandRequest
@@ -927,93 +936,95 @@ var file_vitess_vtctlservice_dev_vtctlservice_proto_depIdxs = []int32{
 	82,  // 82: vitess.vtctlservice.dev.Vtctld.ValidateVersionKeyspace:input_type -> vitess.vtctldata.dev.ValidateVersionKeyspaceRequest
 	83,  // 83: vitess.vtctlservice.dev.Vtctld.ValidateVersionShard:input_type -> vitess.vtctldata.dev.ValidateVersionShardRequest
 	84,  // 84: vitess.vtctlservice.dev.Vtctld.ValidateVSchema:input_type -> vitess.vtctldata.dev.ValidateVSchemaRequest
-	85,  // 85: vitess.vtctlservice.dev.Vtctl.ExecuteVtctlCommand:output_type -> vitess.vtctldata.dev.ExecuteVtctlCommandResponse
-	86,  // 86: vitess.vtctlservice.dev.Vtctld.AddCellInfo:output_type -> vitess.vtctldata.dev.AddCellInfoResponse
-	87,  // 87: vitess.vtctlservice.dev.Vtctld.AddCellsAlias:output_type -> vitess.vtctldata.dev.AddCellsAliasResponse
-	88,  // 88: vitess.vtctlservice.dev.Vtctld.ApplyRoutingRules:output_type -> vitess.vtctldata.dev.ApplyRoutingRulesResponse
-	89,  // 89: vitess.vtctlservice.dev.Vtctld.ApplySchema:output_type -> vitess.vtctldata.dev.ApplySchemaResponse
-	90,  // 90: vitess.vtctlservice.dev.Vtctld.ApplyShardRoutingRules:output_type -> vitess.vtctldata.dev.ApplyShardRoutingRulesResponse
-	91,  // 91: vitess.vtctlservice.dev.Vtctld.ApplyVSchema:output_type -> vitess.vtctldata.dev.ApplyVSchemaResponse
-	92,  // 92: vitess.vtctlservice.dev.Vtctld.Backup:output_type -> vitess.vtctldata.dev.BackupResponse
-	92,  // 93: vitess.vtctlservice.dev.Vtctld.BackupShard:output_type -> vitess.vtctldata.dev.BackupResponse
-	93,  // 94: vitess.vtctlservice.dev.Vtctld.ChangeTabletType:output_type -> vitess.vtctldata.dev.ChangeTabletTypeResponse
-	94,  // 95: vitess.vtctlservice.dev.Vtctld.CreateKeyspace:output_type -> vitess.vtctldata.dev.CreateKeyspaceResponse
-	95,  // 96: vitess.vtctlservice.dev.Vtctld.CreateShard:output_type -> vitess.vtctldata.dev.CreateShardResponse
-	96,  // 97: vitess.vtctlservice.dev.Vtctld.DeleteCellInfo:output_type -> vitess.vtctldata.dev.DeleteCellInfoResponse
-	97,  // 98: vitess.vtctlservice.dev.Vtctld.DeleteCellsAlias:output_type -> vitess.vtctldata.dev.DeleteCellsAliasResponse
-	98,  // 99: vitess.vtctlservice.dev.Vtctld.DeleteKeyspace:output_type -> vitess.vtctldata.dev.DeleteKeyspaceResponse
-	99,  // 100: vitess.vtctlservice.dev.Vtctld.DeleteShards:output_type -> vitess.vtctldata.dev.DeleteShardsResponse
-	100, // 101: vitess.vtctlservice.dev.Vtctld.DeleteSrvVSchema:output_type -> vitess.vtctldata.dev.DeleteSrvVSchemaResponse
-	101, // 102: vitess.vtctlservice.dev.Vtctld.DeleteTablets:output_type -> vitess.vtctldata.dev.DeleteTabletsResponse
-	102, // 103: vitess.vtctlservice.dev.Vtctld.EmergencyReparentShard:output_type -> vitess.vtctldata.dev.EmergencyReparentShardResponse
-	103, // 104: vitess.vtctlservice.dev.Vtctld.ExecuteFetchAsApp:output_type -> vitess.vtctldata.dev.ExecuteFetchAsAppResponse
-	104, // 105: vitess.vtctlservice.dev.Vtctld.ExecuteFetchAsDBA:output_type -> vitess.vtctldata.dev.ExecuteFetchAsDBAResponse
-	105, // 106: vitess.vtctlservice.dev.Vtctld.ExecuteHook:output_type -> vitess.vtctldata.dev.ExecuteHookResponse
-	106, // 107: vitess.vtctlservice.dev.Vtctld.FindAllShardsInKeyspace:output_type -> vitess.vtctldata.dev.FindAllShardsInKeyspaceResponse
-	107, // 108: vitess.vtctlservice.dev.Vtctld.GetBackups:output_type -> vitess.vtctldata.dev.GetBackupsResponse
-	108, // 109: vitess.vtctlservice.dev.Vtctld.GetCellInfo:output_type -> vitess.vtctldata.dev.GetCellInfoResponse
-	109, // 110: vitess.vtctlservice.dev.Vtctld.GetCellInfoNames:output_type -> vitess.vtctldata.dev.GetCellInfoNamesResponse
-	110, // 111: vitess.vtctlservice.dev.Vtctld.GetCellsAliases:output_type -> vitess.vtctldata.dev.GetCellsAliasesResponse
-	111, // 112: vitess.vtctlservice.dev.Vtctld.GetFullStatus:output_type -> vitess.vtctldata.dev.GetFullStatusResponse
-	112, // 113: vitess.vtctlservice.dev.Vtctld.GetKeyspace:output_type -> vitess.vtctldata.dev.GetKeyspaceResponse
-	113, // 114: vitess.vtctlservice.dev.Vtctld.GetKeyspaces:output_type -> vitess.vtctldata.dev.GetKeyspacesResponse
-	114, // 115: vitess.vtctlservice.dev.Vtctld.GetPermissions:output_type -> vitess.vtctldata.dev.GetPermissionsResponse
-	115, // 116: vitess.vtctlservice.dev.Vtctld.GetRoutingRules:output_type -> vitess.vtctldata.dev.GetRoutingRulesResponse
-	116, // 117: vitess.vtctlservice.dev.Vtctld.GetSchema:output_type -> vitess.vtctldata.dev.GetSchemaResponse
-	117, // 118: vitess.vtctlservice.dev.Vtctld.GetShard:output_type -> vitess.vtctldata.dev.GetShardResponse
-	118, // 119: vitess.vtctlservice.dev.Vtctld.GetShardRoutingRules:output_type -> vitess.vtctldata.dev.GetShardRoutingRulesResponse
-	119, // 120: vitess.vtctlservice.dev.Vtctld.GetSrvKeyspaceNames:output_type -> vitess.vtctldata.dev.GetSrvKeyspaceNamesResponse
-	120, // 121: vitess.vtctlservice.dev.Vtctld.GetSrvKeyspaces:output_type -> vitess.vtctldata.dev.GetSrvKeyspacesResponse
-	121, // 122: vitess.vtctlservice.dev.Vtctld.UpdateThrottlerConfig:output_type -> vitess.vtctldata.dev.UpdateThrottlerConfigResponse
-	122, // 123: vitess.vtctlservice.dev.Vtctld.GetSrvVSchema:output_type -> vitess.vtctldata.dev.GetSrvVSchemaResponse
-	123, // 124: vitess.vtctlservice.dev.Vtctld.GetSrvVSchemas:output_type -> vitess.vtctldata.dev.GetSrvVSchemasResponse
-	124, // 125: vitess.vtctlservice.dev.Vtctld.GetTablet:output_type -> vitess.vtctldata.dev.GetTabletResponse
-	125, // 126: vitess.vtctlservice.dev.Vtctld.GetTablets:output_type -> vitess.vtctldata.dev.GetTabletsResponse
-	126, // 127: vitess.vtctlservice.dev.Vtctld.GetTopologyPath:output_type -> vitess.vtctldata.dev.GetTopologyPathResponse
-	127, // 128: vitess.vtctlservice.dev.Vtctld.GetVersion:output_type -> vitess.vtctldata.dev.GetVersionResponse
-	128, // 129: vitess.vtctlservice.dev.Vtctld.GetVSchema:output_type -> vitess.vtctldata.dev.GetVSchemaResponse
-	129, // 130: vitess.vtctlservice.dev.Vtctld.GetWorkflows:output_type -> vitess.vtctldata.dev.GetWorkflowsResponse
-	130, // 131: vitess.vtctlservice.dev.Vtctld.InitShardPrimary:output_type -> vitess.vtctldata.dev.InitShardPrimaryResponse
-	131, // 132: vitess.vtctlservice.dev.Vtctld.PingTablet:output_type -> vitess.vtctldata.dev.PingTabletResponse
-	132, // 133: vitess.vtctlservice.dev.Vtctld.PlannedReparentShard:output_type -> vitess.vtctldata.dev.PlannedReparentShardResponse
-	133, // 134: vitess.vtctlservice.dev.Vtctld.RebuildKeyspaceGraph:output_type -> vitess.vtctldata.dev.RebuildKeyspaceGraphResponse
-	134, // 135: vitess.vtctlservice.dev.Vtctld.RebuildVSchemaGraph:output_type -> vitess.vtctldata.dev.RebuildVSchemaGraphResponse
-	135, // 136: vitess.vtctlservice.dev.Vtctld.RefreshState:output_type -> vitess.vtctldata.dev.RefreshStateResponse
-	136, // 137: vitess.vtctlservice.dev.Vtctld.RefreshStateByShard:output_type -> vitess.vtctldata.dev.RefreshStateByShardResponse
-	137, // 138: vitess.vtctlservice.dev.Vtctld.ReloadSchema:output_type -> vitess.vtctldata.dev.ReloadSchemaResponse
-	138, // 139: vitess.vtctlservice.dev.Vtctld.ReloadSchemaKeyspace:output_type -> vitess.vtctldata.dev.ReloadSchemaKeyspaceResponse
-	139, // 140: vitess.vtctlservice.dev.Vtctld.ReloadSchemaShard:output_type -> vitess.vtctldata.dev.ReloadSchemaShardResponse
-	140, // 141: vitess.vtctlservice.dev.Vtctld.RemoveBackup:output_type -> vitess.vtctldata.dev.RemoveBackupResponse
-	141, // 142: vitess.vtctlservice.dev.Vtctld.RemoveKeyspaceCell:output_type -> vitess.vtctldata.dev.RemoveKeyspaceCellResponse
-	142, // 143: vitess.vtctlservice.dev.Vtctld.RemoveShardCell:output_type -> vitess.vtctldata.dev.RemoveShardCellResponse
-	143, // 144: vitess.vtctlservice.dev.Vtctld.ReparentTablet:output_type -> vitess.vtctldata.dev.ReparentTabletResponse
-	144, // 145: vitess.vtctlservice.dev.Vtctld.RestoreFromBackup:output_type -> vitess.vtctldata.dev.RestoreFromBackupResponse
-	145, // 146: vitess.vtctlservice.dev.Vtctld.RunHealthCheck:output_type -> vitess.vtctldata.dev.RunHealthCheckResponse
-	146, // 147: vitess.vtctlservice.dev.Vtctld.SetKeyspaceDurabilityPolicy:output_type -> vitess.vtctldata.dev.SetKeyspaceDurabilityPolicyResponse
-	147, // 148: vitess.vtctlservice.dev.Vtctld.SetShardIsPrimaryServing:output_type -> vitess.vtctldata.dev.SetShardIsPrimaryServingResponse
-	148, // 149: vitess.vtctlservice.dev.Vtctld.SetShardTabletControl:output_type -> vitess.vtctldata.dev.SetShardTabletControlResponse
-	149, // 150: vitess.vtctlservice.dev.Vtctld.SetWritable:output_type -> vitess.vtctldata.dev.SetWritableResponse
-	150, // 151: vitess.vtctlservice.dev.Vtctld.ShardReplicationAdd:output_type -> vitess.vtctldata.dev.ShardReplicationAddResponse
-	151, // 152: vitess.vtctlservice.dev.Vtctld.ShardReplicationFix:output_type -> vitess.vtctldata.dev.ShardReplicationFixResponse
-	152, // 153: vitess.vtctlservice.dev.Vtctld.ShardReplicationPositions:output_type -> vitess.vtctldata.dev.ShardReplicationPositionsResponse
-	153, // 154: vitess.vtctlservice.dev.Vtctld.ShardReplicationRemove:output_type -> vitess.vtctldata.dev.ShardReplicationRemoveResponse
-	154, // 155: vitess.vtctlservice.dev.Vtctld.SleepTablet:output_type -> vitess.vtctldata.dev.SleepTabletResponse
-	155, // 156: vitess.vtctlservice.dev.Vtctld.SourceShardAdd:output_type -> vitess.vtctldata.dev.SourceShardAddResponse
-	156, // 157: vitess.vtctlservice.dev.Vtctld.SourceShardDelete:output_type -> vitess.vtctldata.dev.SourceShardDeleteResponse
-	157, // 158: vitess.vtctlservice.dev.Vtctld.StartReplication:output_type -> vitess.vtctldata.dev.StartReplicationResponse
-	158, // 159: vitess.vtctlservice.dev.Vtctld.StopReplication:output_type -> vitess.vtctldata.dev.StopReplicationResponse
-	159, // 160: vitess.vtctlservice.dev.Vtctld.TabletExternallyReparented:output_type -> vitess.vtctldata.dev.TabletExternallyReparentedResponse
-	160, // 161: vitess.vtctlservice.dev.Vtctld.UpdateCellInfo:output_type -> vitess.vtctldata.dev.UpdateCellInfoResponse
-	161, // 162: vitess.vtctlservice.dev.Vtctld.UpdateCellsAlias:output_type -> vitess.vtctldata.dev.UpdateCellsAliasResponse
-	162, // 163: vitess.vtctlservice.dev.Vtctld.Validate:output_type -> vitess.vtctldata.dev.ValidateResponse
-	163, // 164: vitess.vtctlservice.dev.Vtctld.ValidateKeyspace:output_type -> vitess.vtctldata.dev.ValidateKeyspaceResponse
-	164, // 165: vitess.vtctlservice.dev.Vtctld.ValidateSchemaKeyspace:output_type -> vitess.vtctldata.dev.ValidateSchemaKeyspaceResponse
-	165, // 166: vitess.vtctlservice.dev.Vtctld.ValidateShard:output_type -> vitess.vtctldata.dev.ValidateShardResponse
-	166, // 167: vitess.vtctlservice.dev.Vtctld.ValidateVersionKeyspace:output_type -> vitess.vtctldata.dev.ValidateVersionKeyspaceResponse
-	167, // 168: vitess.vtctlservice.dev.Vtctld.ValidateVersionShard:output_type -> vitess.vtctldata.dev.ValidateVersionShardResponse
-	168, // 169: vitess.vtctlservice.dev.Vtctld.ValidateVSchema:output_type -> vitess.vtctldata.dev.ValidateVSchemaResponse
-	85,  // [85:170] is the sub-list for method output_type
-	0,   // [0:85] is the sub-list for method input_type
+	85,  // 85: vitess.vtctlservice.dev.Vtctld.WorkflowUpdate:input_type -> vitess.vtctldata.dev.WorkflowUpdateRequest
+	86,  // 86: vitess.vtctlservice.dev.Vtctl.ExecuteVtctlCommand:output_type -> vitess.vtctldata.dev.ExecuteVtctlCommandResponse
+	87,  // 87: vitess.vtctlservice.dev.Vtctld.AddCellInfo:output_type -> vitess.vtctldata.dev.AddCellInfoResponse
+	88,  // 88: vitess.vtctlservice.dev.Vtctld.AddCellsAlias:output_type -> vitess.vtctldata.dev.AddCellsAliasResponse
+	89,  // 89: vitess.vtctlservice.dev.Vtctld.ApplyRoutingRules:output_type -> vitess.vtctldata.dev.ApplyRoutingRulesResponse
+	90,  // 90: vitess.vtctlservice.dev.Vtctld.ApplySchema:output_type -> vitess.vtctldata.dev.ApplySchemaResponse
+	91,  // 91: vitess.vtctlservice.dev.Vtctld.ApplyShardRoutingRules:output_type -> vitess.vtctldata.dev.ApplyShardRoutingRulesResponse
+	92,  // 92: vitess.vtctlservice.dev.Vtctld.ApplyVSchema:output_type -> vitess.vtctldata.dev.ApplyVSchemaResponse
+	93,  // 93: vitess.vtctlservice.dev.Vtctld.Backup:output_type -> vitess.vtctldata.dev.BackupResponse
+	93,  // 94: vitess.vtctlservice.dev.Vtctld.BackupShard:output_type -> vitess.vtctldata.dev.BackupResponse
+	94,  // 95: vitess.vtctlservice.dev.Vtctld.ChangeTabletType:output_type -> vitess.vtctldata.dev.ChangeTabletTypeResponse
+	95,  // 96: vitess.vtctlservice.dev.Vtctld.CreateKeyspace:output_type -> vitess.vtctldata.dev.CreateKeyspaceResponse
+	96,  // 97: vitess.vtctlservice.dev.Vtctld.CreateShard:output_type -> vitess.vtctldata.dev.CreateShardResponse
+	97,  // 98: vitess.vtctlservice.dev.Vtctld.DeleteCellInfo:output_type -> vitess.vtctldata.dev.DeleteCellInfoResponse
+	98,  // 99: vitess.vtctlservice.dev.Vtctld.DeleteCellsAlias:output_type -> vitess.vtctldata.dev.DeleteCellsAliasResponse
+	99,  // 100: vitess.vtctlservice.dev.Vtctld.DeleteKeyspace:output_type -> vitess.vtctldata.dev.DeleteKeyspaceResponse
+	100, // 101: vitess.vtctlservice.dev.Vtctld.DeleteShards:output_type -> vitess.vtctldata.dev.DeleteShardsResponse
+	101, // 102: vitess.vtctlservice.dev.Vtctld.DeleteSrvVSchema:output_type -> vitess.vtctldata.dev.DeleteSrvVSchemaResponse
+	102, // 103: vitess.vtctlservice.dev.Vtctld.DeleteTablets:output_type -> vitess.vtctldata.dev.DeleteTabletsResponse
+	103, // 104: vitess.vtctlservice.dev.Vtctld.EmergencyReparentShard:output_type -> vitess.vtctldata.dev.EmergencyReparentShardResponse
+	104, // 105: vitess.vtctlservice.dev.Vtctld.ExecuteFetchAsApp:output_type -> vitess.vtctldata.dev.ExecuteFetchAsAppResponse
+	105, // 106: vitess.vtctlservice.dev.Vtctld.ExecuteFetchAsDBA:output_type -> vitess.vtctldata.dev.ExecuteFetchAsDBAResponse
+	106, // 107: vitess.vtctlservice.dev.Vtctld.ExecuteHook:output_type -> vitess.vtctldata.dev.ExecuteHookResponse
+	107, // 108: vitess.vtctlservice.dev.Vtctld.FindAllShardsInKeyspace:output_type -> vitess.vtctldata.dev.FindAllShardsInKeyspaceResponse
+	108, // 109: vitess.vtctlservice.dev.Vtctld.GetBackups:output_type -> vitess.vtctldata.dev.GetBackupsResponse
+	109, // 110: vitess.vtctlservice.dev.Vtctld.GetCellInfo:output_type -> vitess.vtctldata.dev.GetCellInfoResponse
+	110, // 111: vitess.vtctlservice.dev.Vtctld.GetCellInfoNames:output_type -> vitess.vtctldata.dev.GetCellInfoNamesResponse
+	111, // 112: vitess.vtctlservice.dev.Vtctld.GetCellsAliases:output_type -> vitess.vtctldata.dev.GetCellsAliasesResponse
+	112, // 113: vitess.vtctlservice.dev.Vtctld.GetFullStatus:output_type -> vitess.vtctldata.dev.GetFullStatusResponse
+	113, // 114: vitess.vtctlservice.dev.Vtctld.GetKeyspace:output_type -> vitess.vtctldata.dev.GetKeyspaceResponse
+	114, // 115: vitess.vtctlservice.dev.Vtctld.GetKeyspaces:output_type -> vitess.vtctldata.dev.GetKeyspacesResponse
+	115, // 116: vitess.vtctlservice.dev.Vtctld.GetPermissions:output_type -> vitess.vtctldata.dev.GetPermissionsResponse
+	116, // 117: vitess.vtctlservice.dev.Vtctld.GetRoutingRules:output_type -> vitess.vtctldata.dev.GetRoutingRulesResponse
+	117, // 118: vitess.vtctlservice.dev.Vtctld.GetSchema:output_type -> vitess.vtctldata.dev.GetSchemaResponse
+	118, // 119: vitess.vtctlservice.dev.Vtctld.GetShard:output_type -> vitess.vtctldata.dev.GetShardResponse
+	119, // 120: vitess.vtctlservice.dev.Vtctld.GetShardRoutingRules:output_type -> vitess.vtctldata.dev.GetShardRoutingRulesResponse
+	120, // 121: vitess.vtctlservice.dev.Vtctld.GetSrvKeyspaceNames:output_type -> vitess.vtctldata.dev.GetSrvKeyspaceNamesResponse
+	121, // 122: vitess.vtctlservice.dev.Vtctld.GetSrvKeyspaces:output_type -> vitess.vtctldata.dev.GetSrvKeyspacesResponse
+	122, // 123: vitess.vtctlservice.dev.Vtctld.UpdateThrottlerConfig:output_type -> vitess.vtctldata.dev.UpdateThrottlerConfigResponse
+	123, // 124: vitess.vtctlservice.dev.Vtctld.GetSrvVSchema:output_type -> vitess.vtctldata.dev.GetSrvVSchemaResponse
+	124, // 125: vitess.vtctlservice.dev.Vtctld.GetSrvVSchemas:output_type -> vitess.vtctldata.dev.GetSrvVSchemasResponse
+	125, // 126: vitess.vtctlservice.dev.Vtctld.GetTablet:output_type -> vitess.vtctldata.dev.GetTabletResponse
+	126, // 127: vitess.vtctlservice.dev.Vtctld.GetTablets:output_type -> vitess.vtctldata.dev.GetTabletsResponse
+	127, // 128: vitess.vtctlservice.dev.Vtctld.GetTopologyPath:output_type -> vitess.vtctldata.dev.GetTopologyPathResponse
+	128, // 129: vitess.vtctlservice.dev.Vtctld.GetVersion:output_type -> vitess.vtctldata.dev.GetVersionResponse
+	129, // 130: vitess.vtctlservice.dev.Vtctld.GetVSchema:output_type -> vitess.vtctldata.dev.GetVSchemaResponse
+	130, // 131: vitess.vtctlservice.dev.Vtctld.GetWorkflows:output_type -> vitess.vtctldata.dev.GetWorkflowsResponse
+	131, // 132: vitess.vtctlservice.dev.Vtctld.InitShardPrimary:output_type -> vitess.vtctldata.dev.InitShardPrimaryResponse
+	132, // 133: vitess.vtctlservice.dev.Vtctld.PingTablet:output_type -> vitess.vtctldata.dev.PingTabletResponse
+	133, // 134: vitess.vtctlservice.dev.Vtctld.PlannedReparentShard:output_type -> vitess.vtctldata.dev.PlannedReparentShardResponse
+	134, // 135: vitess.vtctlservice.dev.Vtctld.RebuildKeyspaceGraph:output_type -> vitess.vtctldata.dev.RebuildKeyspaceGraphResponse
+	135, // 136: vitess.vtctlservice.dev.Vtctld.RebuildVSchemaGraph:output_type -> vitess.vtctldata.dev.RebuildVSchemaGraphResponse
+	136, // 137: vitess.vtctlservice.dev.Vtctld.RefreshState:output_type -> vitess.vtctldata.dev.RefreshStateResponse
+	137, // 138: vitess.vtctlservice.dev.Vtctld.RefreshStateByShard:output_type -> vitess.vtctldata.dev.RefreshStateByShardResponse
+	138, // 139: vitess.vtctlservice.dev.Vtctld.ReloadSchema:output_type -> vitess.vtctldata.dev.ReloadSchemaResponse
+	139, // 140: vitess.vtctlservice.dev.Vtctld.ReloadSchemaKeyspace:output_type -> vitess.vtctldata.dev.ReloadSchemaKeyspaceResponse
+	140, // 141: vitess.vtctlservice.dev.Vtctld.ReloadSchemaShard:output_type -> vitess.vtctldata.dev.ReloadSchemaShardResponse
+	141, // 142: vitess.vtctlservice.dev.Vtctld.RemoveBackup:output_type -> vitess.vtctldata.dev.RemoveBackupResponse
+	142, // 143: vitess.vtctlservice.dev.Vtctld.RemoveKeyspaceCell:output_type -> vitess.vtctldata.dev.RemoveKeyspaceCellResponse
+	143, // 144: vitess.vtctlservice.dev.Vtctld.RemoveShardCell:output_type -> vitess.vtctldata.dev.RemoveShardCellResponse
+	144, // 145: vitess.vtctlservice.dev.Vtctld.ReparentTablet:output_type -> vitess.vtctldata.dev.ReparentTabletResponse
+	145, // 146: vitess.vtctlservice.dev.Vtctld.RestoreFromBackup:output_type -> vitess.vtctldata.dev.RestoreFromBackupResponse
+	146, // 147: vitess.vtctlservice.dev.Vtctld.RunHealthCheck:output_type -> vitess.vtctldata.dev.RunHealthCheckResponse
+	147, // 148: vitess.vtctlservice.dev.Vtctld.SetKeyspaceDurabilityPolicy:output_type -> vitess.vtctldata.dev.SetKeyspaceDurabilityPolicyResponse
+	148, // 149: vitess.vtctlservice.dev.Vtctld.SetShardIsPrimaryServing:output_type -> vitess.vtctldata.dev.SetShardIsPrimaryServingResponse
+	149, // 150: vitess.vtctlservice.dev.Vtctld.SetShardTabletControl:output_type -> vitess.vtctldata.dev.SetShardTabletControlResponse
+	150, // 151: vitess.vtctlservice.dev.Vtctld.SetWritable:output_type -> vitess.vtctldata.dev.SetWritableResponse
+	151, // 152: vitess.vtctlservice.dev.Vtctld.ShardReplicationAdd:output_type -> vitess.vtctldata.dev.ShardReplicationAddResponse
+	152, // 153: vitess.vtctlservice.dev.Vtctld.ShardReplicationFix:output_type -> vitess.vtctldata.dev.ShardReplicationFixResponse
+	153, // 154: vitess.vtctlservice.dev.Vtctld.ShardReplicationPositions:output_type -> vitess.vtctldata.dev.ShardReplicationPositionsResponse
+	154, // 155: vitess.vtctlservice.dev.Vtctld.ShardReplicationRemove:output_type -> vitess.vtctldata.dev.ShardReplicationRemoveResponse
+	155, // 156: vitess.vtctlservice.dev.Vtctld.SleepTablet:output_type -> vitess.vtctldata.dev.SleepTabletResponse
+	156, // 157: vitess.vtctlservice.dev.Vtctld.SourceShardAdd:output_type -> vitess.vtctldata.dev.SourceShardAddResponse
+	157, // 158: vitess.vtctlservice.dev.Vtctld.SourceShardDelete:output_type -> vitess.vtctldata.dev.SourceShardDeleteResponse
+	158, // 159: vitess.vtctlservice.dev.Vtctld.StartReplication:output_type -> vitess.vtctldata.dev.StartReplicationResponse
+	159, // 160: vitess.vtctlservice.dev.Vtctld.StopReplication:output_type -> vitess.vtctldata.dev.StopReplicationResponse
+	160, // 161: vitess.vtctlservice.dev.Vtctld.TabletExternallyReparented:output_type -> vitess.vtctldata.dev.TabletExternallyReparentedResponse
+	161, // 162: vitess.vtctlservice.dev.Vtctld.UpdateCellInfo:output_type -> vitess.vtctldata.dev.UpdateCellInfoResponse
+	162, // 163: vitess.vtctlservice.dev.Vtctld.UpdateCellsAlias:output_type -> vitess.vtctldata.dev.UpdateCellsAliasResponse
+	163, // 164: vitess.vtctlservice.dev.Vtctld.Validate:output_type -> vitess.vtctldata.dev.ValidateResponse
+	164, // 165: vitess.vtctlservice.dev.Vtctld.ValidateKeyspace:output_type -> vitess.vtctldata.dev.ValidateKeyspaceResponse
+	165, // 166: vitess.vtctlservice.dev.Vtctld.ValidateSchemaKeyspace:output_type -> vitess.vtctldata.dev.ValidateSchemaKeyspaceResponse
+	166, // 167: vitess.vtctlservice.dev.Vtctld.ValidateShard:output_type -> vitess.vtctldata.dev.ValidateShardResponse
+	167, // 168: vitess.vtctlservice.dev.Vtctld.ValidateVersionKeyspace:output_type -> vitess.vtctldata.dev.ValidateVersionKeyspaceResponse
+	168, // 169: vitess.vtctlservice.dev.Vtctld.ValidateVersionShard:output_type -> vitess.vtctldata.dev.ValidateVersionShardResponse
+	169, // 170: vitess.vtctlservice.dev.Vtctld.ValidateVSchema:output_type -> vitess.vtctldata.dev.ValidateVSchemaResponse
+	170, // 171: vitess.vtctlservice.dev.Vtctld.WorkflowUpdate:output_type -> vitess.vtctldata.dev.WorkflowUpdateResponse
+	86,  // [86:172] is the sub-list for method output_type
+	0,   // [0:86] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
 	0,   // [0:0] is the sub-list for extension extendee
 	0,   // [0:0] is the sub-list for field type_name

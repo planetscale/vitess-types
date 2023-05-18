@@ -138,6 +138,9 @@ const (
 	// TabletManagerVReplicationWaitForPosProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationWaitForPos RPC.
 	TabletManagerVReplicationWaitForPosProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VReplicationWaitForPos"
+	// TabletManagerUpdateVRWorkflowProcedure is the fully-qualified name of the TabletManager's
+	// UpdateVRWorkflow RPC.
+	TabletManagerUpdateVRWorkflowProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UpdateVRWorkflow"
 	// TabletManagerVDiffProcedure is the fully-qualified name of the TabletManager's VDiff RPC.
 	TabletManagerVDiffProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VDiff"
 	// TabletManagerResetReplicationProcedure is the fully-qualified name of the TabletManager's
@@ -184,8 +187,6 @@ const (
 	// TabletManagerRestoreFromBackupProcedure is the fully-qualified name of the TabletManager's
 	// RestoreFromBackup RPC.
 	TabletManagerRestoreFromBackupProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/RestoreFromBackup"
-	// TabletManagerVExecProcedure is the fully-qualified name of the TabletManager's VExec RPC.
-	TabletManagerVExecProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VExec"
 )
 
 // TabletManagerClient is a client for the vitess.tabletmanagerservice.dev.TabletManager service.
@@ -238,6 +239,7 @@ type TabletManagerClient interface {
 	// VReplication API
 	VReplicationExec(context.Context, *connect_go.Request[dev.VReplicationExecRequest]) (*connect_go.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect_go.Request[dev.VReplicationWaitForPosRequest]) (*connect_go.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateVRWorkflow(context.Context, *connect_go.Request[dev.UpdateVRWorkflowRequest]) (*connect_go.Response[dev.UpdateVRWorkflowResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect_go.Request[dev.VDiffRequest]) (*connect_go.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -271,8 +273,6 @@ type TabletManagerClient interface {
 	Backup(context.Context, *connect_go.Request[dev.BackupRequest]) (*connect_go.ServerStreamForClient[dev.BackupResponse], error)
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
 	RestoreFromBackup(context.Context, *connect_go.Request[dev.RestoreFromBackupRequest]) (*connect_go.ServerStreamForClient[dev.RestoreFromBackupResponse], error)
-	// Generic VExec request. Can be used for various purposes
-	VExec(context.Context, *connect_go.Request[dev.VExecRequest]) (*connect_go.Response[dev.VExecResponse], error)
 }
 
 // NewTabletManagerClient constructs a client for the vitess.tabletmanagerservice.dev.TabletManager
@@ -435,6 +435,11 @@ func NewTabletManagerClient(httpClient connect_go.HTTPClient, baseURL string, op
 			baseURL+TabletManagerVReplicationWaitForPosProcedure,
 			opts...,
 		),
+		updateVRWorkflow: connect_go.NewClient[dev.UpdateVRWorkflowRequest, dev.UpdateVRWorkflowResponse](
+			httpClient,
+			baseURL+TabletManagerUpdateVRWorkflowProcedure,
+			opts...,
+		),
 		vDiff: connect_go.NewClient[dev.VDiffRequest, dev.VDiffResponse](
 			httpClient,
 			baseURL+TabletManagerVDiffProcedure,
@@ -515,11 +520,6 @@ func NewTabletManagerClient(httpClient connect_go.HTTPClient, baseURL string, op
 			baseURL+TabletManagerRestoreFromBackupProcedure,
 			opts...,
 		),
-		vExec: connect_go.NewClient[dev.VExecRequest, dev.VExecResponse](
-			httpClient,
-			baseURL+TabletManagerVExecProcedure,
-			opts...,
-		),
 	}
 }
 
@@ -555,6 +555,7 @@ type tabletManagerClient struct {
 	getReplicas                 *connect_go.Client[dev.GetReplicasRequest, dev.GetReplicasResponse]
 	vReplicationExec            *connect_go.Client[dev.VReplicationExecRequest, dev.VReplicationExecResponse]
 	vReplicationWaitForPos      *connect_go.Client[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse]
+	updateVRWorkflow            *connect_go.Client[dev.UpdateVRWorkflowRequest, dev.UpdateVRWorkflowResponse]
 	vDiff                       *connect_go.Client[dev.VDiffRequest, dev.VDiffResponse]
 	resetReplication            *connect_go.Client[dev.ResetReplicationRequest, dev.ResetReplicationResponse]
 	initPrimary                 *connect_go.Client[dev.InitPrimaryRequest, dev.InitPrimaryResponse]
@@ -571,7 +572,6 @@ type tabletManagerClient struct {
 	promoteReplica              *connect_go.Client[dev.PromoteReplicaRequest, dev.PromoteReplicaResponse]
 	backup                      *connect_go.Client[dev.BackupRequest, dev.BackupResponse]
 	restoreFromBackup           *connect_go.Client[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse]
-	vExec                       *connect_go.Client[dev.VExecRequest, dev.VExecResponse]
 }
 
 // Ping calls vitess.tabletmanagerservice.dev.TabletManager.Ping.
@@ -728,6 +728,11 @@ func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *c
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
 }
 
+// UpdateVRWorkflow calls vitess.tabletmanagerservice.dev.TabletManager.UpdateVRWorkflow.
+func (c *tabletManagerClient) UpdateVRWorkflow(ctx context.Context, req *connect_go.Request[dev.UpdateVRWorkflowRequest]) (*connect_go.Response[dev.UpdateVRWorkflowResponse], error) {
+	return c.updateVRWorkflow.CallUnary(ctx, req)
+}
+
 // VDiff calls vitess.tabletmanagerservice.dev.TabletManager.VDiff.
 func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect_go.Request[dev.VDiffRequest]) (*connect_go.Response[dev.VDiffResponse], error) {
 	return c.vDiff.CallUnary(ctx, req)
@@ -811,11 +816,6 @@ func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connec
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
-// VExec calls vitess.tabletmanagerservice.dev.TabletManager.VExec.
-func (c *tabletManagerClient) VExec(ctx context.Context, req *connect_go.Request[dev.VExecRequest]) (*connect_go.Response[dev.VExecResponse], error) {
-	return c.vExec.CallUnary(ctx, req)
-}
-
 // TabletManagerHandler is an implementation of the vitess.tabletmanagerservice.dev.TabletManager
 // service.
 type TabletManagerHandler interface {
@@ -867,6 +867,7 @@ type TabletManagerHandler interface {
 	// VReplication API
 	VReplicationExec(context.Context, *connect_go.Request[dev.VReplicationExecRequest]) (*connect_go.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect_go.Request[dev.VReplicationWaitForPosRequest]) (*connect_go.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateVRWorkflow(context.Context, *connect_go.Request[dev.UpdateVRWorkflowRequest]) (*connect_go.Response[dev.UpdateVRWorkflowResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect_go.Request[dev.VDiffRequest]) (*connect_go.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -900,8 +901,6 @@ type TabletManagerHandler interface {
 	Backup(context.Context, *connect_go.Request[dev.BackupRequest], *connect_go.ServerStream[dev.BackupResponse]) error
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
 	RestoreFromBackup(context.Context, *connect_go.Request[dev.RestoreFromBackupRequest], *connect_go.ServerStream[dev.RestoreFromBackupResponse]) error
-	// Generic VExec request. Can be used for various purposes
-	VExec(context.Context, *connect_go.Request[dev.VExecRequest]) (*connect_go.Response[dev.VExecResponse], error)
 }
 
 // NewTabletManagerHandler builds an HTTP handler from the service implementation. It returns the
@@ -1061,6 +1060,11 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect_go.Handle
 		svc.VReplicationWaitForPos,
 		opts...,
 	))
+	mux.Handle(TabletManagerUpdateVRWorkflowProcedure, connect_go.NewUnaryHandler(
+		TabletManagerUpdateVRWorkflowProcedure,
+		svc.UpdateVRWorkflow,
+		opts...,
+	))
 	mux.Handle(TabletManagerVDiffProcedure, connect_go.NewUnaryHandler(
 		TabletManagerVDiffProcedure,
 		svc.VDiff,
@@ -1139,11 +1143,6 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect_go.Handle
 	mux.Handle(TabletManagerRestoreFromBackupProcedure, connect_go.NewServerStreamHandler(
 		TabletManagerRestoreFromBackupProcedure,
 		svc.RestoreFromBackup,
-		opts...,
-	))
-	mux.Handle(TabletManagerVExecProcedure, connect_go.NewUnaryHandler(
-		TabletManagerVExecProcedure,
-		svc.VExec,
 		opts...,
 	))
 	return "/vitess.tabletmanagerservice.dev.TabletManager/", mux
@@ -1272,6 +1271,10 @@ func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context,
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VReplicationWaitForPos is not implemented"))
 }
 
+func (UnimplementedTabletManagerHandler) UpdateVRWorkflow(context.Context, *connect_go.Request[dev.UpdateVRWorkflowRequest]) (*connect_go.Response[dev.UpdateVRWorkflowResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UpdateVRWorkflow is not implemented"))
+}
+
 func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect_go.Request[dev.VDiffRequest]) (*connect_go.Response[dev.VDiffResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VDiff is not implemented"))
 }
@@ -1334,8 +1337,4 @@ func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect_go.Req
 
 func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect_go.Request[dev.RestoreFromBackupRequest], *connect_go.ServerStream[dev.RestoreFromBackupResponse]) error {
 	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.RestoreFromBackup is not implemented"))
-}
-
-func (UnimplementedTabletManagerHandler) VExec(context.Context, *connect_go.Request[dev.VExecRequest]) (*connect_go.Response[dev.VExecResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VExec is not implemented"))
 }
