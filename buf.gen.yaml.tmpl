@@ -1,0 +1,23 @@
+version: v1
+plugins:
+  - name: go
+    path: bin/protoc-gen-go
+    out: gen
+    opt:
+      - paths=source_relative
+  - name: go-vtproto
+    path: bin/protoc-gen-go-vtproto
+    out: gen
+    opt:
+      - paths=source_relative
+      - features=marshal+unmarshal+size+pool
+      {{- range $i, $v := .Versions}}
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/{{$v}}.Row
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/{{$v}}.BoundQuery
+      - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/{{$v}}.VStreamRowsResponse
+      {{- end}}
+  - name: connect-go
+    path: bin/protoc-gen-connect-go
+    out: gen
+    opt:
+      - paths=source_relative

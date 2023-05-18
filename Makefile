@@ -31,13 +31,13 @@ $(BIN)/protoc-gen-go-vtproto: Makefile | $(BIN)
 	$(TOOL_INSTALL) github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@v0.4.0
 
 $(BIN)/protoc-gen-connect-go: Makefile | $(BIN)
-	$(TOOL_INSTALL) github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go@v1.5.1
+	$(TOOL_INSTALL) github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go@v1.7.0
 
 $(BIN)/gofumpt: Makefile | $(BIN)
 	$(TOOL_INSTALL) mvdan.cc/gofumpt@v0.4.0
 
 $(BIN)/buf: Makefile | $(BIN)
-	$(TOOL_INSTALL) github.com/bufbuild/buf/cmd/buf@v1.14.0
+	$(TOOL_INSTALL) github.com/bufbuild/buf/cmd/buf@v1.19.0
 
 $(BIN)/yq: Makefile | $(BIN)
 	$(TOOL_INSTALL) github.com/mikefarah/yq/v4@v4.30.8
@@ -45,14 +45,12 @@ $(BIN)/yq: Makefile | $(BIN)
 PROTO_TOOLS := $(BIN)/protoc-gen-go $(BIN)/protoc-gen-connect-go $(BIN)/protoc-gen-go-vtproto $(BIN)/buf
 tools: $(PROTO_TOOLS) $(BIN)/gofumpt $(BIN)/staticcheck $(BIN)/govulncheck $(BIN)/yq
 
-$(VERSIONS): $(PROTO_TOOLS)
-	$(BIN)/buf generate -v --debug $@ --template $@/gen.yaml
+proto: $(PROTO_TOOLS)
+	$(BIN)/buf generate -v
 
 download:
 	go run download.go
 	$(MAKE) clean-proto proto
-
-proto: $(VERSIONS)
 
 fmt: fmt-go fmt-proto
 
