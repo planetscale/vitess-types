@@ -39,7 +39,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// AutomationName is the fully-qualified name of the Automation service.
-	AutomationName = "vitess.automationservice.v15.Automation"
+	AutomationName = "automationservice.Automation"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -52,13 +52,13 @@ const (
 const (
 	// AutomationEnqueueClusterOperationProcedure is the fully-qualified name of the Automation's
 	// EnqueueClusterOperation RPC.
-	AutomationEnqueueClusterOperationProcedure = "/vitess.automationservice.v15.Automation/EnqueueClusterOperation"
+	AutomationEnqueueClusterOperationProcedure = "/automationservice.Automation/EnqueueClusterOperation"
 	// AutomationGetClusterOperationDetailsProcedure is the fully-qualified name of the Automation's
 	// GetClusterOperationDetails RPC.
-	AutomationGetClusterOperationDetailsProcedure = "/vitess.automationservice.v15.Automation/GetClusterOperationDetails"
+	AutomationGetClusterOperationDetailsProcedure = "/automationservice.Automation/GetClusterOperationDetails"
 )
 
-// AutomationClient is a client for the vitess.automationservice.v15.Automation service.
+// AutomationClient is a client for the automationservice.Automation service.
 type AutomationClient interface {
 	// Start a cluster operation.
 	EnqueueClusterOperation(context.Context, *connect_go.Request[v15.EnqueueClusterOperationRequest]) (*connect_go.Response[v15.EnqueueClusterOperationResponse], error)
@@ -67,7 +67,7 @@ type AutomationClient interface {
 	GetClusterOperationDetails(context.Context, *connect_go.Request[v15.GetClusterOperationDetailsRequest]) (*connect_go.Response[v15.GetClusterOperationDetailsResponse], error)
 }
 
-// NewAutomationClient constructs a client for the vitess.automationservice.v15.Automation service.
+// NewAutomationClient constructs a client for the automationservice.Automation service.
 // By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
 // responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -96,18 +96,18 @@ type automationClient struct {
 	getClusterOperationDetails *connect_go.Client[v15.GetClusterOperationDetailsRequest, v15.GetClusterOperationDetailsResponse]
 }
 
-// EnqueueClusterOperation calls vitess.automationservice.v15.Automation.EnqueueClusterOperation.
+// EnqueueClusterOperation calls automationservice.Automation.EnqueueClusterOperation.
 func (c *automationClient) EnqueueClusterOperation(ctx context.Context, req *connect_go.Request[v15.EnqueueClusterOperationRequest]) (*connect_go.Response[v15.EnqueueClusterOperationResponse], error) {
 	return c.enqueueClusterOperation.CallUnary(ctx, req)
 }
 
 // GetClusterOperationDetails calls
-// vitess.automationservice.v15.Automation.GetClusterOperationDetails.
+// automationservice.Automation.GetClusterOperationDetails.
 func (c *automationClient) GetClusterOperationDetails(ctx context.Context, req *connect_go.Request[v15.GetClusterOperationDetailsRequest]) (*connect_go.Response[v15.GetClusterOperationDetailsResponse], error) {
 	return c.getClusterOperationDetails.CallUnary(ctx, req)
 }
 
-// AutomationHandler is an implementation of the vitess.automationservice.v15.Automation service.
+// AutomationHandler is an implementation of the automationservice.Automation service.
 type AutomationHandler interface {
 	// Start a cluster operation.
 	EnqueueClusterOperation(context.Context, *connect_go.Request[v15.EnqueueClusterOperationRequest]) (*connect_go.Response[v15.EnqueueClusterOperationResponse], error)
@@ -133,16 +133,16 @@ func NewAutomationHandler(svc AutomationHandler, opts ...connect_go.HandlerOptio
 		svc.GetClusterOperationDetails,
 		opts...,
 	))
-	return "/vitess.automationservice.v15.Automation/", mux
+	return "/automationservice.Automation/", mux
 }
 
 // UnimplementedAutomationHandler returns CodeUnimplemented from all methods.
 type UnimplementedAutomationHandler struct{}
 
 func (UnimplementedAutomationHandler) EnqueueClusterOperation(context.Context, *connect_go.Request[v15.EnqueueClusterOperationRequest]) (*connect_go.Response[v15.EnqueueClusterOperationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.automationservice.v15.Automation.EnqueueClusterOperation is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("automationservice.Automation.EnqueueClusterOperation is not implemented"))
 }
 
 func (UnimplementedAutomationHandler) GetClusterOperationDetails(context.Context, *connect_go.Request[v15.GetClusterOperationDetailsRequest]) (*connect_go.Response[v15.GetClusterOperationDetailsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.automationservice.v15.Automation.GetClusterOperationDetails is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("automationservice.Automation.GetClusterOperationDetails is not implemented"))
 }

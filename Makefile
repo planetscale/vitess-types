@@ -47,9 +47,10 @@ tools: $(PROTO_TOOLS) $(BIN)/gofumpt $(BIN)/staticcheck $(BIN)/govulncheck $(BIN
 
 proto: $(PROTO_TOOLS)
 	$(BIN)/buf generate -v
+	fd . -t f -e connect.go -X go run scripts/fix-service-names.go --
 
 download:
-	go run download.go
+	go run scripts/download.go
 	$(MAKE) clean-proto proto
 
 fmt: fmt-go fmt-proto
@@ -58,12 +59,7 @@ fmt-go: $(BIN)/gofumpt
 	$(BIN)/gofumpt -l -w .
 
 fmt-yaml: $(BIN)/yq
-ifeq (, $(shell command -v fd 2>/dev/null))
-	@echo "!! Maybe install 'fd', it's a lot faster (https://github.com/sharkdp/fd)"
-	find . -type f \( -name '*.yaml' -o -name '*.yml' \) -exec $(BIN)/yq -iP eval-all . {} \;
-else
 	fd . -t f -e yaml -e yml -x $(BIN)/yq -iP eval-all . {} \;
-endif
 
 update:
 	go get -v -u ./...

@@ -39,7 +39,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// MysqlCtlName is the fully-qualified name of the MysqlCtl service.
-	MysqlCtlName = "vitess.mysqlctl.v16.MysqlCtl"
+	MysqlCtlName = "mysqlctl.MysqlCtl"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -51,19 +51,19 @@ const (
 // period.
 const (
 	// MysqlCtlStartProcedure is the fully-qualified name of the MysqlCtl's Start RPC.
-	MysqlCtlStartProcedure = "/vitess.mysqlctl.v16.MysqlCtl/Start"
+	MysqlCtlStartProcedure = "/mysqlctl.MysqlCtl/Start"
 	// MysqlCtlShutdownProcedure is the fully-qualified name of the MysqlCtl's Shutdown RPC.
-	MysqlCtlShutdownProcedure = "/vitess.mysqlctl.v16.MysqlCtl/Shutdown"
+	MysqlCtlShutdownProcedure = "/mysqlctl.MysqlCtl/Shutdown"
 	// MysqlCtlRunMysqlUpgradeProcedure is the fully-qualified name of the MysqlCtl's RunMysqlUpgrade
 	// RPC.
-	MysqlCtlRunMysqlUpgradeProcedure = "/vitess.mysqlctl.v16.MysqlCtl/RunMysqlUpgrade"
+	MysqlCtlRunMysqlUpgradeProcedure = "/mysqlctl.MysqlCtl/RunMysqlUpgrade"
 	// MysqlCtlReinitConfigProcedure is the fully-qualified name of the MysqlCtl's ReinitConfig RPC.
-	MysqlCtlReinitConfigProcedure = "/vitess.mysqlctl.v16.MysqlCtl/ReinitConfig"
+	MysqlCtlReinitConfigProcedure = "/mysqlctl.MysqlCtl/ReinitConfig"
 	// MysqlCtlRefreshConfigProcedure is the fully-qualified name of the MysqlCtl's RefreshConfig RPC.
-	MysqlCtlRefreshConfigProcedure = "/vitess.mysqlctl.v16.MysqlCtl/RefreshConfig"
+	MysqlCtlRefreshConfigProcedure = "/mysqlctl.MysqlCtl/RefreshConfig"
 )
 
-// MysqlCtlClient is a client for the vitess.mysqlctl.v16.MysqlCtl service.
+// MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
 type MysqlCtlClient interface {
 	Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error)
 	Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error)
@@ -72,7 +72,7 @@ type MysqlCtlClient interface {
 	RefreshConfig(context.Context, *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error)
 }
 
-// NewMysqlCtlClient constructs a client for the vitess.mysqlctl.v16.MysqlCtl service. By default,
+// NewMysqlCtlClient constructs a client for the mysqlctl.MysqlCtl service. By default,
 // it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
 // sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
 // or connect.WithGRPCWeb() options.
@@ -119,32 +119,32 @@ type mysqlCtlClient struct {
 	refreshConfig   *connect_go.Client[v16.RefreshConfigRequest, v16.RefreshConfigResponse]
 }
 
-// Start calls vitess.mysqlctl.v16.MysqlCtl.Start.
+// Start calls mysqlctl.MysqlCtl.Start.
 func (c *mysqlCtlClient) Start(ctx context.Context, req *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error) {
 	return c.start.CallUnary(ctx, req)
 }
 
-// Shutdown calls vitess.mysqlctl.v16.MysqlCtl.Shutdown.
+// Shutdown calls mysqlctl.MysqlCtl.Shutdown.
 func (c *mysqlCtlClient) Shutdown(ctx context.Context, req *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error) {
 	return c.shutdown.CallUnary(ctx, req)
 }
 
-// RunMysqlUpgrade calls vitess.mysqlctl.v16.MysqlCtl.RunMysqlUpgrade.
+// RunMysqlUpgrade calls mysqlctl.MysqlCtl.RunMysqlUpgrade.
 func (c *mysqlCtlClient) RunMysqlUpgrade(ctx context.Context, req *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error) {
 	return c.runMysqlUpgrade.CallUnary(ctx, req)
 }
 
-// ReinitConfig calls vitess.mysqlctl.v16.MysqlCtl.ReinitConfig.
+// ReinitConfig calls mysqlctl.MysqlCtl.ReinitConfig.
 func (c *mysqlCtlClient) ReinitConfig(ctx context.Context, req *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error) {
 	return c.reinitConfig.CallUnary(ctx, req)
 }
 
-// RefreshConfig calls vitess.mysqlctl.v16.MysqlCtl.RefreshConfig.
+// RefreshConfig calls mysqlctl.MysqlCtl.RefreshConfig.
 func (c *mysqlCtlClient) RefreshConfig(ctx context.Context, req *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error) {
 	return c.refreshConfig.CallUnary(ctx, req)
 }
 
-// MysqlCtlHandler is an implementation of the vitess.mysqlctl.v16.MysqlCtl service.
+// MysqlCtlHandler is an implementation of the mysqlctl.MysqlCtl service.
 type MysqlCtlHandler interface {
 	Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error)
 	Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error)
@@ -185,28 +185,28 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect_go.HandlerOption) (
 		svc.RefreshConfig,
 		opts...,
 	))
-	return "/vitess.mysqlctl.v16.MysqlCtl/", mux
+	return "/mysqlctl.MysqlCtl/", mux
 }
 
 // UnimplementedMysqlCtlHandler returns CodeUnimplemented from all methods.
 type UnimplementedMysqlCtlHandler struct{}
 
 func (UnimplementedMysqlCtlHandler) Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.mysqlctl.v16.MysqlCtl.Start is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Start is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.mysqlctl.v16.MysqlCtl.Shutdown is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Shutdown is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) RunMysqlUpgrade(context.Context, *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.mysqlctl.v16.MysqlCtl.RunMysqlUpgrade is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RunMysqlUpgrade is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) ReinitConfig(context.Context, *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.mysqlctl.v16.MysqlCtl.ReinitConfig is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReinitConfig is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.mysqlctl.v16.MysqlCtl.RefreshConfig is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RefreshConfig is not implemented"))
 }

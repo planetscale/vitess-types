@@ -41,7 +41,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// UpdateStreamName is the fully-qualified name of the UpdateStream service.
-	UpdateStreamName = "vitess.binlogservice.dev.UpdateStream"
+	UpdateStreamName = "binlogservice.UpdateStream"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,13 +54,13 @@ const (
 const (
 	// UpdateStreamStreamKeyRangeProcedure is the fully-qualified name of the UpdateStream's
 	// StreamKeyRange RPC.
-	UpdateStreamStreamKeyRangeProcedure = "/vitess.binlogservice.dev.UpdateStream/StreamKeyRange"
+	UpdateStreamStreamKeyRangeProcedure = "/binlogservice.UpdateStream/StreamKeyRange"
 	// UpdateStreamStreamTablesProcedure is the fully-qualified name of the UpdateStream's StreamTables
 	// RPC.
-	UpdateStreamStreamTablesProcedure = "/vitess.binlogservice.dev.UpdateStream/StreamTables"
+	UpdateStreamStreamTablesProcedure = "/binlogservice.UpdateStream/StreamTables"
 )
 
-// UpdateStreamClient is a client for the vitess.binlogservice.dev.UpdateStream service.
+// UpdateStreamClient is a client for the binlogservice.UpdateStream service.
 type UpdateStreamClient interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
@@ -70,7 +70,7 @@ type UpdateStreamClient interface {
 	StreamTables(context.Context, *connect_go.Request[dev.StreamTablesRequest]) (*connect_go.ServerStreamForClient[dev.StreamTablesResponse], error)
 }
 
-// NewUpdateStreamClient constructs a client for the vitess.binlogservice.dev.UpdateStream service.
+// NewUpdateStreamClient constructs a client for the binlogservice.UpdateStream service.
 // By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
 // responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -99,17 +99,17 @@ type updateStreamClient struct {
 	streamTables   *connect_go.Client[dev.StreamTablesRequest, dev.StreamTablesResponse]
 }
 
-// StreamKeyRange calls vitess.binlogservice.dev.UpdateStream.StreamKeyRange.
+// StreamKeyRange calls binlogservice.UpdateStream.StreamKeyRange.
 func (c *updateStreamClient) StreamKeyRange(ctx context.Context, req *connect_go.Request[dev.StreamKeyRangeRequest]) (*connect_go.ServerStreamForClient[dev.StreamKeyRangeResponse], error) {
 	return c.streamKeyRange.CallServerStream(ctx, req)
 }
 
-// StreamTables calls vitess.binlogservice.dev.UpdateStream.StreamTables.
+// StreamTables calls binlogservice.UpdateStream.StreamTables.
 func (c *updateStreamClient) StreamTables(ctx context.Context, req *connect_go.Request[dev.StreamTablesRequest]) (*connect_go.ServerStreamForClient[dev.StreamTablesResponse], error) {
 	return c.streamTables.CallServerStream(ctx, req)
 }
 
-// UpdateStreamHandler is an implementation of the vitess.binlogservice.dev.UpdateStream service.
+// UpdateStreamHandler is an implementation of the binlogservice.UpdateStream service.
 type UpdateStreamHandler interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
@@ -136,16 +136,16 @@ func NewUpdateStreamHandler(svc UpdateStreamHandler, opts ...connect_go.HandlerO
 		svc.StreamTables,
 		opts...,
 	))
-	return "/vitess.binlogservice.dev.UpdateStream/", mux
+	return "/binlogservice.UpdateStream/", mux
 }
 
 // UnimplementedUpdateStreamHandler returns CodeUnimplemented from all methods.
 type UnimplementedUpdateStreamHandler struct{}
 
 func (UnimplementedUpdateStreamHandler) StreamKeyRange(context.Context, *connect_go.Request[dev.StreamKeyRangeRequest], *connect_go.ServerStream[dev.StreamKeyRangeResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.binlogservice.dev.UpdateStream.StreamKeyRange is not implemented"))
+	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamKeyRange is not implemented"))
 }
 
 func (UnimplementedUpdateStreamHandler) StreamTables(context.Context, *connect_go.Request[dev.StreamTablesRequest], *connect_go.ServerStream[dev.StreamTablesResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.binlogservice.dev.UpdateStream.StreamTables is not implemented"))
+	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamTables is not implemented"))
 }

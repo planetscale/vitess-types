@@ -39,7 +39,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// VTAdminName is the fully-qualified name of the VTAdmin service.
-	VTAdminName = "vitess.vtadmin.dev.VTAdmin"
+	VTAdminName = "vtadmin.VTAdmin"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -51,123 +51,123 @@ const (
 // period.
 const (
 	// VTAdminCreateKeyspaceProcedure is the fully-qualified name of the VTAdmin's CreateKeyspace RPC.
-	VTAdminCreateKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/CreateKeyspace"
+	VTAdminCreateKeyspaceProcedure = "/vtadmin.VTAdmin/CreateKeyspace"
 	// VTAdminCreateShardProcedure is the fully-qualified name of the VTAdmin's CreateShard RPC.
-	VTAdminCreateShardProcedure = "/vitess.vtadmin.dev.VTAdmin/CreateShard"
+	VTAdminCreateShardProcedure = "/vtadmin.VTAdmin/CreateShard"
 	// VTAdminDeleteKeyspaceProcedure is the fully-qualified name of the VTAdmin's DeleteKeyspace RPC.
-	VTAdminDeleteKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/DeleteKeyspace"
+	VTAdminDeleteKeyspaceProcedure = "/vtadmin.VTAdmin/DeleteKeyspace"
 	// VTAdminDeleteShardsProcedure is the fully-qualified name of the VTAdmin's DeleteShards RPC.
-	VTAdminDeleteShardsProcedure = "/vitess.vtadmin.dev.VTAdmin/DeleteShards"
+	VTAdminDeleteShardsProcedure = "/vtadmin.VTAdmin/DeleteShards"
 	// VTAdminDeleteTabletProcedure is the fully-qualified name of the VTAdmin's DeleteTablet RPC.
-	VTAdminDeleteTabletProcedure = "/vitess.vtadmin.dev.VTAdmin/DeleteTablet"
+	VTAdminDeleteTabletProcedure = "/vtadmin.VTAdmin/DeleteTablet"
 	// VTAdminEmergencyFailoverShardProcedure is the fully-qualified name of the VTAdmin's
 	// EmergencyFailoverShard RPC.
-	VTAdminEmergencyFailoverShardProcedure = "/vitess.vtadmin.dev.VTAdmin/EmergencyFailoverShard"
+	VTAdminEmergencyFailoverShardProcedure = "/vtadmin.VTAdmin/EmergencyFailoverShard"
 	// VTAdminFindSchemaProcedure is the fully-qualified name of the VTAdmin's FindSchema RPC.
-	VTAdminFindSchemaProcedure = "/vitess.vtadmin.dev.VTAdmin/FindSchema"
+	VTAdminFindSchemaProcedure = "/vtadmin.VTAdmin/FindSchema"
 	// VTAdminGetBackupsProcedure is the fully-qualified name of the VTAdmin's GetBackups RPC.
-	VTAdminGetBackupsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetBackups"
+	VTAdminGetBackupsProcedure = "/vtadmin.VTAdmin/GetBackups"
 	// VTAdminGetCellInfosProcedure is the fully-qualified name of the VTAdmin's GetCellInfos RPC.
-	VTAdminGetCellInfosProcedure = "/vitess.vtadmin.dev.VTAdmin/GetCellInfos"
+	VTAdminGetCellInfosProcedure = "/vtadmin.VTAdmin/GetCellInfos"
 	// VTAdminGetCellsAliasesProcedure is the fully-qualified name of the VTAdmin's GetCellsAliases RPC.
-	VTAdminGetCellsAliasesProcedure = "/vitess.vtadmin.dev.VTAdmin/GetCellsAliases"
+	VTAdminGetCellsAliasesProcedure = "/vtadmin.VTAdmin/GetCellsAliases"
 	// VTAdminGetClustersProcedure is the fully-qualified name of the VTAdmin's GetClusters RPC.
-	VTAdminGetClustersProcedure = "/vitess.vtadmin.dev.VTAdmin/GetClusters"
+	VTAdminGetClustersProcedure = "/vtadmin.VTAdmin/GetClusters"
 	// VTAdminGetFullStatusProcedure is the fully-qualified name of the VTAdmin's GetFullStatus RPC.
-	VTAdminGetFullStatusProcedure = "/vitess.vtadmin.dev.VTAdmin/GetFullStatus"
+	VTAdminGetFullStatusProcedure = "/vtadmin.VTAdmin/GetFullStatus"
 	// VTAdminGetGatesProcedure is the fully-qualified name of the VTAdmin's GetGates RPC.
-	VTAdminGetGatesProcedure = "/vitess.vtadmin.dev.VTAdmin/GetGates"
+	VTAdminGetGatesProcedure = "/vtadmin.VTAdmin/GetGates"
 	// VTAdminGetKeyspaceProcedure is the fully-qualified name of the VTAdmin's GetKeyspace RPC.
-	VTAdminGetKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/GetKeyspace"
+	VTAdminGetKeyspaceProcedure = "/vtadmin.VTAdmin/GetKeyspace"
 	// VTAdminGetKeyspacesProcedure is the fully-qualified name of the VTAdmin's GetKeyspaces RPC.
-	VTAdminGetKeyspacesProcedure = "/vitess.vtadmin.dev.VTAdmin/GetKeyspaces"
+	VTAdminGetKeyspacesProcedure = "/vtadmin.VTAdmin/GetKeyspaces"
 	// VTAdminGetSchemaProcedure is the fully-qualified name of the VTAdmin's GetSchema RPC.
-	VTAdminGetSchemaProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSchema"
+	VTAdminGetSchemaProcedure = "/vtadmin.VTAdmin/GetSchema"
 	// VTAdminGetSchemasProcedure is the fully-qualified name of the VTAdmin's GetSchemas RPC.
-	VTAdminGetSchemasProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSchemas"
+	VTAdminGetSchemasProcedure = "/vtadmin.VTAdmin/GetSchemas"
 	// VTAdminGetShardReplicationPositionsProcedure is the fully-qualified name of the VTAdmin's
 	// GetShardReplicationPositions RPC.
-	VTAdminGetShardReplicationPositionsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetShardReplicationPositions"
+	VTAdminGetShardReplicationPositionsProcedure = "/vtadmin.VTAdmin/GetShardReplicationPositions"
 	// VTAdminGetSrvKeyspaceProcedure is the fully-qualified name of the VTAdmin's GetSrvKeyspace RPC.
-	VTAdminGetSrvKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvKeyspace"
+	VTAdminGetSrvKeyspaceProcedure = "/vtadmin.VTAdmin/GetSrvKeyspace"
 	// VTAdminGetSrvKeyspacesProcedure is the fully-qualified name of the VTAdmin's GetSrvKeyspaces RPC.
-	VTAdminGetSrvKeyspacesProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvKeyspaces"
+	VTAdminGetSrvKeyspacesProcedure = "/vtadmin.VTAdmin/GetSrvKeyspaces"
 	// VTAdminGetSrvVSchemaProcedure is the fully-qualified name of the VTAdmin's GetSrvVSchema RPC.
-	VTAdminGetSrvVSchemaProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvVSchema"
+	VTAdminGetSrvVSchemaProcedure = "/vtadmin.VTAdmin/GetSrvVSchema"
 	// VTAdminGetSrvVSchemasProcedure is the fully-qualified name of the VTAdmin's GetSrvVSchemas RPC.
-	VTAdminGetSrvVSchemasProcedure = "/vitess.vtadmin.dev.VTAdmin/GetSrvVSchemas"
+	VTAdminGetSrvVSchemasProcedure = "/vtadmin.VTAdmin/GetSrvVSchemas"
 	// VTAdminGetTabletProcedure is the fully-qualified name of the VTAdmin's GetTablet RPC.
-	VTAdminGetTabletProcedure = "/vitess.vtadmin.dev.VTAdmin/GetTablet"
+	VTAdminGetTabletProcedure = "/vtadmin.VTAdmin/GetTablet"
 	// VTAdminGetTabletsProcedure is the fully-qualified name of the VTAdmin's GetTablets RPC.
-	VTAdminGetTabletsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetTablets"
+	VTAdminGetTabletsProcedure = "/vtadmin.VTAdmin/GetTablets"
 	// VTAdminGetTopologyPathProcedure is the fully-qualified name of the VTAdmin's GetTopologyPath RPC.
-	VTAdminGetTopologyPathProcedure = "/vitess.vtadmin.dev.VTAdmin/GetTopologyPath"
+	VTAdminGetTopologyPathProcedure = "/vtadmin.VTAdmin/GetTopologyPath"
 	// VTAdminGetVSchemaProcedure is the fully-qualified name of the VTAdmin's GetVSchema RPC.
-	VTAdminGetVSchemaProcedure = "/vitess.vtadmin.dev.VTAdmin/GetVSchema"
+	VTAdminGetVSchemaProcedure = "/vtadmin.VTAdmin/GetVSchema"
 	// VTAdminGetVSchemasProcedure is the fully-qualified name of the VTAdmin's GetVSchemas RPC.
-	VTAdminGetVSchemasProcedure = "/vitess.vtadmin.dev.VTAdmin/GetVSchemas"
+	VTAdminGetVSchemasProcedure = "/vtadmin.VTAdmin/GetVSchemas"
 	// VTAdminGetVtctldsProcedure is the fully-qualified name of the VTAdmin's GetVtctlds RPC.
-	VTAdminGetVtctldsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetVtctlds"
+	VTAdminGetVtctldsProcedure = "/vtadmin.VTAdmin/GetVtctlds"
 	// VTAdminGetWorkflowProcedure is the fully-qualified name of the VTAdmin's GetWorkflow RPC.
-	VTAdminGetWorkflowProcedure = "/vitess.vtadmin.dev.VTAdmin/GetWorkflow"
+	VTAdminGetWorkflowProcedure = "/vtadmin.VTAdmin/GetWorkflow"
 	// VTAdminGetWorkflowsProcedure is the fully-qualified name of the VTAdmin's GetWorkflows RPC.
-	VTAdminGetWorkflowsProcedure = "/vitess.vtadmin.dev.VTAdmin/GetWorkflows"
+	VTAdminGetWorkflowsProcedure = "/vtadmin.VTAdmin/GetWorkflows"
 	// VTAdminPingTabletProcedure is the fully-qualified name of the VTAdmin's PingTablet RPC.
-	VTAdminPingTabletProcedure = "/vitess.vtadmin.dev.VTAdmin/PingTablet"
+	VTAdminPingTabletProcedure = "/vtadmin.VTAdmin/PingTablet"
 	// VTAdminPlannedFailoverShardProcedure is the fully-qualified name of the VTAdmin's
 	// PlannedFailoverShard RPC.
-	VTAdminPlannedFailoverShardProcedure = "/vitess.vtadmin.dev.VTAdmin/PlannedFailoverShard"
+	VTAdminPlannedFailoverShardProcedure = "/vtadmin.VTAdmin/PlannedFailoverShard"
 	// VTAdminRebuildKeyspaceGraphProcedure is the fully-qualified name of the VTAdmin's
 	// RebuildKeyspaceGraph RPC.
-	VTAdminRebuildKeyspaceGraphProcedure = "/vitess.vtadmin.dev.VTAdmin/RebuildKeyspaceGraph"
+	VTAdminRebuildKeyspaceGraphProcedure = "/vtadmin.VTAdmin/RebuildKeyspaceGraph"
 	// VTAdminRefreshStateProcedure is the fully-qualified name of the VTAdmin's RefreshState RPC.
-	VTAdminRefreshStateProcedure = "/vitess.vtadmin.dev.VTAdmin/RefreshState"
+	VTAdminRefreshStateProcedure = "/vtadmin.VTAdmin/RefreshState"
 	// VTAdminRefreshTabletReplicationSourceProcedure is the fully-qualified name of the VTAdmin's
 	// RefreshTabletReplicationSource RPC.
-	VTAdminRefreshTabletReplicationSourceProcedure = "/vitess.vtadmin.dev.VTAdmin/RefreshTabletReplicationSource"
+	VTAdminRefreshTabletReplicationSourceProcedure = "/vtadmin.VTAdmin/RefreshTabletReplicationSource"
 	// VTAdminReloadSchemasProcedure is the fully-qualified name of the VTAdmin's ReloadSchemas RPC.
-	VTAdminReloadSchemasProcedure = "/vitess.vtadmin.dev.VTAdmin/ReloadSchemas"
+	VTAdminReloadSchemasProcedure = "/vtadmin.VTAdmin/ReloadSchemas"
 	// VTAdminReloadSchemaShardProcedure is the fully-qualified name of the VTAdmin's ReloadSchemaShard
 	// RPC.
-	VTAdminReloadSchemaShardProcedure = "/vitess.vtadmin.dev.VTAdmin/ReloadSchemaShard"
+	VTAdminReloadSchemaShardProcedure = "/vtadmin.VTAdmin/ReloadSchemaShard"
 	// VTAdminRemoveKeyspaceCellProcedure is the fully-qualified name of the VTAdmin's
 	// RemoveKeyspaceCell RPC.
-	VTAdminRemoveKeyspaceCellProcedure = "/vitess.vtadmin.dev.VTAdmin/RemoveKeyspaceCell"
+	VTAdminRemoveKeyspaceCellProcedure = "/vtadmin.VTAdmin/RemoveKeyspaceCell"
 	// VTAdminRunHealthCheckProcedure is the fully-qualified name of the VTAdmin's RunHealthCheck RPC.
-	VTAdminRunHealthCheckProcedure = "/vitess.vtadmin.dev.VTAdmin/RunHealthCheck"
+	VTAdminRunHealthCheckProcedure = "/vtadmin.VTAdmin/RunHealthCheck"
 	// VTAdminSetReadOnlyProcedure is the fully-qualified name of the VTAdmin's SetReadOnly RPC.
-	VTAdminSetReadOnlyProcedure = "/vitess.vtadmin.dev.VTAdmin/SetReadOnly"
+	VTAdminSetReadOnlyProcedure = "/vtadmin.VTAdmin/SetReadOnly"
 	// VTAdminSetReadWriteProcedure is the fully-qualified name of the VTAdmin's SetReadWrite RPC.
-	VTAdminSetReadWriteProcedure = "/vitess.vtadmin.dev.VTAdmin/SetReadWrite"
+	VTAdminSetReadWriteProcedure = "/vtadmin.VTAdmin/SetReadWrite"
 	// VTAdminStartReplicationProcedure is the fully-qualified name of the VTAdmin's StartReplication
 	// RPC.
-	VTAdminStartReplicationProcedure = "/vitess.vtadmin.dev.VTAdmin/StartReplication"
+	VTAdminStartReplicationProcedure = "/vtadmin.VTAdmin/StartReplication"
 	// VTAdminStopReplicationProcedure is the fully-qualified name of the VTAdmin's StopReplication RPC.
-	VTAdminStopReplicationProcedure = "/vitess.vtadmin.dev.VTAdmin/StopReplication"
+	VTAdminStopReplicationProcedure = "/vtadmin.VTAdmin/StopReplication"
 	// VTAdminTabletExternallyPromotedProcedure is the fully-qualified name of the VTAdmin's
 	// TabletExternallyPromoted RPC.
-	VTAdminTabletExternallyPromotedProcedure = "/vitess.vtadmin.dev.VTAdmin/TabletExternallyPromoted"
+	VTAdminTabletExternallyPromotedProcedure = "/vtadmin.VTAdmin/TabletExternallyPromoted"
 	// VTAdminValidateProcedure is the fully-qualified name of the VTAdmin's Validate RPC.
-	VTAdminValidateProcedure = "/vitess.vtadmin.dev.VTAdmin/Validate"
+	VTAdminValidateProcedure = "/vtadmin.VTAdmin/Validate"
 	// VTAdminValidateKeyspaceProcedure is the fully-qualified name of the VTAdmin's ValidateKeyspace
 	// RPC.
-	VTAdminValidateKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/ValidateKeyspace"
+	VTAdminValidateKeyspaceProcedure = "/vtadmin.VTAdmin/ValidateKeyspace"
 	// VTAdminValidateSchemaKeyspaceProcedure is the fully-qualified name of the VTAdmin's
 	// ValidateSchemaKeyspace RPC.
-	VTAdminValidateSchemaKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/ValidateSchemaKeyspace"
+	VTAdminValidateSchemaKeyspaceProcedure = "/vtadmin.VTAdmin/ValidateSchemaKeyspace"
 	// VTAdminValidateShardProcedure is the fully-qualified name of the VTAdmin's ValidateShard RPC.
-	VTAdminValidateShardProcedure = "/vitess.vtadmin.dev.VTAdmin/ValidateShard"
+	VTAdminValidateShardProcedure = "/vtadmin.VTAdmin/ValidateShard"
 	// VTAdminValidateVersionKeyspaceProcedure is the fully-qualified name of the VTAdmin's
 	// ValidateVersionKeyspace RPC.
-	VTAdminValidateVersionKeyspaceProcedure = "/vitess.vtadmin.dev.VTAdmin/ValidateVersionKeyspace"
+	VTAdminValidateVersionKeyspaceProcedure = "/vtadmin.VTAdmin/ValidateVersionKeyspace"
 	// VTAdminValidateVersionShardProcedure is the fully-qualified name of the VTAdmin's
 	// ValidateVersionShard RPC.
-	VTAdminValidateVersionShardProcedure = "/vitess.vtadmin.dev.VTAdmin/ValidateVersionShard"
+	VTAdminValidateVersionShardProcedure = "/vtadmin.VTAdmin/ValidateVersionShard"
 	// VTAdminVTExplainProcedure is the fully-qualified name of the VTAdmin's VTExplain RPC.
-	VTAdminVTExplainProcedure = "/vitess.vtadmin.dev.VTAdmin/VTExplain"
+	VTAdminVTExplainProcedure = "/vtadmin.VTAdmin/VTExplain"
 )
 
-// VTAdminClient is a client for the vitess.vtadmin.dev.VTAdmin service.
+// VTAdminClient is a client for the vtadmin.VTAdmin service.
 type VTAdminClient interface {
 	// CreateKeyspace creates a new keyspace in the given cluster.
 	CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error)
@@ -314,7 +314,7 @@ type VTAdminClient interface {
 	VTExplain(context.Context, *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error)
 }
 
-// NewVTAdminClient constructs a client for the vitess.vtadmin.dev.VTAdmin service. By default, it
+// NewVTAdminClient constructs a client for the vtadmin.VTAdmin service. By default, it
 // uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
 // uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
 // connect.WithGRPCWeb() options.
@@ -637,262 +637,262 @@ type vTAdminClient struct {
 	vTExplain                      *connect_go.Client[dev.VTExplainRequest, dev.VTExplainResponse]
 }
 
-// CreateKeyspace calls vitess.vtadmin.dev.VTAdmin.CreateKeyspace.
+// CreateKeyspace calls vtadmin.VTAdmin.CreateKeyspace.
 func (c *vTAdminClient) CreateKeyspace(ctx context.Context, req *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error) {
 	return c.createKeyspace.CallUnary(ctx, req)
 }
 
-// CreateShard calls vitess.vtadmin.dev.VTAdmin.CreateShard.
+// CreateShard calls vtadmin.VTAdmin.CreateShard.
 func (c *vTAdminClient) CreateShard(ctx context.Context, req *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error) {
 	return c.createShard.CallUnary(ctx, req)
 }
 
-// DeleteKeyspace calls vitess.vtadmin.dev.VTAdmin.DeleteKeyspace.
+// DeleteKeyspace calls vtadmin.VTAdmin.DeleteKeyspace.
 func (c *vTAdminClient) DeleteKeyspace(ctx context.Context, req *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error) {
 	return c.deleteKeyspace.CallUnary(ctx, req)
 }
 
-// DeleteShards calls vitess.vtadmin.dev.VTAdmin.DeleteShards.
+// DeleteShards calls vtadmin.VTAdmin.DeleteShards.
 func (c *vTAdminClient) DeleteShards(ctx context.Context, req *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error) {
 	return c.deleteShards.CallUnary(ctx, req)
 }
 
-// DeleteTablet calls vitess.vtadmin.dev.VTAdmin.DeleteTablet.
+// DeleteTablet calls vtadmin.VTAdmin.DeleteTablet.
 func (c *vTAdminClient) DeleteTablet(ctx context.Context, req *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error) {
 	return c.deleteTablet.CallUnary(ctx, req)
 }
 
-// EmergencyFailoverShard calls vitess.vtadmin.dev.VTAdmin.EmergencyFailoverShard.
+// EmergencyFailoverShard calls vtadmin.VTAdmin.EmergencyFailoverShard.
 func (c *vTAdminClient) EmergencyFailoverShard(ctx context.Context, req *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error) {
 	return c.emergencyFailoverShard.CallUnary(ctx, req)
 }
 
-// FindSchema calls vitess.vtadmin.dev.VTAdmin.FindSchema.
+// FindSchema calls vtadmin.VTAdmin.FindSchema.
 func (c *vTAdminClient) FindSchema(ctx context.Context, req *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
 	return c.findSchema.CallUnary(ctx, req)
 }
 
-// GetBackups calls vitess.vtadmin.dev.VTAdmin.GetBackups.
+// GetBackups calls vtadmin.VTAdmin.GetBackups.
 func (c *vTAdminClient) GetBackups(ctx context.Context, req *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error) {
 	return c.getBackups.CallUnary(ctx, req)
 }
 
-// GetCellInfos calls vitess.vtadmin.dev.VTAdmin.GetCellInfos.
+// GetCellInfos calls vtadmin.VTAdmin.GetCellInfos.
 func (c *vTAdminClient) GetCellInfos(ctx context.Context, req *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error) {
 	return c.getCellInfos.CallUnary(ctx, req)
 }
 
-// GetCellsAliases calls vitess.vtadmin.dev.VTAdmin.GetCellsAliases.
+// GetCellsAliases calls vtadmin.VTAdmin.GetCellsAliases.
 func (c *vTAdminClient) GetCellsAliases(ctx context.Context, req *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error) {
 	return c.getCellsAliases.CallUnary(ctx, req)
 }
 
-// GetClusters calls vitess.vtadmin.dev.VTAdmin.GetClusters.
+// GetClusters calls vtadmin.VTAdmin.GetClusters.
 func (c *vTAdminClient) GetClusters(ctx context.Context, req *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error) {
 	return c.getClusters.CallUnary(ctx, req)
 }
 
-// GetFullStatus calls vitess.vtadmin.dev.VTAdmin.GetFullStatus.
+// GetFullStatus calls vtadmin.VTAdmin.GetFullStatus.
 func (c *vTAdminClient) GetFullStatus(ctx context.Context, req *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error) {
 	return c.getFullStatus.CallUnary(ctx, req)
 }
 
-// GetGates calls vitess.vtadmin.dev.VTAdmin.GetGates.
+// GetGates calls vtadmin.VTAdmin.GetGates.
 func (c *vTAdminClient) GetGates(ctx context.Context, req *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error) {
 	return c.getGates.CallUnary(ctx, req)
 }
 
-// GetKeyspace calls vitess.vtadmin.dev.VTAdmin.GetKeyspace.
+// GetKeyspace calls vtadmin.VTAdmin.GetKeyspace.
 func (c *vTAdminClient) GetKeyspace(ctx context.Context, req *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error) {
 	return c.getKeyspace.CallUnary(ctx, req)
 }
 
-// GetKeyspaces calls vitess.vtadmin.dev.VTAdmin.GetKeyspaces.
+// GetKeyspaces calls vtadmin.VTAdmin.GetKeyspaces.
 func (c *vTAdminClient) GetKeyspaces(ctx context.Context, req *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error) {
 	return c.getKeyspaces.CallUnary(ctx, req)
 }
 
-// GetSchema calls vitess.vtadmin.dev.VTAdmin.GetSchema.
+// GetSchema calls vtadmin.VTAdmin.GetSchema.
 func (c *vTAdminClient) GetSchema(ctx context.Context, req *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
-// GetSchemas calls vitess.vtadmin.dev.VTAdmin.GetSchemas.
+// GetSchemas calls vtadmin.VTAdmin.GetSchemas.
 func (c *vTAdminClient) GetSchemas(ctx context.Context, req *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error) {
 	return c.getSchemas.CallUnary(ctx, req)
 }
 
-// GetShardReplicationPositions calls vitess.vtadmin.dev.VTAdmin.GetShardReplicationPositions.
+// GetShardReplicationPositions calls vtadmin.VTAdmin.GetShardReplicationPositions.
 func (c *vTAdminClient) GetShardReplicationPositions(ctx context.Context, req *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
 	return c.getShardReplicationPositions.CallUnary(ctx, req)
 }
 
-// GetSrvKeyspace calls vitess.vtadmin.dev.VTAdmin.GetSrvKeyspace.
+// GetSrvKeyspace calls vtadmin.VTAdmin.GetSrvKeyspace.
 func (c *vTAdminClient) GetSrvKeyspace(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspace.CallUnary(ctx, req)
 }
 
-// GetSrvKeyspaces calls vitess.vtadmin.dev.VTAdmin.GetSrvKeyspaces.
+// GetSrvKeyspaces calls vtadmin.VTAdmin.GetSrvKeyspaces.
 func (c *vTAdminClient) GetSrvKeyspaces(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspaces.CallUnary(ctx, req)
 }
 
-// GetSrvVSchema calls vitess.vtadmin.dev.VTAdmin.GetSrvVSchema.
+// GetSrvVSchema calls vtadmin.VTAdmin.GetSrvVSchema.
 func (c *vTAdminClient) GetSrvVSchema(ctx context.Context, req *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error) {
 	return c.getSrvVSchema.CallUnary(ctx, req)
 }
 
-// GetSrvVSchemas calls vitess.vtadmin.dev.VTAdmin.GetSrvVSchemas.
+// GetSrvVSchemas calls vtadmin.VTAdmin.GetSrvVSchemas.
 func (c *vTAdminClient) GetSrvVSchemas(ctx context.Context, req *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error) {
 	return c.getSrvVSchemas.CallUnary(ctx, req)
 }
 
-// GetTablet calls vitess.vtadmin.dev.VTAdmin.GetTablet.
+// GetTablet calls vtadmin.VTAdmin.GetTablet.
 func (c *vTAdminClient) GetTablet(ctx context.Context, req *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error) {
 	return c.getTablet.CallUnary(ctx, req)
 }
 
-// GetTablets calls vitess.vtadmin.dev.VTAdmin.GetTablets.
+// GetTablets calls vtadmin.VTAdmin.GetTablets.
 func (c *vTAdminClient) GetTablets(ctx context.Context, req *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
 }
 
-// GetTopologyPath calls vitess.vtadmin.dev.VTAdmin.GetTopologyPath.
+// GetTopologyPath calls vtadmin.VTAdmin.GetTopologyPath.
 func (c *vTAdminClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error) {
 	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
-// GetVSchema calls vitess.vtadmin.dev.VTAdmin.GetVSchema.
+// GetVSchema calls vtadmin.VTAdmin.GetVSchema.
 func (c *vTAdminClient) GetVSchema(ctx context.Context, req *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error) {
 	return c.getVSchema.CallUnary(ctx, req)
 }
 
-// GetVSchemas calls vitess.vtadmin.dev.VTAdmin.GetVSchemas.
+// GetVSchemas calls vtadmin.VTAdmin.GetVSchemas.
 func (c *vTAdminClient) GetVSchemas(ctx context.Context, req *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error) {
 	return c.getVSchemas.CallUnary(ctx, req)
 }
 
-// GetVtctlds calls vitess.vtadmin.dev.VTAdmin.GetVtctlds.
+// GetVtctlds calls vtadmin.VTAdmin.GetVtctlds.
 func (c *vTAdminClient) GetVtctlds(ctx context.Context, req *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error) {
 	return c.getVtctlds.CallUnary(ctx, req)
 }
 
-// GetWorkflow calls vitess.vtadmin.dev.VTAdmin.GetWorkflow.
+// GetWorkflow calls vtadmin.VTAdmin.GetWorkflow.
 func (c *vTAdminClient) GetWorkflow(ctx context.Context, req *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error) {
 	return c.getWorkflow.CallUnary(ctx, req)
 }
 
-// GetWorkflows calls vitess.vtadmin.dev.VTAdmin.GetWorkflows.
+// GetWorkflows calls vtadmin.VTAdmin.GetWorkflows.
 func (c *vTAdminClient) GetWorkflows(ctx context.Context, req *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error) {
 	return c.getWorkflows.CallUnary(ctx, req)
 }
 
-// PingTablet calls vitess.vtadmin.dev.VTAdmin.PingTablet.
+// PingTablet calls vtadmin.VTAdmin.PingTablet.
 func (c *vTAdminClient) PingTablet(ctx context.Context, req *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error) {
 	return c.pingTablet.CallUnary(ctx, req)
 }
 
-// PlannedFailoverShard calls vitess.vtadmin.dev.VTAdmin.PlannedFailoverShard.
+// PlannedFailoverShard calls vtadmin.VTAdmin.PlannedFailoverShard.
 func (c *vTAdminClient) PlannedFailoverShard(ctx context.Context, req *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error) {
 	return c.plannedFailoverShard.CallUnary(ctx, req)
 }
 
-// RebuildKeyspaceGraph calls vitess.vtadmin.dev.VTAdmin.RebuildKeyspaceGraph.
+// RebuildKeyspaceGraph calls vtadmin.VTAdmin.RebuildKeyspaceGraph.
 func (c *vTAdminClient) RebuildKeyspaceGraph(ctx context.Context, req *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error) {
 	return c.rebuildKeyspaceGraph.CallUnary(ctx, req)
 }
 
-// RefreshState calls vitess.vtadmin.dev.VTAdmin.RefreshState.
+// RefreshState calls vtadmin.VTAdmin.RefreshState.
 func (c *vTAdminClient) RefreshState(ctx context.Context, req *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
-// RefreshTabletReplicationSource calls vitess.vtadmin.dev.VTAdmin.RefreshTabletReplicationSource.
+// RefreshTabletReplicationSource calls vtadmin.VTAdmin.RefreshTabletReplicationSource.
 func (c *vTAdminClient) RefreshTabletReplicationSource(ctx context.Context, req *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error) {
 	return c.refreshTabletReplicationSource.CallUnary(ctx, req)
 }
 
-// ReloadSchemas calls vitess.vtadmin.dev.VTAdmin.ReloadSchemas.
+// ReloadSchemas calls vtadmin.VTAdmin.ReloadSchemas.
 func (c *vTAdminClient) ReloadSchemas(ctx context.Context, req *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error) {
 	return c.reloadSchemas.CallUnary(ctx, req)
 }
 
-// ReloadSchemaShard calls vitess.vtadmin.dev.VTAdmin.ReloadSchemaShard.
+// ReloadSchemaShard calls vtadmin.VTAdmin.ReloadSchemaShard.
 func (c *vTAdminClient) ReloadSchemaShard(ctx context.Context, req *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error) {
 	return c.reloadSchemaShard.CallUnary(ctx, req)
 }
 
-// RemoveKeyspaceCell calls vitess.vtadmin.dev.VTAdmin.RemoveKeyspaceCell.
+// RemoveKeyspaceCell calls vtadmin.VTAdmin.RemoveKeyspaceCell.
 func (c *vTAdminClient) RemoveKeyspaceCell(ctx context.Context, req *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error) {
 	return c.removeKeyspaceCell.CallUnary(ctx, req)
 }
 
-// RunHealthCheck calls vitess.vtadmin.dev.VTAdmin.RunHealthCheck.
+// RunHealthCheck calls vtadmin.VTAdmin.RunHealthCheck.
 func (c *vTAdminClient) RunHealthCheck(ctx context.Context, req *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
-// SetReadOnly calls vitess.vtadmin.dev.VTAdmin.SetReadOnly.
+// SetReadOnly calls vtadmin.VTAdmin.SetReadOnly.
 func (c *vTAdminClient) SetReadOnly(ctx context.Context, req *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error) {
 	return c.setReadOnly.CallUnary(ctx, req)
 }
 
-// SetReadWrite calls vitess.vtadmin.dev.VTAdmin.SetReadWrite.
+// SetReadWrite calls vtadmin.VTAdmin.SetReadWrite.
 func (c *vTAdminClient) SetReadWrite(ctx context.Context, req *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error) {
 	return c.setReadWrite.CallUnary(ctx, req)
 }
 
-// StartReplication calls vitess.vtadmin.dev.VTAdmin.StartReplication.
+// StartReplication calls vtadmin.VTAdmin.StartReplication.
 func (c *vTAdminClient) StartReplication(ctx context.Context, req *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
-// StopReplication calls vitess.vtadmin.dev.VTAdmin.StopReplication.
+// StopReplication calls vtadmin.VTAdmin.StopReplication.
 func (c *vTAdminClient) StopReplication(ctx context.Context, req *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
-// TabletExternallyPromoted calls vitess.vtadmin.dev.VTAdmin.TabletExternallyPromoted.
+// TabletExternallyPromoted calls vtadmin.VTAdmin.TabletExternallyPromoted.
 func (c *vTAdminClient) TabletExternallyPromoted(ctx context.Context, req *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error) {
 	return c.tabletExternallyPromoted.CallUnary(ctx, req)
 }
 
-// Validate calls vitess.vtadmin.dev.VTAdmin.Validate.
+// Validate calls vtadmin.VTAdmin.Validate.
 func (c *vTAdminClient) Validate(ctx context.Context, req *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error) {
 	return c.validate.CallUnary(ctx, req)
 }
 
-// ValidateKeyspace calls vitess.vtadmin.dev.VTAdmin.ValidateKeyspace.
+// ValidateKeyspace calls vtadmin.VTAdmin.ValidateKeyspace.
 func (c *vTAdminClient) ValidateKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error) {
 	return c.validateKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateSchemaKeyspace calls vitess.vtadmin.dev.VTAdmin.ValidateSchemaKeyspace.
+// ValidateSchemaKeyspace calls vtadmin.VTAdmin.ValidateSchemaKeyspace.
 func (c *vTAdminClient) ValidateSchemaKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
 	return c.validateSchemaKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateShard calls vitess.vtadmin.dev.VTAdmin.ValidateShard.
+// ValidateShard calls vtadmin.VTAdmin.ValidateShard.
 func (c *vTAdminClient) ValidateShard(ctx context.Context, req *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error) {
 	return c.validateShard.CallUnary(ctx, req)
 }
 
-// ValidateVersionKeyspace calls vitess.vtadmin.dev.VTAdmin.ValidateVersionKeyspace.
+// ValidateVersionKeyspace calls vtadmin.VTAdmin.ValidateVersionKeyspace.
 func (c *vTAdminClient) ValidateVersionKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error) {
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateVersionShard calls vitess.vtadmin.dev.VTAdmin.ValidateVersionShard.
+// ValidateVersionShard calls vtadmin.VTAdmin.ValidateVersionShard.
 func (c *vTAdminClient) ValidateVersionShard(ctx context.Context, req *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error) {
 	return c.validateVersionShard.CallUnary(ctx, req)
 }
 
-// VTExplain calls vitess.vtadmin.dev.VTAdmin.VTExplain.
+// VTExplain calls vtadmin.VTAdmin.VTExplain.
 func (c *vTAdminClient) VTExplain(ctx context.Context, req *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error) {
 	return c.vTExplain.CallUnary(ctx, req)
 }
 
-// VTAdminHandler is an implementation of the vitess.vtadmin.dev.VTAdmin service.
+// VTAdminHandler is an implementation of the vtadmin.VTAdmin service.
 type VTAdminHandler interface {
 	// CreateKeyspace creates a new keyspace in the given cluster.
 	CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error)
@@ -1301,212 +1301,212 @@ func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (st
 		svc.VTExplain,
 		opts...,
 	))
-	return "/vitess.vtadmin.dev.VTAdmin/", mux
+	return "/vtadmin.VTAdmin/", mux
 }
 
 // UnimplementedVTAdminHandler returns CodeUnimplemented from all methods.
 type UnimplementedVTAdminHandler struct{}
 
 func (UnimplementedVTAdminHandler) CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.CreateKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) CreateShard(context.Context, *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.CreateShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) DeleteKeyspace(context.Context, *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.DeleteKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) DeleteShards(context.Context, *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.DeleteShards is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteShards is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) DeleteTablet(context.Context, *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.DeleteTablet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteTablet is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) EmergencyFailoverShard(context.Context, *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.EmergencyFailoverShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.EmergencyFailoverShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) FindSchema(context.Context, *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.FindSchema is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.FindSchema is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetBackups(context.Context, *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetBackups is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetBackups is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetCellInfos(context.Context, *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetCellInfos is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellInfos is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetCellsAliases(context.Context, *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetCellsAliases is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellsAliases is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetClusters(context.Context, *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetClusters is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetClusters is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetFullStatus(context.Context, *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetFullStatus is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetFullStatus is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetGates(context.Context, *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetGates is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetGates is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetKeyspace(context.Context, *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetKeyspaces(context.Context, *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetKeyspaces is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspaces is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSchema is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchema is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSchemas(context.Context, *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSchemas is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchemas is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetShardReplicationPositions is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetShardReplicationPositions is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvKeyspaces is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspaces is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvVSchema is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchema is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetSrvVSchemas(context.Context, *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetSrvVSchemas is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchemas is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetTablet(context.Context, *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetTablet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablet is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetTablets(context.Context, *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetTablets is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablets is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetTopologyPath(context.Context, *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetTopologyPath is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTopologyPath is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetVSchema(context.Context, *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetVSchema is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchema is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetVSchemas(context.Context, *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetVSchemas is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchemas is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetVtctlds(context.Context, *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetVtctlds is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVtctlds is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetWorkflow(context.Context, *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetWorkflow is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflow is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) GetWorkflows(context.Context, *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.GetWorkflows is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflows is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) PingTablet(context.Context, *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.PingTablet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PingTablet is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) PlannedFailoverShard(context.Context, *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.PlannedFailoverShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PlannedFailoverShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) RebuildKeyspaceGraph(context.Context, *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.RebuildKeyspaceGraph is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RebuildKeyspaceGraph is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) RefreshState(context.Context, *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.RefreshState is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshState is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) RefreshTabletReplicationSource(context.Context, *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.RefreshTabletReplicationSource is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshTabletReplicationSource is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ReloadSchemas(context.Context, *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ReloadSchemas is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemas is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ReloadSchemaShard(context.Context, *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ReloadSchemaShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemaShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) RemoveKeyspaceCell(context.Context, *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.RemoveKeyspaceCell is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RemoveKeyspaceCell is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) RunHealthCheck(context.Context, *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.RunHealthCheck is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RunHealthCheck is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) SetReadOnly(context.Context, *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.SetReadOnly is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadOnly is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) SetReadWrite(context.Context, *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.SetReadWrite is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadWrite is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) StartReplication(context.Context, *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.StartReplication is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StartReplication is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) StopReplication(context.Context, *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.StopReplication is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StopReplication is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) TabletExternallyPromoted(context.Context, *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.TabletExternallyPromoted is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.TabletExternallyPromoted is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) Validate(context.Context, *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.Validate is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.Validate is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ValidateKeyspace(context.Context, *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ValidateKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ValidateSchemaKeyspace(context.Context, *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ValidateSchemaKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateSchemaKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ValidateShard(context.Context, *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ValidateShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ValidateVersionKeyspace(context.Context, *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ValidateVersionKeyspace is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionKeyspace is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.ValidateVersionShard is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionShard is not implemented"))
 }
 
 func (UnimplementedVTAdminHandler) VTExplain(context.Context, *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtadmin.dev.VTAdmin.VTExplain is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.VTExplain is not implemented"))
 }

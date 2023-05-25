@@ -42,7 +42,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// VitessName is the fully-qualified name of the Vitess service.
-	VitessName = "vitess.vtgateservice.v15.Vitess"
+	VitessName = "vtgateservice.Vitess"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,23 +54,23 @@ const (
 // period.
 const (
 	// VitessExecuteProcedure is the fully-qualified name of the Vitess's Execute RPC.
-	VitessExecuteProcedure = "/vitess.vtgateservice.v15.Vitess/Execute"
+	VitessExecuteProcedure = "/vtgateservice.Vitess/Execute"
 	// VitessExecuteBatchProcedure is the fully-qualified name of the Vitess's ExecuteBatch RPC.
-	VitessExecuteBatchProcedure = "/vitess.vtgateservice.v15.Vitess/ExecuteBatch"
+	VitessExecuteBatchProcedure = "/vtgateservice.Vitess/ExecuteBatch"
 	// VitessStreamExecuteProcedure is the fully-qualified name of the Vitess's StreamExecute RPC.
-	VitessStreamExecuteProcedure = "/vitess.vtgateservice.v15.Vitess/StreamExecute"
+	VitessStreamExecuteProcedure = "/vtgateservice.Vitess/StreamExecute"
 	// VitessResolveTransactionProcedure is the fully-qualified name of the Vitess's ResolveTransaction
 	// RPC.
-	VitessResolveTransactionProcedure = "/vitess.vtgateservice.v15.Vitess/ResolveTransaction"
+	VitessResolveTransactionProcedure = "/vtgateservice.Vitess/ResolveTransaction"
 	// VitessVStreamProcedure is the fully-qualified name of the Vitess's VStream RPC.
-	VitessVStreamProcedure = "/vitess.vtgateservice.v15.Vitess/VStream"
+	VitessVStreamProcedure = "/vtgateservice.Vitess/VStream"
 	// VitessPrepareProcedure is the fully-qualified name of the Vitess's Prepare RPC.
-	VitessPrepareProcedure = "/vitess.vtgateservice.v15.Vitess/Prepare"
+	VitessPrepareProcedure = "/vtgateservice.Vitess/Prepare"
 	// VitessCloseSessionProcedure is the fully-qualified name of the Vitess's CloseSession RPC.
-	VitessCloseSessionProcedure = "/vitess.vtgateservice.v15.Vitess/CloseSession"
+	VitessCloseSessionProcedure = "/vtgateservice.Vitess/CloseSession"
 )
 
-// VitessClient is a client for the vitess.vtgateservice.v15.Vitess service.
+// VitessClient is a client for the vtgateservice.Vitess service.
 type VitessClient interface {
 	// Execute tries to route the query to the right shard.
 	// It depends on the query and bind variables to provide enough
@@ -101,7 +101,7 @@ type VitessClient interface {
 	CloseSession(context.Context, *connect_go.Request[v15.CloseSessionRequest]) (*connect_go.Response[v15.CloseSessionResponse], error)
 }
 
-// NewVitessClient constructs a client for the vitess.vtgateservice.v15.Vitess service. By default,
+// NewVitessClient constructs a client for the vtgateservice.Vitess service. By default,
 // it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
 // sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
 // or connect.WithGRPCWeb() options.
@@ -160,42 +160,42 @@ type vitessClient struct {
 	closeSession       *connect_go.Client[v15.CloseSessionRequest, v15.CloseSessionResponse]
 }
 
-// Execute calls vitess.vtgateservice.v15.Vitess.Execute.
+// Execute calls vtgateservice.Vitess.Execute.
 func (c *vitessClient) Execute(ctx context.Context, req *connect_go.Request[v15.ExecuteRequest]) (*connect_go.Response[v15.ExecuteResponse], error) {
 	return c.execute.CallUnary(ctx, req)
 }
 
-// ExecuteBatch calls vitess.vtgateservice.v15.Vitess.ExecuteBatch.
+// ExecuteBatch calls vtgateservice.Vitess.ExecuteBatch.
 func (c *vitessClient) ExecuteBatch(ctx context.Context, req *connect_go.Request[v15.ExecuteBatchRequest]) (*connect_go.Response[v15.ExecuteBatchResponse], error) {
 	return c.executeBatch.CallUnary(ctx, req)
 }
 
-// StreamExecute calls vitess.vtgateservice.v15.Vitess.StreamExecute.
+// StreamExecute calls vtgateservice.Vitess.StreamExecute.
 func (c *vitessClient) StreamExecute(ctx context.Context, req *connect_go.Request[v15.StreamExecuteRequest]) (*connect_go.ServerStreamForClient[v15.StreamExecuteResponse], error) {
 	return c.streamExecute.CallServerStream(ctx, req)
 }
 
-// ResolveTransaction calls vitess.vtgateservice.v15.Vitess.ResolveTransaction.
+// ResolveTransaction calls vtgateservice.Vitess.ResolveTransaction.
 func (c *vitessClient) ResolveTransaction(ctx context.Context, req *connect_go.Request[v15.ResolveTransactionRequest]) (*connect_go.Response[v15.ResolveTransactionResponse], error) {
 	return c.resolveTransaction.CallUnary(ctx, req)
 }
 
-// VStream calls vitess.vtgateservice.v15.Vitess.VStream.
+// VStream calls vtgateservice.Vitess.VStream.
 func (c *vitessClient) VStream(ctx context.Context, req *connect_go.Request[v15.VStreamRequest]) (*connect_go.ServerStreamForClient[v15.VStreamResponse], error) {
 	return c.vStream.CallServerStream(ctx, req)
 }
 
-// Prepare calls vitess.vtgateservice.v15.Vitess.Prepare.
+// Prepare calls vtgateservice.Vitess.Prepare.
 func (c *vitessClient) Prepare(ctx context.Context, req *connect_go.Request[v15.PrepareRequest]) (*connect_go.Response[v15.PrepareResponse], error) {
 	return c.prepare.CallUnary(ctx, req)
 }
 
-// CloseSession calls vitess.vtgateservice.v15.Vitess.CloseSession.
+// CloseSession calls vtgateservice.Vitess.CloseSession.
 func (c *vitessClient) CloseSession(ctx context.Context, req *connect_go.Request[v15.CloseSessionRequest]) (*connect_go.Response[v15.CloseSessionResponse], error) {
 	return c.closeSession.CallUnary(ctx, req)
 }
 
-// VitessHandler is an implementation of the vitess.vtgateservice.v15.Vitess service.
+// VitessHandler is an implementation of the vtgateservice.Vitess service.
 type VitessHandler interface {
 	// Execute tries to route the query to the right shard.
 	// It depends on the query and bind variables to provide enough
@@ -268,36 +268,36 @@ func NewVitessHandler(svc VitessHandler, opts ...connect_go.HandlerOption) (stri
 		svc.CloseSession,
 		opts...,
 	))
-	return "/vitess.vtgateservice.v15.Vitess/", mux
+	return "/vtgateservice.Vitess/", mux
 }
 
 // UnimplementedVitessHandler returns CodeUnimplemented from all methods.
 type UnimplementedVitessHandler struct{}
 
 func (UnimplementedVitessHandler) Execute(context.Context, *connect_go.Request[v15.ExecuteRequest]) (*connect_go.Response[v15.ExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.Execute is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.Execute is not implemented"))
 }
 
 func (UnimplementedVitessHandler) ExecuteBatch(context.Context, *connect_go.Request[v15.ExecuteBatchRequest]) (*connect_go.Response[v15.ExecuteBatchResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.ExecuteBatch is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.ExecuteBatch is not implemented"))
 }
 
 func (UnimplementedVitessHandler) StreamExecute(context.Context, *connect_go.Request[v15.StreamExecuteRequest], *connect_go.ServerStream[v15.StreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.StreamExecute is not implemented"))
+	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.StreamExecute is not implemented"))
 }
 
 func (UnimplementedVitessHandler) ResolveTransaction(context.Context, *connect_go.Request[v15.ResolveTransactionRequest]) (*connect_go.Response[v15.ResolveTransactionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.ResolveTransaction is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.ResolveTransaction is not implemented"))
 }
 
 func (UnimplementedVitessHandler) VStream(context.Context, *connect_go.Request[v15.VStreamRequest], *connect_go.ServerStream[v15.VStreamResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.VStream is not implemented"))
+	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.VStream is not implemented"))
 }
 
 func (UnimplementedVitessHandler) Prepare(context.Context, *connect_go.Request[v15.PrepareRequest]) (*connect_go.Response[v15.PrepareResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.Prepare is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.Prepare is not implemented"))
 }
 
 func (UnimplementedVitessHandler) CloseSession(context.Context, *connect_go.Request[v15.CloseSessionRequest]) (*connect_go.Response[v15.CloseSessionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.vtgateservice.v15.Vitess.CloseSession is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.CloseSession is not implemented"))
 }

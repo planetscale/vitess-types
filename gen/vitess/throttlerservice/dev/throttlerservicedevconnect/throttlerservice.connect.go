@@ -40,7 +40,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// ThrottlerName is the fully-qualified name of the Throttler service.
-	ThrottlerName = "vitess.throttlerservice.dev.Throttler"
+	ThrottlerName = "throttlerservice.Throttler"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -52,21 +52,21 @@ const (
 // period.
 const (
 	// ThrottlerMaxRatesProcedure is the fully-qualified name of the Throttler's MaxRates RPC.
-	ThrottlerMaxRatesProcedure = "/vitess.throttlerservice.dev.Throttler/MaxRates"
+	ThrottlerMaxRatesProcedure = "/throttlerservice.Throttler/MaxRates"
 	// ThrottlerSetMaxRateProcedure is the fully-qualified name of the Throttler's SetMaxRate RPC.
-	ThrottlerSetMaxRateProcedure = "/vitess.throttlerservice.dev.Throttler/SetMaxRate"
+	ThrottlerSetMaxRateProcedure = "/throttlerservice.Throttler/SetMaxRate"
 	// ThrottlerGetConfigurationProcedure is the fully-qualified name of the Throttler's
 	// GetConfiguration RPC.
-	ThrottlerGetConfigurationProcedure = "/vitess.throttlerservice.dev.Throttler/GetConfiguration"
+	ThrottlerGetConfigurationProcedure = "/throttlerservice.Throttler/GetConfiguration"
 	// ThrottlerUpdateConfigurationProcedure is the fully-qualified name of the Throttler's
 	// UpdateConfiguration RPC.
-	ThrottlerUpdateConfigurationProcedure = "/vitess.throttlerservice.dev.Throttler/UpdateConfiguration"
+	ThrottlerUpdateConfigurationProcedure = "/throttlerservice.Throttler/UpdateConfiguration"
 	// ThrottlerResetConfigurationProcedure is the fully-qualified name of the Throttler's
 	// ResetConfiguration RPC.
-	ThrottlerResetConfigurationProcedure = "/vitess.throttlerservice.dev.Throttler/ResetConfiguration"
+	ThrottlerResetConfigurationProcedure = "/throttlerservice.Throttler/ResetConfiguration"
 )
 
-// ThrottlerClient is a client for the vitess.throttlerservice.dev.Throttler service.
+// ThrottlerClient is a client for the throttlerservice.Throttler service.
 type ThrottlerClient interface {
 	// MaxRates returns the current max rate for each throttler of the process.
 	MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error)
@@ -88,7 +88,7 @@ type ThrottlerClient interface {
 	ResetConfiguration(context.Context, *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error)
 }
 
-// NewThrottlerClient constructs a client for the vitess.throttlerservice.dev.Throttler service. By
+// NewThrottlerClient constructs a client for the throttlerservice.Throttler service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -135,32 +135,32 @@ type throttlerClient struct {
 	resetConfiguration  *connect_go.Client[dev.ResetConfigurationRequest, dev.ResetConfigurationResponse]
 }
 
-// MaxRates calls vitess.throttlerservice.dev.Throttler.MaxRates.
+// MaxRates calls throttlerservice.Throttler.MaxRates.
 func (c *throttlerClient) MaxRates(ctx context.Context, req *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error) {
 	return c.maxRates.CallUnary(ctx, req)
 }
 
-// SetMaxRate calls vitess.throttlerservice.dev.Throttler.SetMaxRate.
+// SetMaxRate calls throttlerservice.Throttler.SetMaxRate.
 func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error) {
 	return c.setMaxRate.CallUnary(ctx, req)
 }
 
-// GetConfiguration calls vitess.throttlerservice.dev.Throttler.GetConfiguration.
+// GetConfiguration calls throttlerservice.Throttler.GetConfiguration.
 func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error) {
 	return c.getConfiguration.CallUnary(ctx, req)
 }
 
-// UpdateConfiguration calls vitess.throttlerservice.dev.Throttler.UpdateConfiguration.
+// UpdateConfiguration calls throttlerservice.Throttler.UpdateConfiguration.
 func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error) {
 	return c.updateConfiguration.CallUnary(ctx, req)
 }
 
-// ResetConfiguration calls vitess.throttlerservice.dev.Throttler.ResetConfiguration.
+// ResetConfiguration calls throttlerservice.Throttler.ResetConfiguration.
 func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error) {
 	return c.resetConfiguration.CallUnary(ctx, req)
 }
 
-// ThrottlerHandler is an implementation of the vitess.throttlerservice.dev.Throttler service.
+// ThrottlerHandler is an implementation of the throttlerservice.Throttler service.
 type ThrottlerHandler interface {
 	// MaxRates returns the current max rate for each throttler of the process.
 	MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error)
@@ -214,28 +214,28 @@ func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect_go.HandlerOption)
 		svc.ResetConfiguration,
 		opts...,
 	))
-	return "/vitess.throttlerservice.dev.Throttler/", mux
+	return "/throttlerservice.Throttler/", mux
 }
 
 // UnimplementedThrottlerHandler returns CodeUnimplemented from all methods.
 type UnimplementedThrottlerHandler struct{}
 
 func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.throttlerservice.dev.Throttler.MaxRates is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.MaxRates is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.throttlerservice.dev.Throttler.SetMaxRate is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.SetMaxRate is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.throttlerservice.dev.Throttler.GetConfiguration is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.GetConfiguration is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.throttlerservice.dev.Throttler.UpdateConfiguration is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.UpdateConfiguration is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vitess.throttlerservice.dev.Throttler.ResetConfiguration is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.ResetConfiguration is not implemented"))
 }
