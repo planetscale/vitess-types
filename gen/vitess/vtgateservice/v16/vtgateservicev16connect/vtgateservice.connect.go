@@ -24,9 +24,9 @@
 package vtgateservicev16connect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	v16 "github.com/planetscale/vitess-types/gen/vitess/vtgate/v16"
 	_ "github.com/planetscale/vitess-types/gen/vitess/vtgateservice/v16"
 	http "net/http"
@@ -38,7 +38,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// VitessName is the fully-qualified name of the Vitess service.
@@ -76,29 +76,29 @@ type VitessClient interface {
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// API group: v3
-	Execute(context.Context, *connect_go.Request[v16.ExecuteRequest]) (*connect_go.Response[v16.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[v16.ExecuteRequest]) (*connect.Response[v16.ExecuteResponse], error)
 	// ExecuteBatch tries to route the list of queries on the right shards.
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// API group: v3
-	ExecuteBatch(context.Context, *connect_go.Request[v16.ExecuteBatchRequest]) (*connect_go.Response[v16.ExecuteBatchResponse], error)
+	ExecuteBatch(context.Context, *connect.Request[v16.ExecuteBatchRequest]) (*connect.Response[v16.ExecuteBatchResponse], error)
 	// StreamExecute executes a streaming query based on shards.
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// Use this method if the query returns a large number of rows.
 	// API group: v3
-	StreamExecute(context.Context, *connect_go.Request[v16.StreamExecuteRequest]) (*connect_go.ServerStreamForClient[v16.StreamExecuteResponse], error)
+	StreamExecute(context.Context, *connect.Request[v16.StreamExecuteRequest]) (*connect.ServerStreamForClient[v16.StreamExecuteResponse], error)
 	// ResolveTransaction resolves a transaction.
 	// API group: Transactions
-	ResolveTransaction(context.Context, *connect_go.Request[v16.ResolveTransactionRequest]) (*connect_go.Response[v16.ResolveTransactionResponse], error)
+	ResolveTransaction(context.Context, *connect.Request[v16.ResolveTransactionRequest]) (*connect.Response[v16.ResolveTransactionResponse], error)
 	// VStream streams binlog events from the requested sources.
-	VStream(context.Context, *connect_go.Request[v16.VStreamRequest]) (*connect_go.ServerStreamForClient[v16.VStreamResponse], error)
+	VStream(context.Context, *connect.Request[v16.VStreamRequest]) (*connect.ServerStreamForClient[v16.VStreamResponse], error)
 	// Prepare is used by the MySQL server plugin as part of supporting prepared statements.
-	Prepare(context.Context, *connect_go.Request[v16.PrepareRequest]) (*connect_go.Response[v16.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[v16.PrepareRequest]) (*connect.Response[v16.PrepareResponse], error)
 	// CloseSession closes the session, rolling back any implicit transactions.
 	// This has the same effect as if a "rollback" statement was executed,
 	// but does not affect the query statistics.
-	CloseSession(context.Context, *connect_go.Request[v16.CloseSessionRequest]) (*connect_go.Response[v16.CloseSessionResponse], error)
+	CloseSession(context.Context, *connect.Request[v16.CloseSessionRequest]) (*connect.Response[v16.CloseSessionResponse], error)
 }
 
 // NewVitessClient constructs a client for the vtgateservice.Vitess service. By default,
@@ -108,40 +108,40 @@ type VitessClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewVitessClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) VitessClient {
+func NewVitessClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VitessClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &vitessClient{
-		execute: connect_go.NewClient[v16.ExecuteRequest, v16.ExecuteResponse](
+		execute: connect.NewClient[v16.ExecuteRequest, v16.ExecuteResponse](
 			httpClient,
 			baseURL+VitessExecuteProcedure,
 			opts...,
 		),
-		executeBatch: connect_go.NewClient[v16.ExecuteBatchRequest, v16.ExecuteBatchResponse](
+		executeBatch: connect.NewClient[v16.ExecuteBatchRequest, v16.ExecuteBatchResponse](
 			httpClient,
 			baseURL+VitessExecuteBatchProcedure,
 			opts...,
 		),
-		streamExecute: connect_go.NewClient[v16.StreamExecuteRequest, v16.StreamExecuteResponse](
+		streamExecute: connect.NewClient[v16.StreamExecuteRequest, v16.StreamExecuteResponse](
 			httpClient,
 			baseURL+VitessStreamExecuteProcedure,
 			opts...,
 		),
-		resolveTransaction: connect_go.NewClient[v16.ResolveTransactionRequest, v16.ResolveTransactionResponse](
+		resolveTransaction: connect.NewClient[v16.ResolveTransactionRequest, v16.ResolveTransactionResponse](
 			httpClient,
 			baseURL+VitessResolveTransactionProcedure,
 			opts...,
 		),
-		vStream: connect_go.NewClient[v16.VStreamRequest, v16.VStreamResponse](
+		vStream: connect.NewClient[v16.VStreamRequest, v16.VStreamResponse](
 			httpClient,
 			baseURL+VitessVStreamProcedure,
 			opts...,
 		),
-		prepare: connect_go.NewClient[v16.PrepareRequest, v16.PrepareResponse](
+		prepare: connect.NewClient[v16.PrepareRequest, v16.PrepareResponse](
 			httpClient,
 			baseURL+VitessPrepareProcedure,
 			opts...,
 		),
-		closeSession: connect_go.NewClient[v16.CloseSessionRequest, v16.CloseSessionResponse](
+		closeSession: connect.NewClient[v16.CloseSessionRequest, v16.CloseSessionResponse](
 			httpClient,
 			baseURL+VitessCloseSessionProcedure,
 			opts...,
@@ -151,47 +151,47 @@ func NewVitessClient(httpClient connect_go.HTTPClient, baseURL string, opts ...c
 
 // vitessClient implements VitessClient.
 type vitessClient struct {
-	execute            *connect_go.Client[v16.ExecuteRequest, v16.ExecuteResponse]
-	executeBatch       *connect_go.Client[v16.ExecuteBatchRequest, v16.ExecuteBatchResponse]
-	streamExecute      *connect_go.Client[v16.StreamExecuteRequest, v16.StreamExecuteResponse]
-	resolveTransaction *connect_go.Client[v16.ResolveTransactionRequest, v16.ResolveTransactionResponse]
-	vStream            *connect_go.Client[v16.VStreamRequest, v16.VStreamResponse]
-	prepare            *connect_go.Client[v16.PrepareRequest, v16.PrepareResponse]
-	closeSession       *connect_go.Client[v16.CloseSessionRequest, v16.CloseSessionResponse]
+	execute            *connect.Client[v16.ExecuteRequest, v16.ExecuteResponse]
+	executeBatch       *connect.Client[v16.ExecuteBatchRequest, v16.ExecuteBatchResponse]
+	streamExecute      *connect.Client[v16.StreamExecuteRequest, v16.StreamExecuteResponse]
+	resolveTransaction *connect.Client[v16.ResolveTransactionRequest, v16.ResolveTransactionResponse]
+	vStream            *connect.Client[v16.VStreamRequest, v16.VStreamResponse]
+	prepare            *connect.Client[v16.PrepareRequest, v16.PrepareResponse]
+	closeSession       *connect.Client[v16.CloseSessionRequest, v16.CloseSessionResponse]
 }
 
 // Execute calls vtgateservice.Vitess.Execute.
-func (c *vitessClient) Execute(ctx context.Context, req *connect_go.Request[v16.ExecuteRequest]) (*connect_go.Response[v16.ExecuteResponse], error) {
+func (c *vitessClient) Execute(ctx context.Context, req *connect.Request[v16.ExecuteRequest]) (*connect.Response[v16.ExecuteResponse], error) {
 	return c.execute.CallUnary(ctx, req)
 }
 
 // ExecuteBatch calls vtgateservice.Vitess.ExecuteBatch.
-func (c *vitessClient) ExecuteBatch(ctx context.Context, req *connect_go.Request[v16.ExecuteBatchRequest]) (*connect_go.Response[v16.ExecuteBatchResponse], error) {
+func (c *vitessClient) ExecuteBatch(ctx context.Context, req *connect.Request[v16.ExecuteBatchRequest]) (*connect.Response[v16.ExecuteBatchResponse], error) {
 	return c.executeBatch.CallUnary(ctx, req)
 }
 
 // StreamExecute calls vtgateservice.Vitess.StreamExecute.
-func (c *vitessClient) StreamExecute(ctx context.Context, req *connect_go.Request[v16.StreamExecuteRequest]) (*connect_go.ServerStreamForClient[v16.StreamExecuteResponse], error) {
+func (c *vitessClient) StreamExecute(ctx context.Context, req *connect.Request[v16.StreamExecuteRequest]) (*connect.ServerStreamForClient[v16.StreamExecuteResponse], error) {
 	return c.streamExecute.CallServerStream(ctx, req)
 }
 
 // ResolveTransaction calls vtgateservice.Vitess.ResolveTransaction.
-func (c *vitessClient) ResolveTransaction(ctx context.Context, req *connect_go.Request[v16.ResolveTransactionRequest]) (*connect_go.Response[v16.ResolveTransactionResponse], error) {
+func (c *vitessClient) ResolveTransaction(ctx context.Context, req *connect.Request[v16.ResolveTransactionRequest]) (*connect.Response[v16.ResolveTransactionResponse], error) {
 	return c.resolveTransaction.CallUnary(ctx, req)
 }
 
 // VStream calls vtgateservice.Vitess.VStream.
-func (c *vitessClient) VStream(ctx context.Context, req *connect_go.Request[v16.VStreamRequest]) (*connect_go.ServerStreamForClient[v16.VStreamResponse], error) {
+func (c *vitessClient) VStream(ctx context.Context, req *connect.Request[v16.VStreamRequest]) (*connect.ServerStreamForClient[v16.VStreamResponse], error) {
 	return c.vStream.CallServerStream(ctx, req)
 }
 
 // Prepare calls vtgateservice.Vitess.Prepare.
-func (c *vitessClient) Prepare(ctx context.Context, req *connect_go.Request[v16.PrepareRequest]) (*connect_go.Response[v16.PrepareResponse], error) {
+func (c *vitessClient) Prepare(ctx context.Context, req *connect.Request[v16.PrepareRequest]) (*connect.Response[v16.PrepareResponse], error) {
 	return c.prepare.CallUnary(ctx, req)
 }
 
 // CloseSession calls vtgateservice.Vitess.CloseSession.
-func (c *vitessClient) CloseSession(ctx context.Context, req *connect_go.Request[v16.CloseSessionRequest]) (*connect_go.Response[v16.CloseSessionResponse], error) {
+func (c *vitessClient) CloseSession(ctx context.Context, req *connect.Request[v16.CloseSessionRequest]) (*connect.Response[v16.CloseSessionResponse], error) {
 	return c.closeSession.CallUnary(ctx, req)
 }
 
@@ -201,29 +201,29 @@ type VitessHandler interface {
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// API group: v3
-	Execute(context.Context, *connect_go.Request[v16.ExecuteRequest]) (*connect_go.Response[v16.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[v16.ExecuteRequest]) (*connect.Response[v16.ExecuteResponse], error)
 	// ExecuteBatch tries to route the list of queries on the right shards.
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// API group: v3
-	ExecuteBatch(context.Context, *connect_go.Request[v16.ExecuteBatchRequest]) (*connect_go.Response[v16.ExecuteBatchResponse], error)
+	ExecuteBatch(context.Context, *connect.Request[v16.ExecuteBatchRequest]) (*connect.Response[v16.ExecuteBatchResponse], error)
 	// StreamExecute executes a streaming query based on shards.
 	// It depends on the query and bind variables to provide enough
 	// information in conjunction with the vindexes to route the query.
 	// Use this method if the query returns a large number of rows.
 	// API group: v3
-	StreamExecute(context.Context, *connect_go.Request[v16.StreamExecuteRequest], *connect_go.ServerStream[v16.StreamExecuteResponse]) error
+	StreamExecute(context.Context, *connect.Request[v16.StreamExecuteRequest], *connect.ServerStream[v16.StreamExecuteResponse]) error
 	// ResolveTransaction resolves a transaction.
 	// API group: Transactions
-	ResolveTransaction(context.Context, *connect_go.Request[v16.ResolveTransactionRequest]) (*connect_go.Response[v16.ResolveTransactionResponse], error)
+	ResolveTransaction(context.Context, *connect.Request[v16.ResolveTransactionRequest]) (*connect.Response[v16.ResolveTransactionResponse], error)
 	// VStream streams binlog events from the requested sources.
-	VStream(context.Context, *connect_go.Request[v16.VStreamRequest], *connect_go.ServerStream[v16.VStreamResponse]) error
+	VStream(context.Context, *connect.Request[v16.VStreamRequest], *connect.ServerStream[v16.VStreamResponse]) error
 	// Prepare is used by the MySQL server plugin as part of supporting prepared statements.
-	Prepare(context.Context, *connect_go.Request[v16.PrepareRequest]) (*connect_go.Response[v16.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[v16.PrepareRequest]) (*connect.Response[v16.PrepareResponse], error)
 	// CloseSession closes the session, rolling back any implicit transactions.
 	// This has the same effect as if a "rollback" statement was executed,
 	// but does not affect the query statistics.
-	CloseSession(context.Context, *connect_go.Request[v16.CloseSessionRequest]) (*connect_go.Response[v16.CloseSessionResponse], error)
+	CloseSession(context.Context, *connect.Request[v16.CloseSessionRequest]) (*connect.Response[v16.CloseSessionResponse], error)
 }
 
 // NewVitessHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -231,73 +231,91 @@ type VitessHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewVitessHandler(svc VitessHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(VitessExecuteProcedure, connect_go.NewUnaryHandler(
+func NewVitessHandler(svc VitessHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	vitessExecuteHandler := connect.NewUnaryHandler(
 		VitessExecuteProcedure,
 		svc.Execute,
 		opts...,
-	))
-	mux.Handle(VitessExecuteBatchProcedure, connect_go.NewUnaryHandler(
+	)
+	vitessExecuteBatchHandler := connect.NewUnaryHandler(
 		VitessExecuteBatchProcedure,
 		svc.ExecuteBatch,
 		opts...,
-	))
-	mux.Handle(VitessStreamExecuteProcedure, connect_go.NewServerStreamHandler(
+	)
+	vitessStreamExecuteHandler := connect.NewServerStreamHandler(
 		VitessStreamExecuteProcedure,
 		svc.StreamExecute,
 		opts...,
-	))
-	mux.Handle(VitessResolveTransactionProcedure, connect_go.NewUnaryHandler(
+	)
+	vitessResolveTransactionHandler := connect.NewUnaryHandler(
 		VitessResolveTransactionProcedure,
 		svc.ResolveTransaction,
 		opts...,
-	))
-	mux.Handle(VitessVStreamProcedure, connect_go.NewServerStreamHandler(
+	)
+	vitessVStreamHandler := connect.NewServerStreamHandler(
 		VitessVStreamProcedure,
 		svc.VStream,
 		opts...,
-	))
-	mux.Handle(VitessPrepareProcedure, connect_go.NewUnaryHandler(
+	)
+	vitessPrepareHandler := connect.NewUnaryHandler(
 		VitessPrepareProcedure,
 		svc.Prepare,
 		opts...,
-	))
-	mux.Handle(VitessCloseSessionProcedure, connect_go.NewUnaryHandler(
+	)
+	vitessCloseSessionHandler := connect.NewUnaryHandler(
 		VitessCloseSessionProcedure,
 		svc.CloseSession,
 		opts...,
-	))
-	return "/vtgateservice.Vitess/", mux
+	)
+	return "/vtgateservice.Vitess/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case VitessExecuteProcedure:
+			vitessExecuteHandler.ServeHTTP(w, r)
+		case VitessExecuteBatchProcedure:
+			vitessExecuteBatchHandler.ServeHTTP(w, r)
+		case VitessStreamExecuteProcedure:
+			vitessStreamExecuteHandler.ServeHTTP(w, r)
+		case VitessResolveTransactionProcedure:
+			vitessResolveTransactionHandler.ServeHTTP(w, r)
+		case VitessVStreamProcedure:
+			vitessVStreamHandler.ServeHTTP(w, r)
+		case VitessPrepareProcedure:
+			vitessPrepareHandler.ServeHTTP(w, r)
+		case VitessCloseSessionProcedure:
+			vitessCloseSessionHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedVitessHandler returns CodeUnimplemented from all methods.
 type UnimplementedVitessHandler struct{}
 
-func (UnimplementedVitessHandler) Execute(context.Context, *connect_go.Request[v16.ExecuteRequest]) (*connect_go.Response[v16.ExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.Execute is not implemented"))
+func (UnimplementedVitessHandler) Execute(context.Context, *connect.Request[v16.ExecuteRequest]) (*connect.Response[v16.ExecuteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.Execute is not implemented"))
 }
 
-func (UnimplementedVitessHandler) ExecuteBatch(context.Context, *connect_go.Request[v16.ExecuteBatchRequest]) (*connect_go.Response[v16.ExecuteBatchResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.ExecuteBatch is not implemented"))
+func (UnimplementedVitessHandler) ExecuteBatch(context.Context, *connect.Request[v16.ExecuteBatchRequest]) (*connect.Response[v16.ExecuteBatchResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.ExecuteBatch is not implemented"))
 }
 
-func (UnimplementedVitessHandler) StreamExecute(context.Context, *connect_go.Request[v16.StreamExecuteRequest], *connect_go.ServerStream[v16.StreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.StreamExecute is not implemented"))
+func (UnimplementedVitessHandler) StreamExecute(context.Context, *connect.Request[v16.StreamExecuteRequest], *connect.ServerStream[v16.StreamExecuteResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.StreamExecute is not implemented"))
 }
 
-func (UnimplementedVitessHandler) ResolveTransaction(context.Context, *connect_go.Request[v16.ResolveTransactionRequest]) (*connect_go.Response[v16.ResolveTransactionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.ResolveTransaction is not implemented"))
+func (UnimplementedVitessHandler) ResolveTransaction(context.Context, *connect.Request[v16.ResolveTransactionRequest]) (*connect.Response[v16.ResolveTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.ResolveTransaction is not implemented"))
 }
 
-func (UnimplementedVitessHandler) VStream(context.Context, *connect_go.Request[v16.VStreamRequest], *connect_go.ServerStream[v16.VStreamResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.VStream is not implemented"))
+func (UnimplementedVitessHandler) VStream(context.Context, *connect.Request[v16.VStreamRequest], *connect.ServerStream[v16.VStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.VStream is not implemented"))
 }
 
-func (UnimplementedVitessHandler) Prepare(context.Context, *connect_go.Request[v16.PrepareRequest]) (*connect_go.Response[v16.PrepareResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.Prepare is not implemented"))
+func (UnimplementedVitessHandler) Prepare(context.Context, *connect.Request[v16.PrepareRequest]) (*connect.Response[v16.PrepareResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.Prepare is not implemented"))
 }
 
-func (UnimplementedVitessHandler) CloseSession(context.Context, *connect_go.Request[v16.CloseSessionRequest]) (*connect_go.Response[v16.CloseSessionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtgateservice.Vitess.CloseSession is not implemented"))
+func (UnimplementedVitessHandler) CloseSession(context.Context, *connect.Request[v16.CloseSessionRequest]) (*connect.Response[v16.CloseSessionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.CloseSession is not implemented"))
 }

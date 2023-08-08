@@ -22,9 +22,9 @@
 package tabletmanagerservicev16connect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	v16 "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerdata/v16"
 	_ "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerservice/v16"
 	http "net/http"
@@ -36,7 +36,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// TabletManagerName is the fully-qualified name of the TabletManager service.
@@ -191,88 +191,88 @@ const (
 // TabletManagerClient is a client for the tabletmanagerservice.TabletManager service.
 type TabletManagerClient interface {
 	// Ping returns the input payload
-	Ping(context.Context, *connect_go.Request[v16.PingRequest]) (*connect_go.Response[v16.PingResponse], error)
+	Ping(context.Context, *connect.Request[v16.PingRequest]) (*connect.Response[v16.PingResponse], error)
 	// Sleep sleeps for the provided duration
-	Sleep(context.Context, *connect_go.Request[v16.SleepRequest]) (*connect_go.Response[v16.SleepResponse], error)
+	Sleep(context.Context, *connect.Request[v16.SleepRequest]) (*connect.Response[v16.SleepResponse], error)
 	// ExecuteHook executes the hook remotely
-	ExecuteHook(context.Context, *connect_go.Request[v16.ExecuteHookRequest]) (*connect_go.Response[v16.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error)
 	// GetSchema asks the tablet for its schema
-	GetSchema(context.Context, *connect_go.Request[v16.GetSchemaRequest]) (*connect_go.Response[v16.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error)
 	// GetPermissions asks the tablet for its permissions
-	GetPermissions(context.Context, *connect_go.Request[v16.GetPermissionsRequest]) (*connect_go.Response[v16.GetPermissionsResponse], error)
-	SetReadOnly(context.Context, *connect_go.Request[v16.SetReadOnlyRequest]) (*connect_go.Response[v16.SetReadOnlyResponse], error)
-	SetReadWrite(context.Context, *connect_go.Request[v16.SetReadWriteRequest]) (*connect_go.Response[v16.SetReadWriteResponse], error)
+	GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error)
+	SetReadOnly(context.Context, *connect.Request[v16.SetReadOnlyRequest]) (*connect.Response[v16.SetReadOnlyResponse], error)
+	SetReadWrite(context.Context, *connect.Request[v16.SetReadWriteRequest]) (*connect.Response[v16.SetReadWriteResponse], error)
 	// ChangeType asks the remote tablet to change its type
-	ChangeType(context.Context, *connect_go.Request[v16.ChangeTypeRequest]) (*connect_go.Response[v16.ChangeTypeResponse], error)
-	RefreshState(context.Context, *connect_go.Request[v16.RefreshStateRequest]) (*connect_go.Response[v16.RefreshStateResponse], error)
-	RunHealthCheck(context.Context, *connect_go.Request[v16.RunHealthCheckRequest]) (*connect_go.Response[v16.RunHealthCheckResponse], error)
-	ReloadSchema(context.Context, *connect_go.Request[v16.ReloadSchemaRequest]) (*connect_go.Response[v16.ReloadSchemaResponse], error)
-	PreflightSchema(context.Context, *connect_go.Request[v16.PreflightSchemaRequest]) (*connect_go.Response[v16.PreflightSchemaResponse], error)
-	ApplySchema(context.Context, *connect_go.Request[v16.ApplySchemaRequest]) (*connect_go.Response[v16.ApplySchemaResponse], error)
-	LockTables(context.Context, *connect_go.Request[v16.LockTablesRequest]) (*connect_go.Response[v16.LockTablesResponse], error)
-	UnlockTables(context.Context, *connect_go.Request[v16.UnlockTablesRequest]) (*connect_go.Response[v16.UnlockTablesResponse], error)
-	ExecuteQuery(context.Context, *connect_go.Request[v16.ExecuteQueryRequest]) (*connect_go.Response[v16.ExecuteQueryResponse], error)
-	ExecuteFetchAsDba(context.Context, *connect_go.Request[v16.ExecuteFetchAsDbaRequest]) (*connect_go.Response[v16.ExecuteFetchAsDbaResponse], error)
-	ExecuteFetchAsAllPrivs(context.Context, *connect_go.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect_go.Response[v16.ExecuteFetchAsAllPrivsResponse], error)
-	ExecuteFetchAsApp(context.Context, *connect_go.Request[v16.ExecuteFetchAsAppRequest]) (*connect_go.Response[v16.ExecuteFetchAsAppResponse], error)
+	ChangeType(context.Context, *connect.Request[v16.ChangeTypeRequest]) (*connect.Response[v16.ChangeTypeResponse], error)
+	RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error)
+	ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error)
+	PreflightSchema(context.Context, *connect.Request[v16.PreflightSchemaRequest]) (*connect.Response[v16.PreflightSchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error)
+	LockTables(context.Context, *connect.Request[v16.LockTablesRequest]) (*connect.Response[v16.LockTablesResponse], error)
+	UnlockTables(context.Context, *connect.Request[v16.UnlockTablesRequest]) (*connect.Response[v16.UnlockTablesResponse], error)
+	ExecuteQuery(context.Context, *connect.Request[v16.ExecuteQueryRequest]) (*connect.Response[v16.ExecuteQueryResponse], error)
+	ExecuteFetchAsDba(context.Context, *connect.Request[v16.ExecuteFetchAsDbaRequest]) (*connect.Response[v16.ExecuteFetchAsDbaResponse], error)
+	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[v16.ExecuteFetchAsAllPrivsResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error)
 	// ReplicationStatus returns the current replication status.
-	ReplicationStatus(context.Context, *connect_go.Request[v16.ReplicationStatusRequest]) (*connect_go.Response[v16.ReplicationStatusResponse], error)
+	ReplicationStatus(context.Context, *connect.Request[v16.ReplicationStatusRequest]) (*connect.Response[v16.ReplicationStatusResponse], error)
 	// PrimaryStatus returns the current primary status.
-	PrimaryStatus(context.Context, *connect_go.Request[v16.PrimaryStatusRequest]) (*connect_go.Response[v16.PrimaryStatusResponse], error)
+	PrimaryStatus(context.Context, *connect.Request[v16.PrimaryStatusRequest]) (*connect.Response[v16.PrimaryStatusResponse], error)
 	// PrimaryPosition returns the current primary position
-	PrimaryPosition(context.Context, *connect_go.Request[v16.PrimaryPositionRequest]) (*connect_go.Response[v16.PrimaryPositionResponse], error)
+	PrimaryPosition(context.Context, *connect.Request[v16.PrimaryPositionRequest]) (*connect.Response[v16.PrimaryPositionResponse], error)
 	// WaitForPosition waits for the position to be reached
-	WaitForPosition(context.Context, *connect_go.Request[v16.WaitForPositionRequest]) (*connect_go.Response[v16.WaitForPositionResponse], error)
+	WaitForPosition(context.Context, *connect.Request[v16.WaitForPositionRequest]) (*connect.Response[v16.WaitForPositionResponse], error)
 	// StopReplication makes mysql stop its replication
-	StopReplication(context.Context, *connect_go.Request[v16.StopReplicationRequest]) (*connect_go.Response[v16.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error)
 	// StopReplicationMinimum stops the mysql replication after it reaches
 	// the provided minimum point
-	StopReplicationMinimum(context.Context, *connect_go.Request[v16.StopReplicationMinimumRequest]) (*connect_go.Response[v16.StopReplicationMinimumResponse], error)
+	StopReplicationMinimum(context.Context, *connect.Request[v16.StopReplicationMinimumRequest]) (*connect.Response[v16.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
-	StartReplication(context.Context, *connect_go.Request[v16.StartReplicationRequest]) (*connect_go.Response[v16.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
-	StartReplicationUntilAfter(context.Context, *connect_go.Request[v16.StartReplicationUntilAfterRequest]) (*connect_go.Response[v16.StartReplicationUntilAfterResponse], error)
+	StartReplicationUntilAfter(context.Context, *connect.Request[v16.StartReplicationUntilAfterRequest]) (*connect.Response[v16.StartReplicationUntilAfterResponse], error)
 	// GetReplicas asks for the list of mysql replicas
-	GetReplicas(context.Context, *connect_go.Request[v16.GetReplicasRequest]) (*connect_go.Response[v16.GetReplicasResponse], error)
+	GetReplicas(context.Context, *connect.Request[v16.GetReplicasRequest]) (*connect.Response[v16.GetReplicasResponse], error)
 	// VReplication API
-	VReplicationExec(context.Context, *connect_go.Request[v16.VReplicationExecRequest]) (*connect_go.Response[v16.VReplicationExecResponse], error)
-	VReplicationWaitForPos(context.Context, *connect_go.Request[v16.VReplicationWaitForPosRequest]) (*connect_go.Response[v16.VReplicationWaitForPosResponse], error)
+	VReplicationExec(context.Context, *connect.Request[v16.VReplicationExecRequest]) (*connect.Response[v16.VReplicationExecResponse], error)
+	VReplicationWaitForPos(context.Context, *connect.Request[v16.VReplicationWaitForPosRequest]) (*connect.Response[v16.VReplicationWaitForPosResponse], error)
 	// VDiff API
-	VDiff(context.Context, *connect_go.Request[v16.VDiffRequest]) (*connect_go.Response[v16.VDiffResponse], error)
+	VDiff(context.Context, *connect.Request[v16.VDiffRequest]) (*connect.Response[v16.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
-	ResetReplication(context.Context, *connect_go.Request[v16.ResetReplicationRequest]) (*connect_go.Response[v16.ResetReplicationResponse], error)
+	ResetReplication(context.Context, *connect.Request[v16.ResetReplicationRequest]) (*connect.Response[v16.ResetReplicationResponse], error)
 	// InitPrimary initializes the tablet as a primary
-	InitPrimary(context.Context, *connect_go.Request[v16.InitPrimaryRequest]) (*connect_go.Response[v16.InitPrimaryResponse], error)
+	InitPrimary(context.Context, *connect.Request[v16.InitPrimaryRequest]) (*connect.Response[v16.InitPrimaryResponse], error)
 	// PopulateReparentJournal tells the tablet to add an entry to its
 	// reparent journal
-	PopulateReparentJournal(context.Context, *connect_go.Request[v16.PopulateReparentJournalRequest]) (*connect_go.Response[v16.PopulateReparentJournalResponse], error)
+	PopulateReparentJournal(context.Context, *connect.Request[v16.PopulateReparentJournalRequest]) (*connect.Response[v16.PopulateReparentJournalResponse], error)
 	// InitReplica tells the tablet to reparent to the primary unconditionally
-	InitReplica(context.Context, *connect_go.Request[v16.InitReplicaRequest]) (*connect_go.Response[v16.InitReplicaResponse], error)
+	InitReplica(context.Context, *connect.Request[v16.InitReplicaRequest]) (*connect.Response[v16.InitReplicaResponse], error)
 	// DemotePrimary tells the soon-to-be-former primary it's gonna change
-	DemotePrimary(context.Context, *connect_go.Request[v16.DemotePrimaryRequest]) (*connect_go.Response[v16.DemotePrimaryResponse], error)
+	DemotePrimary(context.Context, *connect.Request[v16.DemotePrimaryRequest]) (*connect.Response[v16.DemotePrimaryResponse], error)
 	// UndoDemotePrimary reverts all changes made by DemotePrimary
-	UndoDemotePrimary(context.Context, *connect_go.Request[v16.UndoDemotePrimaryRequest]) (*connect_go.Response[v16.UndoDemotePrimaryResponse], error)
+	UndoDemotePrimary(context.Context, *connect.Request[v16.UndoDemotePrimaryRequest]) (*connect.Response[v16.UndoDemotePrimaryResponse], error)
 	// ReplicaWasPromoted tells the remote tablet it is now the primary
-	ReplicaWasPromoted(context.Context, *connect_go.Request[v16.ReplicaWasPromotedRequest]) (*connect_go.Response[v16.ReplicaWasPromotedResponse], error)
+	ReplicaWasPromoted(context.Context, *connect.Request[v16.ReplicaWasPromotedRequest]) (*connect.Response[v16.ReplicaWasPromotedResponse], error)
 	// ResetReplicationParameters resets the replica replication parameters
-	ResetReplicationParameters(context.Context, *connect_go.Request[v16.ResetReplicationParametersRequest]) (*connect_go.Response[v16.ResetReplicationParametersResponse], error)
+	ResetReplicationParameters(context.Context, *connect.Request[v16.ResetReplicationParametersRequest]) (*connect.Response[v16.ResetReplicationParametersResponse], error)
 	// FullStatus collects and returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	FullStatus(context.Context, *connect_go.Request[v16.FullStatusRequest]) (*connect_go.Response[v16.FullStatusResponse], error)
+	FullStatus(context.Context, *connect.Request[v16.FullStatusRequest]) (*connect.Response[v16.FullStatusResponse], error)
 	// SetReplicationSource tells the replica to reparent
-	SetReplicationSource(context.Context, *connect_go.Request[v16.SetReplicationSourceRequest]) (*connect_go.Response[v16.SetReplicationSourceResponse], error)
+	SetReplicationSource(context.Context, *connect.Request[v16.SetReplicationSourceRequest]) (*connect.Response[v16.SetReplicationSourceResponse], error)
 	// ReplicaWasRestarted tells the remote tablet its primary has changed
-	ReplicaWasRestarted(context.Context, *connect_go.Request[v16.ReplicaWasRestartedRequest]) (*connect_go.Response[v16.ReplicaWasRestartedResponse], error)
+	ReplicaWasRestarted(context.Context, *connect.Request[v16.ReplicaWasRestartedRequest]) (*connect.Response[v16.ReplicaWasRestartedResponse], error)
 	// StopReplicationAndGetStatus stops MySQL replication, and returns the
 	// replication status
-	StopReplicationAndGetStatus(context.Context, *connect_go.Request[v16.StopReplicationAndGetStatusRequest]) (*connect_go.Response[v16.StopReplicationAndGetStatusResponse], error)
+	StopReplicationAndGetStatus(context.Context, *connect.Request[v16.StopReplicationAndGetStatusRequest]) (*connect.Response[v16.StopReplicationAndGetStatusResponse], error)
 	// PromoteReplica makes the replica the new primary
-	PromoteReplica(context.Context, *connect_go.Request[v16.PromoteReplicaRequest]) (*connect_go.Response[v16.PromoteReplicaResponse], error)
-	Backup(context.Context, *connect_go.Request[v16.BackupRequest]) (*connect_go.ServerStreamForClient[v16.BackupResponse], error)
+	PromoteReplica(context.Context, *connect.Request[v16.PromoteReplicaRequest]) (*connect.Response[v16.PromoteReplicaResponse], error)
+	Backup(context.Context, *connect.Request[v16.BackupRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error)
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
-	RestoreFromBackup(context.Context, *connect_go.Request[v16.RestoreFromBackupRequest]) (*connect_go.ServerStreamForClient[v16.RestoreFromBackupResponse], error)
+	RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v16.RestoreFromBackupResponse], error)
 	// Generic VExec request. Can be used for various purposes
-	VExec(context.Context, *connect_go.Request[v16.VExecRequest]) (*connect_go.Response[v16.VExecResponse], error)
+	VExec(context.Context, *connect.Request[v16.VExecRequest]) (*connect.Response[v16.VExecResponse], error)
 }
 
 // NewTabletManagerClient constructs a client for the tabletmanagerservice.TabletManager
@@ -282,240 +282,240 @@ type TabletManagerClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewTabletManagerClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) TabletManagerClient {
+func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) TabletManagerClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &tabletManagerClient{
-		ping: connect_go.NewClient[v16.PingRequest, v16.PingResponse](
+		ping: connect.NewClient[v16.PingRequest, v16.PingResponse](
 			httpClient,
 			baseURL+TabletManagerPingProcedure,
 			opts...,
 		),
-		sleep: connect_go.NewClient[v16.SleepRequest, v16.SleepResponse](
+		sleep: connect.NewClient[v16.SleepRequest, v16.SleepResponse](
 			httpClient,
 			baseURL+TabletManagerSleepProcedure,
 			opts...,
 		),
-		executeHook: connect_go.NewClient[v16.ExecuteHookRequest, v16.ExecuteHookResponse](
+		executeHook: connect.NewClient[v16.ExecuteHookRequest, v16.ExecuteHookResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteHookProcedure,
 			opts...,
 		),
-		getSchema: connect_go.NewClient[v16.GetSchemaRequest, v16.GetSchemaResponse](
+		getSchema: connect.NewClient[v16.GetSchemaRequest, v16.GetSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerGetSchemaProcedure,
 			opts...,
 		),
-		getPermissions: connect_go.NewClient[v16.GetPermissionsRequest, v16.GetPermissionsResponse](
+		getPermissions: connect.NewClient[v16.GetPermissionsRequest, v16.GetPermissionsResponse](
 			httpClient,
 			baseURL+TabletManagerGetPermissionsProcedure,
 			opts...,
 		),
-		setReadOnly: connect_go.NewClient[v16.SetReadOnlyRequest, v16.SetReadOnlyResponse](
+		setReadOnly: connect.NewClient[v16.SetReadOnlyRequest, v16.SetReadOnlyResponse](
 			httpClient,
 			baseURL+TabletManagerSetReadOnlyProcedure,
 			opts...,
 		),
-		setReadWrite: connect_go.NewClient[v16.SetReadWriteRequest, v16.SetReadWriteResponse](
+		setReadWrite: connect.NewClient[v16.SetReadWriteRequest, v16.SetReadWriteResponse](
 			httpClient,
 			baseURL+TabletManagerSetReadWriteProcedure,
 			opts...,
 		),
-		changeType: connect_go.NewClient[v16.ChangeTypeRequest, v16.ChangeTypeResponse](
+		changeType: connect.NewClient[v16.ChangeTypeRequest, v16.ChangeTypeResponse](
 			httpClient,
 			baseURL+TabletManagerChangeTypeProcedure,
 			opts...,
 		),
-		refreshState: connect_go.NewClient[v16.RefreshStateRequest, v16.RefreshStateResponse](
+		refreshState: connect.NewClient[v16.RefreshStateRequest, v16.RefreshStateResponse](
 			httpClient,
 			baseURL+TabletManagerRefreshStateProcedure,
 			opts...,
 		),
-		runHealthCheck: connect_go.NewClient[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse](
+		runHealthCheck: connect.NewClient[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse](
 			httpClient,
 			baseURL+TabletManagerRunHealthCheckProcedure,
 			opts...,
 		),
-		reloadSchema: connect_go.NewClient[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse](
+		reloadSchema: connect.NewClient[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerReloadSchemaProcedure,
 			opts...,
 		),
-		preflightSchema: connect_go.NewClient[v16.PreflightSchemaRequest, v16.PreflightSchemaResponse](
+		preflightSchema: connect.NewClient[v16.PreflightSchemaRequest, v16.PreflightSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerPreflightSchemaProcedure,
 			opts...,
 		),
-		applySchema: connect_go.NewClient[v16.ApplySchemaRequest, v16.ApplySchemaResponse](
+		applySchema: connect.NewClient[v16.ApplySchemaRequest, v16.ApplySchemaResponse](
 			httpClient,
 			baseURL+TabletManagerApplySchemaProcedure,
 			opts...,
 		),
-		lockTables: connect_go.NewClient[v16.LockTablesRequest, v16.LockTablesResponse](
+		lockTables: connect.NewClient[v16.LockTablesRequest, v16.LockTablesResponse](
 			httpClient,
 			baseURL+TabletManagerLockTablesProcedure,
 			opts...,
 		),
-		unlockTables: connect_go.NewClient[v16.UnlockTablesRequest, v16.UnlockTablesResponse](
+		unlockTables: connect.NewClient[v16.UnlockTablesRequest, v16.UnlockTablesResponse](
 			httpClient,
 			baseURL+TabletManagerUnlockTablesProcedure,
 			opts...,
 		),
-		executeQuery: connect_go.NewClient[v16.ExecuteQueryRequest, v16.ExecuteQueryResponse](
+		executeQuery: connect.NewClient[v16.ExecuteQueryRequest, v16.ExecuteQueryResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteQueryProcedure,
 			opts...,
 		),
-		executeFetchAsDba: connect_go.NewClient[v16.ExecuteFetchAsDbaRequest, v16.ExecuteFetchAsDbaResponse](
+		executeFetchAsDba: connect.NewClient[v16.ExecuteFetchAsDbaRequest, v16.ExecuteFetchAsDbaResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsDbaProcedure,
 			opts...,
 		),
-		executeFetchAsAllPrivs: connect_go.NewClient[v16.ExecuteFetchAsAllPrivsRequest, v16.ExecuteFetchAsAllPrivsResponse](
+		executeFetchAsAllPrivs: connect.NewClient[v16.ExecuteFetchAsAllPrivsRequest, v16.ExecuteFetchAsAllPrivsResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsAllPrivsProcedure,
 			opts...,
 		),
-		executeFetchAsApp: connect_go.NewClient[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse](
+		executeFetchAsApp: connect.NewClient[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsAppProcedure,
 			opts...,
 		),
-		replicationStatus: connect_go.NewClient[v16.ReplicationStatusRequest, v16.ReplicationStatusResponse](
+		replicationStatus: connect.NewClient[v16.ReplicationStatusRequest, v16.ReplicationStatusResponse](
 			httpClient,
 			baseURL+TabletManagerReplicationStatusProcedure,
 			opts...,
 		),
-		primaryStatus: connect_go.NewClient[v16.PrimaryStatusRequest, v16.PrimaryStatusResponse](
+		primaryStatus: connect.NewClient[v16.PrimaryStatusRequest, v16.PrimaryStatusResponse](
 			httpClient,
 			baseURL+TabletManagerPrimaryStatusProcedure,
 			opts...,
 		),
-		primaryPosition: connect_go.NewClient[v16.PrimaryPositionRequest, v16.PrimaryPositionResponse](
+		primaryPosition: connect.NewClient[v16.PrimaryPositionRequest, v16.PrimaryPositionResponse](
 			httpClient,
 			baseURL+TabletManagerPrimaryPositionProcedure,
 			opts...,
 		),
-		waitForPosition: connect_go.NewClient[v16.WaitForPositionRequest, v16.WaitForPositionResponse](
+		waitForPosition: connect.NewClient[v16.WaitForPositionRequest, v16.WaitForPositionResponse](
 			httpClient,
 			baseURL+TabletManagerWaitForPositionProcedure,
 			opts...,
 		),
-		stopReplication: connect_go.NewClient[v16.StopReplicationRequest, v16.StopReplicationResponse](
+		stopReplication: connect.NewClient[v16.StopReplicationRequest, v16.StopReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationProcedure,
 			opts...,
 		),
-		stopReplicationMinimum: connect_go.NewClient[v16.StopReplicationMinimumRequest, v16.StopReplicationMinimumResponse](
+		stopReplicationMinimum: connect.NewClient[v16.StopReplicationMinimumRequest, v16.StopReplicationMinimumResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationMinimumProcedure,
 			opts...,
 		),
-		startReplication: connect_go.NewClient[v16.StartReplicationRequest, v16.StartReplicationResponse](
+		startReplication: connect.NewClient[v16.StartReplicationRequest, v16.StartReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationProcedure,
 			opts...,
 		),
-		startReplicationUntilAfter: connect_go.NewClient[v16.StartReplicationUntilAfterRequest, v16.StartReplicationUntilAfterResponse](
+		startReplicationUntilAfter: connect.NewClient[v16.StartReplicationUntilAfterRequest, v16.StartReplicationUntilAfterResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationUntilAfterProcedure,
 			opts...,
 		),
-		getReplicas: connect_go.NewClient[v16.GetReplicasRequest, v16.GetReplicasResponse](
+		getReplicas: connect.NewClient[v16.GetReplicasRequest, v16.GetReplicasResponse](
 			httpClient,
 			baseURL+TabletManagerGetReplicasProcedure,
 			opts...,
 		),
-		vReplicationExec: connect_go.NewClient[v16.VReplicationExecRequest, v16.VReplicationExecResponse](
+		vReplicationExec: connect.NewClient[v16.VReplicationExecRequest, v16.VReplicationExecResponse](
 			httpClient,
 			baseURL+TabletManagerVReplicationExecProcedure,
 			opts...,
 		),
-		vReplicationWaitForPos: connect_go.NewClient[v16.VReplicationWaitForPosRequest, v16.VReplicationWaitForPosResponse](
+		vReplicationWaitForPos: connect.NewClient[v16.VReplicationWaitForPosRequest, v16.VReplicationWaitForPosResponse](
 			httpClient,
 			baseURL+TabletManagerVReplicationWaitForPosProcedure,
 			opts...,
 		),
-		vDiff: connect_go.NewClient[v16.VDiffRequest, v16.VDiffResponse](
+		vDiff: connect.NewClient[v16.VDiffRequest, v16.VDiffResponse](
 			httpClient,
 			baseURL+TabletManagerVDiffProcedure,
 			opts...,
 		),
-		resetReplication: connect_go.NewClient[v16.ResetReplicationRequest, v16.ResetReplicationResponse](
+		resetReplication: connect.NewClient[v16.ResetReplicationRequest, v16.ResetReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerResetReplicationProcedure,
 			opts...,
 		),
-		initPrimary: connect_go.NewClient[v16.InitPrimaryRequest, v16.InitPrimaryResponse](
+		initPrimary: connect.NewClient[v16.InitPrimaryRequest, v16.InitPrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerInitPrimaryProcedure,
 			opts...,
 		),
-		populateReparentJournal: connect_go.NewClient[v16.PopulateReparentJournalRequest, v16.PopulateReparentJournalResponse](
+		populateReparentJournal: connect.NewClient[v16.PopulateReparentJournalRequest, v16.PopulateReparentJournalResponse](
 			httpClient,
 			baseURL+TabletManagerPopulateReparentJournalProcedure,
 			opts...,
 		),
-		initReplica: connect_go.NewClient[v16.InitReplicaRequest, v16.InitReplicaResponse](
+		initReplica: connect.NewClient[v16.InitReplicaRequest, v16.InitReplicaResponse](
 			httpClient,
 			baseURL+TabletManagerInitReplicaProcedure,
 			opts...,
 		),
-		demotePrimary: connect_go.NewClient[v16.DemotePrimaryRequest, v16.DemotePrimaryResponse](
+		demotePrimary: connect.NewClient[v16.DemotePrimaryRequest, v16.DemotePrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerDemotePrimaryProcedure,
 			opts...,
 		),
-		undoDemotePrimary: connect_go.NewClient[v16.UndoDemotePrimaryRequest, v16.UndoDemotePrimaryResponse](
+		undoDemotePrimary: connect.NewClient[v16.UndoDemotePrimaryRequest, v16.UndoDemotePrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerUndoDemotePrimaryProcedure,
 			opts...,
 		),
-		replicaWasPromoted: connect_go.NewClient[v16.ReplicaWasPromotedRequest, v16.ReplicaWasPromotedResponse](
+		replicaWasPromoted: connect.NewClient[v16.ReplicaWasPromotedRequest, v16.ReplicaWasPromotedResponse](
 			httpClient,
 			baseURL+TabletManagerReplicaWasPromotedProcedure,
 			opts...,
 		),
-		resetReplicationParameters: connect_go.NewClient[v16.ResetReplicationParametersRequest, v16.ResetReplicationParametersResponse](
+		resetReplicationParameters: connect.NewClient[v16.ResetReplicationParametersRequest, v16.ResetReplicationParametersResponse](
 			httpClient,
 			baseURL+TabletManagerResetReplicationParametersProcedure,
 			opts...,
 		),
-		fullStatus: connect_go.NewClient[v16.FullStatusRequest, v16.FullStatusResponse](
+		fullStatus: connect.NewClient[v16.FullStatusRequest, v16.FullStatusResponse](
 			httpClient,
 			baseURL+TabletManagerFullStatusProcedure,
 			opts...,
 		),
-		setReplicationSource: connect_go.NewClient[v16.SetReplicationSourceRequest, v16.SetReplicationSourceResponse](
+		setReplicationSource: connect.NewClient[v16.SetReplicationSourceRequest, v16.SetReplicationSourceResponse](
 			httpClient,
 			baseURL+TabletManagerSetReplicationSourceProcedure,
 			opts...,
 		),
-		replicaWasRestarted: connect_go.NewClient[v16.ReplicaWasRestartedRequest, v16.ReplicaWasRestartedResponse](
+		replicaWasRestarted: connect.NewClient[v16.ReplicaWasRestartedRequest, v16.ReplicaWasRestartedResponse](
 			httpClient,
 			baseURL+TabletManagerReplicaWasRestartedProcedure,
 			opts...,
 		),
-		stopReplicationAndGetStatus: connect_go.NewClient[v16.StopReplicationAndGetStatusRequest, v16.StopReplicationAndGetStatusResponse](
+		stopReplicationAndGetStatus: connect.NewClient[v16.StopReplicationAndGetStatusRequest, v16.StopReplicationAndGetStatusResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationAndGetStatusProcedure,
 			opts...,
 		),
-		promoteReplica: connect_go.NewClient[v16.PromoteReplicaRequest, v16.PromoteReplicaResponse](
+		promoteReplica: connect.NewClient[v16.PromoteReplicaRequest, v16.PromoteReplicaResponse](
 			httpClient,
 			baseURL+TabletManagerPromoteReplicaProcedure,
 			opts...,
 		),
-		backup: connect_go.NewClient[v16.BackupRequest, v16.BackupResponse](
+		backup: connect.NewClient[v16.BackupRequest, v16.BackupResponse](
 			httpClient,
 			baseURL+TabletManagerBackupProcedure,
 			opts...,
 		),
-		restoreFromBackup: connect_go.NewClient[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse](
+		restoreFromBackup: connect.NewClient[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse](
 			httpClient,
 			baseURL+TabletManagerRestoreFromBackupProcedure,
 			opts...,
 		),
-		vExec: connect_go.NewClient[v16.VExecRequest, v16.VExecResponse](
+		vExec: connect.NewClient[v16.VExecRequest, v16.VExecResponse](
 			httpClient,
 			baseURL+TabletManagerVExecProcedure,
 			opts...,
@@ -525,294 +525,294 @@ func NewTabletManagerClient(httpClient connect_go.HTTPClient, baseURL string, op
 
 // tabletManagerClient implements TabletManagerClient.
 type tabletManagerClient struct {
-	ping                        *connect_go.Client[v16.PingRequest, v16.PingResponse]
-	sleep                       *connect_go.Client[v16.SleepRequest, v16.SleepResponse]
-	executeHook                 *connect_go.Client[v16.ExecuteHookRequest, v16.ExecuteHookResponse]
-	getSchema                   *connect_go.Client[v16.GetSchemaRequest, v16.GetSchemaResponse]
-	getPermissions              *connect_go.Client[v16.GetPermissionsRequest, v16.GetPermissionsResponse]
-	setReadOnly                 *connect_go.Client[v16.SetReadOnlyRequest, v16.SetReadOnlyResponse]
-	setReadWrite                *connect_go.Client[v16.SetReadWriteRequest, v16.SetReadWriteResponse]
-	changeType                  *connect_go.Client[v16.ChangeTypeRequest, v16.ChangeTypeResponse]
-	refreshState                *connect_go.Client[v16.RefreshStateRequest, v16.RefreshStateResponse]
-	runHealthCheck              *connect_go.Client[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse]
-	reloadSchema                *connect_go.Client[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse]
-	preflightSchema             *connect_go.Client[v16.PreflightSchemaRequest, v16.PreflightSchemaResponse]
-	applySchema                 *connect_go.Client[v16.ApplySchemaRequest, v16.ApplySchemaResponse]
-	lockTables                  *connect_go.Client[v16.LockTablesRequest, v16.LockTablesResponse]
-	unlockTables                *connect_go.Client[v16.UnlockTablesRequest, v16.UnlockTablesResponse]
-	executeQuery                *connect_go.Client[v16.ExecuteQueryRequest, v16.ExecuteQueryResponse]
-	executeFetchAsDba           *connect_go.Client[v16.ExecuteFetchAsDbaRequest, v16.ExecuteFetchAsDbaResponse]
-	executeFetchAsAllPrivs      *connect_go.Client[v16.ExecuteFetchAsAllPrivsRequest, v16.ExecuteFetchAsAllPrivsResponse]
-	executeFetchAsApp           *connect_go.Client[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse]
-	replicationStatus           *connect_go.Client[v16.ReplicationStatusRequest, v16.ReplicationStatusResponse]
-	primaryStatus               *connect_go.Client[v16.PrimaryStatusRequest, v16.PrimaryStatusResponse]
-	primaryPosition             *connect_go.Client[v16.PrimaryPositionRequest, v16.PrimaryPositionResponse]
-	waitForPosition             *connect_go.Client[v16.WaitForPositionRequest, v16.WaitForPositionResponse]
-	stopReplication             *connect_go.Client[v16.StopReplicationRequest, v16.StopReplicationResponse]
-	stopReplicationMinimum      *connect_go.Client[v16.StopReplicationMinimumRequest, v16.StopReplicationMinimumResponse]
-	startReplication            *connect_go.Client[v16.StartReplicationRequest, v16.StartReplicationResponse]
-	startReplicationUntilAfter  *connect_go.Client[v16.StartReplicationUntilAfterRequest, v16.StartReplicationUntilAfterResponse]
-	getReplicas                 *connect_go.Client[v16.GetReplicasRequest, v16.GetReplicasResponse]
-	vReplicationExec            *connect_go.Client[v16.VReplicationExecRequest, v16.VReplicationExecResponse]
-	vReplicationWaitForPos      *connect_go.Client[v16.VReplicationWaitForPosRequest, v16.VReplicationWaitForPosResponse]
-	vDiff                       *connect_go.Client[v16.VDiffRequest, v16.VDiffResponse]
-	resetReplication            *connect_go.Client[v16.ResetReplicationRequest, v16.ResetReplicationResponse]
-	initPrimary                 *connect_go.Client[v16.InitPrimaryRequest, v16.InitPrimaryResponse]
-	populateReparentJournal     *connect_go.Client[v16.PopulateReparentJournalRequest, v16.PopulateReparentJournalResponse]
-	initReplica                 *connect_go.Client[v16.InitReplicaRequest, v16.InitReplicaResponse]
-	demotePrimary               *connect_go.Client[v16.DemotePrimaryRequest, v16.DemotePrimaryResponse]
-	undoDemotePrimary           *connect_go.Client[v16.UndoDemotePrimaryRequest, v16.UndoDemotePrimaryResponse]
-	replicaWasPromoted          *connect_go.Client[v16.ReplicaWasPromotedRequest, v16.ReplicaWasPromotedResponse]
-	resetReplicationParameters  *connect_go.Client[v16.ResetReplicationParametersRequest, v16.ResetReplicationParametersResponse]
-	fullStatus                  *connect_go.Client[v16.FullStatusRequest, v16.FullStatusResponse]
-	setReplicationSource        *connect_go.Client[v16.SetReplicationSourceRequest, v16.SetReplicationSourceResponse]
-	replicaWasRestarted         *connect_go.Client[v16.ReplicaWasRestartedRequest, v16.ReplicaWasRestartedResponse]
-	stopReplicationAndGetStatus *connect_go.Client[v16.StopReplicationAndGetStatusRequest, v16.StopReplicationAndGetStatusResponse]
-	promoteReplica              *connect_go.Client[v16.PromoteReplicaRequest, v16.PromoteReplicaResponse]
-	backup                      *connect_go.Client[v16.BackupRequest, v16.BackupResponse]
-	restoreFromBackup           *connect_go.Client[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse]
-	vExec                       *connect_go.Client[v16.VExecRequest, v16.VExecResponse]
+	ping                        *connect.Client[v16.PingRequest, v16.PingResponse]
+	sleep                       *connect.Client[v16.SleepRequest, v16.SleepResponse]
+	executeHook                 *connect.Client[v16.ExecuteHookRequest, v16.ExecuteHookResponse]
+	getSchema                   *connect.Client[v16.GetSchemaRequest, v16.GetSchemaResponse]
+	getPermissions              *connect.Client[v16.GetPermissionsRequest, v16.GetPermissionsResponse]
+	setReadOnly                 *connect.Client[v16.SetReadOnlyRequest, v16.SetReadOnlyResponse]
+	setReadWrite                *connect.Client[v16.SetReadWriteRequest, v16.SetReadWriteResponse]
+	changeType                  *connect.Client[v16.ChangeTypeRequest, v16.ChangeTypeResponse]
+	refreshState                *connect.Client[v16.RefreshStateRequest, v16.RefreshStateResponse]
+	runHealthCheck              *connect.Client[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse]
+	reloadSchema                *connect.Client[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse]
+	preflightSchema             *connect.Client[v16.PreflightSchemaRequest, v16.PreflightSchemaResponse]
+	applySchema                 *connect.Client[v16.ApplySchemaRequest, v16.ApplySchemaResponse]
+	lockTables                  *connect.Client[v16.LockTablesRequest, v16.LockTablesResponse]
+	unlockTables                *connect.Client[v16.UnlockTablesRequest, v16.UnlockTablesResponse]
+	executeQuery                *connect.Client[v16.ExecuteQueryRequest, v16.ExecuteQueryResponse]
+	executeFetchAsDba           *connect.Client[v16.ExecuteFetchAsDbaRequest, v16.ExecuteFetchAsDbaResponse]
+	executeFetchAsAllPrivs      *connect.Client[v16.ExecuteFetchAsAllPrivsRequest, v16.ExecuteFetchAsAllPrivsResponse]
+	executeFetchAsApp           *connect.Client[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse]
+	replicationStatus           *connect.Client[v16.ReplicationStatusRequest, v16.ReplicationStatusResponse]
+	primaryStatus               *connect.Client[v16.PrimaryStatusRequest, v16.PrimaryStatusResponse]
+	primaryPosition             *connect.Client[v16.PrimaryPositionRequest, v16.PrimaryPositionResponse]
+	waitForPosition             *connect.Client[v16.WaitForPositionRequest, v16.WaitForPositionResponse]
+	stopReplication             *connect.Client[v16.StopReplicationRequest, v16.StopReplicationResponse]
+	stopReplicationMinimum      *connect.Client[v16.StopReplicationMinimumRequest, v16.StopReplicationMinimumResponse]
+	startReplication            *connect.Client[v16.StartReplicationRequest, v16.StartReplicationResponse]
+	startReplicationUntilAfter  *connect.Client[v16.StartReplicationUntilAfterRequest, v16.StartReplicationUntilAfterResponse]
+	getReplicas                 *connect.Client[v16.GetReplicasRequest, v16.GetReplicasResponse]
+	vReplicationExec            *connect.Client[v16.VReplicationExecRequest, v16.VReplicationExecResponse]
+	vReplicationWaitForPos      *connect.Client[v16.VReplicationWaitForPosRequest, v16.VReplicationWaitForPosResponse]
+	vDiff                       *connect.Client[v16.VDiffRequest, v16.VDiffResponse]
+	resetReplication            *connect.Client[v16.ResetReplicationRequest, v16.ResetReplicationResponse]
+	initPrimary                 *connect.Client[v16.InitPrimaryRequest, v16.InitPrimaryResponse]
+	populateReparentJournal     *connect.Client[v16.PopulateReparentJournalRequest, v16.PopulateReparentJournalResponse]
+	initReplica                 *connect.Client[v16.InitReplicaRequest, v16.InitReplicaResponse]
+	demotePrimary               *connect.Client[v16.DemotePrimaryRequest, v16.DemotePrimaryResponse]
+	undoDemotePrimary           *connect.Client[v16.UndoDemotePrimaryRequest, v16.UndoDemotePrimaryResponse]
+	replicaWasPromoted          *connect.Client[v16.ReplicaWasPromotedRequest, v16.ReplicaWasPromotedResponse]
+	resetReplicationParameters  *connect.Client[v16.ResetReplicationParametersRequest, v16.ResetReplicationParametersResponse]
+	fullStatus                  *connect.Client[v16.FullStatusRequest, v16.FullStatusResponse]
+	setReplicationSource        *connect.Client[v16.SetReplicationSourceRequest, v16.SetReplicationSourceResponse]
+	replicaWasRestarted         *connect.Client[v16.ReplicaWasRestartedRequest, v16.ReplicaWasRestartedResponse]
+	stopReplicationAndGetStatus *connect.Client[v16.StopReplicationAndGetStatusRequest, v16.StopReplicationAndGetStatusResponse]
+	promoteReplica              *connect.Client[v16.PromoteReplicaRequest, v16.PromoteReplicaResponse]
+	backup                      *connect.Client[v16.BackupRequest, v16.BackupResponse]
+	restoreFromBackup           *connect.Client[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse]
+	vExec                       *connect.Client[v16.VExecRequest, v16.VExecResponse]
 }
 
 // Ping calls tabletmanagerservice.TabletManager.Ping.
-func (c *tabletManagerClient) Ping(ctx context.Context, req *connect_go.Request[v16.PingRequest]) (*connect_go.Response[v16.PingResponse], error) {
+func (c *tabletManagerClient) Ping(ctx context.Context, req *connect.Request[v16.PingRequest]) (*connect.Response[v16.PingResponse], error) {
 	return c.ping.CallUnary(ctx, req)
 }
 
 // Sleep calls tabletmanagerservice.TabletManager.Sleep.
-func (c *tabletManagerClient) Sleep(ctx context.Context, req *connect_go.Request[v16.SleepRequest]) (*connect_go.Response[v16.SleepResponse], error) {
+func (c *tabletManagerClient) Sleep(ctx context.Context, req *connect.Request[v16.SleepRequest]) (*connect.Response[v16.SleepResponse], error) {
 	return c.sleep.CallUnary(ctx, req)
 }
 
 // ExecuteHook calls tabletmanagerservice.TabletManager.ExecuteHook.
-func (c *tabletManagerClient) ExecuteHook(ctx context.Context, req *connect_go.Request[v16.ExecuteHookRequest]) (*connect_go.Response[v16.ExecuteHookResponse], error) {
+func (c *tabletManagerClient) ExecuteHook(ctx context.Context, req *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error) {
 	return c.executeHook.CallUnary(ctx, req)
 }
 
 // GetSchema calls tabletmanagerservice.TabletManager.GetSchema.
-func (c *tabletManagerClient) GetSchema(ctx context.Context, req *connect_go.Request[v16.GetSchemaRequest]) (*connect_go.Response[v16.GetSchemaResponse], error) {
+func (c *tabletManagerClient) GetSchema(ctx context.Context, req *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
 // GetPermissions calls tabletmanagerservice.TabletManager.GetPermissions.
-func (c *tabletManagerClient) GetPermissions(ctx context.Context, req *connect_go.Request[v16.GetPermissionsRequest]) (*connect_go.Response[v16.GetPermissionsResponse], error) {
+func (c *tabletManagerClient) GetPermissions(ctx context.Context, req *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error) {
 	return c.getPermissions.CallUnary(ctx, req)
 }
 
 // SetReadOnly calls tabletmanagerservice.TabletManager.SetReadOnly.
-func (c *tabletManagerClient) SetReadOnly(ctx context.Context, req *connect_go.Request[v16.SetReadOnlyRequest]) (*connect_go.Response[v16.SetReadOnlyResponse], error) {
+func (c *tabletManagerClient) SetReadOnly(ctx context.Context, req *connect.Request[v16.SetReadOnlyRequest]) (*connect.Response[v16.SetReadOnlyResponse], error) {
 	return c.setReadOnly.CallUnary(ctx, req)
 }
 
 // SetReadWrite calls tabletmanagerservice.TabletManager.SetReadWrite.
-func (c *tabletManagerClient) SetReadWrite(ctx context.Context, req *connect_go.Request[v16.SetReadWriteRequest]) (*connect_go.Response[v16.SetReadWriteResponse], error) {
+func (c *tabletManagerClient) SetReadWrite(ctx context.Context, req *connect.Request[v16.SetReadWriteRequest]) (*connect.Response[v16.SetReadWriteResponse], error) {
 	return c.setReadWrite.CallUnary(ctx, req)
 }
 
 // ChangeType calls tabletmanagerservice.TabletManager.ChangeType.
-func (c *tabletManagerClient) ChangeType(ctx context.Context, req *connect_go.Request[v16.ChangeTypeRequest]) (*connect_go.Response[v16.ChangeTypeResponse], error) {
+func (c *tabletManagerClient) ChangeType(ctx context.Context, req *connect.Request[v16.ChangeTypeRequest]) (*connect.Response[v16.ChangeTypeResponse], error) {
 	return c.changeType.CallUnary(ctx, req)
 }
 
 // RefreshState calls tabletmanagerservice.TabletManager.RefreshState.
-func (c *tabletManagerClient) RefreshState(ctx context.Context, req *connect_go.Request[v16.RefreshStateRequest]) (*connect_go.Response[v16.RefreshStateResponse], error) {
+func (c *tabletManagerClient) RefreshState(ctx context.Context, req *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
 // RunHealthCheck calls tabletmanagerservice.TabletManager.RunHealthCheck.
-func (c *tabletManagerClient) RunHealthCheck(ctx context.Context, req *connect_go.Request[v16.RunHealthCheckRequest]) (*connect_go.Response[v16.RunHealthCheckResponse], error) {
+func (c *tabletManagerClient) RunHealthCheck(ctx context.Context, req *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
 // ReloadSchema calls tabletmanagerservice.TabletManager.ReloadSchema.
-func (c *tabletManagerClient) ReloadSchema(ctx context.Context, req *connect_go.Request[v16.ReloadSchemaRequest]) (*connect_go.Response[v16.ReloadSchemaResponse], error) {
+func (c *tabletManagerClient) ReloadSchema(ctx context.Context, req *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error) {
 	return c.reloadSchema.CallUnary(ctx, req)
 }
 
 // PreflightSchema calls tabletmanagerservice.TabletManager.PreflightSchema.
-func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect_go.Request[v16.PreflightSchemaRequest]) (*connect_go.Response[v16.PreflightSchemaResponse], error) {
+func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect.Request[v16.PreflightSchemaRequest]) (*connect.Response[v16.PreflightSchemaResponse], error) {
 	return c.preflightSchema.CallUnary(ctx, req)
 }
 
 // ApplySchema calls tabletmanagerservice.TabletManager.ApplySchema.
-func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect_go.Request[v16.ApplySchemaRequest]) (*connect_go.Response[v16.ApplySchemaResponse], error) {
+func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
 }
 
 // LockTables calls tabletmanagerservice.TabletManager.LockTables.
-func (c *tabletManagerClient) LockTables(ctx context.Context, req *connect_go.Request[v16.LockTablesRequest]) (*connect_go.Response[v16.LockTablesResponse], error) {
+func (c *tabletManagerClient) LockTables(ctx context.Context, req *connect.Request[v16.LockTablesRequest]) (*connect.Response[v16.LockTablesResponse], error) {
 	return c.lockTables.CallUnary(ctx, req)
 }
 
 // UnlockTables calls tabletmanagerservice.TabletManager.UnlockTables.
-func (c *tabletManagerClient) UnlockTables(ctx context.Context, req *connect_go.Request[v16.UnlockTablesRequest]) (*connect_go.Response[v16.UnlockTablesResponse], error) {
+func (c *tabletManagerClient) UnlockTables(ctx context.Context, req *connect.Request[v16.UnlockTablesRequest]) (*connect.Response[v16.UnlockTablesResponse], error) {
 	return c.unlockTables.CallUnary(ctx, req)
 }
 
 // ExecuteQuery calls tabletmanagerservice.TabletManager.ExecuteQuery.
-func (c *tabletManagerClient) ExecuteQuery(ctx context.Context, req *connect_go.Request[v16.ExecuteQueryRequest]) (*connect_go.Response[v16.ExecuteQueryResponse], error) {
+func (c *tabletManagerClient) ExecuteQuery(ctx context.Context, req *connect.Request[v16.ExecuteQueryRequest]) (*connect.Response[v16.ExecuteQueryResponse], error) {
 	return c.executeQuery.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsDba calls tabletmanagerservice.TabletManager.ExecuteFetchAsDba.
-func (c *tabletManagerClient) ExecuteFetchAsDba(ctx context.Context, req *connect_go.Request[v16.ExecuteFetchAsDbaRequest]) (*connect_go.Response[v16.ExecuteFetchAsDbaResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsDba(ctx context.Context, req *connect.Request[v16.ExecuteFetchAsDbaRequest]) (*connect.Response[v16.ExecuteFetchAsDbaResponse], error) {
 	return c.executeFetchAsDba.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsAllPrivs calls
 // tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs.
-func (c *tabletManagerClient) ExecuteFetchAsAllPrivs(ctx context.Context, req *connect_go.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect_go.Response[v16.ExecuteFetchAsAllPrivsResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsAllPrivs(ctx context.Context, req *connect.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[v16.ExecuteFetchAsAllPrivsResponse], error) {
 	return c.executeFetchAsAllPrivs.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsApp calls tabletmanagerservice.TabletManager.ExecuteFetchAsApp.
-func (c *tabletManagerClient) ExecuteFetchAsApp(ctx context.Context, req *connect_go.Request[v16.ExecuteFetchAsAppRequest]) (*connect_go.Response[v16.ExecuteFetchAsAppResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error) {
 	return c.executeFetchAsApp.CallUnary(ctx, req)
 }
 
 // ReplicationStatus calls tabletmanagerservice.TabletManager.ReplicationStatus.
-func (c *tabletManagerClient) ReplicationStatus(ctx context.Context, req *connect_go.Request[v16.ReplicationStatusRequest]) (*connect_go.Response[v16.ReplicationStatusResponse], error) {
+func (c *tabletManagerClient) ReplicationStatus(ctx context.Context, req *connect.Request[v16.ReplicationStatusRequest]) (*connect.Response[v16.ReplicationStatusResponse], error) {
 	return c.replicationStatus.CallUnary(ctx, req)
 }
 
 // PrimaryStatus calls tabletmanagerservice.TabletManager.PrimaryStatus.
-func (c *tabletManagerClient) PrimaryStatus(ctx context.Context, req *connect_go.Request[v16.PrimaryStatusRequest]) (*connect_go.Response[v16.PrimaryStatusResponse], error) {
+func (c *tabletManagerClient) PrimaryStatus(ctx context.Context, req *connect.Request[v16.PrimaryStatusRequest]) (*connect.Response[v16.PrimaryStatusResponse], error) {
 	return c.primaryStatus.CallUnary(ctx, req)
 }
 
 // PrimaryPosition calls tabletmanagerservice.TabletManager.PrimaryPosition.
-func (c *tabletManagerClient) PrimaryPosition(ctx context.Context, req *connect_go.Request[v16.PrimaryPositionRequest]) (*connect_go.Response[v16.PrimaryPositionResponse], error) {
+func (c *tabletManagerClient) PrimaryPosition(ctx context.Context, req *connect.Request[v16.PrimaryPositionRequest]) (*connect.Response[v16.PrimaryPositionResponse], error) {
 	return c.primaryPosition.CallUnary(ctx, req)
 }
 
 // WaitForPosition calls tabletmanagerservice.TabletManager.WaitForPosition.
-func (c *tabletManagerClient) WaitForPosition(ctx context.Context, req *connect_go.Request[v16.WaitForPositionRequest]) (*connect_go.Response[v16.WaitForPositionResponse], error) {
+func (c *tabletManagerClient) WaitForPosition(ctx context.Context, req *connect.Request[v16.WaitForPositionRequest]) (*connect.Response[v16.WaitForPositionResponse], error) {
 	return c.waitForPosition.CallUnary(ctx, req)
 }
 
 // StopReplication calls tabletmanagerservice.TabletManager.StopReplication.
-func (c *tabletManagerClient) StopReplication(ctx context.Context, req *connect_go.Request[v16.StopReplicationRequest]) (*connect_go.Response[v16.StopReplicationResponse], error) {
+func (c *tabletManagerClient) StopReplication(ctx context.Context, req *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
 // StopReplicationMinimum calls
 // tabletmanagerservice.TabletManager.StopReplicationMinimum.
-func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *connect_go.Request[v16.StopReplicationMinimumRequest]) (*connect_go.Response[v16.StopReplicationMinimumResponse], error) {
+func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *connect.Request[v16.StopReplicationMinimumRequest]) (*connect.Response[v16.StopReplicationMinimumResponse], error) {
 	return c.stopReplicationMinimum.CallUnary(ctx, req)
 }
 
 // StartReplication calls tabletmanagerservice.TabletManager.StartReplication.
-func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect_go.Request[v16.StartReplicationRequest]) (*connect_go.Response[v16.StartReplicationResponse], error) {
+func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
 // StartReplicationUntilAfter calls
 // tabletmanagerservice.TabletManager.StartReplicationUntilAfter.
-func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect_go.Request[v16.StartReplicationUntilAfterRequest]) (*connect_go.Response[v16.StartReplicationUntilAfterResponse], error) {
+func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect.Request[v16.StartReplicationUntilAfterRequest]) (*connect.Response[v16.StartReplicationUntilAfterResponse], error) {
 	return c.startReplicationUntilAfter.CallUnary(ctx, req)
 }
 
 // GetReplicas calls tabletmanagerservice.TabletManager.GetReplicas.
-func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect_go.Request[v16.GetReplicasRequest]) (*connect_go.Response[v16.GetReplicasResponse], error) {
+func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect.Request[v16.GetReplicasRequest]) (*connect.Response[v16.GetReplicasResponse], error) {
 	return c.getReplicas.CallUnary(ctx, req)
 }
 
 // VReplicationExec calls tabletmanagerservice.TabletManager.VReplicationExec.
-func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect_go.Request[v16.VReplicationExecRequest]) (*connect_go.Response[v16.VReplicationExecResponse], error) {
+func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect.Request[v16.VReplicationExecRequest]) (*connect.Response[v16.VReplicationExecResponse], error) {
 	return c.vReplicationExec.CallUnary(ctx, req)
 }
 
 // VReplicationWaitForPos calls
 // tabletmanagerservice.TabletManager.VReplicationWaitForPos.
-func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect_go.Request[v16.VReplicationWaitForPosRequest]) (*connect_go.Response[v16.VReplicationWaitForPosResponse], error) {
+func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect.Request[v16.VReplicationWaitForPosRequest]) (*connect.Response[v16.VReplicationWaitForPosResponse], error) {
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
 }
 
 // VDiff calls tabletmanagerservice.TabletManager.VDiff.
-func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect_go.Request[v16.VDiffRequest]) (*connect_go.Response[v16.VDiffResponse], error) {
+func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect.Request[v16.VDiffRequest]) (*connect.Response[v16.VDiffResponse], error) {
 	return c.vDiff.CallUnary(ctx, req)
 }
 
 // ResetReplication calls tabletmanagerservice.TabletManager.ResetReplication.
-func (c *tabletManagerClient) ResetReplication(ctx context.Context, req *connect_go.Request[v16.ResetReplicationRequest]) (*connect_go.Response[v16.ResetReplicationResponse], error) {
+func (c *tabletManagerClient) ResetReplication(ctx context.Context, req *connect.Request[v16.ResetReplicationRequest]) (*connect.Response[v16.ResetReplicationResponse], error) {
 	return c.resetReplication.CallUnary(ctx, req)
 }
 
 // InitPrimary calls tabletmanagerservice.TabletManager.InitPrimary.
-func (c *tabletManagerClient) InitPrimary(ctx context.Context, req *connect_go.Request[v16.InitPrimaryRequest]) (*connect_go.Response[v16.InitPrimaryResponse], error) {
+func (c *tabletManagerClient) InitPrimary(ctx context.Context, req *connect.Request[v16.InitPrimaryRequest]) (*connect.Response[v16.InitPrimaryResponse], error) {
 	return c.initPrimary.CallUnary(ctx, req)
 }
 
 // PopulateReparentJournal calls
 // tabletmanagerservice.TabletManager.PopulateReparentJournal.
-func (c *tabletManagerClient) PopulateReparentJournal(ctx context.Context, req *connect_go.Request[v16.PopulateReparentJournalRequest]) (*connect_go.Response[v16.PopulateReparentJournalResponse], error) {
+func (c *tabletManagerClient) PopulateReparentJournal(ctx context.Context, req *connect.Request[v16.PopulateReparentJournalRequest]) (*connect.Response[v16.PopulateReparentJournalResponse], error) {
 	return c.populateReparentJournal.CallUnary(ctx, req)
 }
 
 // InitReplica calls tabletmanagerservice.TabletManager.InitReplica.
-func (c *tabletManagerClient) InitReplica(ctx context.Context, req *connect_go.Request[v16.InitReplicaRequest]) (*connect_go.Response[v16.InitReplicaResponse], error) {
+func (c *tabletManagerClient) InitReplica(ctx context.Context, req *connect.Request[v16.InitReplicaRequest]) (*connect.Response[v16.InitReplicaResponse], error) {
 	return c.initReplica.CallUnary(ctx, req)
 }
 
 // DemotePrimary calls tabletmanagerservice.TabletManager.DemotePrimary.
-func (c *tabletManagerClient) DemotePrimary(ctx context.Context, req *connect_go.Request[v16.DemotePrimaryRequest]) (*connect_go.Response[v16.DemotePrimaryResponse], error) {
+func (c *tabletManagerClient) DemotePrimary(ctx context.Context, req *connect.Request[v16.DemotePrimaryRequest]) (*connect.Response[v16.DemotePrimaryResponse], error) {
 	return c.demotePrimary.CallUnary(ctx, req)
 }
 
 // UndoDemotePrimary calls tabletmanagerservice.TabletManager.UndoDemotePrimary.
-func (c *tabletManagerClient) UndoDemotePrimary(ctx context.Context, req *connect_go.Request[v16.UndoDemotePrimaryRequest]) (*connect_go.Response[v16.UndoDemotePrimaryResponse], error) {
+func (c *tabletManagerClient) UndoDemotePrimary(ctx context.Context, req *connect.Request[v16.UndoDemotePrimaryRequest]) (*connect.Response[v16.UndoDemotePrimaryResponse], error) {
 	return c.undoDemotePrimary.CallUnary(ctx, req)
 }
 
 // ReplicaWasPromoted calls tabletmanagerservice.TabletManager.ReplicaWasPromoted.
-func (c *tabletManagerClient) ReplicaWasPromoted(ctx context.Context, req *connect_go.Request[v16.ReplicaWasPromotedRequest]) (*connect_go.Response[v16.ReplicaWasPromotedResponse], error) {
+func (c *tabletManagerClient) ReplicaWasPromoted(ctx context.Context, req *connect.Request[v16.ReplicaWasPromotedRequest]) (*connect.Response[v16.ReplicaWasPromotedResponse], error) {
 	return c.replicaWasPromoted.CallUnary(ctx, req)
 }
 
 // ResetReplicationParameters calls
 // tabletmanagerservice.TabletManager.ResetReplicationParameters.
-func (c *tabletManagerClient) ResetReplicationParameters(ctx context.Context, req *connect_go.Request[v16.ResetReplicationParametersRequest]) (*connect_go.Response[v16.ResetReplicationParametersResponse], error) {
+func (c *tabletManagerClient) ResetReplicationParameters(ctx context.Context, req *connect.Request[v16.ResetReplicationParametersRequest]) (*connect.Response[v16.ResetReplicationParametersResponse], error) {
 	return c.resetReplicationParameters.CallUnary(ctx, req)
 }
 
 // FullStatus calls tabletmanagerservice.TabletManager.FullStatus.
-func (c *tabletManagerClient) FullStatus(ctx context.Context, req *connect_go.Request[v16.FullStatusRequest]) (*connect_go.Response[v16.FullStatusResponse], error) {
+func (c *tabletManagerClient) FullStatus(ctx context.Context, req *connect.Request[v16.FullStatusRequest]) (*connect.Response[v16.FullStatusResponse], error) {
 	return c.fullStatus.CallUnary(ctx, req)
 }
 
 // SetReplicationSource calls tabletmanagerservice.TabletManager.SetReplicationSource.
-func (c *tabletManagerClient) SetReplicationSource(ctx context.Context, req *connect_go.Request[v16.SetReplicationSourceRequest]) (*connect_go.Response[v16.SetReplicationSourceResponse], error) {
+func (c *tabletManagerClient) SetReplicationSource(ctx context.Context, req *connect.Request[v16.SetReplicationSourceRequest]) (*connect.Response[v16.SetReplicationSourceResponse], error) {
 	return c.setReplicationSource.CallUnary(ctx, req)
 }
 
 // ReplicaWasRestarted calls tabletmanagerservice.TabletManager.ReplicaWasRestarted.
-func (c *tabletManagerClient) ReplicaWasRestarted(ctx context.Context, req *connect_go.Request[v16.ReplicaWasRestartedRequest]) (*connect_go.Response[v16.ReplicaWasRestartedResponse], error) {
+func (c *tabletManagerClient) ReplicaWasRestarted(ctx context.Context, req *connect.Request[v16.ReplicaWasRestartedRequest]) (*connect.Response[v16.ReplicaWasRestartedResponse], error) {
 	return c.replicaWasRestarted.CallUnary(ctx, req)
 }
 
 // StopReplicationAndGetStatus calls
 // tabletmanagerservice.TabletManager.StopReplicationAndGetStatus.
-func (c *tabletManagerClient) StopReplicationAndGetStatus(ctx context.Context, req *connect_go.Request[v16.StopReplicationAndGetStatusRequest]) (*connect_go.Response[v16.StopReplicationAndGetStatusResponse], error) {
+func (c *tabletManagerClient) StopReplicationAndGetStatus(ctx context.Context, req *connect.Request[v16.StopReplicationAndGetStatusRequest]) (*connect.Response[v16.StopReplicationAndGetStatusResponse], error) {
 	return c.stopReplicationAndGetStatus.CallUnary(ctx, req)
 }
 
 // PromoteReplica calls tabletmanagerservice.TabletManager.PromoteReplica.
-func (c *tabletManagerClient) PromoteReplica(ctx context.Context, req *connect_go.Request[v16.PromoteReplicaRequest]) (*connect_go.Response[v16.PromoteReplicaResponse], error) {
+func (c *tabletManagerClient) PromoteReplica(ctx context.Context, req *connect.Request[v16.PromoteReplicaRequest]) (*connect.Response[v16.PromoteReplicaResponse], error) {
 	return c.promoteReplica.CallUnary(ctx, req)
 }
 
 // Backup calls tabletmanagerservice.TabletManager.Backup.
-func (c *tabletManagerClient) Backup(ctx context.Context, req *connect_go.Request[v16.BackupRequest]) (*connect_go.ServerStreamForClient[v16.BackupResponse], error) {
+func (c *tabletManagerClient) Backup(ctx context.Context, req *connect.Request[v16.BackupRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error) {
 	return c.backup.CallServerStream(ctx, req)
 }
 
 // RestoreFromBackup calls tabletmanagerservice.TabletManager.RestoreFromBackup.
-func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connect_go.Request[v16.RestoreFromBackupRequest]) (*connect_go.ServerStreamForClient[v16.RestoreFromBackupResponse], error) {
+func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connect.Request[v16.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v16.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
 // VExec calls tabletmanagerservice.TabletManager.VExec.
-func (c *tabletManagerClient) VExec(ctx context.Context, req *connect_go.Request[v16.VExecRequest]) (*connect_go.Response[v16.VExecResponse], error) {
+func (c *tabletManagerClient) VExec(ctx context.Context, req *connect.Request[v16.VExecRequest]) (*connect.Response[v16.VExecResponse], error) {
 	return c.vExec.CallUnary(ctx, req)
 }
 
@@ -820,88 +820,88 @@ func (c *tabletManagerClient) VExec(ctx context.Context, req *connect_go.Request
 // service.
 type TabletManagerHandler interface {
 	// Ping returns the input payload
-	Ping(context.Context, *connect_go.Request[v16.PingRequest]) (*connect_go.Response[v16.PingResponse], error)
+	Ping(context.Context, *connect.Request[v16.PingRequest]) (*connect.Response[v16.PingResponse], error)
 	// Sleep sleeps for the provided duration
-	Sleep(context.Context, *connect_go.Request[v16.SleepRequest]) (*connect_go.Response[v16.SleepResponse], error)
+	Sleep(context.Context, *connect.Request[v16.SleepRequest]) (*connect.Response[v16.SleepResponse], error)
 	// ExecuteHook executes the hook remotely
-	ExecuteHook(context.Context, *connect_go.Request[v16.ExecuteHookRequest]) (*connect_go.Response[v16.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error)
 	// GetSchema asks the tablet for its schema
-	GetSchema(context.Context, *connect_go.Request[v16.GetSchemaRequest]) (*connect_go.Response[v16.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error)
 	// GetPermissions asks the tablet for its permissions
-	GetPermissions(context.Context, *connect_go.Request[v16.GetPermissionsRequest]) (*connect_go.Response[v16.GetPermissionsResponse], error)
-	SetReadOnly(context.Context, *connect_go.Request[v16.SetReadOnlyRequest]) (*connect_go.Response[v16.SetReadOnlyResponse], error)
-	SetReadWrite(context.Context, *connect_go.Request[v16.SetReadWriteRequest]) (*connect_go.Response[v16.SetReadWriteResponse], error)
+	GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error)
+	SetReadOnly(context.Context, *connect.Request[v16.SetReadOnlyRequest]) (*connect.Response[v16.SetReadOnlyResponse], error)
+	SetReadWrite(context.Context, *connect.Request[v16.SetReadWriteRequest]) (*connect.Response[v16.SetReadWriteResponse], error)
 	// ChangeType asks the remote tablet to change its type
-	ChangeType(context.Context, *connect_go.Request[v16.ChangeTypeRequest]) (*connect_go.Response[v16.ChangeTypeResponse], error)
-	RefreshState(context.Context, *connect_go.Request[v16.RefreshStateRequest]) (*connect_go.Response[v16.RefreshStateResponse], error)
-	RunHealthCheck(context.Context, *connect_go.Request[v16.RunHealthCheckRequest]) (*connect_go.Response[v16.RunHealthCheckResponse], error)
-	ReloadSchema(context.Context, *connect_go.Request[v16.ReloadSchemaRequest]) (*connect_go.Response[v16.ReloadSchemaResponse], error)
-	PreflightSchema(context.Context, *connect_go.Request[v16.PreflightSchemaRequest]) (*connect_go.Response[v16.PreflightSchemaResponse], error)
-	ApplySchema(context.Context, *connect_go.Request[v16.ApplySchemaRequest]) (*connect_go.Response[v16.ApplySchemaResponse], error)
-	LockTables(context.Context, *connect_go.Request[v16.LockTablesRequest]) (*connect_go.Response[v16.LockTablesResponse], error)
-	UnlockTables(context.Context, *connect_go.Request[v16.UnlockTablesRequest]) (*connect_go.Response[v16.UnlockTablesResponse], error)
-	ExecuteQuery(context.Context, *connect_go.Request[v16.ExecuteQueryRequest]) (*connect_go.Response[v16.ExecuteQueryResponse], error)
-	ExecuteFetchAsDba(context.Context, *connect_go.Request[v16.ExecuteFetchAsDbaRequest]) (*connect_go.Response[v16.ExecuteFetchAsDbaResponse], error)
-	ExecuteFetchAsAllPrivs(context.Context, *connect_go.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect_go.Response[v16.ExecuteFetchAsAllPrivsResponse], error)
-	ExecuteFetchAsApp(context.Context, *connect_go.Request[v16.ExecuteFetchAsAppRequest]) (*connect_go.Response[v16.ExecuteFetchAsAppResponse], error)
+	ChangeType(context.Context, *connect.Request[v16.ChangeTypeRequest]) (*connect.Response[v16.ChangeTypeResponse], error)
+	RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error)
+	ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error)
+	PreflightSchema(context.Context, *connect.Request[v16.PreflightSchemaRequest]) (*connect.Response[v16.PreflightSchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error)
+	LockTables(context.Context, *connect.Request[v16.LockTablesRequest]) (*connect.Response[v16.LockTablesResponse], error)
+	UnlockTables(context.Context, *connect.Request[v16.UnlockTablesRequest]) (*connect.Response[v16.UnlockTablesResponse], error)
+	ExecuteQuery(context.Context, *connect.Request[v16.ExecuteQueryRequest]) (*connect.Response[v16.ExecuteQueryResponse], error)
+	ExecuteFetchAsDba(context.Context, *connect.Request[v16.ExecuteFetchAsDbaRequest]) (*connect.Response[v16.ExecuteFetchAsDbaResponse], error)
+	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[v16.ExecuteFetchAsAllPrivsResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error)
 	// ReplicationStatus returns the current replication status.
-	ReplicationStatus(context.Context, *connect_go.Request[v16.ReplicationStatusRequest]) (*connect_go.Response[v16.ReplicationStatusResponse], error)
+	ReplicationStatus(context.Context, *connect.Request[v16.ReplicationStatusRequest]) (*connect.Response[v16.ReplicationStatusResponse], error)
 	// PrimaryStatus returns the current primary status.
-	PrimaryStatus(context.Context, *connect_go.Request[v16.PrimaryStatusRequest]) (*connect_go.Response[v16.PrimaryStatusResponse], error)
+	PrimaryStatus(context.Context, *connect.Request[v16.PrimaryStatusRequest]) (*connect.Response[v16.PrimaryStatusResponse], error)
 	// PrimaryPosition returns the current primary position
-	PrimaryPosition(context.Context, *connect_go.Request[v16.PrimaryPositionRequest]) (*connect_go.Response[v16.PrimaryPositionResponse], error)
+	PrimaryPosition(context.Context, *connect.Request[v16.PrimaryPositionRequest]) (*connect.Response[v16.PrimaryPositionResponse], error)
 	// WaitForPosition waits for the position to be reached
-	WaitForPosition(context.Context, *connect_go.Request[v16.WaitForPositionRequest]) (*connect_go.Response[v16.WaitForPositionResponse], error)
+	WaitForPosition(context.Context, *connect.Request[v16.WaitForPositionRequest]) (*connect.Response[v16.WaitForPositionResponse], error)
 	// StopReplication makes mysql stop its replication
-	StopReplication(context.Context, *connect_go.Request[v16.StopReplicationRequest]) (*connect_go.Response[v16.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error)
 	// StopReplicationMinimum stops the mysql replication after it reaches
 	// the provided minimum point
-	StopReplicationMinimum(context.Context, *connect_go.Request[v16.StopReplicationMinimumRequest]) (*connect_go.Response[v16.StopReplicationMinimumResponse], error)
+	StopReplicationMinimum(context.Context, *connect.Request[v16.StopReplicationMinimumRequest]) (*connect.Response[v16.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
-	StartReplication(context.Context, *connect_go.Request[v16.StartReplicationRequest]) (*connect_go.Response[v16.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
-	StartReplicationUntilAfter(context.Context, *connect_go.Request[v16.StartReplicationUntilAfterRequest]) (*connect_go.Response[v16.StartReplicationUntilAfterResponse], error)
+	StartReplicationUntilAfter(context.Context, *connect.Request[v16.StartReplicationUntilAfterRequest]) (*connect.Response[v16.StartReplicationUntilAfterResponse], error)
 	// GetReplicas asks for the list of mysql replicas
-	GetReplicas(context.Context, *connect_go.Request[v16.GetReplicasRequest]) (*connect_go.Response[v16.GetReplicasResponse], error)
+	GetReplicas(context.Context, *connect.Request[v16.GetReplicasRequest]) (*connect.Response[v16.GetReplicasResponse], error)
 	// VReplication API
-	VReplicationExec(context.Context, *connect_go.Request[v16.VReplicationExecRequest]) (*connect_go.Response[v16.VReplicationExecResponse], error)
-	VReplicationWaitForPos(context.Context, *connect_go.Request[v16.VReplicationWaitForPosRequest]) (*connect_go.Response[v16.VReplicationWaitForPosResponse], error)
+	VReplicationExec(context.Context, *connect.Request[v16.VReplicationExecRequest]) (*connect.Response[v16.VReplicationExecResponse], error)
+	VReplicationWaitForPos(context.Context, *connect.Request[v16.VReplicationWaitForPosRequest]) (*connect.Response[v16.VReplicationWaitForPosResponse], error)
 	// VDiff API
-	VDiff(context.Context, *connect_go.Request[v16.VDiffRequest]) (*connect_go.Response[v16.VDiffResponse], error)
+	VDiff(context.Context, *connect.Request[v16.VDiffRequest]) (*connect.Response[v16.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
-	ResetReplication(context.Context, *connect_go.Request[v16.ResetReplicationRequest]) (*connect_go.Response[v16.ResetReplicationResponse], error)
+	ResetReplication(context.Context, *connect.Request[v16.ResetReplicationRequest]) (*connect.Response[v16.ResetReplicationResponse], error)
 	// InitPrimary initializes the tablet as a primary
-	InitPrimary(context.Context, *connect_go.Request[v16.InitPrimaryRequest]) (*connect_go.Response[v16.InitPrimaryResponse], error)
+	InitPrimary(context.Context, *connect.Request[v16.InitPrimaryRequest]) (*connect.Response[v16.InitPrimaryResponse], error)
 	// PopulateReparentJournal tells the tablet to add an entry to its
 	// reparent journal
-	PopulateReparentJournal(context.Context, *connect_go.Request[v16.PopulateReparentJournalRequest]) (*connect_go.Response[v16.PopulateReparentJournalResponse], error)
+	PopulateReparentJournal(context.Context, *connect.Request[v16.PopulateReparentJournalRequest]) (*connect.Response[v16.PopulateReparentJournalResponse], error)
 	// InitReplica tells the tablet to reparent to the primary unconditionally
-	InitReplica(context.Context, *connect_go.Request[v16.InitReplicaRequest]) (*connect_go.Response[v16.InitReplicaResponse], error)
+	InitReplica(context.Context, *connect.Request[v16.InitReplicaRequest]) (*connect.Response[v16.InitReplicaResponse], error)
 	// DemotePrimary tells the soon-to-be-former primary it's gonna change
-	DemotePrimary(context.Context, *connect_go.Request[v16.DemotePrimaryRequest]) (*connect_go.Response[v16.DemotePrimaryResponse], error)
+	DemotePrimary(context.Context, *connect.Request[v16.DemotePrimaryRequest]) (*connect.Response[v16.DemotePrimaryResponse], error)
 	// UndoDemotePrimary reverts all changes made by DemotePrimary
-	UndoDemotePrimary(context.Context, *connect_go.Request[v16.UndoDemotePrimaryRequest]) (*connect_go.Response[v16.UndoDemotePrimaryResponse], error)
+	UndoDemotePrimary(context.Context, *connect.Request[v16.UndoDemotePrimaryRequest]) (*connect.Response[v16.UndoDemotePrimaryResponse], error)
 	// ReplicaWasPromoted tells the remote tablet it is now the primary
-	ReplicaWasPromoted(context.Context, *connect_go.Request[v16.ReplicaWasPromotedRequest]) (*connect_go.Response[v16.ReplicaWasPromotedResponse], error)
+	ReplicaWasPromoted(context.Context, *connect.Request[v16.ReplicaWasPromotedRequest]) (*connect.Response[v16.ReplicaWasPromotedResponse], error)
 	// ResetReplicationParameters resets the replica replication parameters
-	ResetReplicationParameters(context.Context, *connect_go.Request[v16.ResetReplicationParametersRequest]) (*connect_go.Response[v16.ResetReplicationParametersResponse], error)
+	ResetReplicationParameters(context.Context, *connect.Request[v16.ResetReplicationParametersRequest]) (*connect.Response[v16.ResetReplicationParametersResponse], error)
 	// FullStatus collects and returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	FullStatus(context.Context, *connect_go.Request[v16.FullStatusRequest]) (*connect_go.Response[v16.FullStatusResponse], error)
+	FullStatus(context.Context, *connect.Request[v16.FullStatusRequest]) (*connect.Response[v16.FullStatusResponse], error)
 	// SetReplicationSource tells the replica to reparent
-	SetReplicationSource(context.Context, *connect_go.Request[v16.SetReplicationSourceRequest]) (*connect_go.Response[v16.SetReplicationSourceResponse], error)
+	SetReplicationSource(context.Context, *connect.Request[v16.SetReplicationSourceRequest]) (*connect.Response[v16.SetReplicationSourceResponse], error)
 	// ReplicaWasRestarted tells the remote tablet its primary has changed
-	ReplicaWasRestarted(context.Context, *connect_go.Request[v16.ReplicaWasRestartedRequest]) (*connect_go.Response[v16.ReplicaWasRestartedResponse], error)
+	ReplicaWasRestarted(context.Context, *connect.Request[v16.ReplicaWasRestartedRequest]) (*connect.Response[v16.ReplicaWasRestartedResponse], error)
 	// StopReplicationAndGetStatus stops MySQL replication, and returns the
 	// replication status
-	StopReplicationAndGetStatus(context.Context, *connect_go.Request[v16.StopReplicationAndGetStatusRequest]) (*connect_go.Response[v16.StopReplicationAndGetStatusResponse], error)
+	StopReplicationAndGetStatus(context.Context, *connect.Request[v16.StopReplicationAndGetStatusRequest]) (*connect.Response[v16.StopReplicationAndGetStatusResponse], error)
 	// PromoteReplica makes the replica the new primary
-	PromoteReplica(context.Context, *connect_go.Request[v16.PromoteReplicaRequest]) (*connect_go.Response[v16.PromoteReplicaResponse], error)
-	Backup(context.Context, *connect_go.Request[v16.BackupRequest], *connect_go.ServerStream[v16.BackupResponse]) error
+	PromoteReplica(context.Context, *connect.Request[v16.PromoteReplicaRequest]) (*connect.Response[v16.PromoteReplicaResponse], error)
+	Backup(context.Context, *connect.Request[v16.BackupRequest], *connect.ServerStream[v16.BackupResponse]) error
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
-	RestoreFromBackup(context.Context, *connect_go.Request[v16.RestoreFromBackupRequest], *connect_go.ServerStream[v16.RestoreFromBackupResponse]) error
+	RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest], *connect.ServerStream[v16.RestoreFromBackupResponse]) error
 	// Generic VExec request. Can be used for various purposes
-	VExec(context.Context, *connect_go.Request[v16.VExecRequest]) (*connect_go.Response[v16.VExecResponse], error)
+	VExec(context.Context, *connect.Request[v16.VExecRequest]) (*connect.Response[v16.VExecResponse], error)
 }
 
 // NewTabletManagerHandler builds an HTTP handler from the service implementation. It returns the
@@ -909,433 +909,531 @@ type TabletManagerHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(TabletManagerPingProcedure, connect_go.NewUnaryHandler(
+func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	tabletManagerPingHandler := connect.NewUnaryHandler(
 		TabletManagerPingProcedure,
 		svc.Ping,
 		opts...,
-	))
-	mux.Handle(TabletManagerSleepProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerSleepHandler := connect.NewUnaryHandler(
 		TabletManagerSleepProcedure,
 		svc.Sleep,
 		opts...,
-	))
-	mux.Handle(TabletManagerExecuteHookProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerExecuteHookHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteHookProcedure,
 		svc.ExecuteHook,
 		opts...,
-	))
-	mux.Handle(TabletManagerGetSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerGetSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerGetSchemaProcedure,
 		svc.GetSchema,
 		opts...,
-	))
-	mux.Handle(TabletManagerGetPermissionsProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerGetPermissionsHandler := connect.NewUnaryHandler(
 		TabletManagerGetPermissionsProcedure,
 		svc.GetPermissions,
 		opts...,
-	))
-	mux.Handle(TabletManagerSetReadOnlyProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerSetReadOnlyHandler := connect.NewUnaryHandler(
 		TabletManagerSetReadOnlyProcedure,
 		svc.SetReadOnly,
 		opts...,
-	))
-	mux.Handle(TabletManagerSetReadWriteProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerSetReadWriteHandler := connect.NewUnaryHandler(
 		TabletManagerSetReadWriteProcedure,
 		svc.SetReadWrite,
 		opts...,
-	))
-	mux.Handle(TabletManagerChangeTypeProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerChangeTypeHandler := connect.NewUnaryHandler(
 		TabletManagerChangeTypeProcedure,
 		svc.ChangeType,
 		opts...,
-	))
-	mux.Handle(TabletManagerRefreshStateProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerRefreshStateHandler := connect.NewUnaryHandler(
 		TabletManagerRefreshStateProcedure,
 		svc.RefreshState,
 		opts...,
-	))
-	mux.Handle(TabletManagerRunHealthCheckProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerRunHealthCheckHandler := connect.NewUnaryHandler(
 		TabletManagerRunHealthCheckProcedure,
 		svc.RunHealthCheck,
 		opts...,
-	))
-	mux.Handle(TabletManagerReloadSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerReloadSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerReloadSchemaProcedure,
 		svc.ReloadSchema,
 		opts...,
-	))
-	mux.Handle(TabletManagerPreflightSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerPreflightSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerPreflightSchemaProcedure,
 		svc.PreflightSchema,
 		opts...,
-	))
-	mux.Handle(TabletManagerApplySchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerApplySchemaHandler := connect.NewUnaryHandler(
 		TabletManagerApplySchemaProcedure,
 		svc.ApplySchema,
 		opts...,
-	))
-	mux.Handle(TabletManagerLockTablesProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerLockTablesHandler := connect.NewUnaryHandler(
 		TabletManagerLockTablesProcedure,
 		svc.LockTables,
 		opts...,
-	))
-	mux.Handle(TabletManagerUnlockTablesProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerUnlockTablesHandler := connect.NewUnaryHandler(
 		TabletManagerUnlockTablesProcedure,
 		svc.UnlockTables,
 		opts...,
-	))
-	mux.Handle(TabletManagerExecuteQueryProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerExecuteQueryHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteQueryProcedure,
 		svc.ExecuteQuery,
 		opts...,
-	))
-	mux.Handle(TabletManagerExecuteFetchAsDbaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerExecuteFetchAsDbaHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsDbaProcedure,
 		svc.ExecuteFetchAsDba,
 		opts...,
-	))
-	mux.Handle(TabletManagerExecuteFetchAsAllPrivsProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerExecuteFetchAsAllPrivsHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsAllPrivsProcedure,
 		svc.ExecuteFetchAsAllPrivs,
 		opts...,
-	))
-	mux.Handle(TabletManagerExecuteFetchAsAppProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerExecuteFetchAsAppHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsAppProcedure,
 		svc.ExecuteFetchAsApp,
 		opts...,
-	))
-	mux.Handle(TabletManagerReplicationStatusProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerReplicationStatusHandler := connect.NewUnaryHandler(
 		TabletManagerReplicationStatusProcedure,
 		svc.ReplicationStatus,
 		opts...,
-	))
-	mux.Handle(TabletManagerPrimaryStatusProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerPrimaryStatusHandler := connect.NewUnaryHandler(
 		TabletManagerPrimaryStatusProcedure,
 		svc.PrimaryStatus,
 		opts...,
-	))
-	mux.Handle(TabletManagerPrimaryPositionProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerPrimaryPositionHandler := connect.NewUnaryHandler(
 		TabletManagerPrimaryPositionProcedure,
 		svc.PrimaryPosition,
 		opts...,
-	))
-	mux.Handle(TabletManagerWaitForPositionProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerWaitForPositionHandler := connect.NewUnaryHandler(
 		TabletManagerWaitForPositionProcedure,
 		svc.WaitForPosition,
 		opts...,
-	))
-	mux.Handle(TabletManagerStopReplicationProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerStopReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationProcedure,
 		svc.StopReplication,
 		opts...,
-	))
-	mux.Handle(TabletManagerStopReplicationMinimumProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerStopReplicationMinimumHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationMinimumProcedure,
 		svc.StopReplicationMinimum,
 		opts...,
-	))
-	mux.Handle(TabletManagerStartReplicationProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerStartReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerStartReplicationProcedure,
 		svc.StartReplication,
 		opts...,
-	))
-	mux.Handle(TabletManagerStartReplicationUntilAfterProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerStartReplicationUntilAfterHandler := connect.NewUnaryHandler(
 		TabletManagerStartReplicationUntilAfterProcedure,
 		svc.StartReplicationUntilAfter,
 		opts...,
-	))
-	mux.Handle(TabletManagerGetReplicasProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerGetReplicasHandler := connect.NewUnaryHandler(
 		TabletManagerGetReplicasProcedure,
 		svc.GetReplicas,
 		opts...,
-	))
-	mux.Handle(TabletManagerVReplicationExecProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerVReplicationExecHandler := connect.NewUnaryHandler(
 		TabletManagerVReplicationExecProcedure,
 		svc.VReplicationExec,
 		opts...,
-	))
-	mux.Handle(TabletManagerVReplicationWaitForPosProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerVReplicationWaitForPosHandler := connect.NewUnaryHandler(
 		TabletManagerVReplicationWaitForPosProcedure,
 		svc.VReplicationWaitForPos,
 		opts...,
-	))
-	mux.Handle(TabletManagerVDiffProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerVDiffHandler := connect.NewUnaryHandler(
 		TabletManagerVDiffProcedure,
 		svc.VDiff,
 		opts...,
-	))
-	mux.Handle(TabletManagerResetReplicationProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerResetReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerResetReplicationProcedure,
 		svc.ResetReplication,
 		opts...,
-	))
-	mux.Handle(TabletManagerInitPrimaryProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerInitPrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerInitPrimaryProcedure,
 		svc.InitPrimary,
 		opts...,
-	))
-	mux.Handle(TabletManagerPopulateReparentJournalProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerPopulateReparentJournalHandler := connect.NewUnaryHandler(
 		TabletManagerPopulateReparentJournalProcedure,
 		svc.PopulateReparentJournal,
 		opts...,
-	))
-	mux.Handle(TabletManagerInitReplicaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerInitReplicaHandler := connect.NewUnaryHandler(
 		TabletManagerInitReplicaProcedure,
 		svc.InitReplica,
 		opts...,
-	))
-	mux.Handle(TabletManagerDemotePrimaryProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerDemotePrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerDemotePrimaryProcedure,
 		svc.DemotePrimary,
 		opts...,
-	))
-	mux.Handle(TabletManagerUndoDemotePrimaryProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerUndoDemotePrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerUndoDemotePrimaryProcedure,
 		svc.UndoDemotePrimary,
 		opts...,
-	))
-	mux.Handle(TabletManagerReplicaWasPromotedProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerReplicaWasPromotedHandler := connect.NewUnaryHandler(
 		TabletManagerReplicaWasPromotedProcedure,
 		svc.ReplicaWasPromoted,
 		opts...,
-	))
-	mux.Handle(TabletManagerResetReplicationParametersProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerResetReplicationParametersHandler := connect.NewUnaryHandler(
 		TabletManagerResetReplicationParametersProcedure,
 		svc.ResetReplicationParameters,
 		opts...,
-	))
-	mux.Handle(TabletManagerFullStatusProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerFullStatusHandler := connect.NewUnaryHandler(
 		TabletManagerFullStatusProcedure,
 		svc.FullStatus,
 		opts...,
-	))
-	mux.Handle(TabletManagerSetReplicationSourceProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerSetReplicationSourceHandler := connect.NewUnaryHandler(
 		TabletManagerSetReplicationSourceProcedure,
 		svc.SetReplicationSource,
 		opts...,
-	))
-	mux.Handle(TabletManagerReplicaWasRestartedProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerReplicaWasRestartedHandler := connect.NewUnaryHandler(
 		TabletManagerReplicaWasRestartedProcedure,
 		svc.ReplicaWasRestarted,
 		opts...,
-	))
-	mux.Handle(TabletManagerStopReplicationAndGetStatusProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerStopReplicationAndGetStatusHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationAndGetStatusProcedure,
 		svc.StopReplicationAndGetStatus,
 		opts...,
-	))
-	mux.Handle(TabletManagerPromoteReplicaProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerPromoteReplicaHandler := connect.NewUnaryHandler(
 		TabletManagerPromoteReplicaProcedure,
 		svc.PromoteReplica,
 		opts...,
-	))
-	mux.Handle(TabletManagerBackupProcedure, connect_go.NewServerStreamHandler(
+	)
+	tabletManagerBackupHandler := connect.NewServerStreamHandler(
 		TabletManagerBackupProcedure,
 		svc.Backup,
 		opts...,
-	))
-	mux.Handle(TabletManagerRestoreFromBackupProcedure, connect_go.NewServerStreamHandler(
+	)
+	tabletManagerRestoreFromBackupHandler := connect.NewServerStreamHandler(
 		TabletManagerRestoreFromBackupProcedure,
 		svc.RestoreFromBackup,
 		opts...,
-	))
-	mux.Handle(TabletManagerVExecProcedure, connect_go.NewUnaryHandler(
+	)
+	tabletManagerVExecHandler := connect.NewUnaryHandler(
 		TabletManagerVExecProcedure,
 		svc.VExec,
 		opts...,
-	))
-	return "/tabletmanagerservice.TabletManager/", mux
+	)
+	return "/tabletmanagerservice.TabletManager/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case TabletManagerPingProcedure:
+			tabletManagerPingHandler.ServeHTTP(w, r)
+		case TabletManagerSleepProcedure:
+			tabletManagerSleepHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteHookProcedure:
+			tabletManagerExecuteHookHandler.ServeHTTP(w, r)
+		case TabletManagerGetSchemaProcedure:
+			tabletManagerGetSchemaHandler.ServeHTTP(w, r)
+		case TabletManagerGetPermissionsProcedure:
+			tabletManagerGetPermissionsHandler.ServeHTTP(w, r)
+		case TabletManagerSetReadOnlyProcedure:
+			tabletManagerSetReadOnlyHandler.ServeHTTP(w, r)
+		case TabletManagerSetReadWriteProcedure:
+			tabletManagerSetReadWriteHandler.ServeHTTP(w, r)
+		case TabletManagerChangeTypeProcedure:
+			tabletManagerChangeTypeHandler.ServeHTTP(w, r)
+		case TabletManagerRefreshStateProcedure:
+			tabletManagerRefreshStateHandler.ServeHTTP(w, r)
+		case TabletManagerRunHealthCheckProcedure:
+			tabletManagerRunHealthCheckHandler.ServeHTTP(w, r)
+		case TabletManagerReloadSchemaProcedure:
+			tabletManagerReloadSchemaHandler.ServeHTTP(w, r)
+		case TabletManagerPreflightSchemaProcedure:
+			tabletManagerPreflightSchemaHandler.ServeHTTP(w, r)
+		case TabletManagerApplySchemaProcedure:
+			tabletManagerApplySchemaHandler.ServeHTTP(w, r)
+		case TabletManagerLockTablesProcedure:
+			tabletManagerLockTablesHandler.ServeHTTP(w, r)
+		case TabletManagerUnlockTablesProcedure:
+			tabletManagerUnlockTablesHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteQueryProcedure:
+			tabletManagerExecuteQueryHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteFetchAsDbaProcedure:
+			tabletManagerExecuteFetchAsDbaHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteFetchAsAllPrivsProcedure:
+			tabletManagerExecuteFetchAsAllPrivsHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteFetchAsAppProcedure:
+			tabletManagerExecuteFetchAsAppHandler.ServeHTTP(w, r)
+		case TabletManagerReplicationStatusProcedure:
+			tabletManagerReplicationStatusHandler.ServeHTTP(w, r)
+		case TabletManagerPrimaryStatusProcedure:
+			tabletManagerPrimaryStatusHandler.ServeHTTP(w, r)
+		case TabletManagerPrimaryPositionProcedure:
+			tabletManagerPrimaryPositionHandler.ServeHTTP(w, r)
+		case TabletManagerWaitForPositionProcedure:
+			tabletManagerWaitForPositionHandler.ServeHTTP(w, r)
+		case TabletManagerStopReplicationProcedure:
+			tabletManagerStopReplicationHandler.ServeHTTP(w, r)
+		case TabletManagerStopReplicationMinimumProcedure:
+			tabletManagerStopReplicationMinimumHandler.ServeHTTP(w, r)
+		case TabletManagerStartReplicationProcedure:
+			tabletManagerStartReplicationHandler.ServeHTTP(w, r)
+		case TabletManagerStartReplicationUntilAfterProcedure:
+			tabletManagerStartReplicationUntilAfterHandler.ServeHTTP(w, r)
+		case TabletManagerGetReplicasProcedure:
+			tabletManagerGetReplicasHandler.ServeHTTP(w, r)
+		case TabletManagerVReplicationExecProcedure:
+			tabletManagerVReplicationExecHandler.ServeHTTP(w, r)
+		case TabletManagerVReplicationWaitForPosProcedure:
+			tabletManagerVReplicationWaitForPosHandler.ServeHTTP(w, r)
+		case TabletManagerVDiffProcedure:
+			tabletManagerVDiffHandler.ServeHTTP(w, r)
+		case TabletManagerResetReplicationProcedure:
+			tabletManagerResetReplicationHandler.ServeHTTP(w, r)
+		case TabletManagerInitPrimaryProcedure:
+			tabletManagerInitPrimaryHandler.ServeHTTP(w, r)
+		case TabletManagerPopulateReparentJournalProcedure:
+			tabletManagerPopulateReparentJournalHandler.ServeHTTP(w, r)
+		case TabletManagerInitReplicaProcedure:
+			tabletManagerInitReplicaHandler.ServeHTTP(w, r)
+		case TabletManagerDemotePrimaryProcedure:
+			tabletManagerDemotePrimaryHandler.ServeHTTP(w, r)
+		case TabletManagerUndoDemotePrimaryProcedure:
+			tabletManagerUndoDemotePrimaryHandler.ServeHTTP(w, r)
+		case TabletManagerReplicaWasPromotedProcedure:
+			tabletManagerReplicaWasPromotedHandler.ServeHTTP(w, r)
+		case TabletManagerResetReplicationParametersProcedure:
+			tabletManagerResetReplicationParametersHandler.ServeHTTP(w, r)
+		case TabletManagerFullStatusProcedure:
+			tabletManagerFullStatusHandler.ServeHTTP(w, r)
+		case TabletManagerSetReplicationSourceProcedure:
+			tabletManagerSetReplicationSourceHandler.ServeHTTP(w, r)
+		case TabletManagerReplicaWasRestartedProcedure:
+			tabletManagerReplicaWasRestartedHandler.ServeHTTP(w, r)
+		case TabletManagerStopReplicationAndGetStatusProcedure:
+			tabletManagerStopReplicationAndGetStatusHandler.ServeHTTP(w, r)
+		case TabletManagerPromoteReplicaProcedure:
+			tabletManagerPromoteReplicaHandler.ServeHTTP(w, r)
+		case TabletManagerBackupProcedure:
+			tabletManagerBackupHandler.ServeHTTP(w, r)
+		case TabletManagerRestoreFromBackupProcedure:
+			tabletManagerRestoreFromBackupHandler.ServeHTTP(w, r)
+		case TabletManagerVExecProcedure:
+			tabletManagerVExecHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedTabletManagerHandler returns CodeUnimplemented from all methods.
 type UnimplementedTabletManagerHandler struct{}
 
-func (UnimplementedTabletManagerHandler) Ping(context.Context, *connect_go.Request[v16.PingRequest]) (*connect_go.Response[v16.PingResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Ping is not implemented"))
+func (UnimplementedTabletManagerHandler) Ping(context.Context, *connect.Request[v16.PingRequest]) (*connect.Response[v16.PingResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Ping is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) Sleep(context.Context, *connect_go.Request[v16.SleepRequest]) (*connect_go.Response[v16.SleepResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Sleep is not implemented"))
+func (UnimplementedTabletManagerHandler) Sleep(context.Context, *connect.Request[v16.SleepRequest]) (*connect.Response[v16.SleepResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Sleep is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteHook(context.Context, *connect_go.Request[v16.ExecuteHookRequest]) (*connect_go.Response[v16.ExecuteHookResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteHook is not implemented"))
+func (UnimplementedTabletManagerHandler) ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteHook is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetSchema(context.Context, *connect_go.Request[v16.GetSchemaRequest]) (*connect_go.Response[v16.GetSchemaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetSchema is not implemented"))
+func (UnimplementedTabletManagerHandler) GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetPermissions(context.Context, *connect_go.Request[v16.GetPermissionsRequest]) (*connect_go.Response[v16.GetPermissionsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetPermissions is not implemented"))
+func (UnimplementedTabletManagerHandler) GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetPermissions is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReadOnly(context.Context, *connect_go.Request[v16.SetReadOnlyRequest]) (*connect_go.Response[v16.SetReadOnlyResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadOnly is not implemented"))
+func (UnimplementedTabletManagerHandler) SetReadOnly(context.Context, *connect.Request[v16.SetReadOnlyRequest]) (*connect.Response[v16.SetReadOnlyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadOnly is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReadWrite(context.Context, *connect_go.Request[v16.SetReadWriteRequest]) (*connect_go.Response[v16.SetReadWriteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadWrite is not implemented"))
+func (UnimplementedTabletManagerHandler) SetReadWrite(context.Context, *connect.Request[v16.SetReadWriteRequest]) (*connect.Response[v16.SetReadWriteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadWrite is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ChangeType(context.Context, *connect_go.Request[v16.ChangeTypeRequest]) (*connect_go.Response[v16.ChangeTypeResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeType is not implemented"))
+func (UnimplementedTabletManagerHandler) ChangeType(context.Context, *connect.Request[v16.ChangeTypeRequest]) (*connect.Response[v16.ChangeTypeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeType is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RefreshState(context.Context, *connect_go.Request[v16.RefreshStateRequest]) (*connect_go.Response[v16.RefreshStateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RefreshState is not implemented"))
+func (UnimplementedTabletManagerHandler) RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RefreshState is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RunHealthCheck(context.Context, *connect_go.Request[v16.RunHealthCheckRequest]) (*connect_go.Response[v16.RunHealthCheckResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RunHealthCheck is not implemented"))
+func (UnimplementedTabletManagerHandler) RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RunHealthCheck is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReloadSchema(context.Context, *connect_go.Request[v16.ReloadSchemaRequest]) (*connect_go.Response[v16.ReloadSchemaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReloadSchema is not implemented"))
+func (UnimplementedTabletManagerHandler) ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReloadSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *connect_go.Request[v16.PreflightSchemaRequest]) (*connect_go.Response[v16.PreflightSchemaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PreflightSchema is not implemented"))
+func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *connect.Request[v16.PreflightSchemaRequest]) (*connect.Response[v16.PreflightSchemaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PreflightSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect_go.Request[v16.ApplySchemaRequest]) (*connect_go.Response[v16.ApplySchemaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ApplySchema is not implemented"))
+func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ApplySchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect_go.Request[v16.LockTablesRequest]) (*connect_go.Response[v16.LockTablesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.LockTables is not implemented"))
+func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect.Request[v16.LockTablesRequest]) (*connect.Response[v16.LockTablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.LockTables is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) UnlockTables(context.Context, *connect_go.Request[v16.UnlockTablesRequest]) (*connect_go.Response[v16.UnlockTablesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UnlockTables is not implemented"))
+func (UnimplementedTabletManagerHandler) UnlockTables(context.Context, *connect.Request[v16.UnlockTablesRequest]) (*connect.Response[v16.UnlockTablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UnlockTables is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteQuery(context.Context, *connect_go.Request[v16.ExecuteQueryRequest]) (*connect_go.Response[v16.ExecuteQueryResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteQuery is not implemented"))
+func (UnimplementedTabletManagerHandler) ExecuteQuery(context.Context, *connect.Request[v16.ExecuteQueryRequest]) (*connect.Response[v16.ExecuteQueryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteQuery is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsDba(context.Context, *connect_go.Request[v16.ExecuteFetchAsDbaRequest]) (*connect_go.Response[v16.ExecuteFetchAsDbaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsDba is not implemented"))
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsDba(context.Context, *connect.Request[v16.ExecuteFetchAsDbaRequest]) (*connect.Response[v16.ExecuteFetchAsDbaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsDba is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsAllPrivs(context.Context, *connect_go.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect_go.Response[v16.ExecuteFetchAsAllPrivsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs is not implemented"))
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsAllPrivs(context.Context, *connect.Request[v16.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[v16.ExecuteFetchAsAllPrivsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsApp(context.Context, *connect_go.Request[v16.ExecuteFetchAsAppRequest]) (*connect_go.Response[v16.ExecuteFetchAsAppResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsApp is not implemented"))
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsApp is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicationStatus(context.Context, *connect_go.Request[v16.ReplicationStatusRequest]) (*connect_go.Response[v16.ReplicationStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicationStatus is not implemented"))
+func (UnimplementedTabletManagerHandler) ReplicationStatus(context.Context, *connect.Request[v16.ReplicationStatusRequest]) (*connect.Response[v16.ReplicationStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicationStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PrimaryStatus(context.Context, *connect_go.Request[v16.PrimaryStatusRequest]) (*connect_go.Response[v16.PrimaryStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryStatus is not implemented"))
+func (UnimplementedTabletManagerHandler) PrimaryStatus(context.Context, *connect.Request[v16.PrimaryStatusRequest]) (*connect.Response[v16.PrimaryStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PrimaryPosition(context.Context, *connect_go.Request[v16.PrimaryPositionRequest]) (*connect_go.Response[v16.PrimaryPositionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryPosition is not implemented"))
+func (UnimplementedTabletManagerHandler) PrimaryPosition(context.Context, *connect.Request[v16.PrimaryPositionRequest]) (*connect.Response[v16.PrimaryPositionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryPosition is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) WaitForPosition(context.Context, *connect_go.Request[v16.WaitForPositionRequest]) (*connect_go.Response[v16.WaitForPositionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.WaitForPosition is not implemented"))
+func (UnimplementedTabletManagerHandler) WaitForPosition(context.Context, *connect.Request[v16.WaitForPositionRequest]) (*connect.Response[v16.WaitForPositionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.WaitForPosition is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplication(context.Context, *connect_go.Request[v16.StopReplicationRequest]) (*connect_go.Response[v16.StopReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplication is not implemented"))
+func (UnimplementedTabletManagerHandler) StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context, *connect_go.Request[v16.StopReplicationMinimumRequest]) (*connect_go.Response[v16.StopReplicationMinimumResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationMinimum is not implemented"))
+func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context, *connect.Request[v16.StopReplicationMinimumRequest]) (*connect.Response[v16.StopReplicationMinimumResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationMinimum is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect_go.Request[v16.StartReplicationRequest]) (*connect_go.Response[v16.StartReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
+func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect_go.Request[v16.StartReplicationUntilAfterRequest]) (*connect_go.Response[v16.StartReplicationUntilAfterResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplicationUntilAfter is not implemented"))
+func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[v16.StartReplicationUntilAfterRequest]) (*connect.Response[v16.StartReplicationUntilAfterResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplicationUntilAfter is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect_go.Request[v16.GetReplicasRequest]) (*connect_go.Response[v16.GetReplicasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetReplicas is not implemented"))
+func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect.Request[v16.GetReplicasRequest]) (*connect.Response[v16.GetReplicasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetReplicas is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect_go.Request[v16.VReplicationExecRequest]) (*connect_go.Response[v16.VReplicationExecResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
+func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect.Request[v16.VReplicationExecRequest]) (*connect.Response[v16.VReplicationExecResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect_go.Request[v16.VReplicationWaitForPosRequest]) (*connect_go.Response[v16.VReplicationWaitForPosResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
+func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect.Request[v16.VReplicationWaitForPosRequest]) (*connect.Response[v16.VReplicationWaitForPosResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect_go.Request[v16.VDiffRequest]) (*connect_go.Response[v16.VDiffResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VDiff is not implemented"))
+func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[v16.VDiffRequest]) (*connect.Response[v16.VDiffResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VDiff is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ResetReplication(context.Context, *connect_go.Request[v16.ResetReplicationRequest]) (*connect_go.Response[v16.ResetReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplication is not implemented"))
+func (UnimplementedTabletManagerHandler) ResetReplication(context.Context, *connect.Request[v16.ResetReplicationRequest]) (*connect.Response[v16.ResetReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) InitPrimary(context.Context, *connect_go.Request[v16.InitPrimaryRequest]) (*connect_go.Response[v16.InitPrimaryResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitPrimary is not implemented"))
+func (UnimplementedTabletManagerHandler) InitPrimary(context.Context, *connect.Request[v16.InitPrimaryRequest]) (*connect.Response[v16.InitPrimaryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitPrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PopulateReparentJournal(context.Context, *connect_go.Request[v16.PopulateReparentJournalRequest]) (*connect_go.Response[v16.PopulateReparentJournalResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PopulateReparentJournal is not implemented"))
+func (UnimplementedTabletManagerHandler) PopulateReparentJournal(context.Context, *connect.Request[v16.PopulateReparentJournalRequest]) (*connect.Response[v16.PopulateReparentJournalResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PopulateReparentJournal is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) InitReplica(context.Context, *connect_go.Request[v16.InitReplicaRequest]) (*connect_go.Response[v16.InitReplicaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitReplica is not implemented"))
+func (UnimplementedTabletManagerHandler) InitReplica(context.Context, *connect.Request[v16.InitReplicaRequest]) (*connect.Response[v16.InitReplicaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitReplica is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) DemotePrimary(context.Context, *connect_go.Request[v16.DemotePrimaryRequest]) (*connect_go.Response[v16.DemotePrimaryResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DemotePrimary is not implemented"))
+func (UnimplementedTabletManagerHandler) DemotePrimary(context.Context, *connect.Request[v16.DemotePrimaryRequest]) (*connect.Response[v16.DemotePrimaryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DemotePrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) UndoDemotePrimary(context.Context, *connect_go.Request[v16.UndoDemotePrimaryRequest]) (*connect_go.Response[v16.UndoDemotePrimaryResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UndoDemotePrimary is not implemented"))
+func (UnimplementedTabletManagerHandler) UndoDemotePrimary(context.Context, *connect.Request[v16.UndoDemotePrimaryRequest]) (*connect.Response[v16.UndoDemotePrimaryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UndoDemotePrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicaWasPromoted(context.Context, *connect_go.Request[v16.ReplicaWasPromotedRequest]) (*connect_go.Response[v16.ReplicaWasPromotedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasPromoted is not implemented"))
+func (UnimplementedTabletManagerHandler) ReplicaWasPromoted(context.Context, *connect.Request[v16.ReplicaWasPromotedRequest]) (*connect.Response[v16.ReplicaWasPromotedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasPromoted is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ResetReplicationParameters(context.Context, *connect_go.Request[v16.ResetReplicationParametersRequest]) (*connect_go.Response[v16.ResetReplicationParametersResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplicationParameters is not implemented"))
+func (UnimplementedTabletManagerHandler) ResetReplicationParameters(context.Context, *connect.Request[v16.ResetReplicationParametersRequest]) (*connect.Response[v16.ResetReplicationParametersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplicationParameters is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) FullStatus(context.Context, *connect_go.Request[v16.FullStatusRequest]) (*connect_go.Response[v16.FullStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.FullStatus is not implemented"))
+func (UnimplementedTabletManagerHandler) FullStatus(context.Context, *connect.Request[v16.FullStatusRequest]) (*connect.Response[v16.FullStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.FullStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReplicationSource(context.Context, *connect_go.Request[v16.SetReplicationSourceRequest]) (*connect_go.Response[v16.SetReplicationSourceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReplicationSource is not implemented"))
+func (UnimplementedTabletManagerHandler) SetReplicationSource(context.Context, *connect.Request[v16.SetReplicationSourceRequest]) (*connect.Response[v16.SetReplicationSourceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReplicationSource is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicaWasRestarted(context.Context, *connect_go.Request[v16.ReplicaWasRestartedRequest]) (*connect_go.Response[v16.ReplicaWasRestartedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasRestarted is not implemented"))
+func (UnimplementedTabletManagerHandler) ReplicaWasRestarted(context.Context, *connect.Request[v16.ReplicaWasRestartedRequest]) (*connect.Response[v16.ReplicaWasRestartedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasRestarted is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplicationAndGetStatus(context.Context, *connect_go.Request[v16.StopReplicationAndGetStatusRequest]) (*connect_go.Response[v16.StopReplicationAndGetStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationAndGetStatus is not implemented"))
+func (UnimplementedTabletManagerHandler) StopReplicationAndGetStatus(context.Context, *connect.Request[v16.StopReplicationAndGetStatusRequest]) (*connect.Response[v16.StopReplicationAndGetStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationAndGetStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PromoteReplica(context.Context, *connect_go.Request[v16.PromoteReplicaRequest]) (*connect_go.Response[v16.PromoteReplicaResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PromoteReplica is not implemented"))
+func (UnimplementedTabletManagerHandler) PromoteReplica(context.Context, *connect.Request[v16.PromoteReplicaRequest]) (*connect.Response[v16.PromoteReplicaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PromoteReplica is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect_go.Request[v16.BackupRequest], *connect_go.ServerStream[v16.BackupResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Backup is not implemented"))
+func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect.Request[v16.BackupRequest], *connect.ServerStream[v16.BackupResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Backup is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect_go.Request[v16.RestoreFromBackupRequest], *connect_go.ServerStream[v16.RestoreFromBackupResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestoreFromBackup is not implemented"))
+func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest], *connect.ServerStream[v16.RestoreFromBackupResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestoreFromBackup is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VExec(context.Context, *connect_go.Request[v16.VExecRequest]) (*connect_go.Response[v16.VExecResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VExec is not implemented"))
+func (UnimplementedTabletManagerHandler) VExec(context.Context, *connect.Request[v16.VExecRequest]) (*connect.Response[v16.VExecResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VExec is not implemented"))
 }

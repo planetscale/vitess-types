@@ -21,9 +21,9 @@
 package vtadmindevconnect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	dev "github.com/planetscale/vitess-types/gen/vitess/vtadmin/dev"
 	dev1 "github.com/planetscale/vitess-types/gen/vitess/vtctldata/dev"
 	http "net/http"
@@ -35,7 +35,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// VTAdminName is the fully-qualified name of the VTAdmin service.
@@ -170,83 +170,83 @@ const (
 // VTAdminClient is a client for the vtadmin.VTAdmin service.
 type VTAdminClient interface {
 	// CreateKeyspace creates a new keyspace in the given cluster.
-	CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error)
+	CreateKeyspace(context.Context, *connect.Request[dev.CreateKeyspaceRequest]) (*connect.Response[dev.CreateKeyspaceResponse], error)
 	// CreateShard creates a new shard in the given cluster and keyspace.
-	CreateShard(context.Context, *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error)
+	CreateShard(context.Context, *connect.Request[dev.CreateShardRequest]) (*connect.Response[dev1.CreateShardResponse], error)
 	// DeleteKeyspace deletes a keyspace in the given cluster.
-	DeleteKeyspace(context.Context, *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error)
+	DeleteKeyspace(context.Context, *connect.Request[dev.DeleteKeyspaceRequest]) (*connect.Response[dev1.DeleteKeyspaceResponse], error)
 	// DeleteShard deletes one or more shards in the given cluster and keyspace.
-	DeleteShards(context.Context, *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error)
+	DeleteShards(context.Context, *connect.Request[dev.DeleteShardsRequest]) (*connect.Response[dev1.DeleteShardsResponse], error)
 	// DeleteTablet deletes a tablet from the topology
-	DeleteTablet(context.Context, *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error)
+	DeleteTablet(context.Context, *connect.Request[dev.DeleteTabletRequest]) (*connect.Response[dev.DeleteTabletResponse], error)
 	// EmergencyFailoverShard fails over a shard to a new primary. It assumes
 	// the old primary is dead or otherwise not responding.
-	EmergencyFailoverShard(context.Context, *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error)
+	EmergencyFailoverShard(context.Context, *connect.Request[dev.EmergencyFailoverShardRequest]) (*connect.Response[dev.EmergencyFailoverShardResponse], error)
 	// FindSchema returns a single Schema that matches the provided table name
 	// across all specified clusters IDs. Not specifying a set of cluster IDs
 	// causes the search to span all configured clusters.
 	//
 	// An error occurs if either no table exists across any of the clusters with
 	// the specified table name, or if multiple tables exist with that name.
-	FindSchema(context.Context, *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error)
+	FindSchema(context.Context, *connect.Request[dev.FindSchemaRequest]) (*connect.Response[dev.Schema], error)
 	// GetBackups returns backups grouped by cluster.
-	GetBackups(context.Context, *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error)
+	GetBackups(context.Context, *connect.Request[dev.GetBackupsRequest]) (*connect.Response[dev.GetBackupsResponse], error)
 	// GetCellInfos returns the CellInfo objects for the specified clusters.
 	//
 	// Callers may optionally restrict the set of CellInfos, or restrict the
 	// response to include only cell names.
-	GetCellInfos(context.Context, *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error)
+	GetCellInfos(context.Context, *connect.Request[dev.GetCellInfosRequest]) (*connect.Response[dev.GetCellInfosResponse], error)
 	// GetCellsAliases returns the CellsAliases data for the specified clusters.
-	GetCellsAliases(context.Context, *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error)
+	GetCellsAliases(context.Context, *connect.Request[dev.GetCellsAliasesRequest]) (*connect.Response[dev.GetCellsAliasesResponse], error)
 	// GetClusters returns all configured clusters.
-	GetClusters(context.Context, *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error)
+	GetClusters(context.Context, *connect.Request[dev.GetClustersRequest]) (*connect.Response[dev.GetClustersResponse], error)
 	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	GetFullStatus(context.Context, *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error)
+	GetFullStatus(context.Context, *connect.Request[dev.GetFullStatusRequest]) (*connect.Response[dev1.GetFullStatusResponse], error)
 	// GetGates returns all gates across all the specified clusters.
-	GetGates(context.Context, *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error)
+	GetGates(context.Context, *connect.Request[dev.GetGatesRequest]) (*connect.Response[dev.GetGatesResponse], error)
 	// GetKeyspace returns a keyspace by name in the specified cluster.
-	GetKeyspace(context.Context, *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error)
+	GetKeyspace(context.Context, *connect.Request[dev.GetKeyspaceRequest]) (*connect.Response[dev.Keyspace], error)
 	// GetKeyspaces returns all keyspaces across the specified clusters.
-	GetKeyspaces(context.Context, *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error)
+	GetKeyspaces(context.Context, *connect.Request[dev.GetKeyspacesRequest]) (*connect.Response[dev.GetKeyspacesResponse], error)
 	// GetSchema returns the schema for the specified (cluster, keyspace, table)
 	// tuple.
-	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error)
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.Schema], error)
 	// GetSchemas returns all schemas across the specified clusters.
-	GetSchemas(context.Context, *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error)
+	GetSchemas(context.Context, *connect.Request[dev.GetSchemasRequest]) (*connect.Response[dev.GetSchemasResponse], error)
 	// GetShardReplicationPositions returns shard replication positions grouped
 	// by cluster.
-	GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error)
+	GetShardReplicationPositions(context.Context, *connect.Request[dev.GetShardReplicationPositionsRequest]) (*connect.Response[dev.GetShardReplicationPositionsResponse], error)
 	// GetSrvKeyspace returns the SrvKeyspace for a keyspace in one or more cells.
-	GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspace(context.Context, *connect.Request[dev.GetSrvKeyspaceRequest]) (*connect.Response[dev1.GetSrvKeyspacesResponse], error)
 	// GetSrvKeyspaces returns the SrvKeyspaces for all keyspaces across all the specified clusters.
-	GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspaces(context.Context, *connect.Request[dev.GetSrvKeyspacesRequest]) (*connect.Response[dev.GetSrvKeyspacesResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for the given cluster and cell.
-	GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error)
+	GetSrvVSchema(context.Context, *connect.Request[dev.GetSrvVSchemaRequest]) (*connect.Response[dev.SrvVSchema], error)
 	// GetSrvVSchemas returns all SrvVSchemas across all (or specified) clusters
 	// and cells.
-	GetSrvVSchemas(context.Context, *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error)
+	GetSrvVSchemas(context.Context, *connect.Request[dev.GetSrvVSchemasRequest]) (*connect.Response[dev.GetSrvVSchemasResponse], error)
 	// GetTablet looks up a tablet by hostname across all clusters and returns
 	// the result.
-	GetTablet(context.Context, *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error)
+	GetTablet(context.Context, *connect.Request[dev.GetTabletRequest]) (*connect.Response[dev.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
-	GetTablets(context.Context, *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error)
+	GetTablets(context.Context, *connect.Request[dev.GetTabletsRequest]) (*connect.Response[dev.GetTabletsResponse], error)
 	// GetTopologyPath returns the cell located at the specified path in the topology server.
-	GetTopologyPath(context.Context, *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error)
+	GetTopologyPath(context.Context, *connect.Request[dev.GetTopologyPathRequest]) (*connect.Response[dev1.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
-	GetVSchema(context.Context, *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error)
+	GetVSchema(context.Context, *connect.Request[dev.GetVSchemaRequest]) (*connect.Response[dev.VSchema], error)
 	// GetVSchemas returns the VSchemas for all specified clusters.
-	GetVSchemas(context.Context, *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error)
+	GetVSchemas(context.Context, *connect.Request[dev.GetVSchemasRequest]) (*connect.Response[dev.GetVSchemasResponse], error)
 	// GetVtctlds returns the Vtctlds for all specified clusters.
-	GetVtctlds(context.Context, *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error)
+	GetVtctlds(context.Context, *connect.Request[dev.GetVtctldsRequest]) (*connect.Response[dev.GetVtctldsResponse], error)
 	// GetWorkflow returns a single Workflow for a given cluster, keyspace, and
 	// workflow name.
-	GetWorkflow(context.Context, *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error)
+	GetWorkflow(context.Context, *connect.Request[dev.GetWorkflowRequest]) (*connect.Response[dev.Workflow], error)
 	// GetWorkflows returns the Workflows for all specified clusters.
-	GetWorkflows(context.Context, *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error)
+	GetWorkflows(context.Context, *connect.Request[dev.GetWorkflowsRequest]) (*connect.Response[dev.GetWorkflowsResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to
 	// RPCs. This command can be blocked by other in-flight operations.
-	PingTablet(context.Context, *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error)
+	PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error)
 	// PlannedFailoverShard fails over the shard to a new primary, or away from
 	// an old primary. Both the old and new primaries must be reachable and
 	// running.
@@ -254,34 +254,34 @@ type VTAdminClient interface {
 	// NOTE: A planned failover will not consider replicas outside the current
 	// shard primary's cell as promotion candidates unless NewPrimary is
 	// explicitly provided in the request.
-	PlannedFailoverShard(context.Context, *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error)
+	PlannedFailoverShard(context.Context, *connect.Request[dev.PlannedFailoverShardRequest]) (*connect.Response[dev.PlannedFailoverShardResponse], error)
 	// RebuildKeyspaceGraph rebuilds the serving data for a keyspace.
-	RebuildKeyspaceGraph(context.Context, *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error)
+	RebuildKeyspaceGraph(context.Context, *connect.Request[dev.RebuildKeyspaceGraphRequest]) (*connect.Response[dev.RebuildKeyspaceGraphResponse], error)
 	// RefreshState reloads the tablet record on the specified tablet.
-	RefreshState(context.Context, *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error)
+	RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error)
 	// RefreshTabletReplicationSource performs a `CHANGE REPLICATION SOURCE TO`
 	// on a tablet to replicate from the current primary in the shard.
-	RefreshTabletReplicationSource(context.Context, *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error)
+	RefreshTabletReplicationSource(context.Context, *connect.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect.Response[dev.RefreshTabletReplicationSourceResponse], error)
 	// ReloadSchemas reloads the schema definition across keyspaces, shards, or
 	// tablets in one or more clusters, depending on the request fields (see
 	// ReloadSchemasRequest for details).
-	ReloadSchemas(context.Context, *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error)
+	ReloadSchemas(context.Context, *connect.Request[dev.ReloadSchemasRequest]) (*connect.Response[dev.ReloadSchemasResponse], error)
 	// ReloadSchemaShard reloads the schema on all tablets in a shard. This is done on a best-effort basis.
-	ReloadSchemaShard(context.Context, *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error)
+	ReloadSchemaShard(context.Context, *connect.Request[dev.ReloadSchemaShardRequest]) (*connect.Response[dev.ReloadSchemaShardResponse], error)
 	// RemoveKeyspaceCell removes the cell from the Cells list for all shards in the keyspace, and the SrvKeyspace for that keyspace in that cell.
-	RemoveKeyspaceCell(context.Context, *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error)
+	RemoveKeyspaceCell(context.Context, *connect.Request[dev.RemoveKeyspaceCellRequest]) (*connect.Response[dev.RemoveKeyspaceCellResponse], error)
 	// RunHealthCheck runs a healthcheck on the tablet.
-	RunHealthCheck(context.Context, *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
 	// SetReadOnly sets the tablet to read-only mode.
-	SetReadOnly(context.Context, *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error)
+	SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error)
 	// SetReadWrite sets the tablet to read-write mode.
-	SetReadWrite(context.Context, *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error)
+	SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error)
 	// StartReplication runs the underlying database command to start
 	// replication on a tablet.
-	StartReplication(context.Context, *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
 	// StopReplication runs the underlying database command to stop replication
 	// on a tablet
-	StopReplication(context.Context, *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error)
 	// TabletExternallyPromoted updates the metadata in a cluster's topology
 	// to acknowledge a shard primary change performed by an external tool
 	// (e.g. orchestrator*).
@@ -291,27 +291,27 @@ type VTAdminClient interface {
 	//
 	// * "orchestrator" here refers to external orchestrator, not the newer,
 	// Vitess-aware orchestrator, VTOrc.
-	TabletExternallyPromoted(context.Context, *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error)
+	TabletExternallyPromoted(context.Context, *connect.Request[dev.TabletExternallyPromotedRequest]) (*connect.Response[dev.TabletExternallyPromotedResponse], error)
 	// Validate validates all nodes in a cluster that are reachable from the global replication graph,
 	// as well as all tablets in discoverable cells, are consistent
-	Validate(context.Context, *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error)
+	Validate(context.Context, *connect.Request[dev.ValidateRequest]) (*connect.Response[dev1.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
-	ValidateKeyspace(context.Context, *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error)
+	ValidateKeyspace(context.Context, *connect.Request[dev.ValidateKeyspaceRequest]) (*connect.Response[dev1.ValidateKeyspaceResponse], error)
 	// ValidateSchemaKeyspace validates that the schema on the primary tablet
 	// for shard 0 matches the schema on all of the other tablets in the
 	// keyspace.
-	ValidateSchemaKeyspace(context.Context, *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error)
+	ValidateSchemaKeyspace(context.Context, *connect.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect.Response[dev1.ValidateSchemaKeyspaceResponse], error)
 	// ValidateShard validates that that all nodes reachable from the specified shard are consistent.
-	ValidateShard(context.Context, *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error)
+	ValidateShard(context.Context, *connect.Request[dev.ValidateShardRequest]) (*connect.Response[dev1.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of
 	// shard 0 matches all of the other tablets in the keyspace.
-	ValidateVersionKeyspace(context.Context, *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error)
+	ValidateVersionKeyspace(context.Context, *connect.Request[dev.ValidateVersionKeyspaceRequest]) (*connect.Response[dev1.ValidateVersionKeyspaceResponse], error)
 	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
-	ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error)
+	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev1.ValidateVersionShardResponse], error)
 	// VTExplain provides information on how Vitess plans to execute a
 	// particular query.
-	VTExplain(context.Context, *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error)
+	VTExplain(context.Context, *connect.Request[dev.VTExplainRequest]) (*connect.Response[dev.VTExplainResponse], error)
 }
 
 // NewVTAdminClient constructs a client for the vtadmin.VTAdmin service. By default, it
@@ -321,260 +321,260 @@ type VTAdminClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) VTAdminClient {
+func NewVTAdminClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VTAdminClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &vTAdminClient{
-		createKeyspace: connect_go.NewClient[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse](
+		createKeyspace: connect.NewClient[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminCreateKeyspaceProcedure,
 			opts...,
 		),
-		createShard: connect_go.NewClient[dev.CreateShardRequest, dev1.CreateShardResponse](
+		createShard: connect.NewClient[dev.CreateShardRequest, dev1.CreateShardResponse](
 			httpClient,
 			baseURL+VTAdminCreateShardProcedure,
 			opts...,
 		),
-		deleteKeyspace: connect_go.NewClient[dev.DeleteKeyspaceRequest, dev1.DeleteKeyspaceResponse](
+		deleteKeyspace: connect.NewClient[dev.DeleteKeyspaceRequest, dev1.DeleteKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminDeleteKeyspaceProcedure,
 			opts...,
 		),
-		deleteShards: connect_go.NewClient[dev.DeleteShardsRequest, dev1.DeleteShardsResponse](
+		deleteShards: connect.NewClient[dev.DeleteShardsRequest, dev1.DeleteShardsResponse](
 			httpClient,
 			baseURL+VTAdminDeleteShardsProcedure,
 			opts...,
 		),
-		deleteTablet: connect_go.NewClient[dev.DeleteTabletRequest, dev.DeleteTabletResponse](
+		deleteTablet: connect.NewClient[dev.DeleteTabletRequest, dev.DeleteTabletResponse](
 			httpClient,
 			baseURL+VTAdminDeleteTabletProcedure,
 			opts...,
 		),
-		emergencyFailoverShard: connect_go.NewClient[dev.EmergencyFailoverShardRequest, dev.EmergencyFailoverShardResponse](
+		emergencyFailoverShard: connect.NewClient[dev.EmergencyFailoverShardRequest, dev.EmergencyFailoverShardResponse](
 			httpClient,
 			baseURL+VTAdminEmergencyFailoverShardProcedure,
 			opts...,
 		),
-		findSchema: connect_go.NewClient[dev.FindSchemaRequest, dev.Schema](
+		findSchema: connect.NewClient[dev.FindSchemaRequest, dev.Schema](
 			httpClient,
 			baseURL+VTAdminFindSchemaProcedure,
 			opts...,
 		),
-		getBackups: connect_go.NewClient[dev.GetBackupsRequest, dev.GetBackupsResponse](
+		getBackups: connect.NewClient[dev.GetBackupsRequest, dev.GetBackupsResponse](
 			httpClient,
 			baseURL+VTAdminGetBackupsProcedure,
 			opts...,
 		),
-		getCellInfos: connect_go.NewClient[dev.GetCellInfosRequest, dev.GetCellInfosResponse](
+		getCellInfos: connect.NewClient[dev.GetCellInfosRequest, dev.GetCellInfosResponse](
 			httpClient,
 			baseURL+VTAdminGetCellInfosProcedure,
 			opts...,
 		),
-		getCellsAliases: connect_go.NewClient[dev.GetCellsAliasesRequest, dev.GetCellsAliasesResponse](
+		getCellsAliases: connect.NewClient[dev.GetCellsAliasesRequest, dev.GetCellsAliasesResponse](
 			httpClient,
 			baseURL+VTAdminGetCellsAliasesProcedure,
 			opts...,
 		),
-		getClusters: connect_go.NewClient[dev.GetClustersRequest, dev.GetClustersResponse](
+		getClusters: connect.NewClient[dev.GetClustersRequest, dev.GetClustersResponse](
 			httpClient,
 			baseURL+VTAdminGetClustersProcedure,
 			opts...,
 		),
-		getFullStatus: connect_go.NewClient[dev.GetFullStatusRequest, dev1.GetFullStatusResponse](
+		getFullStatus: connect.NewClient[dev.GetFullStatusRequest, dev1.GetFullStatusResponse](
 			httpClient,
 			baseURL+VTAdminGetFullStatusProcedure,
 			opts...,
 		),
-		getGates: connect_go.NewClient[dev.GetGatesRequest, dev.GetGatesResponse](
+		getGates: connect.NewClient[dev.GetGatesRequest, dev.GetGatesResponse](
 			httpClient,
 			baseURL+VTAdminGetGatesProcedure,
 			opts...,
 		),
-		getKeyspace: connect_go.NewClient[dev.GetKeyspaceRequest, dev.Keyspace](
+		getKeyspace: connect.NewClient[dev.GetKeyspaceRequest, dev.Keyspace](
 			httpClient,
 			baseURL+VTAdminGetKeyspaceProcedure,
 			opts...,
 		),
-		getKeyspaces: connect_go.NewClient[dev.GetKeyspacesRequest, dev.GetKeyspacesResponse](
+		getKeyspaces: connect.NewClient[dev.GetKeyspacesRequest, dev.GetKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetKeyspacesProcedure,
 			opts...,
 		),
-		getSchema: connect_go.NewClient[dev.GetSchemaRequest, dev.Schema](
+		getSchema: connect.NewClient[dev.GetSchemaRequest, dev.Schema](
 			httpClient,
 			baseURL+VTAdminGetSchemaProcedure,
 			opts...,
 		),
-		getSchemas: connect_go.NewClient[dev.GetSchemasRequest, dev.GetSchemasResponse](
+		getSchemas: connect.NewClient[dev.GetSchemasRequest, dev.GetSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetSchemasProcedure,
 			opts...,
 		),
-		getShardReplicationPositions: connect_go.NewClient[dev.GetShardReplicationPositionsRequest, dev.GetShardReplicationPositionsResponse](
+		getShardReplicationPositions: connect.NewClient[dev.GetShardReplicationPositionsRequest, dev.GetShardReplicationPositionsResponse](
 			httpClient,
 			baseURL+VTAdminGetShardReplicationPositionsProcedure,
 			opts...,
 		),
-		getSrvKeyspace: connect_go.NewClient[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse](
+		getSrvKeyspace: connect.NewClient[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvKeyspaceProcedure,
 			opts...,
 		),
-		getSrvKeyspaces: connect_go.NewClient[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse](
+		getSrvKeyspaces: connect.NewClient[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvKeyspacesProcedure,
 			opts...,
 		),
-		getSrvVSchema: connect_go.NewClient[dev.GetSrvVSchemaRequest, dev.SrvVSchema](
+		getSrvVSchema: connect.NewClient[dev.GetSrvVSchemaRequest, dev.SrvVSchema](
 			httpClient,
 			baseURL+VTAdminGetSrvVSchemaProcedure,
 			opts...,
 		),
-		getSrvVSchemas: connect_go.NewClient[dev.GetSrvVSchemasRequest, dev.GetSrvVSchemasResponse](
+		getSrvVSchemas: connect.NewClient[dev.GetSrvVSchemasRequest, dev.GetSrvVSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvVSchemasProcedure,
 			opts...,
 		),
-		getTablet: connect_go.NewClient[dev.GetTabletRequest, dev.Tablet](
+		getTablet: connect.NewClient[dev.GetTabletRequest, dev.Tablet](
 			httpClient,
 			baseURL+VTAdminGetTabletProcedure,
 			opts...,
 		),
-		getTablets: connect_go.NewClient[dev.GetTabletsRequest, dev.GetTabletsResponse](
+		getTablets: connect.NewClient[dev.GetTabletsRequest, dev.GetTabletsResponse](
 			httpClient,
 			baseURL+VTAdminGetTabletsProcedure,
 			opts...,
 		),
-		getTopologyPath: connect_go.NewClient[dev.GetTopologyPathRequest, dev1.GetTopologyPathResponse](
+		getTopologyPath: connect.NewClient[dev.GetTopologyPathRequest, dev1.GetTopologyPathResponse](
 			httpClient,
 			baseURL+VTAdminGetTopologyPathProcedure,
 			opts...,
 		),
-		getVSchema: connect_go.NewClient[dev.GetVSchemaRequest, dev.VSchema](
+		getVSchema: connect.NewClient[dev.GetVSchemaRequest, dev.VSchema](
 			httpClient,
 			baseURL+VTAdminGetVSchemaProcedure,
 			opts...,
 		),
-		getVSchemas: connect_go.NewClient[dev.GetVSchemasRequest, dev.GetVSchemasResponse](
+		getVSchemas: connect.NewClient[dev.GetVSchemasRequest, dev.GetVSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetVSchemasProcedure,
 			opts...,
 		),
-		getVtctlds: connect_go.NewClient[dev.GetVtctldsRequest, dev.GetVtctldsResponse](
+		getVtctlds: connect.NewClient[dev.GetVtctldsRequest, dev.GetVtctldsResponse](
 			httpClient,
 			baseURL+VTAdminGetVtctldsProcedure,
 			opts...,
 		),
-		getWorkflow: connect_go.NewClient[dev.GetWorkflowRequest, dev.Workflow](
+		getWorkflow: connect.NewClient[dev.GetWorkflowRequest, dev.Workflow](
 			httpClient,
 			baseURL+VTAdminGetWorkflowProcedure,
 			opts...,
 		),
-		getWorkflows: connect_go.NewClient[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse](
+		getWorkflows: connect.NewClient[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse](
 			httpClient,
 			baseURL+VTAdminGetWorkflowsProcedure,
 			opts...,
 		),
-		pingTablet: connect_go.NewClient[dev.PingTabletRequest, dev.PingTabletResponse](
+		pingTablet: connect.NewClient[dev.PingTabletRequest, dev.PingTabletResponse](
 			httpClient,
 			baseURL+VTAdminPingTabletProcedure,
 			opts...,
 		),
-		plannedFailoverShard: connect_go.NewClient[dev.PlannedFailoverShardRequest, dev.PlannedFailoverShardResponse](
+		plannedFailoverShard: connect.NewClient[dev.PlannedFailoverShardRequest, dev.PlannedFailoverShardResponse](
 			httpClient,
 			baseURL+VTAdminPlannedFailoverShardProcedure,
 			opts...,
 		),
-		rebuildKeyspaceGraph: connect_go.NewClient[dev.RebuildKeyspaceGraphRequest, dev.RebuildKeyspaceGraphResponse](
+		rebuildKeyspaceGraph: connect.NewClient[dev.RebuildKeyspaceGraphRequest, dev.RebuildKeyspaceGraphResponse](
 			httpClient,
 			baseURL+VTAdminRebuildKeyspaceGraphProcedure,
 			opts...,
 		),
-		refreshState: connect_go.NewClient[dev.RefreshStateRequest, dev.RefreshStateResponse](
+		refreshState: connect.NewClient[dev.RefreshStateRequest, dev.RefreshStateResponse](
 			httpClient,
 			baseURL+VTAdminRefreshStateProcedure,
 			opts...,
 		),
-		refreshTabletReplicationSource: connect_go.NewClient[dev.RefreshTabletReplicationSourceRequest, dev.RefreshTabletReplicationSourceResponse](
+		refreshTabletReplicationSource: connect.NewClient[dev.RefreshTabletReplicationSourceRequest, dev.RefreshTabletReplicationSourceResponse](
 			httpClient,
 			baseURL+VTAdminRefreshTabletReplicationSourceProcedure,
 			opts...,
 		),
-		reloadSchemas: connect_go.NewClient[dev.ReloadSchemasRequest, dev.ReloadSchemasResponse](
+		reloadSchemas: connect.NewClient[dev.ReloadSchemasRequest, dev.ReloadSchemasResponse](
 			httpClient,
 			baseURL+VTAdminReloadSchemasProcedure,
 			opts...,
 		),
-		reloadSchemaShard: connect_go.NewClient[dev.ReloadSchemaShardRequest, dev.ReloadSchemaShardResponse](
+		reloadSchemaShard: connect.NewClient[dev.ReloadSchemaShardRequest, dev.ReloadSchemaShardResponse](
 			httpClient,
 			baseURL+VTAdminReloadSchemaShardProcedure,
 			opts...,
 		),
-		removeKeyspaceCell: connect_go.NewClient[dev.RemoveKeyspaceCellRequest, dev.RemoveKeyspaceCellResponse](
+		removeKeyspaceCell: connect.NewClient[dev.RemoveKeyspaceCellRequest, dev.RemoveKeyspaceCellResponse](
 			httpClient,
 			baseURL+VTAdminRemoveKeyspaceCellProcedure,
 			opts...,
 		),
-		runHealthCheck: connect_go.NewClient[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse](
+		runHealthCheck: connect.NewClient[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse](
 			httpClient,
 			baseURL+VTAdminRunHealthCheckProcedure,
 			opts...,
 		),
-		setReadOnly: connect_go.NewClient[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse](
+		setReadOnly: connect.NewClient[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse](
 			httpClient,
 			baseURL+VTAdminSetReadOnlyProcedure,
 			opts...,
 		),
-		setReadWrite: connect_go.NewClient[dev.SetReadWriteRequest, dev.SetReadWriteResponse](
+		setReadWrite: connect.NewClient[dev.SetReadWriteRequest, dev.SetReadWriteResponse](
 			httpClient,
 			baseURL+VTAdminSetReadWriteProcedure,
 			opts...,
 		),
-		startReplication: connect_go.NewClient[dev.StartReplicationRequest, dev.StartReplicationResponse](
+		startReplication: connect.NewClient[dev.StartReplicationRequest, dev.StartReplicationResponse](
 			httpClient,
 			baseURL+VTAdminStartReplicationProcedure,
 			opts...,
 		),
-		stopReplication: connect_go.NewClient[dev.StopReplicationRequest, dev.StopReplicationResponse](
+		stopReplication: connect.NewClient[dev.StopReplicationRequest, dev.StopReplicationResponse](
 			httpClient,
 			baseURL+VTAdminStopReplicationProcedure,
 			opts...,
 		),
-		tabletExternallyPromoted: connect_go.NewClient[dev.TabletExternallyPromotedRequest, dev.TabletExternallyPromotedResponse](
+		tabletExternallyPromoted: connect.NewClient[dev.TabletExternallyPromotedRequest, dev.TabletExternallyPromotedResponse](
 			httpClient,
 			baseURL+VTAdminTabletExternallyPromotedProcedure,
 			opts...,
 		),
-		validate: connect_go.NewClient[dev.ValidateRequest, dev1.ValidateResponse](
+		validate: connect.NewClient[dev.ValidateRequest, dev1.ValidateResponse](
 			httpClient,
 			baseURL+VTAdminValidateProcedure,
 			opts...,
 		),
-		validateKeyspace: connect_go.NewClient[dev.ValidateKeyspaceRequest, dev1.ValidateKeyspaceResponse](
+		validateKeyspace: connect.NewClient[dev.ValidateKeyspaceRequest, dev1.ValidateKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateKeyspaceProcedure,
 			opts...,
 		),
-		validateSchemaKeyspace: connect_go.NewClient[dev.ValidateSchemaKeyspaceRequest, dev1.ValidateSchemaKeyspaceResponse](
+		validateSchemaKeyspace: connect.NewClient[dev.ValidateSchemaKeyspaceRequest, dev1.ValidateSchemaKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateSchemaKeyspaceProcedure,
 			opts...,
 		),
-		validateShard: connect_go.NewClient[dev.ValidateShardRequest, dev1.ValidateShardResponse](
+		validateShard: connect.NewClient[dev.ValidateShardRequest, dev1.ValidateShardResponse](
 			httpClient,
 			baseURL+VTAdminValidateShardProcedure,
 			opts...,
 		),
-		validateVersionKeyspace: connect_go.NewClient[dev.ValidateVersionKeyspaceRequest, dev1.ValidateVersionKeyspaceResponse](
+		validateVersionKeyspace: connect.NewClient[dev.ValidateVersionKeyspaceRequest, dev1.ValidateVersionKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateVersionKeyspaceProcedure,
 			opts...,
 		),
-		validateVersionShard: connect_go.NewClient[dev.ValidateVersionShardRequest, dev1.ValidateVersionShardResponse](
+		validateVersionShard: connect.NewClient[dev.ValidateVersionShardRequest, dev1.ValidateVersionShardResponse](
 			httpClient,
 			baseURL+VTAdminValidateVersionShardProcedure,
 			opts...,
 		),
-		vTExplain: connect_go.NewClient[dev.VTExplainRequest, dev.VTExplainResponse](
+		vTExplain: connect.NewClient[dev.VTExplainRequest, dev.VTExplainResponse](
 			httpClient,
 			baseURL+VTAdminVTExplainProcedure,
 			opts...,
@@ -584,394 +584,394 @@ func NewVTAdminClient(httpClient connect_go.HTTPClient, baseURL string, opts ...
 
 // vTAdminClient implements VTAdminClient.
 type vTAdminClient struct {
-	createKeyspace                 *connect_go.Client[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse]
-	createShard                    *connect_go.Client[dev.CreateShardRequest, dev1.CreateShardResponse]
-	deleteKeyspace                 *connect_go.Client[dev.DeleteKeyspaceRequest, dev1.DeleteKeyspaceResponse]
-	deleteShards                   *connect_go.Client[dev.DeleteShardsRequest, dev1.DeleteShardsResponse]
-	deleteTablet                   *connect_go.Client[dev.DeleteTabletRequest, dev.DeleteTabletResponse]
-	emergencyFailoverShard         *connect_go.Client[dev.EmergencyFailoverShardRequest, dev.EmergencyFailoverShardResponse]
-	findSchema                     *connect_go.Client[dev.FindSchemaRequest, dev.Schema]
-	getBackups                     *connect_go.Client[dev.GetBackupsRequest, dev.GetBackupsResponse]
-	getCellInfos                   *connect_go.Client[dev.GetCellInfosRequest, dev.GetCellInfosResponse]
-	getCellsAliases                *connect_go.Client[dev.GetCellsAliasesRequest, dev.GetCellsAliasesResponse]
-	getClusters                    *connect_go.Client[dev.GetClustersRequest, dev.GetClustersResponse]
-	getFullStatus                  *connect_go.Client[dev.GetFullStatusRequest, dev1.GetFullStatusResponse]
-	getGates                       *connect_go.Client[dev.GetGatesRequest, dev.GetGatesResponse]
-	getKeyspace                    *connect_go.Client[dev.GetKeyspaceRequest, dev.Keyspace]
-	getKeyspaces                   *connect_go.Client[dev.GetKeyspacesRequest, dev.GetKeyspacesResponse]
-	getSchema                      *connect_go.Client[dev.GetSchemaRequest, dev.Schema]
-	getSchemas                     *connect_go.Client[dev.GetSchemasRequest, dev.GetSchemasResponse]
-	getShardReplicationPositions   *connect_go.Client[dev.GetShardReplicationPositionsRequest, dev.GetShardReplicationPositionsResponse]
-	getSrvKeyspace                 *connect_go.Client[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse]
-	getSrvKeyspaces                *connect_go.Client[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse]
-	getSrvVSchema                  *connect_go.Client[dev.GetSrvVSchemaRequest, dev.SrvVSchema]
-	getSrvVSchemas                 *connect_go.Client[dev.GetSrvVSchemasRequest, dev.GetSrvVSchemasResponse]
-	getTablet                      *connect_go.Client[dev.GetTabletRequest, dev.Tablet]
-	getTablets                     *connect_go.Client[dev.GetTabletsRequest, dev.GetTabletsResponse]
-	getTopologyPath                *connect_go.Client[dev.GetTopologyPathRequest, dev1.GetTopologyPathResponse]
-	getVSchema                     *connect_go.Client[dev.GetVSchemaRequest, dev.VSchema]
-	getVSchemas                    *connect_go.Client[dev.GetVSchemasRequest, dev.GetVSchemasResponse]
-	getVtctlds                     *connect_go.Client[dev.GetVtctldsRequest, dev.GetVtctldsResponse]
-	getWorkflow                    *connect_go.Client[dev.GetWorkflowRequest, dev.Workflow]
-	getWorkflows                   *connect_go.Client[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse]
-	pingTablet                     *connect_go.Client[dev.PingTabletRequest, dev.PingTabletResponse]
-	plannedFailoverShard           *connect_go.Client[dev.PlannedFailoverShardRequest, dev.PlannedFailoverShardResponse]
-	rebuildKeyspaceGraph           *connect_go.Client[dev.RebuildKeyspaceGraphRequest, dev.RebuildKeyspaceGraphResponse]
-	refreshState                   *connect_go.Client[dev.RefreshStateRequest, dev.RefreshStateResponse]
-	refreshTabletReplicationSource *connect_go.Client[dev.RefreshTabletReplicationSourceRequest, dev.RefreshTabletReplicationSourceResponse]
-	reloadSchemas                  *connect_go.Client[dev.ReloadSchemasRequest, dev.ReloadSchemasResponse]
-	reloadSchemaShard              *connect_go.Client[dev.ReloadSchemaShardRequest, dev.ReloadSchemaShardResponse]
-	removeKeyspaceCell             *connect_go.Client[dev.RemoveKeyspaceCellRequest, dev.RemoveKeyspaceCellResponse]
-	runHealthCheck                 *connect_go.Client[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse]
-	setReadOnly                    *connect_go.Client[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse]
-	setReadWrite                   *connect_go.Client[dev.SetReadWriteRequest, dev.SetReadWriteResponse]
-	startReplication               *connect_go.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
-	stopReplication                *connect_go.Client[dev.StopReplicationRequest, dev.StopReplicationResponse]
-	tabletExternallyPromoted       *connect_go.Client[dev.TabletExternallyPromotedRequest, dev.TabletExternallyPromotedResponse]
-	validate                       *connect_go.Client[dev.ValidateRequest, dev1.ValidateResponse]
-	validateKeyspace               *connect_go.Client[dev.ValidateKeyspaceRequest, dev1.ValidateKeyspaceResponse]
-	validateSchemaKeyspace         *connect_go.Client[dev.ValidateSchemaKeyspaceRequest, dev1.ValidateSchemaKeyspaceResponse]
-	validateShard                  *connect_go.Client[dev.ValidateShardRequest, dev1.ValidateShardResponse]
-	validateVersionKeyspace        *connect_go.Client[dev.ValidateVersionKeyspaceRequest, dev1.ValidateVersionKeyspaceResponse]
-	validateVersionShard           *connect_go.Client[dev.ValidateVersionShardRequest, dev1.ValidateVersionShardResponse]
-	vTExplain                      *connect_go.Client[dev.VTExplainRequest, dev.VTExplainResponse]
+	createKeyspace                 *connect.Client[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse]
+	createShard                    *connect.Client[dev.CreateShardRequest, dev1.CreateShardResponse]
+	deleteKeyspace                 *connect.Client[dev.DeleteKeyspaceRequest, dev1.DeleteKeyspaceResponse]
+	deleteShards                   *connect.Client[dev.DeleteShardsRequest, dev1.DeleteShardsResponse]
+	deleteTablet                   *connect.Client[dev.DeleteTabletRequest, dev.DeleteTabletResponse]
+	emergencyFailoverShard         *connect.Client[dev.EmergencyFailoverShardRequest, dev.EmergencyFailoverShardResponse]
+	findSchema                     *connect.Client[dev.FindSchemaRequest, dev.Schema]
+	getBackups                     *connect.Client[dev.GetBackupsRequest, dev.GetBackupsResponse]
+	getCellInfos                   *connect.Client[dev.GetCellInfosRequest, dev.GetCellInfosResponse]
+	getCellsAliases                *connect.Client[dev.GetCellsAliasesRequest, dev.GetCellsAliasesResponse]
+	getClusters                    *connect.Client[dev.GetClustersRequest, dev.GetClustersResponse]
+	getFullStatus                  *connect.Client[dev.GetFullStatusRequest, dev1.GetFullStatusResponse]
+	getGates                       *connect.Client[dev.GetGatesRequest, dev.GetGatesResponse]
+	getKeyspace                    *connect.Client[dev.GetKeyspaceRequest, dev.Keyspace]
+	getKeyspaces                   *connect.Client[dev.GetKeyspacesRequest, dev.GetKeyspacesResponse]
+	getSchema                      *connect.Client[dev.GetSchemaRequest, dev.Schema]
+	getSchemas                     *connect.Client[dev.GetSchemasRequest, dev.GetSchemasResponse]
+	getShardReplicationPositions   *connect.Client[dev.GetShardReplicationPositionsRequest, dev.GetShardReplicationPositionsResponse]
+	getSrvKeyspace                 *connect.Client[dev.GetSrvKeyspaceRequest, dev1.GetSrvKeyspacesResponse]
+	getSrvKeyspaces                *connect.Client[dev.GetSrvKeyspacesRequest, dev.GetSrvKeyspacesResponse]
+	getSrvVSchema                  *connect.Client[dev.GetSrvVSchemaRequest, dev.SrvVSchema]
+	getSrvVSchemas                 *connect.Client[dev.GetSrvVSchemasRequest, dev.GetSrvVSchemasResponse]
+	getTablet                      *connect.Client[dev.GetTabletRequest, dev.Tablet]
+	getTablets                     *connect.Client[dev.GetTabletsRequest, dev.GetTabletsResponse]
+	getTopologyPath                *connect.Client[dev.GetTopologyPathRequest, dev1.GetTopologyPathResponse]
+	getVSchema                     *connect.Client[dev.GetVSchemaRequest, dev.VSchema]
+	getVSchemas                    *connect.Client[dev.GetVSchemasRequest, dev.GetVSchemasResponse]
+	getVtctlds                     *connect.Client[dev.GetVtctldsRequest, dev.GetVtctldsResponse]
+	getWorkflow                    *connect.Client[dev.GetWorkflowRequest, dev.Workflow]
+	getWorkflows                   *connect.Client[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse]
+	pingTablet                     *connect.Client[dev.PingTabletRequest, dev.PingTabletResponse]
+	plannedFailoverShard           *connect.Client[dev.PlannedFailoverShardRequest, dev.PlannedFailoverShardResponse]
+	rebuildKeyspaceGraph           *connect.Client[dev.RebuildKeyspaceGraphRequest, dev.RebuildKeyspaceGraphResponse]
+	refreshState                   *connect.Client[dev.RefreshStateRequest, dev.RefreshStateResponse]
+	refreshTabletReplicationSource *connect.Client[dev.RefreshTabletReplicationSourceRequest, dev.RefreshTabletReplicationSourceResponse]
+	reloadSchemas                  *connect.Client[dev.ReloadSchemasRequest, dev.ReloadSchemasResponse]
+	reloadSchemaShard              *connect.Client[dev.ReloadSchemaShardRequest, dev.ReloadSchemaShardResponse]
+	removeKeyspaceCell             *connect.Client[dev.RemoveKeyspaceCellRequest, dev.RemoveKeyspaceCellResponse]
+	runHealthCheck                 *connect.Client[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse]
+	setReadOnly                    *connect.Client[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse]
+	setReadWrite                   *connect.Client[dev.SetReadWriteRequest, dev.SetReadWriteResponse]
+	startReplication               *connect.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
+	stopReplication                *connect.Client[dev.StopReplicationRequest, dev.StopReplicationResponse]
+	tabletExternallyPromoted       *connect.Client[dev.TabletExternallyPromotedRequest, dev.TabletExternallyPromotedResponse]
+	validate                       *connect.Client[dev.ValidateRequest, dev1.ValidateResponse]
+	validateKeyspace               *connect.Client[dev.ValidateKeyspaceRequest, dev1.ValidateKeyspaceResponse]
+	validateSchemaKeyspace         *connect.Client[dev.ValidateSchemaKeyspaceRequest, dev1.ValidateSchemaKeyspaceResponse]
+	validateShard                  *connect.Client[dev.ValidateShardRequest, dev1.ValidateShardResponse]
+	validateVersionKeyspace        *connect.Client[dev.ValidateVersionKeyspaceRequest, dev1.ValidateVersionKeyspaceResponse]
+	validateVersionShard           *connect.Client[dev.ValidateVersionShardRequest, dev1.ValidateVersionShardResponse]
+	vTExplain                      *connect.Client[dev.VTExplainRequest, dev.VTExplainResponse]
 }
 
 // CreateKeyspace calls vtadmin.VTAdmin.CreateKeyspace.
-func (c *vTAdminClient) CreateKeyspace(ctx context.Context, req *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error) {
+func (c *vTAdminClient) CreateKeyspace(ctx context.Context, req *connect.Request[dev.CreateKeyspaceRequest]) (*connect.Response[dev.CreateKeyspaceResponse], error) {
 	return c.createKeyspace.CallUnary(ctx, req)
 }
 
 // CreateShard calls vtadmin.VTAdmin.CreateShard.
-func (c *vTAdminClient) CreateShard(ctx context.Context, req *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error) {
+func (c *vTAdminClient) CreateShard(ctx context.Context, req *connect.Request[dev.CreateShardRequest]) (*connect.Response[dev1.CreateShardResponse], error) {
 	return c.createShard.CallUnary(ctx, req)
 }
 
 // DeleteKeyspace calls vtadmin.VTAdmin.DeleteKeyspace.
-func (c *vTAdminClient) DeleteKeyspace(ctx context.Context, req *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error) {
+func (c *vTAdminClient) DeleteKeyspace(ctx context.Context, req *connect.Request[dev.DeleteKeyspaceRequest]) (*connect.Response[dev1.DeleteKeyspaceResponse], error) {
 	return c.deleteKeyspace.CallUnary(ctx, req)
 }
 
 // DeleteShards calls vtadmin.VTAdmin.DeleteShards.
-func (c *vTAdminClient) DeleteShards(ctx context.Context, req *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error) {
+func (c *vTAdminClient) DeleteShards(ctx context.Context, req *connect.Request[dev.DeleteShardsRequest]) (*connect.Response[dev1.DeleteShardsResponse], error) {
 	return c.deleteShards.CallUnary(ctx, req)
 }
 
 // DeleteTablet calls vtadmin.VTAdmin.DeleteTablet.
-func (c *vTAdminClient) DeleteTablet(ctx context.Context, req *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error) {
+func (c *vTAdminClient) DeleteTablet(ctx context.Context, req *connect.Request[dev.DeleteTabletRequest]) (*connect.Response[dev.DeleteTabletResponse], error) {
 	return c.deleteTablet.CallUnary(ctx, req)
 }
 
 // EmergencyFailoverShard calls vtadmin.VTAdmin.EmergencyFailoverShard.
-func (c *vTAdminClient) EmergencyFailoverShard(ctx context.Context, req *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error) {
+func (c *vTAdminClient) EmergencyFailoverShard(ctx context.Context, req *connect.Request[dev.EmergencyFailoverShardRequest]) (*connect.Response[dev.EmergencyFailoverShardResponse], error) {
 	return c.emergencyFailoverShard.CallUnary(ctx, req)
 }
 
 // FindSchema calls vtadmin.VTAdmin.FindSchema.
-func (c *vTAdminClient) FindSchema(ctx context.Context, req *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
+func (c *vTAdminClient) FindSchema(ctx context.Context, req *connect.Request[dev.FindSchemaRequest]) (*connect.Response[dev.Schema], error) {
 	return c.findSchema.CallUnary(ctx, req)
 }
 
 // GetBackups calls vtadmin.VTAdmin.GetBackups.
-func (c *vTAdminClient) GetBackups(ctx context.Context, req *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error) {
+func (c *vTAdminClient) GetBackups(ctx context.Context, req *connect.Request[dev.GetBackupsRequest]) (*connect.Response[dev.GetBackupsResponse], error) {
 	return c.getBackups.CallUnary(ctx, req)
 }
 
 // GetCellInfos calls vtadmin.VTAdmin.GetCellInfos.
-func (c *vTAdminClient) GetCellInfos(ctx context.Context, req *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error) {
+func (c *vTAdminClient) GetCellInfos(ctx context.Context, req *connect.Request[dev.GetCellInfosRequest]) (*connect.Response[dev.GetCellInfosResponse], error) {
 	return c.getCellInfos.CallUnary(ctx, req)
 }
 
 // GetCellsAliases calls vtadmin.VTAdmin.GetCellsAliases.
-func (c *vTAdminClient) GetCellsAliases(ctx context.Context, req *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error) {
+func (c *vTAdminClient) GetCellsAliases(ctx context.Context, req *connect.Request[dev.GetCellsAliasesRequest]) (*connect.Response[dev.GetCellsAliasesResponse], error) {
 	return c.getCellsAliases.CallUnary(ctx, req)
 }
 
 // GetClusters calls vtadmin.VTAdmin.GetClusters.
-func (c *vTAdminClient) GetClusters(ctx context.Context, req *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error) {
+func (c *vTAdminClient) GetClusters(ctx context.Context, req *connect.Request[dev.GetClustersRequest]) (*connect.Response[dev.GetClustersResponse], error) {
 	return c.getClusters.CallUnary(ctx, req)
 }
 
 // GetFullStatus calls vtadmin.VTAdmin.GetFullStatus.
-func (c *vTAdminClient) GetFullStatus(ctx context.Context, req *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error) {
+func (c *vTAdminClient) GetFullStatus(ctx context.Context, req *connect.Request[dev.GetFullStatusRequest]) (*connect.Response[dev1.GetFullStatusResponse], error) {
 	return c.getFullStatus.CallUnary(ctx, req)
 }
 
 // GetGates calls vtadmin.VTAdmin.GetGates.
-func (c *vTAdminClient) GetGates(ctx context.Context, req *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error) {
+func (c *vTAdminClient) GetGates(ctx context.Context, req *connect.Request[dev.GetGatesRequest]) (*connect.Response[dev.GetGatesResponse], error) {
 	return c.getGates.CallUnary(ctx, req)
 }
 
 // GetKeyspace calls vtadmin.VTAdmin.GetKeyspace.
-func (c *vTAdminClient) GetKeyspace(ctx context.Context, req *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error) {
+func (c *vTAdminClient) GetKeyspace(ctx context.Context, req *connect.Request[dev.GetKeyspaceRequest]) (*connect.Response[dev.Keyspace], error) {
 	return c.getKeyspace.CallUnary(ctx, req)
 }
 
 // GetKeyspaces calls vtadmin.VTAdmin.GetKeyspaces.
-func (c *vTAdminClient) GetKeyspaces(ctx context.Context, req *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error) {
+func (c *vTAdminClient) GetKeyspaces(ctx context.Context, req *connect.Request[dev.GetKeyspacesRequest]) (*connect.Response[dev.GetKeyspacesResponse], error) {
 	return c.getKeyspaces.CallUnary(ctx, req)
 }
 
 // GetSchema calls vtadmin.VTAdmin.GetSchema.
-func (c *vTAdminClient) GetSchema(ctx context.Context, req *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
+func (c *vTAdminClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.Schema], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
 // GetSchemas calls vtadmin.VTAdmin.GetSchemas.
-func (c *vTAdminClient) GetSchemas(ctx context.Context, req *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error) {
+func (c *vTAdminClient) GetSchemas(ctx context.Context, req *connect.Request[dev.GetSchemasRequest]) (*connect.Response[dev.GetSchemasResponse], error) {
 	return c.getSchemas.CallUnary(ctx, req)
 }
 
 // GetShardReplicationPositions calls vtadmin.VTAdmin.GetShardReplicationPositions.
-func (c *vTAdminClient) GetShardReplicationPositions(ctx context.Context, req *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
+func (c *vTAdminClient) GetShardReplicationPositions(ctx context.Context, req *connect.Request[dev.GetShardReplicationPositionsRequest]) (*connect.Response[dev.GetShardReplicationPositionsResponse], error) {
 	return c.getShardReplicationPositions.CallUnary(ctx, req)
 }
 
 // GetSrvKeyspace calls vtadmin.VTAdmin.GetSrvKeyspace.
-func (c *vTAdminClient) GetSrvKeyspace(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
+func (c *vTAdminClient) GetSrvKeyspace(ctx context.Context, req *connect.Request[dev.GetSrvKeyspaceRequest]) (*connect.Response[dev1.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspace.CallUnary(ctx, req)
 }
 
 // GetSrvKeyspaces calls vtadmin.VTAdmin.GetSrvKeyspaces.
-func (c *vTAdminClient) GetSrvKeyspaces(ctx context.Context, req *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
+func (c *vTAdminClient) GetSrvKeyspaces(ctx context.Context, req *connect.Request[dev.GetSrvKeyspacesRequest]) (*connect.Response[dev.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspaces.CallUnary(ctx, req)
 }
 
 // GetSrvVSchema calls vtadmin.VTAdmin.GetSrvVSchema.
-func (c *vTAdminClient) GetSrvVSchema(ctx context.Context, req *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error) {
+func (c *vTAdminClient) GetSrvVSchema(ctx context.Context, req *connect.Request[dev.GetSrvVSchemaRequest]) (*connect.Response[dev.SrvVSchema], error) {
 	return c.getSrvVSchema.CallUnary(ctx, req)
 }
 
 // GetSrvVSchemas calls vtadmin.VTAdmin.GetSrvVSchemas.
-func (c *vTAdminClient) GetSrvVSchemas(ctx context.Context, req *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error) {
+func (c *vTAdminClient) GetSrvVSchemas(ctx context.Context, req *connect.Request[dev.GetSrvVSchemasRequest]) (*connect.Response[dev.GetSrvVSchemasResponse], error) {
 	return c.getSrvVSchemas.CallUnary(ctx, req)
 }
 
 // GetTablet calls vtadmin.VTAdmin.GetTablet.
-func (c *vTAdminClient) GetTablet(ctx context.Context, req *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error) {
+func (c *vTAdminClient) GetTablet(ctx context.Context, req *connect.Request[dev.GetTabletRequest]) (*connect.Response[dev.Tablet], error) {
 	return c.getTablet.CallUnary(ctx, req)
 }
 
 // GetTablets calls vtadmin.VTAdmin.GetTablets.
-func (c *vTAdminClient) GetTablets(ctx context.Context, req *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error) {
+func (c *vTAdminClient) GetTablets(ctx context.Context, req *connect.Request[dev.GetTabletsRequest]) (*connect.Response[dev.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
 }
 
 // GetTopologyPath calls vtadmin.VTAdmin.GetTopologyPath.
-func (c *vTAdminClient) GetTopologyPath(ctx context.Context, req *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error) {
+func (c *vTAdminClient) GetTopologyPath(ctx context.Context, req *connect.Request[dev.GetTopologyPathRequest]) (*connect.Response[dev1.GetTopologyPathResponse], error) {
 	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
 // GetVSchema calls vtadmin.VTAdmin.GetVSchema.
-func (c *vTAdminClient) GetVSchema(ctx context.Context, req *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error) {
+func (c *vTAdminClient) GetVSchema(ctx context.Context, req *connect.Request[dev.GetVSchemaRequest]) (*connect.Response[dev.VSchema], error) {
 	return c.getVSchema.CallUnary(ctx, req)
 }
 
 // GetVSchemas calls vtadmin.VTAdmin.GetVSchemas.
-func (c *vTAdminClient) GetVSchemas(ctx context.Context, req *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error) {
+func (c *vTAdminClient) GetVSchemas(ctx context.Context, req *connect.Request[dev.GetVSchemasRequest]) (*connect.Response[dev.GetVSchemasResponse], error) {
 	return c.getVSchemas.CallUnary(ctx, req)
 }
 
 // GetVtctlds calls vtadmin.VTAdmin.GetVtctlds.
-func (c *vTAdminClient) GetVtctlds(ctx context.Context, req *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error) {
+func (c *vTAdminClient) GetVtctlds(ctx context.Context, req *connect.Request[dev.GetVtctldsRequest]) (*connect.Response[dev.GetVtctldsResponse], error) {
 	return c.getVtctlds.CallUnary(ctx, req)
 }
 
 // GetWorkflow calls vtadmin.VTAdmin.GetWorkflow.
-func (c *vTAdminClient) GetWorkflow(ctx context.Context, req *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error) {
+func (c *vTAdminClient) GetWorkflow(ctx context.Context, req *connect.Request[dev.GetWorkflowRequest]) (*connect.Response[dev.Workflow], error) {
 	return c.getWorkflow.CallUnary(ctx, req)
 }
 
 // GetWorkflows calls vtadmin.VTAdmin.GetWorkflows.
-func (c *vTAdminClient) GetWorkflows(ctx context.Context, req *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error) {
+func (c *vTAdminClient) GetWorkflows(ctx context.Context, req *connect.Request[dev.GetWorkflowsRequest]) (*connect.Response[dev.GetWorkflowsResponse], error) {
 	return c.getWorkflows.CallUnary(ctx, req)
 }
 
 // PingTablet calls vtadmin.VTAdmin.PingTablet.
-func (c *vTAdminClient) PingTablet(ctx context.Context, req *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error) {
+func (c *vTAdminClient) PingTablet(ctx context.Context, req *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error) {
 	return c.pingTablet.CallUnary(ctx, req)
 }
 
 // PlannedFailoverShard calls vtadmin.VTAdmin.PlannedFailoverShard.
-func (c *vTAdminClient) PlannedFailoverShard(ctx context.Context, req *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error) {
+func (c *vTAdminClient) PlannedFailoverShard(ctx context.Context, req *connect.Request[dev.PlannedFailoverShardRequest]) (*connect.Response[dev.PlannedFailoverShardResponse], error) {
 	return c.plannedFailoverShard.CallUnary(ctx, req)
 }
 
 // RebuildKeyspaceGraph calls vtadmin.VTAdmin.RebuildKeyspaceGraph.
-func (c *vTAdminClient) RebuildKeyspaceGraph(ctx context.Context, req *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error) {
+func (c *vTAdminClient) RebuildKeyspaceGraph(ctx context.Context, req *connect.Request[dev.RebuildKeyspaceGraphRequest]) (*connect.Response[dev.RebuildKeyspaceGraphResponse], error) {
 	return c.rebuildKeyspaceGraph.CallUnary(ctx, req)
 }
 
 // RefreshState calls vtadmin.VTAdmin.RefreshState.
-func (c *vTAdminClient) RefreshState(ctx context.Context, req *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error) {
+func (c *vTAdminClient) RefreshState(ctx context.Context, req *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
 // RefreshTabletReplicationSource calls vtadmin.VTAdmin.RefreshTabletReplicationSource.
-func (c *vTAdminClient) RefreshTabletReplicationSource(ctx context.Context, req *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error) {
+func (c *vTAdminClient) RefreshTabletReplicationSource(ctx context.Context, req *connect.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect.Response[dev.RefreshTabletReplicationSourceResponse], error) {
 	return c.refreshTabletReplicationSource.CallUnary(ctx, req)
 }
 
 // ReloadSchemas calls vtadmin.VTAdmin.ReloadSchemas.
-func (c *vTAdminClient) ReloadSchemas(ctx context.Context, req *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error) {
+func (c *vTAdminClient) ReloadSchemas(ctx context.Context, req *connect.Request[dev.ReloadSchemasRequest]) (*connect.Response[dev.ReloadSchemasResponse], error) {
 	return c.reloadSchemas.CallUnary(ctx, req)
 }
 
 // ReloadSchemaShard calls vtadmin.VTAdmin.ReloadSchemaShard.
-func (c *vTAdminClient) ReloadSchemaShard(ctx context.Context, req *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error) {
+func (c *vTAdminClient) ReloadSchemaShard(ctx context.Context, req *connect.Request[dev.ReloadSchemaShardRequest]) (*connect.Response[dev.ReloadSchemaShardResponse], error) {
 	return c.reloadSchemaShard.CallUnary(ctx, req)
 }
 
 // RemoveKeyspaceCell calls vtadmin.VTAdmin.RemoveKeyspaceCell.
-func (c *vTAdminClient) RemoveKeyspaceCell(ctx context.Context, req *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error) {
+func (c *vTAdminClient) RemoveKeyspaceCell(ctx context.Context, req *connect.Request[dev.RemoveKeyspaceCellRequest]) (*connect.Response[dev.RemoveKeyspaceCellResponse], error) {
 	return c.removeKeyspaceCell.CallUnary(ctx, req)
 }
 
 // RunHealthCheck calls vtadmin.VTAdmin.RunHealthCheck.
-func (c *vTAdminClient) RunHealthCheck(ctx context.Context, req *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error) {
+func (c *vTAdminClient) RunHealthCheck(ctx context.Context, req *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
 // SetReadOnly calls vtadmin.VTAdmin.SetReadOnly.
-func (c *vTAdminClient) SetReadOnly(ctx context.Context, req *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error) {
+func (c *vTAdminClient) SetReadOnly(ctx context.Context, req *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
 	return c.setReadOnly.CallUnary(ctx, req)
 }
 
 // SetReadWrite calls vtadmin.VTAdmin.SetReadWrite.
-func (c *vTAdminClient) SetReadWrite(ctx context.Context, req *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error) {
+func (c *vTAdminClient) SetReadWrite(ctx context.Context, req *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
 	return c.setReadWrite.CallUnary(ctx, req)
 }
 
 // StartReplication calls vtadmin.VTAdmin.StartReplication.
-func (c *vTAdminClient) StartReplication(ctx context.Context, req *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error) {
+func (c *vTAdminClient) StartReplication(ctx context.Context, req *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
 // StopReplication calls vtadmin.VTAdmin.StopReplication.
-func (c *vTAdminClient) StopReplication(ctx context.Context, req *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error) {
+func (c *vTAdminClient) StopReplication(ctx context.Context, req *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
 // TabletExternallyPromoted calls vtadmin.VTAdmin.TabletExternallyPromoted.
-func (c *vTAdminClient) TabletExternallyPromoted(ctx context.Context, req *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error) {
+func (c *vTAdminClient) TabletExternallyPromoted(ctx context.Context, req *connect.Request[dev.TabletExternallyPromotedRequest]) (*connect.Response[dev.TabletExternallyPromotedResponse], error) {
 	return c.tabletExternallyPromoted.CallUnary(ctx, req)
 }
 
 // Validate calls vtadmin.VTAdmin.Validate.
-func (c *vTAdminClient) Validate(ctx context.Context, req *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error) {
+func (c *vTAdminClient) Validate(ctx context.Context, req *connect.Request[dev.ValidateRequest]) (*connect.Response[dev1.ValidateResponse], error) {
 	return c.validate.CallUnary(ctx, req)
 }
 
 // ValidateKeyspace calls vtadmin.VTAdmin.ValidateKeyspace.
-func (c *vTAdminClient) ValidateKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error) {
+func (c *vTAdminClient) ValidateKeyspace(ctx context.Context, req *connect.Request[dev.ValidateKeyspaceRequest]) (*connect.Response[dev1.ValidateKeyspaceResponse], error) {
 	return c.validateKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateSchemaKeyspace calls vtadmin.VTAdmin.ValidateSchemaKeyspace.
-func (c *vTAdminClient) ValidateSchemaKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
+func (c *vTAdminClient) ValidateSchemaKeyspace(ctx context.Context, req *connect.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
 	return c.validateSchemaKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateShard calls vtadmin.VTAdmin.ValidateShard.
-func (c *vTAdminClient) ValidateShard(ctx context.Context, req *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error) {
+func (c *vTAdminClient) ValidateShard(ctx context.Context, req *connect.Request[dev.ValidateShardRequest]) (*connect.Response[dev1.ValidateShardResponse], error) {
 	return c.validateShard.CallUnary(ctx, req)
 }
 
 // ValidateVersionKeyspace calls vtadmin.VTAdmin.ValidateVersionKeyspace.
-func (c *vTAdminClient) ValidateVersionKeyspace(ctx context.Context, req *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error) {
+func (c *vTAdminClient) ValidateVersionKeyspace(ctx context.Context, req *connect.Request[dev.ValidateVersionKeyspaceRequest]) (*connect.Response[dev1.ValidateVersionKeyspaceResponse], error) {
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateVersionShard calls vtadmin.VTAdmin.ValidateVersionShard.
-func (c *vTAdminClient) ValidateVersionShard(ctx context.Context, req *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error) {
+func (c *vTAdminClient) ValidateVersionShard(ctx context.Context, req *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev1.ValidateVersionShardResponse], error) {
 	return c.validateVersionShard.CallUnary(ctx, req)
 }
 
 // VTExplain calls vtadmin.VTAdmin.VTExplain.
-func (c *vTAdminClient) VTExplain(ctx context.Context, req *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error) {
+func (c *vTAdminClient) VTExplain(ctx context.Context, req *connect.Request[dev.VTExplainRequest]) (*connect.Response[dev.VTExplainResponse], error) {
 	return c.vTExplain.CallUnary(ctx, req)
 }
 
 // VTAdminHandler is an implementation of the vtadmin.VTAdmin service.
 type VTAdminHandler interface {
 	// CreateKeyspace creates a new keyspace in the given cluster.
-	CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error)
+	CreateKeyspace(context.Context, *connect.Request[dev.CreateKeyspaceRequest]) (*connect.Response[dev.CreateKeyspaceResponse], error)
 	// CreateShard creates a new shard in the given cluster and keyspace.
-	CreateShard(context.Context, *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error)
+	CreateShard(context.Context, *connect.Request[dev.CreateShardRequest]) (*connect.Response[dev1.CreateShardResponse], error)
 	// DeleteKeyspace deletes a keyspace in the given cluster.
-	DeleteKeyspace(context.Context, *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error)
+	DeleteKeyspace(context.Context, *connect.Request[dev.DeleteKeyspaceRequest]) (*connect.Response[dev1.DeleteKeyspaceResponse], error)
 	// DeleteShard deletes one or more shards in the given cluster and keyspace.
-	DeleteShards(context.Context, *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error)
+	DeleteShards(context.Context, *connect.Request[dev.DeleteShardsRequest]) (*connect.Response[dev1.DeleteShardsResponse], error)
 	// DeleteTablet deletes a tablet from the topology
-	DeleteTablet(context.Context, *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error)
+	DeleteTablet(context.Context, *connect.Request[dev.DeleteTabletRequest]) (*connect.Response[dev.DeleteTabletResponse], error)
 	// EmergencyFailoverShard fails over a shard to a new primary. It assumes
 	// the old primary is dead or otherwise not responding.
-	EmergencyFailoverShard(context.Context, *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error)
+	EmergencyFailoverShard(context.Context, *connect.Request[dev.EmergencyFailoverShardRequest]) (*connect.Response[dev.EmergencyFailoverShardResponse], error)
 	// FindSchema returns a single Schema that matches the provided table name
 	// across all specified clusters IDs. Not specifying a set of cluster IDs
 	// causes the search to span all configured clusters.
 	//
 	// An error occurs if either no table exists across any of the clusters with
 	// the specified table name, or if multiple tables exist with that name.
-	FindSchema(context.Context, *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error)
+	FindSchema(context.Context, *connect.Request[dev.FindSchemaRequest]) (*connect.Response[dev.Schema], error)
 	// GetBackups returns backups grouped by cluster.
-	GetBackups(context.Context, *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error)
+	GetBackups(context.Context, *connect.Request[dev.GetBackupsRequest]) (*connect.Response[dev.GetBackupsResponse], error)
 	// GetCellInfos returns the CellInfo objects for the specified clusters.
 	//
 	// Callers may optionally restrict the set of CellInfos, or restrict the
 	// response to include only cell names.
-	GetCellInfos(context.Context, *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error)
+	GetCellInfos(context.Context, *connect.Request[dev.GetCellInfosRequest]) (*connect.Response[dev.GetCellInfosResponse], error)
 	// GetCellsAliases returns the CellsAliases data for the specified clusters.
-	GetCellsAliases(context.Context, *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error)
+	GetCellsAliases(context.Context, *connect.Request[dev.GetCellsAliasesRequest]) (*connect.Response[dev.GetCellsAliasesResponse], error)
 	// GetClusters returns all configured clusters.
-	GetClusters(context.Context, *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error)
+	GetClusters(context.Context, *connect.Request[dev.GetClustersRequest]) (*connect.Response[dev.GetClustersResponse], error)
 	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	GetFullStatus(context.Context, *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error)
+	GetFullStatus(context.Context, *connect.Request[dev.GetFullStatusRequest]) (*connect.Response[dev1.GetFullStatusResponse], error)
 	// GetGates returns all gates across all the specified clusters.
-	GetGates(context.Context, *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error)
+	GetGates(context.Context, *connect.Request[dev.GetGatesRequest]) (*connect.Response[dev.GetGatesResponse], error)
 	// GetKeyspace returns a keyspace by name in the specified cluster.
-	GetKeyspace(context.Context, *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error)
+	GetKeyspace(context.Context, *connect.Request[dev.GetKeyspaceRequest]) (*connect.Response[dev.Keyspace], error)
 	// GetKeyspaces returns all keyspaces across the specified clusters.
-	GetKeyspaces(context.Context, *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error)
+	GetKeyspaces(context.Context, *connect.Request[dev.GetKeyspacesRequest]) (*connect.Response[dev.GetKeyspacesResponse], error)
 	// GetSchema returns the schema for the specified (cluster, keyspace, table)
 	// tuple.
-	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error)
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.Schema], error)
 	// GetSchemas returns all schemas across the specified clusters.
-	GetSchemas(context.Context, *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error)
+	GetSchemas(context.Context, *connect.Request[dev.GetSchemasRequest]) (*connect.Response[dev.GetSchemasResponse], error)
 	// GetShardReplicationPositions returns shard replication positions grouped
 	// by cluster.
-	GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error)
+	GetShardReplicationPositions(context.Context, *connect.Request[dev.GetShardReplicationPositionsRequest]) (*connect.Response[dev.GetShardReplicationPositionsResponse], error)
 	// GetSrvKeyspace returns the SrvKeyspace for a keyspace in one or more cells.
-	GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspace(context.Context, *connect.Request[dev.GetSrvKeyspaceRequest]) (*connect.Response[dev1.GetSrvKeyspacesResponse], error)
 	// GetSrvKeyspaces returns the SrvKeyspaces for all keyspaces across all the specified clusters.
-	GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspaces(context.Context, *connect.Request[dev.GetSrvKeyspacesRequest]) (*connect.Response[dev.GetSrvKeyspacesResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for the given cluster and cell.
-	GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error)
+	GetSrvVSchema(context.Context, *connect.Request[dev.GetSrvVSchemaRequest]) (*connect.Response[dev.SrvVSchema], error)
 	// GetSrvVSchemas returns all SrvVSchemas across all (or specified) clusters
 	// and cells.
-	GetSrvVSchemas(context.Context, *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error)
+	GetSrvVSchemas(context.Context, *connect.Request[dev.GetSrvVSchemasRequest]) (*connect.Response[dev.GetSrvVSchemasResponse], error)
 	// GetTablet looks up a tablet by hostname across all clusters and returns
 	// the result.
-	GetTablet(context.Context, *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error)
+	GetTablet(context.Context, *connect.Request[dev.GetTabletRequest]) (*connect.Response[dev.Tablet], error)
 	// GetTablets returns all tablets across all the specified clusters.
-	GetTablets(context.Context, *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error)
+	GetTablets(context.Context, *connect.Request[dev.GetTabletsRequest]) (*connect.Response[dev.GetTabletsResponse], error)
 	// GetTopologyPath returns the cell located at the specified path in the topology server.
-	GetTopologyPath(context.Context, *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error)
+	GetTopologyPath(context.Context, *connect.Request[dev.GetTopologyPathRequest]) (*connect.Response[dev1.GetTopologyPathResponse], error)
 	// GetVSchema returns a VSchema for the specified keyspace in the specified
 	// cluster.
-	GetVSchema(context.Context, *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error)
+	GetVSchema(context.Context, *connect.Request[dev.GetVSchemaRequest]) (*connect.Response[dev.VSchema], error)
 	// GetVSchemas returns the VSchemas for all specified clusters.
-	GetVSchemas(context.Context, *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error)
+	GetVSchemas(context.Context, *connect.Request[dev.GetVSchemasRequest]) (*connect.Response[dev.GetVSchemasResponse], error)
 	// GetVtctlds returns the Vtctlds for all specified clusters.
-	GetVtctlds(context.Context, *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error)
+	GetVtctlds(context.Context, *connect.Request[dev.GetVtctldsRequest]) (*connect.Response[dev.GetVtctldsResponse], error)
 	// GetWorkflow returns a single Workflow for a given cluster, keyspace, and
 	// workflow name.
-	GetWorkflow(context.Context, *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error)
+	GetWorkflow(context.Context, *connect.Request[dev.GetWorkflowRequest]) (*connect.Response[dev.Workflow], error)
 	// GetWorkflows returns the Workflows for all specified clusters.
-	GetWorkflows(context.Context, *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error)
+	GetWorkflows(context.Context, *connect.Request[dev.GetWorkflowsRequest]) (*connect.Response[dev.GetWorkflowsResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to
 	// RPCs. This command can be blocked by other in-flight operations.
-	PingTablet(context.Context, *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error)
+	PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error)
 	// PlannedFailoverShard fails over the shard to a new primary, or away from
 	// an old primary. Both the old and new primaries must be reachable and
 	// running.
@@ -979,34 +979,34 @@ type VTAdminHandler interface {
 	// NOTE: A planned failover will not consider replicas outside the current
 	// shard primary's cell as promotion candidates unless NewPrimary is
 	// explicitly provided in the request.
-	PlannedFailoverShard(context.Context, *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error)
+	PlannedFailoverShard(context.Context, *connect.Request[dev.PlannedFailoverShardRequest]) (*connect.Response[dev.PlannedFailoverShardResponse], error)
 	// RebuildKeyspaceGraph rebuilds the serving data for a keyspace.
-	RebuildKeyspaceGraph(context.Context, *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error)
+	RebuildKeyspaceGraph(context.Context, *connect.Request[dev.RebuildKeyspaceGraphRequest]) (*connect.Response[dev.RebuildKeyspaceGraphResponse], error)
 	// RefreshState reloads the tablet record on the specified tablet.
-	RefreshState(context.Context, *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error)
+	RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error)
 	// RefreshTabletReplicationSource performs a `CHANGE REPLICATION SOURCE TO`
 	// on a tablet to replicate from the current primary in the shard.
-	RefreshTabletReplicationSource(context.Context, *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error)
+	RefreshTabletReplicationSource(context.Context, *connect.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect.Response[dev.RefreshTabletReplicationSourceResponse], error)
 	// ReloadSchemas reloads the schema definition across keyspaces, shards, or
 	// tablets in one or more clusters, depending on the request fields (see
 	// ReloadSchemasRequest for details).
-	ReloadSchemas(context.Context, *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error)
+	ReloadSchemas(context.Context, *connect.Request[dev.ReloadSchemasRequest]) (*connect.Response[dev.ReloadSchemasResponse], error)
 	// ReloadSchemaShard reloads the schema on all tablets in a shard. This is done on a best-effort basis.
-	ReloadSchemaShard(context.Context, *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error)
+	ReloadSchemaShard(context.Context, *connect.Request[dev.ReloadSchemaShardRequest]) (*connect.Response[dev.ReloadSchemaShardResponse], error)
 	// RemoveKeyspaceCell removes the cell from the Cells list for all shards in the keyspace, and the SrvKeyspace for that keyspace in that cell.
-	RemoveKeyspaceCell(context.Context, *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error)
+	RemoveKeyspaceCell(context.Context, *connect.Request[dev.RemoveKeyspaceCellRequest]) (*connect.Response[dev.RemoveKeyspaceCellResponse], error)
 	// RunHealthCheck runs a healthcheck on the tablet.
-	RunHealthCheck(context.Context, *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
 	// SetReadOnly sets the tablet to read-only mode.
-	SetReadOnly(context.Context, *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error)
+	SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error)
 	// SetReadWrite sets the tablet to read-write mode.
-	SetReadWrite(context.Context, *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error)
+	SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error)
 	// StartReplication runs the underlying database command to start
 	// replication on a tablet.
-	StartReplication(context.Context, *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
 	// StopReplication runs the underlying database command to stop replication
 	// on a tablet
-	StopReplication(context.Context, *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error)
 	// TabletExternallyPromoted updates the metadata in a cluster's topology
 	// to acknowledge a shard primary change performed by an external tool
 	// (e.g. orchestrator*).
@@ -1016,27 +1016,27 @@ type VTAdminHandler interface {
 	//
 	// * "orchestrator" here refers to external orchestrator, not the newer,
 	// Vitess-aware orchestrator, VTOrc.
-	TabletExternallyPromoted(context.Context, *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error)
+	TabletExternallyPromoted(context.Context, *connect.Request[dev.TabletExternallyPromotedRequest]) (*connect.Response[dev.TabletExternallyPromotedResponse], error)
 	// Validate validates all nodes in a cluster that are reachable from the global replication graph,
 	// as well as all tablets in discoverable cells, are consistent
-	Validate(context.Context, *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error)
+	Validate(context.Context, *connect.Request[dev.ValidateRequest]) (*connect.Response[dev1.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
-	ValidateKeyspace(context.Context, *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error)
+	ValidateKeyspace(context.Context, *connect.Request[dev.ValidateKeyspaceRequest]) (*connect.Response[dev1.ValidateKeyspaceResponse], error)
 	// ValidateSchemaKeyspace validates that the schema on the primary tablet
 	// for shard 0 matches the schema on all of the other tablets in the
 	// keyspace.
-	ValidateSchemaKeyspace(context.Context, *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error)
+	ValidateSchemaKeyspace(context.Context, *connect.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect.Response[dev1.ValidateSchemaKeyspaceResponse], error)
 	// ValidateShard validates that that all nodes reachable from the specified shard are consistent.
-	ValidateShard(context.Context, *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error)
+	ValidateShard(context.Context, *connect.Request[dev.ValidateShardRequest]) (*connect.Response[dev1.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of
 	// shard 0 matches all of the other tablets in the keyspace.
-	ValidateVersionKeyspace(context.Context, *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error)
+	ValidateVersionKeyspace(context.Context, *connect.Request[dev.ValidateVersionKeyspaceRequest]) (*connect.Response[dev1.ValidateVersionKeyspaceResponse], error)
 	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
-	ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error)
+	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev1.ValidateVersionShardResponse], error)
 	// VTExplain provides information on how Vitess plans to execute a
 	// particular query.
-	VTExplain(context.Context, *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error)
+	VTExplain(context.Context, *connect.Request[dev.VTExplainRequest]) (*connect.Response[dev.VTExplainResponse], error)
 }
 
 // NewVTAdminHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -1044,469 +1044,575 @@ type VTAdminHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewVTAdminHandler(svc VTAdminHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(VTAdminCreateKeyspaceProcedure, connect_go.NewUnaryHandler(
+func NewVTAdminHandler(svc VTAdminHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	vTAdminCreateKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminCreateKeyspaceProcedure,
 		svc.CreateKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminCreateShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminCreateShardHandler := connect.NewUnaryHandler(
 		VTAdminCreateShardProcedure,
 		svc.CreateShard,
 		opts...,
-	))
-	mux.Handle(VTAdminDeleteKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminDeleteKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminDeleteKeyspaceProcedure,
 		svc.DeleteKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminDeleteShardsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminDeleteShardsHandler := connect.NewUnaryHandler(
 		VTAdminDeleteShardsProcedure,
 		svc.DeleteShards,
 		opts...,
-	))
-	mux.Handle(VTAdminDeleteTabletProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminDeleteTabletHandler := connect.NewUnaryHandler(
 		VTAdminDeleteTabletProcedure,
 		svc.DeleteTablet,
 		opts...,
-	))
-	mux.Handle(VTAdminEmergencyFailoverShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminEmergencyFailoverShardHandler := connect.NewUnaryHandler(
 		VTAdminEmergencyFailoverShardProcedure,
 		svc.EmergencyFailoverShard,
 		opts...,
-	))
-	mux.Handle(VTAdminFindSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminFindSchemaHandler := connect.NewUnaryHandler(
 		VTAdminFindSchemaProcedure,
 		svc.FindSchema,
 		opts...,
-	))
-	mux.Handle(VTAdminGetBackupsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetBackupsHandler := connect.NewUnaryHandler(
 		VTAdminGetBackupsProcedure,
 		svc.GetBackups,
 		opts...,
-	))
-	mux.Handle(VTAdminGetCellInfosProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetCellInfosHandler := connect.NewUnaryHandler(
 		VTAdminGetCellInfosProcedure,
 		svc.GetCellInfos,
 		opts...,
-	))
-	mux.Handle(VTAdminGetCellsAliasesProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetCellsAliasesHandler := connect.NewUnaryHandler(
 		VTAdminGetCellsAliasesProcedure,
 		svc.GetCellsAliases,
 		opts...,
-	))
-	mux.Handle(VTAdminGetClustersProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetClustersHandler := connect.NewUnaryHandler(
 		VTAdminGetClustersProcedure,
 		svc.GetClusters,
 		opts...,
-	))
-	mux.Handle(VTAdminGetFullStatusProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetFullStatusHandler := connect.NewUnaryHandler(
 		VTAdminGetFullStatusProcedure,
 		svc.GetFullStatus,
 		opts...,
-	))
-	mux.Handle(VTAdminGetGatesProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetGatesHandler := connect.NewUnaryHandler(
 		VTAdminGetGatesProcedure,
 		svc.GetGates,
 		opts...,
-	))
-	mux.Handle(VTAdminGetKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminGetKeyspaceProcedure,
 		svc.GetKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminGetKeyspacesProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetKeyspacesHandler := connect.NewUnaryHandler(
 		VTAdminGetKeyspacesProcedure,
 		svc.GetKeyspaces,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetSchemaProcedure,
 		svc.GetSchema,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSchemasProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetSchemasProcedure,
 		svc.GetSchemas,
 		opts...,
-	))
-	mux.Handle(VTAdminGetShardReplicationPositionsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetShardReplicationPositionsHandler := connect.NewUnaryHandler(
 		VTAdminGetShardReplicationPositionsProcedure,
 		svc.GetShardReplicationPositions,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSrvKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSrvKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvKeyspaceProcedure,
 		svc.GetSrvKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSrvKeyspacesProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSrvKeyspacesHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvKeyspacesProcedure,
 		svc.GetSrvKeyspaces,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSrvVSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSrvVSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvVSchemaProcedure,
 		svc.GetSrvVSchema,
 		opts...,
-	))
-	mux.Handle(VTAdminGetSrvVSchemasProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetSrvVSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvVSchemasProcedure,
 		svc.GetSrvVSchemas,
 		opts...,
-	))
-	mux.Handle(VTAdminGetTabletProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetTabletHandler := connect.NewUnaryHandler(
 		VTAdminGetTabletProcedure,
 		svc.GetTablet,
 		opts...,
-	))
-	mux.Handle(VTAdminGetTabletsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetTabletsHandler := connect.NewUnaryHandler(
 		VTAdminGetTabletsProcedure,
 		svc.GetTablets,
 		opts...,
-	))
-	mux.Handle(VTAdminGetTopologyPathProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetTopologyPathHandler := connect.NewUnaryHandler(
 		VTAdminGetTopologyPathProcedure,
 		svc.GetTopologyPath,
 		opts...,
-	))
-	mux.Handle(VTAdminGetVSchemaProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetVSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetVSchemaProcedure,
 		svc.GetVSchema,
 		opts...,
-	))
-	mux.Handle(VTAdminGetVSchemasProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetVSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetVSchemasProcedure,
 		svc.GetVSchemas,
 		opts...,
-	))
-	mux.Handle(VTAdminGetVtctldsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetVtctldsHandler := connect.NewUnaryHandler(
 		VTAdminGetVtctldsProcedure,
 		svc.GetVtctlds,
 		opts...,
-	))
-	mux.Handle(VTAdminGetWorkflowProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetWorkflowHandler := connect.NewUnaryHandler(
 		VTAdminGetWorkflowProcedure,
 		svc.GetWorkflow,
 		opts...,
-	))
-	mux.Handle(VTAdminGetWorkflowsProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminGetWorkflowsHandler := connect.NewUnaryHandler(
 		VTAdminGetWorkflowsProcedure,
 		svc.GetWorkflows,
 		opts...,
-	))
-	mux.Handle(VTAdminPingTabletProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminPingTabletHandler := connect.NewUnaryHandler(
 		VTAdminPingTabletProcedure,
 		svc.PingTablet,
 		opts...,
-	))
-	mux.Handle(VTAdminPlannedFailoverShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminPlannedFailoverShardHandler := connect.NewUnaryHandler(
 		VTAdminPlannedFailoverShardProcedure,
 		svc.PlannedFailoverShard,
 		opts...,
-	))
-	mux.Handle(VTAdminRebuildKeyspaceGraphProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminRebuildKeyspaceGraphHandler := connect.NewUnaryHandler(
 		VTAdminRebuildKeyspaceGraphProcedure,
 		svc.RebuildKeyspaceGraph,
 		opts...,
-	))
-	mux.Handle(VTAdminRefreshStateProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminRefreshStateHandler := connect.NewUnaryHandler(
 		VTAdminRefreshStateProcedure,
 		svc.RefreshState,
 		opts...,
-	))
-	mux.Handle(VTAdminRefreshTabletReplicationSourceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminRefreshTabletReplicationSourceHandler := connect.NewUnaryHandler(
 		VTAdminRefreshTabletReplicationSourceProcedure,
 		svc.RefreshTabletReplicationSource,
 		opts...,
-	))
-	mux.Handle(VTAdminReloadSchemasProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminReloadSchemasHandler := connect.NewUnaryHandler(
 		VTAdminReloadSchemasProcedure,
 		svc.ReloadSchemas,
 		opts...,
-	))
-	mux.Handle(VTAdminReloadSchemaShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminReloadSchemaShardHandler := connect.NewUnaryHandler(
 		VTAdminReloadSchemaShardProcedure,
 		svc.ReloadSchemaShard,
 		opts...,
-	))
-	mux.Handle(VTAdminRemoveKeyspaceCellProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminRemoveKeyspaceCellHandler := connect.NewUnaryHandler(
 		VTAdminRemoveKeyspaceCellProcedure,
 		svc.RemoveKeyspaceCell,
 		opts...,
-	))
-	mux.Handle(VTAdminRunHealthCheckProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminRunHealthCheckHandler := connect.NewUnaryHandler(
 		VTAdminRunHealthCheckProcedure,
 		svc.RunHealthCheck,
 		opts...,
-	))
-	mux.Handle(VTAdminSetReadOnlyProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminSetReadOnlyHandler := connect.NewUnaryHandler(
 		VTAdminSetReadOnlyProcedure,
 		svc.SetReadOnly,
 		opts...,
-	))
-	mux.Handle(VTAdminSetReadWriteProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminSetReadWriteHandler := connect.NewUnaryHandler(
 		VTAdminSetReadWriteProcedure,
 		svc.SetReadWrite,
 		opts...,
-	))
-	mux.Handle(VTAdminStartReplicationProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminStartReplicationHandler := connect.NewUnaryHandler(
 		VTAdminStartReplicationProcedure,
 		svc.StartReplication,
 		opts...,
-	))
-	mux.Handle(VTAdminStopReplicationProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminStopReplicationHandler := connect.NewUnaryHandler(
 		VTAdminStopReplicationProcedure,
 		svc.StopReplication,
 		opts...,
-	))
-	mux.Handle(VTAdminTabletExternallyPromotedProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminTabletExternallyPromotedHandler := connect.NewUnaryHandler(
 		VTAdminTabletExternallyPromotedProcedure,
 		svc.TabletExternallyPromoted,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateHandler := connect.NewUnaryHandler(
 		VTAdminValidateProcedure,
 		svc.Validate,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateKeyspaceProcedure,
 		svc.ValidateKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateSchemaKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateSchemaKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateSchemaKeyspaceProcedure,
 		svc.ValidateSchemaKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateShardHandler := connect.NewUnaryHandler(
 		VTAdminValidateShardProcedure,
 		svc.ValidateShard,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateVersionKeyspaceProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateVersionKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateVersionKeyspaceProcedure,
 		svc.ValidateVersionKeyspace,
 		opts...,
-	))
-	mux.Handle(VTAdminValidateVersionShardProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminValidateVersionShardHandler := connect.NewUnaryHandler(
 		VTAdminValidateVersionShardProcedure,
 		svc.ValidateVersionShard,
 		opts...,
-	))
-	mux.Handle(VTAdminVTExplainProcedure, connect_go.NewUnaryHandler(
+	)
+	vTAdminVTExplainHandler := connect.NewUnaryHandler(
 		VTAdminVTExplainProcedure,
 		svc.VTExplain,
 		opts...,
-	))
-	return "/vtadmin.VTAdmin/", mux
+	)
+	return "/vtadmin.VTAdmin/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case VTAdminCreateKeyspaceProcedure:
+			vTAdminCreateKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminCreateShardProcedure:
+			vTAdminCreateShardHandler.ServeHTTP(w, r)
+		case VTAdminDeleteKeyspaceProcedure:
+			vTAdminDeleteKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminDeleteShardsProcedure:
+			vTAdminDeleteShardsHandler.ServeHTTP(w, r)
+		case VTAdminDeleteTabletProcedure:
+			vTAdminDeleteTabletHandler.ServeHTTP(w, r)
+		case VTAdminEmergencyFailoverShardProcedure:
+			vTAdminEmergencyFailoverShardHandler.ServeHTTP(w, r)
+		case VTAdminFindSchemaProcedure:
+			vTAdminFindSchemaHandler.ServeHTTP(w, r)
+		case VTAdminGetBackupsProcedure:
+			vTAdminGetBackupsHandler.ServeHTTP(w, r)
+		case VTAdminGetCellInfosProcedure:
+			vTAdminGetCellInfosHandler.ServeHTTP(w, r)
+		case VTAdminGetCellsAliasesProcedure:
+			vTAdminGetCellsAliasesHandler.ServeHTTP(w, r)
+		case VTAdminGetClustersProcedure:
+			vTAdminGetClustersHandler.ServeHTTP(w, r)
+		case VTAdminGetFullStatusProcedure:
+			vTAdminGetFullStatusHandler.ServeHTTP(w, r)
+		case VTAdminGetGatesProcedure:
+			vTAdminGetGatesHandler.ServeHTTP(w, r)
+		case VTAdminGetKeyspaceProcedure:
+			vTAdminGetKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminGetKeyspacesProcedure:
+			vTAdminGetKeyspacesHandler.ServeHTTP(w, r)
+		case VTAdminGetSchemaProcedure:
+			vTAdminGetSchemaHandler.ServeHTTP(w, r)
+		case VTAdminGetSchemasProcedure:
+			vTAdminGetSchemasHandler.ServeHTTP(w, r)
+		case VTAdminGetShardReplicationPositionsProcedure:
+			vTAdminGetShardReplicationPositionsHandler.ServeHTTP(w, r)
+		case VTAdminGetSrvKeyspaceProcedure:
+			vTAdminGetSrvKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminGetSrvKeyspacesProcedure:
+			vTAdminGetSrvKeyspacesHandler.ServeHTTP(w, r)
+		case VTAdminGetSrvVSchemaProcedure:
+			vTAdminGetSrvVSchemaHandler.ServeHTTP(w, r)
+		case VTAdminGetSrvVSchemasProcedure:
+			vTAdminGetSrvVSchemasHandler.ServeHTTP(w, r)
+		case VTAdminGetTabletProcedure:
+			vTAdminGetTabletHandler.ServeHTTP(w, r)
+		case VTAdminGetTabletsProcedure:
+			vTAdminGetTabletsHandler.ServeHTTP(w, r)
+		case VTAdminGetTopologyPathProcedure:
+			vTAdminGetTopologyPathHandler.ServeHTTP(w, r)
+		case VTAdminGetVSchemaProcedure:
+			vTAdminGetVSchemaHandler.ServeHTTP(w, r)
+		case VTAdminGetVSchemasProcedure:
+			vTAdminGetVSchemasHandler.ServeHTTP(w, r)
+		case VTAdminGetVtctldsProcedure:
+			vTAdminGetVtctldsHandler.ServeHTTP(w, r)
+		case VTAdminGetWorkflowProcedure:
+			vTAdminGetWorkflowHandler.ServeHTTP(w, r)
+		case VTAdminGetWorkflowsProcedure:
+			vTAdminGetWorkflowsHandler.ServeHTTP(w, r)
+		case VTAdminPingTabletProcedure:
+			vTAdminPingTabletHandler.ServeHTTP(w, r)
+		case VTAdminPlannedFailoverShardProcedure:
+			vTAdminPlannedFailoverShardHandler.ServeHTTP(w, r)
+		case VTAdminRebuildKeyspaceGraphProcedure:
+			vTAdminRebuildKeyspaceGraphHandler.ServeHTTP(w, r)
+		case VTAdminRefreshStateProcedure:
+			vTAdminRefreshStateHandler.ServeHTTP(w, r)
+		case VTAdminRefreshTabletReplicationSourceProcedure:
+			vTAdminRefreshTabletReplicationSourceHandler.ServeHTTP(w, r)
+		case VTAdminReloadSchemasProcedure:
+			vTAdminReloadSchemasHandler.ServeHTTP(w, r)
+		case VTAdminReloadSchemaShardProcedure:
+			vTAdminReloadSchemaShardHandler.ServeHTTP(w, r)
+		case VTAdminRemoveKeyspaceCellProcedure:
+			vTAdminRemoveKeyspaceCellHandler.ServeHTTP(w, r)
+		case VTAdminRunHealthCheckProcedure:
+			vTAdminRunHealthCheckHandler.ServeHTTP(w, r)
+		case VTAdminSetReadOnlyProcedure:
+			vTAdminSetReadOnlyHandler.ServeHTTP(w, r)
+		case VTAdminSetReadWriteProcedure:
+			vTAdminSetReadWriteHandler.ServeHTTP(w, r)
+		case VTAdminStartReplicationProcedure:
+			vTAdminStartReplicationHandler.ServeHTTP(w, r)
+		case VTAdminStopReplicationProcedure:
+			vTAdminStopReplicationHandler.ServeHTTP(w, r)
+		case VTAdminTabletExternallyPromotedProcedure:
+			vTAdminTabletExternallyPromotedHandler.ServeHTTP(w, r)
+		case VTAdminValidateProcedure:
+			vTAdminValidateHandler.ServeHTTP(w, r)
+		case VTAdminValidateKeyspaceProcedure:
+			vTAdminValidateKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminValidateSchemaKeyspaceProcedure:
+			vTAdminValidateSchemaKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminValidateShardProcedure:
+			vTAdminValidateShardHandler.ServeHTTP(w, r)
+		case VTAdminValidateVersionKeyspaceProcedure:
+			vTAdminValidateVersionKeyspaceHandler.ServeHTTP(w, r)
+		case VTAdminValidateVersionShardProcedure:
+			vTAdminValidateVersionShardHandler.ServeHTTP(w, r)
+		case VTAdminVTExplainProcedure:
+			vTAdminVTExplainHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedVTAdminHandler returns CodeUnimplemented from all methods.
 type UnimplementedVTAdminHandler struct{}
 
-func (UnimplementedVTAdminHandler) CreateKeyspace(context.Context, *connect_go.Request[dev.CreateKeyspaceRequest]) (*connect_go.Response[dev.CreateKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) CreateKeyspace(context.Context, *connect.Request[dev.CreateKeyspaceRequest]) (*connect.Response[dev.CreateKeyspaceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) CreateShard(context.Context, *connect_go.Request[dev.CreateShardRequest]) (*connect_go.Response[dev1.CreateShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateShard is not implemented"))
+func (UnimplementedVTAdminHandler) CreateShard(context.Context, *connect.Request[dev.CreateShardRequest]) (*connect.Response[dev1.CreateShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.CreateShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) DeleteKeyspace(context.Context, *connect_go.Request[dev.DeleteKeyspaceRequest]) (*connect_go.Response[dev1.DeleteKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) DeleteKeyspace(context.Context, *connect.Request[dev.DeleteKeyspaceRequest]) (*connect.Response[dev1.DeleteKeyspaceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) DeleteShards(context.Context, *connect_go.Request[dev.DeleteShardsRequest]) (*connect_go.Response[dev1.DeleteShardsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteShards is not implemented"))
+func (UnimplementedVTAdminHandler) DeleteShards(context.Context, *connect.Request[dev.DeleteShardsRequest]) (*connect.Response[dev1.DeleteShardsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteShards is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) DeleteTablet(context.Context, *connect_go.Request[dev.DeleteTabletRequest]) (*connect_go.Response[dev.DeleteTabletResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteTablet is not implemented"))
+func (UnimplementedVTAdminHandler) DeleteTablet(context.Context, *connect.Request[dev.DeleteTabletRequest]) (*connect.Response[dev.DeleteTabletResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.DeleteTablet is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) EmergencyFailoverShard(context.Context, *connect_go.Request[dev.EmergencyFailoverShardRequest]) (*connect_go.Response[dev.EmergencyFailoverShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.EmergencyFailoverShard is not implemented"))
+func (UnimplementedVTAdminHandler) EmergencyFailoverShard(context.Context, *connect.Request[dev.EmergencyFailoverShardRequest]) (*connect.Response[dev.EmergencyFailoverShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.EmergencyFailoverShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) FindSchema(context.Context, *connect_go.Request[dev.FindSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.FindSchema is not implemented"))
+func (UnimplementedVTAdminHandler) FindSchema(context.Context, *connect.Request[dev.FindSchemaRequest]) (*connect.Response[dev.Schema], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.FindSchema is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetBackups(context.Context, *connect_go.Request[dev.GetBackupsRequest]) (*connect_go.Response[dev.GetBackupsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetBackups is not implemented"))
+func (UnimplementedVTAdminHandler) GetBackups(context.Context, *connect.Request[dev.GetBackupsRequest]) (*connect.Response[dev.GetBackupsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetBackups is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetCellInfos(context.Context, *connect_go.Request[dev.GetCellInfosRequest]) (*connect_go.Response[dev.GetCellInfosResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellInfos is not implemented"))
+func (UnimplementedVTAdminHandler) GetCellInfos(context.Context, *connect.Request[dev.GetCellInfosRequest]) (*connect.Response[dev.GetCellInfosResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellInfos is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetCellsAliases(context.Context, *connect_go.Request[dev.GetCellsAliasesRequest]) (*connect_go.Response[dev.GetCellsAliasesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellsAliases is not implemented"))
+func (UnimplementedVTAdminHandler) GetCellsAliases(context.Context, *connect.Request[dev.GetCellsAliasesRequest]) (*connect.Response[dev.GetCellsAliasesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetCellsAliases is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetClusters(context.Context, *connect_go.Request[dev.GetClustersRequest]) (*connect_go.Response[dev.GetClustersResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetClusters is not implemented"))
+func (UnimplementedVTAdminHandler) GetClusters(context.Context, *connect.Request[dev.GetClustersRequest]) (*connect.Response[dev.GetClustersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetClusters is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetFullStatus(context.Context, *connect_go.Request[dev.GetFullStatusRequest]) (*connect_go.Response[dev1.GetFullStatusResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetFullStatus is not implemented"))
+func (UnimplementedVTAdminHandler) GetFullStatus(context.Context, *connect.Request[dev.GetFullStatusRequest]) (*connect.Response[dev1.GetFullStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetFullStatus is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetGates(context.Context, *connect_go.Request[dev.GetGatesRequest]) (*connect_go.Response[dev.GetGatesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetGates is not implemented"))
+func (UnimplementedVTAdminHandler) GetGates(context.Context, *connect.Request[dev.GetGatesRequest]) (*connect.Response[dev.GetGatesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetGates is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetKeyspace(context.Context, *connect_go.Request[dev.GetKeyspaceRequest]) (*connect_go.Response[dev.Keyspace], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) GetKeyspace(context.Context, *connect.Request[dev.GetKeyspaceRequest]) (*connect.Response[dev.Keyspace], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetKeyspaces(context.Context, *connect_go.Request[dev.GetKeyspacesRequest]) (*connect_go.Response[dev.GetKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspaces is not implemented"))
+func (UnimplementedVTAdminHandler) GetKeyspaces(context.Context, *connect.Request[dev.GetKeyspacesRequest]) (*connect.Response[dev.GetKeyspacesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetKeyspaces is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.Response[dev.Schema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchema is not implemented"))
+func (UnimplementedVTAdminHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.Schema], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchema is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSchemas(context.Context, *connect_go.Request[dev.GetSchemasRequest]) (*connect_go.Response[dev.GetSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchemas is not implemented"))
+func (UnimplementedVTAdminHandler) GetSchemas(context.Context, *connect.Request[dev.GetSchemasRequest]) (*connect.Response[dev.GetSchemasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSchemas is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetShardReplicationPositions(context.Context, *connect_go.Request[dev.GetShardReplicationPositionsRequest]) (*connect_go.Response[dev.GetShardReplicationPositionsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetShardReplicationPositions is not implemented"))
+func (UnimplementedVTAdminHandler) GetShardReplicationPositions(context.Context, *connect.Request[dev.GetShardReplicationPositionsRequest]) (*connect.Response[dev.GetShardReplicationPositionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetShardReplicationPositions is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSrvKeyspace(context.Context, *connect_go.Request[dev.GetSrvKeyspaceRequest]) (*connect_go.Response[dev1.GetSrvKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) GetSrvKeyspace(context.Context, *connect.Request[dev.GetSrvKeyspaceRequest]) (*connect.Response[dev1.GetSrvKeyspacesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSrvKeyspaces(context.Context, *connect_go.Request[dev.GetSrvKeyspacesRequest]) (*connect_go.Response[dev.GetSrvKeyspacesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspaces is not implemented"))
+func (UnimplementedVTAdminHandler) GetSrvKeyspaces(context.Context, *connect.Request[dev.GetSrvKeyspacesRequest]) (*connect.Response[dev.GetSrvKeyspacesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvKeyspaces is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSrvVSchema(context.Context, *connect_go.Request[dev.GetSrvVSchemaRequest]) (*connect_go.Response[dev.SrvVSchema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchema is not implemented"))
+func (UnimplementedVTAdminHandler) GetSrvVSchema(context.Context, *connect.Request[dev.GetSrvVSchemaRequest]) (*connect.Response[dev.SrvVSchema], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchema is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetSrvVSchemas(context.Context, *connect_go.Request[dev.GetSrvVSchemasRequest]) (*connect_go.Response[dev.GetSrvVSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchemas is not implemented"))
+func (UnimplementedVTAdminHandler) GetSrvVSchemas(context.Context, *connect.Request[dev.GetSrvVSchemasRequest]) (*connect.Response[dev.GetSrvVSchemasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetSrvVSchemas is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetTablet(context.Context, *connect_go.Request[dev.GetTabletRequest]) (*connect_go.Response[dev.Tablet], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablet is not implemented"))
+func (UnimplementedVTAdminHandler) GetTablet(context.Context, *connect.Request[dev.GetTabletRequest]) (*connect.Response[dev.Tablet], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablet is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetTablets(context.Context, *connect_go.Request[dev.GetTabletsRequest]) (*connect_go.Response[dev.GetTabletsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablets is not implemented"))
+func (UnimplementedVTAdminHandler) GetTablets(context.Context, *connect.Request[dev.GetTabletsRequest]) (*connect.Response[dev.GetTabletsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTablets is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetTopologyPath(context.Context, *connect_go.Request[dev.GetTopologyPathRequest]) (*connect_go.Response[dev1.GetTopologyPathResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTopologyPath is not implemented"))
+func (UnimplementedVTAdminHandler) GetTopologyPath(context.Context, *connect.Request[dev.GetTopologyPathRequest]) (*connect.Response[dev1.GetTopologyPathResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetTopologyPath is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetVSchema(context.Context, *connect_go.Request[dev.GetVSchemaRequest]) (*connect_go.Response[dev.VSchema], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchema is not implemented"))
+func (UnimplementedVTAdminHandler) GetVSchema(context.Context, *connect.Request[dev.GetVSchemaRequest]) (*connect.Response[dev.VSchema], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchema is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetVSchemas(context.Context, *connect_go.Request[dev.GetVSchemasRequest]) (*connect_go.Response[dev.GetVSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchemas is not implemented"))
+func (UnimplementedVTAdminHandler) GetVSchemas(context.Context, *connect.Request[dev.GetVSchemasRequest]) (*connect.Response[dev.GetVSchemasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVSchemas is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetVtctlds(context.Context, *connect_go.Request[dev.GetVtctldsRequest]) (*connect_go.Response[dev.GetVtctldsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVtctlds is not implemented"))
+func (UnimplementedVTAdminHandler) GetVtctlds(context.Context, *connect.Request[dev.GetVtctldsRequest]) (*connect.Response[dev.GetVtctldsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetVtctlds is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetWorkflow(context.Context, *connect_go.Request[dev.GetWorkflowRequest]) (*connect_go.Response[dev.Workflow], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflow is not implemented"))
+func (UnimplementedVTAdminHandler) GetWorkflow(context.Context, *connect.Request[dev.GetWorkflowRequest]) (*connect.Response[dev.Workflow], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflow is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) GetWorkflows(context.Context, *connect_go.Request[dev.GetWorkflowsRequest]) (*connect_go.Response[dev.GetWorkflowsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflows is not implemented"))
+func (UnimplementedVTAdminHandler) GetWorkflows(context.Context, *connect.Request[dev.GetWorkflowsRequest]) (*connect.Response[dev.GetWorkflowsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.GetWorkflows is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) PingTablet(context.Context, *connect_go.Request[dev.PingTabletRequest]) (*connect_go.Response[dev.PingTabletResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PingTablet is not implemented"))
+func (UnimplementedVTAdminHandler) PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PingTablet is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) PlannedFailoverShard(context.Context, *connect_go.Request[dev.PlannedFailoverShardRequest]) (*connect_go.Response[dev.PlannedFailoverShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PlannedFailoverShard is not implemented"))
+func (UnimplementedVTAdminHandler) PlannedFailoverShard(context.Context, *connect.Request[dev.PlannedFailoverShardRequest]) (*connect.Response[dev.PlannedFailoverShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.PlannedFailoverShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) RebuildKeyspaceGraph(context.Context, *connect_go.Request[dev.RebuildKeyspaceGraphRequest]) (*connect_go.Response[dev.RebuildKeyspaceGraphResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RebuildKeyspaceGraph is not implemented"))
+func (UnimplementedVTAdminHandler) RebuildKeyspaceGraph(context.Context, *connect.Request[dev.RebuildKeyspaceGraphRequest]) (*connect.Response[dev.RebuildKeyspaceGraphResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RebuildKeyspaceGraph is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) RefreshState(context.Context, *connect_go.Request[dev.RefreshStateRequest]) (*connect_go.Response[dev.RefreshStateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshState is not implemented"))
+func (UnimplementedVTAdminHandler) RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshState is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) RefreshTabletReplicationSource(context.Context, *connect_go.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect_go.Response[dev.RefreshTabletReplicationSourceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshTabletReplicationSource is not implemented"))
+func (UnimplementedVTAdminHandler) RefreshTabletReplicationSource(context.Context, *connect.Request[dev.RefreshTabletReplicationSourceRequest]) (*connect.Response[dev.RefreshTabletReplicationSourceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RefreshTabletReplicationSource is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ReloadSchemas(context.Context, *connect_go.Request[dev.ReloadSchemasRequest]) (*connect_go.Response[dev.ReloadSchemasResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemas is not implemented"))
+func (UnimplementedVTAdminHandler) ReloadSchemas(context.Context, *connect.Request[dev.ReloadSchemasRequest]) (*connect.Response[dev.ReloadSchemasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemas is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ReloadSchemaShard(context.Context, *connect_go.Request[dev.ReloadSchemaShardRequest]) (*connect_go.Response[dev.ReloadSchemaShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemaShard is not implemented"))
+func (UnimplementedVTAdminHandler) ReloadSchemaShard(context.Context, *connect.Request[dev.ReloadSchemaShardRequest]) (*connect.Response[dev.ReloadSchemaShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ReloadSchemaShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) RemoveKeyspaceCell(context.Context, *connect_go.Request[dev.RemoveKeyspaceCellRequest]) (*connect_go.Response[dev.RemoveKeyspaceCellResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RemoveKeyspaceCell is not implemented"))
+func (UnimplementedVTAdminHandler) RemoveKeyspaceCell(context.Context, *connect.Request[dev.RemoveKeyspaceCellRequest]) (*connect.Response[dev.RemoveKeyspaceCellResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RemoveKeyspaceCell is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) RunHealthCheck(context.Context, *connect_go.Request[dev.RunHealthCheckRequest]) (*connect_go.Response[dev.RunHealthCheckResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RunHealthCheck is not implemented"))
+func (UnimplementedVTAdminHandler) RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.RunHealthCheck is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) SetReadOnly(context.Context, *connect_go.Request[dev.SetReadOnlyRequest]) (*connect_go.Response[dev.SetReadOnlyResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadOnly is not implemented"))
+func (UnimplementedVTAdminHandler) SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadOnly is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) SetReadWrite(context.Context, *connect_go.Request[dev.SetReadWriteRequest]) (*connect_go.Response[dev.SetReadWriteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadWrite is not implemented"))
+func (UnimplementedVTAdminHandler) SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.SetReadWrite is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) StartReplication(context.Context, *connect_go.Request[dev.StartReplicationRequest]) (*connect_go.Response[dev.StartReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StartReplication is not implemented"))
+func (UnimplementedVTAdminHandler) StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StartReplication is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) StopReplication(context.Context, *connect_go.Request[dev.StopReplicationRequest]) (*connect_go.Response[dev.StopReplicationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StopReplication is not implemented"))
+func (UnimplementedVTAdminHandler) StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.StopReplication is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) TabletExternallyPromoted(context.Context, *connect_go.Request[dev.TabletExternallyPromotedRequest]) (*connect_go.Response[dev.TabletExternallyPromotedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.TabletExternallyPromoted is not implemented"))
+func (UnimplementedVTAdminHandler) TabletExternallyPromoted(context.Context, *connect.Request[dev.TabletExternallyPromotedRequest]) (*connect.Response[dev.TabletExternallyPromotedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.TabletExternallyPromoted is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) Validate(context.Context, *connect_go.Request[dev.ValidateRequest]) (*connect_go.Response[dev1.ValidateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.Validate is not implemented"))
+func (UnimplementedVTAdminHandler) Validate(context.Context, *connect.Request[dev.ValidateRequest]) (*connect.Response[dev1.ValidateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.Validate is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ValidateKeyspace(context.Context, *connect_go.Request[dev.ValidateKeyspaceRequest]) (*connect_go.Response[dev1.ValidateKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) ValidateKeyspace(context.Context, *connect.Request[dev.ValidateKeyspaceRequest]) (*connect.Response[dev1.ValidateKeyspaceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ValidateSchemaKeyspace(context.Context, *connect_go.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect_go.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateSchemaKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) ValidateSchemaKeyspace(context.Context, *connect.Request[dev.ValidateSchemaKeyspaceRequest]) (*connect.Response[dev1.ValidateSchemaKeyspaceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateSchemaKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ValidateShard(context.Context, *connect_go.Request[dev.ValidateShardRequest]) (*connect_go.Response[dev1.ValidateShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateShard is not implemented"))
+func (UnimplementedVTAdminHandler) ValidateShard(context.Context, *connect.Request[dev.ValidateShardRequest]) (*connect.Response[dev1.ValidateShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ValidateVersionKeyspace(context.Context, *connect_go.Request[dev.ValidateVersionKeyspaceRequest]) (*connect_go.Response[dev1.ValidateVersionKeyspaceResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionKeyspace is not implemented"))
+func (UnimplementedVTAdminHandler) ValidateVersionKeyspace(context.Context, *connect.Request[dev.ValidateVersionKeyspaceRequest]) (*connect.Response[dev1.ValidateVersionKeyspaceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionKeyspace is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) ValidateVersionShard(context.Context, *connect_go.Request[dev.ValidateVersionShardRequest]) (*connect_go.Response[dev1.ValidateVersionShardResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionShard is not implemented"))
+func (UnimplementedVTAdminHandler) ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev1.ValidateVersionShardResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.ValidateVersionShard is not implemented"))
 }
 
-func (UnimplementedVTAdminHandler) VTExplain(context.Context, *connect_go.Request[dev.VTExplainRequest]) (*connect_go.Response[dev.VTExplainResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("vtadmin.VTAdmin.VTExplain is not implemented"))
+func (UnimplementedVTAdminHandler) VTExplain(context.Context, *connect.Request[dev.VTExplainRequest]) (*connect.Response[dev.VTExplainResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtadmin.VTAdmin.VTExplain is not implemented"))
 }
