@@ -22,9 +22,9 @@
 package throttlerservicedevconnect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	dev "github.com/planetscale/vitess-types/gen/vitess/throttlerdata/dev"
 	_ "github.com/planetscale/vitess-types/gen/vitess/throttlerservice/dev"
 	http "net/http"
@@ -36,7 +36,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// ThrottlerName is the fully-qualified name of the Throttler service.
@@ -69,23 +69,23 @@ const (
 // ThrottlerClient is a client for the throttlerservice.Throttler service.
 type ThrottlerClient interface {
 	// MaxRates returns the current max rate for each throttler of the process.
-	MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error)
+	MaxRates(context.Context, *connect.Request[dev.MaxRatesRequest]) (*connect.Response[dev.MaxRatesResponse], error)
 	// SetMaxRate allows to change the current max rate for all throttlers
 	// of the process.
-	SetMaxRate(context.Context, *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error)
+	SetMaxRate(context.Context, *connect.Request[dev.SetMaxRateRequest]) (*connect.Response[dev.SetMaxRateResponse], error)
 	// GetConfiguration returns the configuration of the MaxReplicationlag module
 	// for the given throttler or all throttlers if "throttler_name" is empty.
-	GetConfiguration(context.Context, *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error)
+	GetConfiguration(context.Context, *connect.Request[dev.GetConfigurationRequest]) (*connect.Response[dev.GetConfigurationResponse], error)
 	// UpdateConfiguration (partially) updates the configuration of the
 	// MaxReplicationlag module for the given throttler or all throttlers if
 	// "throttler_name" is empty.
 	// If "copy_zero_values" is true, fields with zero values will be copied
 	// as well.
-	UpdateConfiguration(context.Context, *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error)
+	UpdateConfiguration(context.Context, *connect.Request[dev.UpdateConfigurationRequest]) (*connect.Response[dev.UpdateConfigurationResponse], error)
 	// ResetConfiguration resets the configuration of the MaxReplicationlag module
 	// to the initial configuration for the given throttler or all throttlers if
 	// "throttler_name" is empty.
-	ResetConfiguration(context.Context, *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error)
+	ResetConfiguration(context.Context, *connect.Request[dev.ResetConfigurationRequest]) (*connect.Response[dev.ResetConfigurationResponse], error)
 }
 
 // NewThrottlerClient constructs a client for the throttlerservice.Throttler service. By
@@ -95,30 +95,30 @@ type ThrottlerClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewThrottlerClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) ThrottlerClient {
+func NewThrottlerClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ThrottlerClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &throttlerClient{
-		maxRates: connect_go.NewClient[dev.MaxRatesRequest, dev.MaxRatesResponse](
+		maxRates: connect.NewClient[dev.MaxRatesRequest, dev.MaxRatesResponse](
 			httpClient,
 			baseURL+ThrottlerMaxRatesProcedure,
 			opts...,
 		),
-		setMaxRate: connect_go.NewClient[dev.SetMaxRateRequest, dev.SetMaxRateResponse](
+		setMaxRate: connect.NewClient[dev.SetMaxRateRequest, dev.SetMaxRateResponse](
 			httpClient,
 			baseURL+ThrottlerSetMaxRateProcedure,
 			opts...,
 		),
-		getConfiguration: connect_go.NewClient[dev.GetConfigurationRequest, dev.GetConfigurationResponse](
+		getConfiguration: connect.NewClient[dev.GetConfigurationRequest, dev.GetConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerGetConfigurationProcedure,
 			opts...,
 		),
-		updateConfiguration: connect_go.NewClient[dev.UpdateConfigurationRequest, dev.UpdateConfigurationResponse](
+		updateConfiguration: connect.NewClient[dev.UpdateConfigurationRequest, dev.UpdateConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerUpdateConfigurationProcedure,
 			opts...,
 		),
-		resetConfiguration: connect_go.NewClient[dev.ResetConfigurationRequest, dev.ResetConfigurationResponse](
+		resetConfiguration: connect.NewClient[dev.ResetConfigurationRequest, dev.ResetConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerResetConfigurationProcedure,
 			opts...,
@@ -128,58 +128,58 @@ func NewThrottlerClient(httpClient connect_go.HTTPClient, baseURL string, opts .
 
 // throttlerClient implements ThrottlerClient.
 type throttlerClient struct {
-	maxRates            *connect_go.Client[dev.MaxRatesRequest, dev.MaxRatesResponse]
-	setMaxRate          *connect_go.Client[dev.SetMaxRateRequest, dev.SetMaxRateResponse]
-	getConfiguration    *connect_go.Client[dev.GetConfigurationRequest, dev.GetConfigurationResponse]
-	updateConfiguration *connect_go.Client[dev.UpdateConfigurationRequest, dev.UpdateConfigurationResponse]
-	resetConfiguration  *connect_go.Client[dev.ResetConfigurationRequest, dev.ResetConfigurationResponse]
+	maxRates            *connect.Client[dev.MaxRatesRequest, dev.MaxRatesResponse]
+	setMaxRate          *connect.Client[dev.SetMaxRateRequest, dev.SetMaxRateResponse]
+	getConfiguration    *connect.Client[dev.GetConfigurationRequest, dev.GetConfigurationResponse]
+	updateConfiguration *connect.Client[dev.UpdateConfigurationRequest, dev.UpdateConfigurationResponse]
+	resetConfiguration  *connect.Client[dev.ResetConfigurationRequest, dev.ResetConfigurationResponse]
 }
 
 // MaxRates calls throttlerservice.Throttler.MaxRates.
-func (c *throttlerClient) MaxRates(ctx context.Context, req *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error) {
+func (c *throttlerClient) MaxRates(ctx context.Context, req *connect.Request[dev.MaxRatesRequest]) (*connect.Response[dev.MaxRatesResponse], error) {
 	return c.maxRates.CallUnary(ctx, req)
 }
 
 // SetMaxRate calls throttlerservice.Throttler.SetMaxRate.
-func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error) {
+func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect.Request[dev.SetMaxRateRequest]) (*connect.Response[dev.SetMaxRateResponse], error) {
 	return c.setMaxRate.CallUnary(ctx, req)
 }
 
 // GetConfiguration calls throttlerservice.Throttler.GetConfiguration.
-func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error) {
+func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect.Request[dev.GetConfigurationRequest]) (*connect.Response[dev.GetConfigurationResponse], error) {
 	return c.getConfiguration.CallUnary(ctx, req)
 }
 
 // UpdateConfiguration calls throttlerservice.Throttler.UpdateConfiguration.
-func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error) {
+func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect.Request[dev.UpdateConfigurationRequest]) (*connect.Response[dev.UpdateConfigurationResponse], error) {
 	return c.updateConfiguration.CallUnary(ctx, req)
 }
 
 // ResetConfiguration calls throttlerservice.Throttler.ResetConfiguration.
-func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error) {
+func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect.Request[dev.ResetConfigurationRequest]) (*connect.Response[dev.ResetConfigurationResponse], error) {
 	return c.resetConfiguration.CallUnary(ctx, req)
 }
 
 // ThrottlerHandler is an implementation of the throttlerservice.Throttler service.
 type ThrottlerHandler interface {
 	// MaxRates returns the current max rate for each throttler of the process.
-	MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error)
+	MaxRates(context.Context, *connect.Request[dev.MaxRatesRequest]) (*connect.Response[dev.MaxRatesResponse], error)
 	// SetMaxRate allows to change the current max rate for all throttlers
 	// of the process.
-	SetMaxRate(context.Context, *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error)
+	SetMaxRate(context.Context, *connect.Request[dev.SetMaxRateRequest]) (*connect.Response[dev.SetMaxRateResponse], error)
 	// GetConfiguration returns the configuration of the MaxReplicationlag module
 	// for the given throttler or all throttlers if "throttler_name" is empty.
-	GetConfiguration(context.Context, *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error)
+	GetConfiguration(context.Context, *connect.Request[dev.GetConfigurationRequest]) (*connect.Response[dev.GetConfigurationResponse], error)
 	// UpdateConfiguration (partially) updates the configuration of the
 	// MaxReplicationlag module for the given throttler or all throttlers if
 	// "throttler_name" is empty.
 	// If "copy_zero_values" is true, fields with zero values will be copied
 	// as well.
-	UpdateConfiguration(context.Context, *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error)
+	UpdateConfiguration(context.Context, *connect.Request[dev.UpdateConfigurationRequest]) (*connect.Response[dev.UpdateConfigurationResponse], error)
 	// ResetConfiguration resets the configuration of the MaxReplicationlag module
 	// to the initial configuration for the given throttler or all throttlers if
 	// "throttler_name" is empty.
-	ResetConfiguration(context.Context, *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error)
+	ResetConfiguration(context.Context, *connect.Request[dev.ResetConfigurationRequest]) (*connect.Response[dev.ResetConfigurationResponse], error)
 }
 
 // NewThrottlerHandler builds an HTTP handler from the service implementation. It returns the path
@@ -187,55 +187,69 @@ type ThrottlerHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(ThrottlerMaxRatesProcedure, connect_go.NewUnaryHandler(
+func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	throttlerMaxRatesHandler := connect.NewUnaryHandler(
 		ThrottlerMaxRatesProcedure,
 		svc.MaxRates,
 		opts...,
-	))
-	mux.Handle(ThrottlerSetMaxRateProcedure, connect_go.NewUnaryHandler(
+	)
+	throttlerSetMaxRateHandler := connect.NewUnaryHandler(
 		ThrottlerSetMaxRateProcedure,
 		svc.SetMaxRate,
 		opts...,
-	))
-	mux.Handle(ThrottlerGetConfigurationProcedure, connect_go.NewUnaryHandler(
+	)
+	throttlerGetConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerGetConfigurationProcedure,
 		svc.GetConfiguration,
 		opts...,
-	))
-	mux.Handle(ThrottlerUpdateConfigurationProcedure, connect_go.NewUnaryHandler(
+	)
+	throttlerUpdateConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerUpdateConfigurationProcedure,
 		svc.UpdateConfiguration,
 		opts...,
-	))
-	mux.Handle(ThrottlerResetConfigurationProcedure, connect_go.NewUnaryHandler(
+	)
+	throttlerResetConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerResetConfigurationProcedure,
 		svc.ResetConfiguration,
 		opts...,
-	))
-	return "/throttlerservice.Throttler/", mux
+	)
+	return "/throttlerservice.Throttler/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case ThrottlerMaxRatesProcedure:
+			throttlerMaxRatesHandler.ServeHTTP(w, r)
+		case ThrottlerSetMaxRateProcedure:
+			throttlerSetMaxRateHandler.ServeHTTP(w, r)
+		case ThrottlerGetConfigurationProcedure:
+			throttlerGetConfigurationHandler.ServeHTTP(w, r)
+		case ThrottlerUpdateConfigurationProcedure:
+			throttlerUpdateConfigurationHandler.ServeHTTP(w, r)
+		case ThrottlerResetConfigurationProcedure:
+			throttlerResetConfigurationHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedThrottlerHandler returns CodeUnimplemented from all methods.
 type UnimplementedThrottlerHandler struct{}
 
-func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect_go.Request[dev.MaxRatesRequest]) (*connect_go.Response[dev.MaxRatesResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.MaxRates is not implemented"))
+func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect.Request[dev.MaxRatesRequest]) (*connect.Response[dev.MaxRatesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.MaxRates is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect_go.Request[dev.SetMaxRateRequest]) (*connect_go.Response[dev.SetMaxRateResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.SetMaxRate is not implemented"))
+func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect.Request[dev.SetMaxRateRequest]) (*connect.Response[dev.SetMaxRateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.SetMaxRate is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect_go.Request[dev.GetConfigurationRequest]) (*connect_go.Response[dev.GetConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.GetConfiguration is not implemented"))
+func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect.Request[dev.GetConfigurationRequest]) (*connect.Response[dev.GetConfigurationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.GetConfiguration is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect_go.Request[dev.UpdateConfigurationRequest]) (*connect_go.Response[dev.UpdateConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.UpdateConfiguration is not implemented"))
+func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect.Request[dev.UpdateConfigurationRequest]) (*connect.Response[dev.UpdateConfigurationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.UpdateConfiguration is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect_go.Request[dev.ResetConfigurationRequest]) (*connect_go.Response[dev.ResetConfigurationResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("throttlerservice.Throttler.ResetConfiguration is not implemented"))
+func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect.Request[dev.ResetConfigurationRequest]) (*connect.Response[dev.ResetConfigurationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.ResetConfiguration is not implemented"))
 }

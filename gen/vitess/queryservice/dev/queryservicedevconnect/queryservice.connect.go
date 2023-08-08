@@ -21,9 +21,9 @@
 package queryservicedevconnect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	dev1 "github.com/planetscale/vitess-types/gen/vitess/binlogdata/dev"
 	dev "github.com/planetscale/vitess-types/gen/vitess/query/dev"
 	_ "github.com/planetscale/vitess-types/gen/vitess/queryservice/dev"
@@ -36,7 +36,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// QueryName is the fully-qualified name of the Query service.
@@ -116,63 +116,63 @@ const (
 type QueryClient interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
-	Execute(context.Context, *connect_go.Request[dev.ExecuteRequest]) (*connect_go.Response[dev.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error)
 	// StreamExecute executes a streaming query. Use this method if the
 	// query returns a large number of rows. The first QueryResult will
 	// contain the Fields, subsequent QueryResult messages will contain
 	// the rows.
-	StreamExecute(context.Context, *connect_go.Request[dev.StreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.StreamExecuteResponse], error)
+	StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev.StreamExecuteResponse], error)
 	// Begin a transaction.
-	Begin(context.Context, *connect_go.Request[dev.BeginRequest]) (*connect_go.Response[dev.BeginResponse], error)
+	Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error)
 	// Commit a transaction.
-	Commit(context.Context, *connect_go.Request[dev.CommitRequest]) (*connect_go.Response[dev.CommitResponse], error)
+	Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error)
 	// Rollback a transaction.
-	Rollback(context.Context, *connect_go.Request[dev.RollbackRequest]) (*connect_go.Response[dev.RollbackResponse], error)
+	Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error)
 	// Prepare preares a transaction.
-	Prepare(context.Context, *connect_go.Request[dev.PrepareRequest]) (*connect_go.Response[dev.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error)
 	// CommitPrepared commits a prepared transaction.
-	CommitPrepared(context.Context, *connect_go.Request[dev.CommitPreparedRequest]) (*connect_go.Response[dev.CommitPreparedResponse], error)
+	CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error)
 	// RollbackPrepared rolls back a prepared transaction.
-	RollbackPrepared(context.Context, *connect_go.Request[dev.RollbackPreparedRequest]) (*connect_go.Response[dev.RollbackPreparedResponse], error)
+	RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error)
 	// CreateTransaction creates the metadata for a 2pc transaction.
-	CreateTransaction(context.Context, *connect_go.Request[dev.CreateTransactionRequest]) (*connect_go.Response[dev.CreateTransactionResponse], error)
+	CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error)
 	// StartCommit initiates a commit for a 2pc transaction.
-	StartCommit(context.Context, *connect_go.Request[dev.StartCommitRequest]) (*connect_go.Response[dev.StartCommitResponse], error)
+	StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error)
 	// SetRollback marks the 2pc transaction for rollback.
-	SetRollback(context.Context, *connect_go.Request[dev.SetRollbackRequest]) (*connect_go.Response[dev.SetRollbackResponse], error)
+	SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error)
 	// ConcludeTransaction marks the 2pc transaction as resolved.
-	ConcludeTransaction(context.Context, *connect_go.Request[dev.ConcludeTransactionRequest]) (*connect_go.Response[dev.ConcludeTransactionResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error)
 	// ReadTransaction returns the 2pc transaction info.
-	ReadTransaction(context.Context, *connect_go.Request[dev.ReadTransactionRequest]) (*connect_go.Response[dev.ReadTransactionResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error)
 	// BeginExecute executes a begin and the specified SQL query.
-	BeginExecute(context.Context, *connect_go.Request[dev.BeginExecuteRequest]) (*connect_go.Response[dev.BeginExecuteResponse], error)
+	BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error)
 	// BeginStreamExecute executes a begin and the specified SQL query.
-	BeginStreamExecute(context.Context, *connect_go.Request[dev.BeginStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.BeginStreamExecuteResponse], error)
+	BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.BeginStreamExecuteResponse], error)
 	// MessageStream streams messages from a message table.
-	MessageStream(context.Context, *connect_go.Request[dev.MessageStreamRequest]) (*connect_go.ServerStreamForClient[dev.MessageStreamResponse], error)
+	MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest]) (*connect.ServerStreamForClient[dev.MessageStreamResponse], error)
 	// MessageAck acks messages for a table.
-	MessageAck(context.Context, *connect_go.Request[dev.MessageAckRequest]) (*connect_go.Response[dev.MessageAckResponse], error)
+	MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error)
 	// ReserveExecute executes a query on a reserved connection
-	ReserveExecute(context.Context, *connect_go.Request[dev.ReserveExecuteRequest]) (*connect_go.Response[dev.ReserveExecuteResponse], error)
+	ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error)
 	// ReserveBeginExecute starts a transaction and executes a query in the transaction on a reserved connection
-	ReserveBeginExecute(context.Context, *connect_go.Request[dev.ReserveBeginExecuteRequest]) (*connect_go.Response[dev.ReserveBeginExecuteResponse], error)
+	ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error)
 	// ReserveStreamExecute executes a streaming query on a reserved connection
-	ReserveStreamExecute(context.Context, *connect_go.Request[dev.ReserveStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error)
+	ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error)
 	// ReserveBeginStreamExecute starts a transaction and executes a streaming query in the transaction on a reserved connection
-	ReserveBeginStreamExecute(context.Context, *connect_go.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error)
+	ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error)
 	// Release releases the connection
-	Release(context.Context, *connect_go.Request[dev.ReleaseRequest]) (*connect_go.Response[dev.ReleaseResponse], error)
+	Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error)
 	// StreamHealth runs a streaming RPC to the tablet, that returns the
 	// current health of the tablet on a regular basis.
-	StreamHealth(context.Context, *connect_go.Request[dev.StreamHealthRequest]) (*connect_go.ServerStreamForClient[dev.StreamHealthResponse], error)
+	StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest]) (*connect.ServerStreamForClient[dev.StreamHealthResponse], error)
 	// VStream streams vreplication events.
-	VStream(context.Context, *connect_go.Request[dev1.VStreamRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamResponse], error)
+	VStream(context.Context, *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error)
 	// VStreamRows streams rows from the specified starting point.
-	VStreamRows(context.Context, *connect_go.Request[dev1.VStreamRowsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamRowsResponse], error)
+	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error)
 	// VStreamResults streams results along with the gtid of the snapshot.
-	VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamResultsResponse], error)
+	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error)
 	// GetSchema returns the schema information.
-	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.ServerStreamForClient[dev.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error)
 }
 
 // NewQueryClient constructs a client for the queryservice.Query service. By default, it
@@ -182,140 +182,140 @@ type QueryClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewQueryClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) QueryClient {
+func NewQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) QueryClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &queryClient{
-		execute: connect_go.NewClient[dev.ExecuteRequest, dev.ExecuteResponse](
+		execute: connect.NewClient[dev.ExecuteRequest, dev.ExecuteResponse](
 			httpClient,
 			baseURL+QueryExecuteProcedure,
 			opts...,
 		),
-		streamExecute: connect_go.NewClient[dev.StreamExecuteRequest, dev.StreamExecuteResponse](
+		streamExecute: connect.NewClient[dev.StreamExecuteRequest, dev.StreamExecuteResponse](
 			httpClient,
 			baseURL+QueryStreamExecuteProcedure,
 			opts...,
 		),
-		begin: connect_go.NewClient[dev.BeginRequest, dev.BeginResponse](
+		begin: connect.NewClient[dev.BeginRequest, dev.BeginResponse](
 			httpClient,
 			baseURL+QueryBeginProcedure,
 			opts...,
 		),
-		commit: connect_go.NewClient[dev.CommitRequest, dev.CommitResponse](
+		commit: connect.NewClient[dev.CommitRequest, dev.CommitResponse](
 			httpClient,
 			baseURL+QueryCommitProcedure,
 			opts...,
 		),
-		rollback: connect_go.NewClient[dev.RollbackRequest, dev.RollbackResponse](
+		rollback: connect.NewClient[dev.RollbackRequest, dev.RollbackResponse](
 			httpClient,
 			baseURL+QueryRollbackProcedure,
 			opts...,
 		),
-		prepare: connect_go.NewClient[dev.PrepareRequest, dev.PrepareResponse](
+		prepare: connect.NewClient[dev.PrepareRequest, dev.PrepareResponse](
 			httpClient,
 			baseURL+QueryPrepareProcedure,
 			opts...,
 		),
-		commitPrepared: connect_go.NewClient[dev.CommitPreparedRequest, dev.CommitPreparedResponse](
+		commitPrepared: connect.NewClient[dev.CommitPreparedRequest, dev.CommitPreparedResponse](
 			httpClient,
 			baseURL+QueryCommitPreparedProcedure,
 			opts...,
 		),
-		rollbackPrepared: connect_go.NewClient[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse](
+		rollbackPrepared: connect.NewClient[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse](
 			httpClient,
 			baseURL+QueryRollbackPreparedProcedure,
 			opts...,
 		),
-		createTransaction: connect_go.NewClient[dev.CreateTransactionRequest, dev.CreateTransactionResponse](
+		createTransaction: connect.NewClient[dev.CreateTransactionRequest, dev.CreateTransactionResponse](
 			httpClient,
 			baseURL+QueryCreateTransactionProcedure,
 			opts...,
 		),
-		startCommit: connect_go.NewClient[dev.StartCommitRequest, dev.StartCommitResponse](
+		startCommit: connect.NewClient[dev.StartCommitRequest, dev.StartCommitResponse](
 			httpClient,
 			baseURL+QueryStartCommitProcedure,
 			opts...,
 		),
-		setRollback: connect_go.NewClient[dev.SetRollbackRequest, dev.SetRollbackResponse](
+		setRollback: connect.NewClient[dev.SetRollbackRequest, dev.SetRollbackResponse](
 			httpClient,
 			baseURL+QuerySetRollbackProcedure,
 			opts...,
 		),
-		concludeTransaction: connect_go.NewClient[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse](
+		concludeTransaction: connect.NewClient[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse](
 			httpClient,
 			baseURL+QueryConcludeTransactionProcedure,
 			opts...,
 		),
-		readTransaction: connect_go.NewClient[dev.ReadTransactionRequest, dev.ReadTransactionResponse](
+		readTransaction: connect.NewClient[dev.ReadTransactionRequest, dev.ReadTransactionResponse](
 			httpClient,
 			baseURL+QueryReadTransactionProcedure,
 			opts...,
 		),
-		beginExecute: connect_go.NewClient[dev.BeginExecuteRequest, dev.BeginExecuteResponse](
+		beginExecute: connect.NewClient[dev.BeginExecuteRequest, dev.BeginExecuteResponse](
 			httpClient,
 			baseURL+QueryBeginExecuteProcedure,
 			opts...,
 		),
-		beginStreamExecute: connect_go.NewClient[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse](
+		beginStreamExecute: connect.NewClient[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryBeginStreamExecuteProcedure,
 			opts...,
 		),
-		messageStream: connect_go.NewClient[dev.MessageStreamRequest, dev.MessageStreamResponse](
+		messageStream: connect.NewClient[dev.MessageStreamRequest, dev.MessageStreamResponse](
 			httpClient,
 			baseURL+QueryMessageStreamProcedure,
 			opts...,
 		),
-		messageAck: connect_go.NewClient[dev.MessageAckRequest, dev.MessageAckResponse](
+		messageAck: connect.NewClient[dev.MessageAckRequest, dev.MessageAckResponse](
 			httpClient,
 			baseURL+QueryMessageAckProcedure,
 			opts...,
 		),
-		reserveExecute: connect_go.NewClient[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse](
+		reserveExecute: connect.NewClient[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveExecuteProcedure,
 			opts...,
 		),
-		reserveBeginExecute: connect_go.NewClient[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse](
+		reserveBeginExecute: connect.NewClient[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveBeginExecuteProcedure,
 			opts...,
 		),
-		reserveStreamExecute: connect_go.NewClient[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse](
+		reserveStreamExecute: connect.NewClient[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveStreamExecuteProcedure,
 			opts...,
 		),
-		reserveBeginStreamExecute: connect_go.NewClient[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse](
+		reserveBeginStreamExecute: connect.NewClient[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveBeginStreamExecuteProcedure,
 			opts...,
 		),
-		release: connect_go.NewClient[dev.ReleaseRequest, dev.ReleaseResponse](
+		release: connect.NewClient[dev.ReleaseRequest, dev.ReleaseResponse](
 			httpClient,
 			baseURL+QueryReleaseProcedure,
 			opts...,
 		),
-		streamHealth: connect_go.NewClient[dev.StreamHealthRequest, dev.StreamHealthResponse](
+		streamHealth: connect.NewClient[dev.StreamHealthRequest, dev.StreamHealthResponse](
 			httpClient,
 			baseURL+QueryStreamHealthProcedure,
 			opts...,
 		),
-		vStream: connect_go.NewClient[dev1.VStreamRequest, dev1.VStreamResponse](
+		vStream: connect.NewClient[dev1.VStreamRequest, dev1.VStreamResponse](
 			httpClient,
 			baseURL+QueryVStreamProcedure,
 			opts...,
 		),
-		vStreamRows: connect_go.NewClient[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse](
+		vStreamRows: connect.NewClient[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse](
 			httpClient,
 			baseURL+QueryVStreamRowsProcedure,
 			opts...,
 		),
-		vStreamResults: connect_go.NewClient[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse](
+		vStreamResults: connect.NewClient[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse](
 			httpClient,
 			baseURL+QueryVStreamResultsProcedure,
 			opts...,
 		),
-		getSchema: connect_go.NewClient[dev.GetSchemaRequest, dev.GetSchemaResponse](
+		getSchema: connect.NewClient[dev.GetSchemaRequest, dev.GetSchemaResponse](
 			httpClient,
 			baseURL+QueryGetSchemaProcedure,
 			opts...,
@@ -325,167 +325,167 @@ func NewQueryClient(httpClient connect_go.HTTPClient, baseURL string, opts ...co
 
 // queryClient implements QueryClient.
 type queryClient struct {
-	execute                   *connect_go.Client[dev.ExecuteRequest, dev.ExecuteResponse]
-	streamExecute             *connect_go.Client[dev.StreamExecuteRequest, dev.StreamExecuteResponse]
-	begin                     *connect_go.Client[dev.BeginRequest, dev.BeginResponse]
-	commit                    *connect_go.Client[dev.CommitRequest, dev.CommitResponse]
-	rollback                  *connect_go.Client[dev.RollbackRequest, dev.RollbackResponse]
-	prepare                   *connect_go.Client[dev.PrepareRequest, dev.PrepareResponse]
-	commitPrepared            *connect_go.Client[dev.CommitPreparedRequest, dev.CommitPreparedResponse]
-	rollbackPrepared          *connect_go.Client[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse]
-	createTransaction         *connect_go.Client[dev.CreateTransactionRequest, dev.CreateTransactionResponse]
-	startCommit               *connect_go.Client[dev.StartCommitRequest, dev.StartCommitResponse]
-	setRollback               *connect_go.Client[dev.SetRollbackRequest, dev.SetRollbackResponse]
-	concludeTransaction       *connect_go.Client[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse]
-	readTransaction           *connect_go.Client[dev.ReadTransactionRequest, dev.ReadTransactionResponse]
-	beginExecute              *connect_go.Client[dev.BeginExecuteRequest, dev.BeginExecuteResponse]
-	beginStreamExecute        *connect_go.Client[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse]
-	messageStream             *connect_go.Client[dev.MessageStreamRequest, dev.MessageStreamResponse]
-	messageAck                *connect_go.Client[dev.MessageAckRequest, dev.MessageAckResponse]
-	reserveExecute            *connect_go.Client[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse]
-	reserveBeginExecute       *connect_go.Client[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse]
-	reserveStreamExecute      *connect_go.Client[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse]
-	reserveBeginStreamExecute *connect_go.Client[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse]
-	release                   *connect_go.Client[dev.ReleaseRequest, dev.ReleaseResponse]
-	streamHealth              *connect_go.Client[dev.StreamHealthRequest, dev.StreamHealthResponse]
-	vStream                   *connect_go.Client[dev1.VStreamRequest, dev1.VStreamResponse]
-	vStreamRows               *connect_go.Client[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse]
-	vStreamResults            *connect_go.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
-	getSchema                 *connect_go.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
+	execute                   *connect.Client[dev.ExecuteRequest, dev.ExecuteResponse]
+	streamExecute             *connect.Client[dev.StreamExecuteRequest, dev.StreamExecuteResponse]
+	begin                     *connect.Client[dev.BeginRequest, dev.BeginResponse]
+	commit                    *connect.Client[dev.CommitRequest, dev.CommitResponse]
+	rollback                  *connect.Client[dev.RollbackRequest, dev.RollbackResponse]
+	prepare                   *connect.Client[dev.PrepareRequest, dev.PrepareResponse]
+	commitPrepared            *connect.Client[dev.CommitPreparedRequest, dev.CommitPreparedResponse]
+	rollbackPrepared          *connect.Client[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse]
+	createTransaction         *connect.Client[dev.CreateTransactionRequest, dev.CreateTransactionResponse]
+	startCommit               *connect.Client[dev.StartCommitRequest, dev.StartCommitResponse]
+	setRollback               *connect.Client[dev.SetRollbackRequest, dev.SetRollbackResponse]
+	concludeTransaction       *connect.Client[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse]
+	readTransaction           *connect.Client[dev.ReadTransactionRequest, dev.ReadTransactionResponse]
+	beginExecute              *connect.Client[dev.BeginExecuteRequest, dev.BeginExecuteResponse]
+	beginStreamExecute        *connect.Client[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse]
+	messageStream             *connect.Client[dev.MessageStreamRequest, dev.MessageStreamResponse]
+	messageAck                *connect.Client[dev.MessageAckRequest, dev.MessageAckResponse]
+	reserveExecute            *connect.Client[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse]
+	reserveBeginExecute       *connect.Client[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse]
+	reserveStreamExecute      *connect.Client[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse]
+	reserveBeginStreamExecute *connect.Client[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse]
+	release                   *connect.Client[dev.ReleaseRequest, dev.ReleaseResponse]
+	streamHealth              *connect.Client[dev.StreamHealthRequest, dev.StreamHealthResponse]
+	vStream                   *connect.Client[dev1.VStreamRequest, dev1.VStreamResponse]
+	vStreamRows               *connect.Client[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse]
+	vStreamResults            *connect.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
+	getSchema                 *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
 }
 
 // Execute calls queryservice.Query.Execute.
-func (c *queryClient) Execute(ctx context.Context, req *connect_go.Request[dev.ExecuteRequest]) (*connect_go.Response[dev.ExecuteResponse], error) {
+func (c *queryClient) Execute(ctx context.Context, req *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
 	return c.execute.CallUnary(ctx, req)
 }
 
 // StreamExecute calls queryservice.Query.StreamExecute.
-func (c *queryClient) StreamExecute(ctx context.Context, req *connect_go.Request[dev.StreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.StreamExecuteResponse], error) {
+func (c *queryClient) StreamExecute(ctx context.Context, req *connect.Request[dev.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev.StreamExecuteResponse], error) {
 	return c.streamExecute.CallServerStream(ctx, req)
 }
 
 // Begin calls queryservice.Query.Begin.
-func (c *queryClient) Begin(ctx context.Context, req *connect_go.Request[dev.BeginRequest]) (*connect_go.Response[dev.BeginResponse], error) {
+func (c *queryClient) Begin(ctx context.Context, req *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
 	return c.begin.CallUnary(ctx, req)
 }
 
 // Commit calls queryservice.Query.Commit.
-func (c *queryClient) Commit(ctx context.Context, req *connect_go.Request[dev.CommitRequest]) (*connect_go.Response[dev.CommitResponse], error) {
+func (c *queryClient) Commit(ctx context.Context, req *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
 	return c.commit.CallUnary(ctx, req)
 }
 
 // Rollback calls queryservice.Query.Rollback.
-func (c *queryClient) Rollback(ctx context.Context, req *connect_go.Request[dev.RollbackRequest]) (*connect_go.Response[dev.RollbackResponse], error) {
+func (c *queryClient) Rollback(ctx context.Context, req *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
 	return c.rollback.CallUnary(ctx, req)
 }
 
 // Prepare calls queryservice.Query.Prepare.
-func (c *queryClient) Prepare(ctx context.Context, req *connect_go.Request[dev.PrepareRequest]) (*connect_go.Response[dev.PrepareResponse], error) {
+func (c *queryClient) Prepare(ctx context.Context, req *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
 	return c.prepare.CallUnary(ctx, req)
 }
 
 // CommitPrepared calls queryservice.Query.CommitPrepared.
-func (c *queryClient) CommitPrepared(ctx context.Context, req *connect_go.Request[dev.CommitPreparedRequest]) (*connect_go.Response[dev.CommitPreparedResponse], error) {
+func (c *queryClient) CommitPrepared(ctx context.Context, req *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
 	return c.commitPrepared.CallUnary(ctx, req)
 }
 
 // RollbackPrepared calls queryservice.Query.RollbackPrepared.
-func (c *queryClient) RollbackPrepared(ctx context.Context, req *connect_go.Request[dev.RollbackPreparedRequest]) (*connect_go.Response[dev.RollbackPreparedResponse], error) {
+func (c *queryClient) RollbackPrepared(ctx context.Context, req *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
 	return c.rollbackPrepared.CallUnary(ctx, req)
 }
 
 // CreateTransaction calls queryservice.Query.CreateTransaction.
-func (c *queryClient) CreateTransaction(ctx context.Context, req *connect_go.Request[dev.CreateTransactionRequest]) (*connect_go.Response[dev.CreateTransactionResponse], error) {
+func (c *queryClient) CreateTransaction(ctx context.Context, req *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
 	return c.createTransaction.CallUnary(ctx, req)
 }
 
 // StartCommit calls queryservice.Query.StartCommit.
-func (c *queryClient) StartCommit(ctx context.Context, req *connect_go.Request[dev.StartCommitRequest]) (*connect_go.Response[dev.StartCommitResponse], error) {
+func (c *queryClient) StartCommit(ctx context.Context, req *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
 	return c.startCommit.CallUnary(ctx, req)
 }
 
 // SetRollback calls queryservice.Query.SetRollback.
-func (c *queryClient) SetRollback(ctx context.Context, req *connect_go.Request[dev.SetRollbackRequest]) (*connect_go.Response[dev.SetRollbackResponse], error) {
+func (c *queryClient) SetRollback(ctx context.Context, req *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
 	return c.setRollback.CallUnary(ctx, req)
 }
 
 // ConcludeTransaction calls queryservice.Query.ConcludeTransaction.
-func (c *queryClient) ConcludeTransaction(ctx context.Context, req *connect_go.Request[dev.ConcludeTransactionRequest]) (*connect_go.Response[dev.ConcludeTransactionResponse], error) {
+func (c *queryClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
 	return c.concludeTransaction.CallUnary(ctx, req)
 }
 
 // ReadTransaction calls queryservice.Query.ReadTransaction.
-func (c *queryClient) ReadTransaction(ctx context.Context, req *connect_go.Request[dev.ReadTransactionRequest]) (*connect_go.Response[dev.ReadTransactionResponse], error) {
+func (c *queryClient) ReadTransaction(ctx context.Context, req *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
 	return c.readTransaction.CallUnary(ctx, req)
 }
 
 // BeginExecute calls queryservice.Query.BeginExecute.
-func (c *queryClient) BeginExecute(ctx context.Context, req *connect_go.Request[dev.BeginExecuteRequest]) (*connect_go.Response[dev.BeginExecuteResponse], error) {
+func (c *queryClient) BeginExecute(ctx context.Context, req *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
 	return c.beginExecute.CallUnary(ctx, req)
 }
 
 // BeginStreamExecute calls queryservice.Query.BeginStreamExecute.
-func (c *queryClient) BeginStreamExecute(ctx context.Context, req *connect_go.Request[dev.BeginStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.BeginStreamExecuteResponse], error) {
+func (c *queryClient) BeginStreamExecute(ctx context.Context, req *connect.Request[dev.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.BeginStreamExecuteResponse], error) {
 	return c.beginStreamExecute.CallServerStream(ctx, req)
 }
 
 // MessageStream calls queryservice.Query.MessageStream.
-func (c *queryClient) MessageStream(ctx context.Context, req *connect_go.Request[dev.MessageStreamRequest]) (*connect_go.ServerStreamForClient[dev.MessageStreamResponse], error) {
+func (c *queryClient) MessageStream(ctx context.Context, req *connect.Request[dev.MessageStreamRequest]) (*connect.ServerStreamForClient[dev.MessageStreamResponse], error) {
 	return c.messageStream.CallServerStream(ctx, req)
 }
 
 // MessageAck calls queryservice.Query.MessageAck.
-func (c *queryClient) MessageAck(ctx context.Context, req *connect_go.Request[dev.MessageAckRequest]) (*connect_go.Response[dev.MessageAckResponse], error) {
+func (c *queryClient) MessageAck(ctx context.Context, req *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
 	return c.messageAck.CallUnary(ctx, req)
 }
 
 // ReserveExecute calls queryservice.Query.ReserveExecute.
-func (c *queryClient) ReserveExecute(ctx context.Context, req *connect_go.Request[dev.ReserveExecuteRequest]) (*connect_go.Response[dev.ReserveExecuteResponse], error) {
+func (c *queryClient) ReserveExecute(ctx context.Context, req *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
 	return c.reserveExecute.CallUnary(ctx, req)
 }
 
 // ReserveBeginExecute calls queryservice.Query.ReserveBeginExecute.
-func (c *queryClient) ReserveBeginExecute(ctx context.Context, req *connect_go.Request[dev.ReserveBeginExecuteRequest]) (*connect_go.Response[dev.ReserveBeginExecuteResponse], error) {
+func (c *queryClient) ReserveBeginExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
 	return c.reserveBeginExecute.CallUnary(ctx, req)
 }
 
 // ReserveStreamExecute calls queryservice.Query.ReserveStreamExecute.
-func (c *queryClient) ReserveStreamExecute(ctx context.Context, req *connect_go.Request[dev.ReserveStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error) {
+func (c *queryClient) ReserveStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error) {
 	return c.reserveStreamExecute.CallServerStream(ctx, req)
 }
 
 // ReserveBeginStreamExecute calls queryservice.Query.ReserveBeginStreamExecute.
-func (c *queryClient) ReserveBeginStreamExecute(ctx context.Context, req *connect_go.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect_go.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error) {
+func (c *queryClient) ReserveBeginStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error) {
 	return c.reserveBeginStreamExecute.CallServerStream(ctx, req)
 }
 
 // Release calls queryservice.Query.Release.
-func (c *queryClient) Release(ctx context.Context, req *connect_go.Request[dev.ReleaseRequest]) (*connect_go.Response[dev.ReleaseResponse], error) {
+func (c *queryClient) Release(ctx context.Context, req *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
 	return c.release.CallUnary(ctx, req)
 }
 
 // StreamHealth calls queryservice.Query.StreamHealth.
-func (c *queryClient) StreamHealth(ctx context.Context, req *connect_go.Request[dev.StreamHealthRequest]) (*connect_go.ServerStreamForClient[dev.StreamHealthResponse], error) {
+func (c *queryClient) StreamHealth(ctx context.Context, req *connect.Request[dev.StreamHealthRequest]) (*connect.ServerStreamForClient[dev.StreamHealthResponse], error) {
 	return c.streamHealth.CallServerStream(ctx, req)
 }
 
 // VStream calls queryservice.Query.VStream.
-func (c *queryClient) VStream(ctx context.Context, req *connect_go.Request[dev1.VStreamRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamResponse], error) {
+func (c *queryClient) VStream(ctx context.Context, req *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error) {
 	return c.vStream.CallServerStream(ctx, req)
 }
 
 // VStreamRows calls queryservice.Query.VStreamRows.
-func (c *queryClient) VStreamRows(ctx context.Context, req *connect_go.Request[dev1.VStreamRowsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamRowsResponse], error) {
+func (c *queryClient) VStreamRows(ctx context.Context, req *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error) {
 	return c.vStreamRows.CallServerStream(ctx, req)
 }
 
 // VStreamResults calls queryservice.Query.VStreamResults.
-func (c *queryClient) VStreamResults(ctx context.Context, req *connect_go.Request[dev1.VStreamResultsRequest]) (*connect_go.ServerStreamForClient[dev1.VStreamResultsResponse], error) {
+func (c *queryClient) VStreamResults(ctx context.Context, req *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error) {
 	return c.vStreamResults.CallServerStream(ctx, req)
 }
 
 // GetSchema calls queryservice.Query.GetSchema.
-func (c *queryClient) GetSchema(ctx context.Context, req *connect_go.Request[dev.GetSchemaRequest]) (*connect_go.ServerStreamForClient[dev.GetSchemaResponse], error) {
+func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error) {
 	return c.getSchema.CallServerStream(ctx, req)
 }
 
@@ -493,63 +493,63 @@ func (c *queryClient) GetSchema(ctx context.Context, req *connect_go.Request[dev
 type QueryHandler interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
-	Execute(context.Context, *connect_go.Request[dev.ExecuteRequest]) (*connect_go.Response[dev.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error)
 	// StreamExecute executes a streaming query. Use this method if the
 	// query returns a large number of rows. The first QueryResult will
 	// contain the Fields, subsequent QueryResult messages will contain
 	// the rows.
-	StreamExecute(context.Context, *connect_go.Request[dev.StreamExecuteRequest], *connect_go.ServerStream[dev.StreamExecuteResponse]) error
+	StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest], *connect.ServerStream[dev.StreamExecuteResponse]) error
 	// Begin a transaction.
-	Begin(context.Context, *connect_go.Request[dev.BeginRequest]) (*connect_go.Response[dev.BeginResponse], error)
+	Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error)
 	// Commit a transaction.
-	Commit(context.Context, *connect_go.Request[dev.CommitRequest]) (*connect_go.Response[dev.CommitResponse], error)
+	Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error)
 	// Rollback a transaction.
-	Rollback(context.Context, *connect_go.Request[dev.RollbackRequest]) (*connect_go.Response[dev.RollbackResponse], error)
+	Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error)
 	// Prepare preares a transaction.
-	Prepare(context.Context, *connect_go.Request[dev.PrepareRequest]) (*connect_go.Response[dev.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error)
 	// CommitPrepared commits a prepared transaction.
-	CommitPrepared(context.Context, *connect_go.Request[dev.CommitPreparedRequest]) (*connect_go.Response[dev.CommitPreparedResponse], error)
+	CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error)
 	// RollbackPrepared rolls back a prepared transaction.
-	RollbackPrepared(context.Context, *connect_go.Request[dev.RollbackPreparedRequest]) (*connect_go.Response[dev.RollbackPreparedResponse], error)
+	RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error)
 	// CreateTransaction creates the metadata for a 2pc transaction.
-	CreateTransaction(context.Context, *connect_go.Request[dev.CreateTransactionRequest]) (*connect_go.Response[dev.CreateTransactionResponse], error)
+	CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error)
 	// StartCommit initiates a commit for a 2pc transaction.
-	StartCommit(context.Context, *connect_go.Request[dev.StartCommitRequest]) (*connect_go.Response[dev.StartCommitResponse], error)
+	StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error)
 	// SetRollback marks the 2pc transaction for rollback.
-	SetRollback(context.Context, *connect_go.Request[dev.SetRollbackRequest]) (*connect_go.Response[dev.SetRollbackResponse], error)
+	SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error)
 	// ConcludeTransaction marks the 2pc transaction as resolved.
-	ConcludeTransaction(context.Context, *connect_go.Request[dev.ConcludeTransactionRequest]) (*connect_go.Response[dev.ConcludeTransactionResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error)
 	// ReadTransaction returns the 2pc transaction info.
-	ReadTransaction(context.Context, *connect_go.Request[dev.ReadTransactionRequest]) (*connect_go.Response[dev.ReadTransactionResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error)
 	// BeginExecute executes a begin and the specified SQL query.
-	BeginExecute(context.Context, *connect_go.Request[dev.BeginExecuteRequest]) (*connect_go.Response[dev.BeginExecuteResponse], error)
+	BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error)
 	// BeginStreamExecute executes a begin and the specified SQL query.
-	BeginStreamExecute(context.Context, *connect_go.Request[dev.BeginStreamExecuteRequest], *connect_go.ServerStream[dev.BeginStreamExecuteResponse]) error
+	BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest], *connect.ServerStream[dev.BeginStreamExecuteResponse]) error
 	// MessageStream streams messages from a message table.
-	MessageStream(context.Context, *connect_go.Request[dev.MessageStreamRequest], *connect_go.ServerStream[dev.MessageStreamResponse]) error
+	MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest], *connect.ServerStream[dev.MessageStreamResponse]) error
 	// MessageAck acks messages for a table.
-	MessageAck(context.Context, *connect_go.Request[dev.MessageAckRequest]) (*connect_go.Response[dev.MessageAckResponse], error)
+	MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error)
 	// ReserveExecute executes a query on a reserved connection
-	ReserveExecute(context.Context, *connect_go.Request[dev.ReserveExecuteRequest]) (*connect_go.Response[dev.ReserveExecuteResponse], error)
+	ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error)
 	// ReserveBeginExecute starts a transaction and executes a query in the transaction on a reserved connection
-	ReserveBeginExecute(context.Context, *connect_go.Request[dev.ReserveBeginExecuteRequest]) (*connect_go.Response[dev.ReserveBeginExecuteResponse], error)
+	ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error)
 	// ReserveStreamExecute executes a streaming query on a reserved connection
-	ReserveStreamExecute(context.Context, *connect_go.Request[dev.ReserveStreamExecuteRequest], *connect_go.ServerStream[dev.ReserveStreamExecuteResponse]) error
+	ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest], *connect.ServerStream[dev.ReserveStreamExecuteResponse]) error
 	// ReserveBeginStreamExecute starts a transaction and executes a streaming query in the transaction on a reserved connection
-	ReserveBeginStreamExecute(context.Context, *connect_go.Request[dev.ReserveBeginStreamExecuteRequest], *connect_go.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error
+	ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error
 	// Release releases the connection
-	Release(context.Context, *connect_go.Request[dev.ReleaseRequest]) (*connect_go.Response[dev.ReleaseResponse], error)
+	Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error)
 	// StreamHealth runs a streaming RPC to the tablet, that returns the
 	// current health of the tablet on a regular basis.
-	StreamHealth(context.Context, *connect_go.Request[dev.StreamHealthRequest], *connect_go.ServerStream[dev.StreamHealthResponse]) error
+	StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest], *connect.ServerStream[dev.StreamHealthResponse]) error
 	// VStream streams vreplication events.
-	VStream(context.Context, *connect_go.Request[dev1.VStreamRequest], *connect_go.ServerStream[dev1.VStreamResponse]) error
+	VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error
 	// VStreamRows streams rows from the specified starting point.
-	VStreamRows(context.Context, *connect_go.Request[dev1.VStreamRowsRequest], *connect_go.ServerStream[dev1.VStreamRowsResponse]) error
+	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error
 	// VStreamResults streams results along with the gtid of the snapshot.
-	VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest], *connect_go.ServerStream[dev1.VStreamResultsResponse]) error
+	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error
 	// GetSchema returns the schema information.
-	GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest], *connect_go.ServerStream[dev.GetSchemaResponse]) error
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error
 }
 
 // NewQueryHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -557,253 +557,311 @@ type QueryHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewQueryHandler(svc QueryHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(QueryExecuteProcedure, connect_go.NewUnaryHandler(
+func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	queryExecuteHandler := connect.NewUnaryHandler(
 		QueryExecuteProcedure,
 		svc.Execute,
 		opts...,
-	))
-	mux.Handle(QueryStreamExecuteProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryStreamExecuteProcedure,
 		svc.StreamExecute,
 		opts...,
-	))
-	mux.Handle(QueryBeginProcedure, connect_go.NewUnaryHandler(
+	)
+	queryBeginHandler := connect.NewUnaryHandler(
 		QueryBeginProcedure,
 		svc.Begin,
 		opts...,
-	))
-	mux.Handle(QueryCommitProcedure, connect_go.NewUnaryHandler(
+	)
+	queryCommitHandler := connect.NewUnaryHandler(
 		QueryCommitProcedure,
 		svc.Commit,
 		opts...,
-	))
-	mux.Handle(QueryRollbackProcedure, connect_go.NewUnaryHandler(
+	)
+	queryRollbackHandler := connect.NewUnaryHandler(
 		QueryRollbackProcedure,
 		svc.Rollback,
 		opts...,
-	))
-	mux.Handle(QueryPrepareProcedure, connect_go.NewUnaryHandler(
+	)
+	queryPrepareHandler := connect.NewUnaryHandler(
 		QueryPrepareProcedure,
 		svc.Prepare,
 		opts...,
-	))
-	mux.Handle(QueryCommitPreparedProcedure, connect_go.NewUnaryHandler(
+	)
+	queryCommitPreparedHandler := connect.NewUnaryHandler(
 		QueryCommitPreparedProcedure,
 		svc.CommitPrepared,
 		opts...,
-	))
-	mux.Handle(QueryRollbackPreparedProcedure, connect_go.NewUnaryHandler(
+	)
+	queryRollbackPreparedHandler := connect.NewUnaryHandler(
 		QueryRollbackPreparedProcedure,
 		svc.RollbackPrepared,
 		opts...,
-	))
-	mux.Handle(QueryCreateTransactionProcedure, connect_go.NewUnaryHandler(
+	)
+	queryCreateTransactionHandler := connect.NewUnaryHandler(
 		QueryCreateTransactionProcedure,
 		svc.CreateTransaction,
 		opts...,
-	))
-	mux.Handle(QueryStartCommitProcedure, connect_go.NewUnaryHandler(
+	)
+	queryStartCommitHandler := connect.NewUnaryHandler(
 		QueryStartCommitProcedure,
 		svc.StartCommit,
 		opts...,
-	))
-	mux.Handle(QuerySetRollbackProcedure, connect_go.NewUnaryHandler(
+	)
+	querySetRollbackHandler := connect.NewUnaryHandler(
 		QuerySetRollbackProcedure,
 		svc.SetRollback,
 		opts...,
-	))
-	mux.Handle(QueryConcludeTransactionProcedure, connect_go.NewUnaryHandler(
+	)
+	queryConcludeTransactionHandler := connect.NewUnaryHandler(
 		QueryConcludeTransactionProcedure,
 		svc.ConcludeTransaction,
 		opts...,
-	))
-	mux.Handle(QueryReadTransactionProcedure, connect_go.NewUnaryHandler(
+	)
+	queryReadTransactionHandler := connect.NewUnaryHandler(
 		QueryReadTransactionProcedure,
 		svc.ReadTransaction,
 		opts...,
-	))
-	mux.Handle(QueryBeginExecuteProcedure, connect_go.NewUnaryHandler(
+	)
+	queryBeginExecuteHandler := connect.NewUnaryHandler(
 		QueryBeginExecuteProcedure,
 		svc.BeginExecute,
 		opts...,
-	))
-	mux.Handle(QueryBeginStreamExecuteProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryBeginStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryBeginStreamExecuteProcedure,
 		svc.BeginStreamExecute,
 		opts...,
-	))
-	mux.Handle(QueryMessageStreamProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryMessageStreamHandler := connect.NewServerStreamHandler(
 		QueryMessageStreamProcedure,
 		svc.MessageStream,
 		opts...,
-	))
-	mux.Handle(QueryMessageAckProcedure, connect_go.NewUnaryHandler(
+	)
+	queryMessageAckHandler := connect.NewUnaryHandler(
 		QueryMessageAckProcedure,
 		svc.MessageAck,
 		opts...,
-	))
-	mux.Handle(QueryReserveExecuteProcedure, connect_go.NewUnaryHandler(
+	)
+	queryReserveExecuteHandler := connect.NewUnaryHandler(
 		QueryReserveExecuteProcedure,
 		svc.ReserveExecute,
 		opts...,
-	))
-	mux.Handle(QueryReserveBeginExecuteProcedure, connect_go.NewUnaryHandler(
+	)
+	queryReserveBeginExecuteHandler := connect.NewUnaryHandler(
 		QueryReserveBeginExecuteProcedure,
 		svc.ReserveBeginExecute,
 		opts...,
-	))
-	mux.Handle(QueryReserveStreamExecuteProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryReserveStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryReserveStreamExecuteProcedure,
 		svc.ReserveStreamExecute,
 		opts...,
-	))
-	mux.Handle(QueryReserveBeginStreamExecuteProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryReserveBeginStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryReserveBeginStreamExecuteProcedure,
 		svc.ReserveBeginStreamExecute,
 		opts...,
-	))
-	mux.Handle(QueryReleaseProcedure, connect_go.NewUnaryHandler(
+	)
+	queryReleaseHandler := connect.NewUnaryHandler(
 		QueryReleaseProcedure,
 		svc.Release,
 		opts...,
-	))
-	mux.Handle(QueryStreamHealthProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryStreamHealthHandler := connect.NewServerStreamHandler(
 		QueryStreamHealthProcedure,
 		svc.StreamHealth,
 		opts...,
-	))
-	mux.Handle(QueryVStreamProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryVStreamHandler := connect.NewServerStreamHandler(
 		QueryVStreamProcedure,
 		svc.VStream,
 		opts...,
-	))
-	mux.Handle(QueryVStreamRowsProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryVStreamRowsHandler := connect.NewServerStreamHandler(
 		QueryVStreamRowsProcedure,
 		svc.VStreamRows,
 		opts...,
-	))
-	mux.Handle(QueryVStreamResultsProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryVStreamResultsHandler := connect.NewServerStreamHandler(
 		QueryVStreamResultsProcedure,
 		svc.VStreamResults,
 		opts...,
-	))
-	mux.Handle(QueryGetSchemaProcedure, connect_go.NewServerStreamHandler(
+	)
+	queryGetSchemaHandler := connect.NewServerStreamHandler(
 		QueryGetSchemaProcedure,
 		svc.GetSchema,
 		opts...,
-	))
-	return "/queryservice.Query/", mux
+	)
+	return "/queryservice.Query/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case QueryExecuteProcedure:
+			queryExecuteHandler.ServeHTTP(w, r)
+		case QueryStreamExecuteProcedure:
+			queryStreamExecuteHandler.ServeHTTP(w, r)
+		case QueryBeginProcedure:
+			queryBeginHandler.ServeHTTP(w, r)
+		case QueryCommitProcedure:
+			queryCommitHandler.ServeHTTP(w, r)
+		case QueryRollbackProcedure:
+			queryRollbackHandler.ServeHTTP(w, r)
+		case QueryPrepareProcedure:
+			queryPrepareHandler.ServeHTTP(w, r)
+		case QueryCommitPreparedProcedure:
+			queryCommitPreparedHandler.ServeHTTP(w, r)
+		case QueryRollbackPreparedProcedure:
+			queryRollbackPreparedHandler.ServeHTTP(w, r)
+		case QueryCreateTransactionProcedure:
+			queryCreateTransactionHandler.ServeHTTP(w, r)
+		case QueryStartCommitProcedure:
+			queryStartCommitHandler.ServeHTTP(w, r)
+		case QuerySetRollbackProcedure:
+			querySetRollbackHandler.ServeHTTP(w, r)
+		case QueryConcludeTransactionProcedure:
+			queryConcludeTransactionHandler.ServeHTTP(w, r)
+		case QueryReadTransactionProcedure:
+			queryReadTransactionHandler.ServeHTTP(w, r)
+		case QueryBeginExecuteProcedure:
+			queryBeginExecuteHandler.ServeHTTP(w, r)
+		case QueryBeginStreamExecuteProcedure:
+			queryBeginStreamExecuteHandler.ServeHTTP(w, r)
+		case QueryMessageStreamProcedure:
+			queryMessageStreamHandler.ServeHTTP(w, r)
+		case QueryMessageAckProcedure:
+			queryMessageAckHandler.ServeHTTP(w, r)
+		case QueryReserveExecuteProcedure:
+			queryReserveExecuteHandler.ServeHTTP(w, r)
+		case QueryReserveBeginExecuteProcedure:
+			queryReserveBeginExecuteHandler.ServeHTTP(w, r)
+		case QueryReserveStreamExecuteProcedure:
+			queryReserveStreamExecuteHandler.ServeHTTP(w, r)
+		case QueryReserveBeginStreamExecuteProcedure:
+			queryReserveBeginStreamExecuteHandler.ServeHTTP(w, r)
+		case QueryReleaseProcedure:
+			queryReleaseHandler.ServeHTTP(w, r)
+		case QueryStreamHealthProcedure:
+			queryStreamHealthHandler.ServeHTTP(w, r)
+		case QueryVStreamProcedure:
+			queryVStreamHandler.ServeHTTP(w, r)
+		case QueryVStreamRowsProcedure:
+			queryVStreamRowsHandler.ServeHTTP(w, r)
+		case QueryVStreamResultsProcedure:
+			queryVStreamResultsHandler.ServeHTTP(w, r)
+		case QueryGetSchemaProcedure:
+			queryGetSchemaHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedQueryHandler returns CodeUnimplemented from all methods.
 type UnimplementedQueryHandler struct{}
 
-func (UnimplementedQueryHandler) Execute(context.Context, *connect_go.Request[dev.ExecuteRequest]) (*connect_go.Response[dev.ExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Execute is not implemented"))
+func (UnimplementedQueryHandler) Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Execute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StreamExecute(context.Context, *connect_go.Request[dev.StreamExecuteRequest], *connect_go.ServerStream[dev.StreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.StreamExecute is not implemented"))
+func (UnimplementedQueryHandler) StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest], *connect.ServerStream[dev.StreamExecuteResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Begin(context.Context, *connect_go.Request[dev.BeginRequest]) (*connect_go.Response[dev.BeginResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Begin is not implemented"))
+func (UnimplementedQueryHandler) Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Begin is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Commit(context.Context, *connect_go.Request[dev.CommitRequest]) (*connect_go.Response[dev.CommitResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Commit is not implemented"))
+func (UnimplementedQueryHandler) Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Commit is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Rollback(context.Context, *connect_go.Request[dev.RollbackRequest]) (*connect_go.Response[dev.RollbackResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Rollback is not implemented"))
+func (UnimplementedQueryHandler) Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Rollback is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Prepare(context.Context, *connect_go.Request[dev.PrepareRequest]) (*connect_go.Response[dev.PrepareResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Prepare is not implemented"))
+func (UnimplementedQueryHandler) Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Prepare is not implemented"))
 }
 
-func (UnimplementedQueryHandler) CommitPrepared(context.Context, *connect_go.Request[dev.CommitPreparedRequest]) (*connect_go.Response[dev.CommitPreparedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.CommitPrepared is not implemented"))
+func (UnimplementedQueryHandler) CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CommitPrepared is not implemented"))
 }
 
-func (UnimplementedQueryHandler) RollbackPrepared(context.Context, *connect_go.Request[dev.RollbackPreparedRequest]) (*connect_go.Response[dev.RollbackPreparedResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.RollbackPrepared is not implemented"))
+func (UnimplementedQueryHandler) RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.RollbackPrepared is not implemented"))
 }
 
-func (UnimplementedQueryHandler) CreateTransaction(context.Context, *connect_go.Request[dev.CreateTransactionRequest]) (*connect_go.Response[dev.CreateTransactionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.CreateTransaction is not implemented"))
+func (UnimplementedQueryHandler) CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CreateTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StartCommit(context.Context, *connect_go.Request[dev.StartCommitRequest]) (*connect_go.Response[dev.StartCommitResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.StartCommit is not implemented"))
+func (UnimplementedQueryHandler) StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StartCommit is not implemented"))
 }
 
-func (UnimplementedQueryHandler) SetRollback(context.Context, *connect_go.Request[dev.SetRollbackRequest]) (*connect_go.Response[dev.SetRollbackResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.SetRollback is not implemented"))
+func (UnimplementedQueryHandler) SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.SetRollback is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ConcludeTransaction(context.Context, *connect_go.Request[dev.ConcludeTransactionRequest]) (*connect_go.Response[dev.ConcludeTransactionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ConcludeTransaction is not implemented"))
+func (UnimplementedQueryHandler) ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ConcludeTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReadTransaction(context.Context, *connect_go.Request[dev.ReadTransactionRequest]) (*connect_go.Response[dev.ReadTransactionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ReadTransaction is not implemented"))
+func (UnimplementedQueryHandler) ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReadTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) BeginExecute(context.Context, *connect_go.Request[dev.BeginExecuteRequest]) (*connect_go.Response[dev.BeginExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.BeginExecute is not implemented"))
+func (UnimplementedQueryHandler) BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) BeginStreamExecute(context.Context, *connect_go.Request[dev.BeginStreamExecuteRequest], *connect_go.ServerStream[dev.BeginStreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.BeginStreamExecute is not implemented"))
+func (UnimplementedQueryHandler) BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest], *connect.ServerStream[dev.BeginStreamExecuteResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) MessageStream(context.Context, *connect_go.Request[dev.MessageStreamRequest], *connect_go.ServerStream[dev.MessageStreamResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.MessageStream is not implemented"))
+func (UnimplementedQueryHandler) MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest], *connect.ServerStream[dev.MessageStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageStream is not implemented"))
 }
 
-func (UnimplementedQueryHandler) MessageAck(context.Context, *connect_go.Request[dev.MessageAckRequest]) (*connect_go.Response[dev.MessageAckResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.MessageAck is not implemented"))
+func (UnimplementedQueryHandler) MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageAck is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveExecute(context.Context, *connect_go.Request[dev.ReserveExecuteRequest]) (*connect_go.Response[dev.ReserveExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ReserveExecute is not implemented"))
+func (UnimplementedQueryHandler) ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveBeginExecute(context.Context, *connect_go.Request[dev.ReserveBeginExecuteRequest]) (*connect_go.Response[dev.ReserveBeginExecuteResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginExecute is not implemented"))
+func (UnimplementedQueryHandler) ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveStreamExecute(context.Context, *connect_go.Request[dev.ReserveStreamExecuteRequest], *connect_go.ServerStream[dev.ReserveStreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ReserveStreamExecute is not implemented"))
+func (UnimplementedQueryHandler) ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest], *connect.ServerStream[dev.ReserveStreamExecuteResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveBeginStreamExecute(context.Context, *connect_go.Request[dev.ReserveBeginStreamExecuteRequest], *connect_go.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginStreamExecute is not implemented"))
+func (UnimplementedQueryHandler) ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Release(context.Context, *connect_go.Request[dev.ReleaseRequest]) (*connect_go.Response[dev.ReleaseResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.Release is not implemented"))
+func (UnimplementedQueryHandler) Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Release is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StreamHealth(context.Context, *connect_go.Request[dev.StreamHealthRequest], *connect_go.ServerStream[dev.StreamHealthResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.StreamHealth is not implemented"))
+func (UnimplementedQueryHandler) StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest], *connect.ServerStream[dev.StreamHealthResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamHealth is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStream(context.Context, *connect_go.Request[dev1.VStreamRequest], *connect_go.ServerStream[dev1.VStreamResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.VStream is not implemented"))
+func (UnimplementedQueryHandler) VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStream is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect_go.Request[dev1.VStreamRowsRequest], *connect_go.ServerStream[dev1.VStreamRowsResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.VStreamRows is not implemented"))
+func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamRows is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect_go.Request[dev1.VStreamResultsRequest], *connect_go.ServerStream[dev1.VStreamResultsResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.VStreamResults is not implemented"))
+func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamResults is not implemented"))
 }
 
-func (UnimplementedQueryHandler) GetSchema(context.Context, *connect_go.Request[dev.GetSchemaRequest], *connect_go.ServerStream[dev.GetSchemaResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("queryservice.Query.GetSchema is not implemented"))
+func (UnimplementedQueryHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.GetSchema is not implemented"))
 }

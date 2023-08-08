@@ -22,9 +22,9 @@
 package mysqlctlv16connect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	v16 "github.com/planetscale/vitess-types/gen/vitess/mysqlctl/v16"
 	http "net/http"
 	strings "strings"
@@ -35,7 +35,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// MysqlCtlName is the fully-qualified name of the MysqlCtl service.
@@ -65,11 +65,11 @@ const (
 
 // MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
 type MysqlCtlClient interface {
-	Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error)
-	Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error)
-	RunMysqlUpgrade(context.Context, *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error)
-	ReinitConfig(context.Context, *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error)
-	RefreshConfig(context.Context, *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error)
+	Start(context.Context, *connect.Request[v16.StartRequest]) (*connect.Response[v16.StartResponse], error)
+	Shutdown(context.Context, *connect.Request[v16.ShutdownRequest]) (*connect.Response[v16.ShutdownResponse], error)
+	RunMysqlUpgrade(context.Context, *connect.Request[v16.RunMysqlUpgradeRequest]) (*connect.Response[v16.RunMysqlUpgradeResponse], error)
+	ReinitConfig(context.Context, *connect.Request[v16.ReinitConfigRequest]) (*connect.Response[v16.ReinitConfigResponse], error)
+	RefreshConfig(context.Context, *connect.Request[v16.RefreshConfigRequest]) (*connect.Response[v16.RefreshConfigResponse], error)
 }
 
 // NewMysqlCtlClient constructs a client for the mysqlctl.MysqlCtl service. By default,
@@ -79,30 +79,30 @@ type MysqlCtlClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewMysqlCtlClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) MysqlCtlClient {
+func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) MysqlCtlClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &mysqlCtlClient{
-		start: connect_go.NewClient[v16.StartRequest, v16.StartResponse](
+		start: connect.NewClient[v16.StartRequest, v16.StartResponse](
 			httpClient,
 			baseURL+MysqlCtlStartProcedure,
 			opts...,
 		),
-		shutdown: connect_go.NewClient[v16.ShutdownRequest, v16.ShutdownResponse](
+		shutdown: connect.NewClient[v16.ShutdownRequest, v16.ShutdownResponse](
 			httpClient,
 			baseURL+MysqlCtlShutdownProcedure,
 			opts...,
 		),
-		runMysqlUpgrade: connect_go.NewClient[v16.RunMysqlUpgradeRequest, v16.RunMysqlUpgradeResponse](
+		runMysqlUpgrade: connect.NewClient[v16.RunMysqlUpgradeRequest, v16.RunMysqlUpgradeResponse](
 			httpClient,
 			baseURL+MysqlCtlRunMysqlUpgradeProcedure,
 			opts...,
 		),
-		reinitConfig: connect_go.NewClient[v16.ReinitConfigRequest, v16.ReinitConfigResponse](
+		reinitConfig: connect.NewClient[v16.ReinitConfigRequest, v16.ReinitConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlReinitConfigProcedure,
 			opts...,
 		),
-		refreshConfig: connect_go.NewClient[v16.RefreshConfigRequest, v16.RefreshConfigResponse](
+		refreshConfig: connect.NewClient[v16.RefreshConfigRequest, v16.RefreshConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlRefreshConfigProcedure,
 			opts...,
@@ -112,45 +112,45 @@ func NewMysqlCtlClient(httpClient connect_go.HTTPClient, baseURL string, opts ..
 
 // mysqlCtlClient implements MysqlCtlClient.
 type mysqlCtlClient struct {
-	start           *connect_go.Client[v16.StartRequest, v16.StartResponse]
-	shutdown        *connect_go.Client[v16.ShutdownRequest, v16.ShutdownResponse]
-	runMysqlUpgrade *connect_go.Client[v16.RunMysqlUpgradeRequest, v16.RunMysqlUpgradeResponse]
-	reinitConfig    *connect_go.Client[v16.ReinitConfigRequest, v16.ReinitConfigResponse]
-	refreshConfig   *connect_go.Client[v16.RefreshConfigRequest, v16.RefreshConfigResponse]
+	start           *connect.Client[v16.StartRequest, v16.StartResponse]
+	shutdown        *connect.Client[v16.ShutdownRequest, v16.ShutdownResponse]
+	runMysqlUpgrade *connect.Client[v16.RunMysqlUpgradeRequest, v16.RunMysqlUpgradeResponse]
+	reinitConfig    *connect.Client[v16.ReinitConfigRequest, v16.ReinitConfigResponse]
+	refreshConfig   *connect.Client[v16.RefreshConfigRequest, v16.RefreshConfigResponse]
 }
 
 // Start calls mysqlctl.MysqlCtl.Start.
-func (c *mysqlCtlClient) Start(ctx context.Context, req *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error) {
+func (c *mysqlCtlClient) Start(ctx context.Context, req *connect.Request[v16.StartRequest]) (*connect.Response[v16.StartResponse], error) {
 	return c.start.CallUnary(ctx, req)
 }
 
 // Shutdown calls mysqlctl.MysqlCtl.Shutdown.
-func (c *mysqlCtlClient) Shutdown(ctx context.Context, req *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error) {
+func (c *mysqlCtlClient) Shutdown(ctx context.Context, req *connect.Request[v16.ShutdownRequest]) (*connect.Response[v16.ShutdownResponse], error) {
 	return c.shutdown.CallUnary(ctx, req)
 }
 
 // RunMysqlUpgrade calls mysqlctl.MysqlCtl.RunMysqlUpgrade.
-func (c *mysqlCtlClient) RunMysqlUpgrade(ctx context.Context, req *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error) {
+func (c *mysqlCtlClient) RunMysqlUpgrade(ctx context.Context, req *connect.Request[v16.RunMysqlUpgradeRequest]) (*connect.Response[v16.RunMysqlUpgradeResponse], error) {
 	return c.runMysqlUpgrade.CallUnary(ctx, req)
 }
 
 // ReinitConfig calls mysqlctl.MysqlCtl.ReinitConfig.
-func (c *mysqlCtlClient) ReinitConfig(ctx context.Context, req *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error) {
+func (c *mysqlCtlClient) ReinitConfig(ctx context.Context, req *connect.Request[v16.ReinitConfigRequest]) (*connect.Response[v16.ReinitConfigResponse], error) {
 	return c.reinitConfig.CallUnary(ctx, req)
 }
 
 // RefreshConfig calls mysqlctl.MysqlCtl.RefreshConfig.
-func (c *mysqlCtlClient) RefreshConfig(ctx context.Context, req *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error) {
+func (c *mysqlCtlClient) RefreshConfig(ctx context.Context, req *connect.Request[v16.RefreshConfigRequest]) (*connect.Response[v16.RefreshConfigResponse], error) {
 	return c.refreshConfig.CallUnary(ctx, req)
 }
 
 // MysqlCtlHandler is an implementation of the mysqlctl.MysqlCtl service.
 type MysqlCtlHandler interface {
-	Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error)
-	Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error)
-	RunMysqlUpgrade(context.Context, *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error)
-	ReinitConfig(context.Context, *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error)
-	RefreshConfig(context.Context, *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error)
+	Start(context.Context, *connect.Request[v16.StartRequest]) (*connect.Response[v16.StartResponse], error)
+	Shutdown(context.Context, *connect.Request[v16.ShutdownRequest]) (*connect.Response[v16.ShutdownResponse], error)
+	RunMysqlUpgrade(context.Context, *connect.Request[v16.RunMysqlUpgradeRequest]) (*connect.Response[v16.RunMysqlUpgradeResponse], error)
+	ReinitConfig(context.Context, *connect.Request[v16.ReinitConfigRequest]) (*connect.Response[v16.ReinitConfigResponse], error)
+	RefreshConfig(context.Context, *connect.Request[v16.RefreshConfigRequest]) (*connect.Response[v16.RefreshConfigResponse], error)
 }
 
 // NewMysqlCtlHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -158,55 +158,69 @@ type MysqlCtlHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(MysqlCtlStartProcedure, connect_go.NewUnaryHandler(
+func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	mysqlCtlStartHandler := connect.NewUnaryHandler(
 		MysqlCtlStartProcedure,
 		svc.Start,
 		opts...,
-	))
-	mux.Handle(MysqlCtlShutdownProcedure, connect_go.NewUnaryHandler(
+	)
+	mysqlCtlShutdownHandler := connect.NewUnaryHandler(
 		MysqlCtlShutdownProcedure,
 		svc.Shutdown,
 		opts...,
-	))
-	mux.Handle(MysqlCtlRunMysqlUpgradeProcedure, connect_go.NewUnaryHandler(
+	)
+	mysqlCtlRunMysqlUpgradeHandler := connect.NewUnaryHandler(
 		MysqlCtlRunMysqlUpgradeProcedure,
 		svc.RunMysqlUpgrade,
 		opts...,
-	))
-	mux.Handle(MysqlCtlReinitConfigProcedure, connect_go.NewUnaryHandler(
+	)
+	mysqlCtlReinitConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlReinitConfigProcedure,
 		svc.ReinitConfig,
 		opts...,
-	))
-	mux.Handle(MysqlCtlRefreshConfigProcedure, connect_go.NewUnaryHandler(
+	)
+	mysqlCtlRefreshConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlRefreshConfigProcedure,
 		svc.RefreshConfig,
 		opts...,
-	))
-	return "/mysqlctl.MysqlCtl/", mux
+	)
+	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case MysqlCtlStartProcedure:
+			mysqlCtlStartHandler.ServeHTTP(w, r)
+		case MysqlCtlShutdownProcedure:
+			mysqlCtlShutdownHandler.ServeHTTP(w, r)
+		case MysqlCtlRunMysqlUpgradeProcedure:
+			mysqlCtlRunMysqlUpgradeHandler.ServeHTTP(w, r)
+		case MysqlCtlReinitConfigProcedure:
+			mysqlCtlReinitConfigHandler.ServeHTTP(w, r)
+		case MysqlCtlRefreshConfigProcedure:
+			mysqlCtlRefreshConfigHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedMysqlCtlHandler returns CodeUnimplemented from all methods.
 type UnimplementedMysqlCtlHandler struct{}
 
-func (UnimplementedMysqlCtlHandler) Start(context.Context, *connect_go.Request[v16.StartRequest]) (*connect_go.Response[v16.StartResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Start is not implemented"))
+func (UnimplementedMysqlCtlHandler) Start(context.Context, *connect.Request[v16.StartRequest]) (*connect.Response[v16.StartResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Start is not implemented"))
 }
 
-func (UnimplementedMysqlCtlHandler) Shutdown(context.Context, *connect_go.Request[v16.ShutdownRequest]) (*connect_go.Response[v16.ShutdownResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Shutdown is not implemented"))
+func (UnimplementedMysqlCtlHandler) Shutdown(context.Context, *connect.Request[v16.ShutdownRequest]) (*connect.Response[v16.ShutdownResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Shutdown is not implemented"))
 }
 
-func (UnimplementedMysqlCtlHandler) RunMysqlUpgrade(context.Context, *connect_go.Request[v16.RunMysqlUpgradeRequest]) (*connect_go.Response[v16.RunMysqlUpgradeResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RunMysqlUpgrade is not implemented"))
+func (UnimplementedMysqlCtlHandler) RunMysqlUpgrade(context.Context, *connect.Request[v16.RunMysqlUpgradeRequest]) (*connect.Response[v16.RunMysqlUpgradeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RunMysqlUpgrade is not implemented"))
 }
 
-func (UnimplementedMysqlCtlHandler) ReinitConfig(context.Context, *connect_go.Request[v16.ReinitConfigRequest]) (*connect_go.Response[v16.ReinitConfigResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReinitConfig is not implemented"))
+func (UnimplementedMysqlCtlHandler) ReinitConfig(context.Context, *connect.Request[v16.ReinitConfigRequest]) (*connect.Response[v16.ReinitConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReinitConfig is not implemented"))
 }
 
-func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect_go.Request[v16.RefreshConfigRequest]) (*connect_go.Response[v16.RefreshConfigResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RefreshConfig is not implemented"))
+func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect.Request[v16.RefreshConfigRequest]) (*connect.Response[v16.RefreshConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RefreshConfig is not implemented"))
 }

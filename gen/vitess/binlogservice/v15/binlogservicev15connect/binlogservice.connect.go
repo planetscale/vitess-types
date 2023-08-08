@@ -23,9 +23,9 @@
 package binlogservicev15connect
 
 import (
+	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	connect_go "github.com/bufbuild/connect-go"
 	v15 "github.com/planetscale/vitess-types/gen/vitess/binlogdata/v15"
 	_ "github.com/planetscale/vitess-types/gen/vitess/binlogservice/v15"
 	http "net/http"
@@ -37,7 +37,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect_go.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// UpdateStreamName is the fully-qualified name of the UpdateStream service.
@@ -64,10 +64,10 @@ const (
 type UpdateStreamClient interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
-	StreamKeyRange(context.Context, *connect_go.Request[v15.StreamKeyRangeRequest]) (*connect_go.ServerStreamForClient[v15.StreamKeyRangeResponse], error)
+	StreamKeyRange(context.Context, *connect.Request[v15.StreamKeyRangeRequest]) (*connect.ServerStreamForClient[v15.StreamKeyRangeResponse], error)
 	// StreamTables returns the binlog transactions related to
 	// the specified Tables.
-	StreamTables(context.Context, *connect_go.Request[v15.StreamTablesRequest]) (*connect_go.ServerStreamForClient[v15.StreamTablesResponse], error)
+	StreamTables(context.Context, *connect.Request[v15.StreamTablesRequest]) (*connect.ServerStreamForClient[v15.StreamTablesResponse], error)
 }
 
 // NewUpdateStreamClient constructs a client for the binlogservice.UpdateStream service.
@@ -77,15 +77,15 @@ type UpdateStreamClient interface {
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewUpdateStreamClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) UpdateStreamClient {
+func NewUpdateStreamClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) UpdateStreamClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &updateStreamClient{
-		streamKeyRange: connect_go.NewClient[v15.StreamKeyRangeRequest, v15.StreamKeyRangeResponse](
+		streamKeyRange: connect.NewClient[v15.StreamKeyRangeRequest, v15.StreamKeyRangeResponse](
 			httpClient,
 			baseURL+UpdateStreamStreamKeyRangeProcedure,
 			opts...,
 		),
-		streamTables: connect_go.NewClient[v15.StreamTablesRequest, v15.StreamTablesResponse](
+		streamTables: connect.NewClient[v15.StreamTablesRequest, v15.StreamTablesResponse](
 			httpClient,
 			baseURL+UpdateStreamStreamTablesProcedure,
 			opts...,
@@ -95,17 +95,17 @@ func NewUpdateStreamClient(httpClient connect_go.HTTPClient, baseURL string, opt
 
 // updateStreamClient implements UpdateStreamClient.
 type updateStreamClient struct {
-	streamKeyRange *connect_go.Client[v15.StreamKeyRangeRequest, v15.StreamKeyRangeResponse]
-	streamTables   *connect_go.Client[v15.StreamTablesRequest, v15.StreamTablesResponse]
+	streamKeyRange *connect.Client[v15.StreamKeyRangeRequest, v15.StreamKeyRangeResponse]
+	streamTables   *connect.Client[v15.StreamTablesRequest, v15.StreamTablesResponse]
 }
 
 // StreamKeyRange calls binlogservice.UpdateStream.StreamKeyRange.
-func (c *updateStreamClient) StreamKeyRange(ctx context.Context, req *connect_go.Request[v15.StreamKeyRangeRequest]) (*connect_go.ServerStreamForClient[v15.StreamKeyRangeResponse], error) {
+func (c *updateStreamClient) StreamKeyRange(ctx context.Context, req *connect.Request[v15.StreamKeyRangeRequest]) (*connect.ServerStreamForClient[v15.StreamKeyRangeResponse], error) {
 	return c.streamKeyRange.CallServerStream(ctx, req)
 }
 
 // StreamTables calls binlogservice.UpdateStream.StreamTables.
-func (c *updateStreamClient) StreamTables(ctx context.Context, req *connect_go.Request[v15.StreamTablesRequest]) (*connect_go.ServerStreamForClient[v15.StreamTablesResponse], error) {
+func (c *updateStreamClient) StreamTables(ctx context.Context, req *connect.Request[v15.StreamTablesRequest]) (*connect.ServerStreamForClient[v15.StreamTablesResponse], error) {
 	return c.streamTables.CallServerStream(ctx, req)
 }
 
@@ -113,10 +113,10 @@ func (c *updateStreamClient) StreamTables(ctx context.Context, req *connect_go.R
 type UpdateStreamHandler interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
-	StreamKeyRange(context.Context, *connect_go.Request[v15.StreamKeyRangeRequest], *connect_go.ServerStream[v15.StreamKeyRangeResponse]) error
+	StreamKeyRange(context.Context, *connect.Request[v15.StreamKeyRangeRequest], *connect.ServerStream[v15.StreamKeyRangeResponse]) error
 	// StreamTables returns the binlog transactions related to
 	// the specified Tables.
-	StreamTables(context.Context, *connect_go.Request[v15.StreamTablesRequest], *connect_go.ServerStream[v15.StreamTablesResponse]) error
+	StreamTables(context.Context, *connect.Request[v15.StreamTablesRequest], *connect.ServerStream[v15.StreamTablesResponse]) error
 }
 
 // NewUpdateStreamHandler builds an HTTP handler from the service implementation. It returns the
@@ -124,28 +124,36 @@ type UpdateStreamHandler interface {
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewUpdateStreamHandler(svc UpdateStreamHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(UpdateStreamStreamKeyRangeProcedure, connect_go.NewServerStreamHandler(
+func NewUpdateStreamHandler(svc UpdateStreamHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	updateStreamStreamKeyRangeHandler := connect.NewServerStreamHandler(
 		UpdateStreamStreamKeyRangeProcedure,
 		svc.StreamKeyRange,
 		opts...,
-	))
-	mux.Handle(UpdateStreamStreamTablesProcedure, connect_go.NewServerStreamHandler(
+	)
+	updateStreamStreamTablesHandler := connect.NewServerStreamHandler(
 		UpdateStreamStreamTablesProcedure,
 		svc.StreamTables,
 		opts...,
-	))
-	return "/binlogservice.UpdateStream/", mux
+	)
+	return "/binlogservice.UpdateStream/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case UpdateStreamStreamKeyRangeProcedure:
+			updateStreamStreamKeyRangeHandler.ServeHTTP(w, r)
+		case UpdateStreamStreamTablesProcedure:
+			updateStreamStreamTablesHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedUpdateStreamHandler returns CodeUnimplemented from all methods.
 type UnimplementedUpdateStreamHandler struct{}
 
-func (UnimplementedUpdateStreamHandler) StreamKeyRange(context.Context, *connect_go.Request[v15.StreamKeyRangeRequest], *connect_go.ServerStream[v15.StreamKeyRangeResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamKeyRange is not implemented"))
+func (UnimplementedUpdateStreamHandler) StreamKeyRange(context.Context, *connect.Request[v15.StreamKeyRangeRequest], *connect.ServerStream[v15.StreamKeyRangeResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamKeyRange is not implemented"))
 }
 
-func (UnimplementedUpdateStreamHandler) StreamTables(context.Context, *connect_go.Request[v15.StreamTablesRequest], *connect_go.ServerStream[v15.StreamTablesResponse]) error {
-	return connect_go.NewError(connect_go.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamTables is not implemented"))
+func (UnimplementedUpdateStreamHandler) StreamTables(context.Context, *connect.Request[v15.StreamTablesRequest], *connect.ServerStream[v15.StreamTablesResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamTables is not implemented"))
 }
