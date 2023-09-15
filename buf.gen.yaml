@@ -20,6 +20,9 @@ plugins:
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/v16.Row
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/v16.BoundQuery
       - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/v16.VStreamRowsResponse
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v17.Row
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v17.BoundQuery
+      - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/v17.VStreamRowsResponse
   - name: connect-go
     path: bin/protoc-gen-connect-go
     out: gen
