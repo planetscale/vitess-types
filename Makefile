@@ -28,7 +28,7 @@ $(BIN)/protoc-gen-go: Makefile | $(BIN)
 	$(TOOL_INSTALL) google.golang.org/protobuf/cmd/protoc-gen-go@v1.31.0
 
 $(BIN)/protoc-gen-go-vtproto: Makefile | $(BIN)
-	$(TOOL_INSTALL) github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@v0.4.0
+	$(TOOL_INSTALL) github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@v0.5.0
 
 $(BIN)/protoc-gen-connect-go: Makefile | $(BIN)
 	$(TOOL_INSTALL) connectrpc.com/connect/cmd/protoc-gen-connect-go@v1.11.0
@@ -37,7 +37,7 @@ $(BIN)/gofumpt: Makefile | $(BIN)
 	$(TOOL_INSTALL) mvdan.cc/gofumpt@v0.4.0
 
 $(BIN)/buf: Makefile | $(BIN)
-	$(TOOL_INSTALL) github.com/bufbuild/buf/cmd/buf@v1.19.0
+	$(TOOL_INSTALL) github.com/bufbuild/buf/cmd/buf@v1.26.1
 
 $(BIN)/yq: Makefile | $(BIN)
 	$(TOOL_INSTALL) github.com/mikefarah/yq/v4@v4.30.8

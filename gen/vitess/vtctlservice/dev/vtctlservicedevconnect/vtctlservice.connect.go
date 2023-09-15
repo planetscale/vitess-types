@@ -74,8 +74,17 @@ const (
 	VtctldBackupProcedure = "/vtctlservice.Vtctld/Backup"
 	// VtctldBackupShardProcedure is the fully-qualified name of the Vtctld's BackupShard RPC.
 	VtctldBackupShardProcedure = "/vtctlservice.Vtctld/BackupShard"
+	// VtctldCancelSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
+	// CancelSchemaMigration RPC.
+	VtctldCancelSchemaMigrationProcedure = "/vtctlservice.Vtctld/CancelSchemaMigration"
 	// VtctldChangeTabletTypeProcedure is the fully-qualified name of the Vtctld's ChangeTabletType RPC.
 	VtctldChangeTabletTypeProcedure = "/vtctlservice.Vtctld/ChangeTabletType"
+	// VtctldCleanupSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
+	// CleanupSchemaMigration RPC.
+	VtctldCleanupSchemaMigrationProcedure = "/vtctlservice.Vtctld/CleanupSchemaMigration"
+	// VtctldCompleteSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
+	// CompleteSchemaMigration RPC.
+	VtctldCompleteSchemaMigrationProcedure = "/vtctlservice.Vtctld/CompleteSchemaMigration"
 	// VtctldCreateKeyspaceProcedure is the fully-qualified name of the Vtctld's CreateKeyspace RPC.
 	VtctldCreateKeyspaceProcedure = "/vtctlservice.Vtctld/CreateKeyspace"
 	// VtctldCreateShardProcedure is the fully-qualified name of the Vtctld's CreateShard RPC.
@@ -126,6 +135,9 @@ const (
 	VtctldGetRoutingRulesProcedure = "/vtctlservice.Vtctld/GetRoutingRules"
 	// VtctldGetSchemaProcedure is the fully-qualified name of the Vtctld's GetSchema RPC.
 	VtctldGetSchemaProcedure = "/vtctlservice.Vtctld/GetSchema"
+	// VtctldGetSchemaMigrationsProcedure is the fully-qualified name of the Vtctld's
+	// GetSchemaMigrations RPC.
+	VtctldGetSchemaMigrationsProcedure = "/vtctlservice.Vtctld/GetSchemaMigrations"
 	// VtctldGetShardProcedure is the fully-qualified name of the Vtctld's GetShard RPC.
 	VtctldGetShardProcedure = "/vtctlservice.Vtctld/GetShard"
 	// VtctldGetShardRoutingRulesProcedure is the fully-qualified name of the Vtctld's
@@ -157,6 +169,14 @@ const (
 	VtctldGetWorkflowsProcedure = "/vtctlservice.Vtctld/GetWorkflows"
 	// VtctldInitShardPrimaryProcedure is the fully-qualified name of the Vtctld's InitShardPrimary RPC.
 	VtctldInitShardPrimaryProcedure = "/vtctlservice.Vtctld/InitShardPrimary"
+	// VtctldLaunchSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
+	// LaunchSchemaMigration RPC.
+	VtctldLaunchSchemaMigrationProcedure = "/vtctlservice.Vtctld/LaunchSchemaMigration"
+	// VtctldMoveTablesCreateProcedure is the fully-qualified name of the Vtctld's MoveTablesCreate RPC.
+	VtctldMoveTablesCreateProcedure = "/vtctlservice.Vtctld/MoveTablesCreate"
+	// VtctldMoveTablesCompleteProcedure is the fully-qualified name of the Vtctld's MoveTablesComplete
+	// RPC.
+	VtctldMoveTablesCompleteProcedure = "/vtctlservice.Vtctld/MoveTablesComplete"
 	// VtctldPingTabletProcedure is the fully-qualified name of the Vtctld's PingTablet RPC.
 	VtctldPingTabletProcedure = "/vtctlservice.Vtctld/PingTablet"
 	// VtctldPlannedReparentShardProcedure is the fully-qualified name of the Vtctld's
@@ -190,9 +210,14 @@ const (
 	VtctldRemoveShardCellProcedure = "/vtctlservice.Vtctld/RemoveShardCell"
 	// VtctldReparentTabletProcedure is the fully-qualified name of the Vtctld's ReparentTablet RPC.
 	VtctldReparentTabletProcedure = "/vtctlservice.Vtctld/ReparentTablet"
+	// VtctldReshardCreateProcedure is the fully-qualified name of the Vtctld's ReshardCreate RPC.
+	VtctldReshardCreateProcedure = "/vtctlservice.Vtctld/ReshardCreate"
 	// VtctldRestoreFromBackupProcedure is the fully-qualified name of the Vtctld's RestoreFromBackup
 	// RPC.
 	VtctldRestoreFromBackupProcedure = "/vtctlservice.Vtctld/RestoreFromBackup"
+	// VtctldRetrySchemaMigrationProcedure is the fully-qualified name of the Vtctld's
+	// RetrySchemaMigration RPC.
+	VtctldRetrySchemaMigrationProcedure = "/vtctlservice.Vtctld/RetrySchemaMigration"
 	// VtctldRunHealthCheckProcedure is the fully-qualified name of the Vtctld's RunHealthCheck RPC.
 	VtctldRunHealthCheckProcedure = "/vtctlservice.Vtctld/RunHealthCheck"
 	// VtctldSetKeyspaceDurabilityPolicyProcedure is the fully-qualified name of the Vtctld's
@@ -253,6 +278,13 @@ const (
 	VtctldValidateVersionShardProcedure = "/vtctlservice.Vtctld/ValidateVersionShard"
 	// VtctldValidateVSchemaProcedure is the fully-qualified name of the Vtctld's ValidateVSchema RPC.
 	VtctldValidateVSchemaProcedure = "/vtctlservice.Vtctld/ValidateVSchema"
+	// VtctldWorkflowDeleteProcedure is the fully-qualified name of the Vtctld's WorkflowDelete RPC.
+	VtctldWorkflowDeleteProcedure = "/vtctlservice.Vtctld/WorkflowDelete"
+	// VtctldWorkflowStatusProcedure is the fully-qualified name of the Vtctld's WorkflowStatus RPC.
+	VtctldWorkflowStatusProcedure = "/vtctlservice.Vtctld/WorkflowStatus"
+	// VtctldWorkflowSwitchTrafficProcedure is the fully-qualified name of the Vtctld's
+	// WorkflowSwitchTraffic RPC.
+	VtctldWorkflowSwitchTrafficProcedure = "/vtctlservice.Vtctld/WorkflowSwitchTraffic"
 	// VtctldWorkflowUpdateProcedure is the fully-qualified name of the Vtctld's WorkflowUpdate RPC.
 	VtctldWorkflowUpdateProcedure = "/vtctlservice.Vtctld/WorkflowUpdate"
 )
@@ -348,12 +380,18 @@ type VtctldClient interface {
 	Backup(context.Context, *connect.Request[dev.BackupRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error)
 	// BackupShard chooses a tablet in the shard and uses it to create a backup.
 	BackupShard(context.Context, *connect.Request[dev.BackupShardRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error)
+	// CancelSchemaMigration cancels one or all migrations, terminating any runnign ones as needed.
+	CancelSchemaMigration(context.Context, *connect.Request[dev.CancelSchemaMigrationRequest]) (*connect.Response[dev.CancelSchemaMigrationResponse], error)
 	// ChangeTabletType changes the db type for the specified tablet, if possible.
 	// This is used primarily to arrange replicas, and it will not convert a
 	// primary. For that, use InitShardPrimary.
 	//
 	// NOTE: This command automatically updates the serving graph.
 	ChangeTabletType(context.Context, *connect.Request[dev.ChangeTabletTypeRequest]) (*connect.Response[dev.ChangeTabletTypeResponse], error)
+	// CleanupSchemaMigration marks a schema migration as ready for artifact cleanup.
+	CleanupSchemaMigration(context.Context, *connect.Request[dev.CleanupSchemaMigrationRequest]) (*connect.Response[dev.CleanupSchemaMigrationResponse], error)
+	// CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
+	CompleteSchemaMigration(context.Context, *connect.Request[dev.CompleteSchemaMigrationRequest]) (*connect.Response[dev.CompleteSchemaMigrationResponse], error)
 	// CreateKeyspace creates the specified keyspace in the topology. For a
 	// SNAPSHOT keyspace, the request must specify the name of a base keyspace,
 	// as well as a snapshot time.
@@ -414,6 +452,12 @@ type VtctldClient interface {
 	// GetSchema returns the schema for a tablet, or just the schema for the
 	// specified tables in that tablet.
 	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error)
+	// GetSchemaMigrations returns one or more online schema migrations for the
+	// specified keyspace, analagous to `SHOW VITESS_MIGRATIONS`.
+	//
+	// Different fields in the request message result in different filtering
+	// behaviors. See the documentation on GetSchemaMigrationsRequest for details.
+	GetSchemaMigrations(context.Context, *connect.Request[dev.GetSchemaMigrationsRequest]) (*connect.Response[dev.GetSchemaMigrationsResponse], error)
 	// GetShard returns information about a shard in the topology.
 	GetShard(context.Context, *connect.Request[dev.GetShardRequest]) (*connect.Response[dev.GetShardResponse], error)
 	// GetShardRoutingRules returns the VSchema shard routing rules.
@@ -450,6 +494,14 @@ type VtctldClient interface {
 	// PlannedReparentShard or EmergencyReparentShard should be used in those
 	// cases instead.
 	InitShardPrimary(context.Context, *connect.Request[dev.InitShardPrimaryRequest]) (*connect.Response[dev.InitShardPrimaryResponse], error)
+	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
+	LaunchSchemaMigration(context.Context, *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error)
+	// MoveTablesCreate creates a workflow which moves one or more tables from a
+	// source keyspace to a target keyspace.
+	MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
+	// MoveTablesComplete completes the move and cleans up the workflow and
+	// its related artifacts.
+	MoveTablesComplete(context.Context, *connect.Request[dev.MoveTablesCompleteRequest]) (*connect.Response[dev.MoveTablesCompleteResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to RPCs.
 	// This command can be blocked by other in-flight operations.
 	PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error)
@@ -497,8 +549,12 @@ type VtctldClient interface {
 	// only works if the current replica position matches the last known reparent
 	// action.
 	ReparentTablet(context.Context, *connect.Request[dev.ReparentTabletRequest]) (*connect.Response[dev.ReparentTabletResponse], error)
+	// ReshardCreate creates a workflow to reshard a keyspace.
+	ReshardCreate(context.Context, *connect.Request[dev.ReshardCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
 	// RestoreFromBackup stops mysqld for the given tablet and restores a backup.
 	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error)
+	// RetrySchemaMigration marks a given schema migration for retry.
+	RetrySchemaMigration(context.Context, *connect.Request[dev.RetrySchemaMigrationRequest]) (*connect.Response[dev.RetrySchemaMigrationResponse], error)
 	// RunHealthCheck runs a healthcheck on the remote tablet.
 	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
 	// SetKeyspaceDurabilityPolicy updates the DurabilityPolicy for a keyspace.
@@ -586,6 +642,10 @@ type VtctldClient interface {
 	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error)
+	// WorkflowDelete deletes a vreplication workflow.
+	WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error)
+	WorkflowStatus(context.Context, *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
+	WorkflowSwitchTraffic(context.Context, *connect.Request[dev.WorkflowSwitchTrafficRequest]) (*connect.Response[dev.WorkflowSwitchTrafficResponse], error)
 	// WorkflowUpdate updates the configuration of a vreplication workflow
 	// using the provided updated parameters.
 	WorkflowUpdate(context.Context, *connect.Request[dev.WorkflowUpdateRequest]) (*connect.Response[dev.WorkflowUpdateResponse], error)
@@ -641,9 +701,24 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldBackupShardProcedure,
 			opts...,
 		),
+		cancelSchemaMigration: connect.NewClient[dev.CancelSchemaMigrationRequest, dev.CancelSchemaMigrationResponse](
+			httpClient,
+			baseURL+VtctldCancelSchemaMigrationProcedure,
+			opts...,
+		),
 		changeTabletType: connect.NewClient[dev.ChangeTabletTypeRequest, dev.ChangeTabletTypeResponse](
 			httpClient,
 			baseURL+VtctldChangeTabletTypeProcedure,
+			opts...,
+		),
+		cleanupSchemaMigration: connect.NewClient[dev.CleanupSchemaMigrationRequest, dev.CleanupSchemaMigrationResponse](
+			httpClient,
+			baseURL+VtctldCleanupSchemaMigrationProcedure,
+			opts...,
+		),
+		completeSchemaMigration: connect.NewClient[dev.CompleteSchemaMigrationRequest, dev.CompleteSchemaMigrationResponse](
+			httpClient,
+			baseURL+VtctldCompleteSchemaMigrationProcedure,
 			opts...,
 		),
 		createKeyspace: connect.NewClient[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse](
@@ -761,6 +836,11 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldGetSchemaProcedure,
 			opts...,
 		),
+		getSchemaMigrations: connect.NewClient[dev.GetSchemaMigrationsRequest, dev.GetSchemaMigrationsResponse](
+			httpClient,
+			baseURL+VtctldGetSchemaMigrationsProcedure,
+			opts...,
+		),
 		getShard: connect.NewClient[dev.GetShardRequest, dev.GetShardResponse](
 			httpClient,
 			baseURL+VtctldGetShardProcedure,
@@ -831,6 +911,21 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldInitShardPrimaryProcedure,
 			opts...,
 		),
+		launchSchemaMigration: connect.NewClient[dev.LaunchSchemaMigrationRequest, dev.LaunchSchemaMigrationResponse](
+			httpClient,
+			baseURL+VtctldLaunchSchemaMigrationProcedure,
+			opts...,
+		),
+		moveTablesCreate: connect.NewClient[dev.MoveTablesCreateRequest, dev.WorkflowStatusResponse](
+			httpClient,
+			baseURL+VtctldMoveTablesCreateProcedure,
+			opts...,
+		),
+		moveTablesComplete: connect.NewClient[dev.MoveTablesCompleteRequest, dev.MoveTablesCompleteResponse](
+			httpClient,
+			baseURL+VtctldMoveTablesCompleteProcedure,
+			opts...,
+		),
 		pingTablet: connect.NewClient[dev.PingTabletRequest, dev.PingTabletResponse](
 			httpClient,
 			baseURL+VtctldPingTabletProcedure,
@@ -896,9 +991,19 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldReparentTabletProcedure,
 			opts...,
 		),
+		reshardCreate: connect.NewClient[dev.ReshardCreateRequest, dev.WorkflowStatusResponse](
+			httpClient,
+			baseURL+VtctldReshardCreateProcedure,
+			opts...,
+		),
 		restoreFromBackup: connect.NewClient[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse](
 			httpClient,
 			baseURL+VtctldRestoreFromBackupProcedure,
+			opts...,
+		),
+		retrySchemaMigration: connect.NewClient[dev.RetrySchemaMigrationRequest, dev.RetrySchemaMigrationResponse](
+			httpClient,
+			baseURL+VtctldRetrySchemaMigrationProcedure,
 			opts...,
 		),
 		runHealthCheck: connect.NewClient[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse](
@@ -1021,6 +1126,21 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldValidateVSchemaProcedure,
 			opts...,
 		),
+		workflowDelete: connect.NewClient[dev.WorkflowDeleteRequest, dev.WorkflowDeleteResponse](
+			httpClient,
+			baseURL+VtctldWorkflowDeleteProcedure,
+			opts...,
+		),
+		workflowStatus: connect.NewClient[dev.WorkflowStatusRequest, dev.WorkflowStatusResponse](
+			httpClient,
+			baseURL+VtctldWorkflowStatusProcedure,
+			opts...,
+		),
+		workflowSwitchTraffic: connect.NewClient[dev.WorkflowSwitchTrafficRequest, dev.WorkflowSwitchTrafficResponse](
+			httpClient,
+			baseURL+VtctldWorkflowSwitchTrafficProcedure,
+			opts...,
+		),
 		workflowUpdate: connect.NewClient[dev.WorkflowUpdateRequest, dev.WorkflowUpdateResponse](
 			httpClient,
 			baseURL+VtctldWorkflowUpdateProcedure,
@@ -1039,7 +1159,10 @@ type vtctldClient struct {
 	applyVSchema                *connect.Client[dev.ApplyVSchemaRequest, dev.ApplyVSchemaResponse]
 	backup                      *connect.Client[dev.BackupRequest, dev.BackupResponse]
 	backupShard                 *connect.Client[dev.BackupShardRequest, dev.BackupResponse]
+	cancelSchemaMigration       *connect.Client[dev.CancelSchemaMigrationRequest, dev.CancelSchemaMigrationResponse]
 	changeTabletType            *connect.Client[dev.ChangeTabletTypeRequest, dev.ChangeTabletTypeResponse]
+	cleanupSchemaMigration      *connect.Client[dev.CleanupSchemaMigrationRequest, dev.CleanupSchemaMigrationResponse]
+	completeSchemaMigration     *connect.Client[dev.CompleteSchemaMigrationRequest, dev.CompleteSchemaMigrationResponse]
 	createKeyspace              *connect.Client[dev.CreateKeyspaceRequest, dev.CreateKeyspaceResponse]
 	createShard                 *connect.Client[dev.CreateShardRequest, dev.CreateShardResponse]
 	deleteCellInfo              *connect.Client[dev.DeleteCellInfoRequest, dev.DeleteCellInfoResponse]
@@ -1063,6 +1186,7 @@ type vtctldClient struct {
 	getPermissions              *connect.Client[dev.GetPermissionsRequest, dev.GetPermissionsResponse]
 	getRoutingRules             *connect.Client[dev.GetRoutingRulesRequest, dev.GetRoutingRulesResponse]
 	getSchema                   *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
+	getSchemaMigrations         *connect.Client[dev.GetSchemaMigrationsRequest, dev.GetSchemaMigrationsResponse]
 	getShard                    *connect.Client[dev.GetShardRequest, dev.GetShardResponse]
 	getShardRoutingRules        *connect.Client[dev.GetShardRoutingRulesRequest, dev.GetShardRoutingRulesResponse]
 	getSrvKeyspaceNames         *connect.Client[dev.GetSrvKeyspaceNamesRequest, dev.GetSrvKeyspaceNamesResponse]
@@ -1077,6 +1201,9 @@ type vtctldClient struct {
 	getVSchema                  *connect.Client[dev.GetVSchemaRequest, dev.GetVSchemaResponse]
 	getWorkflows                *connect.Client[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse]
 	initShardPrimary            *connect.Client[dev.InitShardPrimaryRequest, dev.InitShardPrimaryResponse]
+	launchSchemaMigration       *connect.Client[dev.LaunchSchemaMigrationRequest, dev.LaunchSchemaMigrationResponse]
+	moveTablesCreate            *connect.Client[dev.MoveTablesCreateRequest, dev.WorkflowStatusResponse]
+	moveTablesComplete          *connect.Client[dev.MoveTablesCompleteRequest, dev.MoveTablesCompleteResponse]
 	pingTablet                  *connect.Client[dev.PingTabletRequest, dev.PingTabletResponse]
 	plannedReparentShard        *connect.Client[dev.PlannedReparentShardRequest, dev.PlannedReparentShardResponse]
 	rebuildKeyspaceGraph        *connect.Client[dev.RebuildKeyspaceGraphRequest, dev.RebuildKeyspaceGraphResponse]
@@ -1090,7 +1217,9 @@ type vtctldClient struct {
 	removeKeyspaceCell          *connect.Client[dev.RemoveKeyspaceCellRequest, dev.RemoveKeyspaceCellResponse]
 	removeShardCell             *connect.Client[dev.RemoveShardCellRequest, dev.RemoveShardCellResponse]
 	reparentTablet              *connect.Client[dev.ReparentTabletRequest, dev.ReparentTabletResponse]
+	reshardCreate               *connect.Client[dev.ReshardCreateRequest, dev.WorkflowStatusResponse]
 	restoreFromBackup           *connect.Client[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse]
+	retrySchemaMigration        *connect.Client[dev.RetrySchemaMigrationRequest, dev.RetrySchemaMigrationResponse]
 	runHealthCheck              *connect.Client[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse]
 	setKeyspaceDurabilityPolicy *connect.Client[dev.SetKeyspaceDurabilityPolicyRequest, dev.SetKeyspaceDurabilityPolicyResponse]
 	setShardIsPrimaryServing    *connect.Client[dev.SetShardIsPrimaryServingRequest, dev.SetShardIsPrimaryServingResponse]
@@ -1115,6 +1244,9 @@ type vtctldClient struct {
 	validateVersionKeyspace     *connect.Client[dev.ValidateVersionKeyspaceRequest, dev.ValidateVersionKeyspaceResponse]
 	validateVersionShard        *connect.Client[dev.ValidateVersionShardRequest, dev.ValidateVersionShardResponse]
 	validateVSchema             *connect.Client[dev.ValidateVSchemaRequest, dev.ValidateVSchemaResponse]
+	workflowDelete              *connect.Client[dev.WorkflowDeleteRequest, dev.WorkflowDeleteResponse]
+	workflowStatus              *connect.Client[dev.WorkflowStatusRequest, dev.WorkflowStatusResponse]
+	workflowSwitchTraffic       *connect.Client[dev.WorkflowSwitchTrafficRequest, dev.WorkflowSwitchTrafficResponse]
 	workflowUpdate              *connect.Client[dev.WorkflowUpdateRequest, dev.WorkflowUpdateResponse]
 }
 
@@ -1158,9 +1290,24 @@ func (c *vtctldClient) BackupShard(ctx context.Context, req *connect.Request[dev
 	return c.backupShard.CallServerStream(ctx, req)
 }
 
+// CancelSchemaMigration calls vtctlservice.Vtctld.CancelSchemaMigration.
+func (c *vtctldClient) CancelSchemaMigration(ctx context.Context, req *connect.Request[dev.CancelSchemaMigrationRequest]) (*connect.Response[dev.CancelSchemaMigrationResponse], error) {
+	return c.cancelSchemaMigration.CallUnary(ctx, req)
+}
+
 // ChangeTabletType calls vtctlservice.Vtctld.ChangeTabletType.
 func (c *vtctldClient) ChangeTabletType(ctx context.Context, req *connect.Request[dev.ChangeTabletTypeRequest]) (*connect.Response[dev.ChangeTabletTypeResponse], error) {
 	return c.changeTabletType.CallUnary(ctx, req)
+}
+
+// CleanupSchemaMigration calls vtctlservice.Vtctld.CleanupSchemaMigration.
+func (c *vtctldClient) CleanupSchemaMigration(ctx context.Context, req *connect.Request[dev.CleanupSchemaMigrationRequest]) (*connect.Response[dev.CleanupSchemaMigrationResponse], error) {
+	return c.cleanupSchemaMigration.CallUnary(ctx, req)
+}
+
+// CompleteSchemaMigration calls vtctlservice.Vtctld.CompleteSchemaMigration.
+func (c *vtctldClient) CompleteSchemaMigration(ctx context.Context, req *connect.Request[dev.CompleteSchemaMigrationRequest]) (*connect.Response[dev.CompleteSchemaMigrationResponse], error) {
+	return c.completeSchemaMigration.CallUnary(ctx, req)
 }
 
 // CreateKeyspace calls vtctlservice.Vtctld.CreateKeyspace.
@@ -1278,6 +1425,11 @@ func (c *vtctldClient) GetSchema(ctx context.Context, req *connect.Request[dev.G
 	return c.getSchema.CallUnary(ctx, req)
 }
 
+// GetSchemaMigrations calls vtctlservice.Vtctld.GetSchemaMigrations.
+func (c *vtctldClient) GetSchemaMigrations(ctx context.Context, req *connect.Request[dev.GetSchemaMigrationsRequest]) (*connect.Response[dev.GetSchemaMigrationsResponse], error) {
+	return c.getSchemaMigrations.CallUnary(ctx, req)
+}
+
 // GetShard calls vtctlservice.Vtctld.GetShard.
 func (c *vtctldClient) GetShard(ctx context.Context, req *connect.Request[dev.GetShardRequest]) (*connect.Response[dev.GetShardResponse], error) {
 	return c.getShard.CallUnary(ctx, req)
@@ -1348,6 +1500,21 @@ func (c *vtctldClient) InitShardPrimary(ctx context.Context, req *connect.Reques
 	return c.initShardPrimary.CallUnary(ctx, req)
 }
 
+// LaunchSchemaMigration calls vtctlservice.Vtctld.LaunchSchemaMigration.
+func (c *vtctldClient) LaunchSchemaMigration(ctx context.Context, req *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error) {
+	return c.launchSchemaMigration.CallUnary(ctx, req)
+}
+
+// MoveTablesCreate calls vtctlservice.Vtctld.MoveTablesCreate.
+func (c *vtctldClient) MoveTablesCreate(ctx context.Context, req *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return c.moveTablesCreate.CallUnary(ctx, req)
+}
+
+// MoveTablesComplete calls vtctlservice.Vtctld.MoveTablesComplete.
+func (c *vtctldClient) MoveTablesComplete(ctx context.Context, req *connect.Request[dev.MoveTablesCompleteRequest]) (*connect.Response[dev.MoveTablesCompleteResponse], error) {
+	return c.moveTablesComplete.CallUnary(ctx, req)
+}
+
 // PingTablet calls vtctlservice.Vtctld.PingTablet.
 func (c *vtctldClient) PingTablet(ctx context.Context, req *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error) {
 	return c.pingTablet.CallUnary(ctx, req)
@@ -1413,9 +1580,19 @@ func (c *vtctldClient) ReparentTablet(ctx context.Context, req *connect.Request[
 	return c.reparentTablet.CallUnary(ctx, req)
 }
 
+// ReshardCreate calls vtctlservice.Vtctld.ReshardCreate.
+func (c *vtctldClient) ReshardCreate(ctx context.Context, req *connect.Request[dev.ReshardCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return c.reshardCreate.CallUnary(ctx, req)
+}
+
 // RestoreFromBackup calls vtctlservice.Vtctld.RestoreFromBackup.
 func (c *vtctldClient) RestoreFromBackup(ctx context.Context, req *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
+}
+
+// RetrySchemaMigration calls vtctlservice.Vtctld.RetrySchemaMigration.
+func (c *vtctldClient) RetrySchemaMigration(ctx context.Context, req *connect.Request[dev.RetrySchemaMigrationRequest]) (*connect.Response[dev.RetrySchemaMigrationResponse], error) {
+	return c.retrySchemaMigration.CallUnary(ctx, req)
 }
 
 // RunHealthCheck calls vtctlservice.Vtctld.RunHealthCheck.
@@ -1538,6 +1715,21 @@ func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request
 	return c.validateVSchema.CallUnary(ctx, req)
 }
 
+// WorkflowDelete calls vtctlservice.Vtctld.WorkflowDelete.
+func (c *vtctldClient) WorkflowDelete(ctx context.Context, req *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error) {
+	return c.workflowDelete.CallUnary(ctx, req)
+}
+
+// WorkflowStatus calls vtctlservice.Vtctld.WorkflowStatus.
+func (c *vtctldClient) WorkflowStatus(ctx context.Context, req *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return c.workflowStatus.CallUnary(ctx, req)
+}
+
+// WorkflowSwitchTraffic calls vtctlservice.Vtctld.WorkflowSwitchTraffic.
+func (c *vtctldClient) WorkflowSwitchTraffic(ctx context.Context, req *connect.Request[dev.WorkflowSwitchTrafficRequest]) (*connect.Response[dev.WorkflowSwitchTrafficResponse], error) {
+	return c.workflowSwitchTraffic.CallUnary(ctx, req)
+}
+
 // WorkflowUpdate calls vtctlservice.Vtctld.WorkflowUpdate.
 func (c *vtctldClient) WorkflowUpdate(ctx context.Context, req *connect.Request[dev.WorkflowUpdateRequest]) (*connect.Response[dev.WorkflowUpdateResponse], error) {
 	return c.workflowUpdate.CallUnary(ctx, req)
@@ -1568,12 +1760,18 @@ type VtctldHandler interface {
 	Backup(context.Context, *connect.Request[dev.BackupRequest], *connect.ServerStream[dev.BackupResponse]) error
 	// BackupShard chooses a tablet in the shard and uses it to create a backup.
 	BackupShard(context.Context, *connect.Request[dev.BackupShardRequest], *connect.ServerStream[dev.BackupResponse]) error
+	// CancelSchemaMigration cancels one or all migrations, terminating any runnign ones as needed.
+	CancelSchemaMigration(context.Context, *connect.Request[dev.CancelSchemaMigrationRequest]) (*connect.Response[dev.CancelSchemaMigrationResponse], error)
 	// ChangeTabletType changes the db type for the specified tablet, if possible.
 	// This is used primarily to arrange replicas, and it will not convert a
 	// primary. For that, use InitShardPrimary.
 	//
 	// NOTE: This command automatically updates the serving graph.
 	ChangeTabletType(context.Context, *connect.Request[dev.ChangeTabletTypeRequest]) (*connect.Response[dev.ChangeTabletTypeResponse], error)
+	// CleanupSchemaMigration marks a schema migration as ready for artifact cleanup.
+	CleanupSchemaMigration(context.Context, *connect.Request[dev.CleanupSchemaMigrationRequest]) (*connect.Response[dev.CleanupSchemaMigrationResponse], error)
+	// CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
+	CompleteSchemaMigration(context.Context, *connect.Request[dev.CompleteSchemaMigrationRequest]) (*connect.Response[dev.CompleteSchemaMigrationResponse], error)
 	// CreateKeyspace creates the specified keyspace in the topology. For a
 	// SNAPSHOT keyspace, the request must specify the name of a base keyspace,
 	// as well as a snapshot time.
@@ -1634,6 +1832,12 @@ type VtctldHandler interface {
 	// GetSchema returns the schema for a tablet, or just the schema for the
 	// specified tables in that tablet.
 	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error)
+	// GetSchemaMigrations returns one or more online schema migrations for the
+	// specified keyspace, analagous to `SHOW VITESS_MIGRATIONS`.
+	//
+	// Different fields in the request message result in different filtering
+	// behaviors. See the documentation on GetSchemaMigrationsRequest for details.
+	GetSchemaMigrations(context.Context, *connect.Request[dev.GetSchemaMigrationsRequest]) (*connect.Response[dev.GetSchemaMigrationsResponse], error)
 	// GetShard returns information about a shard in the topology.
 	GetShard(context.Context, *connect.Request[dev.GetShardRequest]) (*connect.Response[dev.GetShardResponse], error)
 	// GetShardRoutingRules returns the VSchema shard routing rules.
@@ -1670,6 +1874,14 @@ type VtctldHandler interface {
 	// PlannedReparentShard or EmergencyReparentShard should be used in those
 	// cases instead.
 	InitShardPrimary(context.Context, *connect.Request[dev.InitShardPrimaryRequest]) (*connect.Response[dev.InitShardPrimaryResponse], error)
+	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
+	LaunchSchemaMigration(context.Context, *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error)
+	// MoveTablesCreate creates a workflow which moves one or more tables from a
+	// source keyspace to a target keyspace.
+	MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
+	// MoveTablesComplete completes the move and cleans up the workflow and
+	// its related artifacts.
+	MoveTablesComplete(context.Context, *connect.Request[dev.MoveTablesCompleteRequest]) (*connect.Response[dev.MoveTablesCompleteResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to RPCs.
 	// This command can be blocked by other in-flight operations.
 	PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error)
@@ -1717,8 +1929,12 @@ type VtctldHandler interface {
 	// only works if the current replica position matches the last known reparent
 	// action.
 	ReparentTablet(context.Context, *connect.Request[dev.ReparentTabletRequest]) (*connect.Response[dev.ReparentTabletResponse], error)
+	// ReshardCreate creates a workflow to reshard a keyspace.
+	ReshardCreate(context.Context, *connect.Request[dev.ReshardCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
 	// RestoreFromBackup stops mysqld for the given tablet and restores a backup.
 	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error
+	// RetrySchemaMigration marks a given schema migration for retry.
+	RetrySchemaMigration(context.Context, *connect.Request[dev.RetrySchemaMigrationRequest]) (*connect.Response[dev.RetrySchemaMigrationResponse], error)
 	// RunHealthCheck runs a healthcheck on the remote tablet.
 	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
 	// SetKeyspaceDurabilityPolicy updates the DurabilityPolicy for a keyspace.
@@ -1806,6 +2022,10 @@ type VtctldHandler interface {
 	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error)
+	// WorkflowDelete deletes a vreplication workflow.
+	WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error)
+	WorkflowStatus(context.Context, *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
+	WorkflowSwitchTraffic(context.Context, *connect.Request[dev.WorkflowSwitchTrafficRequest]) (*connect.Response[dev.WorkflowSwitchTrafficResponse], error)
 	// WorkflowUpdate updates the configuration of a vreplication workflow
 	// using the provided updated parameters.
 	WorkflowUpdate(context.Context, *connect.Request[dev.WorkflowUpdateRequest]) (*connect.Response[dev.WorkflowUpdateResponse], error)
@@ -1857,9 +2077,24 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.BackupShard,
 		opts...,
 	)
+	vtctldCancelSchemaMigrationHandler := connect.NewUnaryHandler(
+		VtctldCancelSchemaMigrationProcedure,
+		svc.CancelSchemaMigration,
+		opts...,
+	)
 	vtctldChangeTabletTypeHandler := connect.NewUnaryHandler(
 		VtctldChangeTabletTypeProcedure,
 		svc.ChangeTabletType,
+		opts...,
+	)
+	vtctldCleanupSchemaMigrationHandler := connect.NewUnaryHandler(
+		VtctldCleanupSchemaMigrationProcedure,
+		svc.CleanupSchemaMigration,
+		opts...,
+	)
+	vtctldCompleteSchemaMigrationHandler := connect.NewUnaryHandler(
+		VtctldCompleteSchemaMigrationProcedure,
+		svc.CompleteSchemaMigration,
 		opts...,
 	)
 	vtctldCreateKeyspaceHandler := connect.NewUnaryHandler(
@@ -1977,6 +2212,11 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.GetSchema,
 		opts...,
 	)
+	vtctldGetSchemaMigrationsHandler := connect.NewUnaryHandler(
+		VtctldGetSchemaMigrationsProcedure,
+		svc.GetSchemaMigrations,
+		opts...,
+	)
 	vtctldGetShardHandler := connect.NewUnaryHandler(
 		VtctldGetShardProcedure,
 		svc.GetShard,
@@ -2047,6 +2287,21 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.InitShardPrimary,
 		opts...,
 	)
+	vtctldLaunchSchemaMigrationHandler := connect.NewUnaryHandler(
+		VtctldLaunchSchemaMigrationProcedure,
+		svc.LaunchSchemaMigration,
+		opts...,
+	)
+	vtctldMoveTablesCreateHandler := connect.NewUnaryHandler(
+		VtctldMoveTablesCreateProcedure,
+		svc.MoveTablesCreate,
+		opts...,
+	)
+	vtctldMoveTablesCompleteHandler := connect.NewUnaryHandler(
+		VtctldMoveTablesCompleteProcedure,
+		svc.MoveTablesComplete,
+		opts...,
+	)
 	vtctldPingTabletHandler := connect.NewUnaryHandler(
 		VtctldPingTabletProcedure,
 		svc.PingTablet,
@@ -2112,9 +2367,19 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.ReparentTablet,
 		opts...,
 	)
+	vtctldReshardCreateHandler := connect.NewUnaryHandler(
+		VtctldReshardCreateProcedure,
+		svc.ReshardCreate,
+		opts...,
+	)
 	vtctldRestoreFromBackupHandler := connect.NewServerStreamHandler(
 		VtctldRestoreFromBackupProcedure,
 		svc.RestoreFromBackup,
+		opts...,
+	)
+	vtctldRetrySchemaMigrationHandler := connect.NewUnaryHandler(
+		VtctldRetrySchemaMigrationProcedure,
+		svc.RetrySchemaMigration,
 		opts...,
 	)
 	vtctldRunHealthCheckHandler := connect.NewUnaryHandler(
@@ -2237,6 +2502,21 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.ValidateVSchema,
 		opts...,
 	)
+	vtctldWorkflowDeleteHandler := connect.NewUnaryHandler(
+		VtctldWorkflowDeleteProcedure,
+		svc.WorkflowDelete,
+		opts...,
+	)
+	vtctldWorkflowStatusHandler := connect.NewUnaryHandler(
+		VtctldWorkflowStatusProcedure,
+		svc.WorkflowStatus,
+		opts...,
+	)
+	vtctldWorkflowSwitchTrafficHandler := connect.NewUnaryHandler(
+		VtctldWorkflowSwitchTrafficProcedure,
+		svc.WorkflowSwitchTraffic,
+		opts...,
+	)
 	vtctldWorkflowUpdateHandler := connect.NewUnaryHandler(
 		VtctldWorkflowUpdateProcedure,
 		svc.WorkflowUpdate,
@@ -2260,8 +2540,14 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldBackupHandler.ServeHTTP(w, r)
 		case VtctldBackupShardProcedure:
 			vtctldBackupShardHandler.ServeHTTP(w, r)
+		case VtctldCancelSchemaMigrationProcedure:
+			vtctldCancelSchemaMigrationHandler.ServeHTTP(w, r)
 		case VtctldChangeTabletTypeProcedure:
 			vtctldChangeTabletTypeHandler.ServeHTTP(w, r)
+		case VtctldCleanupSchemaMigrationProcedure:
+			vtctldCleanupSchemaMigrationHandler.ServeHTTP(w, r)
+		case VtctldCompleteSchemaMigrationProcedure:
+			vtctldCompleteSchemaMigrationHandler.ServeHTTP(w, r)
 		case VtctldCreateKeyspaceProcedure:
 			vtctldCreateKeyspaceHandler.ServeHTTP(w, r)
 		case VtctldCreateShardProcedure:
@@ -2308,6 +2594,8 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldGetRoutingRulesHandler.ServeHTTP(w, r)
 		case VtctldGetSchemaProcedure:
 			vtctldGetSchemaHandler.ServeHTTP(w, r)
+		case VtctldGetSchemaMigrationsProcedure:
+			vtctldGetSchemaMigrationsHandler.ServeHTTP(w, r)
 		case VtctldGetShardProcedure:
 			vtctldGetShardHandler.ServeHTTP(w, r)
 		case VtctldGetShardRoutingRulesProcedure:
@@ -2336,6 +2624,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldGetWorkflowsHandler.ServeHTTP(w, r)
 		case VtctldInitShardPrimaryProcedure:
 			vtctldInitShardPrimaryHandler.ServeHTTP(w, r)
+		case VtctldLaunchSchemaMigrationProcedure:
+			vtctldLaunchSchemaMigrationHandler.ServeHTTP(w, r)
+		case VtctldMoveTablesCreateProcedure:
+			vtctldMoveTablesCreateHandler.ServeHTTP(w, r)
+		case VtctldMoveTablesCompleteProcedure:
+			vtctldMoveTablesCompleteHandler.ServeHTTP(w, r)
 		case VtctldPingTabletProcedure:
 			vtctldPingTabletHandler.ServeHTTP(w, r)
 		case VtctldPlannedReparentShardProcedure:
@@ -2362,8 +2656,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldRemoveShardCellHandler.ServeHTTP(w, r)
 		case VtctldReparentTabletProcedure:
 			vtctldReparentTabletHandler.ServeHTTP(w, r)
+		case VtctldReshardCreateProcedure:
+			vtctldReshardCreateHandler.ServeHTTP(w, r)
 		case VtctldRestoreFromBackupProcedure:
 			vtctldRestoreFromBackupHandler.ServeHTTP(w, r)
+		case VtctldRetrySchemaMigrationProcedure:
+			vtctldRetrySchemaMigrationHandler.ServeHTTP(w, r)
 		case VtctldRunHealthCheckProcedure:
 			vtctldRunHealthCheckHandler.ServeHTTP(w, r)
 		case VtctldSetKeyspaceDurabilityPolicyProcedure:
@@ -2412,6 +2710,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldValidateVersionShardHandler.ServeHTTP(w, r)
 		case VtctldValidateVSchemaProcedure:
 			vtctldValidateVSchemaHandler.ServeHTTP(w, r)
+		case VtctldWorkflowDeleteProcedure:
+			vtctldWorkflowDeleteHandler.ServeHTTP(w, r)
+		case VtctldWorkflowStatusProcedure:
+			vtctldWorkflowStatusHandler.ServeHTTP(w, r)
+		case VtctldWorkflowSwitchTrafficProcedure:
+			vtctldWorkflowSwitchTrafficHandler.ServeHTTP(w, r)
 		case VtctldWorkflowUpdateProcedure:
 			vtctldWorkflowUpdateHandler.ServeHTTP(w, r)
 		default:
@@ -2455,8 +2759,20 @@ func (UnimplementedVtctldHandler) BackupShard(context.Context, *connect.Request[
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.BackupShard is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) CancelSchemaMigration(context.Context, *connect.Request[dev.CancelSchemaMigrationRequest]) (*connect.Response[dev.CancelSchemaMigrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CancelSchemaMigration is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) ChangeTabletType(context.Context, *connect.Request[dev.ChangeTabletTypeRequest]) (*connect.Response[dev.ChangeTabletTypeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ChangeTabletType is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) CleanupSchemaMigration(context.Context, *connect.Request[dev.CleanupSchemaMigrationRequest]) (*connect.Response[dev.CleanupSchemaMigrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CleanupSchemaMigration is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) CompleteSchemaMigration(context.Context, *connect.Request[dev.CompleteSchemaMigrationRequest]) (*connect.Response[dev.CompleteSchemaMigrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CompleteSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CreateKeyspace(context.Context, *connect.Request[dev.CreateKeyspaceRequest]) (*connect.Response[dev.CreateKeyspaceResponse], error) {
@@ -2551,6 +2867,10 @@ func (UnimplementedVtctldHandler) GetSchema(context.Context, *connect.Request[de
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSchema is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) GetSchemaMigrations(context.Context, *connect.Request[dev.GetSchemaMigrationsRequest]) (*connect.Response[dev.GetSchemaMigrationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSchemaMigrations is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) GetShard(context.Context, *connect.Request[dev.GetShardRequest]) (*connect.Response[dev.GetShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShard is not implemented"))
 }
@@ -2607,6 +2927,18 @@ func (UnimplementedVtctldHandler) InitShardPrimary(context.Context, *connect.Req
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.InitShardPrimary is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) LaunchSchemaMigration(context.Context, *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LaunchSchemaMigration is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MoveTablesCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MoveTablesComplete(context.Context, *connect.Request[dev.MoveTablesCompleteRequest]) (*connect.Response[dev.MoveTablesCompleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MoveTablesComplete is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) PingTablet(context.Context, *connect.Request[dev.PingTabletRequest]) (*connect.Response[dev.PingTabletResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.PingTablet is not implemented"))
 }
@@ -2659,8 +2991,16 @@ func (UnimplementedVtctldHandler) ReparentTablet(context.Context, *connect.Reque
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReparentTablet is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) ReshardCreate(context.Context, *connect.Request[dev.ReshardCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReshardCreate is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RestoreFromBackup is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) RetrySchemaMigration(context.Context, *connect.Request[dev.RetrySchemaMigrationRequest]) (*connect.Response[dev.RetrySchemaMigrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RetrySchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
@@ -2757,6 +3097,18 @@ func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect
 
 func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVSchema is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowDelete is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) WorkflowStatus(context.Context, *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowStatus is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) WorkflowSwitchTraffic(context.Context, *connect.Request[dev.WorkflowSwitchTrafficRequest]) (*connect.Response[dev.WorkflowSwitchTrafficResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowSwitchTraffic is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowUpdate(context.Context, *connect.Request[dev.WorkflowUpdateRequest]) (*connect.Response[dev.WorkflowUpdateResponse], error) {
