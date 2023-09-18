@@ -2,6 +2,7 @@
   "versions": {
     "dev": "b4854ba7a2ad698ba1ca5ad7220c1b2137894535",
     "v15": "refs/tags/v15.0.4",
-    "v16": "refs/tags/v16.0.4"
+    "v16": "refs/tags/v16.0.4",
+    "v17": "refs/tags/v17.0.2"
   }
 }
