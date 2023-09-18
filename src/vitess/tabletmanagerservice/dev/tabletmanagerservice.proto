@@ -66,6 +66,8 @@ service TabletManager {
 
   rpc ApplySchema(vitess.tabletmanagerdata.dev.ApplySchemaRequest) returns (vitess.tabletmanagerdata.dev.ApplySchemaResponse) {};
 
+  rpc ResetSequences(vitess.tabletmanagerdata.dev.ResetSequencesRequest) returns (vitess.tabletmanagerdata.dev.ResetSequencesResponse) {};
+
   rpc LockTables(vitess.tabletmanagerdata.dev.LockTablesRequest) returns (vitess.tabletmanagerdata.dev.LockTablesResponse) {};
 
   rpc UnlockTables(vitess.tabletmanagerdata.dev.UnlockTablesRequest) returns (vitess.tabletmanagerdata.dev.UnlockTablesResponse) {};
@@ -112,9 +114,12 @@ service TabletManager {
   rpc GetReplicas(vitess.tabletmanagerdata.dev.GetReplicasRequest) returns (vitess.tabletmanagerdata.dev.GetReplicasResponse) {};
 
   // VReplication API
+  rpc CreateVReplicationWorkflow(vitess.tabletmanagerdata.dev.CreateVReplicationWorkflowRequest) returns (vitess.tabletmanagerdata.dev.CreateVReplicationWorkflowResponse) {};
+  rpc DeleteVReplicationWorkflow(vitess.tabletmanagerdata.dev.DeleteVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.DeleteVReplicationWorkflowResponse) {};
+  rpc ReadVReplicationWorkflow(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowResponse) {};
   rpc VReplicationExec(vitess.tabletmanagerdata.dev.VReplicationExecRequest) returns(vitess.tabletmanagerdata.dev.VReplicationExecResponse) {};
   rpc VReplicationWaitForPos(vitess.tabletmanagerdata.dev.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.dev.VReplicationWaitForPosResponse) {};
-  rpc UpdateVRWorkflow(vitess.tabletmanagerdata.dev.UpdateVRWorkflowRequest) returns(vitess.tabletmanagerdata.dev.UpdateVRWorkflowResponse) {};
+  rpc UpdateVReplicationWorkflow(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowResponse) {};
 
   // VDiff API
   rpc VDiff(vitess.tabletmanagerdata.dev.VDiffRequest) returns(vitess.tabletmanagerdata.dev.VDiffResponse) {};
@@ -173,4 +178,6 @@ service TabletManager {
   // RestoreFromBackup deletes all local data and restores it from the latest backup.
   rpc RestoreFromBackup(vitess.tabletmanagerdata.dev.RestoreFromBackupRequest) returns (stream vitess.tabletmanagerdata.dev.RestoreFromBackupResponse) {};
 
+  // CheckThrottler issues a 'check' on a tablet's throttler
+  rpc CheckThrottler(vitess.tabletmanagerdata.dev.CheckThrottlerRequest) returns (vitess.tabletmanagerdata.dev.CheckThrottlerResponse) {};
 }

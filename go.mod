@@ -1,6 +1,6 @@
 module github.com/planetscale/vitess-types
 
-go 1.20
+go 1.21
 
 require (
 	connectrpc.com/connect v1.11.0

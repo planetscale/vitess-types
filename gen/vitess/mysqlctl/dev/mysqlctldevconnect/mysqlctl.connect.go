@@ -57,10 +57,18 @@ const (
 	// MysqlCtlRunMysqlUpgradeProcedure is the fully-qualified name of the MysqlCtl's RunMysqlUpgrade
 	// RPC.
 	MysqlCtlRunMysqlUpgradeProcedure = "/mysqlctl.MysqlCtl/RunMysqlUpgrade"
+	// MysqlCtlApplyBinlogFileProcedure is the fully-qualified name of the MysqlCtl's ApplyBinlogFile
+	// RPC.
+	MysqlCtlApplyBinlogFileProcedure = "/mysqlctl.MysqlCtl/ApplyBinlogFile"
+	// MysqlCtlReadBinlogFilesTimestampsProcedure is the fully-qualified name of the MysqlCtl's
+	// ReadBinlogFilesTimestamps RPC.
+	MysqlCtlReadBinlogFilesTimestampsProcedure = "/mysqlctl.MysqlCtl/ReadBinlogFilesTimestamps"
 	// MysqlCtlReinitConfigProcedure is the fully-qualified name of the MysqlCtl's ReinitConfig RPC.
 	MysqlCtlReinitConfigProcedure = "/mysqlctl.MysqlCtl/ReinitConfig"
 	// MysqlCtlRefreshConfigProcedure is the fully-qualified name of the MysqlCtl's RefreshConfig RPC.
 	MysqlCtlRefreshConfigProcedure = "/mysqlctl.MysqlCtl/RefreshConfig"
+	// MysqlCtlVersionStringProcedure is the fully-qualified name of the MysqlCtl's VersionString RPC.
+	MysqlCtlVersionStringProcedure = "/mysqlctl.MysqlCtl/VersionString"
 )
 
 // MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
@@ -68,8 +76,11 @@ type MysqlCtlClient interface {
 	Start(context.Context, *connect.Request[dev.StartRequest]) (*connect.Response[dev.StartResponse], error)
 	Shutdown(context.Context, *connect.Request[dev.ShutdownRequest]) (*connect.Response[dev.ShutdownResponse], error)
 	RunMysqlUpgrade(context.Context, *connect.Request[dev.RunMysqlUpgradeRequest]) (*connect.Response[dev.RunMysqlUpgradeResponse], error)
+	ApplyBinlogFile(context.Context, *connect.Request[dev.ApplyBinlogFileRequest]) (*connect.Response[dev.ApplyBinlogFileResponse], error)
+	ReadBinlogFilesTimestamps(context.Context, *connect.Request[dev.ReadBinlogFilesTimestampsRequest]) (*connect.Response[dev.ReadBinlogFilesTimestampsResponse], error)
 	ReinitConfig(context.Context, *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error)
 	RefreshConfig(context.Context, *connect.Request[dev.RefreshConfigRequest]) (*connect.Response[dev.RefreshConfigResponse], error)
+	VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error)
 }
 
 // NewMysqlCtlClient constructs a client for the mysqlctl.MysqlCtl service. By default,
@@ -97,6 +108,16 @@ func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...co
 			baseURL+MysqlCtlRunMysqlUpgradeProcedure,
 			opts...,
 		),
+		applyBinlogFile: connect.NewClient[dev.ApplyBinlogFileRequest, dev.ApplyBinlogFileResponse](
+			httpClient,
+			baseURL+MysqlCtlApplyBinlogFileProcedure,
+			opts...,
+		),
+		readBinlogFilesTimestamps: connect.NewClient[dev.ReadBinlogFilesTimestampsRequest, dev.ReadBinlogFilesTimestampsResponse](
+			httpClient,
+			baseURL+MysqlCtlReadBinlogFilesTimestampsProcedure,
+			opts...,
+		),
 		reinitConfig: connect.NewClient[dev.ReinitConfigRequest, dev.ReinitConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlReinitConfigProcedure,
@@ -107,16 +128,24 @@ func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...co
 			baseURL+MysqlCtlRefreshConfigProcedure,
 			opts...,
 		),
+		versionString: connect.NewClient[dev.VersionStringRequest, dev.VersionStringResponse](
+			httpClient,
+			baseURL+MysqlCtlVersionStringProcedure,
+			opts...,
+		),
 	}
 }
 
 // mysqlCtlClient implements MysqlCtlClient.
 type mysqlCtlClient struct {
-	start           *connect.Client[dev.StartRequest, dev.StartResponse]
-	shutdown        *connect.Client[dev.ShutdownRequest, dev.ShutdownResponse]
-	runMysqlUpgrade *connect.Client[dev.RunMysqlUpgradeRequest, dev.RunMysqlUpgradeResponse]
-	reinitConfig    *connect.Client[dev.ReinitConfigRequest, dev.ReinitConfigResponse]
-	refreshConfig   *connect.Client[dev.RefreshConfigRequest, dev.RefreshConfigResponse]
+	start                     *connect.Client[dev.StartRequest, dev.StartResponse]
+	shutdown                  *connect.Client[dev.ShutdownRequest, dev.ShutdownResponse]
+	runMysqlUpgrade           *connect.Client[dev.RunMysqlUpgradeRequest, dev.RunMysqlUpgradeResponse]
+	applyBinlogFile           *connect.Client[dev.ApplyBinlogFileRequest, dev.ApplyBinlogFileResponse]
+	readBinlogFilesTimestamps *connect.Client[dev.ReadBinlogFilesTimestampsRequest, dev.ReadBinlogFilesTimestampsResponse]
+	reinitConfig              *connect.Client[dev.ReinitConfigRequest, dev.ReinitConfigResponse]
+	refreshConfig             *connect.Client[dev.RefreshConfigRequest, dev.RefreshConfigResponse]
+	versionString             *connect.Client[dev.VersionStringRequest, dev.VersionStringResponse]
 }
 
 // Start calls mysqlctl.MysqlCtl.Start.
@@ -134,6 +163,16 @@ func (c *mysqlCtlClient) RunMysqlUpgrade(ctx context.Context, req *connect.Reque
 	return c.runMysqlUpgrade.CallUnary(ctx, req)
 }
 
+// ApplyBinlogFile calls mysqlctl.MysqlCtl.ApplyBinlogFile.
+func (c *mysqlCtlClient) ApplyBinlogFile(ctx context.Context, req *connect.Request[dev.ApplyBinlogFileRequest]) (*connect.Response[dev.ApplyBinlogFileResponse], error) {
+	return c.applyBinlogFile.CallUnary(ctx, req)
+}
+
+// ReadBinlogFilesTimestamps calls mysqlctl.MysqlCtl.ReadBinlogFilesTimestamps.
+func (c *mysqlCtlClient) ReadBinlogFilesTimestamps(ctx context.Context, req *connect.Request[dev.ReadBinlogFilesTimestampsRequest]) (*connect.Response[dev.ReadBinlogFilesTimestampsResponse], error) {
+	return c.readBinlogFilesTimestamps.CallUnary(ctx, req)
+}
+
 // ReinitConfig calls mysqlctl.MysqlCtl.ReinitConfig.
 func (c *mysqlCtlClient) ReinitConfig(ctx context.Context, req *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error) {
 	return c.reinitConfig.CallUnary(ctx, req)
@@ -144,13 +183,21 @@ func (c *mysqlCtlClient) RefreshConfig(ctx context.Context, req *connect.Request
 	return c.refreshConfig.CallUnary(ctx, req)
 }
 
+// VersionString calls mysqlctl.MysqlCtl.VersionString.
+func (c *mysqlCtlClient) VersionString(ctx context.Context, req *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error) {
+	return c.versionString.CallUnary(ctx, req)
+}
+
 // MysqlCtlHandler is an implementation of the mysqlctl.MysqlCtl service.
 type MysqlCtlHandler interface {
 	Start(context.Context, *connect.Request[dev.StartRequest]) (*connect.Response[dev.StartResponse], error)
 	Shutdown(context.Context, *connect.Request[dev.ShutdownRequest]) (*connect.Response[dev.ShutdownResponse], error)
 	RunMysqlUpgrade(context.Context, *connect.Request[dev.RunMysqlUpgradeRequest]) (*connect.Response[dev.RunMysqlUpgradeResponse], error)
+	ApplyBinlogFile(context.Context, *connect.Request[dev.ApplyBinlogFileRequest]) (*connect.Response[dev.ApplyBinlogFileResponse], error)
+	ReadBinlogFilesTimestamps(context.Context, *connect.Request[dev.ReadBinlogFilesTimestampsRequest]) (*connect.Response[dev.ReadBinlogFilesTimestampsResponse], error)
 	ReinitConfig(context.Context, *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error)
 	RefreshConfig(context.Context, *connect.Request[dev.RefreshConfigRequest]) (*connect.Response[dev.RefreshConfigResponse], error)
+	VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error)
 }
 
 // NewMysqlCtlHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -174,6 +221,16 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 		svc.RunMysqlUpgrade,
 		opts...,
 	)
+	mysqlCtlApplyBinlogFileHandler := connect.NewUnaryHandler(
+		MysqlCtlApplyBinlogFileProcedure,
+		svc.ApplyBinlogFile,
+		opts...,
+	)
+	mysqlCtlReadBinlogFilesTimestampsHandler := connect.NewUnaryHandler(
+		MysqlCtlReadBinlogFilesTimestampsProcedure,
+		svc.ReadBinlogFilesTimestamps,
+		opts...,
+	)
 	mysqlCtlReinitConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlReinitConfigProcedure,
 		svc.ReinitConfig,
@@ -184,6 +241,11 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 		svc.RefreshConfig,
 		opts...,
 	)
+	mysqlCtlVersionStringHandler := connect.NewUnaryHandler(
+		MysqlCtlVersionStringProcedure,
+		svc.VersionString,
+		opts...,
+	)
 	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MysqlCtlStartProcedure:
@@ -192,10 +254,16 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 			mysqlCtlShutdownHandler.ServeHTTP(w, r)
 		case MysqlCtlRunMysqlUpgradeProcedure:
 			mysqlCtlRunMysqlUpgradeHandler.ServeHTTP(w, r)
+		case MysqlCtlApplyBinlogFileProcedure:
+			mysqlCtlApplyBinlogFileHandler.ServeHTTP(w, r)
+		case MysqlCtlReadBinlogFilesTimestampsProcedure:
+			mysqlCtlReadBinlogFilesTimestampsHandler.ServeHTTP(w, r)
 		case MysqlCtlReinitConfigProcedure:
 			mysqlCtlReinitConfigHandler.ServeHTTP(w, r)
 		case MysqlCtlRefreshConfigProcedure:
 			mysqlCtlRefreshConfigHandler.ServeHTTP(w, r)
+		case MysqlCtlVersionStringProcedure:
+			mysqlCtlVersionStringHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -217,10 +285,22 @@ func (UnimplementedMysqlCtlHandler) RunMysqlUpgrade(context.Context, *connect.Re
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RunMysqlUpgrade is not implemented"))
 }
 
+func (UnimplementedMysqlCtlHandler) ApplyBinlogFile(context.Context, *connect.Request[dev.ApplyBinlogFileRequest]) (*connect.Response[dev.ApplyBinlogFileResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ApplyBinlogFile is not implemented"))
+}
+
+func (UnimplementedMysqlCtlHandler) ReadBinlogFilesTimestamps(context.Context, *connect.Request[dev.ReadBinlogFilesTimestampsRequest]) (*connect.Response[dev.ReadBinlogFilesTimestampsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReadBinlogFilesTimestamps is not implemented"))
+}
+
 func (UnimplementedMysqlCtlHandler) ReinitConfig(context.Context, *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReinitConfig is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect.Request[dev.RefreshConfigRequest]) (*connect.Response[dev.RefreshConfigResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RefreshConfig is not implemented"))
+}
+
+func (UnimplementedMysqlCtlHandler) VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.VersionString is not implemented"))
 }

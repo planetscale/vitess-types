@@ -106,6 +106,8 @@ const (
 	QueryVStreamProcedure = "/queryservice.Query/VStream"
 	// QueryVStreamRowsProcedure is the fully-qualified name of the Query's VStreamRows RPC.
 	QueryVStreamRowsProcedure = "/queryservice.Query/VStreamRows"
+	// QueryVStreamTablesProcedure is the fully-qualified name of the Query's VStreamTables RPC.
+	QueryVStreamTablesProcedure = "/queryservice.Query/VStreamTables"
 	// QueryVStreamResultsProcedure is the fully-qualified name of the Query's VStreamResults RPC.
 	QueryVStreamResultsProcedure = "/queryservice.Query/VStreamResults"
 	// QueryGetSchemaProcedure is the fully-qualified name of the Query's GetSchema RPC.
@@ -169,6 +171,8 @@ type QueryClient interface {
 	VStream(context.Context, *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error)
 	// VStreamRows streams rows from the specified starting point.
 	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error)
+	// VStreamTables streams rows from the specified starting point.
+	VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev1.VStreamTablesResponse], error)
 	// VStreamResults streams results along with the gtid of the snapshot.
 	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error)
 	// GetSchema returns the schema information.
@@ -310,6 +314,11 @@ func NewQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...conne
 			baseURL+QueryVStreamRowsProcedure,
 			opts...,
 		),
+		vStreamTables: connect.NewClient[dev1.VStreamTablesRequest, dev1.VStreamTablesResponse](
+			httpClient,
+			baseURL+QueryVStreamTablesProcedure,
+			opts...,
+		),
 		vStreamResults: connect.NewClient[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse](
 			httpClient,
 			baseURL+QueryVStreamResultsProcedure,
@@ -350,6 +359,7 @@ type queryClient struct {
 	streamHealth              *connect.Client[dev.StreamHealthRequest, dev.StreamHealthResponse]
 	vStream                   *connect.Client[dev1.VStreamRequest, dev1.VStreamResponse]
 	vStreamRows               *connect.Client[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse]
+	vStreamTables             *connect.Client[dev1.VStreamTablesRequest, dev1.VStreamTablesResponse]
 	vStreamResults            *connect.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
 	getSchema                 *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
 }
@@ -479,6 +489,11 @@ func (c *queryClient) VStreamRows(ctx context.Context, req *connect.Request[dev1
 	return c.vStreamRows.CallServerStream(ctx, req)
 }
 
+// VStreamTables calls queryservice.Query.VStreamTables.
+func (c *queryClient) VStreamTables(ctx context.Context, req *connect.Request[dev1.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev1.VStreamTablesResponse], error) {
+	return c.vStreamTables.CallServerStream(ctx, req)
+}
+
 // VStreamResults calls queryservice.Query.VStreamResults.
 func (c *queryClient) VStreamResults(ctx context.Context, req *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error) {
 	return c.vStreamResults.CallServerStream(ctx, req)
@@ -546,6 +561,8 @@ type QueryHandler interface {
 	VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error
 	// VStreamRows streams rows from the specified starting point.
 	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error
+	// VStreamTables streams rows from the specified starting point.
+	VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest], *connect.ServerStream[dev1.VStreamTablesResponse]) error
 	// VStreamResults streams results along with the gtid of the snapshot.
 	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error
 	// GetSchema returns the schema information.
@@ -683,6 +700,11 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 		svc.VStreamRows,
 		opts...,
 	)
+	queryVStreamTablesHandler := connect.NewServerStreamHandler(
+		QueryVStreamTablesProcedure,
+		svc.VStreamTables,
+		opts...,
+	)
 	queryVStreamResultsHandler := connect.NewServerStreamHandler(
 		QueryVStreamResultsProcedure,
 		svc.VStreamResults,
@@ -745,6 +767,8 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 			queryVStreamHandler.ServeHTTP(w, r)
 		case QueryVStreamRowsProcedure:
 			queryVStreamRowsHandler.ServeHTTP(w, r)
+		case QueryVStreamTablesProcedure:
+			queryVStreamTablesHandler.ServeHTTP(w, r)
 		case QueryVStreamResultsProcedure:
 			queryVStreamResultsHandler.ServeHTTP(w, r)
 		case QueryGetSchemaProcedure:
@@ -856,6 +880,10 @@ func (UnimplementedQueryHandler) VStream(context.Context, *connect.Request[dev1.
 
 func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamRows is not implemented"))
+}
+
+func (UnimplementedQueryHandler) VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest], *connect.ServerStream[dev1.VStreamTablesResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamTables is not implemented"))
 }
 
 func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error {

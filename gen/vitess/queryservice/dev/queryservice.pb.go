@@ -49,7 +49,7 @@ var file_vitess_queryservice_dev_queryservice_proto_rawDesc = []byte{
 	0x65, 0x72, 0x79, 0x2f, 0x64, 0x65, 0x76, 0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x26, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2f, 0x62, 0x69, 0x6e, 0x6c,
 	0x6f, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2f, 0x64, 0x65, 0x76, 0x2f, 0x62, 0x69, 0x6e, 0x6c, 0x6f,
-	0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xa5, 0x15, 0x0a, 0x05,
+	0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x95, 0x16, 0x0a, 0x05,
 	0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x50, 0x0a, 0x07, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65,
 	0x12, 0x20, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e,
 	0x64, 0x65, 0x76, 0x2e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
@@ -207,6 +207,13 @@ var file_vitess_queryservice_dev_queryservice_proto_rawDesc = []byte{
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e,
 	0x62, 0x69, 0x6e, 0x6c, 0x6f, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x56,
 	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x6f, 0x77, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x6e, 0x0a, 0x0d, 0x56, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x12, 0x2b, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73,
+	0x2e, 0x62, 0x69, 0x6e, 0x6c, 0x6f, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e,
+	0x56, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2c, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73, 0x73, 0x2e, 0x62, 0x69,
+	0x6e, 0x6c, 0x6f, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x64, 0x65, 0x76, 0x2e, 0x56, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x71, 0x0a, 0x0e, 0x56, 0x53, 0x74, 0x72, 0x65, 0x61,
 	0x6d, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x12, 0x2c, 0x2e, 0x76, 0x69, 0x74, 0x65, 0x73,
 	0x73, 0x2e, 0x62, 0x69, 0x6e, 0x6c, 0x6f, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x64, 0x65, 0x76,
@@ -254,35 +261,37 @@ var file_vitess_queryservice_dev_queryservice_proto_goTypes = []interface{}{
 	(*dev.StreamHealthRequest)(nil),               // 22: vitess.query.dev.StreamHealthRequest
 	(*dev1.VStreamRequest)(nil),                   // 23: vitess.binlogdata.dev.VStreamRequest
 	(*dev1.VStreamRowsRequest)(nil),               // 24: vitess.binlogdata.dev.VStreamRowsRequest
-	(*dev1.VStreamResultsRequest)(nil),            // 25: vitess.binlogdata.dev.VStreamResultsRequest
-	(*dev.GetSchemaRequest)(nil),                  // 26: vitess.query.dev.GetSchemaRequest
-	(*dev.ExecuteResponse)(nil),                   // 27: vitess.query.dev.ExecuteResponse
-	(*dev.StreamExecuteResponse)(nil),             // 28: vitess.query.dev.StreamExecuteResponse
-	(*dev.BeginResponse)(nil),                     // 29: vitess.query.dev.BeginResponse
-	(*dev.CommitResponse)(nil),                    // 30: vitess.query.dev.CommitResponse
-	(*dev.RollbackResponse)(nil),                  // 31: vitess.query.dev.RollbackResponse
-	(*dev.PrepareResponse)(nil),                   // 32: vitess.query.dev.PrepareResponse
-	(*dev.CommitPreparedResponse)(nil),            // 33: vitess.query.dev.CommitPreparedResponse
-	(*dev.RollbackPreparedResponse)(nil),          // 34: vitess.query.dev.RollbackPreparedResponse
-	(*dev.CreateTransactionResponse)(nil),         // 35: vitess.query.dev.CreateTransactionResponse
-	(*dev.StartCommitResponse)(nil),               // 36: vitess.query.dev.StartCommitResponse
-	(*dev.SetRollbackResponse)(nil),               // 37: vitess.query.dev.SetRollbackResponse
-	(*dev.ConcludeTransactionResponse)(nil),       // 38: vitess.query.dev.ConcludeTransactionResponse
-	(*dev.ReadTransactionResponse)(nil),           // 39: vitess.query.dev.ReadTransactionResponse
-	(*dev.BeginExecuteResponse)(nil),              // 40: vitess.query.dev.BeginExecuteResponse
-	(*dev.BeginStreamExecuteResponse)(nil),        // 41: vitess.query.dev.BeginStreamExecuteResponse
-	(*dev.MessageStreamResponse)(nil),             // 42: vitess.query.dev.MessageStreamResponse
-	(*dev.MessageAckResponse)(nil),                // 43: vitess.query.dev.MessageAckResponse
-	(*dev.ReserveExecuteResponse)(nil),            // 44: vitess.query.dev.ReserveExecuteResponse
-	(*dev.ReserveBeginExecuteResponse)(nil),       // 45: vitess.query.dev.ReserveBeginExecuteResponse
-	(*dev.ReserveStreamExecuteResponse)(nil),      // 46: vitess.query.dev.ReserveStreamExecuteResponse
-	(*dev.ReserveBeginStreamExecuteResponse)(nil), // 47: vitess.query.dev.ReserveBeginStreamExecuteResponse
-	(*dev.ReleaseResponse)(nil),                   // 48: vitess.query.dev.ReleaseResponse
-	(*dev.StreamHealthResponse)(nil),              // 49: vitess.query.dev.StreamHealthResponse
-	(*dev1.VStreamResponse)(nil),                  // 50: vitess.binlogdata.dev.VStreamResponse
-	(*dev1.VStreamRowsResponse)(nil),              // 51: vitess.binlogdata.dev.VStreamRowsResponse
-	(*dev1.VStreamResultsResponse)(nil),           // 52: vitess.binlogdata.dev.VStreamResultsResponse
-	(*dev.GetSchemaResponse)(nil),                 // 53: vitess.query.dev.GetSchemaResponse
+	(*dev1.VStreamTablesRequest)(nil),             // 25: vitess.binlogdata.dev.VStreamTablesRequest
+	(*dev1.VStreamResultsRequest)(nil),            // 26: vitess.binlogdata.dev.VStreamResultsRequest
+	(*dev.GetSchemaRequest)(nil),                  // 27: vitess.query.dev.GetSchemaRequest
+	(*dev.ExecuteResponse)(nil),                   // 28: vitess.query.dev.ExecuteResponse
+	(*dev.StreamExecuteResponse)(nil),             // 29: vitess.query.dev.StreamExecuteResponse
+	(*dev.BeginResponse)(nil),                     // 30: vitess.query.dev.BeginResponse
+	(*dev.CommitResponse)(nil),                    // 31: vitess.query.dev.CommitResponse
+	(*dev.RollbackResponse)(nil),                  // 32: vitess.query.dev.RollbackResponse
+	(*dev.PrepareResponse)(nil),                   // 33: vitess.query.dev.PrepareResponse
+	(*dev.CommitPreparedResponse)(nil),            // 34: vitess.query.dev.CommitPreparedResponse
+	(*dev.RollbackPreparedResponse)(nil),          // 35: vitess.query.dev.RollbackPreparedResponse
+	(*dev.CreateTransactionResponse)(nil),         // 36: vitess.query.dev.CreateTransactionResponse
+	(*dev.StartCommitResponse)(nil),               // 37: vitess.query.dev.StartCommitResponse
+	(*dev.SetRollbackResponse)(nil),               // 38: vitess.query.dev.SetRollbackResponse
+	(*dev.ConcludeTransactionResponse)(nil),       // 39: vitess.query.dev.ConcludeTransactionResponse
+	(*dev.ReadTransactionResponse)(nil),           // 40: vitess.query.dev.ReadTransactionResponse
+	(*dev.BeginExecuteResponse)(nil),              // 41: vitess.query.dev.BeginExecuteResponse
+	(*dev.BeginStreamExecuteResponse)(nil),        // 42: vitess.query.dev.BeginStreamExecuteResponse
+	(*dev.MessageStreamResponse)(nil),             // 43: vitess.query.dev.MessageStreamResponse
+	(*dev.MessageAckResponse)(nil),                // 44: vitess.query.dev.MessageAckResponse
+	(*dev.ReserveExecuteResponse)(nil),            // 45: vitess.query.dev.ReserveExecuteResponse
+	(*dev.ReserveBeginExecuteResponse)(nil),       // 46: vitess.query.dev.ReserveBeginExecuteResponse
+	(*dev.ReserveStreamExecuteResponse)(nil),      // 47: vitess.query.dev.ReserveStreamExecuteResponse
+	(*dev.ReserveBeginStreamExecuteResponse)(nil), // 48: vitess.query.dev.ReserveBeginStreamExecuteResponse
+	(*dev.ReleaseResponse)(nil),                   // 49: vitess.query.dev.ReleaseResponse
+	(*dev.StreamHealthResponse)(nil),              // 50: vitess.query.dev.StreamHealthResponse
+	(*dev1.VStreamResponse)(nil),                  // 51: vitess.binlogdata.dev.VStreamResponse
+	(*dev1.VStreamRowsResponse)(nil),              // 52: vitess.binlogdata.dev.VStreamRowsResponse
+	(*dev1.VStreamTablesResponse)(nil),            // 53: vitess.binlogdata.dev.VStreamTablesResponse
+	(*dev1.VStreamResultsResponse)(nil),           // 54: vitess.binlogdata.dev.VStreamResultsResponse
+	(*dev.GetSchemaResponse)(nil),                 // 55: vitess.query.dev.GetSchemaResponse
 }
 var file_vitess_queryservice_dev_queryservice_proto_depIdxs = []int32{
 	0,  // 0: vitess.queryservice.dev.Query.Execute:input_type -> vitess.query.dev.ExecuteRequest
@@ -310,37 +319,39 @@ var file_vitess_queryservice_dev_queryservice_proto_depIdxs = []int32{
 	22, // 22: vitess.queryservice.dev.Query.StreamHealth:input_type -> vitess.query.dev.StreamHealthRequest
 	23, // 23: vitess.queryservice.dev.Query.VStream:input_type -> vitess.binlogdata.dev.VStreamRequest
 	24, // 24: vitess.queryservice.dev.Query.VStreamRows:input_type -> vitess.binlogdata.dev.VStreamRowsRequest
-	25, // 25: vitess.queryservice.dev.Query.VStreamResults:input_type -> vitess.binlogdata.dev.VStreamResultsRequest
-	26, // 26: vitess.queryservice.dev.Query.GetSchema:input_type -> vitess.query.dev.GetSchemaRequest
-	27, // 27: vitess.queryservice.dev.Query.Execute:output_type -> vitess.query.dev.ExecuteResponse
-	28, // 28: vitess.queryservice.dev.Query.StreamExecute:output_type -> vitess.query.dev.StreamExecuteResponse
-	29, // 29: vitess.queryservice.dev.Query.Begin:output_type -> vitess.query.dev.BeginResponse
-	30, // 30: vitess.queryservice.dev.Query.Commit:output_type -> vitess.query.dev.CommitResponse
-	31, // 31: vitess.queryservice.dev.Query.Rollback:output_type -> vitess.query.dev.RollbackResponse
-	32, // 32: vitess.queryservice.dev.Query.Prepare:output_type -> vitess.query.dev.PrepareResponse
-	33, // 33: vitess.queryservice.dev.Query.CommitPrepared:output_type -> vitess.query.dev.CommitPreparedResponse
-	34, // 34: vitess.queryservice.dev.Query.RollbackPrepared:output_type -> vitess.query.dev.RollbackPreparedResponse
-	35, // 35: vitess.queryservice.dev.Query.CreateTransaction:output_type -> vitess.query.dev.CreateTransactionResponse
-	36, // 36: vitess.queryservice.dev.Query.StartCommit:output_type -> vitess.query.dev.StartCommitResponse
-	37, // 37: vitess.queryservice.dev.Query.SetRollback:output_type -> vitess.query.dev.SetRollbackResponse
-	38, // 38: vitess.queryservice.dev.Query.ConcludeTransaction:output_type -> vitess.query.dev.ConcludeTransactionResponse
-	39, // 39: vitess.queryservice.dev.Query.ReadTransaction:output_type -> vitess.query.dev.ReadTransactionResponse
-	40, // 40: vitess.queryservice.dev.Query.BeginExecute:output_type -> vitess.query.dev.BeginExecuteResponse
-	41, // 41: vitess.queryservice.dev.Query.BeginStreamExecute:output_type -> vitess.query.dev.BeginStreamExecuteResponse
-	42, // 42: vitess.queryservice.dev.Query.MessageStream:output_type -> vitess.query.dev.MessageStreamResponse
-	43, // 43: vitess.queryservice.dev.Query.MessageAck:output_type -> vitess.query.dev.MessageAckResponse
-	44, // 44: vitess.queryservice.dev.Query.ReserveExecute:output_type -> vitess.query.dev.ReserveExecuteResponse
-	45, // 45: vitess.queryservice.dev.Query.ReserveBeginExecute:output_type -> vitess.query.dev.ReserveBeginExecuteResponse
-	46, // 46: vitess.queryservice.dev.Query.ReserveStreamExecute:output_type -> vitess.query.dev.ReserveStreamExecuteResponse
-	47, // 47: vitess.queryservice.dev.Query.ReserveBeginStreamExecute:output_type -> vitess.query.dev.ReserveBeginStreamExecuteResponse
-	48, // 48: vitess.queryservice.dev.Query.Release:output_type -> vitess.query.dev.ReleaseResponse
-	49, // 49: vitess.queryservice.dev.Query.StreamHealth:output_type -> vitess.query.dev.StreamHealthResponse
-	50, // 50: vitess.queryservice.dev.Query.VStream:output_type -> vitess.binlogdata.dev.VStreamResponse
-	51, // 51: vitess.queryservice.dev.Query.VStreamRows:output_type -> vitess.binlogdata.dev.VStreamRowsResponse
-	52, // 52: vitess.queryservice.dev.Query.VStreamResults:output_type -> vitess.binlogdata.dev.VStreamResultsResponse
-	53, // 53: vitess.queryservice.dev.Query.GetSchema:output_type -> vitess.query.dev.GetSchemaResponse
-	27, // [27:54] is the sub-list for method output_type
-	0,  // [0:27] is the sub-list for method input_type
+	25, // 25: vitess.queryservice.dev.Query.VStreamTables:input_type -> vitess.binlogdata.dev.VStreamTablesRequest
+	26, // 26: vitess.queryservice.dev.Query.VStreamResults:input_type -> vitess.binlogdata.dev.VStreamResultsRequest
+	27, // 27: vitess.queryservice.dev.Query.GetSchema:input_type -> vitess.query.dev.GetSchemaRequest
+	28, // 28: vitess.queryservice.dev.Query.Execute:output_type -> vitess.query.dev.ExecuteResponse
+	29, // 29: vitess.queryservice.dev.Query.StreamExecute:output_type -> vitess.query.dev.StreamExecuteResponse
+	30, // 30: vitess.queryservice.dev.Query.Begin:output_type -> vitess.query.dev.BeginResponse
+	31, // 31: vitess.queryservice.dev.Query.Commit:output_type -> vitess.query.dev.CommitResponse
+	32, // 32: vitess.queryservice.dev.Query.Rollback:output_type -> vitess.query.dev.RollbackResponse
+	33, // 33: vitess.queryservice.dev.Query.Prepare:output_type -> vitess.query.dev.PrepareResponse
+	34, // 34: vitess.queryservice.dev.Query.CommitPrepared:output_type -> vitess.query.dev.CommitPreparedResponse
+	35, // 35: vitess.queryservice.dev.Query.RollbackPrepared:output_type -> vitess.query.dev.RollbackPreparedResponse
+	36, // 36: vitess.queryservice.dev.Query.CreateTransaction:output_type -> vitess.query.dev.CreateTransactionResponse
+	37, // 37: vitess.queryservice.dev.Query.StartCommit:output_type -> vitess.query.dev.StartCommitResponse
+	38, // 38: vitess.queryservice.dev.Query.SetRollback:output_type -> vitess.query.dev.SetRollbackResponse
+	39, // 39: vitess.queryservice.dev.Query.ConcludeTransaction:output_type -> vitess.query.dev.ConcludeTransactionResponse
+	40, // 40: vitess.queryservice.dev.Query.ReadTransaction:output_type -> vitess.query.dev.ReadTransactionResponse
+	41, // 41: vitess.queryservice.dev.Query.BeginExecute:output_type -> vitess.query.dev.BeginExecuteResponse
+	42, // 42: vitess.queryservice.dev.Query.BeginStreamExecute:output_type -> vitess.query.dev.BeginStreamExecuteResponse
+	43, // 43: vitess.queryservice.dev.Query.MessageStream:output_type -> vitess.query.dev.MessageStreamResponse
+	44, // 44: vitess.queryservice.dev.Query.MessageAck:output_type -> vitess.query.dev.MessageAckResponse
+	45, // 45: vitess.queryservice.dev.Query.ReserveExecute:output_type -> vitess.query.dev.ReserveExecuteResponse
+	46, // 46: vitess.queryservice.dev.Query.ReserveBeginExecute:output_type -> vitess.query.dev.ReserveBeginExecuteResponse
+	47, // 47: vitess.queryservice.dev.Query.ReserveStreamExecute:output_type -> vitess.query.dev.ReserveStreamExecuteResponse
+	48, // 48: vitess.queryservice.dev.Query.ReserveBeginStreamExecute:output_type -> vitess.query.dev.ReserveBeginStreamExecuteResponse
+	49, // 49: vitess.queryservice.dev.Query.Release:output_type -> vitess.query.dev.ReleaseResponse
+	50, // 50: vitess.queryservice.dev.Query.StreamHealth:output_type -> vitess.query.dev.StreamHealthResponse
+	51, // 51: vitess.queryservice.dev.Query.VStream:output_type -> vitess.binlogdata.dev.VStreamResponse
+	52, // 52: vitess.queryservice.dev.Query.VStreamRows:output_type -> vitess.binlogdata.dev.VStreamRowsResponse
+	53, // 53: vitess.queryservice.dev.Query.VStreamTables:output_type -> vitess.binlogdata.dev.VStreamTablesResponse
+	54, // 54: vitess.queryservice.dev.Query.VStreamResults:output_type -> vitess.binlogdata.dev.VStreamResultsResponse
+	55, // 55: vitess.queryservice.dev.Query.GetSchema:output_type -> vitess.query.dev.GetSchemaResponse
+	28, // [28:56] is the sub-list for method output_type
+	0,  // [0:28] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

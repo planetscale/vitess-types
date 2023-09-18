@@ -87,6 +87,9 @@ const (
 	// TabletManagerApplySchemaProcedure is the fully-qualified name of the TabletManager's ApplySchema
 	// RPC.
 	TabletManagerApplySchemaProcedure = "/tabletmanagerservice.TabletManager/ApplySchema"
+	// TabletManagerResetSequencesProcedure is the fully-qualified name of the TabletManager's
+	// ResetSequences RPC.
+	TabletManagerResetSequencesProcedure = "/tabletmanagerservice.TabletManager/ResetSequences"
 	// TabletManagerLockTablesProcedure is the fully-qualified name of the TabletManager's LockTables
 	// RPC.
 	TabletManagerLockTablesProcedure = "/tabletmanagerservice.TabletManager/LockTables"
@@ -132,15 +135,24 @@ const (
 	// TabletManagerGetReplicasProcedure is the fully-qualified name of the TabletManager's GetReplicas
 	// RPC.
 	TabletManagerGetReplicasProcedure = "/tabletmanagerservice.TabletManager/GetReplicas"
+	// TabletManagerCreateVReplicationWorkflowProcedure is the fully-qualified name of the
+	// TabletManager's CreateVReplicationWorkflow RPC.
+	TabletManagerCreateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/CreateVReplicationWorkflow"
+	// TabletManagerDeleteVReplicationWorkflowProcedure is the fully-qualified name of the
+	// TabletManager's DeleteVReplicationWorkflow RPC.
+	TabletManagerDeleteVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/DeleteVReplicationWorkflow"
+	// TabletManagerReadVReplicationWorkflowProcedure is the fully-qualified name of the TabletManager's
+	// ReadVReplicationWorkflow RPC.
+	TabletManagerReadVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/ReadVReplicationWorkflow"
 	// TabletManagerVReplicationExecProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationExec RPC.
 	TabletManagerVReplicationExecProcedure = "/tabletmanagerservice.TabletManager/VReplicationExec"
 	// TabletManagerVReplicationWaitForPosProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationWaitForPos RPC.
 	TabletManagerVReplicationWaitForPosProcedure = "/tabletmanagerservice.TabletManager/VReplicationWaitForPos"
-	// TabletManagerUpdateVRWorkflowProcedure is the fully-qualified name of the TabletManager's
-	// UpdateVRWorkflow RPC.
-	TabletManagerUpdateVRWorkflowProcedure = "/tabletmanagerservice.TabletManager/UpdateVRWorkflow"
+	// TabletManagerUpdateVReplicationWorkflowProcedure is the fully-qualified name of the
+	// TabletManager's UpdateVReplicationWorkflow RPC.
+	TabletManagerUpdateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflow"
 	// TabletManagerVDiffProcedure is the fully-qualified name of the TabletManager's VDiff RPC.
 	TabletManagerVDiffProcedure = "/tabletmanagerservice.TabletManager/VDiff"
 	// TabletManagerResetReplicationProcedure is the fully-qualified name of the TabletManager's
@@ -187,6 +199,9 @@ const (
 	// TabletManagerRestoreFromBackupProcedure is the fully-qualified name of the TabletManager's
 	// RestoreFromBackup RPC.
 	TabletManagerRestoreFromBackupProcedure = "/tabletmanagerservice.TabletManager/RestoreFromBackup"
+	// TabletManagerCheckThrottlerProcedure is the fully-qualified name of the TabletManager's
+	// CheckThrottler RPC.
+	TabletManagerCheckThrottlerProcedure = "/tabletmanagerservice.TabletManager/CheckThrottler"
 )
 
 // TabletManagerClient is a client for the tabletmanagerservice.TabletManager service.
@@ -210,6 +225,7 @@ type TabletManagerClient interface {
 	ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error)
 	PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error)
 	ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error)
+	ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error)
 	LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error)
 	UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error)
 	ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error)
@@ -237,9 +253,12 @@ type TabletManagerClient interface {
 	// GetReplicas asks for the list of mysql replicas
 	GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error)
 	// VReplication API
+	CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error)
+	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error)
+	ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
-	UpdateVRWorkflow(context.Context, *connect.Request[dev.UpdateVRWorkflowRequest]) (*connect.Response[dev.UpdateVRWorkflowResponse], error)
+	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -273,6 +292,8 @@ type TabletManagerClient interface {
 	Backup(context.Context, *connect.Request[dev.BackupRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error)
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
 	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error)
+	// CheckThrottler issues a 'check' on a tablet's throttler
+	CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error)
 }
 
 // NewTabletManagerClient constructs a client for the tabletmanagerservice.TabletManager
@@ -350,6 +371,11 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			baseURL+TabletManagerApplySchemaProcedure,
 			opts...,
 		),
+		resetSequences: connect.NewClient[dev.ResetSequencesRequest, dev.ResetSequencesResponse](
+			httpClient,
+			baseURL+TabletManagerResetSequencesProcedure,
+			opts...,
+		),
 		lockTables: connect.NewClient[dev.LockTablesRequest, dev.LockTablesResponse](
 			httpClient,
 			baseURL+TabletManagerLockTablesProcedure,
@@ -425,6 +451,21 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			baseURL+TabletManagerGetReplicasProcedure,
 			opts...,
 		),
+		createVReplicationWorkflow: connect.NewClient[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse](
+			httpClient,
+			baseURL+TabletManagerCreateVReplicationWorkflowProcedure,
+			opts...,
+		),
+		deleteVReplicationWorkflow: connect.NewClient[dev.DeleteVReplicationWorkflowRequest, dev.DeleteVReplicationWorkflowResponse](
+			httpClient,
+			baseURL+TabletManagerDeleteVReplicationWorkflowProcedure,
+			opts...,
+		),
+		readVReplicationWorkflow: connect.NewClient[dev.ReadVReplicationWorkflowRequest, dev.ReadVReplicationWorkflowResponse](
+			httpClient,
+			baseURL+TabletManagerReadVReplicationWorkflowProcedure,
+			opts...,
+		),
 		vReplicationExec: connect.NewClient[dev.VReplicationExecRequest, dev.VReplicationExecResponse](
 			httpClient,
 			baseURL+TabletManagerVReplicationExecProcedure,
@@ -435,9 +476,9 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			baseURL+TabletManagerVReplicationWaitForPosProcedure,
 			opts...,
 		),
-		updateVRWorkflow: connect.NewClient[dev.UpdateVRWorkflowRequest, dev.UpdateVRWorkflowResponse](
+		updateVReplicationWorkflow: connect.NewClient[dev.UpdateVReplicationWorkflowRequest, dev.UpdateVReplicationWorkflowResponse](
 			httpClient,
-			baseURL+TabletManagerUpdateVRWorkflowProcedure,
+			baseURL+TabletManagerUpdateVReplicationWorkflowProcedure,
 			opts...,
 		),
 		vDiff: connect.NewClient[dev.VDiffRequest, dev.VDiffResponse](
@@ -520,6 +561,11 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			baseURL+TabletManagerRestoreFromBackupProcedure,
 			opts...,
 		),
+		checkThrottler: connect.NewClient[dev.CheckThrottlerRequest, dev.CheckThrottlerResponse](
+			httpClient,
+			baseURL+TabletManagerCheckThrottlerProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -538,6 +584,7 @@ type tabletManagerClient struct {
 	reloadSchema                *connect.Client[dev.ReloadSchemaRequest, dev.ReloadSchemaResponse]
 	preflightSchema             *connect.Client[dev.PreflightSchemaRequest, dev.PreflightSchemaResponse]
 	applySchema                 *connect.Client[dev.ApplySchemaRequest, dev.ApplySchemaResponse]
+	resetSequences              *connect.Client[dev.ResetSequencesRequest, dev.ResetSequencesResponse]
 	lockTables                  *connect.Client[dev.LockTablesRequest, dev.LockTablesResponse]
 	unlockTables                *connect.Client[dev.UnlockTablesRequest, dev.UnlockTablesResponse]
 	executeQuery                *connect.Client[dev.ExecuteQueryRequest, dev.ExecuteQueryResponse]
@@ -553,9 +600,12 @@ type tabletManagerClient struct {
 	startReplication            *connect.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
 	startReplicationUntilAfter  *connect.Client[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse]
 	getReplicas                 *connect.Client[dev.GetReplicasRequest, dev.GetReplicasResponse]
+	createVReplicationWorkflow  *connect.Client[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse]
+	deleteVReplicationWorkflow  *connect.Client[dev.DeleteVReplicationWorkflowRequest, dev.DeleteVReplicationWorkflowResponse]
+	readVReplicationWorkflow    *connect.Client[dev.ReadVReplicationWorkflowRequest, dev.ReadVReplicationWorkflowResponse]
 	vReplicationExec            *connect.Client[dev.VReplicationExecRequest, dev.VReplicationExecResponse]
 	vReplicationWaitForPos      *connect.Client[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse]
-	updateVRWorkflow            *connect.Client[dev.UpdateVRWorkflowRequest, dev.UpdateVRWorkflowResponse]
+	updateVReplicationWorkflow  *connect.Client[dev.UpdateVReplicationWorkflowRequest, dev.UpdateVReplicationWorkflowResponse]
 	vDiff                       *connect.Client[dev.VDiffRequest, dev.VDiffResponse]
 	resetReplication            *connect.Client[dev.ResetReplicationRequest, dev.ResetReplicationResponse]
 	initPrimary                 *connect.Client[dev.InitPrimaryRequest, dev.InitPrimaryResponse]
@@ -572,6 +622,7 @@ type tabletManagerClient struct {
 	promoteReplica              *connect.Client[dev.PromoteReplicaRequest, dev.PromoteReplicaResponse]
 	backup                      *connect.Client[dev.BackupRequest, dev.BackupResponse]
 	restoreFromBackup           *connect.Client[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse]
+	checkThrottler              *connect.Client[dev.CheckThrottlerRequest, dev.CheckThrottlerResponse]
 }
 
 // Ping calls tabletmanagerservice.TabletManager.Ping.
@@ -637,6 +688,11 @@ func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect.
 // ApplySchema calls tabletmanagerservice.TabletManager.ApplySchema.
 func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
+}
+
+// ResetSequences calls tabletmanagerservice.TabletManager.ResetSequences.
+func (c *tabletManagerClient) ResetSequences(ctx context.Context, req *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
+	return c.resetSequences.CallUnary(ctx, req)
 }
 
 // LockTables calls tabletmanagerservice.TabletManager.LockTables.
@@ -717,6 +773,24 @@ func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect.Requ
 	return c.getReplicas.CallUnary(ctx, req)
 }
 
+// CreateVReplicationWorkflow calls
+// tabletmanagerservice.TabletManager.CreateVReplicationWorkflow.
+func (c *tabletManagerClient) CreateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
+	return c.createVReplicationWorkflow.CallUnary(ctx, req)
+}
+
+// DeleteVReplicationWorkflow calls
+// tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow.
+func (c *tabletManagerClient) DeleteVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
+	return c.deleteVReplicationWorkflow.CallUnary(ctx, req)
+}
+
+// ReadVReplicationWorkflow calls
+// tabletmanagerservice.TabletManager.ReadVReplicationWorkflow.
+func (c *tabletManagerClient) ReadVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
+	return c.readVReplicationWorkflow.CallUnary(ctx, req)
+}
+
 // VReplicationExec calls tabletmanagerservice.TabletManager.VReplicationExec.
 func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
 	return c.vReplicationExec.CallUnary(ctx, req)
@@ -728,9 +802,10 @@ func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *c
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
 }
 
-// UpdateVRWorkflow calls tabletmanagerservice.TabletManager.UpdateVRWorkflow.
-func (c *tabletManagerClient) UpdateVRWorkflow(ctx context.Context, req *connect.Request[dev.UpdateVRWorkflowRequest]) (*connect.Response[dev.UpdateVRWorkflowResponse], error) {
-	return c.updateVRWorkflow.CallUnary(ctx, req)
+// UpdateVReplicationWorkflow calls
+// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow.
+func (c *tabletManagerClient) UpdateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
+	return c.updateVReplicationWorkflow.CallUnary(ctx, req)
 }
 
 // VDiff calls tabletmanagerservice.TabletManager.VDiff.
@@ -816,6 +891,11 @@ func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connec
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
+// CheckThrottler calls tabletmanagerservice.TabletManager.CheckThrottler.
+func (c *tabletManagerClient) CheckThrottler(ctx context.Context, req *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
+	return c.checkThrottler.CallUnary(ctx, req)
+}
+
 // TabletManagerHandler is an implementation of the tabletmanagerservice.TabletManager
 // service.
 type TabletManagerHandler interface {
@@ -838,6 +918,7 @@ type TabletManagerHandler interface {
 	ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error)
 	PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error)
 	ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error)
+	ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error)
 	LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error)
 	UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error)
 	ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error)
@@ -865,9 +946,12 @@ type TabletManagerHandler interface {
 	// GetReplicas asks for the list of mysql replicas
 	GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error)
 	// VReplication API
+	CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error)
+	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error)
+	ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
-	UpdateVRWorkflow(context.Context, *connect.Request[dev.UpdateVRWorkflowRequest]) (*connect.Response[dev.UpdateVRWorkflowResponse], error)
+	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -901,6 +985,8 @@ type TabletManagerHandler interface {
 	Backup(context.Context, *connect.Request[dev.BackupRequest], *connect.ServerStream[dev.BackupResponse]) error
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
 	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error
+	// CheckThrottler issues a 'check' on a tablet's throttler
+	CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error)
 }
 
 // NewTabletManagerHandler builds an HTTP handler from the service implementation. It returns the
@@ -972,6 +1058,11 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 	tabletManagerApplySchemaHandler := connect.NewUnaryHandler(
 		TabletManagerApplySchemaProcedure,
 		svc.ApplySchema,
+		opts...,
+	)
+	tabletManagerResetSequencesHandler := connect.NewUnaryHandler(
+		TabletManagerResetSequencesProcedure,
+		svc.ResetSequences,
 		opts...,
 	)
 	tabletManagerLockTablesHandler := connect.NewUnaryHandler(
@@ -1049,6 +1140,21 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		svc.GetReplicas,
 		opts...,
 	)
+	tabletManagerCreateVReplicationWorkflowHandler := connect.NewUnaryHandler(
+		TabletManagerCreateVReplicationWorkflowProcedure,
+		svc.CreateVReplicationWorkflow,
+		opts...,
+	)
+	tabletManagerDeleteVReplicationWorkflowHandler := connect.NewUnaryHandler(
+		TabletManagerDeleteVReplicationWorkflowProcedure,
+		svc.DeleteVReplicationWorkflow,
+		opts...,
+	)
+	tabletManagerReadVReplicationWorkflowHandler := connect.NewUnaryHandler(
+		TabletManagerReadVReplicationWorkflowProcedure,
+		svc.ReadVReplicationWorkflow,
+		opts...,
+	)
 	tabletManagerVReplicationExecHandler := connect.NewUnaryHandler(
 		TabletManagerVReplicationExecProcedure,
 		svc.VReplicationExec,
@@ -1059,9 +1165,9 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		svc.VReplicationWaitForPos,
 		opts...,
 	)
-	tabletManagerUpdateVRWorkflowHandler := connect.NewUnaryHandler(
-		TabletManagerUpdateVRWorkflowProcedure,
-		svc.UpdateVRWorkflow,
+	tabletManagerUpdateVReplicationWorkflowHandler := connect.NewUnaryHandler(
+		TabletManagerUpdateVReplicationWorkflowProcedure,
+		svc.UpdateVReplicationWorkflow,
 		opts...,
 	)
 	tabletManagerVDiffHandler := connect.NewUnaryHandler(
@@ -1144,6 +1250,11 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		svc.RestoreFromBackup,
 		opts...,
 	)
+	tabletManagerCheckThrottlerHandler := connect.NewUnaryHandler(
+		TabletManagerCheckThrottlerProcedure,
+		svc.CheckThrottler,
+		opts...,
+	)
 	return "/tabletmanagerservice.TabletManager/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TabletManagerPingProcedure:
@@ -1172,6 +1283,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerPreflightSchemaHandler.ServeHTTP(w, r)
 		case TabletManagerApplySchemaProcedure:
 			tabletManagerApplySchemaHandler.ServeHTTP(w, r)
+		case TabletManagerResetSequencesProcedure:
+			tabletManagerResetSequencesHandler.ServeHTTP(w, r)
 		case TabletManagerLockTablesProcedure:
 			tabletManagerLockTablesHandler.ServeHTTP(w, r)
 		case TabletManagerUnlockTablesProcedure:
@@ -1202,12 +1315,18 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerStartReplicationUntilAfterHandler.ServeHTTP(w, r)
 		case TabletManagerGetReplicasProcedure:
 			tabletManagerGetReplicasHandler.ServeHTTP(w, r)
+		case TabletManagerCreateVReplicationWorkflowProcedure:
+			tabletManagerCreateVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerDeleteVReplicationWorkflowProcedure:
+			tabletManagerDeleteVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerReadVReplicationWorkflowProcedure:
+			tabletManagerReadVReplicationWorkflowHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationExecProcedure:
 			tabletManagerVReplicationExecHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationWaitForPosProcedure:
 			tabletManagerVReplicationWaitForPosHandler.ServeHTTP(w, r)
-		case TabletManagerUpdateVRWorkflowProcedure:
-			tabletManagerUpdateVRWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerUpdateVReplicationWorkflowProcedure:
+			tabletManagerUpdateVReplicationWorkflowHandler.ServeHTTP(w, r)
 		case TabletManagerVDiffProcedure:
 			tabletManagerVDiffHandler.ServeHTTP(w, r)
 		case TabletManagerResetReplicationProcedure:
@@ -1240,6 +1359,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerBackupHandler.ServeHTTP(w, r)
 		case TabletManagerRestoreFromBackupProcedure:
 			tabletManagerRestoreFromBackupHandler.ServeHTTP(w, r)
+		case TabletManagerCheckThrottlerProcedure:
+			tabletManagerCheckThrottlerHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1299,6 +1420,10 @@ func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *conne
 
 func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ApplySchema is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetSequences is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error) {
@@ -1361,6 +1486,18 @@ func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect.R
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetReplicas is not implemented"))
 }
 
+func (UnimplementedTabletManagerHandler) CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CreateVReplicationWorkflow is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadVReplicationWorkflow is not implemented"))
+}
+
 func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
 }
@@ -1369,8 +1506,8 @@ func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context,
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) UpdateVRWorkflow(context.Context, *connect.Request[dev.UpdateVRWorkflowRequest]) (*connect.Response[dev.UpdateVRWorkflowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVRWorkflow is not implemented"))
+func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {
@@ -1435,4 +1572,8 @@ func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect.Reques
 
 func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestoreFromBackup is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CheckThrottler is not implemented"))
 }
