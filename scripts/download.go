@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 	"sync"
 	"text/template"
@@ -71,6 +72,8 @@ func main() {
 	for k := range manifest.Versions {
 		versions = append(versions, k)
 	}
+
+	sort.Strings(versions)
 
 	maybePanic(executeToFile(filepath.Join(".", "buf.gen.yaml"), templates, struct{ Versions []string }{versions}))
 }

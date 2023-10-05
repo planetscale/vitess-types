@@ -333,8 +333,8 @@ message ApplySchemaRequest {
   // WaitReplicasTimeout is the duration of time to wait for replicas to catch
   // up in reparenting.
   vitess.vttime.dev.Duration wait_replicas_timeout = 7;
-  // Skip pre-apply schema checks, and directly forward schema change query to shards
-  bool skip_preflight = 8;
+
+  reserved 8;
   // caller_id identifies the caller. This is the effective caller ID,
   // set by the application to further identify the caller.
   vitess.vtrpc.dev.CallerID caller_id = 9;
@@ -995,6 +995,33 @@ message LaunchSchemaMigrationResponse {
   map<string, uint64> rows_affected_by_shard = 1;
 }
 
+message LookupVindexCreateRequest {
+  string keyspace = 1;
+  string workflow = 2;
+  repeated string cells = 3;
+  vitess.vschema.dev.Keyspace vindex = 4;
+  bool continue_after_copy_with_owner = 5;
+  repeated vitess.topodata.dev.TabletType tablet_types = 6;
+  vitess.tabletmanagerdata.dev.TabletSelectionPreference tablet_selection_preference = 7;
+}
+
+message LookupVindexCreateResponse {
+}
+
+message LookupVindexExternalizeRequest {
+  // Where the lookup vindex lives.
+  string keyspace = 1;
+  // This is the name of the lookup vindex and the vreplication workflow.
+  string name = 2;
+  // Where the vreplication workflow lives.
+  string table_keyspace = 3;
+}
+
+message LookupVindexExternalizeResponse {
+  // Was the workflow also deleted.
+  bool workflow_deleted = 1;
+}
+
 message MoveTablesCreateRequest {
   // The necessary info gets passed on to each primary tablet involved
   // in the workflow via the CreateVReplicationWorkflow tabletmanager RPC.
@@ -1575,6 +1602,73 @@ message ValidateVSchemaRequest {
 message ValidateVSchemaResponse {
   repeated string results = 1;
   map<string, ValidateShardResponse> results_by_shard = 2;
+}
+
+message VDiffCreateRequest {
+  string workflow = 1;
+  string target_keyspace = 2;
+  string uuid = 3;
+  repeated string source_cells = 4;
+  repeated string target_cells = 5;
+  repeated vitess.topodata.dev.TabletType tablet_types = 6;
+  vitess.tabletmanagerdata.dev.TabletSelectionPreference tablet_selection_preference = 7;
+  repeated string tables = 8;
+  int64 limit = 9;
+  vitess.vttime.dev.Duration filtered_replication_wait_time = 10;
+  bool debug_query = 11;
+  bool only_p_ks = 12;
+  bool update_table_stats = 13;
+  int64 max_extra_rows_to_compare = 14;
+  bool wait = 15;
+  vitess.vttime.dev.Duration wait_update_interval = 16;
+  bool auto_retry = 17;
+  bool verbose = 18;
+}
+
+message VDiffCreateResponse {
+  // Intentionally upper case to maintain compatibility with
+  // vtctlclient and other VDiff client command output.
+  string UUID = 1;
+}
+
+message VDiffDeleteRequest {
+  string workflow = 1;
+  string target_keyspace = 2;
+  // This will be 'all' or a UUID.
+  string arg = 3;
+}
+
+message VDiffDeleteResponse {
+}
+
+message VDiffResumeRequest {
+  string workflow = 1;
+  string target_keyspace = 2;
+  string uuid = 3;
+}
+
+message VDiffResumeResponse {
+}
+
+message VDiffShowRequest {
+  string workflow = 1;
+  string target_keyspace = 2;
+  // This will be 'all', 'last', or a UUID.
+  string arg = 3;
+}
+
+message VDiffShowResponse {
+  // The key is keyspace/shard.
+  map<string, vitess.tabletmanagerdata.dev.VDiffResponse> tablet_responses = 1;
+}
+
+message VDiffStopRequest {
+  string workflow = 1;
+  string target_keyspace = 2;
+  string uuid = 3;
+}
+
+message VDiffStopResponse {
 }
 
 message WorkflowDeleteRequest {

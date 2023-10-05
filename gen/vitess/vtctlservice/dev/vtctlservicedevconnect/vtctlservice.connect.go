@@ -172,6 +172,12 @@ const (
 	// VtctldLaunchSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// LaunchSchemaMigration RPC.
 	VtctldLaunchSchemaMigrationProcedure = "/vtctlservice.Vtctld/LaunchSchemaMigration"
+	// VtctldLookupVindexCreateProcedure is the fully-qualified name of the Vtctld's LookupVindexCreate
+	// RPC.
+	VtctldLookupVindexCreateProcedure = "/vtctlservice.Vtctld/LookupVindexCreate"
+	// VtctldLookupVindexExternalizeProcedure is the fully-qualified name of the Vtctld's
+	// LookupVindexExternalize RPC.
+	VtctldLookupVindexExternalizeProcedure = "/vtctlservice.Vtctld/LookupVindexExternalize"
 	// VtctldMoveTablesCreateProcedure is the fully-qualified name of the Vtctld's MoveTablesCreate RPC.
 	VtctldMoveTablesCreateProcedure = "/vtctlservice.Vtctld/MoveTablesCreate"
 	// VtctldMoveTablesCompleteProcedure is the fully-qualified name of the Vtctld's MoveTablesComplete
@@ -278,6 +284,16 @@ const (
 	VtctldValidateVersionShardProcedure = "/vtctlservice.Vtctld/ValidateVersionShard"
 	// VtctldValidateVSchemaProcedure is the fully-qualified name of the Vtctld's ValidateVSchema RPC.
 	VtctldValidateVSchemaProcedure = "/vtctlservice.Vtctld/ValidateVSchema"
+	// VtctldVDiffCreateProcedure is the fully-qualified name of the Vtctld's VDiffCreate RPC.
+	VtctldVDiffCreateProcedure = "/vtctlservice.Vtctld/VDiffCreate"
+	// VtctldVDiffDeleteProcedure is the fully-qualified name of the Vtctld's VDiffDelete RPC.
+	VtctldVDiffDeleteProcedure = "/vtctlservice.Vtctld/VDiffDelete"
+	// VtctldVDiffResumeProcedure is the fully-qualified name of the Vtctld's VDiffResume RPC.
+	VtctldVDiffResumeProcedure = "/vtctlservice.Vtctld/VDiffResume"
+	// VtctldVDiffShowProcedure is the fully-qualified name of the Vtctld's VDiffShow RPC.
+	VtctldVDiffShowProcedure = "/vtctlservice.Vtctld/VDiffShow"
+	// VtctldVDiffStopProcedure is the fully-qualified name of the Vtctld's VDiffStop RPC.
+	VtctldVDiffStopProcedure = "/vtctlservice.Vtctld/VDiffStop"
 	// VtctldWorkflowDeleteProcedure is the fully-qualified name of the Vtctld's WorkflowDelete RPC.
 	VtctldWorkflowDeleteProcedure = "/vtctlservice.Vtctld/WorkflowDelete"
 	// VtctldWorkflowStatusProcedure is the fully-qualified name of the Vtctld's WorkflowStatus RPC.
@@ -496,6 +512,8 @@ type VtctldClient interface {
 	InitShardPrimary(context.Context, *connect.Request[dev.InitShardPrimaryRequest]) (*connect.Response[dev.InitShardPrimaryResponse], error)
 	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
 	LaunchSchemaMigration(context.Context, *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error)
+	LookupVindexCreate(context.Context, *connect.Request[dev.LookupVindexCreateRequest]) (*connect.Response[dev.LookupVindexCreateResponse], error)
+	LookupVindexExternalize(context.Context, *connect.Request[dev.LookupVindexExternalizeRequest]) (*connect.Response[dev.LookupVindexExternalizeResponse], error)
 	// MoveTablesCreate creates a workflow which moves one or more tables from a
 	// source keyspace to a target keyspace.
 	MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -642,6 +660,11 @@ type VtctldClient interface {
 	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error)
+	VDiffCreate(context.Context, *connect.Request[dev.VDiffCreateRequest]) (*connect.Response[dev.VDiffCreateResponse], error)
+	VDiffDelete(context.Context, *connect.Request[dev.VDiffDeleteRequest]) (*connect.Response[dev.VDiffDeleteResponse], error)
+	VDiffResume(context.Context, *connect.Request[dev.VDiffResumeRequest]) (*connect.Response[dev.VDiffResumeResponse], error)
+	VDiffShow(context.Context, *connect.Request[dev.VDiffShowRequest]) (*connect.Response[dev.VDiffShowResponse], error)
+	VDiffStop(context.Context, *connect.Request[dev.VDiffStopRequest]) (*connect.Response[dev.VDiffStopResponse], error)
 	// WorkflowDelete deletes a vreplication workflow.
 	WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error)
 	WorkflowStatus(context.Context, *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -916,6 +939,16 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldLaunchSchemaMigrationProcedure,
 			opts...,
 		),
+		lookupVindexCreate: connect.NewClient[dev.LookupVindexCreateRequest, dev.LookupVindexCreateResponse](
+			httpClient,
+			baseURL+VtctldLookupVindexCreateProcedure,
+			opts...,
+		),
+		lookupVindexExternalize: connect.NewClient[dev.LookupVindexExternalizeRequest, dev.LookupVindexExternalizeResponse](
+			httpClient,
+			baseURL+VtctldLookupVindexExternalizeProcedure,
+			opts...,
+		),
 		moveTablesCreate: connect.NewClient[dev.MoveTablesCreateRequest, dev.WorkflowStatusResponse](
 			httpClient,
 			baseURL+VtctldMoveTablesCreateProcedure,
@@ -1126,6 +1159,31 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldValidateVSchemaProcedure,
 			opts...,
 		),
+		vDiffCreate: connect.NewClient[dev.VDiffCreateRequest, dev.VDiffCreateResponse](
+			httpClient,
+			baseURL+VtctldVDiffCreateProcedure,
+			opts...,
+		),
+		vDiffDelete: connect.NewClient[dev.VDiffDeleteRequest, dev.VDiffDeleteResponse](
+			httpClient,
+			baseURL+VtctldVDiffDeleteProcedure,
+			opts...,
+		),
+		vDiffResume: connect.NewClient[dev.VDiffResumeRequest, dev.VDiffResumeResponse](
+			httpClient,
+			baseURL+VtctldVDiffResumeProcedure,
+			opts...,
+		),
+		vDiffShow: connect.NewClient[dev.VDiffShowRequest, dev.VDiffShowResponse](
+			httpClient,
+			baseURL+VtctldVDiffShowProcedure,
+			opts...,
+		),
+		vDiffStop: connect.NewClient[dev.VDiffStopRequest, dev.VDiffStopResponse](
+			httpClient,
+			baseURL+VtctldVDiffStopProcedure,
+			opts...,
+		),
 		workflowDelete: connect.NewClient[dev.WorkflowDeleteRequest, dev.WorkflowDeleteResponse](
 			httpClient,
 			baseURL+VtctldWorkflowDeleteProcedure,
@@ -1202,6 +1260,8 @@ type vtctldClient struct {
 	getWorkflows                *connect.Client[dev.GetWorkflowsRequest, dev.GetWorkflowsResponse]
 	initShardPrimary            *connect.Client[dev.InitShardPrimaryRequest, dev.InitShardPrimaryResponse]
 	launchSchemaMigration       *connect.Client[dev.LaunchSchemaMigrationRequest, dev.LaunchSchemaMigrationResponse]
+	lookupVindexCreate          *connect.Client[dev.LookupVindexCreateRequest, dev.LookupVindexCreateResponse]
+	lookupVindexExternalize     *connect.Client[dev.LookupVindexExternalizeRequest, dev.LookupVindexExternalizeResponse]
 	moveTablesCreate            *connect.Client[dev.MoveTablesCreateRequest, dev.WorkflowStatusResponse]
 	moveTablesComplete          *connect.Client[dev.MoveTablesCompleteRequest, dev.MoveTablesCompleteResponse]
 	pingTablet                  *connect.Client[dev.PingTabletRequest, dev.PingTabletResponse]
@@ -1244,6 +1304,11 @@ type vtctldClient struct {
 	validateVersionKeyspace     *connect.Client[dev.ValidateVersionKeyspaceRequest, dev.ValidateVersionKeyspaceResponse]
 	validateVersionShard        *connect.Client[dev.ValidateVersionShardRequest, dev.ValidateVersionShardResponse]
 	validateVSchema             *connect.Client[dev.ValidateVSchemaRequest, dev.ValidateVSchemaResponse]
+	vDiffCreate                 *connect.Client[dev.VDiffCreateRequest, dev.VDiffCreateResponse]
+	vDiffDelete                 *connect.Client[dev.VDiffDeleteRequest, dev.VDiffDeleteResponse]
+	vDiffResume                 *connect.Client[dev.VDiffResumeRequest, dev.VDiffResumeResponse]
+	vDiffShow                   *connect.Client[dev.VDiffShowRequest, dev.VDiffShowResponse]
+	vDiffStop                   *connect.Client[dev.VDiffStopRequest, dev.VDiffStopResponse]
 	workflowDelete              *connect.Client[dev.WorkflowDeleteRequest, dev.WorkflowDeleteResponse]
 	workflowStatus              *connect.Client[dev.WorkflowStatusRequest, dev.WorkflowStatusResponse]
 	workflowSwitchTraffic       *connect.Client[dev.WorkflowSwitchTrafficRequest, dev.WorkflowSwitchTrafficResponse]
@@ -1505,6 +1570,16 @@ func (c *vtctldClient) LaunchSchemaMigration(ctx context.Context, req *connect.R
 	return c.launchSchemaMigration.CallUnary(ctx, req)
 }
 
+// LookupVindexCreate calls vtctlservice.Vtctld.LookupVindexCreate.
+func (c *vtctldClient) LookupVindexCreate(ctx context.Context, req *connect.Request[dev.LookupVindexCreateRequest]) (*connect.Response[dev.LookupVindexCreateResponse], error) {
+	return c.lookupVindexCreate.CallUnary(ctx, req)
+}
+
+// LookupVindexExternalize calls vtctlservice.Vtctld.LookupVindexExternalize.
+func (c *vtctldClient) LookupVindexExternalize(ctx context.Context, req *connect.Request[dev.LookupVindexExternalizeRequest]) (*connect.Response[dev.LookupVindexExternalizeResponse], error) {
+	return c.lookupVindexExternalize.CallUnary(ctx, req)
+}
+
 // MoveTablesCreate calls vtctlservice.Vtctld.MoveTablesCreate.
 func (c *vtctldClient) MoveTablesCreate(ctx context.Context, req *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
 	return c.moveTablesCreate.CallUnary(ctx, req)
@@ -1715,6 +1790,31 @@ func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request
 	return c.validateVSchema.CallUnary(ctx, req)
 }
 
+// VDiffCreate calls vtctlservice.Vtctld.VDiffCreate.
+func (c *vtctldClient) VDiffCreate(ctx context.Context, req *connect.Request[dev.VDiffCreateRequest]) (*connect.Response[dev.VDiffCreateResponse], error) {
+	return c.vDiffCreate.CallUnary(ctx, req)
+}
+
+// VDiffDelete calls vtctlservice.Vtctld.VDiffDelete.
+func (c *vtctldClient) VDiffDelete(ctx context.Context, req *connect.Request[dev.VDiffDeleteRequest]) (*connect.Response[dev.VDiffDeleteResponse], error) {
+	return c.vDiffDelete.CallUnary(ctx, req)
+}
+
+// VDiffResume calls vtctlservice.Vtctld.VDiffResume.
+func (c *vtctldClient) VDiffResume(ctx context.Context, req *connect.Request[dev.VDiffResumeRequest]) (*connect.Response[dev.VDiffResumeResponse], error) {
+	return c.vDiffResume.CallUnary(ctx, req)
+}
+
+// VDiffShow calls vtctlservice.Vtctld.VDiffShow.
+func (c *vtctldClient) VDiffShow(ctx context.Context, req *connect.Request[dev.VDiffShowRequest]) (*connect.Response[dev.VDiffShowResponse], error) {
+	return c.vDiffShow.CallUnary(ctx, req)
+}
+
+// VDiffStop calls vtctlservice.Vtctld.VDiffStop.
+func (c *vtctldClient) VDiffStop(ctx context.Context, req *connect.Request[dev.VDiffStopRequest]) (*connect.Response[dev.VDiffStopResponse], error) {
+	return c.vDiffStop.CallUnary(ctx, req)
+}
+
 // WorkflowDelete calls vtctlservice.Vtctld.WorkflowDelete.
 func (c *vtctldClient) WorkflowDelete(ctx context.Context, req *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error) {
 	return c.workflowDelete.CallUnary(ctx, req)
@@ -1876,6 +1976,8 @@ type VtctldHandler interface {
 	InitShardPrimary(context.Context, *connect.Request[dev.InitShardPrimaryRequest]) (*connect.Response[dev.InitShardPrimaryResponse], error)
 	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
 	LaunchSchemaMigration(context.Context, *connect.Request[dev.LaunchSchemaMigrationRequest]) (*connect.Response[dev.LaunchSchemaMigrationResponse], error)
+	LookupVindexCreate(context.Context, *connect.Request[dev.LookupVindexCreateRequest]) (*connect.Response[dev.LookupVindexCreateResponse], error)
+	LookupVindexExternalize(context.Context, *connect.Request[dev.LookupVindexExternalizeRequest]) (*connect.Response[dev.LookupVindexExternalizeResponse], error)
 	// MoveTablesCreate creates a workflow which moves one or more tables from a
 	// source keyspace to a target keyspace.
 	MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -2022,6 +2124,11 @@ type VtctldHandler interface {
 	ValidateVersionShard(context.Context, *connect.Request[dev.ValidateVersionShardRequest]) (*connect.Response[dev.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
 	ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error)
+	VDiffCreate(context.Context, *connect.Request[dev.VDiffCreateRequest]) (*connect.Response[dev.VDiffCreateResponse], error)
+	VDiffDelete(context.Context, *connect.Request[dev.VDiffDeleteRequest]) (*connect.Response[dev.VDiffDeleteResponse], error)
+	VDiffResume(context.Context, *connect.Request[dev.VDiffResumeRequest]) (*connect.Response[dev.VDiffResumeResponse], error)
+	VDiffShow(context.Context, *connect.Request[dev.VDiffShowRequest]) (*connect.Response[dev.VDiffShowResponse], error)
+	VDiffStop(context.Context, *connect.Request[dev.VDiffStopRequest]) (*connect.Response[dev.VDiffStopResponse], error)
 	// WorkflowDelete deletes a vreplication workflow.
 	WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error)
 	WorkflowStatus(context.Context, *connect.Request[dev.WorkflowStatusRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -2292,6 +2399,16 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.LaunchSchemaMigration,
 		opts...,
 	)
+	vtctldLookupVindexCreateHandler := connect.NewUnaryHandler(
+		VtctldLookupVindexCreateProcedure,
+		svc.LookupVindexCreate,
+		opts...,
+	)
+	vtctldLookupVindexExternalizeHandler := connect.NewUnaryHandler(
+		VtctldLookupVindexExternalizeProcedure,
+		svc.LookupVindexExternalize,
+		opts...,
+	)
 	vtctldMoveTablesCreateHandler := connect.NewUnaryHandler(
 		VtctldMoveTablesCreateProcedure,
 		svc.MoveTablesCreate,
@@ -2502,6 +2619,31 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.ValidateVSchema,
 		opts...,
 	)
+	vtctldVDiffCreateHandler := connect.NewUnaryHandler(
+		VtctldVDiffCreateProcedure,
+		svc.VDiffCreate,
+		opts...,
+	)
+	vtctldVDiffDeleteHandler := connect.NewUnaryHandler(
+		VtctldVDiffDeleteProcedure,
+		svc.VDiffDelete,
+		opts...,
+	)
+	vtctldVDiffResumeHandler := connect.NewUnaryHandler(
+		VtctldVDiffResumeProcedure,
+		svc.VDiffResume,
+		opts...,
+	)
+	vtctldVDiffShowHandler := connect.NewUnaryHandler(
+		VtctldVDiffShowProcedure,
+		svc.VDiffShow,
+		opts...,
+	)
+	vtctldVDiffStopHandler := connect.NewUnaryHandler(
+		VtctldVDiffStopProcedure,
+		svc.VDiffStop,
+		opts...,
+	)
 	vtctldWorkflowDeleteHandler := connect.NewUnaryHandler(
 		VtctldWorkflowDeleteProcedure,
 		svc.WorkflowDelete,
@@ -2626,6 +2768,10 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldInitShardPrimaryHandler.ServeHTTP(w, r)
 		case VtctldLaunchSchemaMigrationProcedure:
 			vtctldLaunchSchemaMigrationHandler.ServeHTTP(w, r)
+		case VtctldLookupVindexCreateProcedure:
+			vtctldLookupVindexCreateHandler.ServeHTTP(w, r)
+		case VtctldLookupVindexExternalizeProcedure:
+			vtctldLookupVindexExternalizeHandler.ServeHTTP(w, r)
 		case VtctldMoveTablesCreateProcedure:
 			vtctldMoveTablesCreateHandler.ServeHTTP(w, r)
 		case VtctldMoveTablesCompleteProcedure:
@@ -2710,6 +2856,16 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldValidateVersionShardHandler.ServeHTTP(w, r)
 		case VtctldValidateVSchemaProcedure:
 			vtctldValidateVSchemaHandler.ServeHTTP(w, r)
+		case VtctldVDiffCreateProcedure:
+			vtctldVDiffCreateHandler.ServeHTTP(w, r)
+		case VtctldVDiffDeleteProcedure:
+			vtctldVDiffDeleteHandler.ServeHTTP(w, r)
+		case VtctldVDiffResumeProcedure:
+			vtctldVDiffResumeHandler.ServeHTTP(w, r)
+		case VtctldVDiffShowProcedure:
+			vtctldVDiffShowHandler.ServeHTTP(w, r)
+		case VtctldVDiffStopProcedure:
+			vtctldVDiffStopHandler.ServeHTTP(w, r)
 		case VtctldWorkflowDeleteProcedure:
 			vtctldWorkflowDeleteHandler.ServeHTTP(w, r)
 		case VtctldWorkflowStatusProcedure:
@@ -2931,6 +3087,14 @@ func (UnimplementedVtctldHandler) LaunchSchemaMigration(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LaunchSchemaMigration is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) LookupVindexCreate(context.Context, *connect.Request[dev.LookupVindexCreateRequest]) (*connect.Response[dev.LookupVindexCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) LookupVindexExternalize(context.Context, *connect.Request[dev.LookupVindexExternalizeRequest]) (*connect.Response[dev.LookupVindexExternalizeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexExternalize is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) MoveTablesCreate(context.Context, *connect.Request[dev.MoveTablesCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MoveTablesCreate is not implemented"))
 }
@@ -3097,6 +3261,26 @@ func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect
 
 func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect.Request[dev.ValidateVSchemaRequest]) (*connect.Response[dev.ValidateVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVSchema is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) VDiffCreate(context.Context, *connect.Request[dev.VDiffCreateRequest]) (*connect.Response[dev.VDiffCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) VDiffDelete(context.Context, *connect.Request[dev.VDiffDeleteRequest]) (*connect.Response[dev.VDiffDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffDelete is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) VDiffResume(context.Context, *connect.Request[dev.VDiffResumeRequest]) (*connect.Response[dev.VDiffResumeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffResume is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) VDiffShow(context.Context, *connect.Request[dev.VDiffShowRequest]) (*connect.Response[dev.VDiffShowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffShow is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) VDiffStop(context.Context, *connect.Request[dev.VDiffStopRequest]) (*connect.Response[dev.VDiffStopResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffStop is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowDelete(context.Context, *connect.Request[dev.WorkflowDeleteRequest]) (*connect.Response[dev.WorkflowDeleteResponse], error) {
