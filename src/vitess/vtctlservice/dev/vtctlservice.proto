@@ -170,6 +170,8 @@ service Vtctld {
   rpc InitShardPrimary(vitess.vtctldata.dev.InitShardPrimaryRequest) returns (vitess.vtctldata.dev.InitShardPrimaryResponse) {};
   // LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
   rpc LaunchSchemaMigration(vitess.vtctldata.dev.LaunchSchemaMigrationRequest) returns (vitess.vtctldata.dev.LaunchSchemaMigrationResponse) {};
+  rpc LookupVindexCreate(vitess.vtctldata.dev.LookupVindexCreateRequest) returns (vitess.vtctldata.dev.LookupVindexCreateResponse) {};
+  rpc LookupVindexExternalize(vitess.vtctldata.dev.LookupVindexExternalizeRequest) returns (vitess.vtctldata.dev.LookupVindexExternalizeResponse) {};
   // MoveTablesCreate creates a workflow which moves one or more tables from a
   // source keyspace to a target keyspace.
   rpc MoveTablesCreate(vitess.vtctldata.dev.MoveTablesCreateRequest) returns (vitess.vtctldata.dev.WorkflowStatusResponse) {};
@@ -317,6 +319,11 @@ service Vtctld {
   rpc ValidateVersionShard(vitess.vtctldata.dev.ValidateVersionShardRequest) returns (vitess.vtctldata.dev.ValidateVersionShardResponse) {};
   // ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
   rpc ValidateVSchema(vitess.vtctldata.dev.ValidateVSchemaRequest) returns (vitess.vtctldata.dev.ValidateVSchemaResponse) {};
+  rpc VDiffCreate(vitess.vtctldata.dev.VDiffCreateRequest) returns (vitess.vtctldata.dev.VDiffCreateResponse) {};
+  rpc VDiffDelete(vitess.vtctldata.dev.VDiffDeleteRequest) returns (vitess.vtctldata.dev.VDiffDeleteResponse) {};
+  rpc VDiffResume(vitess.vtctldata.dev.VDiffResumeRequest) returns (vitess.vtctldata.dev.VDiffResumeResponse) {};
+  rpc VDiffShow(vitess.vtctldata.dev.VDiffShowRequest) returns (vitess.vtctldata.dev.VDiffShowResponse) {};
+  rpc VDiffStop(vitess.vtctldata.dev.VDiffStopRequest) returns (vitess.vtctldata.dev.VDiffStopResponse) {};
   // WorkflowDelete deletes a vreplication workflow.
   rpc WorkflowDelete(vitess.vtctldata.dev.WorkflowDeleteRequest) returns (vitess.vtctldata.dev.WorkflowDeleteResponse) {};
   rpc WorkflowStatus(vitess.vtctldata.dev.WorkflowStatusRequest) returns (vitess.vtctldata.dev.WorkflowStatusResponse) {};
