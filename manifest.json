@@ -1,8 +1,8 @@
 {
   "versions": {
     "dev": "refs/heads/main",
-    "v16": "refs/tags/v16.0.5",
-    "v17": "refs/tags/v17.0.3",
-    "v18": "refs/tags/v18.0.0-rc1"
+    "v16": "refs/tags/v16.0.6",
+    "v17": "refs/tags/v17.0.4",
+    "v18": "refs/tags/v18.0.1"
   }
 }
