@@ -170,6 +170,27 @@ service Vtctld {
   rpc InitShardPrimary(vitess.vtctldata.v18.InitShardPrimaryRequest) returns (vitess.vtctldata.v18.InitShardPrimaryResponse) {};
   // LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
   rpc LaunchSchemaMigration(vitess.vtctldata.v18.LaunchSchemaMigrationRequest) returns (vitess.vtctldata.v18.LaunchSchemaMigrationResponse) {};
+
+  rpc LookupVindexCreate(vitess.vtctldata.v18.LookupVindexCreateRequest) returns (vitess.vtctldata.v18.LookupVindexCreateResponse) {};
+  rpc LookupVindexExternalize(vitess.vtctldata.v18.LookupVindexExternalizeRequest) returns (vitess.vtctldata.v18.LookupVindexExternalizeResponse) {};
+
+  // MaterializeCreate creates a workflow to materialize one or more tables
+  // from a source keyspace to a target keyspace using a provided expressions.
+  rpc MaterializeCreate(vitess.vtctldata.v18.MaterializeCreateRequest) returns (vitess.vtctldata.v18.MaterializeCreateResponse) {};
+
+  // MigrateCreate creates a workflow which migrates one or more tables from an
+  // external cluster into Vitess.
+  rpc MigrateCreate(vitess.vtctldata.v18.MigrateCreateRequest) returns (vitess.vtctldata.v18.WorkflowStatusResponse) {};
+
+  // MountRegister registers a new external Vitess cluster.
+  rpc MountRegister(vitess.vtctldata.v18.MountRegisterRequest) returns (vitess.vtctldata.v18.MountRegisterResponse) {};
+  // MountUnregister unregisters an external Vitess cluster.
+  rpc MountUnregister(vitess.vtctldata.v18.MountUnregisterRequest) returns (vitess.vtctldata.v18.MountUnregisterResponse) {};
+  // MountShow returns information about an external Vitess cluster.
+  rpc MountShow(vitess.vtctldata.v18.MountShowRequest) returns (vitess.vtctldata.v18.MountShowResponse) {};
+  // MountList lists all registered external Vitess clusters.
+  rpc MountList(vitess.vtctldata.v18.MountListRequest) returns (vitess.vtctldata.v18.MountListResponse) {};
+
   // MoveTablesCreate creates a workflow which moves one or more tables from a
   // source keyspace to a target keyspace.
   rpc MoveTablesCreate(vitess.vtctldata.v18.MoveTablesCreateRequest) returns (vitess.vtctldata.v18.WorkflowStatusResponse) {};

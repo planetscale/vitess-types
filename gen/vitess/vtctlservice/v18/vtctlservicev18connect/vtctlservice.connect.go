@@ -172,6 +172,25 @@ const (
 	// VtctldLaunchSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// LaunchSchemaMigration RPC.
 	VtctldLaunchSchemaMigrationProcedure = "/vtctlservice.Vtctld/LaunchSchemaMigration"
+	// VtctldLookupVindexCreateProcedure is the fully-qualified name of the Vtctld's LookupVindexCreate
+	// RPC.
+	VtctldLookupVindexCreateProcedure = "/vtctlservice.Vtctld/LookupVindexCreate"
+	// VtctldLookupVindexExternalizeProcedure is the fully-qualified name of the Vtctld's
+	// LookupVindexExternalize RPC.
+	VtctldLookupVindexExternalizeProcedure = "/vtctlservice.Vtctld/LookupVindexExternalize"
+	// VtctldMaterializeCreateProcedure is the fully-qualified name of the Vtctld's MaterializeCreate
+	// RPC.
+	VtctldMaterializeCreateProcedure = "/vtctlservice.Vtctld/MaterializeCreate"
+	// VtctldMigrateCreateProcedure is the fully-qualified name of the Vtctld's MigrateCreate RPC.
+	VtctldMigrateCreateProcedure = "/vtctlservice.Vtctld/MigrateCreate"
+	// VtctldMountRegisterProcedure is the fully-qualified name of the Vtctld's MountRegister RPC.
+	VtctldMountRegisterProcedure = "/vtctlservice.Vtctld/MountRegister"
+	// VtctldMountUnregisterProcedure is the fully-qualified name of the Vtctld's MountUnregister RPC.
+	VtctldMountUnregisterProcedure = "/vtctlservice.Vtctld/MountUnregister"
+	// VtctldMountShowProcedure is the fully-qualified name of the Vtctld's MountShow RPC.
+	VtctldMountShowProcedure = "/vtctlservice.Vtctld/MountShow"
+	// VtctldMountListProcedure is the fully-qualified name of the Vtctld's MountList RPC.
+	VtctldMountListProcedure = "/vtctlservice.Vtctld/MountList"
 	// VtctldMoveTablesCreateProcedure is the fully-qualified name of the Vtctld's MoveTablesCreate RPC.
 	VtctldMoveTablesCreateProcedure = "/vtctlservice.Vtctld/MoveTablesCreate"
 	// VtctldMoveTablesCompleteProcedure is the fully-qualified name of the Vtctld's MoveTablesComplete
@@ -506,6 +525,22 @@ type VtctldClient interface {
 	InitShardPrimary(context.Context, *connect.Request[v18.InitShardPrimaryRequest]) (*connect.Response[v18.InitShardPrimaryResponse], error)
 	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
 	LaunchSchemaMigration(context.Context, *connect.Request[v18.LaunchSchemaMigrationRequest]) (*connect.Response[v18.LaunchSchemaMigrationResponse], error)
+	LookupVindexCreate(context.Context, *connect.Request[v18.LookupVindexCreateRequest]) (*connect.Response[v18.LookupVindexCreateResponse], error)
+	LookupVindexExternalize(context.Context, *connect.Request[v18.LookupVindexExternalizeRequest]) (*connect.Response[v18.LookupVindexExternalizeResponse], error)
+	// MaterializeCreate creates a workflow to materialize one or more tables
+	// from a source keyspace to a target keyspace using a provided expressions.
+	MaterializeCreate(context.Context, *connect.Request[v18.MaterializeCreateRequest]) (*connect.Response[v18.MaterializeCreateResponse], error)
+	// MigrateCreate creates a workflow which migrates one or more tables from an
+	// external cluster into Vitess.
+	MigrateCreate(context.Context, *connect.Request[v18.MigrateCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error)
+	// MountRegister registers a new external Vitess cluster.
+	MountRegister(context.Context, *connect.Request[v18.MountRegisterRequest]) (*connect.Response[v18.MountRegisterResponse], error)
+	// MountUnregister unregisters an external Vitess cluster.
+	MountUnregister(context.Context, *connect.Request[v18.MountUnregisterRequest]) (*connect.Response[v18.MountUnregisterResponse], error)
+	// MountShow returns information about an external Vitess cluster.
+	MountShow(context.Context, *connect.Request[v18.MountShowRequest]) (*connect.Response[v18.MountShowResponse], error)
+	// MountList lists all registered external Vitess clusters.
+	MountList(context.Context, *connect.Request[v18.MountListRequest]) (*connect.Response[v18.MountListResponse], error)
 	// MoveTablesCreate creates a workflow which moves one or more tables from a
 	// source keyspace to a target keyspace.
 	MoveTablesCreate(context.Context, *connect.Request[v18.MoveTablesCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error)
@@ -931,6 +966,46 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			baseURL+VtctldLaunchSchemaMigrationProcedure,
 			opts...,
 		),
+		lookupVindexCreate: connect.NewClient[v18.LookupVindexCreateRequest, v18.LookupVindexCreateResponse](
+			httpClient,
+			baseURL+VtctldLookupVindexCreateProcedure,
+			opts...,
+		),
+		lookupVindexExternalize: connect.NewClient[v18.LookupVindexExternalizeRequest, v18.LookupVindexExternalizeResponse](
+			httpClient,
+			baseURL+VtctldLookupVindexExternalizeProcedure,
+			opts...,
+		),
+		materializeCreate: connect.NewClient[v18.MaterializeCreateRequest, v18.MaterializeCreateResponse](
+			httpClient,
+			baseURL+VtctldMaterializeCreateProcedure,
+			opts...,
+		),
+		migrateCreate: connect.NewClient[v18.MigrateCreateRequest, v18.WorkflowStatusResponse](
+			httpClient,
+			baseURL+VtctldMigrateCreateProcedure,
+			opts...,
+		),
+		mountRegister: connect.NewClient[v18.MountRegisterRequest, v18.MountRegisterResponse](
+			httpClient,
+			baseURL+VtctldMountRegisterProcedure,
+			opts...,
+		),
+		mountUnregister: connect.NewClient[v18.MountUnregisterRequest, v18.MountUnregisterResponse](
+			httpClient,
+			baseURL+VtctldMountUnregisterProcedure,
+			opts...,
+		),
+		mountShow: connect.NewClient[v18.MountShowRequest, v18.MountShowResponse](
+			httpClient,
+			baseURL+VtctldMountShowProcedure,
+			opts...,
+		),
+		mountList: connect.NewClient[v18.MountListRequest, v18.MountListResponse](
+			httpClient,
+			baseURL+VtctldMountListProcedure,
+			opts...,
+		),
 		moveTablesCreate: connect.NewClient[v18.MoveTablesCreateRequest, v18.WorkflowStatusResponse](
 			httpClient,
 			baseURL+VtctldMoveTablesCreateProcedure,
@@ -1242,6 +1317,14 @@ type vtctldClient struct {
 	getWorkflows                *connect.Client[v18.GetWorkflowsRequest, v18.GetWorkflowsResponse]
 	initShardPrimary            *connect.Client[v18.InitShardPrimaryRequest, v18.InitShardPrimaryResponse]
 	launchSchemaMigration       *connect.Client[v18.LaunchSchemaMigrationRequest, v18.LaunchSchemaMigrationResponse]
+	lookupVindexCreate          *connect.Client[v18.LookupVindexCreateRequest, v18.LookupVindexCreateResponse]
+	lookupVindexExternalize     *connect.Client[v18.LookupVindexExternalizeRequest, v18.LookupVindexExternalizeResponse]
+	materializeCreate           *connect.Client[v18.MaterializeCreateRequest, v18.MaterializeCreateResponse]
+	migrateCreate               *connect.Client[v18.MigrateCreateRequest, v18.WorkflowStatusResponse]
+	mountRegister               *connect.Client[v18.MountRegisterRequest, v18.MountRegisterResponse]
+	mountUnregister             *connect.Client[v18.MountUnregisterRequest, v18.MountUnregisterResponse]
+	mountShow                   *connect.Client[v18.MountShowRequest, v18.MountShowResponse]
+	mountList                   *connect.Client[v18.MountListRequest, v18.MountListResponse]
 	moveTablesCreate            *connect.Client[v18.MoveTablesCreateRequest, v18.WorkflowStatusResponse]
 	moveTablesComplete          *connect.Client[v18.MoveTablesCompleteRequest, v18.MoveTablesCompleteResponse]
 	pingTablet                  *connect.Client[v18.PingTabletRequest, v18.PingTabletResponse]
@@ -1548,6 +1631,46 @@ func (c *vtctldClient) InitShardPrimary(ctx context.Context, req *connect.Reques
 // LaunchSchemaMigration calls vtctlservice.Vtctld.LaunchSchemaMigration.
 func (c *vtctldClient) LaunchSchemaMigration(ctx context.Context, req *connect.Request[v18.LaunchSchemaMigrationRequest]) (*connect.Response[v18.LaunchSchemaMigrationResponse], error) {
 	return c.launchSchemaMigration.CallUnary(ctx, req)
+}
+
+// LookupVindexCreate calls vtctlservice.Vtctld.LookupVindexCreate.
+func (c *vtctldClient) LookupVindexCreate(ctx context.Context, req *connect.Request[v18.LookupVindexCreateRequest]) (*connect.Response[v18.LookupVindexCreateResponse], error) {
+	return c.lookupVindexCreate.CallUnary(ctx, req)
+}
+
+// LookupVindexExternalize calls vtctlservice.Vtctld.LookupVindexExternalize.
+func (c *vtctldClient) LookupVindexExternalize(ctx context.Context, req *connect.Request[v18.LookupVindexExternalizeRequest]) (*connect.Response[v18.LookupVindexExternalizeResponse], error) {
+	return c.lookupVindexExternalize.CallUnary(ctx, req)
+}
+
+// MaterializeCreate calls vtctlservice.Vtctld.MaterializeCreate.
+func (c *vtctldClient) MaterializeCreate(ctx context.Context, req *connect.Request[v18.MaterializeCreateRequest]) (*connect.Response[v18.MaterializeCreateResponse], error) {
+	return c.materializeCreate.CallUnary(ctx, req)
+}
+
+// MigrateCreate calls vtctlservice.Vtctld.MigrateCreate.
+func (c *vtctldClient) MigrateCreate(ctx context.Context, req *connect.Request[v18.MigrateCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error) {
+	return c.migrateCreate.CallUnary(ctx, req)
+}
+
+// MountRegister calls vtctlservice.Vtctld.MountRegister.
+func (c *vtctldClient) MountRegister(ctx context.Context, req *connect.Request[v18.MountRegisterRequest]) (*connect.Response[v18.MountRegisterResponse], error) {
+	return c.mountRegister.CallUnary(ctx, req)
+}
+
+// MountUnregister calls vtctlservice.Vtctld.MountUnregister.
+func (c *vtctldClient) MountUnregister(ctx context.Context, req *connect.Request[v18.MountUnregisterRequest]) (*connect.Response[v18.MountUnregisterResponse], error) {
+	return c.mountUnregister.CallUnary(ctx, req)
+}
+
+// MountShow calls vtctlservice.Vtctld.MountShow.
+func (c *vtctldClient) MountShow(ctx context.Context, req *connect.Request[v18.MountShowRequest]) (*connect.Response[v18.MountShowResponse], error) {
+	return c.mountShow.CallUnary(ctx, req)
+}
+
+// MountList calls vtctlservice.Vtctld.MountList.
+func (c *vtctldClient) MountList(ctx context.Context, req *connect.Request[v18.MountListRequest]) (*connect.Response[v18.MountListResponse], error) {
+	return c.mountList.CallUnary(ctx, req)
 }
 
 // MoveTablesCreate calls vtctlservice.Vtctld.MoveTablesCreate.
@@ -1946,6 +2069,22 @@ type VtctldHandler interface {
 	InitShardPrimary(context.Context, *connect.Request[v18.InitShardPrimaryRequest]) (*connect.Response[v18.InitShardPrimaryResponse], error)
 	// LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
 	LaunchSchemaMigration(context.Context, *connect.Request[v18.LaunchSchemaMigrationRequest]) (*connect.Response[v18.LaunchSchemaMigrationResponse], error)
+	LookupVindexCreate(context.Context, *connect.Request[v18.LookupVindexCreateRequest]) (*connect.Response[v18.LookupVindexCreateResponse], error)
+	LookupVindexExternalize(context.Context, *connect.Request[v18.LookupVindexExternalizeRequest]) (*connect.Response[v18.LookupVindexExternalizeResponse], error)
+	// MaterializeCreate creates a workflow to materialize one or more tables
+	// from a source keyspace to a target keyspace using a provided expressions.
+	MaterializeCreate(context.Context, *connect.Request[v18.MaterializeCreateRequest]) (*connect.Response[v18.MaterializeCreateResponse], error)
+	// MigrateCreate creates a workflow which migrates one or more tables from an
+	// external cluster into Vitess.
+	MigrateCreate(context.Context, *connect.Request[v18.MigrateCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error)
+	// MountRegister registers a new external Vitess cluster.
+	MountRegister(context.Context, *connect.Request[v18.MountRegisterRequest]) (*connect.Response[v18.MountRegisterResponse], error)
+	// MountUnregister unregisters an external Vitess cluster.
+	MountUnregister(context.Context, *connect.Request[v18.MountUnregisterRequest]) (*connect.Response[v18.MountUnregisterResponse], error)
+	// MountShow returns information about an external Vitess cluster.
+	MountShow(context.Context, *connect.Request[v18.MountShowRequest]) (*connect.Response[v18.MountShowResponse], error)
+	// MountList lists all registered external Vitess clusters.
+	MountList(context.Context, *connect.Request[v18.MountListRequest]) (*connect.Response[v18.MountListResponse], error)
 	// MoveTablesCreate creates a workflow which moves one or more tables from a
 	// source keyspace to a target keyspace.
 	MoveTablesCreate(context.Context, *connect.Request[v18.MoveTablesCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error)
@@ -2367,6 +2506,46 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		svc.LaunchSchemaMigration,
 		opts...,
 	)
+	vtctldLookupVindexCreateHandler := connect.NewUnaryHandler(
+		VtctldLookupVindexCreateProcedure,
+		svc.LookupVindexCreate,
+		opts...,
+	)
+	vtctldLookupVindexExternalizeHandler := connect.NewUnaryHandler(
+		VtctldLookupVindexExternalizeProcedure,
+		svc.LookupVindexExternalize,
+		opts...,
+	)
+	vtctldMaterializeCreateHandler := connect.NewUnaryHandler(
+		VtctldMaterializeCreateProcedure,
+		svc.MaterializeCreate,
+		opts...,
+	)
+	vtctldMigrateCreateHandler := connect.NewUnaryHandler(
+		VtctldMigrateCreateProcedure,
+		svc.MigrateCreate,
+		opts...,
+	)
+	vtctldMountRegisterHandler := connect.NewUnaryHandler(
+		VtctldMountRegisterProcedure,
+		svc.MountRegister,
+		opts...,
+	)
+	vtctldMountUnregisterHandler := connect.NewUnaryHandler(
+		VtctldMountUnregisterProcedure,
+		svc.MountUnregister,
+		opts...,
+	)
+	vtctldMountShowHandler := connect.NewUnaryHandler(
+		VtctldMountShowProcedure,
+		svc.MountShow,
+		opts...,
+	)
+	vtctldMountListHandler := connect.NewUnaryHandler(
+		VtctldMountListProcedure,
+		svc.MountList,
+		opts...,
+	)
 	vtctldMoveTablesCreateHandler := connect.NewUnaryHandler(
 		VtctldMoveTablesCreateProcedure,
 		svc.MoveTablesCreate,
@@ -2726,6 +2905,22 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldInitShardPrimaryHandler.ServeHTTP(w, r)
 		case VtctldLaunchSchemaMigrationProcedure:
 			vtctldLaunchSchemaMigrationHandler.ServeHTTP(w, r)
+		case VtctldLookupVindexCreateProcedure:
+			vtctldLookupVindexCreateHandler.ServeHTTP(w, r)
+		case VtctldLookupVindexExternalizeProcedure:
+			vtctldLookupVindexExternalizeHandler.ServeHTTP(w, r)
+		case VtctldMaterializeCreateProcedure:
+			vtctldMaterializeCreateHandler.ServeHTTP(w, r)
+		case VtctldMigrateCreateProcedure:
+			vtctldMigrateCreateHandler.ServeHTTP(w, r)
+		case VtctldMountRegisterProcedure:
+			vtctldMountRegisterHandler.ServeHTTP(w, r)
+		case VtctldMountUnregisterProcedure:
+			vtctldMountUnregisterHandler.ServeHTTP(w, r)
+		case VtctldMountShowProcedure:
+			vtctldMountShowHandler.ServeHTTP(w, r)
+		case VtctldMountListProcedure:
+			vtctldMountListHandler.ServeHTTP(w, r)
 		case VtctldMoveTablesCreateProcedure:
 			vtctldMoveTablesCreateHandler.ServeHTTP(w, r)
 		case VtctldMoveTablesCompleteProcedure:
@@ -3039,6 +3234,38 @@ func (UnimplementedVtctldHandler) InitShardPrimary(context.Context, *connect.Req
 
 func (UnimplementedVtctldHandler) LaunchSchemaMigration(context.Context, *connect.Request[v18.LaunchSchemaMigrationRequest]) (*connect.Response[v18.LaunchSchemaMigrationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LaunchSchemaMigration is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) LookupVindexCreate(context.Context, *connect.Request[v18.LookupVindexCreateRequest]) (*connect.Response[v18.LookupVindexCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) LookupVindexExternalize(context.Context, *connect.Request[v18.LookupVindexExternalizeRequest]) (*connect.Response[v18.LookupVindexExternalizeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexExternalize is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MaterializeCreate(context.Context, *connect.Request[v18.MaterializeCreateRequest]) (*connect.Response[v18.MaterializeCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MaterializeCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MigrateCreate(context.Context, *connect.Request[v18.MigrateCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MigrateCreate is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MountRegister(context.Context, *connect.Request[v18.MountRegisterRequest]) (*connect.Response[v18.MountRegisterResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountRegister is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MountUnregister(context.Context, *connect.Request[v18.MountUnregisterRequest]) (*connect.Response[v18.MountUnregisterResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountUnregister is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MountShow(context.Context, *connect.Request[v18.MountShowRequest]) (*connect.Response[v18.MountShowResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountShow is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) MountList(context.Context, *connect.Request[v18.MountListRequest]) (*connect.Response[v18.MountListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountList is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MoveTablesCreate(context.Context, *connect.Request[v18.MoveTablesCreateRequest]) (*connect.Response[v18.WorkflowStatusResponse], error) {
