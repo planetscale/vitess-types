@@ -25,8 +25,8 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	dev "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerdata/dev"
-	_ "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerservice/dev"
+	dev1 "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerdata/dev"
+	dev "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerservice/dev"
 	http "net/http"
 	strings "strings"
 )
@@ -36,7 +36,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// TabletManagerName is the fully-qualified name of the TabletManager service.
@@ -63,12 +63,18 @@ const (
 	// TabletManagerGetPermissionsProcedure is the fully-qualified name of the TabletManager's
 	// GetPermissions RPC.
 	TabletManagerGetPermissionsProcedure = "/tabletmanagerservice.TabletManager/GetPermissions"
+	// TabletManagerGetGlobalStatusVarsProcedure is the fully-qualified name of the TabletManager's
+	// GetGlobalStatusVars RPC.
+	TabletManagerGetGlobalStatusVarsProcedure = "/tabletmanagerservice.TabletManager/GetGlobalStatusVars"
 	// TabletManagerSetReadOnlyProcedure is the fully-qualified name of the TabletManager's SetReadOnly
 	// RPC.
 	TabletManagerSetReadOnlyProcedure = "/tabletmanagerservice.TabletManager/SetReadOnly"
 	// TabletManagerSetReadWriteProcedure is the fully-qualified name of the TabletManager's
 	// SetReadWrite RPC.
 	TabletManagerSetReadWriteProcedure = "/tabletmanagerservice.TabletManager/SetReadWrite"
+	// TabletManagerChangeTagsProcedure is the fully-qualified name of the TabletManager's ChangeTags
+	// RPC.
+	TabletManagerChangeTagsProcedure = "/tabletmanagerservice.TabletManager/ChangeTags"
 	// TabletManagerChangeTypeProcedure is the fully-qualified name of the TabletManager's ChangeType
 	// RPC.
 	TabletManagerChangeTypeProcedure = "/tabletmanagerservice.TabletManager/ChangeType"
@@ -102,12 +108,30 @@ const (
 	// TabletManagerExecuteFetchAsDbaProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsDba RPC.
 	TabletManagerExecuteFetchAsDbaProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsDba"
+	// TabletManagerExecuteMultiFetchAsDbaProcedure is the fully-qualified name of the TabletManager's
+	// ExecuteMultiFetchAsDba RPC.
+	TabletManagerExecuteMultiFetchAsDbaProcedure = "/tabletmanagerservice.TabletManager/ExecuteMultiFetchAsDba"
 	// TabletManagerExecuteFetchAsAllPrivsProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsAllPrivs RPC.
 	TabletManagerExecuteFetchAsAllPrivsProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsAllPrivs"
 	// TabletManagerExecuteFetchAsAppProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsApp RPC.
 	TabletManagerExecuteFetchAsAppProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsApp"
+	// TabletManagerGetUnresolvedTransactionsProcedure is the fully-qualified name of the
+	// TabletManager's GetUnresolvedTransactions RPC.
+	TabletManagerGetUnresolvedTransactionsProcedure = "/tabletmanagerservice.TabletManager/GetUnresolvedTransactions"
+	// TabletManagerReadTransactionProcedure is the fully-qualified name of the TabletManager's
+	// ReadTransaction RPC.
+	TabletManagerReadTransactionProcedure = "/tabletmanagerservice.TabletManager/ReadTransaction"
+	// TabletManagerGetTransactionInfoProcedure is the fully-qualified name of the TabletManager's
+	// GetTransactionInfo RPC.
+	TabletManagerGetTransactionInfoProcedure = "/tabletmanagerservice.TabletManager/GetTransactionInfo"
+	// TabletManagerConcludeTransactionProcedure is the fully-qualified name of the TabletManager's
+	// ConcludeTransaction RPC.
+	TabletManagerConcludeTransactionProcedure = "/tabletmanagerservice.TabletManager/ConcludeTransaction"
+	// TabletManagerMysqlHostMetricsProcedure is the fully-qualified name of the TabletManager's
+	// MysqlHostMetrics RPC.
+	TabletManagerMysqlHostMetricsProcedure = "/tabletmanagerservice.TabletManager/MysqlHostMetrics"
 	// TabletManagerReplicationStatusProcedure is the fully-qualified name of the TabletManager's
 	// ReplicationStatus RPC.
 	TabletManagerReplicationStatusProcedure = "/tabletmanagerservice.TabletManager/ReplicationStatus"
@@ -138,21 +162,36 @@ const (
 	// TabletManagerCreateVReplicationWorkflowProcedure is the fully-qualified name of the
 	// TabletManager's CreateVReplicationWorkflow RPC.
 	TabletManagerCreateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/CreateVReplicationWorkflow"
+	// TabletManagerDeleteTableDataProcedure is the fully-qualified name of the TabletManager's
+	// DeleteTableData RPC.
+	TabletManagerDeleteTableDataProcedure = "/tabletmanagerservice.TabletManager/DeleteTableData"
 	// TabletManagerDeleteVReplicationWorkflowProcedure is the fully-qualified name of the
 	// TabletManager's DeleteVReplicationWorkflow RPC.
 	TabletManagerDeleteVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/DeleteVReplicationWorkflow"
+	// TabletManagerHasVReplicationWorkflowsProcedure is the fully-qualified name of the TabletManager's
+	// HasVReplicationWorkflows RPC.
+	TabletManagerHasVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/HasVReplicationWorkflows"
 	// TabletManagerReadVReplicationWorkflowProcedure is the fully-qualified name of the TabletManager's
 	// ReadVReplicationWorkflow RPC.
 	TabletManagerReadVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/ReadVReplicationWorkflow"
+	// TabletManagerReadVReplicationWorkflowsProcedure is the fully-qualified name of the
+	// TabletManager's ReadVReplicationWorkflows RPC.
+	TabletManagerReadVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/ReadVReplicationWorkflows"
+	// TabletManagerUpdateVReplicationWorkflowProcedure is the fully-qualified name of the
+	// TabletManager's UpdateVReplicationWorkflow RPC.
+	TabletManagerUpdateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflow"
+	// TabletManagerUpdateVReplicationWorkflowsProcedure is the fully-qualified name of the
+	// TabletManager's UpdateVReplicationWorkflows RPC.
+	TabletManagerUpdateVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflows"
+	// TabletManagerValidateVReplicationPermissionsProcedure is the fully-qualified name of the
+	// TabletManager's ValidateVReplicationPermissions RPC.
+	TabletManagerValidateVReplicationPermissionsProcedure = "/tabletmanagerservice.TabletManager/ValidateVReplicationPermissions"
 	// TabletManagerVReplicationExecProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationExec RPC.
 	TabletManagerVReplicationExecProcedure = "/tabletmanagerservice.TabletManager/VReplicationExec"
 	// TabletManagerVReplicationWaitForPosProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationWaitForPos RPC.
 	TabletManagerVReplicationWaitForPosProcedure = "/tabletmanagerservice.TabletManager/VReplicationWaitForPos"
-	// TabletManagerUpdateVReplicationWorkflowProcedure is the fully-qualified name of the
-	// TabletManager's UpdateVReplicationWorkflow RPC.
-	TabletManagerUpdateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflow"
 	// TabletManagerVDiffProcedure is the fully-qualified name of the TabletManager's VDiff RPC.
 	TabletManagerVDiffProcedure = "/tabletmanagerservice.TabletManager/VDiff"
 	// TabletManagerResetReplicationProcedure is the fully-qualified name of the TabletManager's
@@ -164,6 +203,9 @@ const (
 	// TabletManagerPopulateReparentJournalProcedure is the fully-qualified name of the TabletManager's
 	// PopulateReparentJournal RPC.
 	TabletManagerPopulateReparentJournalProcedure = "/tabletmanagerservice.TabletManager/PopulateReparentJournal"
+	// TabletManagerReadReparentJournalInfoProcedure is the fully-qualified name of the TabletManager's
+	// ReadReparentJournalInfo RPC.
+	TabletManagerReadReparentJournalInfoProcedure = "/tabletmanagerservice.TabletManager/ReadReparentJournalInfo"
 	// TabletManagerInitReplicaProcedure is the fully-qualified name of the TabletManager's InitReplica
 	// RPC.
 	TabletManagerInitReplicaProcedure = "/tabletmanagerservice.TabletManager/InitReplica"
@@ -202,98 +244,193 @@ const (
 	// TabletManagerCheckThrottlerProcedure is the fully-qualified name of the TabletManager's
 	// CheckThrottler RPC.
 	TabletManagerCheckThrottlerProcedure = "/tabletmanagerservice.TabletManager/CheckThrottler"
+	// TabletManagerGetThrottlerStatusProcedure is the fully-qualified name of the TabletManager's
+	// GetThrottlerStatus RPC.
+	TabletManagerGetThrottlerStatusProcedure = "/tabletmanagerservice.TabletManager/GetThrottlerStatus"
+)
+
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	tabletManagerServiceDescriptor                               = dev.File_vitess_tabletmanagerservice_dev_tabletmanagerservice_proto.Services().ByName("TabletManager")
+	tabletManagerPingMethodDescriptor                            = tabletManagerServiceDescriptor.Methods().ByName("Ping")
+	tabletManagerSleepMethodDescriptor                           = tabletManagerServiceDescriptor.Methods().ByName("Sleep")
+	tabletManagerExecuteHookMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("ExecuteHook")
+	tabletManagerGetSchemaMethodDescriptor                       = tabletManagerServiceDescriptor.Methods().ByName("GetSchema")
+	tabletManagerGetPermissionsMethodDescriptor                  = tabletManagerServiceDescriptor.Methods().ByName("GetPermissions")
+	tabletManagerGetGlobalStatusVarsMethodDescriptor             = tabletManagerServiceDescriptor.Methods().ByName("GetGlobalStatusVars")
+	tabletManagerSetReadOnlyMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("SetReadOnly")
+	tabletManagerSetReadWriteMethodDescriptor                    = tabletManagerServiceDescriptor.Methods().ByName("SetReadWrite")
+	tabletManagerChangeTagsMethodDescriptor                      = tabletManagerServiceDescriptor.Methods().ByName("ChangeTags")
+	tabletManagerChangeTypeMethodDescriptor                      = tabletManagerServiceDescriptor.Methods().ByName("ChangeType")
+	tabletManagerRefreshStateMethodDescriptor                    = tabletManagerServiceDescriptor.Methods().ByName("RefreshState")
+	tabletManagerRunHealthCheckMethodDescriptor                  = tabletManagerServiceDescriptor.Methods().ByName("RunHealthCheck")
+	tabletManagerReloadSchemaMethodDescriptor                    = tabletManagerServiceDescriptor.Methods().ByName("ReloadSchema")
+	tabletManagerPreflightSchemaMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("PreflightSchema")
+	tabletManagerApplySchemaMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("ApplySchema")
+	tabletManagerResetSequencesMethodDescriptor                  = tabletManagerServiceDescriptor.Methods().ByName("ResetSequences")
+	tabletManagerLockTablesMethodDescriptor                      = tabletManagerServiceDescriptor.Methods().ByName("LockTables")
+	tabletManagerUnlockTablesMethodDescriptor                    = tabletManagerServiceDescriptor.Methods().ByName("UnlockTables")
+	tabletManagerExecuteQueryMethodDescriptor                    = tabletManagerServiceDescriptor.Methods().ByName("ExecuteQuery")
+	tabletManagerExecuteFetchAsDbaMethodDescriptor               = tabletManagerServiceDescriptor.Methods().ByName("ExecuteFetchAsDba")
+	tabletManagerExecuteMultiFetchAsDbaMethodDescriptor          = tabletManagerServiceDescriptor.Methods().ByName("ExecuteMultiFetchAsDba")
+	tabletManagerExecuteFetchAsAllPrivsMethodDescriptor          = tabletManagerServiceDescriptor.Methods().ByName("ExecuteFetchAsAllPrivs")
+	tabletManagerExecuteFetchAsAppMethodDescriptor               = tabletManagerServiceDescriptor.Methods().ByName("ExecuteFetchAsApp")
+	tabletManagerGetUnresolvedTransactionsMethodDescriptor       = tabletManagerServiceDescriptor.Methods().ByName("GetUnresolvedTransactions")
+	tabletManagerReadTransactionMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("ReadTransaction")
+	tabletManagerGetTransactionInfoMethodDescriptor              = tabletManagerServiceDescriptor.Methods().ByName("GetTransactionInfo")
+	tabletManagerConcludeTransactionMethodDescriptor             = tabletManagerServiceDescriptor.Methods().ByName("ConcludeTransaction")
+	tabletManagerMysqlHostMetricsMethodDescriptor                = tabletManagerServiceDescriptor.Methods().ByName("MysqlHostMetrics")
+	tabletManagerReplicationStatusMethodDescriptor               = tabletManagerServiceDescriptor.Methods().ByName("ReplicationStatus")
+	tabletManagerPrimaryStatusMethodDescriptor                   = tabletManagerServiceDescriptor.Methods().ByName("PrimaryStatus")
+	tabletManagerPrimaryPositionMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("PrimaryPosition")
+	tabletManagerWaitForPositionMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("WaitForPosition")
+	tabletManagerStopReplicationMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("StopReplication")
+	tabletManagerStopReplicationMinimumMethodDescriptor          = tabletManagerServiceDescriptor.Methods().ByName("StopReplicationMinimum")
+	tabletManagerStartReplicationMethodDescriptor                = tabletManagerServiceDescriptor.Methods().ByName("StartReplication")
+	tabletManagerStartReplicationUntilAfterMethodDescriptor      = tabletManagerServiceDescriptor.Methods().ByName("StartReplicationUntilAfter")
+	tabletManagerGetReplicasMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("GetReplicas")
+	tabletManagerCreateVReplicationWorkflowMethodDescriptor      = tabletManagerServiceDescriptor.Methods().ByName("CreateVReplicationWorkflow")
+	tabletManagerDeleteTableDataMethodDescriptor                 = tabletManagerServiceDescriptor.Methods().ByName("DeleteTableData")
+	tabletManagerDeleteVReplicationWorkflowMethodDescriptor      = tabletManagerServiceDescriptor.Methods().ByName("DeleteVReplicationWorkflow")
+	tabletManagerHasVReplicationWorkflowsMethodDescriptor        = tabletManagerServiceDescriptor.Methods().ByName("HasVReplicationWorkflows")
+	tabletManagerReadVReplicationWorkflowMethodDescriptor        = tabletManagerServiceDescriptor.Methods().ByName("ReadVReplicationWorkflow")
+	tabletManagerReadVReplicationWorkflowsMethodDescriptor       = tabletManagerServiceDescriptor.Methods().ByName("ReadVReplicationWorkflows")
+	tabletManagerUpdateVReplicationWorkflowMethodDescriptor      = tabletManagerServiceDescriptor.Methods().ByName("UpdateVReplicationWorkflow")
+	tabletManagerUpdateVReplicationWorkflowsMethodDescriptor     = tabletManagerServiceDescriptor.Methods().ByName("UpdateVReplicationWorkflows")
+	tabletManagerValidateVReplicationPermissionsMethodDescriptor = tabletManagerServiceDescriptor.Methods().ByName("ValidateVReplicationPermissions")
+	tabletManagerVReplicationExecMethodDescriptor                = tabletManagerServiceDescriptor.Methods().ByName("VReplicationExec")
+	tabletManagerVReplicationWaitForPosMethodDescriptor          = tabletManagerServiceDescriptor.Methods().ByName("VReplicationWaitForPos")
+	tabletManagerVDiffMethodDescriptor                           = tabletManagerServiceDescriptor.Methods().ByName("VDiff")
+	tabletManagerResetReplicationMethodDescriptor                = tabletManagerServiceDescriptor.Methods().ByName("ResetReplication")
+	tabletManagerInitPrimaryMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("InitPrimary")
+	tabletManagerPopulateReparentJournalMethodDescriptor         = tabletManagerServiceDescriptor.Methods().ByName("PopulateReparentJournal")
+	tabletManagerReadReparentJournalInfoMethodDescriptor         = tabletManagerServiceDescriptor.Methods().ByName("ReadReparentJournalInfo")
+	tabletManagerInitReplicaMethodDescriptor                     = tabletManagerServiceDescriptor.Methods().ByName("InitReplica")
+	tabletManagerDemotePrimaryMethodDescriptor                   = tabletManagerServiceDescriptor.Methods().ByName("DemotePrimary")
+	tabletManagerUndoDemotePrimaryMethodDescriptor               = tabletManagerServiceDescriptor.Methods().ByName("UndoDemotePrimary")
+	tabletManagerReplicaWasPromotedMethodDescriptor              = tabletManagerServiceDescriptor.Methods().ByName("ReplicaWasPromoted")
+	tabletManagerResetReplicationParametersMethodDescriptor      = tabletManagerServiceDescriptor.Methods().ByName("ResetReplicationParameters")
+	tabletManagerFullStatusMethodDescriptor                      = tabletManagerServiceDescriptor.Methods().ByName("FullStatus")
+	tabletManagerSetReplicationSourceMethodDescriptor            = tabletManagerServiceDescriptor.Methods().ByName("SetReplicationSource")
+	tabletManagerReplicaWasRestartedMethodDescriptor             = tabletManagerServiceDescriptor.Methods().ByName("ReplicaWasRestarted")
+	tabletManagerStopReplicationAndGetStatusMethodDescriptor     = tabletManagerServiceDescriptor.Methods().ByName("StopReplicationAndGetStatus")
+	tabletManagerPromoteReplicaMethodDescriptor                  = tabletManagerServiceDescriptor.Methods().ByName("PromoteReplica")
+	tabletManagerBackupMethodDescriptor                          = tabletManagerServiceDescriptor.Methods().ByName("Backup")
+	tabletManagerRestoreFromBackupMethodDescriptor               = tabletManagerServiceDescriptor.Methods().ByName("RestoreFromBackup")
+	tabletManagerCheckThrottlerMethodDescriptor                  = tabletManagerServiceDescriptor.Methods().ByName("CheckThrottler")
+	tabletManagerGetThrottlerStatusMethodDescriptor              = tabletManagerServiceDescriptor.Methods().ByName("GetThrottlerStatus")
 )
 
 // TabletManagerClient is a client for the tabletmanagerservice.TabletManager service.
 type TabletManagerClient interface {
 	// Ping returns the input payload
-	Ping(context.Context, *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error)
+	Ping(context.Context, *connect.Request[dev1.PingRequest]) (*connect.Response[dev1.PingResponse], error)
 	// Sleep sleeps for the provided duration
-	Sleep(context.Context, *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error)
+	Sleep(context.Context, *connect.Request[dev1.SleepRequest]) (*connect.Response[dev1.SleepResponse], error)
 	// ExecuteHook executes the hook remotely
-	ExecuteHook(context.Context, *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[dev1.ExecuteHookRequest]) (*connect.Response[dev1.ExecuteHookResponse], error)
 	// GetSchema asks the tablet for its schema
-	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest]) (*connect.Response[dev1.GetSchemaResponse], error)
 	// GetPermissions asks the tablet for its permissions
-	GetPermissions(context.Context, *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error)
-	SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error)
-	SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error)
+	GetPermissions(context.Context, *connect.Request[dev1.GetPermissionsRequest]) (*connect.Response[dev1.GetPermissionsResponse], error)
+	// GetGlobalStatusVars returns the server's global status variables asked for.
+	// An empty/nil variable name parameter slice means you want all of them.
+	GetGlobalStatusVars(context.Context, *connect.Request[dev1.GetGlobalStatusVarsRequest]) (*connect.Response[dev1.GetGlobalStatusVarsResponse], error)
+	SetReadOnly(context.Context, *connect.Request[dev1.SetReadOnlyRequest]) (*connect.Response[dev1.SetReadOnlyResponse], error)
+	SetReadWrite(context.Context, *connect.Request[dev1.SetReadWriteRequest]) (*connect.Response[dev1.SetReadWriteResponse], error)
+	// ChangeTags asks the remote tablet to change its tags
+	ChangeTags(context.Context, *connect.Request[dev1.ChangeTagsRequest]) (*connect.Response[dev1.ChangeTagsResponse], error)
 	// ChangeType asks the remote tablet to change its type
-	ChangeType(context.Context, *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error)
-	RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error)
-	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
-	ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error)
-	PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error)
-	ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error)
-	ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error)
-	LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error)
-	UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error)
-	ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error)
-	ExecuteFetchAsDba(context.Context, *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error)
-	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error)
-	ExecuteFetchAsApp(context.Context, *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error)
+	ChangeType(context.Context, *connect.Request[dev1.ChangeTypeRequest]) (*connect.Response[dev1.ChangeTypeResponse], error)
+	RefreshState(context.Context, *connect.Request[dev1.RefreshStateRequest]) (*connect.Response[dev1.RefreshStateResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[dev1.RunHealthCheckRequest]) (*connect.Response[dev1.RunHealthCheckResponse], error)
+	ReloadSchema(context.Context, *connect.Request[dev1.ReloadSchemaRequest]) (*connect.Response[dev1.ReloadSchemaResponse], error)
+	PreflightSchema(context.Context, *connect.Request[dev1.PreflightSchemaRequest]) (*connect.Response[dev1.PreflightSchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[dev1.ApplySchemaRequest]) (*connect.Response[dev1.ApplySchemaResponse], error)
+	ResetSequences(context.Context, *connect.Request[dev1.ResetSequencesRequest]) (*connect.Response[dev1.ResetSequencesResponse], error)
+	LockTables(context.Context, *connect.Request[dev1.LockTablesRequest]) (*connect.Response[dev1.LockTablesResponse], error)
+	UnlockTables(context.Context, *connect.Request[dev1.UnlockTablesRequest]) (*connect.Response[dev1.UnlockTablesResponse], error)
+	ExecuteQuery(context.Context, *connect.Request[dev1.ExecuteQueryRequest]) (*connect.Response[dev1.ExecuteQueryResponse], error)
+	ExecuteFetchAsDba(context.Context, *connect.Request[dev1.ExecuteFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteFetchAsDbaResponse], error)
+	ExecuteMultiFetchAsDba(context.Context, *connect.Request[dev1.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteMultiFetchAsDbaResponse], error)
+	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev1.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev1.ExecuteFetchAsAllPrivsResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[dev1.ExecuteFetchAsAppRequest]) (*connect.Response[dev1.ExecuteFetchAsAppResponse], error)
+	GetUnresolvedTransactions(context.Context, *connect.Request[dev1.GetUnresolvedTransactionsRequest]) (*connect.Response[dev1.GetUnresolvedTransactionsResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error)
+	GetTransactionInfo(context.Context, *connect.Request[dev1.GetTransactionInfoRequest]) (*connect.Response[dev1.GetTransactionInfoResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error)
+	MysqlHostMetrics(context.Context, *connect.Request[dev1.MysqlHostMetricsRequest]) (*connect.Response[dev1.MysqlHostMetricsResponse], error)
 	// ReplicationStatus returns the current replication status.
-	ReplicationStatus(context.Context, *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error)
+	ReplicationStatus(context.Context, *connect.Request[dev1.ReplicationStatusRequest]) (*connect.Response[dev1.ReplicationStatusResponse], error)
 	// PrimaryStatus returns the current primary status.
-	PrimaryStatus(context.Context, *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error)
+	PrimaryStatus(context.Context, *connect.Request[dev1.PrimaryStatusRequest]) (*connect.Response[dev1.PrimaryStatusResponse], error)
 	// PrimaryPosition returns the current primary position
-	PrimaryPosition(context.Context, *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error)
+	PrimaryPosition(context.Context, *connect.Request[dev1.PrimaryPositionRequest]) (*connect.Response[dev1.PrimaryPositionResponse], error)
 	// WaitForPosition waits for the position to be reached
-	WaitForPosition(context.Context, *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error)
+	WaitForPosition(context.Context, *connect.Request[dev1.WaitForPositionRequest]) (*connect.Response[dev1.WaitForPositionResponse], error)
 	// StopReplication makes mysql stop its replication
-	StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[dev1.StopReplicationRequest]) (*connect.Response[dev1.StopReplicationResponse], error)
 	// StopReplicationMinimum stops the mysql replication after it reaches
 	// the provided minimum point
-	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
+	StopReplicationMinimum(context.Context, *connect.Request[dev1.StopReplicationMinimumRequest]) (*connect.Response[dev1.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
-	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[dev1.StartReplicationRequest]) (*connect.Response[dev1.StartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
-	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
+	StartReplicationUntilAfter(context.Context, *connect.Request[dev1.StartReplicationUntilAfterRequest]) (*connect.Response[dev1.StartReplicationUntilAfterResponse], error)
 	// GetReplicas asks for the list of mysql replicas
-	GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error)
+	GetReplicas(context.Context, *connect.Request[dev1.GetReplicasRequest]) (*connect.Response[dev1.GetReplicasResponse], error)
 	// VReplication API
-	CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error)
-	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error)
-	ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error)
-	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
-	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
-	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error)
+	CreateVReplicationWorkflow(context.Context, *connect.Request[dev1.CreateVReplicationWorkflowRequest]) (*connect.Response[dev1.CreateVReplicationWorkflowResponse], error)
+	DeleteTableData(context.Context, *connect.Request[dev1.DeleteTableDataRequest]) (*connect.Response[dev1.DeleteTableDataResponse], error)
+	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev1.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev1.DeleteVReplicationWorkflowResponse], error)
+	HasVReplicationWorkflows(context.Context, *connect.Request[dev1.HasVReplicationWorkflowsRequest]) (*connect.Response[dev1.HasVReplicationWorkflowsResponse], error)
+	ReadVReplicationWorkflow(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowResponse], error)
+	ReadVReplicationWorkflows(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowsResponse], error)
+	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowResponse], error)
+	UpdateVReplicationWorkflows(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowsResponse], error)
+	ValidateVReplicationPermissions(context.Context, *connect.Request[dev1.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev1.ValidateVReplicationPermissionsResponse], error)
+	VReplicationExec(context.Context, *connect.Request[dev1.VReplicationExecRequest]) (*connect.Response[dev1.VReplicationExecResponse], error)
+	VReplicationWaitForPos(context.Context, *connect.Request[dev1.VReplicationWaitForPosRequest]) (*connect.Response[dev1.VReplicationWaitForPosResponse], error)
 	// VDiff API
-	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
+	VDiff(context.Context, *connect.Request[dev1.VDiffRequest]) (*connect.Response[dev1.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
-	ResetReplication(context.Context, *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error)
+	ResetReplication(context.Context, *connect.Request[dev1.ResetReplicationRequest]) (*connect.Response[dev1.ResetReplicationResponse], error)
 	// InitPrimary initializes the tablet as a primary
-	InitPrimary(context.Context, *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error)
+	InitPrimary(context.Context, *connect.Request[dev1.InitPrimaryRequest]) (*connect.Response[dev1.InitPrimaryResponse], error)
 	// PopulateReparentJournal tells the tablet to add an entry to its
 	// reparent journal
-	PopulateReparentJournal(context.Context, *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error)
+	PopulateReparentJournal(context.Context, *connect.Request[dev1.PopulateReparentJournalRequest]) (*connect.Response[dev1.PopulateReparentJournalResponse], error)
+	// ReadReparentJournalInfo reads the information from reparent journal
+	ReadReparentJournalInfo(context.Context, *connect.Request[dev1.ReadReparentJournalInfoRequest]) (*connect.Response[dev1.ReadReparentJournalInfoResponse], error)
 	// InitReplica tells the tablet to reparent to the primary unconditionally
-	InitReplica(context.Context, *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error)
+	InitReplica(context.Context, *connect.Request[dev1.InitReplicaRequest]) (*connect.Response[dev1.InitReplicaResponse], error)
 	// DemotePrimary tells the soon-to-be-former primary it's gonna change
-	DemotePrimary(context.Context, *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error)
+	DemotePrimary(context.Context, *connect.Request[dev1.DemotePrimaryRequest]) (*connect.Response[dev1.DemotePrimaryResponse], error)
 	// UndoDemotePrimary reverts all changes made by DemotePrimary
-	UndoDemotePrimary(context.Context, *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error)
+	UndoDemotePrimary(context.Context, *connect.Request[dev1.UndoDemotePrimaryRequest]) (*connect.Response[dev1.UndoDemotePrimaryResponse], error)
 	// ReplicaWasPromoted tells the remote tablet it is now the primary
-	ReplicaWasPromoted(context.Context, *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error)
+	ReplicaWasPromoted(context.Context, *connect.Request[dev1.ReplicaWasPromotedRequest]) (*connect.Response[dev1.ReplicaWasPromotedResponse], error)
 	// ResetReplicationParameters resets the replica replication parameters
-	ResetReplicationParameters(context.Context, *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error)
+	ResetReplicationParameters(context.Context, *connect.Request[dev1.ResetReplicationParametersRequest]) (*connect.Response[dev1.ResetReplicationParametersResponse], error)
 	// FullStatus collects and returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	FullStatus(context.Context, *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error)
+	FullStatus(context.Context, *connect.Request[dev1.FullStatusRequest]) (*connect.Response[dev1.FullStatusResponse], error)
 	// SetReplicationSource tells the replica to reparent
-	SetReplicationSource(context.Context, *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error)
+	SetReplicationSource(context.Context, *connect.Request[dev1.SetReplicationSourceRequest]) (*connect.Response[dev1.SetReplicationSourceResponse], error)
 	// ReplicaWasRestarted tells the remote tablet its primary has changed
-	ReplicaWasRestarted(context.Context, *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error)
+	ReplicaWasRestarted(context.Context, *connect.Request[dev1.ReplicaWasRestartedRequest]) (*connect.Response[dev1.ReplicaWasRestartedResponse], error)
 	// StopReplicationAndGetStatus stops MySQL replication, and returns the
 	// replication status
-	StopReplicationAndGetStatus(context.Context, *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error)
+	StopReplicationAndGetStatus(context.Context, *connect.Request[dev1.StopReplicationAndGetStatusRequest]) (*connect.Response[dev1.StopReplicationAndGetStatusResponse], error)
 	// PromoteReplica makes the replica the new primary
-	PromoteReplica(context.Context, *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error)
-	Backup(context.Context, *connect.Request[dev.BackupRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error)
+	PromoteReplica(context.Context, *connect.Request[dev1.PromoteReplicaRequest]) (*connect.Response[dev1.PromoteReplicaResponse], error)
+	Backup(context.Context, *connect.Request[dev1.BackupRequest]) (*connect.ServerStreamForClient[dev1.BackupResponse], error)
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
-	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error)
+	RestoreFromBackup(context.Context, *connect.Request[dev1.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev1.RestoreFromBackupResponse], error)
 	// CheckThrottler issues a 'check' on a tablet's throttler
-	CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error)
+	CheckThrottler(context.Context, *connect.Request[dev1.CheckThrottlerRequest]) (*connect.Response[dev1.CheckThrottlerResponse], error)
+	// GetThrottlerStatus gets the status of a tablet throttler
+	GetThrottlerStatus(context.Context, *connect.Request[dev1.GetThrottlerStatusRequest]) (*connect.Response[dev1.GetThrottlerStatusResponse], error)
 }
 
 // NewTabletManagerClient constructs a client for the tabletmanagerservice.TabletManager
@@ -306,687 +443,946 @@ type TabletManagerClient interface {
 func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) TabletManagerClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &tabletManagerClient{
-		ping: connect.NewClient[dev.PingRequest, dev.PingResponse](
+		ping: connect.NewClient[dev1.PingRequest, dev1.PingResponse](
 			httpClient,
 			baseURL+TabletManagerPingProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPingMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		sleep: connect.NewClient[dev.SleepRequest, dev.SleepResponse](
+		sleep: connect.NewClient[dev1.SleepRequest, dev1.SleepResponse](
 			httpClient,
 			baseURL+TabletManagerSleepProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerSleepMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeHook: connect.NewClient[dev.ExecuteHookRequest, dev.ExecuteHookResponse](
+		executeHook: connect.NewClient[dev1.ExecuteHookRequest, dev1.ExecuteHookResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteHookProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerExecuteHookMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSchema: connect.NewClient[dev.GetSchemaRequest, dev.GetSchemaResponse](
+		getSchema: connect.NewClient[dev1.GetSchemaRequest, dev1.GetSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerGetSchemaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerGetSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getPermissions: connect.NewClient[dev.GetPermissionsRequest, dev.GetPermissionsResponse](
+		getPermissions: connect.NewClient[dev1.GetPermissionsRequest, dev1.GetPermissionsResponse](
 			httpClient,
 			baseURL+TabletManagerGetPermissionsProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerGetPermissionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setReadOnly: connect.NewClient[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse](
+		getGlobalStatusVars: connect.NewClient[dev1.GetGlobalStatusVarsRequest, dev1.GetGlobalStatusVarsResponse](
+			httpClient,
+			baseURL+TabletManagerGetGlobalStatusVarsProcedure,
+			connect.WithSchema(tabletManagerGetGlobalStatusVarsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		setReadOnly: connect.NewClient[dev1.SetReadOnlyRequest, dev1.SetReadOnlyResponse](
 			httpClient,
 			baseURL+TabletManagerSetReadOnlyProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerSetReadOnlyMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setReadWrite: connect.NewClient[dev.SetReadWriteRequest, dev.SetReadWriteResponse](
+		setReadWrite: connect.NewClient[dev1.SetReadWriteRequest, dev1.SetReadWriteResponse](
 			httpClient,
 			baseURL+TabletManagerSetReadWriteProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerSetReadWriteMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		changeType: connect.NewClient[dev.ChangeTypeRequest, dev.ChangeTypeResponse](
+		changeTags: connect.NewClient[dev1.ChangeTagsRequest, dev1.ChangeTagsResponse](
+			httpClient,
+			baseURL+TabletManagerChangeTagsProcedure,
+			connect.WithSchema(tabletManagerChangeTagsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		changeType: connect.NewClient[dev1.ChangeTypeRequest, dev1.ChangeTypeResponse](
 			httpClient,
 			baseURL+TabletManagerChangeTypeProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerChangeTypeMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		refreshState: connect.NewClient[dev.RefreshStateRequest, dev.RefreshStateResponse](
+		refreshState: connect.NewClient[dev1.RefreshStateRequest, dev1.RefreshStateResponse](
 			httpClient,
 			baseURL+TabletManagerRefreshStateProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerRefreshStateMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		runHealthCheck: connect.NewClient[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse](
+		runHealthCheck: connect.NewClient[dev1.RunHealthCheckRequest, dev1.RunHealthCheckResponse](
 			httpClient,
 			baseURL+TabletManagerRunHealthCheckProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerRunHealthCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		reloadSchema: connect.NewClient[dev.ReloadSchemaRequest, dev.ReloadSchemaResponse](
+		reloadSchema: connect.NewClient[dev1.ReloadSchemaRequest, dev1.ReloadSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerReloadSchemaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerReloadSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		preflightSchema: connect.NewClient[dev.PreflightSchemaRequest, dev.PreflightSchemaResponse](
+		preflightSchema: connect.NewClient[dev1.PreflightSchemaRequest, dev1.PreflightSchemaResponse](
 			httpClient,
 			baseURL+TabletManagerPreflightSchemaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPreflightSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		applySchema: connect.NewClient[dev.ApplySchemaRequest, dev.ApplySchemaResponse](
+		applySchema: connect.NewClient[dev1.ApplySchemaRequest, dev1.ApplySchemaResponse](
 			httpClient,
 			baseURL+TabletManagerApplySchemaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerApplySchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		resetSequences: connect.NewClient[dev.ResetSequencesRequest, dev.ResetSequencesResponse](
+		resetSequences: connect.NewClient[dev1.ResetSequencesRequest, dev1.ResetSequencesResponse](
 			httpClient,
 			baseURL+TabletManagerResetSequencesProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerResetSequencesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		lockTables: connect.NewClient[dev.LockTablesRequest, dev.LockTablesResponse](
+		lockTables: connect.NewClient[dev1.LockTablesRequest, dev1.LockTablesResponse](
 			httpClient,
 			baseURL+TabletManagerLockTablesProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerLockTablesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		unlockTables: connect.NewClient[dev.UnlockTablesRequest, dev.UnlockTablesResponse](
+		unlockTables: connect.NewClient[dev1.UnlockTablesRequest, dev1.UnlockTablesResponse](
 			httpClient,
 			baseURL+TabletManagerUnlockTablesProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerUnlockTablesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeQuery: connect.NewClient[dev.ExecuteQueryRequest, dev.ExecuteQueryResponse](
+		executeQuery: connect.NewClient[dev1.ExecuteQueryRequest, dev1.ExecuteQueryResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteQueryProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerExecuteQueryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeFetchAsDba: connect.NewClient[dev.ExecuteFetchAsDbaRequest, dev.ExecuteFetchAsDbaResponse](
+		executeFetchAsDba: connect.NewClient[dev1.ExecuteFetchAsDbaRequest, dev1.ExecuteFetchAsDbaResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsDbaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerExecuteFetchAsDbaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeFetchAsAllPrivs: connect.NewClient[dev.ExecuteFetchAsAllPrivsRequest, dev.ExecuteFetchAsAllPrivsResponse](
+		executeMultiFetchAsDba: connect.NewClient[dev1.ExecuteMultiFetchAsDbaRequest, dev1.ExecuteMultiFetchAsDbaResponse](
+			httpClient,
+			baseURL+TabletManagerExecuteMultiFetchAsDbaProcedure,
+			connect.WithSchema(tabletManagerExecuteMultiFetchAsDbaMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		executeFetchAsAllPrivs: connect.NewClient[dev1.ExecuteFetchAsAllPrivsRequest, dev1.ExecuteFetchAsAllPrivsResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsAllPrivsProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerExecuteFetchAsAllPrivsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeFetchAsApp: connect.NewClient[dev.ExecuteFetchAsAppRequest, dev.ExecuteFetchAsAppResponse](
+		executeFetchAsApp: connect.NewClient[dev1.ExecuteFetchAsAppRequest, dev1.ExecuteFetchAsAppResponse](
 			httpClient,
 			baseURL+TabletManagerExecuteFetchAsAppProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerExecuteFetchAsAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		replicationStatus: connect.NewClient[dev.ReplicationStatusRequest, dev.ReplicationStatusResponse](
+		getUnresolvedTransactions: connect.NewClient[dev1.GetUnresolvedTransactionsRequest, dev1.GetUnresolvedTransactionsResponse](
+			httpClient,
+			baseURL+TabletManagerGetUnresolvedTransactionsProcedure,
+			connect.WithSchema(tabletManagerGetUnresolvedTransactionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		readTransaction: connect.NewClient[dev1.ReadTransactionRequest, dev1.ReadTransactionResponse](
+			httpClient,
+			baseURL+TabletManagerReadTransactionProcedure,
+			connect.WithSchema(tabletManagerReadTransactionMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getTransactionInfo: connect.NewClient[dev1.GetTransactionInfoRequest, dev1.GetTransactionInfoResponse](
+			httpClient,
+			baseURL+TabletManagerGetTransactionInfoProcedure,
+			connect.WithSchema(tabletManagerGetTransactionInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		concludeTransaction: connect.NewClient[dev1.ConcludeTransactionRequest, dev1.ConcludeTransactionResponse](
+			httpClient,
+			baseURL+TabletManagerConcludeTransactionProcedure,
+			connect.WithSchema(tabletManagerConcludeTransactionMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		mysqlHostMetrics: connect.NewClient[dev1.MysqlHostMetricsRequest, dev1.MysqlHostMetricsResponse](
+			httpClient,
+			baseURL+TabletManagerMysqlHostMetricsProcedure,
+			connect.WithSchema(tabletManagerMysqlHostMetricsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		replicationStatus: connect.NewClient[dev1.ReplicationStatusRequest, dev1.ReplicationStatusResponse](
 			httpClient,
 			baseURL+TabletManagerReplicationStatusProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerReplicationStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		primaryStatus: connect.NewClient[dev.PrimaryStatusRequest, dev.PrimaryStatusResponse](
+		primaryStatus: connect.NewClient[dev1.PrimaryStatusRequest, dev1.PrimaryStatusResponse](
 			httpClient,
 			baseURL+TabletManagerPrimaryStatusProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPrimaryStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		primaryPosition: connect.NewClient[dev.PrimaryPositionRequest, dev.PrimaryPositionResponse](
+		primaryPosition: connect.NewClient[dev1.PrimaryPositionRequest, dev1.PrimaryPositionResponse](
 			httpClient,
 			baseURL+TabletManagerPrimaryPositionProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPrimaryPositionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		waitForPosition: connect.NewClient[dev.WaitForPositionRequest, dev.WaitForPositionResponse](
+		waitForPosition: connect.NewClient[dev1.WaitForPositionRequest, dev1.WaitForPositionResponse](
 			httpClient,
 			baseURL+TabletManagerWaitForPositionProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerWaitForPositionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		stopReplication: connect.NewClient[dev.StopReplicationRequest, dev.StopReplicationResponse](
+		stopReplication: connect.NewClient[dev1.StopReplicationRequest, dev1.StopReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerStopReplicationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		stopReplicationMinimum: connect.NewClient[dev.StopReplicationMinimumRequest, dev.StopReplicationMinimumResponse](
+		stopReplicationMinimum: connect.NewClient[dev1.StopReplicationMinimumRequest, dev1.StopReplicationMinimumResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationMinimumProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerStopReplicationMinimumMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		startReplication: connect.NewClient[dev.StartReplicationRequest, dev.StartReplicationResponse](
+		startReplication: connect.NewClient[dev1.StartReplicationRequest, dev1.StartReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerStartReplicationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		startReplicationUntilAfter: connect.NewClient[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse](
+		startReplicationUntilAfter: connect.NewClient[dev1.StartReplicationUntilAfterRequest, dev1.StartReplicationUntilAfterResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationUntilAfterProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerStartReplicationUntilAfterMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getReplicas: connect.NewClient[dev.GetReplicasRequest, dev.GetReplicasResponse](
+		getReplicas: connect.NewClient[dev1.GetReplicasRequest, dev1.GetReplicasResponse](
 			httpClient,
 			baseURL+TabletManagerGetReplicasProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerGetReplicasMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		createVReplicationWorkflow: connect.NewClient[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse](
+		createVReplicationWorkflow: connect.NewClient[dev1.CreateVReplicationWorkflowRequest, dev1.CreateVReplicationWorkflowResponse](
 			httpClient,
 			baseURL+TabletManagerCreateVReplicationWorkflowProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerCreateVReplicationWorkflowMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteVReplicationWorkflow: connect.NewClient[dev.DeleteVReplicationWorkflowRequest, dev.DeleteVReplicationWorkflowResponse](
+		deleteTableData: connect.NewClient[dev1.DeleteTableDataRequest, dev1.DeleteTableDataResponse](
+			httpClient,
+			baseURL+TabletManagerDeleteTableDataProcedure,
+			connect.WithSchema(tabletManagerDeleteTableDataMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		deleteVReplicationWorkflow: connect.NewClient[dev1.DeleteVReplicationWorkflowRequest, dev1.DeleteVReplicationWorkflowResponse](
 			httpClient,
 			baseURL+TabletManagerDeleteVReplicationWorkflowProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerDeleteVReplicationWorkflowMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		readVReplicationWorkflow: connect.NewClient[dev.ReadVReplicationWorkflowRequest, dev.ReadVReplicationWorkflowResponse](
+		hasVReplicationWorkflows: connect.NewClient[dev1.HasVReplicationWorkflowsRequest, dev1.HasVReplicationWorkflowsResponse](
+			httpClient,
+			baseURL+TabletManagerHasVReplicationWorkflowsProcedure,
+			connect.WithSchema(tabletManagerHasVReplicationWorkflowsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		readVReplicationWorkflow: connect.NewClient[dev1.ReadVReplicationWorkflowRequest, dev1.ReadVReplicationWorkflowResponse](
 			httpClient,
 			baseURL+TabletManagerReadVReplicationWorkflowProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerReadVReplicationWorkflowMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		vReplicationExec: connect.NewClient[dev.VReplicationExecRequest, dev.VReplicationExecResponse](
+		readVReplicationWorkflows: connect.NewClient[dev1.ReadVReplicationWorkflowsRequest, dev1.ReadVReplicationWorkflowsResponse](
 			httpClient,
-			baseURL+TabletManagerVReplicationExecProcedure,
-			opts...,
+			baseURL+TabletManagerReadVReplicationWorkflowsProcedure,
+			connect.WithSchema(tabletManagerReadVReplicationWorkflowsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		vReplicationWaitForPos: connect.NewClient[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse](
-			httpClient,
-			baseURL+TabletManagerVReplicationWaitForPosProcedure,
-			opts...,
-		),
-		updateVReplicationWorkflow: connect.NewClient[dev.UpdateVReplicationWorkflowRequest, dev.UpdateVReplicationWorkflowResponse](
+		updateVReplicationWorkflow: connect.NewClient[dev1.UpdateVReplicationWorkflowRequest, dev1.UpdateVReplicationWorkflowResponse](
 			httpClient,
 			baseURL+TabletManagerUpdateVReplicationWorkflowProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerUpdateVReplicationWorkflowMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		vDiff: connect.NewClient[dev.VDiffRequest, dev.VDiffResponse](
+		updateVReplicationWorkflows: connect.NewClient[dev1.UpdateVReplicationWorkflowsRequest, dev1.UpdateVReplicationWorkflowsResponse](
+			httpClient,
+			baseURL+TabletManagerUpdateVReplicationWorkflowsProcedure,
+			connect.WithSchema(tabletManagerUpdateVReplicationWorkflowsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		validateVReplicationPermissions: connect.NewClient[dev1.ValidateVReplicationPermissionsRequest, dev1.ValidateVReplicationPermissionsResponse](
+			httpClient,
+			baseURL+TabletManagerValidateVReplicationPermissionsProcedure,
+			connect.WithSchema(tabletManagerValidateVReplicationPermissionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		vReplicationExec: connect.NewClient[dev1.VReplicationExecRequest, dev1.VReplicationExecResponse](
+			httpClient,
+			baseURL+TabletManagerVReplicationExecProcedure,
+			connect.WithSchema(tabletManagerVReplicationExecMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		vReplicationWaitForPos: connect.NewClient[dev1.VReplicationWaitForPosRequest, dev1.VReplicationWaitForPosResponse](
+			httpClient,
+			baseURL+TabletManagerVReplicationWaitForPosProcedure,
+			connect.WithSchema(tabletManagerVReplicationWaitForPosMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		vDiff: connect.NewClient[dev1.VDiffRequest, dev1.VDiffResponse](
 			httpClient,
 			baseURL+TabletManagerVDiffProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerVDiffMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		resetReplication: connect.NewClient[dev.ResetReplicationRequest, dev.ResetReplicationResponse](
+		resetReplication: connect.NewClient[dev1.ResetReplicationRequest, dev1.ResetReplicationResponse](
 			httpClient,
 			baseURL+TabletManagerResetReplicationProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerResetReplicationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		initPrimary: connect.NewClient[dev.InitPrimaryRequest, dev.InitPrimaryResponse](
+		initPrimary: connect.NewClient[dev1.InitPrimaryRequest, dev1.InitPrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerInitPrimaryProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerInitPrimaryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		populateReparentJournal: connect.NewClient[dev.PopulateReparentJournalRequest, dev.PopulateReparentJournalResponse](
+		populateReparentJournal: connect.NewClient[dev1.PopulateReparentJournalRequest, dev1.PopulateReparentJournalResponse](
 			httpClient,
 			baseURL+TabletManagerPopulateReparentJournalProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPopulateReparentJournalMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		initReplica: connect.NewClient[dev.InitReplicaRequest, dev.InitReplicaResponse](
+		readReparentJournalInfo: connect.NewClient[dev1.ReadReparentJournalInfoRequest, dev1.ReadReparentJournalInfoResponse](
+			httpClient,
+			baseURL+TabletManagerReadReparentJournalInfoProcedure,
+			connect.WithSchema(tabletManagerReadReparentJournalInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		initReplica: connect.NewClient[dev1.InitReplicaRequest, dev1.InitReplicaResponse](
 			httpClient,
 			baseURL+TabletManagerInitReplicaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerInitReplicaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		demotePrimary: connect.NewClient[dev.DemotePrimaryRequest, dev.DemotePrimaryResponse](
+		demotePrimary: connect.NewClient[dev1.DemotePrimaryRequest, dev1.DemotePrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerDemotePrimaryProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerDemotePrimaryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		undoDemotePrimary: connect.NewClient[dev.UndoDemotePrimaryRequest, dev.UndoDemotePrimaryResponse](
+		undoDemotePrimary: connect.NewClient[dev1.UndoDemotePrimaryRequest, dev1.UndoDemotePrimaryResponse](
 			httpClient,
 			baseURL+TabletManagerUndoDemotePrimaryProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerUndoDemotePrimaryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		replicaWasPromoted: connect.NewClient[dev.ReplicaWasPromotedRequest, dev.ReplicaWasPromotedResponse](
+		replicaWasPromoted: connect.NewClient[dev1.ReplicaWasPromotedRequest, dev1.ReplicaWasPromotedResponse](
 			httpClient,
 			baseURL+TabletManagerReplicaWasPromotedProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerReplicaWasPromotedMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		resetReplicationParameters: connect.NewClient[dev.ResetReplicationParametersRequest, dev.ResetReplicationParametersResponse](
+		resetReplicationParameters: connect.NewClient[dev1.ResetReplicationParametersRequest, dev1.ResetReplicationParametersResponse](
 			httpClient,
 			baseURL+TabletManagerResetReplicationParametersProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerResetReplicationParametersMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		fullStatus: connect.NewClient[dev.FullStatusRequest, dev.FullStatusResponse](
+		fullStatus: connect.NewClient[dev1.FullStatusRequest, dev1.FullStatusResponse](
 			httpClient,
 			baseURL+TabletManagerFullStatusProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerFullStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setReplicationSource: connect.NewClient[dev.SetReplicationSourceRequest, dev.SetReplicationSourceResponse](
+		setReplicationSource: connect.NewClient[dev1.SetReplicationSourceRequest, dev1.SetReplicationSourceResponse](
 			httpClient,
 			baseURL+TabletManagerSetReplicationSourceProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerSetReplicationSourceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		replicaWasRestarted: connect.NewClient[dev.ReplicaWasRestartedRequest, dev.ReplicaWasRestartedResponse](
+		replicaWasRestarted: connect.NewClient[dev1.ReplicaWasRestartedRequest, dev1.ReplicaWasRestartedResponse](
 			httpClient,
 			baseURL+TabletManagerReplicaWasRestartedProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerReplicaWasRestartedMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		stopReplicationAndGetStatus: connect.NewClient[dev.StopReplicationAndGetStatusRequest, dev.StopReplicationAndGetStatusResponse](
+		stopReplicationAndGetStatus: connect.NewClient[dev1.StopReplicationAndGetStatusRequest, dev1.StopReplicationAndGetStatusResponse](
 			httpClient,
 			baseURL+TabletManagerStopReplicationAndGetStatusProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerStopReplicationAndGetStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		promoteReplica: connect.NewClient[dev.PromoteReplicaRequest, dev.PromoteReplicaResponse](
+		promoteReplica: connect.NewClient[dev1.PromoteReplicaRequest, dev1.PromoteReplicaResponse](
 			httpClient,
 			baseURL+TabletManagerPromoteReplicaProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerPromoteReplicaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		backup: connect.NewClient[dev.BackupRequest, dev.BackupResponse](
+		backup: connect.NewClient[dev1.BackupRequest, dev1.BackupResponse](
 			httpClient,
 			baseURL+TabletManagerBackupProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerBackupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		restoreFromBackup: connect.NewClient[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse](
+		restoreFromBackup: connect.NewClient[dev1.RestoreFromBackupRequest, dev1.RestoreFromBackupResponse](
 			httpClient,
 			baseURL+TabletManagerRestoreFromBackupProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerRestoreFromBackupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		checkThrottler: connect.NewClient[dev.CheckThrottlerRequest, dev.CheckThrottlerResponse](
+		checkThrottler: connect.NewClient[dev1.CheckThrottlerRequest, dev1.CheckThrottlerResponse](
 			httpClient,
 			baseURL+TabletManagerCheckThrottlerProcedure,
-			opts...,
+			connect.WithSchema(tabletManagerCheckThrottlerMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getThrottlerStatus: connect.NewClient[dev1.GetThrottlerStatusRequest, dev1.GetThrottlerStatusResponse](
+			httpClient,
+			baseURL+TabletManagerGetThrottlerStatusProcedure,
+			connect.WithSchema(tabletManagerGetThrottlerStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
 // tabletManagerClient implements TabletManagerClient.
 type tabletManagerClient struct {
-	ping                        *connect.Client[dev.PingRequest, dev.PingResponse]
-	sleep                       *connect.Client[dev.SleepRequest, dev.SleepResponse]
-	executeHook                 *connect.Client[dev.ExecuteHookRequest, dev.ExecuteHookResponse]
-	getSchema                   *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
-	getPermissions              *connect.Client[dev.GetPermissionsRequest, dev.GetPermissionsResponse]
-	setReadOnly                 *connect.Client[dev.SetReadOnlyRequest, dev.SetReadOnlyResponse]
-	setReadWrite                *connect.Client[dev.SetReadWriteRequest, dev.SetReadWriteResponse]
-	changeType                  *connect.Client[dev.ChangeTypeRequest, dev.ChangeTypeResponse]
-	refreshState                *connect.Client[dev.RefreshStateRequest, dev.RefreshStateResponse]
-	runHealthCheck              *connect.Client[dev.RunHealthCheckRequest, dev.RunHealthCheckResponse]
-	reloadSchema                *connect.Client[dev.ReloadSchemaRequest, dev.ReloadSchemaResponse]
-	preflightSchema             *connect.Client[dev.PreflightSchemaRequest, dev.PreflightSchemaResponse]
-	applySchema                 *connect.Client[dev.ApplySchemaRequest, dev.ApplySchemaResponse]
-	resetSequences              *connect.Client[dev.ResetSequencesRequest, dev.ResetSequencesResponse]
-	lockTables                  *connect.Client[dev.LockTablesRequest, dev.LockTablesResponse]
-	unlockTables                *connect.Client[dev.UnlockTablesRequest, dev.UnlockTablesResponse]
-	executeQuery                *connect.Client[dev.ExecuteQueryRequest, dev.ExecuteQueryResponse]
-	executeFetchAsDba           *connect.Client[dev.ExecuteFetchAsDbaRequest, dev.ExecuteFetchAsDbaResponse]
-	executeFetchAsAllPrivs      *connect.Client[dev.ExecuteFetchAsAllPrivsRequest, dev.ExecuteFetchAsAllPrivsResponse]
-	executeFetchAsApp           *connect.Client[dev.ExecuteFetchAsAppRequest, dev.ExecuteFetchAsAppResponse]
-	replicationStatus           *connect.Client[dev.ReplicationStatusRequest, dev.ReplicationStatusResponse]
-	primaryStatus               *connect.Client[dev.PrimaryStatusRequest, dev.PrimaryStatusResponse]
-	primaryPosition             *connect.Client[dev.PrimaryPositionRequest, dev.PrimaryPositionResponse]
-	waitForPosition             *connect.Client[dev.WaitForPositionRequest, dev.WaitForPositionResponse]
-	stopReplication             *connect.Client[dev.StopReplicationRequest, dev.StopReplicationResponse]
-	stopReplicationMinimum      *connect.Client[dev.StopReplicationMinimumRequest, dev.StopReplicationMinimumResponse]
-	startReplication            *connect.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
-	startReplicationUntilAfter  *connect.Client[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse]
-	getReplicas                 *connect.Client[dev.GetReplicasRequest, dev.GetReplicasResponse]
-	createVReplicationWorkflow  *connect.Client[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse]
-	deleteVReplicationWorkflow  *connect.Client[dev.DeleteVReplicationWorkflowRequest, dev.DeleteVReplicationWorkflowResponse]
-	readVReplicationWorkflow    *connect.Client[dev.ReadVReplicationWorkflowRequest, dev.ReadVReplicationWorkflowResponse]
-	vReplicationExec            *connect.Client[dev.VReplicationExecRequest, dev.VReplicationExecResponse]
-	vReplicationWaitForPos      *connect.Client[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse]
-	updateVReplicationWorkflow  *connect.Client[dev.UpdateVReplicationWorkflowRequest, dev.UpdateVReplicationWorkflowResponse]
-	vDiff                       *connect.Client[dev.VDiffRequest, dev.VDiffResponse]
-	resetReplication            *connect.Client[dev.ResetReplicationRequest, dev.ResetReplicationResponse]
-	initPrimary                 *connect.Client[dev.InitPrimaryRequest, dev.InitPrimaryResponse]
-	populateReparentJournal     *connect.Client[dev.PopulateReparentJournalRequest, dev.PopulateReparentJournalResponse]
-	initReplica                 *connect.Client[dev.InitReplicaRequest, dev.InitReplicaResponse]
-	demotePrimary               *connect.Client[dev.DemotePrimaryRequest, dev.DemotePrimaryResponse]
-	undoDemotePrimary           *connect.Client[dev.UndoDemotePrimaryRequest, dev.UndoDemotePrimaryResponse]
-	replicaWasPromoted          *connect.Client[dev.ReplicaWasPromotedRequest, dev.ReplicaWasPromotedResponse]
-	resetReplicationParameters  *connect.Client[dev.ResetReplicationParametersRequest, dev.ResetReplicationParametersResponse]
-	fullStatus                  *connect.Client[dev.FullStatusRequest, dev.FullStatusResponse]
-	setReplicationSource        *connect.Client[dev.SetReplicationSourceRequest, dev.SetReplicationSourceResponse]
-	replicaWasRestarted         *connect.Client[dev.ReplicaWasRestartedRequest, dev.ReplicaWasRestartedResponse]
-	stopReplicationAndGetStatus *connect.Client[dev.StopReplicationAndGetStatusRequest, dev.StopReplicationAndGetStatusResponse]
-	promoteReplica              *connect.Client[dev.PromoteReplicaRequest, dev.PromoteReplicaResponse]
-	backup                      *connect.Client[dev.BackupRequest, dev.BackupResponse]
-	restoreFromBackup           *connect.Client[dev.RestoreFromBackupRequest, dev.RestoreFromBackupResponse]
-	checkThrottler              *connect.Client[dev.CheckThrottlerRequest, dev.CheckThrottlerResponse]
+	ping                            *connect.Client[dev1.PingRequest, dev1.PingResponse]
+	sleep                           *connect.Client[dev1.SleepRequest, dev1.SleepResponse]
+	executeHook                     *connect.Client[dev1.ExecuteHookRequest, dev1.ExecuteHookResponse]
+	getSchema                       *connect.Client[dev1.GetSchemaRequest, dev1.GetSchemaResponse]
+	getPermissions                  *connect.Client[dev1.GetPermissionsRequest, dev1.GetPermissionsResponse]
+	getGlobalStatusVars             *connect.Client[dev1.GetGlobalStatusVarsRequest, dev1.GetGlobalStatusVarsResponse]
+	setReadOnly                     *connect.Client[dev1.SetReadOnlyRequest, dev1.SetReadOnlyResponse]
+	setReadWrite                    *connect.Client[dev1.SetReadWriteRequest, dev1.SetReadWriteResponse]
+	changeTags                      *connect.Client[dev1.ChangeTagsRequest, dev1.ChangeTagsResponse]
+	changeType                      *connect.Client[dev1.ChangeTypeRequest, dev1.ChangeTypeResponse]
+	refreshState                    *connect.Client[dev1.RefreshStateRequest, dev1.RefreshStateResponse]
+	runHealthCheck                  *connect.Client[dev1.RunHealthCheckRequest, dev1.RunHealthCheckResponse]
+	reloadSchema                    *connect.Client[dev1.ReloadSchemaRequest, dev1.ReloadSchemaResponse]
+	preflightSchema                 *connect.Client[dev1.PreflightSchemaRequest, dev1.PreflightSchemaResponse]
+	applySchema                     *connect.Client[dev1.ApplySchemaRequest, dev1.ApplySchemaResponse]
+	resetSequences                  *connect.Client[dev1.ResetSequencesRequest, dev1.ResetSequencesResponse]
+	lockTables                      *connect.Client[dev1.LockTablesRequest, dev1.LockTablesResponse]
+	unlockTables                    *connect.Client[dev1.UnlockTablesRequest, dev1.UnlockTablesResponse]
+	executeQuery                    *connect.Client[dev1.ExecuteQueryRequest, dev1.ExecuteQueryResponse]
+	executeFetchAsDba               *connect.Client[dev1.ExecuteFetchAsDbaRequest, dev1.ExecuteFetchAsDbaResponse]
+	executeMultiFetchAsDba          *connect.Client[dev1.ExecuteMultiFetchAsDbaRequest, dev1.ExecuteMultiFetchAsDbaResponse]
+	executeFetchAsAllPrivs          *connect.Client[dev1.ExecuteFetchAsAllPrivsRequest, dev1.ExecuteFetchAsAllPrivsResponse]
+	executeFetchAsApp               *connect.Client[dev1.ExecuteFetchAsAppRequest, dev1.ExecuteFetchAsAppResponse]
+	getUnresolvedTransactions       *connect.Client[dev1.GetUnresolvedTransactionsRequest, dev1.GetUnresolvedTransactionsResponse]
+	readTransaction                 *connect.Client[dev1.ReadTransactionRequest, dev1.ReadTransactionResponse]
+	getTransactionInfo              *connect.Client[dev1.GetTransactionInfoRequest, dev1.GetTransactionInfoResponse]
+	concludeTransaction             *connect.Client[dev1.ConcludeTransactionRequest, dev1.ConcludeTransactionResponse]
+	mysqlHostMetrics                *connect.Client[dev1.MysqlHostMetricsRequest, dev1.MysqlHostMetricsResponse]
+	replicationStatus               *connect.Client[dev1.ReplicationStatusRequest, dev1.ReplicationStatusResponse]
+	primaryStatus                   *connect.Client[dev1.PrimaryStatusRequest, dev1.PrimaryStatusResponse]
+	primaryPosition                 *connect.Client[dev1.PrimaryPositionRequest, dev1.PrimaryPositionResponse]
+	waitForPosition                 *connect.Client[dev1.WaitForPositionRequest, dev1.WaitForPositionResponse]
+	stopReplication                 *connect.Client[dev1.StopReplicationRequest, dev1.StopReplicationResponse]
+	stopReplicationMinimum          *connect.Client[dev1.StopReplicationMinimumRequest, dev1.StopReplicationMinimumResponse]
+	startReplication                *connect.Client[dev1.StartReplicationRequest, dev1.StartReplicationResponse]
+	startReplicationUntilAfter      *connect.Client[dev1.StartReplicationUntilAfterRequest, dev1.StartReplicationUntilAfterResponse]
+	getReplicas                     *connect.Client[dev1.GetReplicasRequest, dev1.GetReplicasResponse]
+	createVReplicationWorkflow      *connect.Client[dev1.CreateVReplicationWorkflowRequest, dev1.CreateVReplicationWorkflowResponse]
+	deleteTableData                 *connect.Client[dev1.DeleteTableDataRequest, dev1.DeleteTableDataResponse]
+	deleteVReplicationWorkflow      *connect.Client[dev1.DeleteVReplicationWorkflowRequest, dev1.DeleteVReplicationWorkflowResponse]
+	hasVReplicationWorkflows        *connect.Client[dev1.HasVReplicationWorkflowsRequest, dev1.HasVReplicationWorkflowsResponse]
+	readVReplicationWorkflow        *connect.Client[dev1.ReadVReplicationWorkflowRequest, dev1.ReadVReplicationWorkflowResponse]
+	readVReplicationWorkflows       *connect.Client[dev1.ReadVReplicationWorkflowsRequest, dev1.ReadVReplicationWorkflowsResponse]
+	updateVReplicationWorkflow      *connect.Client[dev1.UpdateVReplicationWorkflowRequest, dev1.UpdateVReplicationWorkflowResponse]
+	updateVReplicationWorkflows     *connect.Client[dev1.UpdateVReplicationWorkflowsRequest, dev1.UpdateVReplicationWorkflowsResponse]
+	validateVReplicationPermissions *connect.Client[dev1.ValidateVReplicationPermissionsRequest, dev1.ValidateVReplicationPermissionsResponse]
+	vReplicationExec                *connect.Client[dev1.VReplicationExecRequest, dev1.VReplicationExecResponse]
+	vReplicationWaitForPos          *connect.Client[dev1.VReplicationWaitForPosRequest, dev1.VReplicationWaitForPosResponse]
+	vDiff                           *connect.Client[dev1.VDiffRequest, dev1.VDiffResponse]
+	resetReplication                *connect.Client[dev1.ResetReplicationRequest, dev1.ResetReplicationResponse]
+	initPrimary                     *connect.Client[dev1.InitPrimaryRequest, dev1.InitPrimaryResponse]
+	populateReparentJournal         *connect.Client[dev1.PopulateReparentJournalRequest, dev1.PopulateReparentJournalResponse]
+	readReparentJournalInfo         *connect.Client[dev1.ReadReparentJournalInfoRequest, dev1.ReadReparentJournalInfoResponse]
+	initReplica                     *connect.Client[dev1.InitReplicaRequest, dev1.InitReplicaResponse]
+	demotePrimary                   *connect.Client[dev1.DemotePrimaryRequest, dev1.DemotePrimaryResponse]
+	undoDemotePrimary               *connect.Client[dev1.UndoDemotePrimaryRequest, dev1.UndoDemotePrimaryResponse]
+	replicaWasPromoted              *connect.Client[dev1.ReplicaWasPromotedRequest, dev1.ReplicaWasPromotedResponse]
+	resetReplicationParameters      *connect.Client[dev1.ResetReplicationParametersRequest, dev1.ResetReplicationParametersResponse]
+	fullStatus                      *connect.Client[dev1.FullStatusRequest, dev1.FullStatusResponse]
+	setReplicationSource            *connect.Client[dev1.SetReplicationSourceRequest, dev1.SetReplicationSourceResponse]
+	replicaWasRestarted             *connect.Client[dev1.ReplicaWasRestartedRequest, dev1.ReplicaWasRestartedResponse]
+	stopReplicationAndGetStatus     *connect.Client[dev1.StopReplicationAndGetStatusRequest, dev1.StopReplicationAndGetStatusResponse]
+	promoteReplica                  *connect.Client[dev1.PromoteReplicaRequest, dev1.PromoteReplicaResponse]
+	backup                          *connect.Client[dev1.BackupRequest, dev1.BackupResponse]
+	restoreFromBackup               *connect.Client[dev1.RestoreFromBackupRequest, dev1.RestoreFromBackupResponse]
+	checkThrottler                  *connect.Client[dev1.CheckThrottlerRequest, dev1.CheckThrottlerResponse]
+	getThrottlerStatus              *connect.Client[dev1.GetThrottlerStatusRequest, dev1.GetThrottlerStatusResponse]
 }
 
 // Ping calls tabletmanagerservice.TabletManager.Ping.
-func (c *tabletManagerClient) Ping(ctx context.Context, req *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error) {
+func (c *tabletManagerClient) Ping(ctx context.Context, req *connect.Request[dev1.PingRequest]) (*connect.Response[dev1.PingResponse], error) {
 	return c.ping.CallUnary(ctx, req)
 }
 
 // Sleep calls tabletmanagerservice.TabletManager.Sleep.
-func (c *tabletManagerClient) Sleep(ctx context.Context, req *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error) {
+func (c *tabletManagerClient) Sleep(ctx context.Context, req *connect.Request[dev1.SleepRequest]) (*connect.Response[dev1.SleepResponse], error) {
 	return c.sleep.CallUnary(ctx, req)
 }
 
 // ExecuteHook calls tabletmanagerservice.TabletManager.ExecuteHook.
-func (c *tabletManagerClient) ExecuteHook(ctx context.Context, req *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error) {
+func (c *tabletManagerClient) ExecuteHook(ctx context.Context, req *connect.Request[dev1.ExecuteHookRequest]) (*connect.Response[dev1.ExecuteHookResponse], error) {
 	return c.executeHook.CallUnary(ctx, req)
 }
 
 // GetSchema calls tabletmanagerservice.TabletManager.GetSchema.
-func (c *tabletManagerClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error) {
+func (c *tabletManagerClient) GetSchema(ctx context.Context, req *connect.Request[dev1.GetSchemaRequest]) (*connect.Response[dev1.GetSchemaResponse], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
 // GetPermissions calls tabletmanagerservice.TabletManager.GetPermissions.
-func (c *tabletManagerClient) GetPermissions(ctx context.Context, req *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error) {
+func (c *tabletManagerClient) GetPermissions(ctx context.Context, req *connect.Request[dev1.GetPermissionsRequest]) (*connect.Response[dev1.GetPermissionsResponse], error) {
 	return c.getPermissions.CallUnary(ctx, req)
 }
 
+// GetGlobalStatusVars calls tabletmanagerservice.TabletManager.GetGlobalStatusVars.
+func (c *tabletManagerClient) GetGlobalStatusVars(ctx context.Context, req *connect.Request[dev1.GetGlobalStatusVarsRequest]) (*connect.Response[dev1.GetGlobalStatusVarsResponse], error) {
+	return c.getGlobalStatusVars.CallUnary(ctx, req)
+}
+
 // SetReadOnly calls tabletmanagerservice.TabletManager.SetReadOnly.
-func (c *tabletManagerClient) SetReadOnly(ctx context.Context, req *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
+func (c *tabletManagerClient) SetReadOnly(ctx context.Context, req *connect.Request[dev1.SetReadOnlyRequest]) (*connect.Response[dev1.SetReadOnlyResponse], error) {
 	return c.setReadOnly.CallUnary(ctx, req)
 }
 
 // SetReadWrite calls tabletmanagerservice.TabletManager.SetReadWrite.
-func (c *tabletManagerClient) SetReadWrite(ctx context.Context, req *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
+func (c *tabletManagerClient) SetReadWrite(ctx context.Context, req *connect.Request[dev1.SetReadWriteRequest]) (*connect.Response[dev1.SetReadWriteResponse], error) {
 	return c.setReadWrite.CallUnary(ctx, req)
 }
 
+// ChangeTags calls tabletmanagerservice.TabletManager.ChangeTags.
+func (c *tabletManagerClient) ChangeTags(ctx context.Context, req *connect.Request[dev1.ChangeTagsRequest]) (*connect.Response[dev1.ChangeTagsResponse], error) {
+	return c.changeTags.CallUnary(ctx, req)
+}
+
 // ChangeType calls tabletmanagerservice.TabletManager.ChangeType.
-func (c *tabletManagerClient) ChangeType(ctx context.Context, req *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error) {
+func (c *tabletManagerClient) ChangeType(ctx context.Context, req *connect.Request[dev1.ChangeTypeRequest]) (*connect.Response[dev1.ChangeTypeResponse], error) {
 	return c.changeType.CallUnary(ctx, req)
 }
 
 // RefreshState calls tabletmanagerservice.TabletManager.RefreshState.
-func (c *tabletManagerClient) RefreshState(ctx context.Context, req *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
+func (c *tabletManagerClient) RefreshState(ctx context.Context, req *connect.Request[dev1.RefreshStateRequest]) (*connect.Response[dev1.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
 // RunHealthCheck calls tabletmanagerservice.TabletManager.RunHealthCheck.
-func (c *tabletManagerClient) RunHealthCheck(ctx context.Context, req *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
+func (c *tabletManagerClient) RunHealthCheck(ctx context.Context, req *connect.Request[dev1.RunHealthCheckRequest]) (*connect.Response[dev1.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
 // ReloadSchema calls tabletmanagerservice.TabletManager.ReloadSchema.
-func (c *tabletManagerClient) ReloadSchema(ctx context.Context, req *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error) {
+func (c *tabletManagerClient) ReloadSchema(ctx context.Context, req *connect.Request[dev1.ReloadSchemaRequest]) (*connect.Response[dev1.ReloadSchemaResponse], error) {
 	return c.reloadSchema.CallUnary(ctx, req)
 }
 
 // PreflightSchema calls tabletmanagerservice.TabletManager.PreflightSchema.
-func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error) {
+func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect.Request[dev1.PreflightSchemaRequest]) (*connect.Response[dev1.PreflightSchemaResponse], error) {
 	return c.preflightSchema.CallUnary(ctx, req)
 }
 
 // ApplySchema calls tabletmanagerservice.TabletManager.ApplySchema.
-func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
+func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect.Request[dev1.ApplySchemaRequest]) (*connect.Response[dev1.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
 }
 
 // ResetSequences calls tabletmanagerservice.TabletManager.ResetSequences.
-func (c *tabletManagerClient) ResetSequences(ctx context.Context, req *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
+func (c *tabletManagerClient) ResetSequences(ctx context.Context, req *connect.Request[dev1.ResetSequencesRequest]) (*connect.Response[dev1.ResetSequencesResponse], error) {
 	return c.resetSequences.CallUnary(ctx, req)
 }
 
 // LockTables calls tabletmanagerservice.TabletManager.LockTables.
-func (c *tabletManagerClient) LockTables(ctx context.Context, req *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error) {
+func (c *tabletManagerClient) LockTables(ctx context.Context, req *connect.Request[dev1.LockTablesRequest]) (*connect.Response[dev1.LockTablesResponse], error) {
 	return c.lockTables.CallUnary(ctx, req)
 }
 
 // UnlockTables calls tabletmanagerservice.TabletManager.UnlockTables.
-func (c *tabletManagerClient) UnlockTables(ctx context.Context, req *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error) {
+func (c *tabletManagerClient) UnlockTables(ctx context.Context, req *connect.Request[dev1.UnlockTablesRequest]) (*connect.Response[dev1.UnlockTablesResponse], error) {
 	return c.unlockTables.CallUnary(ctx, req)
 }
 
 // ExecuteQuery calls tabletmanagerservice.TabletManager.ExecuteQuery.
-func (c *tabletManagerClient) ExecuteQuery(ctx context.Context, req *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error) {
+func (c *tabletManagerClient) ExecuteQuery(ctx context.Context, req *connect.Request[dev1.ExecuteQueryRequest]) (*connect.Response[dev1.ExecuteQueryResponse], error) {
 	return c.executeQuery.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsDba calls tabletmanagerservice.TabletManager.ExecuteFetchAsDba.
-func (c *tabletManagerClient) ExecuteFetchAsDba(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsDba(ctx context.Context, req *connect.Request[dev1.ExecuteFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteFetchAsDbaResponse], error) {
 	return c.executeFetchAsDba.CallUnary(ctx, req)
+}
+
+// ExecuteMultiFetchAsDba calls
+// tabletmanagerservice.TabletManager.ExecuteMultiFetchAsDba.
+func (c *tabletManagerClient) ExecuteMultiFetchAsDba(ctx context.Context, req *connect.Request[dev1.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteMultiFetchAsDbaResponse], error) {
+	return c.executeMultiFetchAsDba.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsAllPrivs calls
 // tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs.
-func (c *tabletManagerClient) ExecuteFetchAsAllPrivs(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsAllPrivs(ctx context.Context, req *connect.Request[dev1.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev1.ExecuteFetchAsAllPrivsResponse], error) {
 	return c.executeFetchAsAllPrivs.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsApp calls tabletmanagerservice.TabletManager.ExecuteFetchAsApp.
-func (c *tabletManagerClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error) {
+func (c *tabletManagerClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[dev1.ExecuteFetchAsAppRequest]) (*connect.Response[dev1.ExecuteFetchAsAppResponse], error) {
 	return c.executeFetchAsApp.CallUnary(ctx, req)
 }
 
+// GetUnresolvedTransactions calls
+// tabletmanagerservice.TabletManager.GetUnresolvedTransactions.
+func (c *tabletManagerClient) GetUnresolvedTransactions(ctx context.Context, req *connect.Request[dev1.GetUnresolvedTransactionsRequest]) (*connect.Response[dev1.GetUnresolvedTransactionsResponse], error) {
+	return c.getUnresolvedTransactions.CallUnary(ctx, req)
+}
+
+// ReadTransaction calls tabletmanagerservice.TabletManager.ReadTransaction.
+func (c *tabletManagerClient) ReadTransaction(ctx context.Context, req *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error) {
+	return c.readTransaction.CallUnary(ctx, req)
+}
+
+// GetTransactionInfo calls tabletmanagerservice.TabletManager.GetTransactionInfo.
+func (c *tabletManagerClient) GetTransactionInfo(ctx context.Context, req *connect.Request[dev1.GetTransactionInfoRequest]) (*connect.Response[dev1.GetTransactionInfoResponse], error) {
+	return c.getTransactionInfo.CallUnary(ctx, req)
+}
+
+// ConcludeTransaction calls tabletmanagerservice.TabletManager.ConcludeTransaction.
+func (c *tabletManagerClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error) {
+	return c.concludeTransaction.CallUnary(ctx, req)
+}
+
+// MysqlHostMetrics calls tabletmanagerservice.TabletManager.MysqlHostMetrics.
+func (c *tabletManagerClient) MysqlHostMetrics(ctx context.Context, req *connect.Request[dev1.MysqlHostMetricsRequest]) (*connect.Response[dev1.MysqlHostMetricsResponse], error) {
+	return c.mysqlHostMetrics.CallUnary(ctx, req)
+}
+
 // ReplicationStatus calls tabletmanagerservice.TabletManager.ReplicationStatus.
-func (c *tabletManagerClient) ReplicationStatus(ctx context.Context, req *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error) {
+func (c *tabletManagerClient) ReplicationStatus(ctx context.Context, req *connect.Request[dev1.ReplicationStatusRequest]) (*connect.Response[dev1.ReplicationStatusResponse], error) {
 	return c.replicationStatus.CallUnary(ctx, req)
 }
 
 // PrimaryStatus calls tabletmanagerservice.TabletManager.PrimaryStatus.
-func (c *tabletManagerClient) PrimaryStatus(ctx context.Context, req *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error) {
+func (c *tabletManagerClient) PrimaryStatus(ctx context.Context, req *connect.Request[dev1.PrimaryStatusRequest]) (*connect.Response[dev1.PrimaryStatusResponse], error) {
 	return c.primaryStatus.CallUnary(ctx, req)
 }
 
 // PrimaryPosition calls tabletmanagerservice.TabletManager.PrimaryPosition.
-func (c *tabletManagerClient) PrimaryPosition(ctx context.Context, req *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error) {
+func (c *tabletManagerClient) PrimaryPosition(ctx context.Context, req *connect.Request[dev1.PrimaryPositionRequest]) (*connect.Response[dev1.PrimaryPositionResponse], error) {
 	return c.primaryPosition.CallUnary(ctx, req)
 }
 
 // WaitForPosition calls tabletmanagerservice.TabletManager.WaitForPosition.
-func (c *tabletManagerClient) WaitForPosition(ctx context.Context, req *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error) {
+func (c *tabletManagerClient) WaitForPosition(ctx context.Context, req *connect.Request[dev1.WaitForPositionRequest]) (*connect.Response[dev1.WaitForPositionResponse], error) {
 	return c.waitForPosition.CallUnary(ctx, req)
 }
 
 // StopReplication calls tabletmanagerservice.TabletManager.StopReplication.
-func (c *tabletManagerClient) StopReplication(ctx context.Context, req *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
+func (c *tabletManagerClient) StopReplication(ctx context.Context, req *connect.Request[dev1.StopReplicationRequest]) (*connect.Response[dev1.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
 // StopReplicationMinimum calls
 // tabletmanagerservice.TabletManager.StopReplicationMinimum.
-func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error) {
+func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *connect.Request[dev1.StopReplicationMinimumRequest]) (*connect.Response[dev1.StopReplicationMinimumResponse], error) {
 	return c.stopReplicationMinimum.CallUnary(ctx, req)
 }
 
 // StartReplication calls tabletmanagerservice.TabletManager.StartReplication.
-func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
+func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect.Request[dev1.StartReplicationRequest]) (*connect.Response[dev1.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
 // StartReplicationUntilAfter calls
 // tabletmanagerservice.TabletManager.StartReplicationUntilAfter.
-func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
+func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect.Request[dev1.StartReplicationUntilAfterRequest]) (*connect.Response[dev1.StartReplicationUntilAfterResponse], error) {
 	return c.startReplicationUntilAfter.CallUnary(ctx, req)
 }
 
 // GetReplicas calls tabletmanagerservice.TabletManager.GetReplicas.
-func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error) {
+func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect.Request[dev1.GetReplicasRequest]) (*connect.Response[dev1.GetReplicasResponse], error) {
 	return c.getReplicas.CallUnary(ctx, req)
 }
 
 // CreateVReplicationWorkflow calls
 // tabletmanagerservice.TabletManager.CreateVReplicationWorkflow.
-func (c *tabletManagerClient) CreateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
+func (c *tabletManagerClient) CreateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev1.CreateVReplicationWorkflowRequest]) (*connect.Response[dev1.CreateVReplicationWorkflowResponse], error) {
 	return c.createVReplicationWorkflow.CallUnary(ctx, req)
+}
+
+// DeleteTableData calls tabletmanagerservice.TabletManager.DeleteTableData.
+func (c *tabletManagerClient) DeleteTableData(ctx context.Context, req *connect.Request[dev1.DeleteTableDataRequest]) (*connect.Response[dev1.DeleteTableDataResponse], error) {
+	return c.deleteTableData.CallUnary(ctx, req)
 }
 
 // DeleteVReplicationWorkflow calls
 // tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow.
-func (c *tabletManagerClient) DeleteVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
+func (c *tabletManagerClient) DeleteVReplicationWorkflow(ctx context.Context, req *connect.Request[dev1.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev1.DeleteVReplicationWorkflowResponse], error) {
 	return c.deleteVReplicationWorkflow.CallUnary(ctx, req)
+}
+
+// HasVReplicationWorkflows calls
+// tabletmanagerservice.TabletManager.HasVReplicationWorkflows.
+func (c *tabletManagerClient) HasVReplicationWorkflows(ctx context.Context, req *connect.Request[dev1.HasVReplicationWorkflowsRequest]) (*connect.Response[dev1.HasVReplicationWorkflowsResponse], error) {
+	return c.hasVReplicationWorkflows.CallUnary(ctx, req)
 }
 
 // ReadVReplicationWorkflow calls
 // tabletmanagerservice.TabletManager.ReadVReplicationWorkflow.
-func (c *tabletManagerClient) ReadVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
+func (c *tabletManagerClient) ReadVReplicationWorkflow(ctx context.Context, req *connect.Request[dev1.ReadVReplicationWorkflowRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowResponse], error) {
 	return c.readVReplicationWorkflow.CallUnary(ctx, req)
 }
 
+// ReadVReplicationWorkflows calls
+// tabletmanagerservice.TabletManager.ReadVReplicationWorkflows.
+func (c *tabletManagerClient) ReadVReplicationWorkflows(ctx context.Context, req *connect.Request[dev1.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowsResponse], error) {
+	return c.readVReplicationWorkflows.CallUnary(ctx, req)
+}
+
+// UpdateVReplicationWorkflow calls
+// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow.
+func (c *tabletManagerClient) UpdateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev1.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowResponse], error) {
+	return c.updateVReplicationWorkflow.CallUnary(ctx, req)
+}
+
+// UpdateVReplicationWorkflows calls
+// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflows.
+func (c *tabletManagerClient) UpdateVReplicationWorkflows(ctx context.Context, req *connect.Request[dev1.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowsResponse], error) {
+	return c.updateVReplicationWorkflows.CallUnary(ctx, req)
+}
+
+// ValidateVReplicationPermissions calls
+// tabletmanagerservice.TabletManager.ValidateVReplicationPermissions.
+func (c *tabletManagerClient) ValidateVReplicationPermissions(ctx context.Context, req *connect.Request[dev1.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev1.ValidateVReplicationPermissionsResponse], error) {
+	return c.validateVReplicationPermissions.CallUnary(ctx, req)
+}
+
 // VReplicationExec calls tabletmanagerservice.TabletManager.VReplicationExec.
-func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
+func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect.Request[dev1.VReplicationExecRequest]) (*connect.Response[dev1.VReplicationExecResponse], error) {
 	return c.vReplicationExec.CallUnary(ctx, req)
 }
 
 // VReplicationWaitForPos calls
 // tabletmanagerservice.TabletManager.VReplicationWaitForPos.
-func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
+func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect.Request[dev1.VReplicationWaitForPosRequest]) (*connect.Response[dev1.VReplicationWaitForPosResponse], error) {
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
 }
 
-// UpdateVReplicationWorkflow calls
-// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow.
-func (c *tabletManagerClient) UpdateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
-	return c.updateVReplicationWorkflow.CallUnary(ctx, req)
-}
-
 // VDiff calls tabletmanagerservice.TabletManager.VDiff.
-func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {
+func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect.Request[dev1.VDiffRequest]) (*connect.Response[dev1.VDiffResponse], error) {
 	return c.vDiff.CallUnary(ctx, req)
 }
 
 // ResetReplication calls tabletmanagerservice.TabletManager.ResetReplication.
-func (c *tabletManagerClient) ResetReplication(ctx context.Context, req *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error) {
+func (c *tabletManagerClient) ResetReplication(ctx context.Context, req *connect.Request[dev1.ResetReplicationRequest]) (*connect.Response[dev1.ResetReplicationResponse], error) {
 	return c.resetReplication.CallUnary(ctx, req)
 }
 
 // InitPrimary calls tabletmanagerservice.TabletManager.InitPrimary.
-func (c *tabletManagerClient) InitPrimary(ctx context.Context, req *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error) {
+func (c *tabletManagerClient) InitPrimary(ctx context.Context, req *connect.Request[dev1.InitPrimaryRequest]) (*connect.Response[dev1.InitPrimaryResponse], error) {
 	return c.initPrimary.CallUnary(ctx, req)
 }
 
 // PopulateReparentJournal calls
 // tabletmanagerservice.TabletManager.PopulateReparentJournal.
-func (c *tabletManagerClient) PopulateReparentJournal(ctx context.Context, req *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error) {
+func (c *tabletManagerClient) PopulateReparentJournal(ctx context.Context, req *connect.Request[dev1.PopulateReparentJournalRequest]) (*connect.Response[dev1.PopulateReparentJournalResponse], error) {
 	return c.populateReparentJournal.CallUnary(ctx, req)
 }
 
+// ReadReparentJournalInfo calls
+// tabletmanagerservice.TabletManager.ReadReparentJournalInfo.
+func (c *tabletManagerClient) ReadReparentJournalInfo(ctx context.Context, req *connect.Request[dev1.ReadReparentJournalInfoRequest]) (*connect.Response[dev1.ReadReparentJournalInfoResponse], error) {
+	return c.readReparentJournalInfo.CallUnary(ctx, req)
+}
+
 // InitReplica calls tabletmanagerservice.TabletManager.InitReplica.
-func (c *tabletManagerClient) InitReplica(ctx context.Context, req *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error) {
+func (c *tabletManagerClient) InitReplica(ctx context.Context, req *connect.Request[dev1.InitReplicaRequest]) (*connect.Response[dev1.InitReplicaResponse], error) {
 	return c.initReplica.CallUnary(ctx, req)
 }
 
 // DemotePrimary calls tabletmanagerservice.TabletManager.DemotePrimary.
-func (c *tabletManagerClient) DemotePrimary(ctx context.Context, req *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error) {
+func (c *tabletManagerClient) DemotePrimary(ctx context.Context, req *connect.Request[dev1.DemotePrimaryRequest]) (*connect.Response[dev1.DemotePrimaryResponse], error) {
 	return c.demotePrimary.CallUnary(ctx, req)
 }
 
 // UndoDemotePrimary calls tabletmanagerservice.TabletManager.UndoDemotePrimary.
-func (c *tabletManagerClient) UndoDemotePrimary(ctx context.Context, req *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error) {
+func (c *tabletManagerClient) UndoDemotePrimary(ctx context.Context, req *connect.Request[dev1.UndoDemotePrimaryRequest]) (*connect.Response[dev1.UndoDemotePrimaryResponse], error) {
 	return c.undoDemotePrimary.CallUnary(ctx, req)
 }
 
 // ReplicaWasPromoted calls tabletmanagerservice.TabletManager.ReplicaWasPromoted.
-func (c *tabletManagerClient) ReplicaWasPromoted(ctx context.Context, req *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error) {
+func (c *tabletManagerClient) ReplicaWasPromoted(ctx context.Context, req *connect.Request[dev1.ReplicaWasPromotedRequest]) (*connect.Response[dev1.ReplicaWasPromotedResponse], error) {
 	return c.replicaWasPromoted.CallUnary(ctx, req)
 }
 
 // ResetReplicationParameters calls
 // tabletmanagerservice.TabletManager.ResetReplicationParameters.
-func (c *tabletManagerClient) ResetReplicationParameters(ctx context.Context, req *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error) {
+func (c *tabletManagerClient) ResetReplicationParameters(ctx context.Context, req *connect.Request[dev1.ResetReplicationParametersRequest]) (*connect.Response[dev1.ResetReplicationParametersResponse], error) {
 	return c.resetReplicationParameters.CallUnary(ctx, req)
 }
 
 // FullStatus calls tabletmanagerservice.TabletManager.FullStatus.
-func (c *tabletManagerClient) FullStatus(ctx context.Context, req *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error) {
+func (c *tabletManagerClient) FullStatus(ctx context.Context, req *connect.Request[dev1.FullStatusRequest]) (*connect.Response[dev1.FullStatusResponse], error) {
 	return c.fullStatus.CallUnary(ctx, req)
 }
 
 // SetReplicationSource calls tabletmanagerservice.TabletManager.SetReplicationSource.
-func (c *tabletManagerClient) SetReplicationSource(ctx context.Context, req *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error) {
+func (c *tabletManagerClient) SetReplicationSource(ctx context.Context, req *connect.Request[dev1.SetReplicationSourceRequest]) (*connect.Response[dev1.SetReplicationSourceResponse], error) {
 	return c.setReplicationSource.CallUnary(ctx, req)
 }
 
 // ReplicaWasRestarted calls tabletmanagerservice.TabletManager.ReplicaWasRestarted.
-func (c *tabletManagerClient) ReplicaWasRestarted(ctx context.Context, req *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error) {
+func (c *tabletManagerClient) ReplicaWasRestarted(ctx context.Context, req *connect.Request[dev1.ReplicaWasRestartedRequest]) (*connect.Response[dev1.ReplicaWasRestartedResponse], error) {
 	return c.replicaWasRestarted.CallUnary(ctx, req)
 }
 
 // StopReplicationAndGetStatus calls
 // tabletmanagerservice.TabletManager.StopReplicationAndGetStatus.
-func (c *tabletManagerClient) StopReplicationAndGetStatus(ctx context.Context, req *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error) {
+func (c *tabletManagerClient) StopReplicationAndGetStatus(ctx context.Context, req *connect.Request[dev1.StopReplicationAndGetStatusRequest]) (*connect.Response[dev1.StopReplicationAndGetStatusResponse], error) {
 	return c.stopReplicationAndGetStatus.CallUnary(ctx, req)
 }
 
 // PromoteReplica calls tabletmanagerservice.TabletManager.PromoteReplica.
-func (c *tabletManagerClient) PromoteReplica(ctx context.Context, req *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error) {
+func (c *tabletManagerClient) PromoteReplica(ctx context.Context, req *connect.Request[dev1.PromoteReplicaRequest]) (*connect.Response[dev1.PromoteReplicaResponse], error) {
 	return c.promoteReplica.CallUnary(ctx, req)
 }
 
 // Backup calls tabletmanagerservice.TabletManager.Backup.
-func (c *tabletManagerClient) Backup(ctx context.Context, req *connect.Request[dev.BackupRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error) {
+func (c *tabletManagerClient) Backup(ctx context.Context, req *connect.Request[dev1.BackupRequest]) (*connect.ServerStreamForClient[dev1.BackupResponse], error) {
 	return c.backup.CallServerStream(ctx, req)
 }
 
 // RestoreFromBackup calls tabletmanagerservice.TabletManager.RestoreFromBackup.
-func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error) {
+func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connect.Request[dev1.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev1.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
 // CheckThrottler calls tabletmanagerservice.TabletManager.CheckThrottler.
-func (c *tabletManagerClient) CheckThrottler(ctx context.Context, req *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
+func (c *tabletManagerClient) CheckThrottler(ctx context.Context, req *connect.Request[dev1.CheckThrottlerRequest]) (*connect.Response[dev1.CheckThrottlerResponse], error) {
 	return c.checkThrottler.CallUnary(ctx, req)
+}
+
+// GetThrottlerStatus calls tabletmanagerservice.TabletManager.GetThrottlerStatus.
+func (c *tabletManagerClient) GetThrottlerStatus(ctx context.Context, req *connect.Request[dev1.GetThrottlerStatusRequest]) (*connect.Response[dev1.GetThrottlerStatusResponse], error) {
+	return c.getThrottlerStatus.CallUnary(ctx, req)
 }
 
 // TabletManagerHandler is an implementation of the tabletmanagerservice.TabletManager
 // service.
 type TabletManagerHandler interface {
 	// Ping returns the input payload
-	Ping(context.Context, *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error)
+	Ping(context.Context, *connect.Request[dev1.PingRequest]) (*connect.Response[dev1.PingResponse], error)
 	// Sleep sleeps for the provided duration
-	Sleep(context.Context, *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error)
+	Sleep(context.Context, *connect.Request[dev1.SleepRequest]) (*connect.Response[dev1.SleepResponse], error)
 	// ExecuteHook executes the hook remotely
-	ExecuteHook(context.Context, *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[dev1.ExecuteHookRequest]) (*connect.Response[dev1.ExecuteHookResponse], error)
 	// GetSchema asks the tablet for its schema
-	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest]) (*connect.Response[dev1.GetSchemaResponse], error)
 	// GetPermissions asks the tablet for its permissions
-	GetPermissions(context.Context, *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error)
-	SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error)
-	SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error)
+	GetPermissions(context.Context, *connect.Request[dev1.GetPermissionsRequest]) (*connect.Response[dev1.GetPermissionsResponse], error)
+	// GetGlobalStatusVars returns the server's global status variables asked for.
+	// An empty/nil variable name parameter slice means you want all of them.
+	GetGlobalStatusVars(context.Context, *connect.Request[dev1.GetGlobalStatusVarsRequest]) (*connect.Response[dev1.GetGlobalStatusVarsResponse], error)
+	SetReadOnly(context.Context, *connect.Request[dev1.SetReadOnlyRequest]) (*connect.Response[dev1.SetReadOnlyResponse], error)
+	SetReadWrite(context.Context, *connect.Request[dev1.SetReadWriteRequest]) (*connect.Response[dev1.SetReadWriteResponse], error)
+	// ChangeTags asks the remote tablet to change its tags
+	ChangeTags(context.Context, *connect.Request[dev1.ChangeTagsRequest]) (*connect.Response[dev1.ChangeTagsResponse], error)
 	// ChangeType asks the remote tablet to change its type
-	ChangeType(context.Context, *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error)
-	RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error)
-	RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error)
-	ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error)
-	PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error)
-	ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error)
-	ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error)
-	LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error)
-	UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error)
-	ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error)
-	ExecuteFetchAsDba(context.Context, *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error)
-	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error)
-	ExecuteFetchAsApp(context.Context, *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error)
+	ChangeType(context.Context, *connect.Request[dev1.ChangeTypeRequest]) (*connect.Response[dev1.ChangeTypeResponse], error)
+	RefreshState(context.Context, *connect.Request[dev1.RefreshStateRequest]) (*connect.Response[dev1.RefreshStateResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[dev1.RunHealthCheckRequest]) (*connect.Response[dev1.RunHealthCheckResponse], error)
+	ReloadSchema(context.Context, *connect.Request[dev1.ReloadSchemaRequest]) (*connect.Response[dev1.ReloadSchemaResponse], error)
+	PreflightSchema(context.Context, *connect.Request[dev1.PreflightSchemaRequest]) (*connect.Response[dev1.PreflightSchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[dev1.ApplySchemaRequest]) (*connect.Response[dev1.ApplySchemaResponse], error)
+	ResetSequences(context.Context, *connect.Request[dev1.ResetSequencesRequest]) (*connect.Response[dev1.ResetSequencesResponse], error)
+	LockTables(context.Context, *connect.Request[dev1.LockTablesRequest]) (*connect.Response[dev1.LockTablesResponse], error)
+	UnlockTables(context.Context, *connect.Request[dev1.UnlockTablesRequest]) (*connect.Response[dev1.UnlockTablesResponse], error)
+	ExecuteQuery(context.Context, *connect.Request[dev1.ExecuteQueryRequest]) (*connect.Response[dev1.ExecuteQueryResponse], error)
+	ExecuteFetchAsDba(context.Context, *connect.Request[dev1.ExecuteFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteFetchAsDbaResponse], error)
+	ExecuteMultiFetchAsDba(context.Context, *connect.Request[dev1.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteMultiFetchAsDbaResponse], error)
+	ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev1.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev1.ExecuteFetchAsAllPrivsResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[dev1.ExecuteFetchAsAppRequest]) (*connect.Response[dev1.ExecuteFetchAsAppResponse], error)
+	GetUnresolvedTransactions(context.Context, *connect.Request[dev1.GetUnresolvedTransactionsRequest]) (*connect.Response[dev1.GetUnresolvedTransactionsResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error)
+	GetTransactionInfo(context.Context, *connect.Request[dev1.GetTransactionInfoRequest]) (*connect.Response[dev1.GetTransactionInfoResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error)
+	MysqlHostMetrics(context.Context, *connect.Request[dev1.MysqlHostMetricsRequest]) (*connect.Response[dev1.MysqlHostMetricsResponse], error)
 	// ReplicationStatus returns the current replication status.
-	ReplicationStatus(context.Context, *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error)
+	ReplicationStatus(context.Context, *connect.Request[dev1.ReplicationStatusRequest]) (*connect.Response[dev1.ReplicationStatusResponse], error)
 	// PrimaryStatus returns the current primary status.
-	PrimaryStatus(context.Context, *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error)
+	PrimaryStatus(context.Context, *connect.Request[dev1.PrimaryStatusRequest]) (*connect.Response[dev1.PrimaryStatusResponse], error)
 	// PrimaryPosition returns the current primary position
-	PrimaryPosition(context.Context, *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error)
+	PrimaryPosition(context.Context, *connect.Request[dev1.PrimaryPositionRequest]) (*connect.Response[dev1.PrimaryPositionResponse], error)
 	// WaitForPosition waits for the position to be reached
-	WaitForPosition(context.Context, *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error)
+	WaitForPosition(context.Context, *connect.Request[dev1.WaitForPositionRequest]) (*connect.Response[dev1.WaitForPositionResponse], error)
 	// StopReplication makes mysql stop its replication
-	StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[dev1.StopReplicationRequest]) (*connect.Response[dev1.StopReplicationResponse], error)
 	// StopReplicationMinimum stops the mysql replication after it reaches
 	// the provided minimum point
-	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
+	StopReplicationMinimum(context.Context, *connect.Request[dev1.StopReplicationMinimumRequest]) (*connect.Response[dev1.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
-	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[dev1.StartReplicationRequest]) (*connect.Response[dev1.StartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
-	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
+	StartReplicationUntilAfter(context.Context, *connect.Request[dev1.StartReplicationUntilAfterRequest]) (*connect.Response[dev1.StartReplicationUntilAfterResponse], error)
 	// GetReplicas asks for the list of mysql replicas
-	GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error)
+	GetReplicas(context.Context, *connect.Request[dev1.GetReplicasRequest]) (*connect.Response[dev1.GetReplicasResponse], error)
 	// VReplication API
-	CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error)
-	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error)
-	ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error)
-	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
-	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
-	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error)
+	CreateVReplicationWorkflow(context.Context, *connect.Request[dev1.CreateVReplicationWorkflowRequest]) (*connect.Response[dev1.CreateVReplicationWorkflowResponse], error)
+	DeleteTableData(context.Context, *connect.Request[dev1.DeleteTableDataRequest]) (*connect.Response[dev1.DeleteTableDataResponse], error)
+	DeleteVReplicationWorkflow(context.Context, *connect.Request[dev1.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev1.DeleteVReplicationWorkflowResponse], error)
+	HasVReplicationWorkflows(context.Context, *connect.Request[dev1.HasVReplicationWorkflowsRequest]) (*connect.Response[dev1.HasVReplicationWorkflowsResponse], error)
+	ReadVReplicationWorkflow(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowResponse], error)
+	ReadVReplicationWorkflows(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowsResponse], error)
+	UpdateVReplicationWorkflow(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowResponse], error)
+	UpdateVReplicationWorkflows(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowsResponse], error)
+	ValidateVReplicationPermissions(context.Context, *connect.Request[dev1.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev1.ValidateVReplicationPermissionsResponse], error)
+	VReplicationExec(context.Context, *connect.Request[dev1.VReplicationExecRequest]) (*connect.Response[dev1.VReplicationExecResponse], error)
+	VReplicationWaitForPos(context.Context, *connect.Request[dev1.VReplicationWaitForPosRequest]) (*connect.Response[dev1.VReplicationWaitForPosResponse], error)
 	// VDiff API
-	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
+	VDiff(context.Context, *connect.Request[dev1.VDiffRequest]) (*connect.Response[dev1.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
-	ResetReplication(context.Context, *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error)
+	ResetReplication(context.Context, *connect.Request[dev1.ResetReplicationRequest]) (*connect.Response[dev1.ResetReplicationResponse], error)
 	// InitPrimary initializes the tablet as a primary
-	InitPrimary(context.Context, *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error)
+	InitPrimary(context.Context, *connect.Request[dev1.InitPrimaryRequest]) (*connect.Response[dev1.InitPrimaryResponse], error)
 	// PopulateReparentJournal tells the tablet to add an entry to its
 	// reparent journal
-	PopulateReparentJournal(context.Context, *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error)
+	PopulateReparentJournal(context.Context, *connect.Request[dev1.PopulateReparentJournalRequest]) (*connect.Response[dev1.PopulateReparentJournalResponse], error)
+	// ReadReparentJournalInfo reads the information from reparent journal
+	ReadReparentJournalInfo(context.Context, *connect.Request[dev1.ReadReparentJournalInfoRequest]) (*connect.Response[dev1.ReadReparentJournalInfoResponse], error)
 	// InitReplica tells the tablet to reparent to the primary unconditionally
-	InitReplica(context.Context, *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error)
+	InitReplica(context.Context, *connect.Request[dev1.InitReplicaRequest]) (*connect.Response[dev1.InitReplicaResponse], error)
 	// DemotePrimary tells the soon-to-be-former primary it's gonna change
-	DemotePrimary(context.Context, *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error)
+	DemotePrimary(context.Context, *connect.Request[dev1.DemotePrimaryRequest]) (*connect.Response[dev1.DemotePrimaryResponse], error)
 	// UndoDemotePrimary reverts all changes made by DemotePrimary
-	UndoDemotePrimary(context.Context, *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error)
+	UndoDemotePrimary(context.Context, *connect.Request[dev1.UndoDemotePrimaryRequest]) (*connect.Response[dev1.UndoDemotePrimaryResponse], error)
 	// ReplicaWasPromoted tells the remote tablet it is now the primary
-	ReplicaWasPromoted(context.Context, *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error)
+	ReplicaWasPromoted(context.Context, *connect.Request[dev1.ReplicaWasPromotedRequest]) (*connect.Response[dev1.ReplicaWasPromotedResponse], error)
 	// ResetReplicationParameters resets the replica replication parameters
-	ResetReplicationParameters(context.Context, *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error)
+	ResetReplicationParameters(context.Context, *connect.Request[dev1.ResetReplicationParametersRequest]) (*connect.Response[dev1.ResetReplicationParametersResponse], error)
 	// FullStatus collects and returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	FullStatus(context.Context, *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error)
+	FullStatus(context.Context, *connect.Request[dev1.FullStatusRequest]) (*connect.Response[dev1.FullStatusResponse], error)
 	// SetReplicationSource tells the replica to reparent
-	SetReplicationSource(context.Context, *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error)
+	SetReplicationSource(context.Context, *connect.Request[dev1.SetReplicationSourceRequest]) (*connect.Response[dev1.SetReplicationSourceResponse], error)
 	// ReplicaWasRestarted tells the remote tablet its primary has changed
-	ReplicaWasRestarted(context.Context, *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error)
+	ReplicaWasRestarted(context.Context, *connect.Request[dev1.ReplicaWasRestartedRequest]) (*connect.Response[dev1.ReplicaWasRestartedResponse], error)
 	// StopReplicationAndGetStatus stops MySQL replication, and returns the
 	// replication status
-	StopReplicationAndGetStatus(context.Context, *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error)
+	StopReplicationAndGetStatus(context.Context, *connect.Request[dev1.StopReplicationAndGetStatusRequest]) (*connect.Response[dev1.StopReplicationAndGetStatusResponse], error)
 	// PromoteReplica makes the replica the new primary
-	PromoteReplica(context.Context, *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error)
-	Backup(context.Context, *connect.Request[dev.BackupRequest], *connect.ServerStream[dev.BackupResponse]) error
+	PromoteReplica(context.Context, *connect.Request[dev1.PromoteReplicaRequest]) (*connect.Response[dev1.PromoteReplicaResponse], error)
+	Backup(context.Context, *connect.Request[dev1.BackupRequest], *connect.ServerStream[dev1.BackupResponse]) error
 	// RestoreFromBackup deletes all local data and restores it from the latest backup.
-	RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error
+	RestoreFromBackup(context.Context, *connect.Request[dev1.RestoreFromBackupRequest], *connect.ServerStream[dev1.RestoreFromBackupResponse]) error
 	// CheckThrottler issues a 'check' on a tablet's throttler
-	CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error)
+	CheckThrottler(context.Context, *connect.Request[dev1.CheckThrottlerRequest]) (*connect.Response[dev1.CheckThrottlerResponse], error)
+	// GetThrottlerStatus gets the status of a tablet throttler
+	GetThrottlerStatus(context.Context, *connect.Request[dev1.GetThrottlerStatusRequest]) (*connect.Response[dev1.GetThrottlerStatusResponse], error)
 }
 
 // NewTabletManagerHandler builds an HTTP handler from the service implementation. It returns the
@@ -998,262 +1394,404 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 	tabletManagerPingHandler := connect.NewUnaryHandler(
 		TabletManagerPingProcedure,
 		svc.Ping,
-		opts...,
+		connect.WithSchema(tabletManagerPingMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerSleepHandler := connect.NewUnaryHandler(
 		TabletManagerSleepProcedure,
 		svc.Sleep,
-		opts...,
+		connect.WithSchema(tabletManagerSleepMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerExecuteHookHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteHookProcedure,
 		svc.ExecuteHook,
-		opts...,
+		connect.WithSchema(tabletManagerExecuteHookMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerGetSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerGetSchemaProcedure,
 		svc.GetSchema,
-		opts...,
+		connect.WithSchema(tabletManagerGetSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerGetPermissionsHandler := connect.NewUnaryHandler(
 		TabletManagerGetPermissionsProcedure,
 		svc.GetPermissions,
-		opts...,
+		connect.WithSchema(tabletManagerGetPermissionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetGlobalStatusVarsHandler := connect.NewUnaryHandler(
+		TabletManagerGetGlobalStatusVarsProcedure,
+		svc.GetGlobalStatusVars,
+		connect.WithSchema(tabletManagerGetGlobalStatusVarsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerSetReadOnlyHandler := connect.NewUnaryHandler(
 		TabletManagerSetReadOnlyProcedure,
 		svc.SetReadOnly,
-		opts...,
+		connect.WithSchema(tabletManagerSetReadOnlyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerSetReadWriteHandler := connect.NewUnaryHandler(
 		TabletManagerSetReadWriteProcedure,
 		svc.SetReadWrite,
-		opts...,
+		connect.WithSchema(tabletManagerSetReadWriteMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerChangeTagsHandler := connect.NewUnaryHandler(
+		TabletManagerChangeTagsProcedure,
+		svc.ChangeTags,
+		connect.WithSchema(tabletManagerChangeTagsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerChangeTypeHandler := connect.NewUnaryHandler(
 		TabletManagerChangeTypeProcedure,
 		svc.ChangeType,
-		opts...,
+		connect.WithSchema(tabletManagerChangeTypeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerRefreshStateHandler := connect.NewUnaryHandler(
 		TabletManagerRefreshStateProcedure,
 		svc.RefreshState,
-		opts...,
+		connect.WithSchema(tabletManagerRefreshStateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerRunHealthCheckHandler := connect.NewUnaryHandler(
 		TabletManagerRunHealthCheckProcedure,
 		svc.RunHealthCheck,
-		opts...,
+		connect.WithSchema(tabletManagerRunHealthCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerReloadSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerReloadSchemaProcedure,
 		svc.ReloadSchema,
-		opts...,
+		connect.WithSchema(tabletManagerReloadSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerPreflightSchemaHandler := connect.NewUnaryHandler(
 		TabletManagerPreflightSchemaProcedure,
 		svc.PreflightSchema,
-		opts...,
+		connect.WithSchema(tabletManagerPreflightSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerApplySchemaHandler := connect.NewUnaryHandler(
 		TabletManagerApplySchemaProcedure,
 		svc.ApplySchema,
-		opts...,
+		connect.WithSchema(tabletManagerApplySchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerResetSequencesHandler := connect.NewUnaryHandler(
 		TabletManagerResetSequencesProcedure,
 		svc.ResetSequences,
-		opts...,
+		connect.WithSchema(tabletManagerResetSequencesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerLockTablesHandler := connect.NewUnaryHandler(
 		TabletManagerLockTablesProcedure,
 		svc.LockTables,
-		opts...,
+		connect.WithSchema(tabletManagerLockTablesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerUnlockTablesHandler := connect.NewUnaryHandler(
 		TabletManagerUnlockTablesProcedure,
 		svc.UnlockTables,
-		opts...,
+		connect.WithSchema(tabletManagerUnlockTablesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerExecuteQueryHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteQueryProcedure,
 		svc.ExecuteQuery,
-		opts...,
+		connect.WithSchema(tabletManagerExecuteQueryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerExecuteFetchAsDbaHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsDbaProcedure,
 		svc.ExecuteFetchAsDba,
-		opts...,
+		connect.WithSchema(tabletManagerExecuteFetchAsDbaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerExecuteMultiFetchAsDbaHandler := connect.NewUnaryHandler(
+		TabletManagerExecuteMultiFetchAsDbaProcedure,
+		svc.ExecuteMultiFetchAsDba,
+		connect.WithSchema(tabletManagerExecuteMultiFetchAsDbaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerExecuteFetchAsAllPrivsHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsAllPrivsProcedure,
 		svc.ExecuteFetchAsAllPrivs,
-		opts...,
+		connect.WithSchema(tabletManagerExecuteFetchAsAllPrivsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerExecuteFetchAsAppHandler := connect.NewUnaryHandler(
 		TabletManagerExecuteFetchAsAppProcedure,
 		svc.ExecuteFetchAsApp,
-		opts...,
+		connect.WithSchema(tabletManagerExecuteFetchAsAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetUnresolvedTransactionsHandler := connect.NewUnaryHandler(
+		TabletManagerGetUnresolvedTransactionsProcedure,
+		svc.GetUnresolvedTransactions,
+		connect.WithSchema(tabletManagerGetUnresolvedTransactionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerReadTransactionHandler := connect.NewUnaryHandler(
+		TabletManagerReadTransactionProcedure,
+		svc.ReadTransaction,
+		connect.WithSchema(tabletManagerReadTransactionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetTransactionInfoHandler := connect.NewUnaryHandler(
+		TabletManagerGetTransactionInfoProcedure,
+		svc.GetTransactionInfo,
+		connect.WithSchema(tabletManagerGetTransactionInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerConcludeTransactionHandler := connect.NewUnaryHandler(
+		TabletManagerConcludeTransactionProcedure,
+		svc.ConcludeTransaction,
+		connect.WithSchema(tabletManagerConcludeTransactionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerMysqlHostMetricsHandler := connect.NewUnaryHandler(
+		TabletManagerMysqlHostMetricsProcedure,
+		svc.MysqlHostMetrics,
+		connect.WithSchema(tabletManagerMysqlHostMetricsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerReplicationStatusHandler := connect.NewUnaryHandler(
 		TabletManagerReplicationStatusProcedure,
 		svc.ReplicationStatus,
-		opts...,
+		connect.WithSchema(tabletManagerReplicationStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerPrimaryStatusHandler := connect.NewUnaryHandler(
 		TabletManagerPrimaryStatusProcedure,
 		svc.PrimaryStatus,
-		opts...,
+		connect.WithSchema(tabletManagerPrimaryStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerPrimaryPositionHandler := connect.NewUnaryHandler(
 		TabletManagerPrimaryPositionProcedure,
 		svc.PrimaryPosition,
-		opts...,
+		connect.WithSchema(tabletManagerPrimaryPositionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerWaitForPositionHandler := connect.NewUnaryHandler(
 		TabletManagerWaitForPositionProcedure,
 		svc.WaitForPosition,
-		opts...,
+		connect.WithSchema(tabletManagerWaitForPositionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStopReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationProcedure,
 		svc.StopReplication,
-		opts...,
+		connect.WithSchema(tabletManagerStopReplicationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStopReplicationMinimumHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationMinimumProcedure,
 		svc.StopReplicationMinimum,
-		opts...,
+		connect.WithSchema(tabletManagerStopReplicationMinimumMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStartReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerStartReplicationProcedure,
 		svc.StartReplication,
-		opts...,
+		connect.WithSchema(tabletManagerStartReplicationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStartReplicationUntilAfterHandler := connect.NewUnaryHandler(
 		TabletManagerStartReplicationUntilAfterProcedure,
 		svc.StartReplicationUntilAfter,
-		opts...,
+		connect.WithSchema(tabletManagerStartReplicationUntilAfterMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerGetReplicasHandler := connect.NewUnaryHandler(
 		TabletManagerGetReplicasProcedure,
 		svc.GetReplicas,
-		opts...,
+		connect.WithSchema(tabletManagerGetReplicasMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerCreateVReplicationWorkflowHandler := connect.NewUnaryHandler(
 		TabletManagerCreateVReplicationWorkflowProcedure,
 		svc.CreateVReplicationWorkflow,
-		opts...,
+		connect.WithSchema(tabletManagerCreateVReplicationWorkflowMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerDeleteTableDataHandler := connect.NewUnaryHandler(
+		TabletManagerDeleteTableDataProcedure,
+		svc.DeleteTableData,
+		connect.WithSchema(tabletManagerDeleteTableDataMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerDeleteVReplicationWorkflowHandler := connect.NewUnaryHandler(
 		TabletManagerDeleteVReplicationWorkflowProcedure,
 		svc.DeleteVReplicationWorkflow,
-		opts...,
+		connect.WithSchema(tabletManagerDeleteVReplicationWorkflowMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerHasVReplicationWorkflowsHandler := connect.NewUnaryHandler(
+		TabletManagerHasVReplicationWorkflowsProcedure,
+		svc.HasVReplicationWorkflows,
+		connect.WithSchema(tabletManagerHasVReplicationWorkflowsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerReadVReplicationWorkflowHandler := connect.NewUnaryHandler(
 		TabletManagerReadVReplicationWorkflowProcedure,
 		svc.ReadVReplicationWorkflow,
-		opts...,
+		connect.WithSchema(tabletManagerReadVReplicationWorkflowMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
-	tabletManagerVReplicationExecHandler := connect.NewUnaryHandler(
-		TabletManagerVReplicationExecProcedure,
-		svc.VReplicationExec,
-		opts...,
-	)
-	tabletManagerVReplicationWaitForPosHandler := connect.NewUnaryHandler(
-		TabletManagerVReplicationWaitForPosProcedure,
-		svc.VReplicationWaitForPos,
-		opts...,
+	tabletManagerReadVReplicationWorkflowsHandler := connect.NewUnaryHandler(
+		TabletManagerReadVReplicationWorkflowsProcedure,
+		svc.ReadVReplicationWorkflows,
+		connect.WithSchema(tabletManagerReadVReplicationWorkflowsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerUpdateVReplicationWorkflowHandler := connect.NewUnaryHandler(
 		TabletManagerUpdateVReplicationWorkflowProcedure,
 		svc.UpdateVReplicationWorkflow,
-		opts...,
+		connect.WithSchema(tabletManagerUpdateVReplicationWorkflowMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerUpdateVReplicationWorkflowsHandler := connect.NewUnaryHandler(
+		TabletManagerUpdateVReplicationWorkflowsProcedure,
+		svc.UpdateVReplicationWorkflows,
+		connect.WithSchema(tabletManagerUpdateVReplicationWorkflowsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerValidateVReplicationPermissionsHandler := connect.NewUnaryHandler(
+		TabletManagerValidateVReplicationPermissionsProcedure,
+		svc.ValidateVReplicationPermissions,
+		connect.WithSchema(tabletManagerValidateVReplicationPermissionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerVReplicationExecHandler := connect.NewUnaryHandler(
+		TabletManagerVReplicationExecProcedure,
+		svc.VReplicationExec,
+		connect.WithSchema(tabletManagerVReplicationExecMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerVReplicationWaitForPosHandler := connect.NewUnaryHandler(
+		TabletManagerVReplicationWaitForPosProcedure,
+		svc.VReplicationWaitForPos,
+		connect.WithSchema(tabletManagerVReplicationWaitForPosMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerVDiffHandler := connect.NewUnaryHandler(
 		TabletManagerVDiffProcedure,
 		svc.VDiff,
-		opts...,
+		connect.WithSchema(tabletManagerVDiffMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerResetReplicationHandler := connect.NewUnaryHandler(
 		TabletManagerResetReplicationProcedure,
 		svc.ResetReplication,
-		opts...,
+		connect.WithSchema(tabletManagerResetReplicationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerInitPrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerInitPrimaryProcedure,
 		svc.InitPrimary,
-		opts...,
+		connect.WithSchema(tabletManagerInitPrimaryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerPopulateReparentJournalHandler := connect.NewUnaryHandler(
 		TabletManagerPopulateReparentJournalProcedure,
 		svc.PopulateReparentJournal,
-		opts...,
+		connect.WithSchema(tabletManagerPopulateReparentJournalMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerReadReparentJournalInfoHandler := connect.NewUnaryHandler(
+		TabletManagerReadReparentJournalInfoProcedure,
+		svc.ReadReparentJournalInfo,
+		connect.WithSchema(tabletManagerReadReparentJournalInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerInitReplicaHandler := connect.NewUnaryHandler(
 		TabletManagerInitReplicaProcedure,
 		svc.InitReplica,
-		opts...,
+		connect.WithSchema(tabletManagerInitReplicaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerDemotePrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerDemotePrimaryProcedure,
 		svc.DemotePrimary,
-		opts...,
+		connect.WithSchema(tabletManagerDemotePrimaryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerUndoDemotePrimaryHandler := connect.NewUnaryHandler(
 		TabletManagerUndoDemotePrimaryProcedure,
 		svc.UndoDemotePrimary,
-		opts...,
+		connect.WithSchema(tabletManagerUndoDemotePrimaryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerReplicaWasPromotedHandler := connect.NewUnaryHandler(
 		TabletManagerReplicaWasPromotedProcedure,
 		svc.ReplicaWasPromoted,
-		opts...,
+		connect.WithSchema(tabletManagerReplicaWasPromotedMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerResetReplicationParametersHandler := connect.NewUnaryHandler(
 		TabletManagerResetReplicationParametersProcedure,
 		svc.ResetReplicationParameters,
-		opts...,
+		connect.WithSchema(tabletManagerResetReplicationParametersMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerFullStatusHandler := connect.NewUnaryHandler(
 		TabletManagerFullStatusProcedure,
 		svc.FullStatus,
-		opts...,
+		connect.WithSchema(tabletManagerFullStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerSetReplicationSourceHandler := connect.NewUnaryHandler(
 		TabletManagerSetReplicationSourceProcedure,
 		svc.SetReplicationSource,
-		opts...,
+		connect.WithSchema(tabletManagerSetReplicationSourceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerReplicaWasRestartedHandler := connect.NewUnaryHandler(
 		TabletManagerReplicaWasRestartedProcedure,
 		svc.ReplicaWasRestarted,
-		opts...,
+		connect.WithSchema(tabletManagerReplicaWasRestartedMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStopReplicationAndGetStatusHandler := connect.NewUnaryHandler(
 		TabletManagerStopReplicationAndGetStatusProcedure,
 		svc.StopReplicationAndGetStatus,
-		opts...,
+		connect.WithSchema(tabletManagerStopReplicationAndGetStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerPromoteReplicaHandler := connect.NewUnaryHandler(
 		TabletManagerPromoteReplicaProcedure,
 		svc.PromoteReplica,
-		opts...,
+		connect.WithSchema(tabletManagerPromoteReplicaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerBackupHandler := connect.NewServerStreamHandler(
 		TabletManagerBackupProcedure,
 		svc.Backup,
-		opts...,
+		connect.WithSchema(tabletManagerBackupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerRestoreFromBackupHandler := connect.NewServerStreamHandler(
 		TabletManagerRestoreFromBackupProcedure,
 		svc.RestoreFromBackup,
-		opts...,
+		connect.WithSchema(tabletManagerRestoreFromBackupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerCheckThrottlerHandler := connect.NewUnaryHandler(
 		TabletManagerCheckThrottlerProcedure,
 		svc.CheckThrottler,
-		opts...,
+		connect.WithSchema(tabletManagerCheckThrottlerMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetThrottlerStatusHandler := connect.NewUnaryHandler(
+		TabletManagerGetThrottlerStatusProcedure,
+		svc.GetThrottlerStatus,
+		connect.WithSchema(tabletManagerGetThrottlerStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/tabletmanagerservice.TabletManager/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -1267,10 +1805,14 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerGetSchemaHandler.ServeHTTP(w, r)
 		case TabletManagerGetPermissionsProcedure:
 			tabletManagerGetPermissionsHandler.ServeHTTP(w, r)
+		case TabletManagerGetGlobalStatusVarsProcedure:
+			tabletManagerGetGlobalStatusVarsHandler.ServeHTTP(w, r)
 		case TabletManagerSetReadOnlyProcedure:
 			tabletManagerSetReadOnlyHandler.ServeHTTP(w, r)
 		case TabletManagerSetReadWriteProcedure:
 			tabletManagerSetReadWriteHandler.ServeHTTP(w, r)
+		case TabletManagerChangeTagsProcedure:
+			tabletManagerChangeTagsHandler.ServeHTTP(w, r)
 		case TabletManagerChangeTypeProcedure:
 			tabletManagerChangeTypeHandler.ServeHTTP(w, r)
 		case TabletManagerRefreshStateProcedure:
@@ -1293,10 +1835,22 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerExecuteQueryHandler.ServeHTTP(w, r)
 		case TabletManagerExecuteFetchAsDbaProcedure:
 			tabletManagerExecuteFetchAsDbaHandler.ServeHTTP(w, r)
+		case TabletManagerExecuteMultiFetchAsDbaProcedure:
+			tabletManagerExecuteMultiFetchAsDbaHandler.ServeHTTP(w, r)
 		case TabletManagerExecuteFetchAsAllPrivsProcedure:
 			tabletManagerExecuteFetchAsAllPrivsHandler.ServeHTTP(w, r)
 		case TabletManagerExecuteFetchAsAppProcedure:
 			tabletManagerExecuteFetchAsAppHandler.ServeHTTP(w, r)
+		case TabletManagerGetUnresolvedTransactionsProcedure:
+			tabletManagerGetUnresolvedTransactionsHandler.ServeHTTP(w, r)
+		case TabletManagerReadTransactionProcedure:
+			tabletManagerReadTransactionHandler.ServeHTTP(w, r)
+		case TabletManagerGetTransactionInfoProcedure:
+			tabletManagerGetTransactionInfoHandler.ServeHTTP(w, r)
+		case TabletManagerConcludeTransactionProcedure:
+			tabletManagerConcludeTransactionHandler.ServeHTTP(w, r)
+		case TabletManagerMysqlHostMetricsProcedure:
+			tabletManagerMysqlHostMetricsHandler.ServeHTTP(w, r)
 		case TabletManagerReplicationStatusProcedure:
 			tabletManagerReplicationStatusHandler.ServeHTTP(w, r)
 		case TabletManagerPrimaryStatusProcedure:
@@ -1317,16 +1871,26 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerGetReplicasHandler.ServeHTTP(w, r)
 		case TabletManagerCreateVReplicationWorkflowProcedure:
 			tabletManagerCreateVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerDeleteTableDataProcedure:
+			tabletManagerDeleteTableDataHandler.ServeHTTP(w, r)
 		case TabletManagerDeleteVReplicationWorkflowProcedure:
 			tabletManagerDeleteVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerHasVReplicationWorkflowsProcedure:
+			tabletManagerHasVReplicationWorkflowsHandler.ServeHTTP(w, r)
 		case TabletManagerReadVReplicationWorkflowProcedure:
 			tabletManagerReadVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerReadVReplicationWorkflowsProcedure:
+			tabletManagerReadVReplicationWorkflowsHandler.ServeHTTP(w, r)
+		case TabletManagerUpdateVReplicationWorkflowProcedure:
+			tabletManagerUpdateVReplicationWorkflowHandler.ServeHTTP(w, r)
+		case TabletManagerUpdateVReplicationWorkflowsProcedure:
+			tabletManagerUpdateVReplicationWorkflowsHandler.ServeHTTP(w, r)
+		case TabletManagerValidateVReplicationPermissionsProcedure:
+			tabletManagerValidateVReplicationPermissionsHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationExecProcedure:
 			tabletManagerVReplicationExecHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationWaitForPosProcedure:
 			tabletManagerVReplicationWaitForPosHandler.ServeHTTP(w, r)
-		case TabletManagerUpdateVReplicationWorkflowProcedure:
-			tabletManagerUpdateVReplicationWorkflowHandler.ServeHTTP(w, r)
 		case TabletManagerVDiffProcedure:
 			tabletManagerVDiffHandler.ServeHTTP(w, r)
 		case TabletManagerResetReplicationProcedure:
@@ -1335,6 +1899,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerInitPrimaryHandler.ServeHTTP(w, r)
 		case TabletManagerPopulateReparentJournalProcedure:
 			tabletManagerPopulateReparentJournalHandler.ServeHTTP(w, r)
+		case TabletManagerReadReparentJournalInfoProcedure:
+			tabletManagerReadReparentJournalInfoHandler.ServeHTTP(w, r)
 		case TabletManagerInitReplicaProcedure:
 			tabletManagerInitReplicaHandler.ServeHTTP(w, r)
 		case TabletManagerDemotePrimaryProcedure:
@@ -1361,6 +1927,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerRestoreFromBackupHandler.ServeHTTP(w, r)
 		case TabletManagerCheckThrottlerProcedure:
 			tabletManagerCheckThrottlerHandler.ServeHTTP(w, r)
+		case TabletManagerGetThrottlerStatusProcedure:
+			tabletManagerGetThrottlerStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1370,210 +1938,270 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 // UnimplementedTabletManagerHandler returns CodeUnimplemented from all methods.
 type UnimplementedTabletManagerHandler struct{}
 
-func (UnimplementedTabletManagerHandler) Ping(context.Context, *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error) {
+func (UnimplementedTabletManagerHandler) Ping(context.Context, *connect.Request[dev1.PingRequest]) (*connect.Response[dev1.PingResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Ping is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) Sleep(context.Context, *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error) {
+func (UnimplementedTabletManagerHandler) Sleep(context.Context, *connect.Request[dev1.SleepRequest]) (*connect.Response[dev1.SleepResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Sleep is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteHook(context.Context, *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error) {
+func (UnimplementedTabletManagerHandler) ExecuteHook(context.Context, *connect.Request[dev1.ExecuteHookRequest]) (*connect.Response[dev1.ExecuteHookResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteHook is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error) {
+func (UnimplementedTabletManagerHandler) GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest]) (*connect.Response[dev1.GetSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetPermissions(context.Context, *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error) {
+func (UnimplementedTabletManagerHandler) GetPermissions(context.Context, *connect.Request[dev1.GetPermissionsRequest]) (*connect.Response[dev1.GetPermissionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetPermissions is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
+func (UnimplementedTabletManagerHandler) GetGlobalStatusVars(context.Context, *connect.Request[dev1.GetGlobalStatusVarsRequest]) (*connect.Response[dev1.GetGlobalStatusVarsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetGlobalStatusVars is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) SetReadOnly(context.Context, *connect.Request[dev1.SetReadOnlyRequest]) (*connect.Response[dev1.SetReadOnlyResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadOnly is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
+func (UnimplementedTabletManagerHandler) SetReadWrite(context.Context, *connect.Request[dev1.SetReadWriteRequest]) (*connect.Response[dev1.SetReadWriteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadWrite is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ChangeType(context.Context, *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error) {
+func (UnimplementedTabletManagerHandler) ChangeTags(context.Context, *connect.Request[dev1.ChangeTagsRequest]) (*connect.Response[dev1.ChangeTagsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeTags is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ChangeType(context.Context, *connect.Request[dev1.ChangeTypeRequest]) (*connect.Response[dev1.ChangeTypeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeType is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
+func (UnimplementedTabletManagerHandler) RefreshState(context.Context, *connect.Request[dev1.RefreshStateRequest]) (*connect.Response[dev1.RefreshStateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RefreshState is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
+func (UnimplementedTabletManagerHandler) RunHealthCheck(context.Context, *connect.Request[dev1.RunHealthCheckRequest]) (*connect.Response[dev1.RunHealthCheckResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RunHealthCheck is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error) {
+func (UnimplementedTabletManagerHandler) ReloadSchema(context.Context, *connect.Request[dev1.ReloadSchemaRequest]) (*connect.Response[dev1.ReloadSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReloadSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error) {
+func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *connect.Request[dev1.PreflightSchemaRequest]) (*connect.Response[dev1.PreflightSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PreflightSchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
+func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect.Request[dev1.ApplySchemaRequest]) (*connect.Response[dev1.ApplySchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ApplySchema is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
+func (UnimplementedTabletManagerHandler) ResetSequences(context.Context, *connect.Request[dev1.ResetSequencesRequest]) (*connect.Response[dev1.ResetSequencesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetSequences is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error) {
+func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect.Request[dev1.LockTablesRequest]) (*connect.Response[dev1.LockTablesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.LockTables is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error) {
+func (UnimplementedTabletManagerHandler) UnlockTables(context.Context, *connect.Request[dev1.UnlockTablesRequest]) (*connect.Response[dev1.UnlockTablesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UnlockTables is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error) {
+func (UnimplementedTabletManagerHandler) ExecuteQuery(context.Context, *connect.Request[dev1.ExecuteQueryRequest]) (*connect.Response[dev1.ExecuteQueryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteQuery is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsDba(context.Context, *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error) {
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsDba(context.Context, *connect.Request[dev1.ExecuteFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteFetchAsDbaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsDba is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error) {
+func (UnimplementedTabletManagerHandler) ExecuteMultiFetchAsDba(context.Context, *connect.Request[dev1.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev1.ExecuteMultiFetchAsDbaResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteMultiFetchAsDba is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev1.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev1.ExecuteFetchAsAllPrivsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ExecuteFetchAsApp(context.Context, *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error) {
+func (UnimplementedTabletManagerHandler) ExecuteFetchAsApp(context.Context, *connect.Request[dev1.ExecuteFetchAsAppRequest]) (*connect.Response[dev1.ExecuteFetchAsAppResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsApp is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicationStatus(context.Context, *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error) {
+func (UnimplementedTabletManagerHandler) GetUnresolvedTransactions(context.Context, *connect.Request[dev1.GetUnresolvedTransactionsRequest]) (*connect.Response[dev1.GetUnresolvedTransactionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetUnresolvedTransactions is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadTransaction is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) GetTransactionInfo(context.Context, *connect.Request[dev1.GetTransactionInfoRequest]) (*connect.Response[dev1.GetTransactionInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetTransactionInfo is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ConcludeTransaction is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) MysqlHostMetrics(context.Context, *connect.Request[dev1.MysqlHostMetricsRequest]) (*connect.Response[dev1.MysqlHostMetricsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.MysqlHostMetrics is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ReplicationStatus(context.Context, *connect.Request[dev1.ReplicationStatusRequest]) (*connect.Response[dev1.ReplicationStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicationStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PrimaryStatus(context.Context, *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error) {
+func (UnimplementedTabletManagerHandler) PrimaryStatus(context.Context, *connect.Request[dev1.PrimaryStatusRequest]) (*connect.Response[dev1.PrimaryStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PrimaryPosition(context.Context, *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error) {
+func (UnimplementedTabletManagerHandler) PrimaryPosition(context.Context, *connect.Request[dev1.PrimaryPositionRequest]) (*connect.Response[dev1.PrimaryPositionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryPosition is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) WaitForPosition(context.Context, *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error) {
+func (UnimplementedTabletManagerHandler) WaitForPosition(context.Context, *connect.Request[dev1.WaitForPositionRequest]) (*connect.Response[dev1.WaitForPositionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.WaitForPosition is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
+func (UnimplementedTabletManagerHandler) StopReplication(context.Context, *connect.Request[dev1.StopReplicationRequest]) (*connect.Response[dev1.StopReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error) {
+func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context, *connect.Request[dev1.StopReplicationMinimumRequest]) (*connect.Response[dev1.StopReplicationMinimumResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationMinimum is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
+func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect.Request[dev1.StartReplicationRequest]) (*connect.Response[dev1.StartReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
+func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[dev1.StartReplicationUntilAfterRequest]) (*connect.Response[dev1.StartReplicationUntilAfterResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplicationUntilAfter is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error) {
+func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect.Request[dev1.GetReplicasRequest]) (*connect.Response[dev1.GetReplicasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetReplicas is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
+func (UnimplementedTabletManagerHandler) CreateVReplicationWorkflow(context.Context, *connect.Request[dev1.CreateVReplicationWorkflowRequest]) (*connect.Response[dev1.CreateVReplicationWorkflowResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CreateVReplicationWorkflow is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
+func (UnimplementedTabletManagerHandler) DeleteTableData(context.Context, *connect.Request[dev1.DeleteTableDataRequest]) (*connect.Response[dev1.DeleteTableDataResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DeleteTableData is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) DeleteVReplicationWorkflow(context.Context, *connect.Request[dev1.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev1.DeleteVReplicationWorkflowResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
+func (UnimplementedTabletManagerHandler) HasVReplicationWorkflows(context.Context, *connect.Request[dev1.HasVReplicationWorkflowsRequest]) (*connect.Response[dev1.HasVReplicationWorkflowsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.HasVReplicationWorkflows is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflow(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadVReplicationWorkflow is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
+func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflows(context.Context, *connect.Request[dev1.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev1.ReadVReplicationWorkflowsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadVReplicationWorkflows is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
-}
-
-func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
+func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflow(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {
+func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflows(context.Context, *connect.Request[dev1.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev1.UpdateVReplicationWorkflowsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVReplicationWorkflows is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) ValidateVReplicationPermissions(context.Context, *connect.Request[dev1.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev1.ValidateVReplicationPermissionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ValidateVReplicationPermissions is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect.Request[dev1.VReplicationExecRequest]) (*connect.Response[dev1.VReplicationExecResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect.Request[dev1.VReplicationWaitForPosRequest]) (*connect.Response[dev1.VReplicationWaitForPosResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[dev1.VDiffRequest]) (*connect.Response[dev1.VDiffResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VDiff is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ResetReplication(context.Context, *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error) {
+func (UnimplementedTabletManagerHandler) ResetReplication(context.Context, *connect.Request[dev1.ResetReplicationRequest]) (*connect.Response[dev1.ResetReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplication is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) InitPrimary(context.Context, *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error) {
+func (UnimplementedTabletManagerHandler) InitPrimary(context.Context, *connect.Request[dev1.InitPrimaryRequest]) (*connect.Response[dev1.InitPrimaryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitPrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PopulateReparentJournal(context.Context, *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error) {
+func (UnimplementedTabletManagerHandler) PopulateReparentJournal(context.Context, *connect.Request[dev1.PopulateReparentJournalRequest]) (*connect.Response[dev1.PopulateReparentJournalResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PopulateReparentJournal is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) InitReplica(context.Context, *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error) {
+func (UnimplementedTabletManagerHandler) ReadReparentJournalInfo(context.Context, *connect.Request[dev1.ReadReparentJournalInfoRequest]) (*connect.Response[dev1.ReadReparentJournalInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadReparentJournalInfo is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) InitReplica(context.Context, *connect.Request[dev1.InitReplicaRequest]) (*connect.Response[dev1.InitReplicaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitReplica is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) DemotePrimary(context.Context, *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error) {
+func (UnimplementedTabletManagerHandler) DemotePrimary(context.Context, *connect.Request[dev1.DemotePrimaryRequest]) (*connect.Response[dev1.DemotePrimaryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DemotePrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) UndoDemotePrimary(context.Context, *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error) {
+func (UnimplementedTabletManagerHandler) UndoDemotePrimary(context.Context, *connect.Request[dev1.UndoDemotePrimaryRequest]) (*connect.Response[dev1.UndoDemotePrimaryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UndoDemotePrimary is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicaWasPromoted(context.Context, *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error) {
+func (UnimplementedTabletManagerHandler) ReplicaWasPromoted(context.Context, *connect.Request[dev1.ReplicaWasPromotedRequest]) (*connect.Response[dev1.ReplicaWasPromotedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasPromoted is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ResetReplicationParameters(context.Context, *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error) {
+func (UnimplementedTabletManagerHandler) ResetReplicationParameters(context.Context, *connect.Request[dev1.ResetReplicationParametersRequest]) (*connect.Response[dev1.ResetReplicationParametersResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplicationParameters is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) FullStatus(context.Context, *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error) {
+func (UnimplementedTabletManagerHandler) FullStatus(context.Context, *connect.Request[dev1.FullStatusRequest]) (*connect.Response[dev1.FullStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.FullStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) SetReplicationSource(context.Context, *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error) {
+func (UnimplementedTabletManagerHandler) SetReplicationSource(context.Context, *connect.Request[dev1.SetReplicationSourceRequest]) (*connect.Response[dev1.SetReplicationSourceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReplicationSource is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) ReplicaWasRestarted(context.Context, *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error) {
+func (UnimplementedTabletManagerHandler) ReplicaWasRestarted(context.Context, *connect.Request[dev1.ReplicaWasRestartedRequest]) (*connect.Response[dev1.ReplicaWasRestartedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasRestarted is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) StopReplicationAndGetStatus(context.Context, *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error) {
+func (UnimplementedTabletManagerHandler) StopReplicationAndGetStatus(context.Context, *connect.Request[dev1.StopReplicationAndGetStatusRequest]) (*connect.Response[dev1.StopReplicationAndGetStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationAndGetStatus is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) PromoteReplica(context.Context, *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error) {
+func (UnimplementedTabletManagerHandler) PromoteReplica(context.Context, *connect.Request[dev1.PromoteReplicaRequest]) (*connect.Response[dev1.PromoteReplicaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PromoteReplica is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect.Request[dev.BackupRequest], *connect.ServerStream[dev.BackupResponse]) error {
+func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect.Request[dev1.BackupRequest], *connect.ServerStream[dev1.BackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Backup is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error {
+func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect.Request[dev1.RestoreFromBackupRequest], *connect.ServerStream[dev1.RestoreFromBackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestoreFromBackup is not implemented"))
 }
 
-func (UnimplementedTabletManagerHandler) CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
+func (UnimplementedTabletManagerHandler) CheckThrottler(context.Context, *connect.Request[dev1.CheckThrottlerRequest]) (*connect.Response[dev1.CheckThrottlerResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CheckThrottler is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) GetThrottlerStatus(context.Context, *connect.Request[dev1.GetThrottlerStatusRequest]) (*connect.Response[dev1.GetThrottlerStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetThrottlerStatus is not implemented"))
 }

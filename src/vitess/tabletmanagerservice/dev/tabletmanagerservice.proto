@@ -45,6 +45,10 @@ service TabletManager {
   // GetPermissions asks the tablet for its permissions
   rpc GetPermissions(vitess.tabletmanagerdata.dev.GetPermissionsRequest) returns (vitess.tabletmanagerdata.dev.GetPermissionsResponse) {};
 
+  // GetGlobalStatusVars returns the server's global status variables asked for.
+  // An empty/nil variable name parameter slice means you want all of them.
+  rpc GetGlobalStatusVars(vitess.tabletmanagerdata.dev.GetGlobalStatusVarsRequest) returns (vitess.tabletmanagerdata.dev.GetGlobalStatusVarsResponse) {};
+
   //
   // Various read-write methods
   //
@@ -52,6 +56,9 @@ service TabletManager {
   rpc SetReadOnly(vitess.tabletmanagerdata.dev.SetReadOnlyRequest) returns (vitess.tabletmanagerdata.dev.SetReadOnlyResponse) {};
 
   rpc SetReadWrite(vitess.tabletmanagerdata.dev.SetReadWriteRequest) returns (vitess.tabletmanagerdata.dev.SetReadWriteResponse) {};
+
+  // ChangeTags asks the remote tablet to change its tags
+  rpc ChangeTags(vitess.tabletmanagerdata.dev.ChangeTagsRequest) returns (vitess.tabletmanagerdata.dev.ChangeTagsResponse) {};
 
   // ChangeType asks the remote tablet to change its type
   rpc ChangeType(vitess.tabletmanagerdata.dev.ChangeTypeRequest) returns (vitess.tabletmanagerdata.dev.ChangeTypeResponse) {};
@@ -76,9 +83,25 @@ service TabletManager {
 
   rpc ExecuteFetchAsDba(vitess.tabletmanagerdata.dev.ExecuteFetchAsDbaRequest) returns (vitess.tabletmanagerdata.dev.ExecuteFetchAsDbaResponse) {};
 
+  rpc ExecuteMultiFetchAsDba(vitess.tabletmanagerdata.dev.ExecuteMultiFetchAsDbaRequest) returns (vitess.tabletmanagerdata.dev.ExecuteMultiFetchAsDbaResponse) {};
+
   rpc ExecuteFetchAsAllPrivs(vitess.tabletmanagerdata.dev.ExecuteFetchAsAllPrivsRequest) returns (vitess.tabletmanagerdata.dev.ExecuteFetchAsAllPrivsResponse) {};
 
   rpc ExecuteFetchAsApp(vitess.tabletmanagerdata.dev.ExecuteFetchAsAppRequest) returns (vitess.tabletmanagerdata.dev.ExecuteFetchAsAppResponse) {};
+
+  //
+  // Distributed Transaction related methods
+  //
+
+  rpc GetUnresolvedTransactions(vitess.tabletmanagerdata.dev.GetUnresolvedTransactionsRequest) returns (vitess.tabletmanagerdata.dev.GetUnresolvedTransactionsResponse) {};
+
+  rpc ReadTransaction(vitess.tabletmanagerdata.dev.ReadTransactionRequest) returns (vitess.tabletmanagerdata.dev.ReadTransactionResponse) {};
+
+  rpc GetTransactionInfo(vitess.tabletmanagerdata.dev.GetTransactionInfoRequest) returns (vitess.tabletmanagerdata.dev.GetTransactionInfoResponse) {};
+
+  rpc ConcludeTransaction(vitess.tabletmanagerdata.dev.ConcludeTransactionRequest) returns (vitess.tabletmanagerdata.dev.ConcludeTransactionResponse) {};
+
+  rpc MysqlHostMetrics(vitess.tabletmanagerdata.dev.MysqlHostMetricsRequest) returns (vitess.tabletmanagerdata.dev.MysqlHostMetricsResponse) {};
 
   //
   // Replication related methods
@@ -115,11 +138,16 @@ service TabletManager {
 
   // VReplication API
   rpc CreateVReplicationWorkflow(vitess.tabletmanagerdata.dev.CreateVReplicationWorkflowRequest) returns (vitess.tabletmanagerdata.dev.CreateVReplicationWorkflowResponse) {};
+  rpc DeleteTableData(vitess.tabletmanagerdata.dev.DeleteTableDataRequest) returns(vitess.tabletmanagerdata.dev.DeleteTableDataResponse) {}
   rpc DeleteVReplicationWorkflow(vitess.tabletmanagerdata.dev.DeleteVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.DeleteVReplicationWorkflowResponse) {};
+  rpc HasVReplicationWorkflows(vitess.tabletmanagerdata.dev.HasVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.dev.HasVReplicationWorkflowsResponse) {};
   rpc ReadVReplicationWorkflow(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowResponse) {};
+  rpc ReadVReplicationWorkflows(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.dev.ReadVReplicationWorkflowsResponse) {};
+  rpc UpdateVReplicationWorkflow(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowResponse) {};
+  rpc UpdateVReplicationWorkflows(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowsResponse) {};
+  rpc ValidateVReplicationPermissions(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsRequest) returns(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsResponse) {};
   rpc VReplicationExec(vitess.tabletmanagerdata.dev.VReplicationExecRequest) returns(vitess.tabletmanagerdata.dev.VReplicationExecResponse) {};
   rpc VReplicationWaitForPos(vitess.tabletmanagerdata.dev.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.dev.VReplicationWaitForPosResponse) {};
-  rpc UpdateVReplicationWorkflow(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.dev.UpdateVReplicationWorkflowResponse) {};
 
   // VDiff API
   rpc VDiff(vitess.tabletmanagerdata.dev.VDiffRequest) returns(vitess.tabletmanagerdata.dev.VDiffResponse) {};
@@ -137,6 +165,9 @@ service TabletManager {
   // PopulateReparentJournal tells the tablet to add an entry to its
   // reparent journal
   rpc PopulateReparentJournal(vitess.tabletmanagerdata.dev.PopulateReparentJournalRequest) returns (vitess.tabletmanagerdata.dev.PopulateReparentJournalResponse) {};
+
+  // ReadReparentJournalInfo reads the information from reparent journal
+  rpc ReadReparentJournalInfo(vitess.tabletmanagerdata.dev.ReadReparentJournalInfoRequest) returns (vitess.tabletmanagerdata.dev.ReadReparentJournalInfoResponse) {};
 
   // InitReplica tells the tablet to reparent to the primary unconditionally
   rpc InitReplica(vitess.tabletmanagerdata.dev.InitReplicaRequest) returns (vitess.tabletmanagerdata.dev.InitReplicaResponse) {};
@@ -178,6 +209,13 @@ service TabletManager {
   // RestoreFromBackup deletes all local data and restores it from the latest backup.
   rpc RestoreFromBackup(vitess.tabletmanagerdata.dev.RestoreFromBackupRequest) returns (stream vitess.tabletmanagerdata.dev.RestoreFromBackupResponse) {};
 
+  //
+  // Tablet throttler related methods
+  //
+
   // CheckThrottler issues a 'check' on a tablet's throttler
   rpc CheckThrottler(vitess.tabletmanagerdata.dev.CheckThrottlerRequest) returns (vitess.tabletmanagerdata.dev.CheckThrottlerResponse) {};
+
+  // GetThrottlerStatus gets the status of a tablet throttler
+  rpc GetThrottlerStatus(vitess.tabletmanagerdata.dev.GetThrottlerStatusRequest) returns (vitess.tabletmanagerdata.dev.GetThrottlerStatusResponse) {};
 }

@@ -25,8 +25,8 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v16 "github.com/planetscale/vitess-types/gen/vitess/vtctldata/v16"
-	_ "github.com/planetscale/vitess-types/gen/vitess/vtctlservice/v16"
+	v161 "github.com/planetscale/vitess-types/gen/vitess/vtctldata/v16"
+	v16 "github.com/planetscale/vitess-types/gen/vitess/vtctlservice/v16"
 	http "net/http"
 	strings "strings"
 )
@@ -36,7 +36,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VtctlName is the fully-qualified name of the Vtctl service.
@@ -255,9 +255,100 @@ const (
 	VtctldValidateVSchemaProcedure = "/vtctlservice.Vtctld/ValidateVSchema"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	vtctlServiceDescriptor                            = v16.File_vitess_vtctlservice_v16_vtctlservice_proto.Services().ByName("Vtctl")
+	vtctlExecuteVtctlCommandMethodDescriptor          = vtctlServiceDescriptor.Methods().ByName("ExecuteVtctlCommand")
+	vtctldServiceDescriptor                           = v16.File_vitess_vtctlservice_v16_vtctlservice_proto.Services().ByName("Vtctld")
+	vtctldAddCellInfoMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("AddCellInfo")
+	vtctldAddCellsAliasMethodDescriptor               = vtctldServiceDescriptor.Methods().ByName("AddCellsAlias")
+	vtctldApplyRoutingRulesMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("ApplyRoutingRules")
+	vtctldApplySchemaMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("ApplySchema")
+	vtctldApplyShardRoutingRulesMethodDescriptor      = vtctldServiceDescriptor.Methods().ByName("ApplyShardRoutingRules")
+	vtctldApplyVSchemaMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("ApplyVSchema")
+	vtctldBackupMethodDescriptor                      = vtctldServiceDescriptor.Methods().ByName("Backup")
+	vtctldBackupShardMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("BackupShard")
+	vtctldChangeTabletTypeMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("ChangeTabletType")
+	vtctldCreateKeyspaceMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("CreateKeyspace")
+	vtctldCreateShardMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("CreateShard")
+	vtctldDeleteCellInfoMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("DeleteCellInfo")
+	vtctldDeleteCellsAliasMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("DeleteCellsAlias")
+	vtctldDeleteKeyspaceMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("DeleteKeyspace")
+	vtctldDeleteShardsMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("DeleteShards")
+	vtctldDeleteSrvVSchemaMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("DeleteSrvVSchema")
+	vtctldDeleteTabletsMethodDescriptor               = vtctldServiceDescriptor.Methods().ByName("DeleteTablets")
+	vtctldEmergencyReparentShardMethodDescriptor      = vtctldServiceDescriptor.Methods().ByName("EmergencyReparentShard")
+	vtctldExecuteFetchAsAppMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("ExecuteFetchAsApp")
+	vtctldExecuteFetchAsDBAMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("ExecuteFetchAsDBA")
+	vtctldExecuteHookMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("ExecuteHook")
+	vtctldFindAllShardsInKeyspaceMethodDescriptor     = vtctldServiceDescriptor.Methods().ByName("FindAllShardsInKeyspace")
+	vtctldGetBackupsMethodDescriptor                  = vtctldServiceDescriptor.Methods().ByName("GetBackups")
+	vtctldGetCellInfoMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("GetCellInfo")
+	vtctldGetCellInfoNamesMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("GetCellInfoNames")
+	vtctldGetCellsAliasesMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("GetCellsAliases")
+	vtctldGetFullStatusMethodDescriptor               = vtctldServiceDescriptor.Methods().ByName("GetFullStatus")
+	vtctldGetKeyspaceMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("GetKeyspace")
+	vtctldGetKeyspacesMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("GetKeyspaces")
+	vtctldGetPermissionsMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("GetPermissions")
+	vtctldGetRoutingRulesMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("GetRoutingRules")
+	vtctldGetSchemaMethodDescriptor                   = vtctldServiceDescriptor.Methods().ByName("GetSchema")
+	vtctldGetShardMethodDescriptor                    = vtctldServiceDescriptor.Methods().ByName("GetShard")
+	vtctldGetShardRoutingRulesMethodDescriptor        = vtctldServiceDescriptor.Methods().ByName("GetShardRoutingRules")
+	vtctldGetSrvKeyspaceNamesMethodDescriptor         = vtctldServiceDescriptor.Methods().ByName("GetSrvKeyspaceNames")
+	vtctldGetSrvKeyspacesMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("GetSrvKeyspaces")
+	vtctldUpdateThrottlerConfigMethodDescriptor       = vtctldServiceDescriptor.Methods().ByName("UpdateThrottlerConfig")
+	vtctldGetSrvVSchemaMethodDescriptor               = vtctldServiceDescriptor.Methods().ByName("GetSrvVSchema")
+	vtctldGetSrvVSchemasMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("GetSrvVSchemas")
+	vtctldGetTabletMethodDescriptor                   = vtctldServiceDescriptor.Methods().ByName("GetTablet")
+	vtctldGetTabletsMethodDescriptor                  = vtctldServiceDescriptor.Methods().ByName("GetTablets")
+	vtctldGetTopologyPathMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("GetTopologyPath")
+	vtctldGetVersionMethodDescriptor                  = vtctldServiceDescriptor.Methods().ByName("GetVersion")
+	vtctldGetVSchemaMethodDescriptor                  = vtctldServiceDescriptor.Methods().ByName("GetVSchema")
+	vtctldGetWorkflowsMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("GetWorkflows")
+	vtctldInitShardPrimaryMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("InitShardPrimary")
+	vtctldPingTabletMethodDescriptor                  = vtctldServiceDescriptor.Methods().ByName("PingTablet")
+	vtctldPlannedReparentShardMethodDescriptor        = vtctldServiceDescriptor.Methods().ByName("PlannedReparentShard")
+	vtctldRebuildKeyspaceGraphMethodDescriptor        = vtctldServiceDescriptor.Methods().ByName("RebuildKeyspaceGraph")
+	vtctldRebuildVSchemaGraphMethodDescriptor         = vtctldServiceDescriptor.Methods().ByName("RebuildVSchemaGraph")
+	vtctldRefreshStateMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("RefreshState")
+	vtctldRefreshStateByShardMethodDescriptor         = vtctldServiceDescriptor.Methods().ByName("RefreshStateByShard")
+	vtctldReloadSchemaMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("ReloadSchema")
+	vtctldReloadSchemaKeyspaceMethodDescriptor        = vtctldServiceDescriptor.Methods().ByName("ReloadSchemaKeyspace")
+	vtctldReloadSchemaShardMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("ReloadSchemaShard")
+	vtctldRemoveBackupMethodDescriptor                = vtctldServiceDescriptor.Methods().ByName("RemoveBackup")
+	vtctldRemoveKeyspaceCellMethodDescriptor          = vtctldServiceDescriptor.Methods().ByName("RemoveKeyspaceCell")
+	vtctldRemoveShardCellMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("RemoveShardCell")
+	vtctldReparentTabletMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("ReparentTablet")
+	vtctldRestoreFromBackupMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("RestoreFromBackup")
+	vtctldRunHealthCheckMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("RunHealthCheck")
+	vtctldSetKeyspaceDurabilityPolicyMethodDescriptor = vtctldServiceDescriptor.Methods().ByName("SetKeyspaceDurabilityPolicy")
+	vtctldSetShardIsPrimaryServingMethodDescriptor    = vtctldServiceDescriptor.Methods().ByName("SetShardIsPrimaryServing")
+	vtctldSetShardTabletControlMethodDescriptor       = vtctldServiceDescriptor.Methods().ByName("SetShardTabletControl")
+	vtctldSetWritableMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("SetWritable")
+	vtctldShardReplicationAddMethodDescriptor         = vtctldServiceDescriptor.Methods().ByName("ShardReplicationAdd")
+	vtctldShardReplicationFixMethodDescriptor         = vtctldServiceDescriptor.Methods().ByName("ShardReplicationFix")
+	vtctldShardReplicationPositionsMethodDescriptor   = vtctldServiceDescriptor.Methods().ByName("ShardReplicationPositions")
+	vtctldShardReplicationRemoveMethodDescriptor      = vtctldServiceDescriptor.Methods().ByName("ShardReplicationRemove")
+	vtctldSleepTabletMethodDescriptor                 = vtctldServiceDescriptor.Methods().ByName("SleepTablet")
+	vtctldSourceShardAddMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("SourceShardAdd")
+	vtctldSourceShardDeleteMethodDescriptor           = vtctldServiceDescriptor.Methods().ByName("SourceShardDelete")
+	vtctldStartReplicationMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("StartReplication")
+	vtctldStopReplicationMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("StopReplication")
+	vtctldTabletExternallyReparentedMethodDescriptor  = vtctldServiceDescriptor.Methods().ByName("TabletExternallyReparented")
+	vtctldUpdateCellInfoMethodDescriptor              = vtctldServiceDescriptor.Methods().ByName("UpdateCellInfo")
+	vtctldUpdateCellsAliasMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("UpdateCellsAlias")
+	vtctldValidateMethodDescriptor                    = vtctldServiceDescriptor.Methods().ByName("Validate")
+	vtctldValidateKeyspaceMethodDescriptor            = vtctldServiceDescriptor.Methods().ByName("ValidateKeyspace")
+	vtctldValidateSchemaKeyspaceMethodDescriptor      = vtctldServiceDescriptor.Methods().ByName("ValidateSchemaKeyspace")
+	vtctldValidateShardMethodDescriptor               = vtctldServiceDescriptor.Methods().ByName("ValidateShard")
+	vtctldValidateVersionKeyspaceMethodDescriptor     = vtctldServiceDescriptor.Methods().ByName("ValidateVersionKeyspace")
+	vtctldValidateVersionShardMethodDescriptor        = vtctldServiceDescriptor.Methods().ByName("ValidateVersionShard")
+	vtctldValidateVSchemaMethodDescriptor             = vtctldServiceDescriptor.Methods().ByName("ValidateVSchema")
+)
+
 // VtctlClient is a client for the vtctlservice.Vtctl service.
 type VtctlClient interface {
-	ExecuteVtctlCommand(context.Context, *connect.Request[v16.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v16.ExecuteVtctlCommandResponse], error)
+	ExecuteVtctlCommand(context.Context, *connect.Request[v161.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v161.ExecuteVtctlCommandResponse], error)
 }
 
 // NewVtctlClient constructs a client for the vtctlservice.Vtctl service. By default, it
@@ -270,27 +361,28 @@ type VtctlClient interface {
 func NewVtctlClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VtctlClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &vtctlClient{
-		executeVtctlCommand: connect.NewClient[v16.ExecuteVtctlCommandRequest, v16.ExecuteVtctlCommandResponse](
+		executeVtctlCommand: connect.NewClient[v161.ExecuteVtctlCommandRequest, v161.ExecuteVtctlCommandResponse](
 			httpClient,
 			baseURL+VtctlExecuteVtctlCommandProcedure,
-			opts...,
+			connect.WithSchema(vtctlExecuteVtctlCommandMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
 // vtctlClient implements VtctlClient.
 type vtctlClient struct {
-	executeVtctlCommand *connect.Client[v16.ExecuteVtctlCommandRequest, v16.ExecuteVtctlCommandResponse]
+	executeVtctlCommand *connect.Client[v161.ExecuteVtctlCommandRequest, v161.ExecuteVtctlCommandResponse]
 }
 
 // ExecuteVtctlCommand calls vtctlservice.Vtctl.ExecuteVtctlCommand.
-func (c *vtctlClient) ExecuteVtctlCommand(ctx context.Context, req *connect.Request[v16.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v16.ExecuteVtctlCommandResponse], error) {
+func (c *vtctlClient) ExecuteVtctlCommand(ctx context.Context, req *connect.Request[v161.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v161.ExecuteVtctlCommandResponse], error) {
 	return c.executeVtctlCommand.CallServerStream(ctx, req)
 }
 
 // VtctlHandler is an implementation of the vtctlservice.Vtctl service.
 type VtctlHandler interface {
-	ExecuteVtctlCommand(context.Context, *connect.Request[v16.ExecuteVtctlCommandRequest], *connect.ServerStream[v16.ExecuteVtctlCommandResponse]) error
+	ExecuteVtctlCommand(context.Context, *connect.Request[v161.ExecuteVtctlCommandRequest], *connect.ServerStream[v161.ExecuteVtctlCommandResponse]) error
 }
 
 // NewVtctlHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -302,7 +394,8 @@ func NewVtctlHandler(svc VtctlHandler, opts ...connect.HandlerOption) (string, h
 	vtctlExecuteVtctlCommandHandler := connect.NewServerStreamHandler(
 		VtctlExecuteVtctlCommandProcedure,
 		svc.ExecuteVtctlCommand,
-		opts...,
+		connect.WithSchema(vtctlExecuteVtctlCommandMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/vtctlservice.Vtctl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -317,7 +410,7 @@ func NewVtctlHandler(svc VtctlHandler, opts ...connect.HandlerOption) (string, h
 // UnimplementedVtctlHandler returns CodeUnimplemented from all methods.
 type UnimplementedVtctlHandler struct{}
 
-func (UnimplementedVtctlHandler) ExecuteVtctlCommand(context.Context, *connect.Request[v16.ExecuteVtctlCommandRequest], *connect.ServerStream[v16.ExecuteVtctlCommandResponse]) error {
+func (UnimplementedVtctlHandler) ExecuteVtctlCommand(context.Context, *connect.Request[v161.ExecuteVtctlCommandRequest], *connect.ServerStream[v161.ExecuteVtctlCommandResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctl.ExecuteVtctlCommand is not implemented"))
 }
 
@@ -325,132 +418,132 @@ func (UnimplementedVtctlHandler) ExecuteVtctlCommand(context.Context, *connect.R
 type VtctldClient interface {
 	// AddCellInfo registers a local topology service in a new cell by creating
 	// the CellInfo with the provided parameters.
-	AddCellInfo(context.Context, *connect.Request[v16.AddCellInfoRequest]) (*connect.Response[v16.AddCellInfoResponse], error)
+	AddCellInfo(context.Context, *connect.Request[v161.AddCellInfoRequest]) (*connect.Response[v161.AddCellInfoResponse], error)
 	// AddCellsAlias defines a group of cells that can be referenced by a single
 	// name (the alias).
 	//
 	// When routing query traffic, replica/rdonly traffic can be routed across
 	// cells within the group (alias). Only primary traffic can be routed across
 	// cells not in the same group (alias).
-	AddCellsAlias(context.Context, *connect.Request[v16.AddCellsAliasRequest]) (*connect.Response[v16.AddCellsAliasResponse], error)
+	AddCellsAlias(context.Context, *connect.Request[v161.AddCellsAliasRequest]) (*connect.Response[v161.AddCellsAliasResponse], error)
 	// ApplyRoutingRules applies the VSchema routing rules.
-	ApplyRoutingRules(context.Context, *connect.Request[v16.ApplyRoutingRulesRequest]) (*connect.Response[v16.ApplyRoutingRulesResponse], error)
+	ApplyRoutingRules(context.Context, *connect.Request[v161.ApplyRoutingRulesRequest]) (*connect.Response[v161.ApplyRoutingRulesResponse], error)
 	// ApplySchema applies a schema to a keyspace.
-	ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[v161.ApplySchemaRequest]) (*connect.Response[v161.ApplySchemaResponse], error)
 	// ApplyShardRoutingRules applies the VSchema shard routing rules.
-	ApplyShardRoutingRules(context.Context, *connect.Request[v16.ApplyShardRoutingRulesRequest]) (*connect.Response[v16.ApplyShardRoutingRulesResponse], error)
+	ApplyShardRoutingRules(context.Context, *connect.Request[v161.ApplyShardRoutingRulesRequest]) (*connect.Response[v161.ApplyShardRoutingRulesResponse], error)
 	// ApplyVSchema applies a vschema to a keyspace.
-	ApplyVSchema(context.Context, *connect.Request[v16.ApplyVSchemaRequest]) (*connect.Response[v16.ApplyVSchemaResponse], error)
+	ApplyVSchema(context.Context, *connect.Request[v161.ApplyVSchemaRequest]) (*connect.Response[v161.ApplyVSchemaResponse], error)
 	// Backup uses the BackupEngine and BackupStorage services on the specified
 	// tablet to create and store a new backup.
-	Backup(context.Context, *connect.Request[v16.BackupRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error)
+	Backup(context.Context, *connect.Request[v161.BackupRequest]) (*connect.ServerStreamForClient[v161.BackupResponse], error)
 	// BackupShard chooses a tablet in the shard and uses it to create a backup.
-	BackupShard(context.Context, *connect.Request[v16.BackupShardRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error)
+	BackupShard(context.Context, *connect.Request[v161.BackupShardRequest]) (*connect.ServerStreamForClient[v161.BackupResponse], error)
 	// ChangeTabletType changes the db type for the specified tablet, if possible.
 	// This is used primarily to arrange replicas, and it will not convert a
 	// primary. For that, use InitShardPrimary.
 	//
 	// NOTE: This command automatically updates the serving graph.
-	ChangeTabletType(context.Context, *connect.Request[v16.ChangeTabletTypeRequest]) (*connect.Response[v16.ChangeTabletTypeResponse], error)
+	ChangeTabletType(context.Context, *connect.Request[v161.ChangeTabletTypeRequest]) (*connect.Response[v161.ChangeTabletTypeResponse], error)
 	// CreateKeyspace creates the specified keyspace in the topology. For a
 	// SNAPSHOT keyspace, the request must specify the name of a base keyspace,
 	// as well as a snapshot time.
-	CreateKeyspace(context.Context, *connect.Request[v16.CreateKeyspaceRequest]) (*connect.Response[v16.CreateKeyspaceResponse], error)
+	CreateKeyspace(context.Context, *connect.Request[v161.CreateKeyspaceRequest]) (*connect.Response[v161.CreateKeyspaceResponse], error)
 	// CreateShard creates the specified shard in the topology.
-	CreateShard(context.Context, *connect.Request[v16.CreateShardRequest]) (*connect.Response[v16.CreateShardResponse], error)
+	CreateShard(context.Context, *connect.Request[v161.CreateShardRequest]) (*connect.Response[v161.CreateShardResponse], error)
 	// DeleteCellInfo deletes the CellInfo for the provided cell. The cell cannot
 	// be referenced by any Shard record in the topology.
-	DeleteCellInfo(context.Context, *connect.Request[v16.DeleteCellInfoRequest]) (*connect.Response[v16.DeleteCellInfoResponse], error)
+	DeleteCellInfo(context.Context, *connect.Request[v161.DeleteCellInfoRequest]) (*connect.Response[v161.DeleteCellInfoResponse], error)
 	// DeleteCellsAlias deletes the CellsAlias for the provided alias.
-	DeleteCellsAlias(context.Context, *connect.Request[v16.DeleteCellsAliasRequest]) (*connect.Response[v16.DeleteCellsAliasResponse], error)
+	DeleteCellsAlias(context.Context, *connect.Request[v161.DeleteCellsAliasRequest]) (*connect.Response[v161.DeleteCellsAliasResponse], error)
 	// DeleteKeyspace deletes the specified keyspace from the topology. In
 	// recursive mode, it also recursively deletes all shards in the keyspace.
 	// Otherwise, the keyspace must be empty (have no shards), or DeleteKeyspace
 	// returns an error.
-	DeleteKeyspace(context.Context, *connect.Request[v16.DeleteKeyspaceRequest]) (*connect.Response[v16.DeleteKeyspaceResponse], error)
+	DeleteKeyspace(context.Context, *connect.Request[v161.DeleteKeyspaceRequest]) (*connect.Response[v161.DeleteKeyspaceResponse], error)
 	// DeleteShards deletes the specified shards from the topology. In recursive
 	// mode, it also deletes all tablets belonging to the shard. Otherwise, the
 	// shard must be empty (have no tablets) or DeleteShards returns an error for
 	// that shard.
-	DeleteShards(context.Context, *connect.Request[v16.DeleteShardsRequest]) (*connect.Response[v16.DeleteShardsResponse], error)
+	DeleteShards(context.Context, *connect.Request[v161.DeleteShardsRequest]) (*connect.Response[v161.DeleteShardsResponse], error)
 	// DeleteSrvVSchema deletes the SrvVSchema object in the specified cell.
-	DeleteSrvVSchema(context.Context, *connect.Request[v16.DeleteSrvVSchemaRequest]) (*connect.Response[v16.DeleteSrvVSchemaResponse], error)
+	DeleteSrvVSchema(context.Context, *connect.Request[v161.DeleteSrvVSchemaRequest]) (*connect.Response[v161.DeleteSrvVSchemaResponse], error)
 	// DeleteTablets deletes one or more tablets from the topology.
-	DeleteTablets(context.Context, *connect.Request[v16.DeleteTabletsRequest]) (*connect.Response[v16.DeleteTabletsResponse], error)
+	DeleteTablets(context.Context, *connect.Request[v161.DeleteTabletsRequest]) (*connect.Response[v161.DeleteTabletsResponse], error)
 	// EmergencyReparentShard reparents the shard to the new primary. It assumes
 	// the old primary is dead or otherwise not responding.
-	EmergencyReparentShard(context.Context, *connect.Request[v16.EmergencyReparentShardRequest]) (*connect.Response[v16.EmergencyReparentShardResponse], error)
+	EmergencyReparentShard(context.Context, *connect.Request[v161.EmergencyReparentShardRequest]) (*connect.Response[v161.EmergencyReparentShardResponse], error)
 	// ExecuteFetchAsApp executes a SQL query on the remote tablet as the App user.
-	ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[v161.ExecuteFetchAsAppRequest]) (*connect.Response[v161.ExecuteFetchAsAppResponse], error)
 	// ExecuteFetchAsDBA executes a SQL query on the remote tablet as the DBA user.
-	ExecuteFetchAsDBA(context.Context, *connect.Request[v16.ExecuteFetchAsDBARequest]) (*connect.Response[v16.ExecuteFetchAsDBAResponse], error)
+	ExecuteFetchAsDBA(context.Context, *connect.Request[v161.ExecuteFetchAsDBARequest]) (*connect.Response[v161.ExecuteFetchAsDBAResponse], error)
 	// ExecuteHook runs the hook on the tablet.
-	ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[v161.ExecuteHookRequest]) (*connect.Response[v161.ExecuteHookResponse], error)
 	// FindAllShardsInKeyspace returns a map of shard names to shard references
 	// for a given keyspace.
-	FindAllShardsInKeyspace(context.Context, *connect.Request[v16.FindAllShardsInKeyspaceRequest]) (*connect.Response[v16.FindAllShardsInKeyspaceResponse], error)
+	FindAllShardsInKeyspace(context.Context, *connect.Request[v161.FindAllShardsInKeyspaceRequest]) (*connect.Response[v161.FindAllShardsInKeyspaceResponse], error)
 	// GetBackups returns all the backups for a shard.
-	GetBackups(context.Context, *connect.Request[v16.GetBackupsRequest]) (*connect.Response[v16.GetBackupsResponse], error)
+	GetBackups(context.Context, *connect.Request[v161.GetBackupsRequest]) (*connect.Response[v161.GetBackupsResponse], error)
 	// GetCellInfo returns the information for a cell.
-	GetCellInfo(context.Context, *connect.Request[v16.GetCellInfoRequest]) (*connect.Response[v16.GetCellInfoResponse], error)
+	GetCellInfo(context.Context, *connect.Request[v161.GetCellInfoRequest]) (*connect.Response[v161.GetCellInfoResponse], error)
 	// GetCellInfoNames returns all the cells for which we have a CellInfo object,
 	// meaning we have a topology service registered.
-	GetCellInfoNames(context.Context, *connect.Request[v16.GetCellInfoNamesRequest]) (*connect.Response[v16.GetCellInfoNamesResponse], error)
+	GetCellInfoNames(context.Context, *connect.Request[v161.GetCellInfoNamesRequest]) (*connect.Response[v161.GetCellInfoNamesResponse], error)
 	// GetCellsAliases returns a mapping of cell alias to cells identified by that
 	// alias.
-	GetCellsAliases(context.Context, *connect.Request[v16.GetCellsAliasesRequest]) (*connect.Response[v16.GetCellsAliasesResponse], error)
+	GetCellsAliases(context.Context, *connect.Request[v161.GetCellsAliasesRequest]) (*connect.Response[v161.GetCellsAliasesResponse], error)
 	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	GetFullStatus(context.Context, *connect.Request[v16.GetFullStatusRequest]) (*connect.Response[v16.GetFullStatusResponse], error)
+	GetFullStatus(context.Context, *connect.Request[v161.GetFullStatusRequest]) (*connect.Response[v161.GetFullStatusResponse], error)
 	// GetKeyspace reads the given keyspace from the topo and returns it.
-	GetKeyspace(context.Context, *connect.Request[v16.GetKeyspaceRequest]) (*connect.Response[v16.GetKeyspaceResponse], error)
+	GetKeyspace(context.Context, *connect.Request[v161.GetKeyspaceRequest]) (*connect.Response[v161.GetKeyspaceResponse], error)
 	// GetKeyspaces returns the keyspace struct of all keyspaces in the topo.
-	GetKeyspaces(context.Context, *connect.Request[v16.GetKeyspacesRequest]) (*connect.Response[v16.GetKeyspacesResponse], error)
+	GetKeyspaces(context.Context, *connect.Request[v161.GetKeyspacesRequest]) (*connect.Response[v161.GetKeyspacesResponse], error)
 	// GetPermissions returns the permissions set on the remote tablet.
-	GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error)
+	GetPermissions(context.Context, *connect.Request[v161.GetPermissionsRequest]) (*connect.Response[v161.GetPermissionsResponse], error)
 	// GetRoutingRules returns the VSchema routing rules.
-	GetRoutingRules(context.Context, *connect.Request[v16.GetRoutingRulesRequest]) (*connect.Response[v16.GetRoutingRulesResponse], error)
+	GetRoutingRules(context.Context, *connect.Request[v161.GetRoutingRulesRequest]) (*connect.Response[v161.GetRoutingRulesResponse], error)
 	// GetSchema returns the schema for a tablet, or just the schema for the
 	// specified tables in that tablet.
-	GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[v161.GetSchemaRequest]) (*connect.Response[v161.GetSchemaResponse], error)
 	// GetShard returns information about a shard in the topology.
-	GetShard(context.Context, *connect.Request[v16.GetShardRequest]) (*connect.Response[v16.GetShardResponse], error)
+	GetShard(context.Context, *connect.Request[v161.GetShardRequest]) (*connect.Response[v161.GetShardResponse], error)
 	// GetShardRoutingRules returns the VSchema shard routing rules.
-	GetShardRoutingRules(context.Context, *connect.Request[v16.GetShardRoutingRulesRequest]) (*connect.Response[v16.GetShardRoutingRulesResponse], error)
+	GetShardRoutingRules(context.Context, *connect.Request[v161.GetShardRoutingRulesRequest]) (*connect.Response[v161.GetShardRoutingRulesResponse], error)
 	// GetSrvKeyspaceNames returns a mapping of cell name to the keyspaces served
 	// in that cell.
-	GetSrvKeyspaceNames(context.Context, *connect.Request[v16.GetSrvKeyspaceNamesRequest]) (*connect.Response[v16.GetSrvKeyspaceNamesResponse], error)
+	GetSrvKeyspaceNames(context.Context, *connect.Request[v161.GetSrvKeyspaceNamesRequest]) (*connect.Response[v161.GetSrvKeyspaceNamesResponse], error)
 	// GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
 	// cells.
-	GetSrvKeyspaces(context.Context, *connect.Request[v16.GetSrvKeyspacesRequest]) (*connect.Response[v16.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspaces(context.Context, *connect.Request[v161.GetSrvKeyspacesRequest]) (*connect.Response[v161.GetSrvKeyspacesResponse], error)
 	// UpdateThrottlerConfig updates the tablet throttler configuration
-	UpdateThrottlerConfig(context.Context, *connect.Request[v16.UpdateThrottlerConfigRequest]) (*connect.Response[v16.UpdateThrottlerConfigResponse], error)
+	UpdateThrottlerConfig(context.Context, *connect.Request[v161.UpdateThrottlerConfigRequest]) (*connect.Response[v161.UpdateThrottlerConfigResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for a cell.
-	GetSrvVSchema(context.Context, *connect.Request[v16.GetSrvVSchemaRequest]) (*connect.Response[v16.GetSrvVSchemaResponse], error)
+	GetSrvVSchema(context.Context, *connect.Request[v161.GetSrvVSchemaRequest]) (*connect.Response[v161.GetSrvVSchemaResponse], error)
 	// GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,
 	// optionally filtered by cell name.
-	GetSrvVSchemas(context.Context, *connect.Request[v16.GetSrvVSchemasRequest]) (*connect.Response[v16.GetSrvVSchemasResponse], error)
+	GetSrvVSchemas(context.Context, *connect.Request[v161.GetSrvVSchemasRequest]) (*connect.Response[v161.GetSrvVSchemasResponse], error)
 	// GetTablet returns information about a tablet.
-	GetTablet(context.Context, *connect.Request[v16.GetTabletRequest]) (*connect.Response[v16.GetTabletResponse], error)
+	GetTablet(context.Context, *connect.Request[v161.GetTabletRequest]) (*connect.Response[v161.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
-	GetTablets(context.Context, *connect.Request[v16.GetTabletsRequest]) (*connect.Response[v16.GetTabletsResponse], error)
+	GetTablets(context.Context, *connect.Request[v161.GetTabletsRequest]) (*connect.Response[v161.GetTabletsResponse], error)
 	// GetTopologyPath returns the topology cell at a given path.
-	GetTopologyPath(context.Context, *connect.Request[v16.GetTopologyPathRequest]) (*connect.Response[v16.GetTopologyPathResponse], error)
+	GetTopologyPath(context.Context, *connect.Request[v161.GetTopologyPathRequest]) (*connect.Response[v161.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
-	GetVersion(context.Context, *connect.Request[v16.GetVersionRequest]) (*connect.Response[v16.GetVersionResponse], error)
+	GetVersion(context.Context, *connect.Request[v161.GetVersionRequest]) (*connect.Response[v161.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
-	GetVSchema(context.Context, *connect.Request[v16.GetVSchemaRequest]) (*connect.Response[v16.GetVSchemaResponse], error)
+	GetVSchema(context.Context, *connect.Request[v161.GetVSchemaRequest]) (*connect.Response[v161.GetVSchemaResponse], error)
 	// GetWorkflows returns a list of workflows for the given keyspace.
-	GetWorkflows(context.Context, *connect.Request[v16.GetWorkflowsRequest]) (*connect.Response[v16.GetWorkflowsResponse], error)
+	GetWorkflows(context.Context, *connect.Request[v161.GetWorkflowsRequest]) (*connect.Response[v161.GetWorkflowsResponse], error)
 	// InitShardPrimary sets the initial primary for a shard. Will make all other
 	// tablets in the shard replicas of the provided primary.
 	//
 	// WARNING: This could cause data loss on an already replicating shard.
 	// PlannedReparentShard or EmergencyReparentShard should be used in those
 	// cases instead.
-	InitShardPrimary(context.Context, *connect.Request[v16.InitShardPrimaryRequest]) (*connect.Response[v16.InitShardPrimaryResponse], error)
+	InitShardPrimary(context.Context, *connect.Request[v161.InitShardPrimaryRequest]) (*connect.Response[v161.InitShardPrimaryResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to RPCs.
 	// This command can be blocked by other in-flight operations.
-	PingTablet(context.Context, *connect.Request[v16.PingTabletRequest]) (*connect.Response[v16.PingTabletResponse], error)
+	PingTablet(context.Context, *connect.Request[v161.PingTabletRequest]) (*connect.Response[v161.PingTabletResponse], error)
 	// PlannedReparentShard reparents the shard to the new primary, or away from
 	// an old primary. Both the old and new primaries need to be reachable and
 	// running.
@@ -458,132 +551,132 @@ type VtctldClient interface {
 	// **NOTE**: The vtctld will not consider any replicas outside the cell the
 	// current shard primary is in for promotion unless NewPrimary is explicitly
 	// provided in the request.
-	PlannedReparentShard(context.Context, *connect.Request[v16.PlannedReparentShardRequest]) (*connect.Response[v16.PlannedReparentShardResponse], error)
+	PlannedReparentShard(context.Context, *connect.Request[v161.PlannedReparentShardRequest]) (*connect.Response[v161.PlannedReparentShardResponse], error)
 	// RebuildKeyspaceGraph rebuilds the serving data for a keyspace.
 	//
 	// This may trigger an update to all connected clients.
-	RebuildKeyspaceGraph(context.Context, *connect.Request[v16.RebuildKeyspaceGraphRequest]) (*connect.Response[v16.RebuildKeyspaceGraphResponse], error)
+	RebuildKeyspaceGraph(context.Context, *connect.Request[v161.RebuildKeyspaceGraphRequest]) (*connect.Response[v161.RebuildKeyspaceGraphResponse], error)
 	// RebuildVSchemaGraph rebuilds the per-cell SrvVSchema from the global
 	// VSchema objects in the provided cells (or all cells in the topo none
 	// provided).
-	RebuildVSchemaGraph(context.Context, *connect.Request[v16.RebuildVSchemaGraphRequest]) (*connect.Response[v16.RebuildVSchemaGraphResponse], error)
+	RebuildVSchemaGraph(context.Context, *connect.Request[v161.RebuildVSchemaGraphRequest]) (*connect.Response[v161.RebuildVSchemaGraphResponse], error)
 	// RefreshState reloads the tablet record on the specified tablet.
-	RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error)
+	RefreshState(context.Context, *connect.Request[v161.RefreshStateRequest]) (*connect.Response[v161.RefreshStateResponse], error)
 	// RefreshStateByShard calls RefreshState on all the tablets in the given shard.
-	RefreshStateByShard(context.Context, *connect.Request[v16.RefreshStateByShardRequest]) (*connect.Response[v16.RefreshStateByShardResponse], error)
+	RefreshStateByShard(context.Context, *connect.Request[v161.RefreshStateByShardRequest]) (*connect.Response[v161.RefreshStateByShardResponse], error)
 	// ReloadSchema instructs the remote tablet to reload its schema.
-	ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error)
+	ReloadSchema(context.Context, *connect.Request[v161.ReloadSchemaRequest]) (*connect.Response[v161.ReloadSchemaResponse], error)
 	// ReloadSchemaKeyspace reloads the schema on all tablets in a keyspace.
-	ReloadSchemaKeyspace(context.Context, *connect.Request[v16.ReloadSchemaKeyspaceRequest]) (*connect.Response[v16.ReloadSchemaKeyspaceResponse], error)
+	ReloadSchemaKeyspace(context.Context, *connect.Request[v161.ReloadSchemaKeyspaceRequest]) (*connect.Response[v161.ReloadSchemaKeyspaceResponse], error)
 	// ReloadSchemaShard reloads the schema on all tablets in a shard.
 	//
 	// In general, we don't always expect all replicas to be ready to reload, and
 	// the periodic schema reload makes them self-healing anyway. So, we do this
 	// on a best-effort basis, and log warnings for any tablets that fail to
 	// reload within the context deadline.
-	ReloadSchemaShard(context.Context, *connect.Request[v16.ReloadSchemaShardRequest]) (*connect.Response[v16.ReloadSchemaShardResponse], error)
+	ReloadSchemaShard(context.Context, *connect.Request[v161.ReloadSchemaShardRequest]) (*connect.Response[v161.ReloadSchemaShardResponse], error)
 	// RemoveBackup removes a backup from the BackupStorage used by vtctld.
-	RemoveBackup(context.Context, *connect.Request[v16.RemoveBackupRequest]) (*connect.Response[v16.RemoveBackupResponse], error)
+	RemoveBackup(context.Context, *connect.Request[v161.RemoveBackupRequest]) (*connect.Response[v161.RemoveBackupResponse], error)
 	// RemoveKeyspaceCell removes the specified cell from the Cells list for all
 	// shards in the specified keyspace (by calling RemoveShardCell on every
 	// shard). It also removes the SrvKeyspace for that keyspace in that cell.
-	RemoveKeyspaceCell(context.Context, *connect.Request[v16.RemoveKeyspaceCellRequest]) (*connect.Response[v16.RemoveKeyspaceCellResponse], error)
+	RemoveKeyspaceCell(context.Context, *connect.Request[v161.RemoveKeyspaceCellRequest]) (*connect.Response[v161.RemoveKeyspaceCellResponse], error)
 	// RemoveShardCell removes the specified cell from the specified shard's Cells
 	// list.
-	RemoveShardCell(context.Context, *connect.Request[v16.RemoveShardCellRequest]) (*connect.Response[v16.RemoveShardCellResponse], error)
+	RemoveShardCell(context.Context, *connect.Request[v161.RemoveShardCellRequest]) (*connect.Response[v161.RemoveShardCellResponse], error)
 	// ReparentTablet reparents a tablet to the current primary in the shard. This
 	// only works if the current replica position matches the last known reparent
 	// action.
-	ReparentTablet(context.Context, *connect.Request[v16.ReparentTabletRequest]) (*connect.Response[v16.ReparentTabletResponse], error)
+	ReparentTablet(context.Context, *connect.Request[v161.ReparentTabletRequest]) (*connect.Response[v161.ReparentTabletResponse], error)
 	// RestoreFromBackup stops mysqld for the given tablet and restores a backup.
-	RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v16.RestoreFromBackupResponse], error)
+	RestoreFromBackup(context.Context, *connect.Request[v161.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v161.RestoreFromBackupResponse], error)
 	// RunHealthCheck runs a healthcheck on the remote tablet.
-	RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[v161.RunHealthCheckRequest]) (*connect.Response[v161.RunHealthCheckResponse], error)
 	// SetKeyspaceDurabilityPolicy updates the DurabilityPolicy for a keyspace.
-	SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v16.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v16.SetKeyspaceDurabilityPolicyResponse], error)
+	SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v161.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v161.SetKeyspaceDurabilityPolicyResponse], error)
 	// SetShardIsPrimaryServing adds or removes a shard from serving.
 	//
 	// This is meant as an emergency function. It does not rebuild any serving
 	// graph (i.e. it does not run RebuildKeyspaceGraph).
-	SetShardIsPrimaryServing(context.Context, *connect.Request[v16.SetShardIsPrimaryServingRequest]) (*connect.Response[v16.SetShardIsPrimaryServingResponse], error)
+	SetShardIsPrimaryServing(context.Context, *connect.Request[v161.SetShardIsPrimaryServingRequest]) (*connect.Response[v161.SetShardIsPrimaryServingResponse], error)
 	// SetShardTabletControl updates the TabletControl topo record for a shard and
 	// tablet type.
 	//
 	// This should only be used for an emergency fix, or after a finished
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
-	SetShardTabletControl(context.Context, *connect.Request[v16.SetShardTabletControlRequest]) (*connect.Response[v16.SetShardTabletControlResponse], error)
+	SetShardTabletControl(context.Context, *connect.Request[v161.SetShardTabletControlRequest]) (*connect.Response[v161.SetShardTabletControlResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
-	SetWritable(context.Context, *connect.Request[v16.SetWritableRequest]) (*connect.Response[v16.SetWritableResponse], error)
+	SetWritable(context.Context, *connect.Request[v161.SetWritableRequest]) (*connect.Response[v161.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
 	//
 	// It is a low-level function and should generally not be called.
-	ShardReplicationAdd(context.Context, *connect.Request[v16.ShardReplicationAddRequest]) (*connect.Response[v16.ShardReplicationAddResponse], error)
+	ShardReplicationAdd(context.Context, *connect.Request[v161.ShardReplicationAddRequest]) (*connect.Response[v161.ShardReplicationAddResponse], error)
 	// ShardReplicationFix walks the replication graph for a shard in a cell and
 	// attempts to fix the first problem encountered, returning information about
 	// the problem fixed, if any.
-	ShardReplicationFix(context.Context, *connect.Request[v16.ShardReplicationFixRequest]) (*connect.Response[v16.ShardReplicationFixResponse], error)
+	ShardReplicationFix(context.Context, *connect.Request[v161.ShardReplicationFixRequest]) (*connect.Response[v161.ShardReplicationFixResponse], error)
 	// ShardReplicationPositions returns the replication position of each tablet
 	// in a shard. This RPC makes a best-effort to return partial results. For
 	// example, if one tablet in the shard graph is unreachable, then
 	// ShardReplicationPositions will return non-error, and include valid results
 	// for the reachable tablets.
-	ShardReplicationPositions(context.Context, *connect.Request[v16.ShardReplicationPositionsRequest]) (*connect.Response[v16.ShardReplicationPositionsResponse], error)
+	ShardReplicationPositions(context.Context, *connect.Request[v161.ShardReplicationPositionsRequest]) (*connect.Response[v161.ShardReplicationPositionsResponse], error)
 	// ShardReplicationRemove removes an entry from a topodata.ShardReplication
 	// object.
 	//
 	// It is a low-level function and should generally not be called.
-	ShardReplicationRemove(context.Context, *connect.Request[v16.ShardReplicationRemoveRequest]) (*connect.Response[v16.ShardReplicationRemoveResponse], error)
+	ShardReplicationRemove(context.Context, *connect.Request[v161.ShardReplicationRemoveRequest]) (*connect.Response[v161.ShardReplicationRemoveResponse], error)
 	// SleepTablet blocks the aciton queue on the specified tablet for the
 	// specified duration.
 	//
 	// This is typically used for testing.
-	SleepTablet(context.Context, *connect.Request[v16.SleepTabletRequest]) (*connect.Response[v16.SleepTabletResponse], error)
+	SleepTablet(context.Context, *connect.Request[v161.SleepTabletRequest]) (*connect.Response[v161.SleepTabletResponse], error)
 	// SourceShardAdd adds the SourceShard record with the provided index. This
 	// should be used only as an emergency function.
 	//
 	// It does not call RefreshState for the shard primary.
-	SourceShardAdd(context.Context, *connect.Request[v16.SourceShardAddRequest]) (*connect.Response[v16.SourceShardAddResponse], error)
+	SourceShardAdd(context.Context, *connect.Request[v161.SourceShardAddRequest]) (*connect.Response[v161.SourceShardAddResponse], error)
 	// SourceShardDelete deletes the SourceShard record with the provided index.
 	// This should be used only as an emergency cleanup function.
 	//
 	// It does not call RefreshState for the shard primary.
-	SourceShardDelete(context.Context, *connect.Request[v16.SourceShardDeleteRequest]) (*connect.Response[v16.SourceShardDeleteResponse], error)
+	SourceShardDelete(context.Context, *connect.Request[v161.SourceShardDeleteRequest]) (*connect.Response[v161.SourceShardDeleteResponse], error)
 	// StartReplication starts replication on the specified tablet.
-	StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[v161.StartReplicationRequest]) (*connect.Response[v161.StartReplicationResponse], error)
 	// StopReplication stops replication on the specified tablet.
-	StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[v161.StopReplicationRequest]) (*connect.Response[v161.StopReplicationResponse], error)
 	// TabletExternallyReparented changes metadata in the topology server to
 	// acknowledge a shard primary change performed by an external tool (e.g.
 	// orchestrator).
 	//
 	// See the Reparenting guide for more information:
-	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v16.TabletExternallyReparentedRequest]) (*connect.Response[v16.TabletExternallyReparentedResponse], error)
+	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v161.TabletExternallyReparentedRequest]) (*connect.Response[v161.TabletExternallyReparentedResponse], error)
 	// UpdateCellInfo updates the content of a CellInfo with the provided
 	// parameters. Empty values are ignored. If the cell does not exist, the
 	// CellInfo will be created.
-	UpdateCellInfo(context.Context, *connect.Request[v16.UpdateCellInfoRequest]) (*connect.Response[v16.UpdateCellInfoResponse], error)
+	UpdateCellInfo(context.Context, *connect.Request[v161.UpdateCellInfoRequest]) (*connect.Response[v161.UpdateCellInfoResponse], error)
 	// UpdateCellsAlias updates the content of a CellsAlias with the provided
 	// parameters. Empty values are ignored. If the alias does not exist, the
 	// CellsAlias will be created.
-	UpdateCellsAlias(context.Context, *connect.Request[v16.UpdateCellsAliasRequest]) (*connect.Response[v16.UpdateCellsAliasResponse], error)
+	UpdateCellsAlias(context.Context, *connect.Request[v161.UpdateCellsAliasRequest]) (*connect.Response[v161.UpdateCellsAliasResponse], error)
 	// Validate validates that all nodes from the global replication graph are
 	// reachable, and that all tablets in discoverable cells are consistent.
-	Validate(context.Context, *connect.Request[v16.ValidateRequest]) (*connect.Response[v16.ValidateResponse], error)
+	Validate(context.Context, *connect.Request[v161.ValidateRequest]) (*connect.Response[v161.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
-	ValidateKeyspace(context.Context, *connect.Request[v16.ValidateKeyspaceRequest]) (*connect.Response[v16.ValidateKeyspaceResponse], error)
+	ValidateKeyspace(context.Context, *connect.Request[v161.ValidateKeyspaceRequest]) (*connect.Response[v161.ValidateKeyspaceResponse], error)
 	// ValidateSchemaKeyspace validates that the schema on the primary tablet for shard 0 matches the schema on all of the other tablets in the keyspace.
-	ValidateSchemaKeyspace(context.Context, *connect.Request[v16.ValidateSchemaKeyspaceRequest]) (*connect.Response[v16.ValidateSchemaKeyspaceResponse], error)
+	ValidateSchemaKeyspace(context.Context, *connect.Request[v161.ValidateSchemaKeyspaceRequest]) (*connect.Response[v161.ValidateSchemaKeyspaceResponse], error)
 	// ValidateShard validates that all nodes reachable from the specified shard
 	// are consistent.
-	ValidateShard(context.Context, *connect.Request[v16.ValidateShardRequest]) (*connect.Response[v16.ValidateShardResponse], error)
+	ValidateShard(context.Context, *connect.Request[v161.ValidateShardRequest]) (*connect.Response[v161.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of shard 0 matches all of the other tablets in the keyspace.
-	ValidateVersionKeyspace(context.Context, *connect.Request[v16.ValidateVersionKeyspaceRequest]) (*connect.Response[v16.ValidateVersionKeyspaceResponse], error)
+	ValidateVersionKeyspace(context.Context, *connect.Request[v161.ValidateVersionKeyspaceRequest]) (*connect.Response[v161.ValidateVersionKeyspaceResponse], error)
 	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
-	ValidateVersionShard(context.Context, *connect.Request[v16.ValidateVersionShardRequest]) (*connect.Response[v16.ValidateVersionShardResponse], error)
+	ValidateVersionShard(context.Context, *connect.Request[v161.ValidateVersionShardRequest]) (*connect.Response[v161.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
-	ValidateVSchema(context.Context, *connect.Request[v16.ValidateVSchemaRequest]) (*connect.Response[v16.ValidateVSchemaResponse], error)
+	ValidateVSchema(context.Context, *connect.Request[v161.ValidateVSchemaRequest]) (*connect.Response[v161.ValidateVSchemaResponse], error)
 }
 
 // NewVtctldClient constructs a client for the vtctlservice.Vtctld service. By default,
@@ -596,934 +689,1018 @@ type VtctldClient interface {
 func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VtctldClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &vtctldClient{
-		addCellInfo: connect.NewClient[v16.AddCellInfoRequest, v16.AddCellInfoResponse](
+		addCellInfo: connect.NewClient[v161.AddCellInfoRequest, v161.AddCellInfoResponse](
 			httpClient,
 			baseURL+VtctldAddCellInfoProcedure,
-			opts...,
+			connect.WithSchema(vtctldAddCellInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		addCellsAlias: connect.NewClient[v16.AddCellsAliasRequest, v16.AddCellsAliasResponse](
+		addCellsAlias: connect.NewClient[v161.AddCellsAliasRequest, v161.AddCellsAliasResponse](
 			httpClient,
 			baseURL+VtctldAddCellsAliasProcedure,
-			opts...,
+			connect.WithSchema(vtctldAddCellsAliasMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		applyRoutingRules: connect.NewClient[v16.ApplyRoutingRulesRequest, v16.ApplyRoutingRulesResponse](
+		applyRoutingRules: connect.NewClient[v161.ApplyRoutingRulesRequest, v161.ApplyRoutingRulesResponse](
 			httpClient,
 			baseURL+VtctldApplyRoutingRulesProcedure,
-			opts...,
+			connect.WithSchema(vtctldApplyRoutingRulesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		applySchema: connect.NewClient[v16.ApplySchemaRequest, v16.ApplySchemaResponse](
+		applySchema: connect.NewClient[v161.ApplySchemaRequest, v161.ApplySchemaResponse](
 			httpClient,
 			baseURL+VtctldApplySchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldApplySchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		applyShardRoutingRules: connect.NewClient[v16.ApplyShardRoutingRulesRequest, v16.ApplyShardRoutingRulesResponse](
+		applyShardRoutingRules: connect.NewClient[v161.ApplyShardRoutingRulesRequest, v161.ApplyShardRoutingRulesResponse](
 			httpClient,
 			baseURL+VtctldApplyShardRoutingRulesProcedure,
-			opts...,
+			connect.WithSchema(vtctldApplyShardRoutingRulesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		applyVSchema: connect.NewClient[v16.ApplyVSchemaRequest, v16.ApplyVSchemaResponse](
+		applyVSchema: connect.NewClient[v161.ApplyVSchemaRequest, v161.ApplyVSchemaResponse](
 			httpClient,
 			baseURL+VtctldApplyVSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldApplyVSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		backup: connect.NewClient[v16.BackupRequest, v16.BackupResponse](
+		backup: connect.NewClient[v161.BackupRequest, v161.BackupResponse](
 			httpClient,
 			baseURL+VtctldBackupProcedure,
-			opts...,
+			connect.WithSchema(vtctldBackupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		backupShard: connect.NewClient[v16.BackupShardRequest, v16.BackupResponse](
+		backupShard: connect.NewClient[v161.BackupShardRequest, v161.BackupResponse](
 			httpClient,
 			baseURL+VtctldBackupShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldBackupShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		changeTabletType: connect.NewClient[v16.ChangeTabletTypeRequest, v16.ChangeTabletTypeResponse](
+		changeTabletType: connect.NewClient[v161.ChangeTabletTypeRequest, v161.ChangeTabletTypeResponse](
 			httpClient,
 			baseURL+VtctldChangeTabletTypeProcedure,
-			opts...,
+			connect.WithSchema(vtctldChangeTabletTypeMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		createKeyspace: connect.NewClient[v16.CreateKeyspaceRequest, v16.CreateKeyspaceResponse](
+		createKeyspace: connect.NewClient[v161.CreateKeyspaceRequest, v161.CreateKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldCreateKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldCreateKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		createShard: connect.NewClient[v16.CreateShardRequest, v16.CreateShardResponse](
+		createShard: connect.NewClient[v161.CreateShardRequest, v161.CreateShardResponse](
 			httpClient,
 			baseURL+VtctldCreateShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldCreateShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteCellInfo: connect.NewClient[v16.DeleteCellInfoRequest, v16.DeleteCellInfoResponse](
+		deleteCellInfo: connect.NewClient[v161.DeleteCellInfoRequest, v161.DeleteCellInfoResponse](
 			httpClient,
 			baseURL+VtctldDeleteCellInfoProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteCellInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteCellsAlias: connect.NewClient[v16.DeleteCellsAliasRequest, v16.DeleteCellsAliasResponse](
+		deleteCellsAlias: connect.NewClient[v161.DeleteCellsAliasRequest, v161.DeleteCellsAliasResponse](
 			httpClient,
 			baseURL+VtctldDeleteCellsAliasProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteCellsAliasMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteKeyspace: connect.NewClient[v16.DeleteKeyspaceRequest, v16.DeleteKeyspaceResponse](
+		deleteKeyspace: connect.NewClient[v161.DeleteKeyspaceRequest, v161.DeleteKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldDeleteKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteShards: connect.NewClient[v16.DeleteShardsRequest, v16.DeleteShardsResponse](
+		deleteShards: connect.NewClient[v161.DeleteShardsRequest, v161.DeleteShardsResponse](
 			httpClient,
 			baseURL+VtctldDeleteShardsProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteShardsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteSrvVSchema: connect.NewClient[v16.DeleteSrvVSchemaRequest, v16.DeleteSrvVSchemaResponse](
+		deleteSrvVSchema: connect.NewClient[v161.DeleteSrvVSchemaRequest, v161.DeleteSrvVSchemaResponse](
 			httpClient,
 			baseURL+VtctldDeleteSrvVSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteSrvVSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		deleteTablets: connect.NewClient[v16.DeleteTabletsRequest, v16.DeleteTabletsResponse](
+		deleteTablets: connect.NewClient[v161.DeleteTabletsRequest, v161.DeleteTabletsResponse](
 			httpClient,
 			baseURL+VtctldDeleteTabletsProcedure,
-			opts...,
+			connect.WithSchema(vtctldDeleteTabletsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		emergencyReparentShard: connect.NewClient[v16.EmergencyReparentShardRequest, v16.EmergencyReparentShardResponse](
+		emergencyReparentShard: connect.NewClient[v161.EmergencyReparentShardRequest, v161.EmergencyReparentShardResponse](
 			httpClient,
 			baseURL+VtctldEmergencyReparentShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldEmergencyReparentShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeFetchAsApp: connect.NewClient[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse](
+		executeFetchAsApp: connect.NewClient[v161.ExecuteFetchAsAppRequest, v161.ExecuteFetchAsAppResponse](
 			httpClient,
 			baseURL+VtctldExecuteFetchAsAppProcedure,
-			opts...,
+			connect.WithSchema(vtctldExecuteFetchAsAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeFetchAsDBA: connect.NewClient[v16.ExecuteFetchAsDBARequest, v16.ExecuteFetchAsDBAResponse](
+		executeFetchAsDBA: connect.NewClient[v161.ExecuteFetchAsDBARequest, v161.ExecuteFetchAsDBAResponse](
 			httpClient,
 			baseURL+VtctldExecuteFetchAsDBAProcedure,
-			opts...,
+			connect.WithSchema(vtctldExecuteFetchAsDBAMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		executeHook: connect.NewClient[v16.ExecuteHookRequest, v16.ExecuteHookResponse](
+		executeHook: connect.NewClient[v161.ExecuteHookRequest, v161.ExecuteHookResponse](
 			httpClient,
 			baseURL+VtctldExecuteHookProcedure,
-			opts...,
+			connect.WithSchema(vtctldExecuteHookMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		findAllShardsInKeyspace: connect.NewClient[v16.FindAllShardsInKeyspaceRequest, v16.FindAllShardsInKeyspaceResponse](
+		findAllShardsInKeyspace: connect.NewClient[v161.FindAllShardsInKeyspaceRequest, v161.FindAllShardsInKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldFindAllShardsInKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldFindAllShardsInKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getBackups: connect.NewClient[v16.GetBackupsRequest, v16.GetBackupsResponse](
+		getBackups: connect.NewClient[v161.GetBackupsRequest, v161.GetBackupsResponse](
 			httpClient,
 			baseURL+VtctldGetBackupsProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetBackupsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getCellInfo: connect.NewClient[v16.GetCellInfoRequest, v16.GetCellInfoResponse](
+		getCellInfo: connect.NewClient[v161.GetCellInfoRequest, v161.GetCellInfoResponse](
 			httpClient,
 			baseURL+VtctldGetCellInfoProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetCellInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getCellInfoNames: connect.NewClient[v16.GetCellInfoNamesRequest, v16.GetCellInfoNamesResponse](
+		getCellInfoNames: connect.NewClient[v161.GetCellInfoNamesRequest, v161.GetCellInfoNamesResponse](
 			httpClient,
 			baseURL+VtctldGetCellInfoNamesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetCellInfoNamesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getCellsAliases: connect.NewClient[v16.GetCellsAliasesRequest, v16.GetCellsAliasesResponse](
+		getCellsAliases: connect.NewClient[v161.GetCellsAliasesRequest, v161.GetCellsAliasesResponse](
 			httpClient,
 			baseURL+VtctldGetCellsAliasesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetCellsAliasesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getFullStatus: connect.NewClient[v16.GetFullStatusRequest, v16.GetFullStatusResponse](
+		getFullStatus: connect.NewClient[v161.GetFullStatusRequest, v161.GetFullStatusResponse](
 			httpClient,
 			baseURL+VtctldGetFullStatusProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetFullStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getKeyspace: connect.NewClient[v16.GetKeyspaceRequest, v16.GetKeyspaceResponse](
+		getKeyspace: connect.NewClient[v161.GetKeyspaceRequest, v161.GetKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldGetKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getKeyspaces: connect.NewClient[v16.GetKeyspacesRequest, v16.GetKeyspacesResponse](
+		getKeyspaces: connect.NewClient[v161.GetKeyspacesRequest, v161.GetKeyspacesResponse](
 			httpClient,
 			baseURL+VtctldGetKeyspacesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetKeyspacesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getPermissions: connect.NewClient[v16.GetPermissionsRequest, v16.GetPermissionsResponse](
+		getPermissions: connect.NewClient[v161.GetPermissionsRequest, v161.GetPermissionsResponse](
 			httpClient,
 			baseURL+VtctldGetPermissionsProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetPermissionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getRoutingRules: connect.NewClient[v16.GetRoutingRulesRequest, v16.GetRoutingRulesResponse](
+		getRoutingRules: connect.NewClient[v161.GetRoutingRulesRequest, v161.GetRoutingRulesResponse](
 			httpClient,
 			baseURL+VtctldGetRoutingRulesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetRoutingRulesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSchema: connect.NewClient[v16.GetSchemaRequest, v16.GetSchemaResponse](
+		getSchema: connect.NewClient[v161.GetSchemaRequest, v161.GetSchemaResponse](
 			httpClient,
 			baseURL+VtctldGetSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getShard: connect.NewClient[v16.GetShardRequest, v16.GetShardResponse](
+		getShard: connect.NewClient[v161.GetShardRequest, v161.GetShardResponse](
 			httpClient,
 			baseURL+VtctldGetShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getShardRoutingRules: connect.NewClient[v16.GetShardRoutingRulesRequest, v16.GetShardRoutingRulesResponse](
+		getShardRoutingRules: connect.NewClient[v161.GetShardRoutingRulesRequest, v161.GetShardRoutingRulesResponse](
 			httpClient,
 			baseURL+VtctldGetShardRoutingRulesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetShardRoutingRulesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSrvKeyspaceNames: connect.NewClient[v16.GetSrvKeyspaceNamesRequest, v16.GetSrvKeyspaceNamesResponse](
+		getSrvKeyspaceNames: connect.NewClient[v161.GetSrvKeyspaceNamesRequest, v161.GetSrvKeyspaceNamesResponse](
 			httpClient,
 			baseURL+VtctldGetSrvKeyspaceNamesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetSrvKeyspaceNamesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSrvKeyspaces: connect.NewClient[v16.GetSrvKeyspacesRequest, v16.GetSrvKeyspacesResponse](
+		getSrvKeyspaces: connect.NewClient[v161.GetSrvKeyspacesRequest, v161.GetSrvKeyspacesResponse](
 			httpClient,
 			baseURL+VtctldGetSrvKeyspacesProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetSrvKeyspacesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		updateThrottlerConfig: connect.NewClient[v16.UpdateThrottlerConfigRequest, v16.UpdateThrottlerConfigResponse](
+		updateThrottlerConfig: connect.NewClient[v161.UpdateThrottlerConfigRequest, v161.UpdateThrottlerConfigResponse](
 			httpClient,
 			baseURL+VtctldUpdateThrottlerConfigProcedure,
-			opts...,
+			connect.WithSchema(vtctldUpdateThrottlerConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSrvVSchema: connect.NewClient[v16.GetSrvVSchemaRequest, v16.GetSrvVSchemaResponse](
+		getSrvVSchema: connect.NewClient[v161.GetSrvVSchemaRequest, v161.GetSrvVSchemaResponse](
 			httpClient,
 			baseURL+VtctldGetSrvVSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetSrvVSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getSrvVSchemas: connect.NewClient[v16.GetSrvVSchemasRequest, v16.GetSrvVSchemasResponse](
+		getSrvVSchemas: connect.NewClient[v161.GetSrvVSchemasRequest, v161.GetSrvVSchemasResponse](
 			httpClient,
 			baseURL+VtctldGetSrvVSchemasProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetSrvVSchemasMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getTablet: connect.NewClient[v16.GetTabletRequest, v16.GetTabletResponse](
+		getTablet: connect.NewClient[v161.GetTabletRequest, v161.GetTabletResponse](
 			httpClient,
 			baseURL+VtctldGetTabletProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetTabletMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getTablets: connect.NewClient[v16.GetTabletsRequest, v16.GetTabletsResponse](
+		getTablets: connect.NewClient[v161.GetTabletsRequest, v161.GetTabletsResponse](
 			httpClient,
 			baseURL+VtctldGetTabletsProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetTabletsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getTopologyPath: connect.NewClient[v16.GetTopologyPathRequest, v16.GetTopologyPathResponse](
+		getTopologyPath: connect.NewClient[v161.GetTopologyPathRequest, v161.GetTopologyPathResponse](
 			httpClient,
 			baseURL+VtctldGetTopologyPathProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetTopologyPathMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getVersion: connect.NewClient[v16.GetVersionRequest, v16.GetVersionResponse](
+		getVersion: connect.NewClient[v161.GetVersionRequest, v161.GetVersionResponse](
 			httpClient,
 			baseURL+VtctldGetVersionProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetVersionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getVSchema: connect.NewClient[v16.GetVSchemaRequest, v16.GetVSchemaResponse](
+		getVSchema: connect.NewClient[v161.GetVSchemaRequest, v161.GetVSchemaResponse](
 			httpClient,
 			baseURL+VtctldGetVSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetVSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getWorkflows: connect.NewClient[v16.GetWorkflowsRequest, v16.GetWorkflowsResponse](
+		getWorkflows: connect.NewClient[v161.GetWorkflowsRequest, v161.GetWorkflowsResponse](
 			httpClient,
 			baseURL+VtctldGetWorkflowsProcedure,
-			opts...,
+			connect.WithSchema(vtctldGetWorkflowsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		initShardPrimary: connect.NewClient[v16.InitShardPrimaryRequest, v16.InitShardPrimaryResponse](
+		initShardPrimary: connect.NewClient[v161.InitShardPrimaryRequest, v161.InitShardPrimaryResponse](
 			httpClient,
 			baseURL+VtctldInitShardPrimaryProcedure,
-			opts...,
+			connect.WithSchema(vtctldInitShardPrimaryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		pingTablet: connect.NewClient[v16.PingTabletRequest, v16.PingTabletResponse](
+		pingTablet: connect.NewClient[v161.PingTabletRequest, v161.PingTabletResponse](
 			httpClient,
 			baseURL+VtctldPingTabletProcedure,
-			opts...,
+			connect.WithSchema(vtctldPingTabletMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		plannedReparentShard: connect.NewClient[v16.PlannedReparentShardRequest, v16.PlannedReparentShardResponse](
+		plannedReparentShard: connect.NewClient[v161.PlannedReparentShardRequest, v161.PlannedReparentShardResponse](
 			httpClient,
 			baseURL+VtctldPlannedReparentShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldPlannedReparentShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		rebuildKeyspaceGraph: connect.NewClient[v16.RebuildKeyspaceGraphRequest, v16.RebuildKeyspaceGraphResponse](
+		rebuildKeyspaceGraph: connect.NewClient[v161.RebuildKeyspaceGraphRequest, v161.RebuildKeyspaceGraphResponse](
 			httpClient,
 			baseURL+VtctldRebuildKeyspaceGraphProcedure,
-			opts...,
+			connect.WithSchema(vtctldRebuildKeyspaceGraphMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		rebuildVSchemaGraph: connect.NewClient[v16.RebuildVSchemaGraphRequest, v16.RebuildVSchemaGraphResponse](
+		rebuildVSchemaGraph: connect.NewClient[v161.RebuildVSchemaGraphRequest, v161.RebuildVSchemaGraphResponse](
 			httpClient,
 			baseURL+VtctldRebuildVSchemaGraphProcedure,
-			opts...,
+			connect.WithSchema(vtctldRebuildVSchemaGraphMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		refreshState: connect.NewClient[v16.RefreshStateRequest, v16.RefreshStateResponse](
+		refreshState: connect.NewClient[v161.RefreshStateRequest, v161.RefreshStateResponse](
 			httpClient,
 			baseURL+VtctldRefreshStateProcedure,
-			opts...,
+			connect.WithSchema(vtctldRefreshStateMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		refreshStateByShard: connect.NewClient[v16.RefreshStateByShardRequest, v16.RefreshStateByShardResponse](
+		refreshStateByShard: connect.NewClient[v161.RefreshStateByShardRequest, v161.RefreshStateByShardResponse](
 			httpClient,
 			baseURL+VtctldRefreshStateByShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldRefreshStateByShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		reloadSchema: connect.NewClient[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse](
+		reloadSchema: connect.NewClient[v161.ReloadSchemaRequest, v161.ReloadSchemaResponse](
 			httpClient,
 			baseURL+VtctldReloadSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldReloadSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		reloadSchemaKeyspace: connect.NewClient[v16.ReloadSchemaKeyspaceRequest, v16.ReloadSchemaKeyspaceResponse](
+		reloadSchemaKeyspace: connect.NewClient[v161.ReloadSchemaKeyspaceRequest, v161.ReloadSchemaKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldReloadSchemaKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldReloadSchemaKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		reloadSchemaShard: connect.NewClient[v16.ReloadSchemaShardRequest, v16.ReloadSchemaShardResponse](
+		reloadSchemaShard: connect.NewClient[v161.ReloadSchemaShardRequest, v161.ReloadSchemaShardResponse](
 			httpClient,
 			baseURL+VtctldReloadSchemaShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldReloadSchemaShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		removeBackup: connect.NewClient[v16.RemoveBackupRequest, v16.RemoveBackupResponse](
+		removeBackup: connect.NewClient[v161.RemoveBackupRequest, v161.RemoveBackupResponse](
 			httpClient,
 			baseURL+VtctldRemoveBackupProcedure,
-			opts...,
+			connect.WithSchema(vtctldRemoveBackupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		removeKeyspaceCell: connect.NewClient[v16.RemoveKeyspaceCellRequest, v16.RemoveKeyspaceCellResponse](
+		removeKeyspaceCell: connect.NewClient[v161.RemoveKeyspaceCellRequest, v161.RemoveKeyspaceCellResponse](
 			httpClient,
 			baseURL+VtctldRemoveKeyspaceCellProcedure,
-			opts...,
+			connect.WithSchema(vtctldRemoveKeyspaceCellMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		removeShardCell: connect.NewClient[v16.RemoveShardCellRequest, v16.RemoveShardCellResponse](
+		removeShardCell: connect.NewClient[v161.RemoveShardCellRequest, v161.RemoveShardCellResponse](
 			httpClient,
 			baseURL+VtctldRemoveShardCellProcedure,
-			opts...,
+			connect.WithSchema(vtctldRemoveShardCellMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		reparentTablet: connect.NewClient[v16.ReparentTabletRequest, v16.ReparentTabletResponse](
+		reparentTablet: connect.NewClient[v161.ReparentTabletRequest, v161.ReparentTabletResponse](
 			httpClient,
 			baseURL+VtctldReparentTabletProcedure,
-			opts...,
+			connect.WithSchema(vtctldReparentTabletMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		restoreFromBackup: connect.NewClient[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse](
+		restoreFromBackup: connect.NewClient[v161.RestoreFromBackupRequest, v161.RestoreFromBackupResponse](
 			httpClient,
 			baseURL+VtctldRestoreFromBackupProcedure,
-			opts...,
+			connect.WithSchema(vtctldRestoreFromBackupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		runHealthCheck: connect.NewClient[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse](
+		runHealthCheck: connect.NewClient[v161.RunHealthCheckRequest, v161.RunHealthCheckResponse](
 			httpClient,
 			baseURL+VtctldRunHealthCheckProcedure,
-			opts...,
+			connect.WithSchema(vtctldRunHealthCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setKeyspaceDurabilityPolicy: connect.NewClient[v16.SetKeyspaceDurabilityPolicyRequest, v16.SetKeyspaceDurabilityPolicyResponse](
+		setKeyspaceDurabilityPolicy: connect.NewClient[v161.SetKeyspaceDurabilityPolicyRequest, v161.SetKeyspaceDurabilityPolicyResponse](
 			httpClient,
 			baseURL+VtctldSetKeyspaceDurabilityPolicyProcedure,
-			opts...,
+			connect.WithSchema(vtctldSetKeyspaceDurabilityPolicyMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setShardIsPrimaryServing: connect.NewClient[v16.SetShardIsPrimaryServingRequest, v16.SetShardIsPrimaryServingResponse](
+		setShardIsPrimaryServing: connect.NewClient[v161.SetShardIsPrimaryServingRequest, v161.SetShardIsPrimaryServingResponse](
 			httpClient,
 			baseURL+VtctldSetShardIsPrimaryServingProcedure,
-			opts...,
+			connect.WithSchema(vtctldSetShardIsPrimaryServingMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setShardTabletControl: connect.NewClient[v16.SetShardTabletControlRequest, v16.SetShardTabletControlResponse](
+		setShardTabletControl: connect.NewClient[v161.SetShardTabletControlRequest, v161.SetShardTabletControlResponse](
 			httpClient,
 			baseURL+VtctldSetShardTabletControlProcedure,
-			opts...,
+			connect.WithSchema(vtctldSetShardTabletControlMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		setWritable: connect.NewClient[v16.SetWritableRequest, v16.SetWritableResponse](
+		setWritable: connect.NewClient[v161.SetWritableRequest, v161.SetWritableResponse](
 			httpClient,
 			baseURL+VtctldSetWritableProcedure,
-			opts...,
+			connect.WithSchema(vtctldSetWritableMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		shardReplicationAdd: connect.NewClient[v16.ShardReplicationAddRequest, v16.ShardReplicationAddResponse](
+		shardReplicationAdd: connect.NewClient[v161.ShardReplicationAddRequest, v161.ShardReplicationAddResponse](
 			httpClient,
 			baseURL+VtctldShardReplicationAddProcedure,
-			opts...,
+			connect.WithSchema(vtctldShardReplicationAddMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		shardReplicationFix: connect.NewClient[v16.ShardReplicationFixRequest, v16.ShardReplicationFixResponse](
+		shardReplicationFix: connect.NewClient[v161.ShardReplicationFixRequest, v161.ShardReplicationFixResponse](
 			httpClient,
 			baseURL+VtctldShardReplicationFixProcedure,
-			opts...,
+			connect.WithSchema(vtctldShardReplicationFixMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		shardReplicationPositions: connect.NewClient[v16.ShardReplicationPositionsRequest, v16.ShardReplicationPositionsResponse](
+		shardReplicationPositions: connect.NewClient[v161.ShardReplicationPositionsRequest, v161.ShardReplicationPositionsResponse](
 			httpClient,
 			baseURL+VtctldShardReplicationPositionsProcedure,
-			opts...,
+			connect.WithSchema(vtctldShardReplicationPositionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		shardReplicationRemove: connect.NewClient[v16.ShardReplicationRemoveRequest, v16.ShardReplicationRemoveResponse](
+		shardReplicationRemove: connect.NewClient[v161.ShardReplicationRemoveRequest, v161.ShardReplicationRemoveResponse](
 			httpClient,
 			baseURL+VtctldShardReplicationRemoveProcedure,
-			opts...,
+			connect.WithSchema(vtctldShardReplicationRemoveMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		sleepTablet: connect.NewClient[v16.SleepTabletRequest, v16.SleepTabletResponse](
+		sleepTablet: connect.NewClient[v161.SleepTabletRequest, v161.SleepTabletResponse](
 			httpClient,
 			baseURL+VtctldSleepTabletProcedure,
-			opts...,
+			connect.WithSchema(vtctldSleepTabletMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		sourceShardAdd: connect.NewClient[v16.SourceShardAddRequest, v16.SourceShardAddResponse](
+		sourceShardAdd: connect.NewClient[v161.SourceShardAddRequest, v161.SourceShardAddResponse](
 			httpClient,
 			baseURL+VtctldSourceShardAddProcedure,
-			opts...,
+			connect.WithSchema(vtctldSourceShardAddMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		sourceShardDelete: connect.NewClient[v16.SourceShardDeleteRequest, v16.SourceShardDeleteResponse](
+		sourceShardDelete: connect.NewClient[v161.SourceShardDeleteRequest, v161.SourceShardDeleteResponse](
 			httpClient,
 			baseURL+VtctldSourceShardDeleteProcedure,
-			opts...,
+			connect.WithSchema(vtctldSourceShardDeleteMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		startReplication: connect.NewClient[v16.StartReplicationRequest, v16.StartReplicationResponse](
+		startReplication: connect.NewClient[v161.StartReplicationRequest, v161.StartReplicationResponse](
 			httpClient,
 			baseURL+VtctldStartReplicationProcedure,
-			opts...,
+			connect.WithSchema(vtctldStartReplicationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		stopReplication: connect.NewClient[v16.StopReplicationRequest, v16.StopReplicationResponse](
+		stopReplication: connect.NewClient[v161.StopReplicationRequest, v161.StopReplicationResponse](
 			httpClient,
 			baseURL+VtctldStopReplicationProcedure,
-			opts...,
+			connect.WithSchema(vtctldStopReplicationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		tabletExternallyReparented: connect.NewClient[v16.TabletExternallyReparentedRequest, v16.TabletExternallyReparentedResponse](
+		tabletExternallyReparented: connect.NewClient[v161.TabletExternallyReparentedRequest, v161.TabletExternallyReparentedResponse](
 			httpClient,
 			baseURL+VtctldTabletExternallyReparentedProcedure,
-			opts...,
+			connect.WithSchema(vtctldTabletExternallyReparentedMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		updateCellInfo: connect.NewClient[v16.UpdateCellInfoRequest, v16.UpdateCellInfoResponse](
+		updateCellInfo: connect.NewClient[v161.UpdateCellInfoRequest, v161.UpdateCellInfoResponse](
 			httpClient,
 			baseURL+VtctldUpdateCellInfoProcedure,
-			opts...,
+			connect.WithSchema(vtctldUpdateCellInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		updateCellsAlias: connect.NewClient[v16.UpdateCellsAliasRequest, v16.UpdateCellsAliasResponse](
+		updateCellsAlias: connect.NewClient[v161.UpdateCellsAliasRequest, v161.UpdateCellsAliasResponse](
 			httpClient,
 			baseURL+VtctldUpdateCellsAliasProcedure,
-			opts...,
+			connect.WithSchema(vtctldUpdateCellsAliasMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validate: connect.NewClient[v16.ValidateRequest, v16.ValidateResponse](
+		validate: connect.NewClient[v161.ValidateRequest, v161.ValidateResponse](
 			httpClient,
 			baseURL+VtctldValidateProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateKeyspace: connect.NewClient[v16.ValidateKeyspaceRequest, v16.ValidateKeyspaceResponse](
+		validateKeyspace: connect.NewClient[v161.ValidateKeyspaceRequest, v161.ValidateKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldValidateKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateSchemaKeyspace: connect.NewClient[v16.ValidateSchemaKeyspaceRequest, v16.ValidateSchemaKeyspaceResponse](
+		validateSchemaKeyspace: connect.NewClient[v161.ValidateSchemaKeyspaceRequest, v161.ValidateSchemaKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldValidateSchemaKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateSchemaKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateShard: connect.NewClient[v16.ValidateShardRequest, v16.ValidateShardResponse](
+		validateShard: connect.NewClient[v161.ValidateShardRequest, v161.ValidateShardResponse](
 			httpClient,
 			baseURL+VtctldValidateShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateVersionKeyspace: connect.NewClient[v16.ValidateVersionKeyspaceRequest, v16.ValidateVersionKeyspaceResponse](
+		validateVersionKeyspace: connect.NewClient[v161.ValidateVersionKeyspaceRequest, v161.ValidateVersionKeyspaceResponse](
 			httpClient,
 			baseURL+VtctldValidateVersionKeyspaceProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateVersionKeyspaceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateVersionShard: connect.NewClient[v16.ValidateVersionShardRequest, v16.ValidateVersionShardResponse](
+		validateVersionShard: connect.NewClient[v161.ValidateVersionShardRequest, v161.ValidateVersionShardResponse](
 			httpClient,
 			baseURL+VtctldValidateVersionShardProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateVersionShardMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		validateVSchema: connect.NewClient[v16.ValidateVSchemaRequest, v16.ValidateVSchemaResponse](
+		validateVSchema: connect.NewClient[v161.ValidateVSchemaRequest, v161.ValidateVSchemaResponse](
 			httpClient,
 			baseURL+VtctldValidateVSchemaProcedure,
-			opts...,
+			connect.WithSchema(vtctldValidateVSchemaMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
 // vtctldClient implements VtctldClient.
 type vtctldClient struct {
-	addCellInfo                 *connect.Client[v16.AddCellInfoRequest, v16.AddCellInfoResponse]
-	addCellsAlias               *connect.Client[v16.AddCellsAliasRequest, v16.AddCellsAliasResponse]
-	applyRoutingRules           *connect.Client[v16.ApplyRoutingRulesRequest, v16.ApplyRoutingRulesResponse]
-	applySchema                 *connect.Client[v16.ApplySchemaRequest, v16.ApplySchemaResponse]
-	applyShardRoutingRules      *connect.Client[v16.ApplyShardRoutingRulesRequest, v16.ApplyShardRoutingRulesResponse]
-	applyVSchema                *connect.Client[v16.ApplyVSchemaRequest, v16.ApplyVSchemaResponse]
-	backup                      *connect.Client[v16.BackupRequest, v16.BackupResponse]
-	backupShard                 *connect.Client[v16.BackupShardRequest, v16.BackupResponse]
-	changeTabletType            *connect.Client[v16.ChangeTabletTypeRequest, v16.ChangeTabletTypeResponse]
-	createKeyspace              *connect.Client[v16.CreateKeyspaceRequest, v16.CreateKeyspaceResponse]
-	createShard                 *connect.Client[v16.CreateShardRequest, v16.CreateShardResponse]
-	deleteCellInfo              *connect.Client[v16.DeleteCellInfoRequest, v16.DeleteCellInfoResponse]
-	deleteCellsAlias            *connect.Client[v16.DeleteCellsAliasRequest, v16.DeleteCellsAliasResponse]
-	deleteKeyspace              *connect.Client[v16.DeleteKeyspaceRequest, v16.DeleteKeyspaceResponse]
-	deleteShards                *connect.Client[v16.DeleteShardsRequest, v16.DeleteShardsResponse]
-	deleteSrvVSchema            *connect.Client[v16.DeleteSrvVSchemaRequest, v16.DeleteSrvVSchemaResponse]
-	deleteTablets               *connect.Client[v16.DeleteTabletsRequest, v16.DeleteTabletsResponse]
-	emergencyReparentShard      *connect.Client[v16.EmergencyReparentShardRequest, v16.EmergencyReparentShardResponse]
-	executeFetchAsApp           *connect.Client[v16.ExecuteFetchAsAppRequest, v16.ExecuteFetchAsAppResponse]
-	executeFetchAsDBA           *connect.Client[v16.ExecuteFetchAsDBARequest, v16.ExecuteFetchAsDBAResponse]
-	executeHook                 *connect.Client[v16.ExecuteHookRequest, v16.ExecuteHookResponse]
-	findAllShardsInKeyspace     *connect.Client[v16.FindAllShardsInKeyspaceRequest, v16.FindAllShardsInKeyspaceResponse]
-	getBackups                  *connect.Client[v16.GetBackupsRequest, v16.GetBackupsResponse]
-	getCellInfo                 *connect.Client[v16.GetCellInfoRequest, v16.GetCellInfoResponse]
-	getCellInfoNames            *connect.Client[v16.GetCellInfoNamesRequest, v16.GetCellInfoNamesResponse]
-	getCellsAliases             *connect.Client[v16.GetCellsAliasesRequest, v16.GetCellsAliasesResponse]
-	getFullStatus               *connect.Client[v16.GetFullStatusRequest, v16.GetFullStatusResponse]
-	getKeyspace                 *connect.Client[v16.GetKeyspaceRequest, v16.GetKeyspaceResponse]
-	getKeyspaces                *connect.Client[v16.GetKeyspacesRequest, v16.GetKeyspacesResponse]
-	getPermissions              *connect.Client[v16.GetPermissionsRequest, v16.GetPermissionsResponse]
-	getRoutingRules             *connect.Client[v16.GetRoutingRulesRequest, v16.GetRoutingRulesResponse]
-	getSchema                   *connect.Client[v16.GetSchemaRequest, v16.GetSchemaResponse]
-	getShard                    *connect.Client[v16.GetShardRequest, v16.GetShardResponse]
-	getShardRoutingRules        *connect.Client[v16.GetShardRoutingRulesRequest, v16.GetShardRoutingRulesResponse]
-	getSrvKeyspaceNames         *connect.Client[v16.GetSrvKeyspaceNamesRequest, v16.GetSrvKeyspaceNamesResponse]
-	getSrvKeyspaces             *connect.Client[v16.GetSrvKeyspacesRequest, v16.GetSrvKeyspacesResponse]
-	updateThrottlerConfig       *connect.Client[v16.UpdateThrottlerConfigRequest, v16.UpdateThrottlerConfigResponse]
-	getSrvVSchema               *connect.Client[v16.GetSrvVSchemaRequest, v16.GetSrvVSchemaResponse]
-	getSrvVSchemas              *connect.Client[v16.GetSrvVSchemasRequest, v16.GetSrvVSchemasResponse]
-	getTablet                   *connect.Client[v16.GetTabletRequest, v16.GetTabletResponse]
-	getTablets                  *connect.Client[v16.GetTabletsRequest, v16.GetTabletsResponse]
-	getTopologyPath             *connect.Client[v16.GetTopologyPathRequest, v16.GetTopologyPathResponse]
-	getVersion                  *connect.Client[v16.GetVersionRequest, v16.GetVersionResponse]
-	getVSchema                  *connect.Client[v16.GetVSchemaRequest, v16.GetVSchemaResponse]
-	getWorkflows                *connect.Client[v16.GetWorkflowsRequest, v16.GetWorkflowsResponse]
-	initShardPrimary            *connect.Client[v16.InitShardPrimaryRequest, v16.InitShardPrimaryResponse]
-	pingTablet                  *connect.Client[v16.PingTabletRequest, v16.PingTabletResponse]
-	plannedReparentShard        *connect.Client[v16.PlannedReparentShardRequest, v16.PlannedReparentShardResponse]
-	rebuildKeyspaceGraph        *connect.Client[v16.RebuildKeyspaceGraphRequest, v16.RebuildKeyspaceGraphResponse]
-	rebuildVSchemaGraph         *connect.Client[v16.RebuildVSchemaGraphRequest, v16.RebuildVSchemaGraphResponse]
-	refreshState                *connect.Client[v16.RefreshStateRequest, v16.RefreshStateResponse]
-	refreshStateByShard         *connect.Client[v16.RefreshStateByShardRequest, v16.RefreshStateByShardResponse]
-	reloadSchema                *connect.Client[v16.ReloadSchemaRequest, v16.ReloadSchemaResponse]
-	reloadSchemaKeyspace        *connect.Client[v16.ReloadSchemaKeyspaceRequest, v16.ReloadSchemaKeyspaceResponse]
-	reloadSchemaShard           *connect.Client[v16.ReloadSchemaShardRequest, v16.ReloadSchemaShardResponse]
-	removeBackup                *connect.Client[v16.RemoveBackupRequest, v16.RemoveBackupResponse]
-	removeKeyspaceCell          *connect.Client[v16.RemoveKeyspaceCellRequest, v16.RemoveKeyspaceCellResponse]
-	removeShardCell             *connect.Client[v16.RemoveShardCellRequest, v16.RemoveShardCellResponse]
-	reparentTablet              *connect.Client[v16.ReparentTabletRequest, v16.ReparentTabletResponse]
-	restoreFromBackup           *connect.Client[v16.RestoreFromBackupRequest, v16.RestoreFromBackupResponse]
-	runHealthCheck              *connect.Client[v16.RunHealthCheckRequest, v16.RunHealthCheckResponse]
-	setKeyspaceDurabilityPolicy *connect.Client[v16.SetKeyspaceDurabilityPolicyRequest, v16.SetKeyspaceDurabilityPolicyResponse]
-	setShardIsPrimaryServing    *connect.Client[v16.SetShardIsPrimaryServingRequest, v16.SetShardIsPrimaryServingResponse]
-	setShardTabletControl       *connect.Client[v16.SetShardTabletControlRequest, v16.SetShardTabletControlResponse]
-	setWritable                 *connect.Client[v16.SetWritableRequest, v16.SetWritableResponse]
-	shardReplicationAdd         *connect.Client[v16.ShardReplicationAddRequest, v16.ShardReplicationAddResponse]
-	shardReplicationFix         *connect.Client[v16.ShardReplicationFixRequest, v16.ShardReplicationFixResponse]
-	shardReplicationPositions   *connect.Client[v16.ShardReplicationPositionsRequest, v16.ShardReplicationPositionsResponse]
-	shardReplicationRemove      *connect.Client[v16.ShardReplicationRemoveRequest, v16.ShardReplicationRemoveResponse]
-	sleepTablet                 *connect.Client[v16.SleepTabletRequest, v16.SleepTabletResponse]
-	sourceShardAdd              *connect.Client[v16.SourceShardAddRequest, v16.SourceShardAddResponse]
-	sourceShardDelete           *connect.Client[v16.SourceShardDeleteRequest, v16.SourceShardDeleteResponse]
-	startReplication            *connect.Client[v16.StartReplicationRequest, v16.StartReplicationResponse]
-	stopReplication             *connect.Client[v16.StopReplicationRequest, v16.StopReplicationResponse]
-	tabletExternallyReparented  *connect.Client[v16.TabletExternallyReparentedRequest, v16.TabletExternallyReparentedResponse]
-	updateCellInfo              *connect.Client[v16.UpdateCellInfoRequest, v16.UpdateCellInfoResponse]
-	updateCellsAlias            *connect.Client[v16.UpdateCellsAliasRequest, v16.UpdateCellsAliasResponse]
-	validate                    *connect.Client[v16.ValidateRequest, v16.ValidateResponse]
-	validateKeyspace            *connect.Client[v16.ValidateKeyspaceRequest, v16.ValidateKeyspaceResponse]
-	validateSchemaKeyspace      *connect.Client[v16.ValidateSchemaKeyspaceRequest, v16.ValidateSchemaKeyspaceResponse]
-	validateShard               *connect.Client[v16.ValidateShardRequest, v16.ValidateShardResponse]
-	validateVersionKeyspace     *connect.Client[v16.ValidateVersionKeyspaceRequest, v16.ValidateVersionKeyspaceResponse]
-	validateVersionShard        *connect.Client[v16.ValidateVersionShardRequest, v16.ValidateVersionShardResponse]
-	validateVSchema             *connect.Client[v16.ValidateVSchemaRequest, v16.ValidateVSchemaResponse]
+	addCellInfo                 *connect.Client[v161.AddCellInfoRequest, v161.AddCellInfoResponse]
+	addCellsAlias               *connect.Client[v161.AddCellsAliasRequest, v161.AddCellsAliasResponse]
+	applyRoutingRules           *connect.Client[v161.ApplyRoutingRulesRequest, v161.ApplyRoutingRulesResponse]
+	applySchema                 *connect.Client[v161.ApplySchemaRequest, v161.ApplySchemaResponse]
+	applyShardRoutingRules      *connect.Client[v161.ApplyShardRoutingRulesRequest, v161.ApplyShardRoutingRulesResponse]
+	applyVSchema                *connect.Client[v161.ApplyVSchemaRequest, v161.ApplyVSchemaResponse]
+	backup                      *connect.Client[v161.BackupRequest, v161.BackupResponse]
+	backupShard                 *connect.Client[v161.BackupShardRequest, v161.BackupResponse]
+	changeTabletType            *connect.Client[v161.ChangeTabletTypeRequest, v161.ChangeTabletTypeResponse]
+	createKeyspace              *connect.Client[v161.CreateKeyspaceRequest, v161.CreateKeyspaceResponse]
+	createShard                 *connect.Client[v161.CreateShardRequest, v161.CreateShardResponse]
+	deleteCellInfo              *connect.Client[v161.DeleteCellInfoRequest, v161.DeleteCellInfoResponse]
+	deleteCellsAlias            *connect.Client[v161.DeleteCellsAliasRequest, v161.DeleteCellsAliasResponse]
+	deleteKeyspace              *connect.Client[v161.DeleteKeyspaceRequest, v161.DeleteKeyspaceResponse]
+	deleteShards                *connect.Client[v161.DeleteShardsRequest, v161.DeleteShardsResponse]
+	deleteSrvVSchema            *connect.Client[v161.DeleteSrvVSchemaRequest, v161.DeleteSrvVSchemaResponse]
+	deleteTablets               *connect.Client[v161.DeleteTabletsRequest, v161.DeleteTabletsResponse]
+	emergencyReparentShard      *connect.Client[v161.EmergencyReparentShardRequest, v161.EmergencyReparentShardResponse]
+	executeFetchAsApp           *connect.Client[v161.ExecuteFetchAsAppRequest, v161.ExecuteFetchAsAppResponse]
+	executeFetchAsDBA           *connect.Client[v161.ExecuteFetchAsDBARequest, v161.ExecuteFetchAsDBAResponse]
+	executeHook                 *connect.Client[v161.ExecuteHookRequest, v161.ExecuteHookResponse]
+	findAllShardsInKeyspace     *connect.Client[v161.FindAllShardsInKeyspaceRequest, v161.FindAllShardsInKeyspaceResponse]
+	getBackups                  *connect.Client[v161.GetBackupsRequest, v161.GetBackupsResponse]
+	getCellInfo                 *connect.Client[v161.GetCellInfoRequest, v161.GetCellInfoResponse]
+	getCellInfoNames            *connect.Client[v161.GetCellInfoNamesRequest, v161.GetCellInfoNamesResponse]
+	getCellsAliases             *connect.Client[v161.GetCellsAliasesRequest, v161.GetCellsAliasesResponse]
+	getFullStatus               *connect.Client[v161.GetFullStatusRequest, v161.GetFullStatusResponse]
+	getKeyspace                 *connect.Client[v161.GetKeyspaceRequest, v161.GetKeyspaceResponse]
+	getKeyspaces                *connect.Client[v161.GetKeyspacesRequest, v161.GetKeyspacesResponse]
+	getPermissions              *connect.Client[v161.GetPermissionsRequest, v161.GetPermissionsResponse]
+	getRoutingRules             *connect.Client[v161.GetRoutingRulesRequest, v161.GetRoutingRulesResponse]
+	getSchema                   *connect.Client[v161.GetSchemaRequest, v161.GetSchemaResponse]
+	getShard                    *connect.Client[v161.GetShardRequest, v161.GetShardResponse]
+	getShardRoutingRules        *connect.Client[v161.GetShardRoutingRulesRequest, v161.GetShardRoutingRulesResponse]
+	getSrvKeyspaceNames         *connect.Client[v161.GetSrvKeyspaceNamesRequest, v161.GetSrvKeyspaceNamesResponse]
+	getSrvKeyspaces             *connect.Client[v161.GetSrvKeyspacesRequest, v161.GetSrvKeyspacesResponse]
+	updateThrottlerConfig       *connect.Client[v161.UpdateThrottlerConfigRequest, v161.UpdateThrottlerConfigResponse]
+	getSrvVSchema               *connect.Client[v161.GetSrvVSchemaRequest, v161.GetSrvVSchemaResponse]
+	getSrvVSchemas              *connect.Client[v161.GetSrvVSchemasRequest, v161.GetSrvVSchemasResponse]
+	getTablet                   *connect.Client[v161.GetTabletRequest, v161.GetTabletResponse]
+	getTablets                  *connect.Client[v161.GetTabletsRequest, v161.GetTabletsResponse]
+	getTopologyPath             *connect.Client[v161.GetTopologyPathRequest, v161.GetTopologyPathResponse]
+	getVersion                  *connect.Client[v161.GetVersionRequest, v161.GetVersionResponse]
+	getVSchema                  *connect.Client[v161.GetVSchemaRequest, v161.GetVSchemaResponse]
+	getWorkflows                *connect.Client[v161.GetWorkflowsRequest, v161.GetWorkflowsResponse]
+	initShardPrimary            *connect.Client[v161.InitShardPrimaryRequest, v161.InitShardPrimaryResponse]
+	pingTablet                  *connect.Client[v161.PingTabletRequest, v161.PingTabletResponse]
+	plannedReparentShard        *connect.Client[v161.PlannedReparentShardRequest, v161.PlannedReparentShardResponse]
+	rebuildKeyspaceGraph        *connect.Client[v161.RebuildKeyspaceGraphRequest, v161.RebuildKeyspaceGraphResponse]
+	rebuildVSchemaGraph         *connect.Client[v161.RebuildVSchemaGraphRequest, v161.RebuildVSchemaGraphResponse]
+	refreshState                *connect.Client[v161.RefreshStateRequest, v161.RefreshStateResponse]
+	refreshStateByShard         *connect.Client[v161.RefreshStateByShardRequest, v161.RefreshStateByShardResponse]
+	reloadSchema                *connect.Client[v161.ReloadSchemaRequest, v161.ReloadSchemaResponse]
+	reloadSchemaKeyspace        *connect.Client[v161.ReloadSchemaKeyspaceRequest, v161.ReloadSchemaKeyspaceResponse]
+	reloadSchemaShard           *connect.Client[v161.ReloadSchemaShardRequest, v161.ReloadSchemaShardResponse]
+	removeBackup                *connect.Client[v161.RemoveBackupRequest, v161.RemoveBackupResponse]
+	removeKeyspaceCell          *connect.Client[v161.RemoveKeyspaceCellRequest, v161.RemoveKeyspaceCellResponse]
+	removeShardCell             *connect.Client[v161.RemoveShardCellRequest, v161.RemoveShardCellResponse]
+	reparentTablet              *connect.Client[v161.ReparentTabletRequest, v161.ReparentTabletResponse]
+	restoreFromBackup           *connect.Client[v161.RestoreFromBackupRequest, v161.RestoreFromBackupResponse]
+	runHealthCheck              *connect.Client[v161.RunHealthCheckRequest, v161.RunHealthCheckResponse]
+	setKeyspaceDurabilityPolicy *connect.Client[v161.SetKeyspaceDurabilityPolicyRequest, v161.SetKeyspaceDurabilityPolicyResponse]
+	setShardIsPrimaryServing    *connect.Client[v161.SetShardIsPrimaryServingRequest, v161.SetShardIsPrimaryServingResponse]
+	setShardTabletControl       *connect.Client[v161.SetShardTabletControlRequest, v161.SetShardTabletControlResponse]
+	setWritable                 *connect.Client[v161.SetWritableRequest, v161.SetWritableResponse]
+	shardReplicationAdd         *connect.Client[v161.ShardReplicationAddRequest, v161.ShardReplicationAddResponse]
+	shardReplicationFix         *connect.Client[v161.ShardReplicationFixRequest, v161.ShardReplicationFixResponse]
+	shardReplicationPositions   *connect.Client[v161.ShardReplicationPositionsRequest, v161.ShardReplicationPositionsResponse]
+	shardReplicationRemove      *connect.Client[v161.ShardReplicationRemoveRequest, v161.ShardReplicationRemoveResponse]
+	sleepTablet                 *connect.Client[v161.SleepTabletRequest, v161.SleepTabletResponse]
+	sourceShardAdd              *connect.Client[v161.SourceShardAddRequest, v161.SourceShardAddResponse]
+	sourceShardDelete           *connect.Client[v161.SourceShardDeleteRequest, v161.SourceShardDeleteResponse]
+	startReplication            *connect.Client[v161.StartReplicationRequest, v161.StartReplicationResponse]
+	stopReplication             *connect.Client[v161.StopReplicationRequest, v161.StopReplicationResponse]
+	tabletExternallyReparented  *connect.Client[v161.TabletExternallyReparentedRequest, v161.TabletExternallyReparentedResponse]
+	updateCellInfo              *connect.Client[v161.UpdateCellInfoRequest, v161.UpdateCellInfoResponse]
+	updateCellsAlias            *connect.Client[v161.UpdateCellsAliasRequest, v161.UpdateCellsAliasResponse]
+	validate                    *connect.Client[v161.ValidateRequest, v161.ValidateResponse]
+	validateKeyspace            *connect.Client[v161.ValidateKeyspaceRequest, v161.ValidateKeyspaceResponse]
+	validateSchemaKeyspace      *connect.Client[v161.ValidateSchemaKeyspaceRequest, v161.ValidateSchemaKeyspaceResponse]
+	validateShard               *connect.Client[v161.ValidateShardRequest, v161.ValidateShardResponse]
+	validateVersionKeyspace     *connect.Client[v161.ValidateVersionKeyspaceRequest, v161.ValidateVersionKeyspaceResponse]
+	validateVersionShard        *connect.Client[v161.ValidateVersionShardRequest, v161.ValidateVersionShardResponse]
+	validateVSchema             *connect.Client[v161.ValidateVSchemaRequest, v161.ValidateVSchemaResponse]
 }
 
 // AddCellInfo calls vtctlservice.Vtctld.AddCellInfo.
-func (c *vtctldClient) AddCellInfo(ctx context.Context, req *connect.Request[v16.AddCellInfoRequest]) (*connect.Response[v16.AddCellInfoResponse], error) {
+func (c *vtctldClient) AddCellInfo(ctx context.Context, req *connect.Request[v161.AddCellInfoRequest]) (*connect.Response[v161.AddCellInfoResponse], error) {
 	return c.addCellInfo.CallUnary(ctx, req)
 }
 
 // AddCellsAlias calls vtctlservice.Vtctld.AddCellsAlias.
-func (c *vtctldClient) AddCellsAlias(ctx context.Context, req *connect.Request[v16.AddCellsAliasRequest]) (*connect.Response[v16.AddCellsAliasResponse], error) {
+func (c *vtctldClient) AddCellsAlias(ctx context.Context, req *connect.Request[v161.AddCellsAliasRequest]) (*connect.Response[v161.AddCellsAliasResponse], error) {
 	return c.addCellsAlias.CallUnary(ctx, req)
 }
 
 // ApplyRoutingRules calls vtctlservice.Vtctld.ApplyRoutingRules.
-func (c *vtctldClient) ApplyRoutingRules(ctx context.Context, req *connect.Request[v16.ApplyRoutingRulesRequest]) (*connect.Response[v16.ApplyRoutingRulesResponse], error) {
+func (c *vtctldClient) ApplyRoutingRules(ctx context.Context, req *connect.Request[v161.ApplyRoutingRulesRequest]) (*connect.Response[v161.ApplyRoutingRulesResponse], error) {
 	return c.applyRoutingRules.CallUnary(ctx, req)
 }
 
 // ApplySchema calls vtctlservice.Vtctld.ApplySchema.
-func (c *vtctldClient) ApplySchema(ctx context.Context, req *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error) {
+func (c *vtctldClient) ApplySchema(ctx context.Context, req *connect.Request[v161.ApplySchemaRequest]) (*connect.Response[v161.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
 }
 
 // ApplyShardRoutingRules calls vtctlservice.Vtctld.ApplyShardRoutingRules.
-func (c *vtctldClient) ApplyShardRoutingRules(ctx context.Context, req *connect.Request[v16.ApplyShardRoutingRulesRequest]) (*connect.Response[v16.ApplyShardRoutingRulesResponse], error) {
+func (c *vtctldClient) ApplyShardRoutingRules(ctx context.Context, req *connect.Request[v161.ApplyShardRoutingRulesRequest]) (*connect.Response[v161.ApplyShardRoutingRulesResponse], error) {
 	return c.applyShardRoutingRules.CallUnary(ctx, req)
 }
 
 // ApplyVSchema calls vtctlservice.Vtctld.ApplyVSchema.
-func (c *vtctldClient) ApplyVSchema(ctx context.Context, req *connect.Request[v16.ApplyVSchemaRequest]) (*connect.Response[v16.ApplyVSchemaResponse], error) {
+func (c *vtctldClient) ApplyVSchema(ctx context.Context, req *connect.Request[v161.ApplyVSchemaRequest]) (*connect.Response[v161.ApplyVSchemaResponse], error) {
 	return c.applyVSchema.CallUnary(ctx, req)
 }
 
 // Backup calls vtctlservice.Vtctld.Backup.
-func (c *vtctldClient) Backup(ctx context.Context, req *connect.Request[v16.BackupRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error) {
+func (c *vtctldClient) Backup(ctx context.Context, req *connect.Request[v161.BackupRequest]) (*connect.ServerStreamForClient[v161.BackupResponse], error) {
 	return c.backup.CallServerStream(ctx, req)
 }
 
 // BackupShard calls vtctlservice.Vtctld.BackupShard.
-func (c *vtctldClient) BackupShard(ctx context.Context, req *connect.Request[v16.BackupShardRequest]) (*connect.ServerStreamForClient[v16.BackupResponse], error) {
+func (c *vtctldClient) BackupShard(ctx context.Context, req *connect.Request[v161.BackupShardRequest]) (*connect.ServerStreamForClient[v161.BackupResponse], error) {
 	return c.backupShard.CallServerStream(ctx, req)
 }
 
 // ChangeTabletType calls vtctlservice.Vtctld.ChangeTabletType.
-func (c *vtctldClient) ChangeTabletType(ctx context.Context, req *connect.Request[v16.ChangeTabletTypeRequest]) (*connect.Response[v16.ChangeTabletTypeResponse], error) {
+func (c *vtctldClient) ChangeTabletType(ctx context.Context, req *connect.Request[v161.ChangeTabletTypeRequest]) (*connect.Response[v161.ChangeTabletTypeResponse], error) {
 	return c.changeTabletType.CallUnary(ctx, req)
 }
 
 // CreateKeyspace calls vtctlservice.Vtctld.CreateKeyspace.
-func (c *vtctldClient) CreateKeyspace(ctx context.Context, req *connect.Request[v16.CreateKeyspaceRequest]) (*connect.Response[v16.CreateKeyspaceResponse], error) {
+func (c *vtctldClient) CreateKeyspace(ctx context.Context, req *connect.Request[v161.CreateKeyspaceRequest]) (*connect.Response[v161.CreateKeyspaceResponse], error) {
 	return c.createKeyspace.CallUnary(ctx, req)
 }
 
 // CreateShard calls vtctlservice.Vtctld.CreateShard.
-func (c *vtctldClient) CreateShard(ctx context.Context, req *connect.Request[v16.CreateShardRequest]) (*connect.Response[v16.CreateShardResponse], error) {
+func (c *vtctldClient) CreateShard(ctx context.Context, req *connect.Request[v161.CreateShardRequest]) (*connect.Response[v161.CreateShardResponse], error) {
 	return c.createShard.CallUnary(ctx, req)
 }
 
 // DeleteCellInfo calls vtctlservice.Vtctld.DeleteCellInfo.
-func (c *vtctldClient) DeleteCellInfo(ctx context.Context, req *connect.Request[v16.DeleteCellInfoRequest]) (*connect.Response[v16.DeleteCellInfoResponse], error) {
+func (c *vtctldClient) DeleteCellInfo(ctx context.Context, req *connect.Request[v161.DeleteCellInfoRequest]) (*connect.Response[v161.DeleteCellInfoResponse], error) {
 	return c.deleteCellInfo.CallUnary(ctx, req)
 }
 
 // DeleteCellsAlias calls vtctlservice.Vtctld.DeleteCellsAlias.
-func (c *vtctldClient) DeleteCellsAlias(ctx context.Context, req *connect.Request[v16.DeleteCellsAliasRequest]) (*connect.Response[v16.DeleteCellsAliasResponse], error) {
+func (c *vtctldClient) DeleteCellsAlias(ctx context.Context, req *connect.Request[v161.DeleteCellsAliasRequest]) (*connect.Response[v161.DeleteCellsAliasResponse], error) {
 	return c.deleteCellsAlias.CallUnary(ctx, req)
 }
 
 // DeleteKeyspace calls vtctlservice.Vtctld.DeleteKeyspace.
-func (c *vtctldClient) DeleteKeyspace(ctx context.Context, req *connect.Request[v16.DeleteKeyspaceRequest]) (*connect.Response[v16.DeleteKeyspaceResponse], error) {
+func (c *vtctldClient) DeleteKeyspace(ctx context.Context, req *connect.Request[v161.DeleteKeyspaceRequest]) (*connect.Response[v161.DeleteKeyspaceResponse], error) {
 	return c.deleteKeyspace.CallUnary(ctx, req)
 }
 
 // DeleteShards calls vtctlservice.Vtctld.DeleteShards.
-func (c *vtctldClient) DeleteShards(ctx context.Context, req *connect.Request[v16.DeleteShardsRequest]) (*connect.Response[v16.DeleteShardsResponse], error) {
+func (c *vtctldClient) DeleteShards(ctx context.Context, req *connect.Request[v161.DeleteShardsRequest]) (*connect.Response[v161.DeleteShardsResponse], error) {
 	return c.deleteShards.CallUnary(ctx, req)
 }
 
 // DeleteSrvVSchema calls vtctlservice.Vtctld.DeleteSrvVSchema.
-func (c *vtctldClient) DeleteSrvVSchema(ctx context.Context, req *connect.Request[v16.DeleteSrvVSchemaRequest]) (*connect.Response[v16.DeleteSrvVSchemaResponse], error) {
+func (c *vtctldClient) DeleteSrvVSchema(ctx context.Context, req *connect.Request[v161.DeleteSrvVSchemaRequest]) (*connect.Response[v161.DeleteSrvVSchemaResponse], error) {
 	return c.deleteSrvVSchema.CallUnary(ctx, req)
 }
 
 // DeleteTablets calls vtctlservice.Vtctld.DeleteTablets.
-func (c *vtctldClient) DeleteTablets(ctx context.Context, req *connect.Request[v16.DeleteTabletsRequest]) (*connect.Response[v16.DeleteTabletsResponse], error) {
+func (c *vtctldClient) DeleteTablets(ctx context.Context, req *connect.Request[v161.DeleteTabletsRequest]) (*connect.Response[v161.DeleteTabletsResponse], error) {
 	return c.deleteTablets.CallUnary(ctx, req)
 }
 
 // EmergencyReparentShard calls vtctlservice.Vtctld.EmergencyReparentShard.
-func (c *vtctldClient) EmergencyReparentShard(ctx context.Context, req *connect.Request[v16.EmergencyReparentShardRequest]) (*connect.Response[v16.EmergencyReparentShardResponse], error) {
+func (c *vtctldClient) EmergencyReparentShard(ctx context.Context, req *connect.Request[v161.EmergencyReparentShardRequest]) (*connect.Response[v161.EmergencyReparentShardResponse], error) {
 	return c.emergencyReparentShard.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsApp calls vtctlservice.Vtctld.ExecuteFetchAsApp.
-func (c *vtctldClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error) {
+func (c *vtctldClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[v161.ExecuteFetchAsAppRequest]) (*connect.Response[v161.ExecuteFetchAsAppResponse], error) {
 	return c.executeFetchAsApp.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsDBA calls vtctlservice.Vtctld.ExecuteFetchAsDBA.
-func (c *vtctldClient) ExecuteFetchAsDBA(ctx context.Context, req *connect.Request[v16.ExecuteFetchAsDBARequest]) (*connect.Response[v16.ExecuteFetchAsDBAResponse], error) {
+func (c *vtctldClient) ExecuteFetchAsDBA(ctx context.Context, req *connect.Request[v161.ExecuteFetchAsDBARequest]) (*connect.Response[v161.ExecuteFetchAsDBAResponse], error) {
 	return c.executeFetchAsDBA.CallUnary(ctx, req)
 }
 
 // ExecuteHook calls vtctlservice.Vtctld.ExecuteHook.
-func (c *vtctldClient) ExecuteHook(ctx context.Context, req *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error) {
+func (c *vtctldClient) ExecuteHook(ctx context.Context, req *connect.Request[v161.ExecuteHookRequest]) (*connect.Response[v161.ExecuteHookResponse], error) {
 	return c.executeHook.CallUnary(ctx, req)
 }
 
 // FindAllShardsInKeyspace calls vtctlservice.Vtctld.FindAllShardsInKeyspace.
-func (c *vtctldClient) FindAllShardsInKeyspace(ctx context.Context, req *connect.Request[v16.FindAllShardsInKeyspaceRequest]) (*connect.Response[v16.FindAllShardsInKeyspaceResponse], error) {
+func (c *vtctldClient) FindAllShardsInKeyspace(ctx context.Context, req *connect.Request[v161.FindAllShardsInKeyspaceRequest]) (*connect.Response[v161.FindAllShardsInKeyspaceResponse], error) {
 	return c.findAllShardsInKeyspace.CallUnary(ctx, req)
 }
 
 // GetBackups calls vtctlservice.Vtctld.GetBackups.
-func (c *vtctldClient) GetBackups(ctx context.Context, req *connect.Request[v16.GetBackupsRequest]) (*connect.Response[v16.GetBackupsResponse], error) {
+func (c *vtctldClient) GetBackups(ctx context.Context, req *connect.Request[v161.GetBackupsRequest]) (*connect.Response[v161.GetBackupsResponse], error) {
 	return c.getBackups.CallUnary(ctx, req)
 }
 
 // GetCellInfo calls vtctlservice.Vtctld.GetCellInfo.
-func (c *vtctldClient) GetCellInfo(ctx context.Context, req *connect.Request[v16.GetCellInfoRequest]) (*connect.Response[v16.GetCellInfoResponse], error) {
+func (c *vtctldClient) GetCellInfo(ctx context.Context, req *connect.Request[v161.GetCellInfoRequest]) (*connect.Response[v161.GetCellInfoResponse], error) {
 	return c.getCellInfo.CallUnary(ctx, req)
 }
 
 // GetCellInfoNames calls vtctlservice.Vtctld.GetCellInfoNames.
-func (c *vtctldClient) GetCellInfoNames(ctx context.Context, req *connect.Request[v16.GetCellInfoNamesRequest]) (*connect.Response[v16.GetCellInfoNamesResponse], error) {
+func (c *vtctldClient) GetCellInfoNames(ctx context.Context, req *connect.Request[v161.GetCellInfoNamesRequest]) (*connect.Response[v161.GetCellInfoNamesResponse], error) {
 	return c.getCellInfoNames.CallUnary(ctx, req)
 }
 
 // GetCellsAliases calls vtctlservice.Vtctld.GetCellsAliases.
-func (c *vtctldClient) GetCellsAliases(ctx context.Context, req *connect.Request[v16.GetCellsAliasesRequest]) (*connect.Response[v16.GetCellsAliasesResponse], error) {
+func (c *vtctldClient) GetCellsAliases(ctx context.Context, req *connect.Request[v161.GetCellsAliasesRequest]) (*connect.Response[v161.GetCellsAliasesResponse], error) {
 	return c.getCellsAliases.CallUnary(ctx, req)
 }
 
 // GetFullStatus calls vtctlservice.Vtctld.GetFullStatus.
-func (c *vtctldClient) GetFullStatus(ctx context.Context, req *connect.Request[v16.GetFullStatusRequest]) (*connect.Response[v16.GetFullStatusResponse], error) {
+func (c *vtctldClient) GetFullStatus(ctx context.Context, req *connect.Request[v161.GetFullStatusRequest]) (*connect.Response[v161.GetFullStatusResponse], error) {
 	return c.getFullStatus.CallUnary(ctx, req)
 }
 
 // GetKeyspace calls vtctlservice.Vtctld.GetKeyspace.
-func (c *vtctldClient) GetKeyspace(ctx context.Context, req *connect.Request[v16.GetKeyspaceRequest]) (*connect.Response[v16.GetKeyspaceResponse], error) {
+func (c *vtctldClient) GetKeyspace(ctx context.Context, req *connect.Request[v161.GetKeyspaceRequest]) (*connect.Response[v161.GetKeyspaceResponse], error) {
 	return c.getKeyspace.CallUnary(ctx, req)
 }
 
 // GetKeyspaces calls vtctlservice.Vtctld.GetKeyspaces.
-func (c *vtctldClient) GetKeyspaces(ctx context.Context, req *connect.Request[v16.GetKeyspacesRequest]) (*connect.Response[v16.GetKeyspacesResponse], error) {
+func (c *vtctldClient) GetKeyspaces(ctx context.Context, req *connect.Request[v161.GetKeyspacesRequest]) (*connect.Response[v161.GetKeyspacesResponse], error) {
 	return c.getKeyspaces.CallUnary(ctx, req)
 }
 
 // GetPermissions calls vtctlservice.Vtctld.GetPermissions.
-func (c *vtctldClient) GetPermissions(ctx context.Context, req *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error) {
+func (c *vtctldClient) GetPermissions(ctx context.Context, req *connect.Request[v161.GetPermissionsRequest]) (*connect.Response[v161.GetPermissionsResponse], error) {
 	return c.getPermissions.CallUnary(ctx, req)
 }
 
 // GetRoutingRules calls vtctlservice.Vtctld.GetRoutingRules.
-func (c *vtctldClient) GetRoutingRules(ctx context.Context, req *connect.Request[v16.GetRoutingRulesRequest]) (*connect.Response[v16.GetRoutingRulesResponse], error) {
+func (c *vtctldClient) GetRoutingRules(ctx context.Context, req *connect.Request[v161.GetRoutingRulesRequest]) (*connect.Response[v161.GetRoutingRulesResponse], error) {
 	return c.getRoutingRules.CallUnary(ctx, req)
 }
 
 // GetSchema calls vtctlservice.Vtctld.GetSchema.
-func (c *vtctldClient) GetSchema(ctx context.Context, req *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error) {
+func (c *vtctldClient) GetSchema(ctx context.Context, req *connect.Request[v161.GetSchemaRequest]) (*connect.Response[v161.GetSchemaResponse], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
 // GetShard calls vtctlservice.Vtctld.GetShard.
-func (c *vtctldClient) GetShard(ctx context.Context, req *connect.Request[v16.GetShardRequest]) (*connect.Response[v16.GetShardResponse], error) {
+func (c *vtctldClient) GetShard(ctx context.Context, req *connect.Request[v161.GetShardRequest]) (*connect.Response[v161.GetShardResponse], error) {
 	return c.getShard.CallUnary(ctx, req)
 }
 
 // GetShardRoutingRules calls vtctlservice.Vtctld.GetShardRoutingRules.
-func (c *vtctldClient) GetShardRoutingRules(ctx context.Context, req *connect.Request[v16.GetShardRoutingRulesRequest]) (*connect.Response[v16.GetShardRoutingRulesResponse], error) {
+func (c *vtctldClient) GetShardRoutingRules(ctx context.Context, req *connect.Request[v161.GetShardRoutingRulesRequest]) (*connect.Response[v161.GetShardRoutingRulesResponse], error) {
 	return c.getShardRoutingRules.CallUnary(ctx, req)
 }
 
 // GetSrvKeyspaceNames calls vtctlservice.Vtctld.GetSrvKeyspaceNames.
-func (c *vtctldClient) GetSrvKeyspaceNames(ctx context.Context, req *connect.Request[v16.GetSrvKeyspaceNamesRequest]) (*connect.Response[v16.GetSrvKeyspaceNamesResponse], error) {
+func (c *vtctldClient) GetSrvKeyspaceNames(ctx context.Context, req *connect.Request[v161.GetSrvKeyspaceNamesRequest]) (*connect.Response[v161.GetSrvKeyspaceNamesResponse], error) {
 	return c.getSrvKeyspaceNames.CallUnary(ctx, req)
 }
 
 // GetSrvKeyspaces calls vtctlservice.Vtctld.GetSrvKeyspaces.
-func (c *vtctldClient) GetSrvKeyspaces(ctx context.Context, req *connect.Request[v16.GetSrvKeyspacesRequest]) (*connect.Response[v16.GetSrvKeyspacesResponse], error) {
+func (c *vtctldClient) GetSrvKeyspaces(ctx context.Context, req *connect.Request[v161.GetSrvKeyspacesRequest]) (*connect.Response[v161.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspaces.CallUnary(ctx, req)
 }
 
 // UpdateThrottlerConfig calls vtctlservice.Vtctld.UpdateThrottlerConfig.
-func (c *vtctldClient) UpdateThrottlerConfig(ctx context.Context, req *connect.Request[v16.UpdateThrottlerConfigRequest]) (*connect.Response[v16.UpdateThrottlerConfigResponse], error) {
+func (c *vtctldClient) UpdateThrottlerConfig(ctx context.Context, req *connect.Request[v161.UpdateThrottlerConfigRequest]) (*connect.Response[v161.UpdateThrottlerConfigResponse], error) {
 	return c.updateThrottlerConfig.CallUnary(ctx, req)
 }
 
 // GetSrvVSchema calls vtctlservice.Vtctld.GetSrvVSchema.
-func (c *vtctldClient) GetSrvVSchema(ctx context.Context, req *connect.Request[v16.GetSrvVSchemaRequest]) (*connect.Response[v16.GetSrvVSchemaResponse], error) {
+func (c *vtctldClient) GetSrvVSchema(ctx context.Context, req *connect.Request[v161.GetSrvVSchemaRequest]) (*connect.Response[v161.GetSrvVSchemaResponse], error) {
 	return c.getSrvVSchema.CallUnary(ctx, req)
 }
 
 // GetSrvVSchemas calls vtctlservice.Vtctld.GetSrvVSchemas.
-func (c *vtctldClient) GetSrvVSchemas(ctx context.Context, req *connect.Request[v16.GetSrvVSchemasRequest]) (*connect.Response[v16.GetSrvVSchemasResponse], error) {
+func (c *vtctldClient) GetSrvVSchemas(ctx context.Context, req *connect.Request[v161.GetSrvVSchemasRequest]) (*connect.Response[v161.GetSrvVSchemasResponse], error) {
 	return c.getSrvVSchemas.CallUnary(ctx, req)
 }
 
 // GetTablet calls vtctlservice.Vtctld.GetTablet.
-func (c *vtctldClient) GetTablet(ctx context.Context, req *connect.Request[v16.GetTabletRequest]) (*connect.Response[v16.GetTabletResponse], error) {
+func (c *vtctldClient) GetTablet(ctx context.Context, req *connect.Request[v161.GetTabletRequest]) (*connect.Response[v161.GetTabletResponse], error) {
 	return c.getTablet.CallUnary(ctx, req)
 }
 
 // GetTablets calls vtctlservice.Vtctld.GetTablets.
-func (c *vtctldClient) GetTablets(ctx context.Context, req *connect.Request[v16.GetTabletsRequest]) (*connect.Response[v16.GetTabletsResponse], error) {
+func (c *vtctldClient) GetTablets(ctx context.Context, req *connect.Request[v161.GetTabletsRequest]) (*connect.Response[v161.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
 }
 
 // GetTopologyPath calls vtctlservice.Vtctld.GetTopologyPath.
-func (c *vtctldClient) GetTopologyPath(ctx context.Context, req *connect.Request[v16.GetTopologyPathRequest]) (*connect.Response[v16.GetTopologyPathResponse], error) {
+func (c *vtctldClient) GetTopologyPath(ctx context.Context, req *connect.Request[v161.GetTopologyPathRequest]) (*connect.Response[v161.GetTopologyPathResponse], error) {
 	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
 // GetVersion calls vtctlservice.Vtctld.GetVersion.
-func (c *vtctldClient) GetVersion(ctx context.Context, req *connect.Request[v16.GetVersionRequest]) (*connect.Response[v16.GetVersionResponse], error) {
+func (c *vtctldClient) GetVersion(ctx context.Context, req *connect.Request[v161.GetVersionRequest]) (*connect.Response[v161.GetVersionResponse], error) {
 	return c.getVersion.CallUnary(ctx, req)
 }
 
 // GetVSchema calls vtctlservice.Vtctld.GetVSchema.
-func (c *vtctldClient) GetVSchema(ctx context.Context, req *connect.Request[v16.GetVSchemaRequest]) (*connect.Response[v16.GetVSchemaResponse], error) {
+func (c *vtctldClient) GetVSchema(ctx context.Context, req *connect.Request[v161.GetVSchemaRequest]) (*connect.Response[v161.GetVSchemaResponse], error) {
 	return c.getVSchema.CallUnary(ctx, req)
 }
 
 // GetWorkflows calls vtctlservice.Vtctld.GetWorkflows.
-func (c *vtctldClient) GetWorkflows(ctx context.Context, req *connect.Request[v16.GetWorkflowsRequest]) (*connect.Response[v16.GetWorkflowsResponse], error) {
+func (c *vtctldClient) GetWorkflows(ctx context.Context, req *connect.Request[v161.GetWorkflowsRequest]) (*connect.Response[v161.GetWorkflowsResponse], error) {
 	return c.getWorkflows.CallUnary(ctx, req)
 }
 
 // InitShardPrimary calls vtctlservice.Vtctld.InitShardPrimary.
-func (c *vtctldClient) InitShardPrimary(ctx context.Context, req *connect.Request[v16.InitShardPrimaryRequest]) (*connect.Response[v16.InitShardPrimaryResponse], error) {
+func (c *vtctldClient) InitShardPrimary(ctx context.Context, req *connect.Request[v161.InitShardPrimaryRequest]) (*connect.Response[v161.InitShardPrimaryResponse], error) {
 	return c.initShardPrimary.CallUnary(ctx, req)
 }
 
 // PingTablet calls vtctlservice.Vtctld.PingTablet.
-func (c *vtctldClient) PingTablet(ctx context.Context, req *connect.Request[v16.PingTabletRequest]) (*connect.Response[v16.PingTabletResponse], error) {
+func (c *vtctldClient) PingTablet(ctx context.Context, req *connect.Request[v161.PingTabletRequest]) (*connect.Response[v161.PingTabletResponse], error) {
 	return c.pingTablet.CallUnary(ctx, req)
 }
 
 // PlannedReparentShard calls vtctlservice.Vtctld.PlannedReparentShard.
-func (c *vtctldClient) PlannedReparentShard(ctx context.Context, req *connect.Request[v16.PlannedReparentShardRequest]) (*connect.Response[v16.PlannedReparentShardResponse], error) {
+func (c *vtctldClient) PlannedReparentShard(ctx context.Context, req *connect.Request[v161.PlannedReparentShardRequest]) (*connect.Response[v161.PlannedReparentShardResponse], error) {
 	return c.plannedReparentShard.CallUnary(ctx, req)
 }
 
 // RebuildKeyspaceGraph calls vtctlservice.Vtctld.RebuildKeyspaceGraph.
-func (c *vtctldClient) RebuildKeyspaceGraph(ctx context.Context, req *connect.Request[v16.RebuildKeyspaceGraphRequest]) (*connect.Response[v16.RebuildKeyspaceGraphResponse], error) {
+func (c *vtctldClient) RebuildKeyspaceGraph(ctx context.Context, req *connect.Request[v161.RebuildKeyspaceGraphRequest]) (*connect.Response[v161.RebuildKeyspaceGraphResponse], error) {
 	return c.rebuildKeyspaceGraph.CallUnary(ctx, req)
 }
 
 // RebuildVSchemaGraph calls vtctlservice.Vtctld.RebuildVSchemaGraph.
-func (c *vtctldClient) RebuildVSchemaGraph(ctx context.Context, req *connect.Request[v16.RebuildVSchemaGraphRequest]) (*connect.Response[v16.RebuildVSchemaGraphResponse], error) {
+func (c *vtctldClient) RebuildVSchemaGraph(ctx context.Context, req *connect.Request[v161.RebuildVSchemaGraphRequest]) (*connect.Response[v161.RebuildVSchemaGraphResponse], error) {
 	return c.rebuildVSchemaGraph.CallUnary(ctx, req)
 }
 
 // RefreshState calls vtctlservice.Vtctld.RefreshState.
-func (c *vtctldClient) RefreshState(ctx context.Context, req *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error) {
+func (c *vtctldClient) RefreshState(ctx context.Context, req *connect.Request[v161.RefreshStateRequest]) (*connect.Response[v161.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
 // RefreshStateByShard calls vtctlservice.Vtctld.RefreshStateByShard.
-func (c *vtctldClient) RefreshStateByShard(ctx context.Context, req *connect.Request[v16.RefreshStateByShardRequest]) (*connect.Response[v16.RefreshStateByShardResponse], error) {
+func (c *vtctldClient) RefreshStateByShard(ctx context.Context, req *connect.Request[v161.RefreshStateByShardRequest]) (*connect.Response[v161.RefreshStateByShardResponse], error) {
 	return c.refreshStateByShard.CallUnary(ctx, req)
 }
 
 // ReloadSchema calls vtctlservice.Vtctld.ReloadSchema.
-func (c *vtctldClient) ReloadSchema(ctx context.Context, req *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error) {
+func (c *vtctldClient) ReloadSchema(ctx context.Context, req *connect.Request[v161.ReloadSchemaRequest]) (*connect.Response[v161.ReloadSchemaResponse], error) {
 	return c.reloadSchema.CallUnary(ctx, req)
 }
 
 // ReloadSchemaKeyspace calls vtctlservice.Vtctld.ReloadSchemaKeyspace.
-func (c *vtctldClient) ReloadSchemaKeyspace(ctx context.Context, req *connect.Request[v16.ReloadSchemaKeyspaceRequest]) (*connect.Response[v16.ReloadSchemaKeyspaceResponse], error) {
+func (c *vtctldClient) ReloadSchemaKeyspace(ctx context.Context, req *connect.Request[v161.ReloadSchemaKeyspaceRequest]) (*connect.Response[v161.ReloadSchemaKeyspaceResponse], error) {
 	return c.reloadSchemaKeyspace.CallUnary(ctx, req)
 }
 
 // ReloadSchemaShard calls vtctlservice.Vtctld.ReloadSchemaShard.
-func (c *vtctldClient) ReloadSchemaShard(ctx context.Context, req *connect.Request[v16.ReloadSchemaShardRequest]) (*connect.Response[v16.ReloadSchemaShardResponse], error) {
+func (c *vtctldClient) ReloadSchemaShard(ctx context.Context, req *connect.Request[v161.ReloadSchemaShardRequest]) (*connect.Response[v161.ReloadSchemaShardResponse], error) {
 	return c.reloadSchemaShard.CallUnary(ctx, req)
 }
 
 // RemoveBackup calls vtctlservice.Vtctld.RemoveBackup.
-func (c *vtctldClient) RemoveBackup(ctx context.Context, req *connect.Request[v16.RemoveBackupRequest]) (*connect.Response[v16.RemoveBackupResponse], error) {
+func (c *vtctldClient) RemoveBackup(ctx context.Context, req *connect.Request[v161.RemoveBackupRequest]) (*connect.Response[v161.RemoveBackupResponse], error) {
 	return c.removeBackup.CallUnary(ctx, req)
 }
 
 // RemoveKeyspaceCell calls vtctlservice.Vtctld.RemoveKeyspaceCell.
-func (c *vtctldClient) RemoveKeyspaceCell(ctx context.Context, req *connect.Request[v16.RemoveKeyspaceCellRequest]) (*connect.Response[v16.RemoveKeyspaceCellResponse], error) {
+func (c *vtctldClient) RemoveKeyspaceCell(ctx context.Context, req *connect.Request[v161.RemoveKeyspaceCellRequest]) (*connect.Response[v161.RemoveKeyspaceCellResponse], error) {
 	return c.removeKeyspaceCell.CallUnary(ctx, req)
 }
 
 // RemoveShardCell calls vtctlservice.Vtctld.RemoveShardCell.
-func (c *vtctldClient) RemoveShardCell(ctx context.Context, req *connect.Request[v16.RemoveShardCellRequest]) (*connect.Response[v16.RemoveShardCellResponse], error) {
+func (c *vtctldClient) RemoveShardCell(ctx context.Context, req *connect.Request[v161.RemoveShardCellRequest]) (*connect.Response[v161.RemoveShardCellResponse], error) {
 	return c.removeShardCell.CallUnary(ctx, req)
 }
 
 // ReparentTablet calls vtctlservice.Vtctld.ReparentTablet.
-func (c *vtctldClient) ReparentTablet(ctx context.Context, req *connect.Request[v16.ReparentTabletRequest]) (*connect.Response[v16.ReparentTabletResponse], error) {
+func (c *vtctldClient) ReparentTablet(ctx context.Context, req *connect.Request[v161.ReparentTabletRequest]) (*connect.Response[v161.ReparentTabletResponse], error) {
 	return c.reparentTablet.CallUnary(ctx, req)
 }
 
 // RestoreFromBackup calls vtctlservice.Vtctld.RestoreFromBackup.
-func (c *vtctldClient) RestoreFromBackup(ctx context.Context, req *connect.Request[v16.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v16.RestoreFromBackupResponse], error) {
+func (c *vtctldClient) RestoreFromBackup(ctx context.Context, req *connect.Request[v161.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v161.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
 // RunHealthCheck calls vtctlservice.Vtctld.RunHealthCheck.
-func (c *vtctldClient) RunHealthCheck(ctx context.Context, req *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error) {
+func (c *vtctldClient) RunHealthCheck(ctx context.Context, req *connect.Request[v161.RunHealthCheckRequest]) (*connect.Response[v161.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
 // SetKeyspaceDurabilityPolicy calls vtctlservice.Vtctld.SetKeyspaceDurabilityPolicy.
-func (c *vtctldClient) SetKeyspaceDurabilityPolicy(ctx context.Context, req *connect.Request[v16.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v16.SetKeyspaceDurabilityPolicyResponse], error) {
+func (c *vtctldClient) SetKeyspaceDurabilityPolicy(ctx context.Context, req *connect.Request[v161.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v161.SetKeyspaceDurabilityPolicyResponse], error) {
 	return c.setKeyspaceDurabilityPolicy.CallUnary(ctx, req)
 }
 
 // SetShardIsPrimaryServing calls vtctlservice.Vtctld.SetShardIsPrimaryServing.
-func (c *vtctldClient) SetShardIsPrimaryServing(ctx context.Context, req *connect.Request[v16.SetShardIsPrimaryServingRequest]) (*connect.Response[v16.SetShardIsPrimaryServingResponse], error) {
+func (c *vtctldClient) SetShardIsPrimaryServing(ctx context.Context, req *connect.Request[v161.SetShardIsPrimaryServingRequest]) (*connect.Response[v161.SetShardIsPrimaryServingResponse], error) {
 	return c.setShardIsPrimaryServing.CallUnary(ctx, req)
 }
 
 // SetShardTabletControl calls vtctlservice.Vtctld.SetShardTabletControl.
-func (c *vtctldClient) SetShardTabletControl(ctx context.Context, req *connect.Request[v16.SetShardTabletControlRequest]) (*connect.Response[v16.SetShardTabletControlResponse], error) {
+func (c *vtctldClient) SetShardTabletControl(ctx context.Context, req *connect.Request[v161.SetShardTabletControlRequest]) (*connect.Response[v161.SetShardTabletControlResponse], error) {
 	return c.setShardTabletControl.CallUnary(ctx, req)
 }
 
 // SetWritable calls vtctlservice.Vtctld.SetWritable.
-func (c *vtctldClient) SetWritable(ctx context.Context, req *connect.Request[v16.SetWritableRequest]) (*connect.Response[v16.SetWritableResponse], error) {
+func (c *vtctldClient) SetWritable(ctx context.Context, req *connect.Request[v161.SetWritableRequest]) (*connect.Response[v161.SetWritableResponse], error) {
 	return c.setWritable.CallUnary(ctx, req)
 }
 
 // ShardReplicationAdd calls vtctlservice.Vtctld.ShardReplicationAdd.
-func (c *vtctldClient) ShardReplicationAdd(ctx context.Context, req *connect.Request[v16.ShardReplicationAddRequest]) (*connect.Response[v16.ShardReplicationAddResponse], error) {
+func (c *vtctldClient) ShardReplicationAdd(ctx context.Context, req *connect.Request[v161.ShardReplicationAddRequest]) (*connect.Response[v161.ShardReplicationAddResponse], error) {
 	return c.shardReplicationAdd.CallUnary(ctx, req)
 }
 
 // ShardReplicationFix calls vtctlservice.Vtctld.ShardReplicationFix.
-func (c *vtctldClient) ShardReplicationFix(ctx context.Context, req *connect.Request[v16.ShardReplicationFixRequest]) (*connect.Response[v16.ShardReplicationFixResponse], error) {
+func (c *vtctldClient) ShardReplicationFix(ctx context.Context, req *connect.Request[v161.ShardReplicationFixRequest]) (*connect.Response[v161.ShardReplicationFixResponse], error) {
 	return c.shardReplicationFix.CallUnary(ctx, req)
 }
 
 // ShardReplicationPositions calls vtctlservice.Vtctld.ShardReplicationPositions.
-func (c *vtctldClient) ShardReplicationPositions(ctx context.Context, req *connect.Request[v16.ShardReplicationPositionsRequest]) (*connect.Response[v16.ShardReplicationPositionsResponse], error) {
+func (c *vtctldClient) ShardReplicationPositions(ctx context.Context, req *connect.Request[v161.ShardReplicationPositionsRequest]) (*connect.Response[v161.ShardReplicationPositionsResponse], error) {
 	return c.shardReplicationPositions.CallUnary(ctx, req)
 }
 
 // ShardReplicationRemove calls vtctlservice.Vtctld.ShardReplicationRemove.
-func (c *vtctldClient) ShardReplicationRemove(ctx context.Context, req *connect.Request[v16.ShardReplicationRemoveRequest]) (*connect.Response[v16.ShardReplicationRemoveResponse], error) {
+func (c *vtctldClient) ShardReplicationRemove(ctx context.Context, req *connect.Request[v161.ShardReplicationRemoveRequest]) (*connect.Response[v161.ShardReplicationRemoveResponse], error) {
 	return c.shardReplicationRemove.CallUnary(ctx, req)
 }
 
 // SleepTablet calls vtctlservice.Vtctld.SleepTablet.
-func (c *vtctldClient) SleepTablet(ctx context.Context, req *connect.Request[v16.SleepTabletRequest]) (*connect.Response[v16.SleepTabletResponse], error) {
+func (c *vtctldClient) SleepTablet(ctx context.Context, req *connect.Request[v161.SleepTabletRequest]) (*connect.Response[v161.SleepTabletResponse], error) {
 	return c.sleepTablet.CallUnary(ctx, req)
 }
 
 // SourceShardAdd calls vtctlservice.Vtctld.SourceShardAdd.
-func (c *vtctldClient) SourceShardAdd(ctx context.Context, req *connect.Request[v16.SourceShardAddRequest]) (*connect.Response[v16.SourceShardAddResponse], error) {
+func (c *vtctldClient) SourceShardAdd(ctx context.Context, req *connect.Request[v161.SourceShardAddRequest]) (*connect.Response[v161.SourceShardAddResponse], error) {
 	return c.sourceShardAdd.CallUnary(ctx, req)
 }
 
 // SourceShardDelete calls vtctlservice.Vtctld.SourceShardDelete.
-func (c *vtctldClient) SourceShardDelete(ctx context.Context, req *connect.Request[v16.SourceShardDeleteRequest]) (*connect.Response[v16.SourceShardDeleteResponse], error) {
+func (c *vtctldClient) SourceShardDelete(ctx context.Context, req *connect.Request[v161.SourceShardDeleteRequest]) (*connect.Response[v161.SourceShardDeleteResponse], error) {
 	return c.sourceShardDelete.CallUnary(ctx, req)
 }
 
 // StartReplication calls vtctlservice.Vtctld.StartReplication.
-func (c *vtctldClient) StartReplication(ctx context.Context, req *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error) {
+func (c *vtctldClient) StartReplication(ctx context.Context, req *connect.Request[v161.StartReplicationRequest]) (*connect.Response[v161.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
 // StopReplication calls vtctlservice.Vtctld.StopReplication.
-func (c *vtctldClient) StopReplication(ctx context.Context, req *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error) {
+func (c *vtctldClient) StopReplication(ctx context.Context, req *connect.Request[v161.StopReplicationRequest]) (*connect.Response[v161.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
 // TabletExternallyReparented calls vtctlservice.Vtctld.TabletExternallyReparented.
-func (c *vtctldClient) TabletExternallyReparented(ctx context.Context, req *connect.Request[v16.TabletExternallyReparentedRequest]) (*connect.Response[v16.TabletExternallyReparentedResponse], error) {
+func (c *vtctldClient) TabletExternallyReparented(ctx context.Context, req *connect.Request[v161.TabletExternallyReparentedRequest]) (*connect.Response[v161.TabletExternallyReparentedResponse], error) {
 	return c.tabletExternallyReparented.CallUnary(ctx, req)
 }
 
 // UpdateCellInfo calls vtctlservice.Vtctld.UpdateCellInfo.
-func (c *vtctldClient) UpdateCellInfo(ctx context.Context, req *connect.Request[v16.UpdateCellInfoRequest]) (*connect.Response[v16.UpdateCellInfoResponse], error) {
+func (c *vtctldClient) UpdateCellInfo(ctx context.Context, req *connect.Request[v161.UpdateCellInfoRequest]) (*connect.Response[v161.UpdateCellInfoResponse], error) {
 	return c.updateCellInfo.CallUnary(ctx, req)
 }
 
 // UpdateCellsAlias calls vtctlservice.Vtctld.UpdateCellsAlias.
-func (c *vtctldClient) UpdateCellsAlias(ctx context.Context, req *connect.Request[v16.UpdateCellsAliasRequest]) (*connect.Response[v16.UpdateCellsAliasResponse], error) {
+func (c *vtctldClient) UpdateCellsAlias(ctx context.Context, req *connect.Request[v161.UpdateCellsAliasRequest]) (*connect.Response[v161.UpdateCellsAliasResponse], error) {
 	return c.updateCellsAlias.CallUnary(ctx, req)
 }
 
 // Validate calls vtctlservice.Vtctld.Validate.
-func (c *vtctldClient) Validate(ctx context.Context, req *connect.Request[v16.ValidateRequest]) (*connect.Response[v16.ValidateResponse], error) {
+func (c *vtctldClient) Validate(ctx context.Context, req *connect.Request[v161.ValidateRequest]) (*connect.Response[v161.ValidateResponse], error) {
 	return c.validate.CallUnary(ctx, req)
 }
 
 // ValidateKeyspace calls vtctlservice.Vtctld.ValidateKeyspace.
-func (c *vtctldClient) ValidateKeyspace(ctx context.Context, req *connect.Request[v16.ValidateKeyspaceRequest]) (*connect.Response[v16.ValidateKeyspaceResponse], error) {
+func (c *vtctldClient) ValidateKeyspace(ctx context.Context, req *connect.Request[v161.ValidateKeyspaceRequest]) (*connect.Response[v161.ValidateKeyspaceResponse], error) {
 	return c.validateKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateSchemaKeyspace calls vtctlservice.Vtctld.ValidateSchemaKeyspace.
-func (c *vtctldClient) ValidateSchemaKeyspace(ctx context.Context, req *connect.Request[v16.ValidateSchemaKeyspaceRequest]) (*connect.Response[v16.ValidateSchemaKeyspaceResponse], error) {
+func (c *vtctldClient) ValidateSchemaKeyspace(ctx context.Context, req *connect.Request[v161.ValidateSchemaKeyspaceRequest]) (*connect.Response[v161.ValidateSchemaKeyspaceResponse], error) {
 	return c.validateSchemaKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateShard calls vtctlservice.Vtctld.ValidateShard.
-func (c *vtctldClient) ValidateShard(ctx context.Context, req *connect.Request[v16.ValidateShardRequest]) (*connect.Response[v16.ValidateShardResponse], error) {
+func (c *vtctldClient) ValidateShard(ctx context.Context, req *connect.Request[v161.ValidateShardRequest]) (*connect.Response[v161.ValidateShardResponse], error) {
 	return c.validateShard.CallUnary(ctx, req)
 }
 
 // ValidateVersionKeyspace calls vtctlservice.Vtctld.ValidateVersionKeyspace.
-func (c *vtctldClient) ValidateVersionKeyspace(ctx context.Context, req *connect.Request[v16.ValidateVersionKeyspaceRequest]) (*connect.Response[v16.ValidateVersionKeyspaceResponse], error) {
+func (c *vtctldClient) ValidateVersionKeyspace(ctx context.Context, req *connect.Request[v161.ValidateVersionKeyspaceRequest]) (*connect.Response[v161.ValidateVersionKeyspaceResponse], error) {
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
 }
 
 // ValidateVersionShard calls vtctlservice.Vtctld.ValidateVersionShard.
-func (c *vtctldClient) ValidateVersionShard(ctx context.Context, req *connect.Request[v16.ValidateVersionShardRequest]) (*connect.Response[v16.ValidateVersionShardResponse], error) {
+func (c *vtctldClient) ValidateVersionShard(ctx context.Context, req *connect.Request[v161.ValidateVersionShardRequest]) (*connect.Response[v161.ValidateVersionShardResponse], error) {
 	return c.validateVersionShard.CallUnary(ctx, req)
 }
 
 // ValidateVSchema calls vtctlservice.Vtctld.ValidateVSchema.
-func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request[v16.ValidateVSchemaRequest]) (*connect.Response[v16.ValidateVSchemaResponse], error) {
+func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request[v161.ValidateVSchemaRequest]) (*connect.Response[v161.ValidateVSchemaResponse], error) {
 	return c.validateVSchema.CallUnary(ctx, req)
 }
 
@@ -1531,132 +1708,132 @@ func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request
 type VtctldHandler interface {
 	// AddCellInfo registers a local topology service in a new cell by creating
 	// the CellInfo with the provided parameters.
-	AddCellInfo(context.Context, *connect.Request[v16.AddCellInfoRequest]) (*connect.Response[v16.AddCellInfoResponse], error)
+	AddCellInfo(context.Context, *connect.Request[v161.AddCellInfoRequest]) (*connect.Response[v161.AddCellInfoResponse], error)
 	// AddCellsAlias defines a group of cells that can be referenced by a single
 	// name (the alias).
 	//
 	// When routing query traffic, replica/rdonly traffic can be routed across
 	// cells within the group (alias). Only primary traffic can be routed across
 	// cells not in the same group (alias).
-	AddCellsAlias(context.Context, *connect.Request[v16.AddCellsAliasRequest]) (*connect.Response[v16.AddCellsAliasResponse], error)
+	AddCellsAlias(context.Context, *connect.Request[v161.AddCellsAliasRequest]) (*connect.Response[v161.AddCellsAliasResponse], error)
 	// ApplyRoutingRules applies the VSchema routing rules.
-	ApplyRoutingRules(context.Context, *connect.Request[v16.ApplyRoutingRulesRequest]) (*connect.Response[v16.ApplyRoutingRulesResponse], error)
+	ApplyRoutingRules(context.Context, *connect.Request[v161.ApplyRoutingRulesRequest]) (*connect.Response[v161.ApplyRoutingRulesResponse], error)
 	// ApplySchema applies a schema to a keyspace.
-	ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error)
+	ApplySchema(context.Context, *connect.Request[v161.ApplySchemaRequest]) (*connect.Response[v161.ApplySchemaResponse], error)
 	// ApplyShardRoutingRules applies the VSchema shard routing rules.
-	ApplyShardRoutingRules(context.Context, *connect.Request[v16.ApplyShardRoutingRulesRequest]) (*connect.Response[v16.ApplyShardRoutingRulesResponse], error)
+	ApplyShardRoutingRules(context.Context, *connect.Request[v161.ApplyShardRoutingRulesRequest]) (*connect.Response[v161.ApplyShardRoutingRulesResponse], error)
 	// ApplyVSchema applies a vschema to a keyspace.
-	ApplyVSchema(context.Context, *connect.Request[v16.ApplyVSchemaRequest]) (*connect.Response[v16.ApplyVSchemaResponse], error)
+	ApplyVSchema(context.Context, *connect.Request[v161.ApplyVSchemaRequest]) (*connect.Response[v161.ApplyVSchemaResponse], error)
 	// Backup uses the BackupEngine and BackupStorage services on the specified
 	// tablet to create and store a new backup.
-	Backup(context.Context, *connect.Request[v16.BackupRequest], *connect.ServerStream[v16.BackupResponse]) error
+	Backup(context.Context, *connect.Request[v161.BackupRequest], *connect.ServerStream[v161.BackupResponse]) error
 	// BackupShard chooses a tablet in the shard and uses it to create a backup.
-	BackupShard(context.Context, *connect.Request[v16.BackupShardRequest], *connect.ServerStream[v16.BackupResponse]) error
+	BackupShard(context.Context, *connect.Request[v161.BackupShardRequest], *connect.ServerStream[v161.BackupResponse]) error
 	// ChangeTabletType changes the db type for the specified tablet, if possible.
 	// This is used primarily to arrange replicas, and it will not convert a
 	// primary. For that, use InitShardPrimary.
 	//
 	// NOTE: This command automatically updates the serving graph.
-	ChangeTabletType(context.Context, *connect.Request[v16.ChangeTabletTypeRequest]) (*connect.Response[v16.ChangeTabletTypeResponse], error)
+	ChangeTabletType(context.Context, *connect.Request[v161.ChangeTabletTypeRequest]) (*connect.Response[v161.ChangeTabletTypeResponse], error)
 	// CreateKeyspace creates the specified keyspace in the topology. For a
 	// SNAPSHOT keyspace, the request must specify the name of a base keyspace,
 	// as well as a snapshot time.
-	CreateKeyspace(context.Context, *connect.Request[v16.CreateKeyspaceRequest]) (*connect.Response[v16.CreateKeyspaceResponse], error)
+	CreateKeyspace(context.Context, *connect.Request[v161.CreateKeyspaceRequest]) (*connect.Response[v161.CreateKeyspaceResponse], error)
 	// CreateShard creates the specified shard in the topology.
-	CreateShard(context.Context, *connect.Request[v16.CreateShardRequest]) (*connect.Response[v16.CreateShardResponse], error)
+	CreateShard(context.Context, *connect.Request[v161.CreateShardRequest]) (*connect.Response[v161.CreateShardResponse], error)
 	// DeleteCellInfo deletes the CellInfo for the provided cell. The cell cannot
 	// be referenced by any Shard record in the topology.
-	DeleteCellInfo(context.Context, *connect.Request[v16.DeleteCellInfoRequest]) (*connect.Response[v16.DeleteCellInfoResponse], error)
+	DeleteCellInfo(context.Context, *connect.Request[v161.DeleteCellInfoRequest]) (*connect.Response[v161.DeleteCellInfoResponse], error)
 	// DeleteCellsAlias deletes the CellsAlias for the provided alias.
-	DeleteCellsAlias(context.Context, *connect.Request[v16.DeleteCellsAliasRequest]) (*connect.Response[v16.DeleteCellsAliasResponse], error)
+	DeleteCellsAlias(context.Context, *connect.Request[v161.DeleteCellsAliasRequest]) (*connect.Response[v161.DeleteCellsAliasResponse], error)
 	// DeleteKeyspace deletes the specified keyspace from the topology. In
 	// recursive mode, it also recursively deletes all shards in the keyspace.
 	// Otherwise, the keyspace must be empty (have no shards), or DeleteKeyspace
 	// returns an error.
-	DeleteKeyspace(context.Context, *connect.Request[v16.DeleteKeyspaceRequest]) (*connect.Response[v16.DeleteKeyspaceResponse], error)
+	DeleteKeyspace(context.Context, *connect.Request[v161.DeleteKeyspaceRequest]) (*connect.Response[v161.DeleteKeyspaceResponse], error)
 	// DeleteShards deletes the specified shards from the topology. In recursive
 	// mode, it also deletes all tablets belonging to the shard. Otherwise, the
 	// shard must be empty (have no tablets) or DeleteShards returns an error for
 	// that shard.
-	DeleteShards(context.Context, *connect.Request[v16.DeleteShardsRequest]) (*connect.Response[v16.DeleteShardsResponse], error)
+	DeleteShards(context.Context, *connect.Request[v161.DeleteShardsRequest]) (*connect.Response[v161.DeleteShardsResponse], error)
 	// DeleteSrvVSchema deletes the SrvVSchema object in the specified cell.
-	DeleteSrvVSchema(context.Context, *connect.Request[v16.DeleteSrvVSchemaRequest]) (*connect.Response[v16.DeleteSrvVSchemaResponse], error)
+	DeleteSrvVSchema(context.Context, *connect.Request[v161.DeleteSrvVSchemaRequest]) (*connect.Response[v161.DeleteSrvVSchemaResponse], error)
 	// DeleteTablets deletes one or more tablets from the topology.
-	DeleteTablets(context.Context, *connect.Request[v16.DeleteTabletsRequest]) (*connect.Response[v16.DeleteTabletsResponse], error)
+	DeleteTablets(context.Context, *connect.Request[v161.DeleteTabletsRequest]) (*connect.Response[v161.DeleteTabletsResponse], error)
 	// EmergencyReparentShard reparents the shard to the new primary. It assumes
 	// the old primary is dead or otherwise not responding.
-	EmergencyReparentShard(context.Context, *connect.Request[v16.EmergencyReparentShardRequest]) (*connect.Response[v16.EmergencyReparentShardResponse], error)
+	EmergencyReparentShard(context.Context, *connect.Request[v161.EmergencyReparentShardRequest]) (*connect.Response[v161.EmergencyReparentShardResponse], error)
 	// ExecuteFetchAsApp executes a SQL query on the remote tablet as the App user.
-	ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error)
+	ExecuteFetchAsApp(context.Context, *connect.Request[v161.ExecuteFetchAsAppRequest]) (*connect.Response[v161.ExecuteFetchAsAppResponse], error)
 	// ExecuteFetchAsDBA executes a SQL query on the remote tablet as the DBA user.
-	ExecuteFetchAsDBA(context.Context, *connect.Request[v16.ExecuteFetchAsDBARequest]) (*connect.Response[v16.ExecuteFetchAsDBAResponse], error)
+	ExecuteFetchAsDBA(context.Context, *connect.Request[v161.ExecuteFetchAsDBARequest]) (*connect.Response[v161.ExecuteFetchAsDBAResponse], error)
 	// ExecuteHook runs the hook on the tablet.
-	ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error)
+	ExecuteHook(context.Context, *connect.Request[v161.ExecuteHookRequest]) (*connect.Response[v161.ExecuteHookResponse], error)
 	// FindAllShardsInKeyspace returns a map of shard names to shard references
 	// for a given keyspace.
-	FindAllShardsInKeyspace(context.Context, *connect.Request[v16.FindAllShardsInKeyspaceRequest]) (*connect.Response[v16.FindAllShardsInKeyspaceResponse], error)
+	FindAllShardsInKeyspace(context.Context, *connect.Request[v161.FindAllShardsInKeyspaceRequest]) (*connect.Response[v161.FindAllShardsInKeyspaceResponse], error)
 	// GetBackups returns all the backups for a shard.
-	GetBackups(context.Context, *connect.Request[v16.GetBackupsRequest]) (*connect.Response[v16.GetBackupsResponse], error)
+	GetBackups(context.Context, *connect.Request[v161.GetBackupsRequest]) (*connect.Response[v161.GetBackupsResponse], error)
 	// GetCellInfo returns the information for a cell.
-	GetCellInfo(context.Context, *connect.Request[v16.GetCellInfoRequest]) (*connect.Response[v16.GetCellInfoResponse], error)
+	GetCellInfo(context.Context, *connect.Request[v161.GetCellInfoRequest]) (*connect.Response[v161.GetCellInfoResponse], error)
 	// GetCellInfoNames returns all the cells for which we have a CellInfo object,
 	// meaning we have a topology service registered.
-	GetCellInfoNames(context.Context, *connect.Request[v16.GetCellInfoNamesRequest]) (*connect.Response[v16.GetCellInfoNamesResponse], error)
+	GetCellInfoNames(context.Context, *connect.Request[v161.GetCellInfoNamesRequest]) (*connect.Response[v161.GetCellInfoNamesResponse], error)
 	// GetCellsAliases returns a mapping of cell alias to cells identified by that
 	// alias.
-	GetCellsAliases(context.Context, *connect.Request[v16.GetCellsAliasesRequest]) (*connect.Response[v16.GetCellsAliasesResponse], error)
+	GetCellsAliases(context.Context, *connect.Request[v161.GetCellsAliasesRequest]) (*connect.Response[v161.GetCellsAliasesResponse], error)
 	// GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
-	GetFullStatus(context.Context, *connect.Request[v16.GetFullStatusRequest]) (*connect.Response[v16.GetFullStatusResponse], error)
+	GetFullStatus(context.Context, *connect.Request[v161.GetFullStatusRequest]) (*connect.Response[v161.GetFullStatusResponse], error)
 	// GetKeyspace reads the given keyspace from the topo and returns it.
-	GetKeyspace(context.Context, *connect.Request[v16.GetKeyspaceRequest]) (*connect.Response[v16.GetKeyspaceResponse], error)
+	GetKeyspace(context.Context, *connect.Request[v161.GetKeyspaceRequest]) (*connect.Response[v161.GetKeyspaceResponse], error)
 	// GetKeyspaces returns the keyspace struct of all keyspaces in the topo.
-	GetKeyspaces(context.Context, *connect.Request[v16.GetKeyspacesRequest]) (*connect.Response[v16.GetKeyspacesResponse], error)
+	GetKeyspaces(context.Context, *connect.Request[v161.GetKeyspacesRequest]) (*connect.Response[v161.GetKeyspacesResponse], error)
 	// GetPermissions returns the permissions set on the remote tablet.
-	GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error)
+	GetPermissions(context.Context, *connect.Request[v161.GetPermissionsRequest]) (*connect.Response[v161.GetPermissionsResponse], error)
 	// GetRoutingRules returns the VSchema routing rules.
-	GetRoutingRules(context.Context, *connect.Request[v16.GetRoutingRulesRequest]) (*connect.Response[v16.GetRoutingRulesResponse], error)
+	GetRoutingRules(context.Context, *connect.Request[v161.GetRoutingRulesRequest]) (*connect.Response[v161.GetRoutingRulesResponse], error)
 	// GetSchema returns the schema for a tablet, or just the schema for the
 	// specified tables in that tablet.
-	GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[v161.GetSchemaRequest]) (*connect.Response[v161.GetSchemaResponse], error)
 	// GetShard returns information about a shard in the topology.
-	GetShard(context.Context, *connect.Request[v16.GetShardRequest]) (*connect.Response[v16.GetShardResponse], error)
+	GetShard(context.Context, *connect.Request[v161.GetShardRequest]) (*connect.Response[v161.GetShardResponse], error)
 	// GetShardRoutingRules returns the VSchema shard routing rules.
-	GetShardRoutingRules(context.Context, *connect.Request[v16.GetShardRoutingRulesRequest]) (*connect.Response[v16.GetShardRoutingRulesResponse], error)
+	GetShardRoutingRules(context.Context, *connect.Request[v161.GetShardRoutingRulesRequest]) (*connect.Response[v161.GetShardRoutingRulesResponse], error)
 	// GetSrvKeyspaceNames returns a mapping of cell name to the keyspaces served
 	// in that cell.
-	GetSrvKeyspaceNames(context.Context, *connect.Request[v16.GetSrvKeyspaceNamesRequest]) (*connect.Response[v16.GetSrvKeyspaceNamesResponse], error)
+	GetSrvKeyspaceNames(context.Context, *connect.Request[v161.GetSrvKeyspaceNamesRequest]) (*connect.Response[v161.GetSrvKeyspaceNamesResponse], error)
 	// GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
 	// cells.
-	GetSrvKeyspaces(context.Context, *connect.Request[v16.GetSrvKeyspacesRequest]) (*connect.Response[v16.GetSrvKeyspacesResponse], error)
+	GetSrvKeyspaces(context.Context, *connect.Request[v161.GetSrvKeyspacesRequest]) (*connect.Response[v161.GetSrvKeyspacesResponse], error)
 	// UpdateThrottlerConfig updates the tablet throttler configuration
-	UpdateThrottlerConfig(context.Context, *connect.Request[v16.UpdateThrottlerConfigRequest]) (*connect.Response[v16.UpdateThrottlerConfigResponse], error)
+	UpdateThrottlerConfig(context.Context, *connect.Request[v161.UpdateThrottlerConfigRequest]) (*connect.Response[v161.UpdateThrottlerConfigResponse], error)
 	// GetSrvVSchema returns the SrvVSchema for a cell.
-	GetSrvVSchema(context.Context, *connect.Request[v16.GetSrvVSchemaRequest]) (*connect.Response[v16.GetSrvVSchemaResponse], error)
+	GetSrvVSchema(context.Context, *connect.Request[v161.GetSrvVSchemaRequest]) (*connect.Response[v161.GetSrvVSchemaResponse], error)
 	// GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,
 	// optionally filtered by cell name.
-	GetSrvVSchemas(context.Context, *connect.Request[v16.GetSrvVSchemasRequest]) (*connect.Response[v16.GetSrvVSchemasResponse], error)
+	GetSrvVSchemas(context.Context, *connect.Request[v161.GetSrvVSchemasRequest]) (*connect.Response[v161.GetSrvVSchemasResponse], error)
 	// GetTablet returns information about a tablet.
-	GetTablet(context.Context, *connect.Request[v16.GetTabletRequest]) (*connect.Response[v16.GetTabletResponse], error)
+	GetTablet(context.Context, *connect.Request[v161.GetTabletRequest]) (*connect.Response[v161.GetTabletResponse], error)
 	// GetTablets returns tablets, optionally filtered by keyspace and shard.
-	GetTablets(context.Context, *connect.Request[v16.GetTabletsRequest]) (*connect.Response[v16.GetTabletsResponse], error)
+	GetTablets(context.Context, *connect.Request[v161.GetTabletsRequest]) (*connect.Response[v161.GetTabletsResponse], error)
 	// GetTopologyPath returns the topology cell at a given path.
-	GetTopologyPath(context.Context, *connect.Request[v16.GetTopologyPathRequest]) (*connect.Response[v16.GetTopologyPathResponse], error)
+	GetTopologyPath(context.Context, *connect.Request[v161.GetTopologyPathRequest]) (*connect.Response[v161.GetTopologyPathResponse], error)
 	// GetVersion returns the version of a tablet from its debug vars.
-	GetVersion(context.Context, *connect.Request[v16.GetVersionRequest]) (*connect.Response[v16.GetVersionResponse], error)
+	GetVersion(context.Context, *connect.Request[v161.GetVersionRequest]) (*connect.Response[v161.GetVersionResponse], error)
 	// GetVSchema returns the vschema for a keyspace.
-	GetVSchema(context.Context, *connect.Request[v16.GetVSchemaRequest]) (*connect.Response[v16.GetVSchemaResponse], error)
+	GetVSchema(context.Context, *connect.Request[v161.GetVSchemaRequest]) (*connect.Response[v161.GetVSchemaResponse], error)
 	// GetWorkflows returns a list of workflows for the given keyspace.
-	GetWorkflows(context.Context, *connect.Request[v16.GetWorkflowsRequest]) (*connect.Response[v16.GetWorkflowsResponse], error)
+	GetWorkflows(context.Context, *connect.Request[v161.GetWorkflowsRequest]) (*connect.Response[v161.GetWorkflowsResponse], error)
 	// InitShardPrimary sets the initial primary for a shard. Will make all other
 	// tablets in the shard replicas of the provided primary.
 	//
 	// WARNING: This could cause data loss on an already replicating shard.
 	// PlannedReparentShard or EmergencyReparentShard should be used in those
 	// cases instead.
-	InitShardPrimary(context.Context, *connect.Request[v16.InitShardPrimaryRequest]) (*connect.Response[v16.InitShardPrimaryResponse], error)
+	InitShardPrimary(context.Context, *connect.Request[v161.InitShardPrimaryRequest]) (*connect.Response[v161.InitShardPrimaryResponse], error)
 	// PingTablet checks that the specified tablet is awake and responding to RPCs.
 	// This command can be blocked by other in-flight operations.
-	PingTablet(context.Context, *connect.Request[v16.PingTabletRequest]) (*connect.Response[v16.PingTabletResponse], error)
+	PingTablet(context.Context, *connect.Request[v161.PingTabletRequest]) (*connect.Response[v161.PingTabletResponse], error)
 	// PlannedReparentShard reparents the shard to the new primary, or away from
 	// an old primary. Both the old and new primaries need to be reachable and
 	// running.
@@ -1664,132 +1841,132 @@ type VtctldHandler interface {
 	// **NOTE**: The vtctld will not consider any replicas outside the cell the
 	// current shard primary is in for promotion unless NewPrimary is explicitly
 	// provided in the request.
-	PlannedReparentShard(context.Context, *connect.Request[v16.PlannedReparentShardRequest]) (*connect.Response[v16.PlannedReparentShardResponse], error)
+	PlannedReparentShard(context.Context, *connect.Request[v161.PlannedReparentShardRequest]) (*connect.Response[v161.PlannedReparentShardResponse], error)
 	// RebuildKeyspaceGraph rebuilds the serving data for a keyspace.
 	//
 	// This may trigger an update to all connected clients.
-	RebuildKeyspaceGraph(context.Context, *connect.Request[v16.RebuildKeyspaceGraphRequest]) (*connect.Response[v16.RebuildKeyspaceGraphResponse], error)
+	RebuildKeyspaceGraph(context.Context, *connect.Request[v161.RebuildKeyspaceGraphRequest]) (*connect.Response[v161.RebuildKeyspaceGraphResponse], error)
 	// RebuildVSchemaGraph rebuilds the per-cell SrvVSchema from the global
 	// VSchema objects in the provided cells (or all cells in the topo none
 	// provided).
-	RebuildVSchemaGraph(context.Context, *connect.Request[v16.RebuildVSchemaGraphRequest]) (*connect.Response[v16.RebuildVSchemaGraphResponse], error)
+	RebuildVSchemaGraph(context.Context, *connect.Request[v161.RebuildVSchemaGraphRequest]) (*connect.Response[v161.RebuildVSchemaGraphResponse], error)
 	// RefreshState reloads the tablet record on the specified tablet.
-	RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error)
+	RefreshState(context.Context, *connect.Request[v161.RefreshStateRequest]) (*connect.Response[v161.RefreshStateResponse], error)
 	// RefreshStateByShard calls RefreshState on all the tablets in the given shard.
-	RefreshStateByShard(context.Context, *connect.Request[v16.RefreshStateByShardRequest]) (*connect.Response[v16.RefreshStateByShardResponse], error)
+	RefreshStateByShard(context.Context, *connect.Request[v161.RefreshStateByShardRequest]) (*connect.Response[v161.RefreshStateByShardResponse], error)
 	// ReloadSchema instructs the remote tablet to reload its schema.
-	ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error)
+	ReloadSchema(context.Context, *connect.Request[v161.ReloadSchemaRequest]) (*connect.Response[v161.ReloadSchemaResponse], error)
 	// ReloadSchemaKeyspace reloads the schema on all tablets in a keyspace.
-	ReloadSchemaKeyspace(context.Context, *connect.Request[v16.ReloadSchemaKeyspaceRequest]) (*connect.Response[v16.ReloadSchemaKeyspaceResponse], error)
+	ReloadSchemaKeyspace(context.Context, *connect.Request[v161.ReloadSchemaKeyspaceRequest]) (*connect.Response[v161.ReloadSchemaKeyspaceResponse], error)
 	// ReloadSchemaShard reloads the schema on all tablets in a shard.
 	//
 	// In general, we don't always expect all replicas to be ready to reload, and
 	// the periodic schema reload makes them self-healing anyway. So, we do this
 	// on a best-effort basis, and log warnings for any tablets that fail to
 	// reload within the context deadline.
-	ReloadSchemaShard(context.Context, *connect.Request[v16.ReloadSchemaShardRequest]) (*connect.Response[v16.ReloadSchemaShardResponse], error)
+	ReloadSchemaShard(context.Context, *connect.Request[v161.ReloadSchemaShardRequest]) (*connect.Response[v161.ReloadSchemaShardResponse], error)
 	// RemoveBackup removes a backup from the BackupStorage used by vtctld.
-	RemoveBackup(context.Context, *connect.Request[v16.RemoveBackupRequest]) (*connect.Response[v16.RemoveBackupResponse], error)
+	RemoveBackup(context.Context, *connect.Request[v161.RemoveBackupRequest]) (*connect.Response[v161.RemoveBackupResponse], error)
 	// RemoveKeyspaceCell removes the specified cell from the Cells list for all
 	// shards in the specified keyspace (by calling RemoveShardCell on every
 	// shard). It also removes the SrvKeyspace for that keyspace in that cell.
-	RemoveKeyspaceCell(context.Context, *connect.Request[v16.RemoveKeyspaceCellRequest]) (*connect.Response[v16.RemoveKeyspaceCellResponse], error)
+	RemoveKeyspaceCell(context.Context, *connect.Request[v161.RemoveKeyspaceCellRequest]) (*connect.Response[v161.RemoveKeyspaceCellResponse], error)
 	// RemoveShardCell removes the specified cell from the specified shard's Cells
 	// list.
-	RemoveShardCell(context.Context, *connect.Request[v16.RemoveShardCellRequest]) (*connect.Response[v16.RemoveShardCellResponse], error)
+	RemoveShardCell(context.Context, *connect.Request[v161.RemoveShardCellRequest]) (*connect.Response[v161.RemoveShardCellResponse], error)
 	// ReparentTablet reparents a tablet to the current primary in the shard. This
 	// only works if the current replica position matches the last known reparent
 	// action.
-	ReparentTablet(context.Context, *connect.Request[v16.ReparentTabletRequest]) (*connect.Response[v16.ReparentTabletResponse], error)
+	ReparentTablet(context.Context, *connect.Request[v161.ReparentTabletRequest]) (*connect.Response[v161.ReparentTabletResponse], error)
 	// RestoreFromBackup stops mysqld for the given tablet and restores a backup.
-	RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest], *connect.ServerStream[v16.RestoreFromBackupResponse]) error
+	RestoreFromBackup(context.Context, *connect.Request[v161.RestoreFromBackupRequest], *connect.ServerStream[v161.RestoreFromBackupResponse]) error
 	// RunHealthCheck runs a healthcheck on the remote tablet.
-	RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error)
+	RunHealthCheck(context.Context, *connect.Request[v161.RunHealthCheckRequest]) (*connect.Response[v161.RunHealthCheckResponse], error)
 	// SetKeyspaceDurabilityPolicy updates the DurabilityPolicy for a keyspace.
-	SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v16.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v16.SetKeyspaceDurabilityPolicyResponse], error)
+	SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v161.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v161.SetKeyspaceDurabilityPolicyResponse], error)
 	// SetShardIsPrimaryServing adds or removes a shard from serving.
 	//
 	// This is meant as an emergency function. It does not rebuild any serving
 	// graph (i.e. it does not run RebuildKeyspaceGraph).
-	SetShardIsPrimaryServing(context.Context, *connect.Request[v16.SetShardIsPrimaryServingRequest]) (*connect.Response[v16.SetShardIsPrimaryServingResponse], error)
+	SetShardIsPrimaryServing(context.Context, *connect.Request[v161.SetShardIsPrimaryServingRequest]) (*connect.Response[v161.SetShardIsPrimaryServingResponse], error)
 	// SetShardTabletControl updates the TabletControl topo record for a shard and
 	// tablet type.
 	//
 	// This should only be used for an emergency fix, or after a finished
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
-	SetShardTabletControl(context.Context, *connect.Request[v16.SetShardTabletControlRequest]) (*connect.Response[v16.SetShardTabletControlResponse], error)
+	SetShardTabletControl(context.Context, *connect.Request[v161.SetShardTabletControlRequest]) (*connect.Response[v161.SetShardTabletControlResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
-	SetWritable(context.Context, *connect.Request[v16.SetWritableRequest]) (*connect.Response[v16.SetWritableResponse], error)
+	SetWritable(context.Context, *connect.Request[v161.SetWritableRequest]) (*connect.Response[v161.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
 	//
 	// It is a low-level function and should generally not be called.
-	ShardReplicationAdd(context.Context, *connect.Request[v16.ShardReplicationAddRequest]) (*connect.Response[v16.ShardReplicationAddResponse], error)
+	ShardReplicationAdd(context.Context, *connect.Request[v161.ShardReplicationAddRequest]) (*connect.Response[v161.ShardReplicationAddResponse], error)
 	// ShardReplicationFix walks the replication graph for a shard in a cell and
 	// attempts to fix the first problem encountered, returning information about
 	// the problem fixed, if any.
-	ShardReplicationFix(context.Context, *connect.Request[v16.ShardReplicationFixRequest]) (*connect.Response[v16.ShardReplicationFixResponse], error)
+	ShardReplicationFix(context.Context, *connect.Request[v161.ShardReplicationFixRequest]) (*connect.Response[v161.ShardReplicationFixResponse], error)
 	// ShardReplicationPositions returns the replication position of each tablet
 	// in a shard. This RPC makes a best-effort to return partial results. For
 	// example, if one tablet in the shard graph is unreachable, then
 	// ShardReplicationPositions will return non-error, and include valid results
 	// for the reachable tablets.
-	ShardReplicationPositions(context.Context, *connect.Request[v16.ShardReplicationPositionsRequest]) (*connect.Response[v16.ShardReplicationPositionsResponse], error)
+	ShardReplicationPositions(context.Context, *connect.Request[v161.ShardReplicationPositionsRequest]) (*connect.Response[v161.ShardReplicationPositionsResponse], error)
 	// ShardReplicationRemove removes an entry from a topodata.ShardReplication
 	// object.
 	//
 	// It is a low-level function and should generally not be called.
-	ShardReplicationRemove(context.Context, *connect.Request[v16.ShardReplicationRemoveRequest]) (*connect.Response[v16.ShardReplicationRemoveResponse], error)
+	ShardReplicationRemove(context.Context, *connect.Request[v161.ShardReplicationRemoveRequest]) (*connect.Response[v161.ShardReplicationRemoveResponse], error)
 	// SleepTablet blocks the aciton queue on the specified tablet for the
 	// specified duration.
 	//
 	// This is typically used for testing.
-	SleepTablet(context.Context, *connect.Request[v16.SleepTabletRequest]) (*connect.Response[v16.SleepTabletResponse], error)
+	SleepTablet(context.Context, *connect.Request[v161.SleepTabletRequest]) (*connect.Response[v161.SleepTabletResponse], error)
 	// SourceShardAdd adds the SourceShard record with the provided index. This
 	// should be used only as an emergency function.
 	//
 	// It does not call RefreshState for the shard primary.
-	SourceShardAdd(context.Context, *connect.Request[v16.SourceShardAddRequest]) (*connect.Response[v16.SourceShardAddResponse], error)
+	SourceShardAdd(context.Context, *connect.Request[v161.SourceShardAddRequest]) (*connect.Response[v161.SourceShardAddResponse], error)
 	// SourceShardDelete deletes the SourceShard record with the provided index.
 	// This should be used only as an emergency cleanup function.
 	//
 	// It does not call RefreshState for the shard primary.
-	SourceShardDelete(context.Context, *connect.Request[v16.SourceShardDeleteRequest]) (*connect.Response[v16.SourceShardDeleteResponse], error)
+	SourceShardDelete(context.Context, *connect.Request[v161.SourceShardDeleteRequest]) (*connect.Response[v161.SourceShardDeleteResponse], error)
 	// StartReplication starts replication on the specified tablet.
-	StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error)
+	StartReplication(context.Context, *connect.Request[v161.StartReplicationRequest]) (*connect.Response[v161.StartReplicationResponse], error)
 	// StopReplication stops replication on the specified tablet.
-	StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error)
+	StopReplication(context.Context, *connect.Request[v161.StopReplicationRequest]) (*connect.Response[v161.StopReplicationResponse], error)
 	// TabletExternallyReparented changes metadata in the topology server to
 	// acknowledge a shard primary change performed by an external tool (e.g.
 	// orchestrator).
 	//
 	// See the Reparenting guide for more information:
-	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v16.TabletExternallyReparentedRequest]) (*connect.Response[v16.TabletExternallyReparentedResponse], error)
+	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v161.TabletExternallyReparentedRequest]) (*connect.Response[v161.TabletExternallyReparentedResponse], error)
 	// UpdateCellInfo updates the content of a CellInfo with the provided
 	// parameters. Empty values are ignored. If the cell does not exist, the
 	// CellInfo will be created.
-	UpdateCellInfo(context.Context, *connect.Request[v16.UpdateCellInfoRequest]) (*connect.Response[v16.UpdateCellInfoResponse], error)
+	UpdateCellInfo(context.Context, *connect.Request[v161.UpdateCellInfoRequest]) (*connect.Response[v161.UpdateCellInfoResponse], error)
 	// UpdateCellsAlias updates the content of a CellsAlias with the provided
 	// parameters. Empty values are ignored. If the alias does not exist, the
 	// CellsAlias will be created.
-	UpdateCellsAlias(context.Context, *connect.Request[v16.UpdateCellsAliasRequest]) (*connect.Response[v16.UpdateCellsAliasResponse], error)
+	UpdateCellsAlias(context.Context, *connect.Request[v161.UpdateCellsAliasRequest]) (*connect.Response[v161.UpdateCellsAliasResponse], error)
 	// Validate validates that all nodes from the global replication graph are
 	// reachable, and that all tablets in discoverable cells are consistent.
-	Validate(context.Context, *connect.Request[v16.ValidateRequest]) (*connect.Response[v16.ValidateResponse], error)
+	Validate(context.Context, *connect.Request[v161.ValidateRequest]) (*connect.Response[v161.ValidateResponse], error)
 	// ValidateKeyspace validates that all nodes reachable from the specified
 	// keyspace are consistent.
-	ValidateKeyspace(context.Context, *connect.Request[v16.ValidateKeyspaceRequest]) (*connect.Response[v16.ValidateKeyspaceResponse], error)
+	ValidateKeyspace(context.Context, *connect.Request[v161.ValidateKeyspaceRequest]) (*connect.Response[v161.ValidateKeyspaceResponse], error)
 	// ValidateSchemaKeyspace validates that the schema on the primary tablet for shard 0 matches the schema on all of the other tablets in the keyspace.
-	ValidateSchemaKeyspace(context.Context, *connect.Request[v16.ValidateSchemaKeyspaceRequest]) (*connect.Response[v16.ValidateSchemaKeyspaceResponse], error)
+	ValidateSchemaKeyspace(context.Context, *connect.Request[v161.ValidateSchemaKeyspaceRequest]) (*connect.Response[v161.ValidateSchemaKeyspaceResponse], error)
 	// ValidateShard validates that all nodes reachable from the specified shard
 	// are consistent.
-	ValidateShard(context.Context, *connect.Request[v16.ValidateShardRequest]) (*connect.Response[v16.ValidateShardResponse], error)
+	ValidateShard(context.Context, *connect.Request[v161.ValidateShardRequest]) (*connect.Response[v161.ValidateShardResponse], error)
 	// ValidateVersionKeyspace validates that the version on the primary of shard 0 matches all of the other tablets in the keyspace.
-	ValidateVersionKeyspace(context.Context, *connect.Request[v16.ValidateVersionKeyspaceRequest]) (*connect.Response[v16.ValidateVersionKeyspaceResponse], error)
+	ValidateVersionKeyspace(context.Context, *connect.Request[v161.ValidateVersionKeyspaceRequest]) (*connect.Response[v161.ValidateVersionKeyspaceResponse], error)
 	// ValidateVersionShard validates that the version on the primary matches all of the replicas.
-	ValidateVersionShard(context.Context, *connect.Request[v16.ValidateVersionShardRequest]) (*connect.Response[v16.ValidateVersionShardResponse], error)
+	ValidateVersionShard(context.Context, *connect.Request[v161.ValidateVersionShardRequest]) (*connect.Response[v161.ValidateVersionShardResponse], error)
 	// ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
-	ValidateVSchema(context.Context, *connect.Request[v16.ValidateVSchemaRequest]) (*connect.Response[v16.ValidateVSchemaResponse], error)
+	ValidateVSchema(context.Context, *connect.Request[v161.ValidateVSchemaRequest]) (*connect.Response[v161.ValidateVSchemaResponse], error)
 }
 
 // NewVtctldHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -1801,422 +1978,506 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 	vtctldAddCellInfoHandler := connect.NewUnaryHandler(
 		VtctldAddCellInfoProcedure,
 		svc.AddCellInfo,
-		opts...,
+		connect.WithSchema(vtctldAddCellInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldAddCellsAliasHandler := connect.NewUnaryHandler(
 		VtctldAddCellsAliasProcedure,
 		svc.AddCellsAlias,
-		opts...,
+		connect.WithSchema(vtctldAddCellsAliasMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldApplyRoutingRulesHandler := connect.NewUnaryHandler(
 		VtctldApplyRoutingRulesProcedure,
 		svc.ApplyRoutingRules,
-		opts...,
+		connect.WithSchema(vtctldApplyRoutingRulesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldApplySchemaHandler := connect.NewUnaryHandler(
 		VtctldApplySchemaProcedure,
 		svc.ApplySchema,
-		opts...,
+		connect.WithSchema(vtctldApplySchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldApplyShardRoutingRulesHandler := connect.NewUnaryHandler(
 		VtctldApplyShardRoutingRulesProcedure,
 		svc.ApplyShardRoutingRules,
-		opts...,
+		connect.WithSchema(vtctldApplyShardRoutingRulesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldApplyVSchemaHandler := connect.NewUnaryHandler(
 		VtctldApplyVSchemaProcedure,
 		svc.ApplyVSchema,
-		opts...,
+		connect.WithSchema(vtctldApplyVSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldBackupHandler := connect.NewServerStreamHandler(
 		VtctldBackupProcedure,
 		svc.Backup,
-		opts...,
+		connect.WithSchema(vtctldBackupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldBackupShardHandler := connect.NewServerStreamHandler(
 		VtctldBackupShardProcedure,
 		svc.BackupShard,
-		opts...,
+		connect.WithSchema(vtctldBackupShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldChangeTabletTypeHandler := connect.NewUnaryHandler(
 		VtctldChangeTabletTypeProcedure,
 		svc.ChangeTabletType,
-		opts...,
+		connect.WithSchema(vtctldChangeTabletTypeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldCreateKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldCreateKeyspaceProcedure,
 		svc.CreateKeyspace,
-		opts...,
+		connect.WithSchema(vtctldCreateKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldCreateShardHandler := connect.NewUnaryHandler(
 		VtctldCreateShardProcedure,
 		svc.CreateShard,
-		opts...,
+		connect.WithSchema(vtctldCreateShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteCellInfoHandler := connect.NewUnaryHandler(
 		VtctldDeleteCellInfoProcedure,
 		svc.DeleteCellInfo,
-		opts...,
+		connect.WithSchema(vtctldDeleteCellInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteCellsAliasHandler := connect.NewUnaryHandler(
 		VtctldDeleteCellsAliasProcedure,
 		svc.DeleteCellsAlias,
-		opts...,
+		connect.WithSchema(vtctldDeleteCellsAliasMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldDeleteKeyspaceProcedure,
 		svc.DeleteKeyspace,
-		opts...,
+		connect.WithSchema(vtctldDeleteKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteShardsHandler := connect.NewUnaryHandler(
 		VtctldDeleteShardsProcedure,
 		svc.DeleteShards,
-		opts...,
+		connect.WithSchema(vtctldDeleteShardsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteSrvVSchemaHandler := connect.NewUnaryHandler(
 		VtctldDeleteSrvVSchemaProcedure,
 		svc.DeleteSrvVSchema,
-		opts...,
+		connect.WithSchema(vtctldDeleteSrvVSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldDeleteTabletsHandler := connect.NewUnaryHandler(
 		VtctldDeleteTabletsProcedure,
 		svc.DeleteTablets,
-		opts...,
+		connect.WithSchema(vtctldDeleteTabletsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldEmergencyReparentShardHandler := connect.NewUnaryHandler(
 		VtctldEmergencyReparentShardProcedure,
 		svc.EmergencyReparentShard,
-		opts...,
+		connect.WithSchema(vtctldEmergencyReparentShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldExecuteFetchAsAppHandler := connect.NewUnaryHandler(
 		VtctldExecuteFetchAsAppProcedure,
 		svc.ExecuteFetchAsApp,
-		opts...,
+		connect.WithSchema(vtctldExecuteFetchAsAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldExecuteFetchAsDBAHandler := connect.NewUnaryHandler(
 		VtctldExecuteFetchAsDBAProcedure,
 		svc.ExecuteFetchAsDBA,
-		opts...,
+		connect.WithSchema(vtctldExecuteFetchAsDBAMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldExecuteHookHandler := connect.NewUnaryHandler(
 		VtctldExecuteHookProcedure,
 		svc.ExecuteHook,
-		opts...,
+		connect.WithSchema(vtctldExecuteHookMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldFindAllShardsInKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldFindAllShardsInKeyspaceProcedure,
 		svc.FindAllShardsInKeyspace,
-		opts...,
+		connect.WithSchema(vtctldFindAllShardsInKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetBackupsHandler := connect.NewUnaryHandler(
 		VtctldGetBackupsProcedure,
 		svc.GetBackups,
-		opts...,
+		connect.WithSchema(vtctldGetBackupsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetCellInfoHandler := connect.NewUnaryHandler(
 		VtctldGetCellInfoProcedure,
 		svc.GetCellInfo,
-		opts...,
+		connect.WithSchema(vtctldGetCellInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetCellInfoNamesHandler := connect.NewUnaryHandler(
 		VtctldGetCellInfoNamesProcedure,
 		svc.GetCellInfoNames,
-		opts...,
+		connect.WithSchema(vtctldGetCellInfoNamesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetCellsAliasesHandler := connect.NewUnaryHandler(
 		VtctldGetCellsAliasesProcedure,
 		svc.GetCellsAliases,
-		opts...,
+		connect.WithSchema(vtctldGetCellsAliasesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetFullStatusHandler := connect.NewUnaryHandler(
 		VtctldGetFullStatusProcedure,
 		svc.GetFullStatus,
-		opts...,
+		connect.WithSchema(vtctldGetFullStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldGetKeyspaceProcedure,
 		svc.GetKeyspace,
-		opts...,
+		connect.WithSchema(vtctldGetKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetKeyspacesHandler := connect.NewUnaryHandler(
 		VtctldGetKeyspacesProcedure,
 		svc.GetKeyspaces,
-		opts...,
+		connect.WithSchema(vtctldGetKeyspacesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetPermissionsHandler := connect.NewUnaryHandler(
 		VtctldGetPermissionsProcedure,
 		svc.GetPermissions,
-		opts...,
+		connect.WithSchema(vtctldGetPermissionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetRoutingRulesHandler := connect.NewUnaryHandler(
 		VtctldGetRoutingRulesProcedure,
 		svc.GetRoutingRules,
-		opts...,
+		connect.WithSchema(vtctldGetRoutingRulesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetSchemaHandler := connect.NewUnaryHandler(
 		VtctldGetSchemaProcedure,
 		svc.GetSchema,
-		opts...,
+		connect.WithSchema(vtctldGetSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetShardHandler := connect.NewUnaryHandler(
 		VtctldGetShardProcedure,
 		svc.GetShard,
-		opts...,
+		connect.WithSchema(vtctldGetShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetShardRoutingRulesHandler := connect.NewUnaryHandler(
 		VtctldGetShardRoutingRulesProcedure,
 		svc.GetShardRoutingRules,
-		opts...,
+		connect.WithSchema(vtctldGetShardRoutingRulesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetSrvKeyspaceNamesHandler := connect.NewUnaryHandler(
 		VtctldGetSrvKeyspaceNamesProcedure,
 		svc.GetSrvKeyspaceNames,
-		opts...,
+		connect.WithSchema(vtctldGetSrvKeyspaceNamesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetSrvKeyspacesHandler := connect.NewUnaryHandler(
 		VtctldGetSrvKeyspacesProcedure,
 		svc.GetSrvKeyspaces,
-		opts...,
+		connect.WithSchema(vtctldGetSrvKeyspacesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldUpdateThrottlerConfigHandler := connect.NewUnaryHandler(
 		VtctldUpdateThrottlerConfigProcedure,
 		svc.UpdateThrottlerConfig,
-		opts...,
+		connect.WithSchema(vtctldUpdateThrottlerConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetSrvVSchemaHandler := connect.NewUnaryHandler(
 		VtctldGetSrvVSchemaProcedure,
 		svc.GetSrvVSchema,
-		opts...,
+		connect.WithSchema(vtctldGetSrvVSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetSrvVSchemasHandler := connect.NewUnaryHandler(
 		VtctldGetSrvVSchemasProcedure,
 		svc.GetSrvVSchemas,
-		opts...,
+		connect.WithSchema(vtctldGetSrvVSchemasMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetTabletHandler := connect.NewUnaryHandler(
 		VtctldGetTabletProcedure,
 		svc.GetTablet,
-		opts...,
+		connect.WithSchema(vtctldGetTabletMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetTabletsHandler := connect.NewUnaryHandler(
 		VtctldGetTabletsProcedure,
 		svc.GetTablets,
-		opts...,
+		connect.WithSchema(vtctldGetTabletsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetTopologyPathHandler := connect.NewUnaryHandler(
 		VtctldGetTopologyPathProcedure,
 		svc.GetTopologyPath,
-		opts...,
+		connect.WithSchema(vtctldGetTopologyPathMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetVersionHandler := connect.NewUnaryHandler(
 		VtctldGetVersionProcedure,
 		svc.GetVersion,
-		opts...,
+		connect.WithSchema(vtctldGetVersionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetVSchemaHandler := connect.NewUnaryHandler(
 		VtctldGetVSchemaProcedure,
 		svc.GetVSchema,
-		opts...,
+		connect.WithSchema(vtctldGetVSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldGetWorkflowsHandler := connect.NewUnaryHandler(
 		VtctldGetWorkflowsProcedure,
 		svc.GetWorkflows,
-		opts...,
+		connect.WithSchema(vtctldGetWorkflowsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldInitShardPrimaryHandler := connect.NewUnaryHandler(
 		VtctldInitShardPrimaryProcedure,
 		svc.InitShardPrimary,
-		opts...,
+		connect.WithSchema(vtctldInitShardPrimaryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldPingTabletHandler := connect.NewUnaryHandler(
 		VtctldPingTabletProcedure,
 		svc.PingTablet,
-		opts...,
+		connect.WithSchema(vtctldPingTabletMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldPlannedReparentShardHandler := connect.NewUnaryHandler(
 		VtctldPlannedReparentShardProcedure,
 		svc.PlannedReparentShard,
-		opts...,
+		connect.WithSchema(vtctldPlannedReparentShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRebuildKeyspaceGraphHandler := connect.NewUnaryHandler(
 		VtctldRebuildKeyspaceGraphProcedure,
 		svc.RebuildKeyspaceGraph,
-		opts...,
+		connect.WithSchema(vtctldRebuildKeyspaceGraphMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRebuildVSchemaGraphHandler := connect.NewUnaryHandler(
 		VtctldRebuildVSchemaGraphProcedure,
 		svc.RebuildVSchemaGraph,
-		opts...,
+		connect.WithSchema(vtctldRebuildVSchemaGraphMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRefreshStateHandler := connect.NewUnaryHandler(
 		VtctldRefreshStateProcedure,
 		svc.RefreshState,
-		opts...,
+		connect.WithSchema(vtctldRefreshStateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRefreshStateByShardHandler := connect.NewUnaryHandler(
 		VtctldRefreshStateByShardProcedure,
 		svc.RefreshStateByShard,
-		opts...,
+		connect.WithSchema(vtctldRefreshStateByShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldReloadSchemaHandler := connect.NewUnaryHandler(
 		VtctldReloadSchemaProcedure,
 		svc.ReloadSchema,
-		opts...,
+		connect.WithSchema(vtctldReloadSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldReloadSchemaKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldReloadSchemaKeyspaceProcedure,
 		svc.ReloadSchemaKeyspace,
-		opts...,
+		connect.WithSchema(vtctldReloadSchemaKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldReloadSchemaShardHandler := connect.NewUnaryHandler(
 		VtctldReloadSchemaShardProcedure,
 		svc.ReloadSchemaShard,
-		opts...,
+		connect.WithSchema(vtctldReloadSchemaShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRemoveBackupHandler := connect.NewUnaryHandler(
 		VtctldRemoveBackupProcedure,
 		svc.RemoveBackup,
-		opts...,
+		connect.WithSchema(vtctldRemoveBackupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRemoveKeyspaceCellHandler := connect.NewUnaryHandler(
 		VtctldRemoveKeyspaceCellProcedure,
 		svc.RemoveKeyspaceCell,
-		opts...,
+		connect.WithSchema(vtctldRemoveKeyspaceCellMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRemoveShardCellHandler := connect.NewUnaryHandler(
 		VtctldRemoveShardCellProcedure,
 		svc.RemoveShardCell,
-		opts...,
+		connect.WithSchema(vtctldRemoveShardCellMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldReparentTabletHandler := connect.NewUnaryHandler(
 		VtctldReparentTabletProcedure,
 		svc.ReparentTablet,
-		opts...,
+		connect.WithSchema(vtctldReparentTabletMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRestoreFromBackupHandler := connect.NewServerStreamHandler(
 		VtctldRestoreFromBackupProcedure,
 		svc.RestoreFromBackup,
-		opts...,
+		connect.WithSchema(vtctldRestoreFromBackupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldRunHealthCheckHandler := connect.NewUnaryHandler(
 		VtctldRunHealthCheckProcedure,
 		svc.RunHealthCheck,
-		opts...,
+		connect.WithSchema(vtctldRunHealthCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSetKeyspaceDurabilityPolicyHandler := connect.NewUnaryHandler(
 		VtctldSetKeyspaceDurabilityPolicyProcedure,
 		svc.SetKeyspaceDurabilityPolicy,
-		opts...,
+		connect.WithSchema(vtctldSetKeyspaceDurabilityPolicyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSetShardIsPrimaryServingHandler := connect.NewUnaryHandler(
 		VtctldSetShardIsPrimaryServingProcedure,
 		svc.SetShardIsPrimaryServing,
-		opts...,
+		connect.WithSchema(vtctldSetShardIsPrimaryServingMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSetShardTabletControlHandler := connect.NewUnaryHandler(
 		VtctldSetShardTabletControlProcedure,
 		svc.SetShardTabletControl,
-		opts...,
+		connect.WithSchema(vtctldSetShardTabletControlMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSetWritableHandler := connect.NewUnaryHandler(
 		VtctldSetWritableProcedure,
 		svc.SetWritable,
-		opts...,
+		connect.WithSchema(vtctldSetWritableMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldShardReplicationAddHandler := connect.NewUnaryHandler(
 		VtctldShardReplicationAddProcedure,
 		svc.ShardReplicationAdd,
-		opts...,
+		connect.WithSchema(vtctldShardReplicationAddMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldShardReplicationFixHandler := connect.NewUnaryHandler(
 		VtctldShardReplicationFixProcedure,
 		svc.ShardReplicationFix,
-		opts...,
+		connect.WithSchema(vtctldShardReplicationFixMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldShardReplicationPositionsHandler := connect.NewUnaryHandler(
 		VtctldShardReplicationPositionsProcedure,
 		svc.ShardReplicationPositions,
-		opts...,
+		connect.WithSchema(vtctldShardReplicationPositionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldShardReplicationRemoveHandler := connect.NewUnaryHandler(
 		VtctldShardReplicationRemoveProcedure,
 		svc.ShardReplicationRemove,
-		opts...,
+		connect.WithSchema(vtctldShardReplicationRemoveMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSleepTabletHandler := connect.NewUnaryHandler(
 		VtctldSleepTabletProcedure,
 		svc.SleepTablet,
-		opts...,
+		connect.WithSchema(vtctldSleepTabletMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSourceShardAddHandler := connect.NewUnaryHandler(
 		VtctldSourceShardAddProcedure,
 		svc.SourceShardAdd,
-		opts...,
+		connect.WithSchema(vtctldSourceShardAddMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSourceShardDeleteHandler := connect.NewUnaryHandler(
 		VtctldSourceShardDeleteProcedure,
 		svc.SourceShardDelete,
-		opts...,
+		connect.WithSchema(vtctldSourceShardDeleteMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldStartReplicationHandler := connect.NewUnaryHandler(
 		VtctldStartReplicationProcedure,
 		svc.StartReplication,
-		opts...,
+		connect.WithSchema(vtctldStartReplicationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldStopReplicationHandler := connect.NewUnaryHandler(
 		VtctldStopReplicationProcedure,
 		svc.StopReplication,
-		opts...,
+		connect.WithSchema(vtctldStopReplicationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldTabletExternallyReparentedHandler := connect.NewUnaryHandler(
 		VtctldTabletExternallyReparentedProcedure,
 		svc.TabletExternallyReparented,
-		opts...,
+		connect.WithSchema(vtctldTabletExternallyReparentedMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldUpdateCellInfoHandler := connect.NewUnaryHandler(
 		VtctldUpdateCellInfoProcedure,
 		svc.UpdateCellInfo,
-		opts...,
+		connect.WithSchema(vtctldUpdateCellInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldUpdateCellsAliasHandler := connect.NewUnaryHandler(
 		VtctldUpdateCellsAliasProcedure,
 		svc.UpdateCellsAlias,
-		opts...,
+		connect.WithSchema(vtctldUpdateCellsAliasMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateHandler := connect.NewUnaryHandler(
 		VtctldValidateProcedure,
 		svc.Validate,
-		opts...,
+		connect.WithSchema(vtctldValidateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldValidateKeyspaceProcedure,
 		svc.ValidateKeyspace,
-		opts...,
+		connect.WithSchema(vtctldValidateKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateSchemaKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldValidateSchemaKeyspaceProcedure,
 		svc.ValidateSchemaKeyspace,
-		opts...,
+		connect.WithSchema(vtctldValidateSchemaKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateShardHandler := connect.NewUnaryHandler(
 		VtctldValidateShardProcedure,
 		svc.ValidateShard,
-		opts...,
+		connect.WithSchema(vtctldValidateShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateVersionKeyspaceHandler := connect.NewUnaryHandler(
 		VtctldValidateVersionKeyspaceProcedure,
 		svc.ValidateVersionKeyspace,
-		opts...,
+		connect.WithSchema(vtctldValidateVersionKeyspaceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateVersionShardHandler := connect.NewUnaryHandler(
 		VtctldValidateVersionShardProcedure,
 		svc.ValidateVersionShard,
-		opts...,
+		connect.WithSchema(vtctldValidateVersionShardMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	vtctldValidateVSchemaHandler := connect.NewUnaryHandler(
 		VtctldValidateVSchemaProcedure,
 		svc.ValidateVSchema,
-		opts...,
+		connect.WithSchema(vtctldValidateVSchemaMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/vtctlservice.Vtctld/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -2397,338 +2658,338 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 // UnimplementedVtctldHandler returns CodeUnimplemented from all methods.
 type UnimplementedVtctldHandler struct{}
 
-func (UnimplementedVtctldHandler) AddCellInfo(context.Context, *connect.Request[v16.AddCellInfoRequest]) (*connect.Response[v16.AddCellInfoResponse], error) {
+func (UnimplementedVtctldHandler) AddCellInfo(context.Context, *connect.Request[v161.AddCellInfoRequest]) (*connect.Response[v161.AddCellInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.AddCellInfo is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) AddCellsAlias(context.Context, *connect.Request[v16.AddCellsAliasRequest]) (*connect.Response[v16.AddCellsAliasResponse], error) {
+func (UnimplementedVtctldHandler) AddCellsAlias(context.Context, *connect.Request[v161.AddCellsAliasRequest]) (*connect.Response[v161.AddCellsAliasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.AddCellsAlias is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ApplyRoutingRules(context.Context, *connect.Request[v16.ApplyRoutingRulesRequest]) (*connect.Response[v16.ApplyRoutingRulesResponse], error) {
+func (UnimplementedVtctldHandler) ApplyRoutingRules(context.Context, *connect.Request[v161.ApplyRoutingRulesRequest]) (*connect.Response[v161.ApplyRoutingRulesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyRoutingRules is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ApplySchema(context.Context, *connect.Request[v16.ApplySchemaRequest]) (*connect.Response[v16.ApplySchemaResponse], error) {
+func (UnimplementedVtctldHandler) ApplySchema(context.Context, *connect.Request[v161.ApplySchemaRequest]) (*connect.Response[v161.ApplySchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplySchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ApplyShardRoutingRules(context.Context, *connect.Request[v16.ApplyShardRoutingRulesRequest]) (*connect.Response[v16.ApplyShardRoutingRulesResponse], error) {
+func (UnimplementedVtctldHandler) ApplyShardRoutingRules(context.Context, *connect.Request[v161.ApplyShardRoutingRulesRequest]) (*connect.Response[v161.ApplyShardRoutingRulesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyShardRoutingRules is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ApplyVSchema(context.Context, *connect.Request[v16.ApplyVSchemaRequest]) (*connect.Response[v16.ApplyVSchemaResponse], error) {
+func (UnimplementedVtctldHandler) ApplyVSchema(context.Context, *connect.Request[v161.ApplyVSchemaRequest]) (*connect.Response[v161.ApplyVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyVSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) Backup(context.Context, *connect.Request[v16.BackupRequest], *connect.ServerStream[v16.BackupResponse]) error {
+func (UnimplementedVtctldHandler) Backup(context.Context, *connect.Request[v161.BackupRequest], *connect.ServerStream[v161.BackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.Backup is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) BackupShard(context.Context, *connect.Request[v16.BackupShardRequest], *connect.ServerStream[v16.BackupResponse]) error {
+func (UnimplementedVtctldHandler) BackupShard(context.Context, *connect.Request[v161.BackupShardRequest], *connect.ServerStream[v161.BackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.BackupShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ChangeTabletType(context.Context, *connect.Request[v16.ChangeTabletTypeRequest]) (*connect.Response[v16.ChangeTabletTypeResponse], error) {
+func (UnimplementedVtctldHandler) ChangeTabletType(context.Context, *connect.Request[v161.ChangeTabletTypeRequest]) (*connect.Response[v161.ChangeTabletTypeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ChangeTabletType is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) CreateKeyspace(context.Context, *connect.Request[v16.CreateKeyspaceRequest]) (*connect.Response[v16.CreateKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) CreateKeyspace(context.Context, *connect.Request[v161.CreateKeyspaceRequest]) (*connect.Response[v161.CreateKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CreateKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) CreateShard(context.Context, *connect.Request[v16.CreateShardRequest]) (*connect.Response[v16.CreateShardResponse], error) {
+func (UnimplementedVtctldHandler) CreateShard(context.Context, *connect.Request[v161.CreateShardRequest]) (*connect.Response[v161.CreateShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CreateShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteCellInfo(context.Context, *connect.Request[v16.DeleteCellInfoRequest]) (*connect.Response[v16.DeleteCellInfoResponse], error) {
+func (UnimplementedVtctldHandler) DeleteCellInfo(context.Context, *connect.Request[v161.DeleteCellInfoRequest]) (*connect.Response[v161.DeleteCellInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteCellInfo is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteCellsAlias(context.Context, *connect.Request[v16.DeleteCellsAliasRequest]) (*connect.Response[v16.DeleteCellsAliasResponse], error) {
+func (UnimplementedVtctldHandler) DeleteCellsAlias(context.Context, *connect.Request[v161.DeleteCellsAliasRequest]) (*connect.Response[v161.DeleteCellsAliasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteCellsAlias is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteKeyspace(context.Context, *connect.Request[v16.DeleteKeyspaceRequest]) (*connect.Response[v16.DeleteKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) DeleteKeyspace(context.Context, *connect.Request[v161.DeleteKeyspaceRequest]) (*connect.Response[v161.DeleteKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteShards(context.Context, *connect.Request[v16.DeleteShardsRequest]) (*connect.Response[v16.DeleteShardsResponse], error) {
+func (UnimplementedVtctldHandler) DeleteShards(context.Context, *connect.Request[v161.DeleteShardsRequest]) (*connect.Response[v161.DeleteShardsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteShards is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteSrvVSchema(context.Context, *connect.Request[v16.DeleteSrvVSchemaRequest]) (*connect.Response[v16.DeleteSrvVSchemaResponse], error) {
+func (UnimplementedVtctldHandler) DeleteSrvVSchema(context.Context, *connect.Request[v161.DeleteSrvVSchemaRequest]) (*connect.Response[v161.DeleteSrvVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteSrvVSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) DeleteTablets(context.Context, *connect.Request[v16.DeleteTabletsRequest]) (*connect.Response[v16.DeleteTabletsResponse], error) {
+func (UnimplementedVtctldHandler) DeleteTablets(context.Context, *connect.Request[v161.DeleteTabletsRequest]) (*connect.Response[v161.DeleteTabletsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteTablets is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) EmergencyReparentShard(context.Context, *connect.Request[v16.EmergencyReparentShardRequest]) (*connect.Response[v16.EmergencyReparentShardResponse], error) {
+func (UnimplementedVtctldHandler) EmergencyReparentShard(context.Context, *connect.Request[v161.EmergencyReparentShardRequest]) (*connect.Response[v161.EmergencyReparentShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.EmergencyReparentShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ExecuteFetchAsApp(context.Context, *connect.Request[v16.ExecuteFetchAsAppRequest]) (*connect.Response[v16.ExecuteFetchAsAppResponse], error) {
+func (UnimplementedVtctldHandler) ExecuteFetchAsApp(context.Context, *connect.Request[v161.ExecuteFetchAsAppRequest]) (*connect.Response[v161.ExecuteFetchAsAppResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteFetchAsApp is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ExecuteFetchAsDBA(context.Context, *connect.Request[v16.ExecuteFetchAsDBARequest]) (*connect.Response[v16.ExecuteFetchAsDBAResponse], error) {
+func (UnimplementedVtctldHandler) ExecuteFetchAsDBA(context.Context, *connect.Request[v161.ExecuteFetchAsDBARequest]) (*connect.Response[v161.ExecuteFetchAsDBAResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteFetchAsDBA is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ExecuteHook(context.Context, *connect.Request[v16.ExecuteHookRequest]) (*connect.Response[v16.ExecuteHookResponse], error) {
+func (UnimplementedVtctldHandler) ExecuteHook(context.Context, *connect.Request[v161.ExecuteHookRequest]) (*connect.Response[v161.ExecuteHookResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteHook is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) FindAllShardsInKeyspace(context.Context, *connect.Request[v16.FindAllShardsInKeyspaceRequest]) (*connect.Response[v16.FindAllShardsInKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) FindAllShardsInKeyspace(context.Context, *connect.Request[v161.FindAllShardsInKeyspaceRequest]) (*connect.Response[v161.FindAllShardsInKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.FindAllShardsInKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetBackups(context.Context, *connect.Request[v16.GetBackupsRequest]) (*connect.Response[v16.GetBackupsResponse], error) {
+func (UnimplementedVtctldHandler) GetBackups(context.Context, *connect.Request[v161.GetBackupsRequest]) (*connect.Response[v161.GetBackupsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetBackups is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetCellInfo(context.Context, *connect.Request[v16.GetCellInfoRequest]) (*connect.Response[v16.GetCellInfoResponse], error) {
+func (UnimplementedVtctldHandler) GetCellInfo(context.Context, *connect.Request[v161.GetCellInfoRequest]) (*connect.Response[v161.GetCellInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellInfo is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetCellInfoNames(context.Context, *connect.Request[v16.GetCellInfoNamesRequest]) (*connect.Response[v16.GetCellInfoNamesResponse], error) {
+func (UnimplementedVtctldHandler) GetCellInfoNames(context.Context, *connect.Request[v161.GetCellInfoNamesRequest]) (*connect.Response[v161.GetCellInfoNamesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellInfoNames is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetCellsAliases(context.Context, *connect.Request[v16.GetCellsAliasesRequest]) (*connect.Response[v16.GetCellsAliasesResponse], error) {
+func (UnimplementedVtctldHandler) GetCellsAliases(context.Context, *connect.Request[v161.GetCellsAliasesRequest]) (*connect.Response[v161.GetCellsAliasesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellsAliases is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetFullStatus(context.Context, *connect.Request[v16.GetFullStatusRequest]) (*connect.Response[v16.GetFullStatusResponse], error) {
+func (UnimplementedVtctldHandler) GetFullStatus(context.Context, *connect.Request[v161.GetFullStatusRequest]) (*connect.Response[v161.GetFullStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetFullStatus is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetKeyspace(context.Context, *connect.Request[v16.GetKeyspaceRequest]) (*connect.Response[v16.GetKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) GetKeyspace(context.Context, *connect.Request[v161.GetKeyspaceRequest]) (*connect.Response[v161.GetKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetKeyspaces(context.Context, *connect.Request[v16.GetKeyspacesRequest]) (*connect.Response[v16.GetKeyspacesResponse], error) {
+func (UnimplementedVtctldHandler) GetKeyspaces(context.Context, *connect.Request[v161.GetKeyspacesRequest]) (*connect.Response[v161.GetKeyspacesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetKeyspaces is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetPermissions(context.Context, *connect.Request[v16.GetPermissionsRequest]) (*connect.Response[v16.GetPermissionsResponse], error) {
+func (UnimplementedVtctldHandler) GetPermissions(context.Context, *connect.Request[v161.GetPermissionsRequest]) (*connect.Response[v161.GetPermissionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetPermissions is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetRoutingRules(context.Context, *connect.Request[v16.GetRoutingRulesRequest]) (*connect.Response[v16.GetRoutingRulesResponse], error) {
+func (UnimplementedVtctldHandler) GetRoutingRules(context.Context, *connect.Request[v161.GetRoutingRulesRequest]) (*connect.Response[v161.GetRoutingRulesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetRoutingRules is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetSchema(context.Context, *connect.Request[v16.GetSchemaRequest]) (*connect.Response[v16.GetSchemaResponse], error) {
+func (UnimplementedVtctldHandler) GetSchema(context.Context, *connect.Request[v161.GetSchemaRequest]) (*connect.Response[v161.GetSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetShard(context.Context, *connect.Request[v16.GetShardRequest]) (*connect.Response[v16.GetShardResponse], error) {
+func (UnimplementedVtctldHandler) GetShard(context.Context, *connect.Request[v161.GetShardRequest]) (*connect.Response[v161.GetShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetShardRoutingRules(context.Context, *connect.Request[v16.GetShardRoutingRulesRequest]) (*connect.Response[v16.GetShardRoutingRulesResponse], error) {
+func (UnimplementedVtctldHandler) GetShardRoutingRules(context.Context, *connect.Request[v161.GetShardRoutingRulesRequest]) (*connect.Response[v161.GetShardRoutingRulesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShardRoutingRules is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetSrvKeyspaceNames(context.Context, *connect.Request[v16.GetSrvKeyspaceNamesRequest]) (*connect.Response[v16.GetSrvKeyspaceNamesResponse], error) {
+func (UnimplementedVtctldHandler) GetSrvKeyspaceNames(context.Context, *connect.Request[v161.GetSrvKeyspaceNamesRequest]) (*connect.Response[v161.GetSrvKeyspaceNamesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvKeyspaceNames is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetSrvKeyspaces(context.Context, *connect.Request[v16.GetSrvKeyspacesRequest]) (*connect.Response[v16.GetSrvKeyspacesResponse], error) {
+func (UnimplementedVtctldHandler) GetSrvKeyspaces(context.Context, *connect.Request[v161.GetSrvKeyspacesRequest]) (*connect.Response[v161.GetSrvKeyspacesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvKeyspaces is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) UpdateThrottlerConfig(context.Context, *connect.Request[v16.UpdateThrottlerConfigRequest]) (*connect.Response[v16.UpdateThrottlerConfigResponse], error) {
+func (UnimplementedVtctldHandler) UpdateThrottlerConfig(context.Context, *connect.Request[v161.UpdateThrottlerConfigRequest]) (*connect.Response[v161.UpdateThrottlerConfigResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateThrottlerConfig is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetSrvVSchema(context.Context, *connect.Request[v16.GetSrvVSchemaRequest]) (*connect.Response[v16.GetSrvVSchemaResponse], error) {
+func (UnimplementedVtctldHandler) GetSrvVSchema(context.Context, *connect.Request[v161.GetSrvVSchemaRequest]) (*connect.Response[v161.GetSrvVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvVSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetSrvVSchemas(context.Context, *connect.Request[v16.GetSrvVSchemasRequest]) (*connect.Response[v16.GetSrvVSchemasResponse], error) {
+func (UnimplementedVtctldHandler) GetSrvVSchemas(context.Context, *connect.Request[v161.GetSrvVSchemasRequest]) (*connect.Response[v161.GetSrvVSchemasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvVSchemas is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetTablet(context.Context, *connect.Request[v16.GetTabletRequest]) (*connect.Response[v16.GetTabletResponse], error) {
+func (UnimplementedVtctldHandler) GetTablet(context.Context, *connect.Request[v161.GetTabletRequest]) (*connect.Response[v161.GetTabletResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablet is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetTablets(context.Context, *connect.Request[v16.GetTabletsRequest]) (*connect.Response[v16.GetTabletsResponse], error) {
+func (UnimplementedVtctldHandler) GetTablets(context.Context, *connect.Request[v161.GetTabletsRequest]) (*connect.Response[v161.GetTabletsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablets is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetTopologyPath(context.Context, *connect.Request[v16.GetTopologyPathRequest]) (*connect.Response[v16.GetTopologyPathResponse], error) {
+func (UnimplementedVtctldHandler) GetTopologyPath(context.Context, *connect.Request[v161.GetTopologyPathRequest]) (*connect.Response[v161.GetTopologyPathResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTopologyPath is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetVersion(context.Context, *connect.Request[v16.GetVersionRequest]) (*connect.Response[v16.GetVersionResponse], error) {
+func (UnimplementedVtctldHandler) GetVersion(context.Context, *connect.Request[v161.GetVersionRequest]) (*connect.Response[v161.GetVersionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetVersion is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetVSchema(context.Context, *connect.Request[v16.GetVSchemaRequest]) (*connect.Response[v16.GetVSchemaResponse], error) {
+func (UnimplementedVtctldHandler) GetVSchema(context.Context, *connect.Request[v161.GetVSchemaRequest]) (*connect.Response[v161.GetVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetVSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) GetWorkflows(context.Context, *connect.Request[v16.GetWorkflowsRequest]) (*connect.Response[v16.GetWorkflowsResponse], error) {
+func (UnimplementedVtctldHandler) GetWorkflows(context.Context, *connect.Request[v161.GetWorkflowsRequest]) (*connect.Response[v161.GetWorkflowsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetWorkflows is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) InitShardPrimary(context.Context, *connect.Request[v16.InitShardPrimaryRequest]) (*connect.Response[v16.InitShardPrimaryResponse], error) {
+func (UnimplementedVtctldHandler) InitShardPrimary(context.Context, *connect.Request[v161.InitShardPrimaryRequest]) (*connect.Response[v161.InitShardPrimaryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.InitShardPrimary is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) PingTablet(context.Context, *connect.Request[v16.PingTabletRequest]) (*connect.Response[v16.PingTabletResponse], error) {
+func (UnimplementedVtctldHandler) PingTablet(context.Context, *connect.Request[v161.PingTabletRequest]) (*connect.Response[v161.PingTabletResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.PingTablet is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) PlannedReparentShard(context.Context, *connect.Request[v16.PlannedReparentShardRequest]) (*connect.Response[v16.PlannedReparentShardResponse], error) {
+func (UnimplementedVtctldHandler) PlannedReparentShard(context.Context, *connect.Request[v161.PlannedReparentShardRequest]) (*connect.Response[v161.PlannedReparentShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.PlannedReparentShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RebuildKeyspaceGraph(context.Context, *connect.Request[v16.RebuildKeyspaceGraphRequest]) (*connect.Response[v16.RebuildKeyspaceGraphResponse], error) {
+func (UnimplementedVtctldHandler) RebuildKeyspaceGraph(context.Context, *connect.Request[v161.RebuildKeyspaceGraphRequest]) (*connect.Response[v161.RebuildKeyspaceGraphResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RebuildKeyspaceGraph is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RebuildVSchemaGraph(context.Context, *connect.Request[v16.RebuildVSchemaGraphRequest]) (*connect.Response[v16.RebuildVSchemaGraphResponse], error) {
+func (UnimplementedVtctldHandler) RebuildVSchemaGraph(context.Context, *connect.Request[v161.RebuildVSchemaGraphRequest]) (*connect.Response[v161.RebuildVSchemaGraphResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RebuildVSchemaGraph is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RefreshState(context.Context, *connect.Request[v16.RefreshStateRequest]) (*connect.Response[v16.RefreshStateResponse], error) {
+func (UnimplementedVtctldHandler) RefreshState(context.Context, *connect.Request[v161.RefreshStateRequest]) (*connect.Response[v161.RefreshStateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RefreshState is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RefreshStateByShard(context.Context, *connect.Request[v16.RefreshStateByShardRequest]) (*connect.Response[v16.RefreshStateByShardResponse], error) {
+func (UnimplementedVtctldHandler) RefreshStateByShard(context.Context, *connect.Request[v161.RefreshStateByShardRequest]) (*connect.Response[v161.RefreshStateByShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RefreshStateByShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ReloadSchema(context.Context, *connect.Request[v16.ReloadSchemaRequest]) (*connect.Response[v16.ReloadSchemaResponse], error) {
+func (UnimplementedVtctldHandler) ReloadSchema(context.Context, *connect.Request[v161.ReloadSchemaRequest]) (*connect.Response[v161.ReloadSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchema is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ReloadSchemaKeyspace(context.Context, *connect.Request[v16.ReloadSchemaKeyspaceRequest]) (*connect.Response[v16.ReloadSchemaKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) ReloadSchemaKeyspace(context.Context, *connect.Request[v161.ReloadSchemaKeyspaceRequest]) (*connect.Response[v161.ReloadSchemaKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchemaKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ReloadSchemaShard(context.Context, *connect.Request[v16.ReloadSchemaShardRequest]) (*connect.Response[v16.ReloadSchemaShardResponse], error) {
+func (UnimplementedVtctldHandler) ReloadSchemaShard(context.Context, *connect.Request[v161.ReloadSchemaShardRequest]) (*connect.Response[v161.ReloadSchemaShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchemaShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RemoveBackup(context.Context, *connect.Request[v16.RemoveBackupRequest]) (*connect.Response[v16.RemoveBackupResponse], error) {
+func (UnimplementedVtctldHandler) RemoveBackup(context.Context, *connect.Request[v161.RemoveBackupRequest]) (*connect.Response[v161.RemoveBackupResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveBackup is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RemoveKeyspaceCell(context.Context, *connect.Request[v16.RemoveKeyspaceCellRequest]) (*connect.Response[v16.RemoveKeyspaceCellResponse], error) {
+func (UnimplementedVtctldHandler) RemoveKeyspaceCell(context.Context, *connect.Request[v161.RemoveKeyspaceCellRequest]) (*connect.Response[v161.RemoveKeyspaceCellResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveKeyspaceCell is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RemoveShardCell(context.Context, *connect.Request[v16.RemoveShardCellRequest]) (*connect.Response[v16.RemoveShardCellResponse], error) {
+func (UnimplementedVtctldHandler) RemoveShardCell(context.Context, *connect.Request[v161.RemoveShardCellRequest]) (*connect.Response[v161.RemoveShardCellResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveShardCell is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ReparentTablet(context.Context, *connect.Request[v16.ReparentTabletRequest]) (*connect.Response[v16.ReparentTabletResponse], error) {
+func (UnimplementedVtctldHandler) ReparentTablet(context.Context, *connect.Request[v161.ReparentTabletRequest]) (*connect.Response[v161.ReparentTabletResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReparentTablet is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RestoreFromBackup(context.Context, *connect.Request[v16.RestoreFromBackupRequest], *connect.ServerStream[v16.RestoreFromBackupResponse]) error {
+func (UnimplementedVtctldHandler) RestoreFromBackup(context.Context, *connect.Request[v161.RestoreFromBackupRequest], *connect.ServerStream[v161.RestoreFromBackupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RestoreFromBackup is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) RunHealthCheck(context.Context, *connect.Request[v16.RunHealthCheckRequest]) (*connect.Response[v16.RunHealthCheckResponse], error) {
+func (UnimplementedVtctldHandler) RunHealthCheck(context.Context, *connect.Request[v161.RunHealthCheckRequest]) (*connect.Response[v161.RunHealthCheckResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RunHealthCheck is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v16.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v16.SetKeyspaceDurabilityPolicyResponse], error) {
+func (UnimplementedVtctldHandler) SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v161.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v161.SetKeyspaceDurabilityPolicyResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetKeyspaceDurabilityPolicy is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SetShardIsPrimaryServing(context.Context, *connect.Request[v16.SetShardIsPrimaryServingRequest]) (*connect.Response[v16.SetShardIsPrimaryServingResponse], error) {
+func (UnimplementedVtctldHandler) SetShardIsPrimaryServing(context.Context, *connect.Request[v161.SetShardIsPrimaryServingRequest]) (*connect.Response[v161.SetShardIsPrimaryServingResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardIsPrimaryServing is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SetShardTabletControl(context.Context, *connect.Request[v16.SetShardTabletControlRequest]) (*connect.Response[v16.SetShardTabletControlResponse], error) {
+func (UnimplementedVtctldHandler) SetShardTabletControl(context.Context, *connect.Request[v161.SetShardTabletControlRequest]) (*connect.Response[v161.SetShardTabletControlResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardTabletControl is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SetWritable(context.Context, *connect.Request[v16.SetWritableRequest]) (*connect.Response[v16.SetWritableResponse], error) {
+func (UnimplementedVtctldHandler) SetWritable(context.Context, *connect.Request[v161.SetWritableRequest]) (*connect.Response[v161.SetWritableResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetWritable is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ShardReplicationAdd(context.Context, *connect.Request[v16.ShardReplicationAddRequest]) (*connect.Response[v16.ShardReplicationAddResponse], error) {
+func (UnimplementedVtctldHandler) ShardReplicationAdd(context.Context, *connect.Request[v161.ShardReplicationAddRequest]) (*connect.Response[v161.ShardReplicationAddResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationAdd is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ShardReplicationFix(context.Context, *connect.Request[v16.ShardReplicationFixRequest]) (*connect.Response[v16.ShardReplicationFixResponse], error) {
+func (UnimplementedVtctldHandler) ShardReplicationFix(context.Context, *connect.Request[v161.ShardReplicationFixRequest]) (*connect.Response[v161.ShardReplicationFixResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationFix is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ShardReplicationPositions(context.Context, *connect.Request[v16.ShardReplicationPositionsRequest]) (*connect.Response[v16.ShardReplicationPositionsResponse], error) {
+func (UnimplementedVtctldHandler) ShardReplicationPositions(context.Context, *connect.Request[v161.ShardReplicationPositionsRequest]) (*connect.Response[v161.ShardReplicationPositionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationPositions is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ShardReplicationRemove(context.Context, *connect.Request[v16.ShardReplicationRemoveRequest]) (*connect.Response[v16.ShardReplicationRemoveResponse], error) {
+func (UnimplementedVtctldHandler) ShardReplicationRemove(context.Context, *connect.Request[v161.ShardReplicationRemoveRequest]) (*connect.Response[v161.ShardReplicationRemoveResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationRemove is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SleepTablet(context.Context, *connect.Request[v16.SleepTabletRequest]) (*connect.Response[v16.SleepTabletResponse], error) {
+func (UnimplementedVtctldHandler) SleepTablet(context.Context, *connect.Request[v161.SleepTabletRequest]) (*connect.Response[v161.SleepTabletResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SleepTablet is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SourceShardAdd(context.Context, *connect.Request[v16.SourceShardAddRequest]) (*connect.Response[v16.SourceShardAddResponse], error) {
+func (UnimplementedVtctldHandler) SourceShardAdd(context.Context, *connect.Request[v161.SourceShardAddRequest]) (*connect.Response[v161.SourceShardAddResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SourceShardAdd is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) SourceShardDelete(context.Context, *connect.Request[v16.SourceShardDeleteRequest]) (*connect.Response[v16.SourceShardDeleteResponse], error) {
+func (UnimplementedVtctldHandler) SourceShardDelete(context.Context, *connect.Request[v161.SourceShardDeleteRequest]) (*connect.Response[v161.SourceShardDeleteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SourceShardDelete is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) StartReplication(context.Context, *connect.Request[v16.StartReplicationRequest]) (*connect.Response[v16.StartReplicationResponse], error) {
+func (UnimplementedVtctldHandler) StartReplication(context.Context, *connect.Request[v161.StartReplicationRequest]) (*connect.Response[v161.StartReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.StartReplication is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) StopReplication(context.Context, *connect.Request[v16.StopReplicationRequest]) (*connect.Response[v16.StopReplicationResponse], error) {
+func (UnimplementedVtctldHandler) StopReplication(context.Context, *connect.Request[v161.StopReplicationRequest]) (*connect.Response[v161.StopReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.StopReplication is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) TabletExternallyReparented(context.Context, *connect.Request[v16.TabletExternallyReparentedRequest]) (*connect.Response[v16.TabletExternallyReparentedResponse], error) {
+func (UnimplementedVtctldHandler) TabletExternallyReparented(context.Context, *connect.Request[v161.TabletExternallyReparentedRequest]) (*connect.Response[v161.TabletExternallyReparentedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.TabletExternallyReparented is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) UpdateCellInfo(context.Context, *connect.Request[v16.UpdateCellInfoRequest]) (*connect.Response[v16.UpdateCellInfoResponse], error) {
+func (UnimplementedVtctldHandler) UpdateCellInfo(context.Context, *connect.Request[v161.UpdateCellInfoRequest]) (*connect.Response[v161.UpdateCellInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateCellInfo is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) UpdateCellsAlias(context.Context, *connect.Request[v16.UpdateCellsAliasRequest]) (*connect.Response[v16.UpdateCellsAliasResponse], error) {
+func (UnimplementedVtctldHandler) UpdateCellsAlias(context.Context, *connect.Request[v161.UpdateCellsAliasRequest]) (*connect.Response[v161.UpdateCellsAliasResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateCellsAlias is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) Validate(context.Context, *connect.Request[v16.ValidateRequest]) (*connect.Response[v16.ValidateResponse], error) {
+func (UnimplementedVtctldHandler) Validate(context.Context, *connect.Request[v161.ValidateRequest]) (*connect.Response[v161.ValidateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.Validate is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateKeyspace(context.Context, *connect.Request[v16.ValidateKeyspaceRequest]) (*connect.Response[v16.ValidateKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) ValidateKeyspace(context.Context, *connect.Request[v161.ValidateKeyspaceRequest]) (*connect.Response[v161.ValidateKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateSchemaKeyspace(context.Context, *connect.Request[v16.ValidateSchemaKeyspaceRequest]) (*connect.Response[v16.ValidateSchemaKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) ValidateSchemaKeyspace(context.Context, *connect.Request[v161.ValidateSchemaKeyspaceRequest]) (*connect.Response[v161.ValidateSchemaKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateSchemaKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateShard(context.Context, *connect.Request[v16.ValidateShardRequest]) (*connect.Response[v16.ValidateShardResponse], error) {
+func (UnimplementedVtctldHandler) ValidateShard(context.Context, *connect.Request[v161.ValidateShardRequest]) (*connect.Response[v161.ValidateShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateVersionKeyspace(context.Context, *connect.Request[v16.ValidateVersionKeyspaceRequest]) (*connect.Response[v16.ValidateVersionKeyspaceResponse], error) {
+func (UnimplementedVtctldHandler) ValidateVersionKeyspace(context.Context, *connect.Request[v161.ValidateVersionKeyspaceRequest]) (*connect.Response[v161.ValidateVersionKeyspaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionKeyspace is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect.Request[v16.ValidateVersionShardRequest]) (*connect.Response[v16.ValidateVersionShardResponse], error) {
+func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect.Request[v161.ValidateVersionShardRequest]) (*connect.Response[v161.ValidateVersionShardResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionShard is not implemented"))
 }
 
-func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect.Request[v16.ValidateVSchemaRequest]) (*connect.Response[v16.ValidateVSchemaResponse], error) {
+func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect.Request[v161.ValidateVSchemaRequest]) (*connect.Response[v161.ValidateVSchemaResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVSchema is not implemented"))
 }

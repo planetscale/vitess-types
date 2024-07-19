@@ -97,6 +97,10 @@ message MaterializeSettings {
   bool defer_secondary_keys = 14;
   vitess.tabletmanagerdata.dev.TabletSelectionPreference tablet_selection_preference = 15;
   bool atomic_copy = 16;
+  WorkflowOptions workflow_options = 17;
+
+  // ReferenceTables is set to a csv list of tables, if the materialization is for reference tables.
+  repeated string reference_tables = 18;
 }
 
 /* Data types for VtctldServer */
@@ -205,6 +209,27 @@ message Shard {
   vitess.topodata.dev.Shard shard = 3;
 }
 
+enum ShardedAutoIncrementHandling {
+  LEAVE = 0;
+  REMOVE = 1;
+  REPLACE = 2;
+}
+
+message WorkflowOptions {
+  string tenant_id = 1;
+  // Remove auto_increment clauses on tables when moving them to a sharded
+  // keyspace and optionally replace them with vschema AutoIncrement
+  // definitions.
+  ShardedAutoIncrementHandling sharded_auto_increment_handling = 2;
+  // Shards on which vreplication streams in the target keyspace are created for this workflow and to which the data
+  // from the source will be vreplicated.
+  repeated string shards = 3;
+  map<string, string> config = 4;
+  // Where to create any related schema and vschema objects such as
+  // sequence tables.
+  string global_keyspace = 5;
+}
+
 // TODO: comment the hell out of this.
 message Workflow {
   string name = 1;
@@ -222,6 +247,9 @@ message Workflow {
   int64 max_v_replication_transaction_lag = 8;
   // This specifies whether to defer the creation of secondary keys.
   bool defer_secondary_keys = 9;
+  // These are additional (optional) settings for vreplication workflows. Previously we used to add it to the
+  // binlogdata.BinlogSource proto object. More details in go/vt/sidecardb/schema/vreplication.sql.
+  WorkflowOptions options = 10;
 
   message ReplicationLocation {
     string keyspace = 1;
@@ -260,10 +288,14 @@ message Workflow {
     repeated string tags = 15;
     int64 rows_copied = 16;
     ThrottlerStatus throttler_status = 17;
+    repeated vitess.topodata.dev.TabletType tablet_types = 18;
+    vitess.tabletmanagerdata.dev.TabletSelectionPreference tablet_selection_preference = 19;
+    repeated string cells = 20;
 
     message CopyState {
       string table = 1;
       string last_pk = 2;
+      int64 stream_id = 3;
     }
 
     message Log {
@@ -303,6 +335,24 @@ message AddCellsAliasRequest {
 message AddCellsAliasResponse {
 }
 
+
+message ApplyKeyspaceRoutingRulesRequest {
+  vitess.vschema.dev.KeyspaceRoutingRules keyspace_routing_rules = 1;
+  // SkipRebuild, if set, will cause ApplyKeyspaceRoutingRules to skip rebuilding the
+  // SrvVSchema objects in each cell in RebuildCells.
+  bool skip_rebuild = 2;
+  // RebuildCells limits the SrvVSchema rebuild to the specified cells. If not
+  // provided the SrvVSchema will be rebuilt in every cell in the topology.
+  //
+  // Ignored if SkipRebuild is set.
+  repeated string rebuild_cells = 3;
+}
+
+message ApplyKeyspaceRoutingRulesResponse {
+  // KeyspaceRoutingRules returns the current set of rules.
+  vitess.vschema.dev.KeyspaceRoutingRules keyspace_routing_rules = 1;
+}
+
 message ApplyRoutingRulesRequest {
   vitess.vschema.dev.RoutingRules routing_rules = 1;
   // SkipRebuild, if set, will cause ApplyRoutingRules to skip rebuilding the
@@ -332,6 +382,8 @@ message ApplyShardRoutingRulesRequest {
 
 message ApplyShardRoutingRulesResponse {
 }
+
+
 
 message ApplySchemaRequest {
   string keyspace = 1;
@@ -370,10 +422,25 @@ message ApplyVSchemaRequest {
   repeated string cells = 4;
   vitess.vschema.dev.Keyspace v_schema = 5;
   string sql = 6;
+  // Strict returns an error if there are unknown vindex params.
+  bool strict = 7;
 }
 
 message ApplyVSchemaResponse {
   vitess.vschema.dev.Keyspace v_schema = 1;
+  // UnknownVindexParams is a map of vindex name to params that were not recognized by the vindex
+  // type. E.g.:
+  //
+  // {
+  //   "lookup_vdx": {
+  //     "params": ["raed_lock", "not_verify"]
+  //   }
+  // }
+  map<string, ParamList> unknown_vindex_params = 2;
+
+  message ParamList {
+    repeated string params = 1;
+  }
 }
 
 message BackupRequest {
@@ -385,13 +452,15 @@ message BackupRequest {
   bool allow_primary = 2;
   // Concurrency specifies the number of compression/checksum jobs to run
   // simultaneously.
-  uint64 concurrency = 3;
+  int32 concurrency = 3;
   // IncrementalFromPos indicates a position of a previous backup. When this value is non-empty
   // then the backup becomes incremental and applies as of given position.
   string incremental_from_pos = 4;
   // UpgradeSafe indicates if the backup should be taken with innodb_fast_shutdown=0
   // so that it's a backup that can be used for an upgrade.
   bool upgrade_safe = 5;
+  // BackupEngine specifies if we want to use a particular backup engine for this backup request
+  optional string backup_engine = 6;
 }
 
 message BackupResponse {
@@ -410,7 +479,7 @@ message BackupShardRequest {
   bool allow_primary = 3;
   // Concurrency specifies the number of compression/checksum jobs to run
   // simultaneously.
-  uint64 concurrency = 4;
+  int32 concurrency = 4;
   // UpgradeSafe indicates if the backup should be taken with innodb_fast_shutdown=0
   // so that it's a backup that can be used for an upgrade.
   bool upgrade_safe = 5;
@@ -428,6 +497,17 @@ message CancelSchemaMigrationResponse {
   map<string, uint64> rows_affected_by_shard = 1;
 }
 
+message ChangeTabletTagsRequest {
+  vitess.topodata.dev.TabletAlias tablet_alias = 1;
+  map<string, string> tags = 2;
+  bool replace = 3;
+}
+
+message ChangeTabletTagsResponse {
+  map<string, string> before_tags = 1;
+  map<string, string> after_tags = 2;
+}
+
 message ChangeTabletTypeRequest {
   vitess.topodata.dev.TabletAlias tablet_alias = 1;
   vitess.topodata.dev.TabletType db_type = 2;
@@ -440,6 +520,24 @@ message ChangeTabletTypeResponse {
   bool was_dry_run = 3;
 }
 
+message CheckThrottlerRequest {
+  vitess.topodata.dev.TabletAlias tablet_alias = 1;
+
+  string app_name = 2;
+
+  string scope = 3;
+  // SkipRequestHeartbeats ensures this check does not renew heartbeat lease
+  bool skip_request_heartbeats = 4;
+  // OKIfNotExists asks the throttler to return OK even if the metric does not exist
+  bool ok_if_not_exists = 5;
+}
+
+message CheckThrottlerResponse {
+  vitess.topodata.dev.TabletAlias tablet_alias = 1;
+
+  vitess.tabletmanagerdata.dev.CheckThrottlerResponse Check = 2;
+}
+
 message CleanupSchemaMigrationRequest {
   string keyspace = 1;
   string uuid = 2;
@@ -448,7 +546,6 @@ message CleanupSchemaMigrationRequest {
 message CleanupSchemaMigrationResponse {
   map<string, uint64> rows_affected_by_shard = 1;
 }
-
 
 message CompleteSchemaMigrationRequest {
   string keyspace = 1;
@@ -473,9 +570,8 @@ message CreateKeyspaceRequest {
   // OBSOLETE topodata.KeyspaceIdType sharding_column_type = 5;
   reserved 5;
 
-  // ServedFroms specifies a set of db_type:keyspace pairs used to serve
-  // traffic for the keyspace.
-  repeated vitess.topodata.dev.Keyspace.ServedFrom served_froms = 6;
+  // OBSOLETE: repeated topodata.Keyspace.ServedFrom served_froms = 6;
+  reserved 6;
 
   // Type is the type of the keyspace to create.
   vitess.topodata.dev.KeyspaceType type = 7;
@@ -611,6 +707,9 @@ message EmergencyReparentShardRequest {
   // WaitForAllTablets makes ERS wait for a response from all the tablets before proceeding.
   // Useful when all the tablets are up and reachable.
   bool wait_for_all_tablets = 7;
+  // ExpectedPrimary is the optional alias we expect to be the current primary in order for
+  // the reparent operation to succeed.
+  vitess.topodata.dev.TabletAlias expected_primary = 8;
 }
 
 message EmergencyReparentShardResponse {
@@ -675,12 +774,44 @@ message ExecuteHookResponse {
   vitess.tabletmanagerdata.dev.ExecuteHookResponse hook_result = 1;
 }
 
+message ExecuteMultiFetchAsDBARequest {
+  vitess.topodata.dev.TabletAlias tablet_alias = 1;
+  // SQL could have potentially multiple queries separated by semicolons.
+  string sql = 2;
+  // MaxRows is an optional parameter to limit the number of rows read into the
+  // QueryResult. Note that this does not apply a LIMIT to a query, just how
+  // many rows are read from the MySQL server on the tablet side.
+  //
+  // This field is optional. Specifying a non-positive value will use whatever
+  // default is configured in the VtctldService.
+  int64 max_rows = 3;
+  // DisableBinlogs instructs the tablet not to use binary logging when
+  // executing the query.
+  bool disable_binlogs = 4;
+  // ReloadSchema instructs the tablet to reload its schema after executing the
+  // query.
+  bool reload_schema = 5;
+}
+
+message ExecuteMultiFetchAsDBAResponse {
+  repeated vitess.query.dev.QueryResult results = 1;
+}
+
 message FindAllShardsInKeyspaceRequest {
   string keyspace = 1;
 }
 
 message FindAllShardsInKeyspaceResponse {
   map<string, Shard> shards = 1;
+}
+
+message ForceCutOverSchemaMigrationRequest {
+  string keyspace = 1;
+  string uuid = 2;
+}
+
+message ForceCutOverSchemaMigrationResponse {
+  map<string, uint64> rows_affected_by_shard = 1;
 }
 
 message GetBackupsRequest {
@@ -759,6 +890,13 @@ message GetPermissionsResponse {
   vitess.tabletmanagerdata.dev.Permissions permissions = 1;
 }
 
+message GetKeyspaceRoutingRulesRequest {
+}
+
+message GetKeyspaceRoutingRulesResponse {
+  vitess.vschema.dev.KeyspaceRoutingRules keyspace_routing_rules = 1;
+}
+
 message GetRoutingRulesRequest {
 }
 
@@ -827,6 +965,18 @@ message GetSchemaMigrationsResponse {
   repeated SchemaMigration migrations = 1;
 }
 
+message GetShardReplicationRequest {
+  string keyspace = 1;
+  string shard = 2;
+  // Cells is the list of cells to fetch data for. Omit to fetch data from all
+  // cells.
+  repeated string cells = 3;
+}
+
+message GetShardReplicationResponse {
+  map<string, vitess.topodata.dev.ShardReplication> shard_replication_by_cell = 1;
+}
+
 message GetShardRequest {
   string keyspace = 1;
   string shard_name = 2;
@@ -886,6 +1036,13 @@ message UpdateThrottlerConfigRequest {
   bool check_as_check_shard = 8;
   // ThrottledApp indicates a single throttled app rule (ignored if name is empty)
   vitess.topodata.dev.ThrottledAppRule throttled_app = 9;
+  // MetricName is the name of the metric for which we apply a new threshold
+  string metric_name = 10;
+  // AppName is the name of the app for which we assign metrics
+  string app_name = 11;
+  // AppCheckedMetrics are the metrics to be checked got the given AppName. These can be scoped. For example:
+  // ["lag", "self/loadvg", "shard/threads_running"]
+  repeated string app_checked_metrics = 12;
 }
 
 message UpdateThrottlerConfigResponse {
@@ -945,8 +1102,19 @@ message GetTabletsResponse {
   repeated vitess.topodata.dev.Tablet tablets = 1;
 }
 
+message GetThrottlerStatusRequest {
+  // TabletAlias is the alias of the tablet to probe
+  vitess.topodata.dev.TabletAlias tablet_alias = 1;
+}
+
+message GetThrottlerStatusResponse {
+  vitess.tabletmanagerdata.dev.GetThrottlerStatusResponse status = 1;
+}
+
 message GetTopologyPathRequest {
   string path = 1;
+  int64 version = 2;
+  bool as_json = 3;
 }
 
 message GetTopologyPathResponse {
@@ -960,6 +1128,42 @@ message TopologyCell {
   // It is only populated if the cell is a terminal node.
   string data = 3;
   repeated string children = 4;
+  int64 version = 5;
+}
+
+message GetUnresolvedTransactionsRequest {
+  string keyspace = 1;
+  int64 abandon_age = 2; // in seconds
+}
+
+message GetUnresolvedTransactionsResponse {
+  repeated vitess.query.dev.TransactionMetadata transactions = 1;
+}
+
+message GetTransactionInfoRequest {
+  string dtid = 1;
+}
+
+message ShardTransactionState {
+  string shard = 1;
+  string state = 2;
+  string message = 3;
+  int64 time_created = 4;
+  repeated string statements = 5;
+}
+
+message GetTransactionInfoResponse {
+  vitess.query.dev.TransactionMetadata metadata = 1;
+  repeated ShardTransactionState shard_states = 2;
+}
+
+
+message ConcludeTransactionRequest {
+  string dtid = 1;
+  repeated vitess.query.dev.Target participants = 2;
+}
+
+message ConcludeTransactionResponse {
 }
 
 message GetVSchemaRequest {
@@ -985,6 +1189,7 @@ message GetWorkflowsRequest {
   // If you only want a specific workflow then set this field.
   string workflow = 4;
   bool include_logs = 5;
+  repeated string shards = 6;
 }
 
 message GetWorkflowsResponse {
@@ -1155,6 +1360,7 @@ message MoveTablesCreateRequest {
   bool no_routing_rules = 18;
   // Run a single copy phase for the entire database.
   bool atomic_copy = 19;
+  WorkflowOptions workflow_options = 20;
 }
 
 message MoveTablesCreateResponse {
@@ -1174,6 +1380,7 @@ message MoveTablesCompleteRequest {
   bool keep_routing_rules = 5;
   bool rename_tables = 6;
   bool dry_run = 7;
+  repeated string shards = 8;
 }
 
 message MoveTablesCompleteResponse {
@@ -1215,6 +1422,11 @@ message PlannedReparentShardRequest {
   // acceptable for a tablet to be eligible for promotion when Vitess makes the choice of a new primary.
   // A value of 0 indicates that Vitess shouldn't consider the replication lag at all.
   vitess.vttime.dev.Duration tolerable_replication_lag = 6;
+  // AllowCrossCellPromotion allows cross cell promotion,
+  bool allow_cross_cell_promotion = 7;
+  // ExpectedPrimary is the optional alias we expect to be the current primary in order for
+  // the reparent operation to succeed.
+  vitess.topodata.dev.TabletAlias expected_primary = 8;
 }
 
 message PlannedReparentShardResponse {
@@ -1283,7 +1495,7 @@ message ReloadSchemaKeyspaceRequest {
   // Concurrency is the global concurrency across all shards in the keyspace
   // (so, at most this many tablets will be reloaded across the keyspace at any
   // given point).
-  uint32 concurrency = 4;
+  int32 concurrency = 4;
 }
 
 message ReloadSchemaKeyspaceResponse {
@@ -1296,7 +1508,7 @@ message ReloadSchemaShardRequest {
   string wait_position = 3;
   bool include_primary = 4;
   // Concurrency is the maximum number of tablets to reload at one time.
-  uint32 concurrency = 5;
+  int32 concurrency = 5;
 }
 
 message ReloadSchemaShardResponse {
@@ -1381,6 +1593,8 @@ message ReshardCreateRequest {
   bool defer_secondary_keys = 11;
   // Start the workflow after creating it.
   bool auto_start = 12;
+  WorkflowOptions workflow_options = 13;
+
 }
 
 message RestoreFromBackupRequest {
@@ -1397,6 +1611,8 @@ message RestoreFromBackupRequest {
   // RestoreToTimestamp, if given, requested an inremental restore up to (and excluding) the given timestamp.
   // RestoreToTimestamp and RestoreToPos are mutually exclusive.
   vitess.vttime.dev.Time restore_to_timestamp = 5;
+  // AllowedBackupEngines, if present will filter out any backups taken with engines not included in the list
+  repeated string allowed_backup_engines = 6;
 }
 
 message RestoreFromBackupResponse {
@@ -1429,19 +1645,6 @@ message SetKeyspaceDurabilityPolicyRequest {
 }
 
 message SetKeyspaceDurabilityPolicyResponse {
-  // Keyspace is the updated keyspace record.
-  vitess.topodata.dev.Keyspace keyspace = 1;
-}
-
-message SetKeyspaceServedFromRequest {
-  string keyspace = 1;
-  vitess.topodata.dev.TabletType tablet_type = 2;
-  repeated string cells = 3;
-  bool remove = 4;
-  string source_keyspace = 5;
-}
-
-message SetKeyspaceServedFromResponse {
   // Keyspace is the updated keyspace record.
   vitess.topodata.dev.Keyspace keyspace = 1;
 }
@@ -1711,25 +1914,86 @@ message ValidateVSchemaResponse {
 }
 
 message VDiffCreateRequest {
+  // The name of the workflow that we're diffing tables for.
   string workflow = 1;
+  // The keyspace where the vreplication workflow is running.
   string target_keyspace = 2;
+  // A unique identifier for the vdiff.
+  // If empty, a new UUID will be generated.
   string uuid = 3;
+  // The cells to look for source tablets in.
+  // If empty, all cells are used.
   repeated string source_cells = 4;
+  // The cells to look for target tablets in.
+  // If empty, all cells are used.
   repeated string target_cells = 5;
+  // The tablet types to use when searching for tablets to use when streaming
+  // results.
+  // A default value of "replica,rdonly,primary" is used by the tablet picker.
   repeated vitess.topodata.dev.TabletType tablet_types = 6;
+  // When performing source tablet selection, look for candidates in the type
+  // order as they are listed in the tablet_types value (or the default of
+  // "replica,rdonly,primary" that the tablet picker uses).
+  // The default is ANY (0) and you can use INORDER (1) to e.g. ensure that a
+  // primary tablet is only used if there are no available replica or rdonly
+  // tablets.
   vitess.tabletmanagerdata.dev.TabletSelectionPreference tablet_selection_preference = 7;
+  // The tables to compare. If empty, all tables in the workflow are compared.
   repeated string tables = 8;
+  // The maximum number of rows to compare for each table on each shard.
+  // The default is a max int64 value: 2^63 - 1 or 9,223,372,036,854,775,807.
   int64 limit = 9;
+  // How long to wait for the relevant vreplication stream(s) to catch up when
+  // attempting to setup the table snapshots on the source and target to use for
+  // the diff on each shard.
+  // The default is 30s.
   vitess.vttime.dev.Duration filtered_replication_wait_time = 10;
+  // Include the MySQL query used for the diff in the report that is stored on
+  // each shard primary tablet in the _vt.vdiff_table records.
   bool debug_query = 11;
+  // Only show the Primary Key columns in any row diff output. You would
+  // typically want to use this if you set the max_sample_rows very high.
   bool only_p_ks = 12;
+  // Update the table statistics, using ANALYZE TABLE, on each table involved
+  // in the vdiff during initialization on each target shard. This will ensure
+  // that progress estimates are as accurate as possible -- but it does involve
+  // locks and can potentially impact query processing on the target keyspace.
   bool update_table_stats = 13;
+  // If there are collation differences between the source and target, you can
+  // have rows that are identical but simply returned in a different order from
+  // MySQL. We will do a second pass to compare the rows for any actual
+  // differences in this case and this flag allows you to control the resources
+  // used for this operation.
+  // The default is 0, comparing no extra rows.
   int64 max_extra_rows_to_compare = 14;
+  // Wait for the vdiff to complete before returning (making the call synchronous
+  // vs asynchronous by default).
   bool wait = 15;
+  // When wait is true, this is how frequently the vdiff progress will be shown.
   vitess.vttime.dev.Duration wait_update_interval = 16;
+  // Automatically retry the vdiff if we encounter an error. This should almost
+  // always be set to true (default is false).
   bool auto_retry = 17;
+  // Include additional information in the vdiff report that is produced and
+  // stored on each target shard primary's _vt sidecar database.
   bool verbose = 18;
+  // The maximum number of rows to include in the row diff report (when
+  // differences are found) for each table on each shard.
+  // The default is 0, which will include no sample rows that differed.
   int64 max_report_sample_rows = 19;
+  // The maximum time that a diff of a single table can run on each target shard
+  // before it is stopped and then later resumed from where we left off. This
+  // can be helpful in limiting the impact of holding open that large transaction
+  // where we scan up to every row in the table.
+  // The default is 0 or no limit.
+  vitess.vttime.dev.Duration max_diff_duration = 20;
+  // At what length should we truncate the column values in the row diff report
+  // generated for each table on each shard when differences are detected.
+  // The default is 0, meaning do not truncate.
+  int64 row_diff_column_truncate_at = 21;
+  // Auto start the vdiff after creating it.
+  // The default is true if no value is specified.
+  optional bool auto_start = 22;
 }
 
 message VDiffCreateResponse {
@@ -1752,6 +2016,7 @@ message VDiffResumeRequest {
   string workflow = 1;
   string target_keyspace = 2;
   string uuid = 3;
+  repeated string target_shards = 4;
 }
 
 message VDiffResumeResponse {
@@ -1773,6 +2038,7 @@ message VDiffStopRequest {
   string workflow = 1;
   string target_keyspace = 2;
   string uuid = 3;
+  repeated string target_shards = 4;
 }
 
 message VDiffStopResponse {
@@ -1783,6 +2049,11 @@ message WorkflowDeleteRequest {
   string workflow = 2;
   bool keep_data = 3;
   bool keep_routing_rules = 4;
+  repeated string shards = 5;
+  // The max records to delete from the moved tables when cleaning
+  // up the migrated data. This is only used with multi-tenant
+  // MoveTables migrations.
+  int64 delete_batch_size = 6;
 }
 
 message WorkflowDeleteResponse {
@@ -1798,6 +2069,7 @@ message WorkflowDeleteResponse {
 message WorkflowStatusRequest {
   string keyspace = 1;
   string workflow = 2;
+  repeated string shards = 3;
 }
 
 message WorkflowStatusResponse {
@@ -1837,6 +2109,8 @@ message WorkflowSwitchTrafficRequest {
   vitess.vttime.dev.Duration timeout = 8;
   bool dry_run = 9;
   bool initialize_target_sequences = 10;
+  repeated string shards = 11;
+  bool force = 12;
 }
 
 message WorkflowSwitchTrafficResponse {
@@ -1862,4 +2136,24 @@ message WorkflowUpdateResponse {
   }
   string summary = 1;
   repeated TabletInfo details = 2;
+}
+
+message GetMirrorRulesRequest {
+}
+
+message GetMirrorRulesResponse {
+  vitess.vschema.dev.MirrorRules mirror_rules = 1;
+}
+
+message WorkflowMirrorTrafficRequest {
+  string keyspace = 1;
+  string workflow = 2;
+  repeated vitess.topodata.dev.TabletType tablet_types = 3;
+  float percent = 4;
+}
+
+message WorkflowMirrorTrafficResponse {
+  string summary = 1;
+  string start_state = 2;
+  string current_state = 3;
 }

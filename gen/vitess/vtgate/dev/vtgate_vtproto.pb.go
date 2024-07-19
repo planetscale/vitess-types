@@ -55,6 +55,16 @@ func (m *Session_ShardSession) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.RowsAffected {
+		i--
+		if m.RowsAffected {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x30
+	}
 	if m.VindexOnly {
 		i--
 		if m.VindexOnly {
@@ -1210,6 +1220,26 @@ func (m *VStreamFlags) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.IncludeReshardJournalEvents {
+		i--
+		if m.IncludeReshardJournalEvents {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x40
+	}
+	if m.StreamKeyspaceHeartbeats {
+		i--
+		if m.StreamKeyspaceHeartbeats {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x38
+	}
 	if len(m.TabletOrder) > 0 {
 		i -= len(m.TabletOrder)
 		copy(dAtA[i:], m.TabletOrder)
@@ -1772,6 +1802,9 @@ func (m *Session_ShardSession) SizeVT() (n int) {
 	if m.VindexOnly {
 		n += 2
 	}
+	if m.RowsAffected {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -2230,6 +2263,12 @@ func (m *VStreamFlags) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + sov(uint64(l))
 	}
+	if m.StreamKeyspaceHeartbeats {
+		n += 2
+	}
+	if m.IncludeReshardJournalEvents {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -2598,6 +2637,26 @@ func (m *Session_ShardSession) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.VindexOnly = bool(v != 0)
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RowsAffected", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.RowsAffected = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skip(dAtA[iNdEx:])
@@ -5371,6 +5430,46 @@ func (m *VStreamFlags) UnmarshalVT(dAtA []byte) error {
 			}
 			m.TabletOrder = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamKeyspaceHeartbeats", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.StreamKeyspaceHeartbeats = bool(v != 0)
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field IncludeReshardJournalEvents", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.IncludeReshardJournalEvents = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skip(dAtA[iNdEx:])

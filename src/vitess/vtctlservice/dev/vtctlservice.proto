@@ -45,6 +45,8 @@ service Vtctld {
   rpc ApplyRoutingRules(vitess.vtctldata.dev.ApplyRoutingRulesRequest) returns (vitess.vtctldata.dev.ApplyRoutingRulesResponse) {};
   // ApplySchema applies a schema to a keyspace.
   rpc ApplySchema(vitess.vtctldata.dev.ApplySchemaRequest) returns (vitess.vtctldata.dev.ApplySchemaResponse) {};
+  // ApplyKeyspaceRoutingRules applies the VSchema keyspace routing rules.
+  rpc ApplyKeyspaceRoutingRules(vitess.vtctldata.dev.ApplyKeyspaceRoutingRulesRequest) returns (vitess.vtctldata.dev.ApplyKeyspaceRoutingRulesResponse) {};
   // ApplyShardRoutingRules applies the VSchema shard routing rules.
   rpc ApplyShardRoutingRules(vitess.vtctldata.dev.ApplyShardRoutingRulesRequest) returns (vitess.vtctldata.dev.ApplyShardRoutingRulesResponse) {};
   // ApplyVSchema applies a vschema to a keyspace.
@@ -54,18 +56,24 @@ service Vtctld {
   rpc Backup(vitess.vtctldata.dev.BackupRequest) returns (stream vitess.vtctldata.dev.BackupResponse) {};
   // BackupShard chooses a tablet in the shard and uses it to create a backup.
   rpc BackupShard(vitess.vtctldata.dev.BackupShardRequest) returns (stream vitess.vtctldata.dev.BackupResponse) {};
-  // CancelSchemaMigration cancels one or all migrations, terminating any runnign ones as needed.
+  // CancelSchemaMigration cancels one or all migrations, terminating any running ones as needed.
   rpc CancelSchemaMigration(vitess.vtctldata.dev.CancelSchemaMigrationRequest) returns (vitess.vtctldata.dev.CancelSchemaMigrationResponse) {};
+  // ChangeTabletTags changes the tags of the specified tablet, if possible.
+  rpc ChangeTabletTags(vitess.vtctldata.dev.ChangeTabletTagsRequest) returns (vitess.vtctldata.dev.ChangeTabletTagsResponse) {};
   // ChangeTabletType changes the db type for the specified tablet, if possible.
   // This is used primarily to arrange replicas, and it will not convert a
   // primary. For that, use InitShardPrimary.
   //
   // NOTE: This command automatically updates the serving graph.
   rpc ChangeTabletType(vitess.vtctldata.dev.ChangeTabletTypeRequest) returns (vitess.vtctldata.dev.ChangeTabletTypeResponse) {};
+  // CheckThrottler issues a 'check' on a tablet's throttler
+  rpc CheckThrottler(vitess.vtctldata.dev.CheckThrottlerRequest) returns (vitess.vtctldata.dev.CheckThrottlerResponse) {};
   // CleanupSchemaMigration marks a schema migration as ready for artifact cleanup.
   rpc CleanupSchemaMigration(vitess.vtctldata.dev.CleanupSchemaMigrationRequest) returns (vitess.vtctldata.dev.CleanupSchemaMigrationResponse) {};
   // CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
   rpc CompleteSchemaMigration(vitess.vtctldata.dev.CompleteSchemaMigrationRequest) returns (vitess.vtctldata.dev.CompleteSchemaMigrationResponse) {};
+  // CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
+  rpc ConcludeTransaction(vitess.vtctldata.dev.ConcludeTransactionRequest) returns (vitess.vtctldata.dev.ConcludeTransactionResponse) {};
   // CreateKeyspace creates the specified keyspace in the topology. For a
   // SNAPSHOT keyspace, the request must specify the name of a base keyspace,
   // as well as a snapshot time.
@@ -100,9 +108,13 @@ service Vtctld {
   rpc ExecuteFetchAsDBA(vitess.vtctldata.dev.ExecuteFetchAsDBARequest) returns (vitess.vtctldata.dev.ExecuteFetchAsDBAResponse) {};
   // ExecuteHook runs the hook on the tablet.
   rpc ExecuteHook(vitess.vtctldata.dev.ExecuteHookRequest) returns (vitess.vtctldata.dev.ExecuteHookResponse);
+  // ExecuteMultiFetchAsDBA executes one or more SQL queries on the remote tablet as the DBA user.
+  rpc ExecuteMultiFetchAsDBA(vitess.vtctldata.dev.ExecuteMultiFetchAsDBARequest) returns (vitess.vtctldata.dev.ExecuteMultiFetchAsDBAResponse) {};
   // FindAllShardsInKeyspace returns a map of shard names to shard references
   // for a given keyspace.
   rpc FindAllShardsInKeyspace(vitess.vtctldata.dev.FindAllShardsInKeyspaceRequest) returns (vitess.vtctldata.dev.FindAllShardsInKeyspaceResponse) {};
+  // ForceCutOverSchemaMigration marks a schema migration for forced cut-over.
+  rpc ForceCutOverSchemaMigration(vitess.vtctldata.dev.ForceCutOverSchemaMigrationRequest) returns (vitess.vtctldata.dev.ForceCutOverSchemaMigrationResponse) {};
   // GetBackups returns all the backups for a shard.
   rpc GetBackups(vitess.vtctldata.dev.GetBackupsRequest) returns (vitess.vtctldata.dev.GetBackupsResponse) {};
   // GetCellInfo returns the information for a cell.
@@ -119,6 +131,8 @@ service Vtctld {
   rpc GetKeyspace(vitess.vtctldata.dev.GetKeyspaceRequest) returns (vitess.vtctldata.dev.GetKeyspaceResponse) {};
   // GetKeyspaces returns the keyspace struct of all keyspaces in the topo.
   rpc GetKeyspaces(vitess.vtctldata.dev.GetKeyspacesRequest) returns (vitess.vtctldata.dev.GetKeyspacesResponse) {};
+  // GetKeyspaceRoutingRules returns the VSchema keyspace routing rules.
+  rpc GetKeyspaceRoutingRules(vitess.vtctldata.dev.GetKeyspaceRoutingRulesRequest) returns (vitess.vtctldata.dev.GetKeyspaceRoutingRulesResponse) {};
   // GetPermissions returns the permissions set on the remote tablet.
   rpc GetPermissions(vitess.vtctldata.dev.GetPermissionsRequest) returns (vitess.vtctldata.dev.GetPermissionsResponse) {};
   // GetRoutingRules returns the VSchema routing rules.
@@ -132,6 +146,8 @@ service Vtctld {
   // Different fields in the request message result in different filtering
   // behaviors. See the documentation on GetSchemaMigrationsRequest for details.
   rpc GetSchemaMigrations(vitess.vtctldata.dev.GetSchemaMigrationsRequest) returns (vitess.vtctldata.dev.GetSchemaMigrationsResponse) {};
+  // GetShardReplication returns the replication graph for a shard in a cell.
+  rpc GetShardReplication(vitess.vtctldata.dev.GetShardReplicationRequest) returns (vitess.vtctldata.dev.GetShardReplicationResponse) {};
   // GetShard returns information about a shard in the topology.
   rpc GetShard(vitess.vtctldata.dev.GetShardRequest) returns (vitess.vtctldata.dev.GetShardResponse) {};
   // GetShardRoutingRules returns the VSchema shard routing rules.
@@ -153,8 +169,14 @@ service Vtctld {
   rpc GetTablet(vitess.vtctldata.dev.GetTabletRequest) returns (vitess.vtctldata.dev.GetTabletResponse) {};
   // GetTablets returns tablets, optionally filtered by keyspace and shard.
   rpc GetTablets(vitess.vtctldata.dev.GetTabletsRequest) returns (vitess.vtctldata.dev.GetTabletsResponse) {};
+  // GetThrottlerStatus gets the status of a tablet throttler
+  rpc GetThrottlerStatus(vitess.vtctldata.dev.GetThrottlerStatusRequest) returns (vitess.vtctldata.dev.GetThrottlerStatusResponse) {};
   // GetTopologyPath returns the topology cell at a given path.
   rpc GetTopologyPath(vitess.vtctldata.dev.GetTopologyPathRequest) returns (vitess.vtctldata.dev.GetTopologyPathResponse) {};
+  // GetTransactionInfo reads a given transactions information.
+  rpc GetTransactionInfo(vitess.vtctldata.dev.GetTransactionInfoRequest) returns (vitess.vtctldata.dev.GetTransactionInfoResponse) {};
+  // GetTransactions returns the unresolved transactions for the request.
+  rpc GetUnresolvedTransactions(vitess.vtctldata.dev.GetUnresolvedTransactionsRequest) returns (vitess.vtctldata.dev.GetUnresolvedTransactionsResponse) {};
   // GetVersion returns the version of a tablet from its debug vars.
   rpc GetVersion(vitess.vtctldata.dev.GetVersionRequest) returns (vitess.vtctldata.dev.GetVersionResponse) {};
   // GetVSchema returns the vschema for a keyspace.
@@ -350,4 +372,7 @@ service Vtctld {
   // WorkflowUpdate updates the configuration of a vreplication workflow
   // using the provided updated parameters.
   rpc WorkflowUpdate(vitess.vtctldata.dev.WorkflowUpdateRequest) returns (vitess.vtctldata.dev.WorkflowUpdateResponse) {};
+  // GetMirrorRules returns the VSchema routing rules.
+  rpc GetMirrorRules(vitess.vtctldata.dev.GetMirrorRulesRequest) returns (vitess.vtctldata.dev.GetMirrorRulesResponse) {};
+  rpc WorkflowMirrorTraffic(vitess.vtctldata.dev.WorkflowMirrorTrafficRequest) returns (vitess.vtctldata.dev.WorkflowMirrorTrafficResponse) {};
 }
