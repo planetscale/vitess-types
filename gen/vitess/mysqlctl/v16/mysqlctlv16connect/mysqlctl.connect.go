@@ -35,7 +35,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// MysqlCtlName is the fully-qualified name of the MysqlCtl service.
@@ -63,6 +63,16 @@ const (
 	MysqlCtlRefreshConfigProcedure = "/mysqlctl.MysqlCtl/RefreshConfig"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	mysqlCtlServiceDescriptor               = v16.File_vitess_mysqlctl_v16_mysqlctl_proto.Services().ByName("MysqlCtl")
+	mysqlCtlStartMethodDescriptor           = mysqlCtlServiceDescriptor.Methods().ByName("Start")
+	mysqlCtlShutdownMethodDescriptor        = mysqlCtlServiceDescriptor.Methods().ByName("Shutdown")
+	mysqlCtlRunMysqlUpgradeMethodDescriptor = mysqlCtlServiceDescriptor.Methods().ByName("RunMysqlUpgrade")
+	mysqlCtlReinitConfigMethodDescriptor    = mysqlCtlServiceDescriptor.Methods().ByName("ReinitConfig")
+	mysqlCtlRefreshConfigMethodDescriptor   = mysqlCtlServiceDescriptor.Methods().ByName("RefreshConfig")
+)
+
 // MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
 type MysqlCtlClient interface {
 	Start(context.Context, *connect.Request[v16.StartRequest]) (*connect.Response[v16.StartResponse], error)
@@ -85,27 +95,32 @@ func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...co
 		start: connect.NewClient[v16.StartRequest, v16.StartResponse](
 			httpClient,
 			baseURL+MysqlCtlStartProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlStartMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		shutdown: connect.NewClient[v16.ShutdownRequest, v16.ShutdownResponse](
 			httpClient,
 			baseURL+MysqlCtlShutdownProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		runMysqlUpgrade: connect.NewClient[v16.RunMysqlUpgradeRequest, v16.RunMysqlUpgradeResponse](
 			httpClient,
 			baseURL+MysqlCtlRunMysqlUpgradeProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		reinitConfig: connect.NewClient[v16.ReinitConfigRequest, v16.ReinitConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlReinitConfigProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		refreshConfig: connect.NewClient[v16.RefreshConfigRequest, v16.RefreshConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlRefreshConfigProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -162,27 +177,32 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 	mysqlCtlStartHandler := connect.NewUnaryHandler(
 		MysqlCtlStartProcedure,
 		svc.Start,
-		opts...,
+		connect.WithSchema(mysqlCtlStartMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlShutdownHandler := connect.NewUnaryHandler(
 		MysqlCtlShutdownProcedure,
 		svc.Shutdown,
-		opts...,
+		connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRunMysqlUpgradeHandler := connect.NewUnaryHandler(
 		MysqlCtlRunMysqlUpgradeProcedure,
 		svc.RunMysqlUpgrade,
-		opts...,
+		connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlReinitConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlReinitConfigProcedure,
 		svc.ReinitConfig,
-		opts...,
+		connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRefreshConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlRefreshConfigProcedure,
 		svc.RefreshConfig,
-		opts...,
+		connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {

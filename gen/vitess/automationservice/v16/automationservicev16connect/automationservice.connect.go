@@ -24,8 +24,8 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v16 "github.com/planetscale/vitess-types/gen/vitess/automation/v16"
-	_ "github.com/planetscale/vitess-types/gen/vitess/automationservice/v16"
+	v161 "github.com/planetscale/vitess-types/gen/vitess/automation/v16"
+	v16 "github.com/planetscale/vitess-types/gen/vitess/automationservice/v16"
 	http "net/http"
 	strings "strings"
 )
@@ -35,7 +35,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// AutomationName is the fully-qualified name of the Automation service.
@@ -58,13 +58,20 @@ const (
 	AutomationGetClusterOperationDetailsProcedure = "/automationservice.Automation/GetClusterOperationDetails"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	automationServiceDescriptor                          = v16.File_vitess_automationservice_v16_automationservice_proto.Services().ByName("Automation")
+	automationEnqueueClusterOperationMethodDescriptor    = automationServiceDescriptor.Methods().ByName("EnqueueClusterOperation")
+	automationGetClusterOperationDetailsMethodDescriptor = automationServiceDescriptor.Methods().ByName("GetClusterOperationDetails")
+)
+
 // AutomationClient is a client for the automationservice.Automation service.
 type AutomationClient interface {
 	// Start a cluster operation.
-	EnqueueClusterOperation(context.Context, *connect.Request[v16.EnqueueClusterOperationRequest]) (*connect.Response[v16.EnqueueClusterOperationResponse], error)
+	EnqueueClusterOperation(context.Context, *connect.Request[v161.EnqueueClusterOperationRequest]) (*connect.Response[v161.EnqueueClusterOperationResponse], error)
 	// TODO(mberlin): Polling this is bad. Implement a subscribe mechanism to wait for changes?
 	// Get all details of an active cluster operation.
-	GetClusterOperationDetails(context.Context, *connect.Request[v16.GetClusterOperationDetailsRequest]) (*connect.Response[v16.GetClusterOperationDetailsResponse], error)
+	GetClusterOperationDetails(context.Context, *connect.Request[v161.GetClusterOperationDetailsRequest]) (*connect.Response[v161.GetClusterOperationDetailsResponse], error)
 }
 
 // NewAutomationClient constructs a client for the automationservice.Automation service.
@@ -77,43 +84,45 @@ type AutomationClient interface {
 func NewAutomationClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AutomationClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &automationClient{
-		enqueueClusterOperation: connect.NewClient[v16.EnqueueClusterOperationRequest, v16.EnqueueClusterOperationResponse](
+		enqueueClusterOperation: connect.NewClient[v161.EnqueueClusterOperationRequest, v161.EnqueueClusterOperationResponse](
 			httpClient,
 			baseURL+AutomationEnqueueClusterOperationProcedure,
-			opts...,
+			connect.WithSchema(automationEnqueueClusterOperationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
-		getClusterOperationDetails: connect.NewClient[v16.GetClusterOperationDetailsRequest, v16.GetClusterOperationDetailsResponse](
+		getClusterOperationDetails: connect.NewClient[v161.GetClusterOperationDetailsRequest, v161.GetClusterOperationDetailsResponse](
 			httpClient,
 			baseURL+AutomationGetClusterOperationDetailsProcedure,
-			opts...,
+			connect.WithSchema(automationGetClusterOperationDetailsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
 
 // automationClient implements AutomationClient.
 type automationClient struct {
-	enqueueClusterOperation    *connect.Client[v16.EnqueueClusterOperationRequest, v16.EnqueueClusterOperationResponse]
-	getClusterOperationDetails *connect.Client[v16.GetClusterOperationDetailsRequest, v16.GetClusterOperationDetailsResponse]
+	enqueueClusterOperation    *connect.Client[v161.EnqueueClusterOperationRequest, v161.EnqueueClusterOperationResponse]
+	getClusterOperationDetails *connect.Client[v161.GetClusterOperationDetailsRequest, v161.GetClusterOperationDetailsResponse]
 }
 
 // EnqueueClusterOperation calls automationservice.Automation.EnqueueClusterOperation.
-func (c *automationClient) EnqueueClusterOperation(ctx context.Context, req *connect.Request[v16.EnqueueClusterOperationRequest]) (*connect.Response[v16.EnqueueClusterOperationResponse], error) {
+func (c *automationClient) EnqueueClusterOperation(ctx context.Context, req *connect.Request[v161.EnqueueClusterOperationRequest]) (*connect.Response[v161.EnqueueClusterOperationResponse], error) {
 	return c.enqueueClusterOperation.CallUnary(ctx, req)
 }
 
 // GetClusterOperationDetails calls
 // automationservice.Automation.GetClusterOperationDetails.
-func (c *automationClient) GetClusterOperationDetails(ctx context.Context, req *connect.Request[v16.GetClusterOperationDetailsRequest]) (*connect.Response[v16.GetClusterOperationDetailsResponse], error) {
+func (c *automationClient) GetClusterOperationDetails(ctx context.Context, req *connect.Request[v161.GetClusterOperationDetailsRequest]) (*connect.Response[v161.GetClusterOperationDetailsResponse], error) {
 	return c.getClusterOperationDetails.CallUnary(ctx, req)
 }
 
 // AutomationHandler is an implementation of the automationservice.Automation service.
 type AutomationHandler interface {
 	// Start a cluster operation.
-	EnqueueClusterOperation(context.Context, *connect.Request[v16.EnqueueClusterOperationRequest]) (*connect.Response[v16.EnqueueClusterOperationResponse], error)
+	EnqueueClusterOperation(context.Context, *connect.Request[v161.EnqueueClusterOperationRequest]) (*connect.Response[v161.EnqueueClusterOperationResponse], error)
 	// TODO(mberlin): Polling this is bad. Implement a subscribe mechanism to wait for changes?
 	// Get all details of an active cluster operation.
-	GetClusterOperationDetails(context.Context, *connect.Request[v16.GetClusterOperationDetailsRequest]) (*connect.Response[v16.GetClusterOperationDetailsResponse], error)
+	GetClusterOperationDetails(context.Context, *connect.Request[v161.GetClusterOperationDetailsRequest]) (*connect.Response[v161.GetClusterOperationDetailsResponse], error)
 }
 
 // NewAutomationHandler builds an HTTP handler from the service implementation. It returns the path
@@ -125,12 +134,14 @@ func NewAutomationHandler(svc AutomationHandler, opts ...connect.HandlerOption) 
 	automationEnqueueClusterOperationHandler := connect.NewUnaryHandler(
 		AutomationEnqueueClusterOperationProcedure,
 		svc.EnqueueClusterOperation,
-		opts...,
+		connect.WithSchema(automationEnqueueClusterOperationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	automationGetClusterOperationDetailsHandler := connect.NewUnaryHandler(
 		AutomationGetClusterOperationDetailsProcedure,
 		svc.GetClusterOperationDetails,
-		opts...,
+		connect.WithSchema(automationGetClusterOperationDetailsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/automationservice.Automation/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -147,10 +158,10 @@ func NewAutomationHandler(svc AutomationHandler, opts ...connect.HandlerOption) 
 // UnimplementedAutomationHandler returns CodeUnimplemented from all methods.
 type UnimplementedAutomationHandler struct{}
 
-func (UnimplementedAutomationHandler) EnqueueClusterOperation(context.Context, *connect.Request[v16.EnqueueClusterOperationRequest]) (*connect.Response[v16.EnqueueClusterOperationResponse], error) {
+func (UnimplementedAutomationHandler) EnqueueClusterOperation(context.Context, *connect.Request[v161.EnqueueClusterOperationRequest]) (*connect.Response[v161.EnqueueClusterOperationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("automationservice.Automation.EnqueueClusterOperation is not implemented"))
 }
 
-func (UnimplementedAutomationHandler) GetClusterOperationDetails(context.Context, *connect.Request[v16.GetClusterOperationDetailsRequest]) (*connect.Response[v16.GetClusterOperationDetailsResponse], error) {
+func (UnimplementedAutomationHandler) GetClusterOperationDetails(context.Context, *connect.Request[v161.GetClusterOperationDetailsRequest]) (*connect.Response[v161.GetClusterOperationDetailsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("automationservice.Automation.GetClusterOperationDetails is not implemented"))
 }

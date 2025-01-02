@@ -35,7 +35,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// MysqlCtlName is the fully-qualified name of the MysqlCtl service.
@@ -69,6 +69,22 @@ const (
 	MysqlCtlRefreshConfigProcedure = "/mysqlctl.MysqlCtl/RefreshConfig"
 	// MysqlCtlVersionStringProcedure is the fully-qualified name of the MysqlCtl's VersionString RPC.
 	MysqlCtlVersionStringProcedure = "/mysqlctl.MysqlCtl/VersionString"
+	// MysqlCtlHostMetricsProcedure is the fully-qualified name of the MysqlCtl's HostMetrics RPC.
+	MysqlCtlHostMetricsProcedure = "/mysqlctl.MysqlCtl/HostMetrics"
+)
+
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	mysqlCtlServiceDescriptor                         = dev.File_vitess_mysqlctl_dev_mysqlctl_proto.Services().ByName("MysqlCtl")
+	mysqlCtlStartMethodDescriptor                     = mysqlCtlServiceDescriptor.Methods().ByName("Start")
+	mysqlCtlShutdownMethodDescriptor                  = mysqlCtlServiceDescriptor.Methods().ByName("Shutdown")
+	mysqlCtlRunMysqlUpgradeMethodDescriptor           = mysqlCtlServiceDescriptor.Methods().ByName("RunMysqlUpgrade")
+	mysqlCtlApplyBinlogFileMethodDescriptor           = mysqlCtlServiceDescriptor.Methods().ByName("ApplyBinlogFile")
+	mysqlCtlReadBinlogFilesTimestampsMethodDescriptor = mysqlCtlServiceDescriptor.Methods().ByName("ReadBinlogFilesTimestamps")
+	mysqlCtlReinitConfigMethodDescriptor              = mysqlCtlServiceDescriptor.Methods().ByName("ReinitConfig")
+	mysqlCtlRefreshConfigMethodDescriptor             = mysqlCtlServiceDescriptor.Methods().ByName("RefreshConfig")
+	mysqlCtlVersionStringMethodDescriptor             = mysqlCtlServiceDescriptor.Methods().ByName("VersionString")
+	mysqlCtlHostMetricsMethodDescriptor               = mysqlCtlServiceDescriptor.Methods().ByName("HostMetrics")
 )
 
 // MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
@@ -81,6 +97,7 @@ type MysqlCtlClient interface {
 	ReinitConfig(context.Context, *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error)
 	RefreshConfig(context.Context, *connect.Request[dev.RefreshConfigRequest]) (*connect.Response[dev.RefreshConfigResponse], error)
 	VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error)
+	HostMetrics(context.Context, *connect.Request[dev.HostMetricsRequest]) (*connect.Response[dev.HostMetricsResponse], error)
 }
 
 // NewMysqlCtlClient constructs a client for the mysqlctl.MysqlCtl service. By default,
@@ -96,42 +113,56 @@ func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...co
 		start: connect.NewClient[dev.StartRequest, dev.StartResponse](
 			httpClient,
 			baseURL+MysqlCtlStartProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlStartMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		shutdown: connect.NewClient[dev.ShutdownRequest, dev.ShutdownResponse](
 			httpClient,
 			baseURL+MysqlCtlShutdownProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		runMysqlUpgrade: connect.NewClient[dev.RunMysqlUpgradeRequest, dev.RunMysqlUpgradeResponse](
 			httpClient,
 			baseURL+MysqlCtlRunMysqlUpgradeProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		applyBinlogFile: connect.NewClient[dev.ApplyBinlogFileRequest, dev.ApplyBinlogFileResponse](
 			httpClient,
 			baseURL+MysqlCtlApplyBinlogFileProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlApplyBinlogFileMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		readBinlogFilesTimestamps: connect.NewClient[dev.ReadBinlogFilesTimestampsRequest, dev.ReadBinlogFilesTimestampsResponse](
 			httpClient,
 			baseURL+MysqlCtlReadBinlogFilesTimestampsProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlReadBinlogFilesTimestampsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		reinitConfig: connect.NewClient[dev.ReinitConfigRequest, dev.ReinitConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlReinitConfigProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		refreshConfig: connect.NewClient[dev.RefreshConfigRequest, dev.RefreshConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlRefreshConfigProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		versionString: connect.NewClient[dev.VersionStringRequest, dev.VersionStringResponse](
 			httpClient,
 			baseURL+MysqlCtlVersionStringProcedure,
-			opts...,
+			connect.WithSchema(mysqlCtlVersionStringMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		hostMetrics: connect.NewClient[dev.HostMetricsRequest, dev.HostMetricsResponse](
+			httpClient,
+			baseURL+MysqlCtlHostMetricsProcedure,
+			connect.WithSchema(mysqlCtlHostMetricsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -146,6 +177,7 @@ type mysqlCtlClient struct {
 	reinitConfig              *connect.Client[dev.ReinitConfigRequest, dev.ReinitConfigResponse]
 	refreshConfig             *connect.Client[dev.RefreshConfigRequest, dev.RefreshConfigResponse]
 	versionString             *connect.Client[dev.VersionStringRequest, dev.VersionStringResponse]
+	hostMetrics               *connect.Client[dev.HostMetricsRequest, dev.HostMetricsResponse]
 }
 
 // Start calls mysqlctl.MysqlCtl.Start.
@@ -188,6 +220,11 @@ func (c *mysqlCtlClient) VersionString(ctx context.Context, req *connect.Request
 	return c.versionString.CallUnary(ctx, req)
 }
 
+// HostMetrics calls mysqlctl.MysqlCtl.HostMetrics.
+func (c *mysqlCtlClient) HostMetrics(ctx context.Context, req *connect.Request[dev.HostMetricsRequest]) (*connect.Response[dev.HostMetricsResponse], error) {
+	return c.hostMetrics.CallUnary(ctx, req)
+}
+
 // MysqlCtlHandler is an implementation of the mysqlctl.MysqlCtl service.
 type MysqlCtlHandler interface {
 	Start(context.Context, *connect.Request[dev.StartRequest]) (*connect.Response[dev.StartResponse], error)
@@ -198,6 +235,7 @@ type MysqlCtlHandler interface {
 	ReinitConfig(context.Context, *connect.Request[dev.ReinitConfigRequest]) (*connect.Response[dev.ReinitConfigResponse], error)
 	RefreshConfig(context.Context, *connect.Request[dev.RefreshConfigRequest]) (*connect.Response[dev.RefreshConfigResponse], error)
 	VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error)
+	HostMetrics(context.Context, *connect.Request[dev.HostMetricsRequest]) (*connect.Response[dev.HostMetricsResponse], error)
 }
 
 // NewMysqlCtlHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -209,42 +247,56 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 	mysqlCtlStartHandler := connect.NewUnaryHandler(
 		MysqlCtlStartProcedure,
 		svc.Start,
-		opts...,
+		connect.WithSchema(mysqlCtlStartMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlShutdownHandler := connect.NewUnaryHandler(
 		MysqlCtlShutdownProcedure,
 		svc.Shutdown,
-		opts...,
+		connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRunMysqlUpgradeHandler := connect.NewUnaryHandler(
 		MysqlCtlRunMysqlUpgradeProcedure,
 		svc.RunMysqlUpgrade,
-		opts...,
+		connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlApplyBinlogFileHandler := connect.NewUnaryHandler(
 		MysqlCtlApplyBinlogFileProcedure,
 		svc.ApplyBinlogFile,
-		opts...,
+		connect.WithSchema(mysqlCtlApplyBinlogFileMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlReadBinlogFilesTimestampsHandler := connect.NewUnaryHandler(
 		MysqlCtlReadBinlogFilesTimestampsProcedure,
 		svc.ReadBinlogFilesTimestamps,
-		opts...,
+		connect.WithSchema(mysqlCtlReadBinlogFilesTimestampsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlReinitConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlReinitConfigProcedure,
 		svc.ReinitConfig,
-		opts...,
+		connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRefreshConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlRefreshConfigProcedure,
 		svc.RefreshConfig,
-		opts...,
+		connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlVersionStringHandler := connect.NewUnaryHandler(
 		MysqlCtlVersionStringProcedure,
 		svc.VersionString,
-		opts...,
+		connect.WithSchema(mysqlCtlVersionStringMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	mysqlCtlHostMetricsHandler := connect.NewUnaryHandler(
+		MysqlCtlHostMetricsProcedure,
+		svc.HostMetrics,
+		connect.WithSchema(mysqlCtlHostMetricsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -264,6 +316,8 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 			mysqlCtlRefreshConfigHandler.ServeHTTP(w, r)
 		case MysqlCtlVersionStringProcedure:
 			mysqlCtlVersionStringHandler.ServeHTTP(w, r)
+		case MysqlCtlHostMetricsProcedure:
+			mysqlCtlHostMetricsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -303,4 +357,8 @@ func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect.Requ
 
 func (UnimplementedMysqlCtlHandler) VersionString(context.Context, *connect.Request[dev.VersionStringRequest]) (*connect.Response[dev.VersionStringResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.VersionString is not implemented"))
+}
+
+func (UnimplementedMysqlCtlHandler) HostMetrics(context.Context, *connect.Request[dev.HostMetricsRequest]) (*connect.Response[dev.HostMetricsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.HostMetrics is not implemented"))
 }
