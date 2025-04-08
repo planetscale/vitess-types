@@ -71,19 +71,6 @@ const (
 	MysqlCtlVersionStringProcedure = "/mysqlctl.MysqlCtl/VersionString"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	mysqlCtlServiceDescriptor                         = v19.File_vitess_mysqlctl_v19_mysqlctl_proto.Services().ByName("MysqlCtl")
-	mysqlCtlStartMethodDescriptor                     = mysqlCtlServiceDescriptor.Methods().ByName("Start")
-	mysqlCtlShutdownMethodDescriptor                  = mysqlCtlServiceDescriptor.Methods().ByName("Shutdown")
-	mysqlCtlRunMysqlUpgradeMethodDescriptor           = mysqlCtlServiceDescriptor.Methods().ByName("RunMysqlUpgrade")
-	mysqlCtlApplyBinlogFileMethodDescriptor           = mysqlCtlServiceDescriptor.Methods().ByName("ApplyBinlogFile")
-	mysqlCtlReadBinlogFilesTimestampsMethodDescriptor = mysqlCtlServiceDescriptor.Methods().ByName("ReadBinlogFilesTimestamps")
-	mysqlCtlReinitConfigMethodDescriptor              = mysqlCtlServiceDescriptor.Methods().ByName("ReinitConfig")
-	mysqlCtlRefreshConfigMethodDescriptor             = mysqlCtlServiceDescriptor.Methods().ByName("RefreshConfig")
-	mysqlCtlVersionStringMethodDescriptor             = mysqlCtlServiceDescriptor.Methods().ByName("VersionString")
-)
-
 // MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
 type MysqlCtlClient interface {
 	Start(context.Context, *connect.Request[v19.StartRequest]) (*connect.Response[v19.StartResponse], error)
@@ -105,53 +92,54 @@ type MysqlCtlClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewMysqlCtlClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) MysqlCtlClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	mysqlCtlMethods := v19.File_vitess_mysqlctl_v19_mysqlctl_proto.Services().ByName("MysqlCtl").Methods()
 	return &mysqlCtlClient{
 		start: connect.NewClient[v19.StartRequest, v19.StartResponse](
 			httpClient,
 			baseURL+MysqlCtlStartProcedure,
-			connect.WithSchema(mysqlCtlStartMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("Start")),
 			connect.WithClientOptions(opts...),
 		),
 		shutdown: connect.NewClient[v19.ShutdownRequest, v19.ShutdownResponse](
 			httpClient,
 			baseURL+MysqlCtlShutdownProcedure,
-			connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("Shutdown")),
 			connect.WithClientOptions(opts...),
 		),
 		runMysqlUpgrade: connect.NewClient[v19.RunMysqlUpgradeRequest, v19.RunMysqlUpgradeResponse](
 			httpClient,
 			baseURL+MysqlCtlRunMysqlUpgradeProcedure,
-			connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("RunMysqlUpgrade")),
 			connect.WithClientOptions(opts...),
 		),
 		applyBinlogFile: connect.NewClient[v19.ApplyBinlogFileRequest, v19.ApplyBinlogFileResponse](
 			httpClient,
 			baseURL+MysqlCtlApplyBinlogFileProcedure,
-			connect.WithSchema(mysqlCtlApplyBinlogFileMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("ApplyBinlogFile")),
 			connect.WithClientOptions(opts...),
 		),
 		readBinlogFilesTimestamps: connect.NewClient[v19.ReadBinlogFilesTimestampsRequest, v19.ReadBinlogFilesTimestampsResponse](
 			httpClient,
 			baseURL+MysqlCtlReadBinlogFilesTimestampsProcedure,
-			connect.WithSchema(mysqlCtlReadBinlogFilesTimestampsMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("ReadBinlogFilesTimestamps")),
 			connect.WithClientOptions(opts...),
 		),
 		reinitConfig: connect.NewClient[v19.ReinitConfigRequest, v19.ReinitConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlReinitConfigProcedure,
-			connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("ReinitConfig")),
 			connect.WithClientOptions(opts...),
 		),
 		refreshConfig: connect.NewClient[v19.RefreshConfigRequest, v19.RefreshConfigResponse](
 			httpClient,
 			baseURL+MysqlCtlRefreshConfigProcedure,
-			connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("RefreshConfig")),
 			connect.WithClientOptions(opts...),
 		),
 		versionString: connect.NewClient[v19.VersionStringRequest, v19.VersionStringResponse](
 			httpClient,
 			baseURL+MysqlCtlVersionStringProcedure,
-			connect.WithSchema(mysqlCtlVersionStringMethodDescriptor),
+			connect.WithSchema(mysqlCtlMethods.ByName("VersionString")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -227,52 +215,53 @@ type MysqlCtlHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	mysqlCtlMethods := v19.File_vitess_mysqlctl_v19_mysqlctl_proto.Services().ByName("MysqlCtl").Methods()
 	mysqlCtlStartHandler := connect.NewUnaryHandler(
 		MysqlCtlStartProcedure,
 		svc.Start,
-		connect.WithSchema(mysqlCtlStartMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("Start")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlShutdownHandler := connect.NewUnaryHandler(
 		MysqlCtlShutdownProcedure,
 		svc.Shutdown,
-		connect.WithSchema(mysqlCtlShutdownMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("Shutdown")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRunMysqlUpgradeHandler := connect.NewUnaryHandler(
 		MysqlCtlRunMysqlUpgradeProcedure,
 		svc.RunMysqlUpgrade,
-		connect.WithSchema(mysqlCtlRunMysqlUpgradeMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("RunMysqlUpgrade")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlApplyBinlogFileHandler := connect.NewUnaryHandler(
 		MysqlCtlApplyBinlogFileProcedure,
 		svc.ApplyBinlogFile,
-		connect.WithSchema(mysqlCtlApplyBinlogFileMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("ApplyBinlogFile")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlReadBinlogFilesTimestampsHandler := connect.NewUnaryHandler(
 		MysqlCtlReadBinlogFilesTimestampsProcedure,
 		svc.ReadBinlogFilesTimestamps,
-		connect.WithSchema(mysqlCtlReadBinlogFilesTimestampsMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("ReadBinlogFilesTimestamps")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlReinitConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlReinitConfigProcedure,
 		svc.ReinitConfig,
-		connect.WithSchema(mysqlCtlReinitConfigMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("ReinitConfig")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlRefreshConfigHandler := connect.NewUnaryHandler(
 		MysqlCtlRefreshConfigProcedure,
 		svc.RefreshConfig,
-		connect.WithSchema(mysqlCtlRefreshConfigMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("RefreshConfig")),
 		connect.WithHandlerOptions(opts...),
 	)
 	mysqlCtlVersionStringHandler := connect.NewUnaryHandler(
 		MysqlCtlVersionStringProcedure,
 		svc.VersionString,
-		connect.WithSchema(mysqlCtlVersionStringMethodDescriptor),
+		connect.WithSchema(mysqlCtlMethods.ByName("VersionString")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

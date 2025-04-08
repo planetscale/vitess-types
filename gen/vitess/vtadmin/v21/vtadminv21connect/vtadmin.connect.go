@@ -203,75 +203,6 @@ const (
 	VTAdminVTExplainProcedure = "/vtadmin.VTAdmin/VTExplain"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	vTAdminServiceDescriptor                              = v21.File_vitess_vtadmin_v21_vtadmin_proto.Services().ByName("VTAdmin")
-	vTAdminApplySchemaMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("ApplySchema")
-	vTAdminCancelSchemaMigrationMethodDescriptor          = vTAdminServiceDescriptor.Methods().ByName("CancelSchemaMigration")
-	vTAdminCleanupSchemaMigrationMethodDescriptor         = vTAdminServiceDescriptor.Methods().ByName("CleanupSchemaMigration")
-	vTAdminCompleteSchemaMigrationMethodDescriptor        = vTAdminServiceDescriptor.Methods().ByName("CompleteSchemaMigration")
-	vTAdminConcludeTransactionMethodDescriptor            = vTAdminServiceDescriptor.Methods().ByName("ConcludeTransaction")
-	vTAdminCreateKeyspaceMethodDescriptor                 = vTAdminServiceDescriptor.Methods().ByName("CreateKeyspace")
-	vTAdminCreateShardMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("CreateShard")
-	vTAdminDeleteKeyspaceMethodDescriptor                 = vTAdminServiceDescriptor.Methods().ByName("DeleteKeyspace")
-	vTAdminDeleteShardsMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("DeleteShards")
-	vTAdminDeleteTabletMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("DeleteTablet")
-	vTAdminEmergencyFailoverShardMethodDescriptor         = vTAdminServiceDescriptor.Methods().ByName("EmergencyFailoverShard")
-	vTAdminFindSchemaMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("FindSchema")
-	vTAdminGetBackupsMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("GetBackups")
-	vTAdminGetCellInfosMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("GetCellInfos")
-	vTAdminGetCellsAliasesMethodDescriptor                = vTAdminServiceDescriptor.Methods().ByName("GetCellsAliases")
-	vTAdminGetClustersMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("GetClusters")
-	vTAdminGetFullStatusMethodDescriptor                  = vTAdminServiceDescriptor.Methods().ByName("GetFullStatus")
-	vTAdminGetGatesMethodDescriptor                       = vTAdminServiceDescriptor.Methods().ByName("GetGates")
-	vTAdminGetKeyspaceMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("GetKeyspace")
-	vTAdminGetKeyspacesMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("GetKeyspaces")
-	vTAdminGetSchemaMethodDescriptor                      = vTAdminServiceDescriptor.Methods().ByName("GetSchema")
-	vTAdminGetSchemasMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("GetSchemas")
-	vTAdminGetSchemaMigrationsMethodDescriptor            = vTAdminServiceDescriptor.Methods().ByName("GetSchemaMigrations")
-	vTAdminGetShardReplicationPositionsMethodDescriptor   = vTAdminServiceDescriptor.Methods().ByName("GetShardReplicationPositions")
-	vTAdminGetSrvKeyspaceMethodDescriptor                 = vTAdminServiceDescriptor.Methods().ByName("GetSrvKeyspace")
-	vTAdminGetSrvKeyspacesMethodDescriptor                = vTAdminServiceDescriptor.Methods().ByName("GetSrvKeyspaces")
-	vTAdminGetSrvVSchemaMethodDescriptor                  = vTAdminServiceDescriptor.Methods().ByName("GetSrvVSchema")
-	vTAdminGetSrvVSchemasMethodDescriptor                 = vTAdminServiceDescriptor.Methods().ByName("GetSrvVSchemas")
-	vTAdminGetTabletMethodDescriptor                      = vTAdminServiceDescriptor.Methods().ByName("GetTablet")
-	vTAdminGetTabletsMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("GetTablets")
-	vTAdminGetTopologyPathMethodDescriptor                = vTAdminServiceDescriptor.Methods().ByName("GetTopologyPath")
-	vTAdminGetUnresolvedTransactionsMethodDescriptor      = vTAdminServiceDescriptor.Methods().ByName("GetUnresolvedTransactions")
-	vTAdminGetVSchemaMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("GetVSchema")
-	vTAdminGetVSchemasMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("GetVSchemas")
-	vTAdminGetVtctldsMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("GetVtctlds")
-	vTAdminGetWorkflowMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("GetWorkflow")
-	vTAdminGetWorkflowsMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("GetWorkflows")
-	vTAdminGetWorkflowStatusMethodDescriptor              = vTAdminServiceDescriptor.Methods().ByName("GetWorkflowStatus")
-	vTAdminStartWorkflowMethodDescriptor                  = vTAdminServiceDescriptor.Methods().ByName("StartWorkflow")
-	vTAdminStopWorkflowMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("StopWorkflow")
-	vTAdminLaunchSchemaMigrationMethodDescriptor          = vTAdminServiceDescriptor.Methods().ByName("LaunchSchemaMigration")
-	vTAdminMoveTablesCreateMethodDescriptor               = vTAdminServiceDescriptor.Methods().ByName("MoveTablesCreate")
-	vTAdminPingTabletMethodDescriptor                     = vTAdminServiceDescriptor.Methods().ByName("PingTablet")
-	vTAdminPlannedFailoverShardMethodDescriptor           = vTAdminServiceDescriptor.Methods().ByName("PlannedFailoverShard")
-	vTAdminRebuildKeyspaceGraphMethodDescriptor           = vTAdminServiceDescriptor.Methods().ByName("RebuildKeyspaceGraph")
-	vTAdminRefreshStateMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("RefreshState")
-	vTAdminRefreshTabletReplicationSourceMethodDescriptor = vTAdminServiceDescriptor.Methods().ByName("RefreshTabletReplicationSource")
-	vTAdminReloadSchemasMethodDescriptor                  = vTAdminServiceDescriptor.Methods().ByName("ReloadSchemas")
-	vTAdminReloadSchemaShardMethodDescriptor              = vTAdminServiceDescriptor.Methods().ByName("ReloadSchemaShard")
-	vTAdminRemoveKeyspaceCellMethodDescriptor             = vTAdminServiceDescriptor.Methods().ByName("RemoveKeyspaceCell")
-	vTAdminRetrySchemaMigrationMethodDescriptor           = vTAdminServiceDescriptor.Methods().ByName("RetrySchemaMigration")
-	vTAdminRunHealthCheckMethodDescriptor                 = vTAdminServiceDescriptor.Methods().ByName("RunHealthCheck")
-	vTAdminSetReadOnlyMethodDescriptor                    = vTAdminServiceDescriptor.Methods().ByName("SetReadOnly")
-	vTAdminSetReadWriteMethodDescriptor                   = vTAdminServiceDescriptor.Methods().ByName("SetReadWrite")
-	vTAdminStartReplicationMethodDescriptor               = vTAdminServiceDescriptor.Methods().ByName("StartReplication")
-	vTAdminStopReplicationMethodDescriptor                = vTAdminServiceDescriptor.Methods().ByName("StopReplication")
-	vTAdminTabletExternallyPromotedMethodDescriptor       = vTAdminServiceDescriptor.Methods().ByName("TabletExternallyPromoted")
-	vTAdminValidateMethodDescriptor                       = vTAdminServiceDescriptor.Methods().ByName("Validate")
-	vTAdminValidateKeyspaceMethodDescriptor               = vTAdminServiceDescriptor.Methods().ByName("ValidateKeyspace")
-	vTAdminValidateSchemaKeyspaceMethodDescriptor         = vTAdminServiceDescriptor.Methods().ByName("ValidateSchemaKeyspace")
-	vTAdminValidateShardMethodDescriptor                  = vTAdminServiceDescriptor.Methods().ByName("ValidateShard")
-	vTAdminValidateVersionKeyspaceMethodDescriptor        = vTAdminServiceDescriptor.Methods().ByName("ValidateVersionKeyspace")
-	vTAdminValidateVersionShardMethodDescriptor           = vTAdminServiceDescriptor.Methods().ByName("ValidateVersionShard")
-	vTAdminVTExplainMethodDescriptor                      = vTAdminServiceDescriptor.Methods().ByName("VTExplain")
-)
-
 // VTAdminClient is a client for the vtadmin.VTAdmin service.
 type VTAdminClient interface {
 	// ApplySchema applies a schema to a keyspace in the given cluster.
@@ -465,389 +396,390 @@ type VTAdminClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewVTAdminClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VTAdminClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	vTAdminMethods := v21.File_vitess_vtadmin_v21_vtadmin_proto.Services().ByName("VTAdmin").Methods()
 	return &vTAdminClient{
 		applySchema: connect.NewClient[v21.ApplySchemaRequest, v211.ApplySchemaResponse](
 			httpClient,
 			baseURL+VTAdminApplySchemaProcedure,
-			connect.WithSchema(vTAdminApplySchemaMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ApplySchema")),
 			connect.WithClientOptions(opts...),
 		),
 		cancelSchemaMigration: connect.NewClient[v21.CancelSchemaMigrationRequest, v211.CancelSchemaMigrationResponse](
 			httpClient,
 			baseURL+VTAdminCancelSchemaMigrationProcedure,
-			connect.WithSchema(vTAdminCancelSchemaMigrationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("CancelSchemaMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		cleanupSchemaMigration: connect.NewClient[v21.CleanupSchemaMigrationRequest, v211.CleanupSchemaMigrationResponse](
 			httpClient,
 			baseURL+VTAdminCleanupSchemaMigrationProcedure,
-			connect.WithSchema(vTAdminCleanupSchemaMigrationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("CleanupSchemaMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		completeSchemaMigration: connect.NewClient[v21.CompleteSchemaMigrationRequest, v211.CompleteSchemaMigrationResponse](
 			httpClient,
 			baseURL+VTAdminCompleteSchemaMigrationProcedure,
-			connect.WithSchema(vTAdminCompleteSchemaMigrationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("CompleteSchemaMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		concludeTransaction: connect.NewClient[v21.ConcludeTransactionRequest, v211.ConcludeTransactionResponse](
 			httpClient,
 			baseURL+VTAdminConcludeTransactionProcedure,
-			connect.WithSchema(vTAdminConcludeTransactionMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ConcludeTransaction")),
 			connect.WithClientOptions(opts...),
 		),
 		createKeyspace: connect.NewClient[v21.CreateKeyspaceRequest, v21.CreateKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminCreateKeyspaceProcedure,
-			connect.WithSchema(vTAdminCreateKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("CreateKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		createShard: connect.NewClient[v21.CreateShardRequest, v211.CreateShardResponse](
 			httpClient,
 			baseURL+VTAdminCreateShardProcedure,
-			connect.WithSchema(vTAdminCreateShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("CreateShard")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteKeyspace: connect.NewClient[v21.DeleteKeyspaceRequest, v211.DeleteKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminDeleteKeyspaceProcedure,
-			connect.WithSchema(vTAdminDeleteKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("DeleteKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteShards: connect.NewClient[v21.DeleteShardsRequest, v211.DeleteShardsResponse](
 			httpClient,
 			baseURL+VTAdminDeleteShardsProcedure,
-			connect.WithSchema(vTAdminDeleteShardsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("DeleteShards")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteTablet: connect.NewClient[v21.DeleteTabletRequest, v21.DeleteTabletResponse](
 			httpClient,
 			baseURL+VTAdminDeleteTabletProcedure,
-			connect.WithSchema(vTAdminDeleteTabletMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("DeleteTablet")),
 			connect.WithClientOptions(opts...),
 		),
 		emergencyFailoverShard: connect.NewClient[v21.EmergencyFailoverShardRequest, v21.EmergencyFailoverShardResponse](
 			httpClient,
 			baseURL+VTAdminEmergencyFailoverShardProcedure,
-			connect.WithSchema(vTAdminEmergencyFailoverShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("EmergencyFailoverShard")),
 			connect.WithClientOptions(opts...),
 		),
 		findSchema: connect.NewClient[v21.FindSchemaRequest, v21.Schema](
 			httpClient,
 			baseURL+VTAdminFindSchemaProcedure,
-			connect.WithSchema(vTAdminFindSchemaMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("FindSchema")),
 			connect.WithClientOptions(opts...),
 		),
 		getBackups: connect.NewClient[v21.GetBackupsRequest, v21.GetBackupsResponse](
 			httpClient,
 			baseURL+VTAdminGetBackupsProcedure,
-			connect.WithSchema(vTAdminGetBackupsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetBackups")),
 			connect.WithClientOptions(opts...),
 		),
 		getCellInfos: connect.NewClient[v21.GetCellInfosRequest, v21.GetCellInfosResponse](
 			httpClient,
 			baseURL+VTAdminGetCellInfosProcedure,
-			connect.WithSchema(vTAdminGetCellInfosMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetCellInfos")),
 			connect.WithClientOptions(opts...),
 		),
 		getCellsAliases: connect.NewClient[v21.GetCellsAliasesRequest, v21.GetCellsAliasesResponse](
 			httpClient,
 			baseURL+VTAdminGetCellsAliasesProcedure,
-			connect.WithSchema(vTAdminGetCellsAliasesMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetCellsAliases")),
 			connect.WithClientOptions(opts...),
 		),
 		getClusters: connect.NewClient[v21.GetClustersRequest, v21.GetClustersResponse](
 			httpClient,
 			baseURL+VTAdminGetClustersProcedure,
-			connect.WithSchema(vTAdminGetClustersMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetClusters")),
 			connect.WithClientOptions(opts...),
 		),
 		getFullStatus: connect.NewClient[v21.GetFullStatusRequest, v211.GetFullStatusResponse](
 			httpClient,
 			baseURL+VTAdminGetFullStatusProcedure,
-			connect.WithSchema(vTAdminGetFullStatusMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetFullStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		getGates: connect.NewClient[v21.GetGatesRequest, v21.GetGatesResponse](
 			httpClient,
 			baseURL+VTAdminGetGatesProcedure,
-			connect.WithSchema(vTAdminGetGatesMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetGates")),
 			connect.WithClientOptions(opts...),
 		),
 		getKeyspace: connect.NewClient[v21.GetKeyspaceRequest, v21.Keyspace](
 			httpClient,
 			baseURL+VTAdminGetKeyspaceProcedure,
-			connect.WithSchema(vTAdminGetKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		getKeyspaces: connect.NewClient[v21.GetKeyspacesRequest, v21.GetKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetKeyspacesProcedure,
-			connect.WithSchema(vTAdminGetKeyspacesMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetKeyspaces")),
 			connect.WithClientOptions(opts...),
 		),
 		getSchema: connect.NewClient[v21.GetSchemaRequest, v21.Schema](
 			httpClient,
 			baseURL+VTAdminGetSchemaProcedure,
-			connect.WithSchema(vTAdminGetSchemaMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSchema")),
 			connect.WithClientOptions(opts...),
 		),
 		getSchemas: connect.NewClient[v21.GetSchemasRequest, v21.GetSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetSchemasProcedure,
-			connect.WithSchema(vTAdminGetSchemasMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSchemas")),
 			connect.WithClientOptions(opts...),
 		),
 		getSchemaMigrations: connect.NewClient[v21.GetSchemaMigrationsRequest, v21.GetSchemaMigrationsResponse](
 			httpClient,
 			baseURL+VTAdminGetSchemaMigrationsProcedure,
-			connect.WithSchema(vTAdminGetSchemaMigrationsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSchemaMigrations")),
 			connect.WithClientOptions(opts...),
 		),
 		getShardReplicationPositions: connect.NewClient[v21.GetShardReplicationPositionsRequest, v21.GetShardReplicationPositionsResponse](
 			httpClient,
 			baseURL+VTAdminGetShardReplicationPositionsProcedure,
-			connect.WithSchema(vTAdminGetShardReplicationPositionsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetShardReplicationPositions")),
 			connect.WithClientOptions(opts...),
 		),
 		getSrvKeyspace: connect.NewClient[v21.GetSrvKeyspaceRequest, v211.GetSrvKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvKeyspaceProcedure,
-			connect.WithSchema(vTAdminGetSrvKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSrvKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		getSrvKeyspaces: connect.NewClient[v21.GetSrvKeyspacesRequest, v21.GetSrvKeyspacesResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvKeyspacesProcedure,
-			connect.WithSchema(vTAdminGetSrvKeyspacesMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSrvKeyspaces")),
 			connect.WithClientOptions(opts...),
 		),
 		getSrvVSchema: connect.NewClient[v21.GetSrvVSchemaRequest, v21.SrvVSchema](
 			httpClient,
 			baseURL+VTAdminGetSrvVSchemaProcedure,
-			connect.WithSchema(vTAdminGetSrvVSchemaMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSrvVSchema")),
 			connect.WithClientOptions(opts...),
 		),
 		getSrvVSchemas: connect.NewClient[v21.GetSrvVSchemasRequest, v21.GetSrvVSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetSrvVSchemasProcedure,
-			connect.WithSchema(vTAdminGetSrvVSchemasMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetSrvVSchemas")),
 			connect.WithClientOptions(opts...),
 		),
 		getTablet: connect.NewClient[v21.GetTabletRequest, v21.Tablet](
 			httpClient,
 			baseURL+VTAdminGetTabletProcedure,
-			connect.WithSchema(vTAdminGetTabletMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetTablet")),
 			connect.WithClientOptions(opts...),
 		),
 		getTablets: connect.NewClient[v21.GetTabletsRequest, v21.GetTabletsResponse](
 			httpClient,
 			baseURL+VTAdminGetTabletsProcedure,
-			connect.WithSchema(vTAdminGetTabletsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetTablets")),
 			connect.WithClientOptions(opts...),
 		),
 		getTopologyPath: connect.NewClient[v21.GetTopologyPathRequest, v211.GetTopologyPathResponse](
 			httpClient,
 			baseURL+VTAdminGetTopologyPathProcedure,
-			connect.WithSchema(vTAdminGetTopologyPathMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetTopologyPath")),
 			connect.WithClientOptions(opts...),
 		),
 		getUnresolvedTransactions: connect.NewClient[v21.GetUnresolvedTransactionsRequest, v211.GetUnresolvedTransactionsResponse](
 			httpClient,
 			baseURL+VTAdminGetUnresolvedTransactionsProcedure,
-			connect.WithSchema(vTAdminGetUnresolvedTransactionsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetUnresolvedTransactions")),
 			connect.WithClientOptions(opts...),
 		),
 		getVSchema: connect.NewClient[v21.GetVSchemaRequest, v21.VSchema](
 			httpClient,
 			baseURL+VTAdminGetVSchemaProcedure,
-			connect.WithSchema(vTAdminGetVSchemaMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetVSchema")),
 			connect.WithClientOptions(opts...),
 		),
 		getVSchemas: connect.NewClient[v21.GetVSchemasRequest, v21.GetVSchemasResponse](
 			httpClient,
 			baseURL+VTAdminGetVSchemasProcedure,
-			connect.WithSchema(vTAdminGetVSchemasMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetVSchemas")),
 			connect.WithClientOptions(opts...),
 		),
 		getVtctlds: connect.NewClient[v21.GetVtctldsRequest, v21.GetVtctldsResponse](
 			httpClient,
 			baseURL+VTAdminGetVtctldsProcedure,
-			connect.WithSchema(vTAdminGetVtctldsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetVtctlds")),
 			connect.WithClientOptions(opts...),
 		),
 		getWorkflow: connect.NewClient[v21.GetWorkflowRequest, v21.Workflow](
 			httpClient,
 			baseURL+VTAdminGetWorkflowProcedure,
-			connect.WithSchema(vTAdminGetWorkflowMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetWorkflow")),
 			connect.WithClientOptions(opts...),
 		),
 		getWorkflows: connect.NewClient[v21.GetWorkflowsRequest, v21.GetWorkflowsResponse](
 			httpClient,
 			baseURL+VTAdminGetWorkflowsProcedure,
-			connect.WithSchema(vTAdminGetWorkflowsMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetWorkflows")),
 			connect.WithClientOptions(opts...),
 		),
 		getWorkflowStatus: connect.NewClient[v21.GetWorkflowStatusRequest, v211.WorkflowStatusResponse](
 			httpClient,
 			baseURL+VTAdminGetWorkflowStatusProcedure,
-			connect.WithSchema(vTAdminGetWorkflowStatusMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("GetWorkflowStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		startWorkflow: connect.NewClient[v21.StartWorkflowRequest, v211.WorkflowUpdateResponse](
 			httpClient,
 			baseURL+VTAdminStartWorkflowProcedure,
-			connect.WithSchema(vTAdminStartWorkflowMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("StartWorkflow")),
 			connect.WithClientOptions(opts...),
 		),
 		stopWorkflow: connect.NewClient[v21.StopWorkflowRequest, v211.WorkflowUpdateResponse](
 			httpClient,
 			baseURL+VTAdminStopWorkflowProcedure,
-			connect.WithSchema(vTAdminStopWorkflowMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("StopWorkflow")),
 			connect.WithClientOptions(opts...),
 		),
 		launchSchemaMigration: connect.NewClient[v21.LaunchSchemaMigrationRequest, v211.LaunchSchemaMigrationResponse](
 			httpClient,
 			baseURL+VTAdminLaunchSchemaMigrationProcedure,
-			connect.WithSchema(vTAdminLaunchSchemaMigrationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("LaunchSchemaMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		moveTablesCreate: connect.NewClient[v21.MoveTablesCreateRequest, v211.WorkflowStatusResponse](
 			httpClient,
 			baseURL+VTAdminMoveTablesCreateProcedure,
-			connect.WithSchema(vTAdminMoveTablesCreateMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("MoveTablesCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		pingTablet: connect.NewClient[v21.PingTabletRequest, v21.PingTabletResponse](
 			httpClient,
 			baseURL+VTAdminPingTabletProcedure,
-			connect.WithSchema(vTAdminPingTabletMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("PingTablet")),
 			connect.WithClientOptions(opts...),
 		),
 		plannedFailoverShard: connect.NewClient[v21.PlannedFailoverShardRequest, v21.PlannedFailoverShardResponse](
 			httpClient,
 			baseURL+VTAdminPlannedFailoverShardProcedure,
-			connect.WithSchema(vTAdminPlannedFailoverShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("PlannedFailoverShard")),
 			connect.WithClientOptions(opts...),
 		),
 		rebuildKeyspaceGraph: connect.NewClient[v21.RebuildKeyspaceGraphRequest, v21.RebuildKeyspaceGraphResponse](
 			httpClient,
 			baseURL+VTAdminRebuildKeyspaceGraphProcedure,
-			connect.WithSchema(vTAdminRebuildKeyspaceGraphMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RebuildKeyspaceGraph")),
 			connect.WithClientOptions(opts...),
 		),
 		refreshState: connect.NewClient[v21.RefreshStateRequest, v21.RefreshStateResponse](
 			httpClient,
 			baseURL+VTAdminRefreshStateProcedure,
-			connect.WithSchema(vTAdminRefreshStateMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RefreshState")),
 			connect.WithClientOptions(opts...),
 		),
 		refreshTabletReplicationSource: connect.NewClient[v21.RefreshTabletReplicationSourceRequest, v21.RefreshTabletReplicationSourceResponse](
 			httpClient,
 			baseURL+VTAdminRefreshTabletReplicationSourceProcedure,
-			connect.WithSchema(vTAdminRefreshTabletReplicationSourceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RefreshTabletReplicationSource")),
 			connect.WithClientOptions(opts...),
 		),
 		reloadSchemas: connect.NewClient[v21.ReloadSchemasRequest, v21.ReloadSchemasResponse](
 			httpClient,
 			baseURL+VTAdminReloadSchemasProcedure,
-			connect.WithSchema(vTAdminReloadSchemasMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ReloadSchemas")),
 			connect.WithClientOptions(opts...),
 		),
 		reloadSchemaShard: connect.NewClient[v21.ReloadSchemaShardRequest, v21.ReloadSchemaShardResponse](
 			httpClient,
 			baseURL+VTAdminReloadSchemaShardProcedure,
-			connect.WithSchema(vTAdminReloadSchemaShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ReloadSchemaShard")),
 			connect.WithClientOptions(opts...),
 		),
 		removeKeyspaceCell: connect.NewClient[v21.RemoveKeyspaceCellRequest, v21.RemoveKeyspaceCellResponse](
 			httpClient,
 			baseURL+VTAdminRemoveKeyspaceCellProcedure,
-			connect.WithSchema(vTAdminRemoveKeyspaceCellMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RemoveKeyspaceCell")),
 			connect.WithClientOptions(opts...),
 		),
 		retrySchemaMigration: connect.NewClient[v21.RetrySchemaMigrationRequest, v211.RetrySchemaMigrationResponse](
 			httpClient,
 			baseURL+VTAdminRetrySchemaMigrationProcedure,
-			connect.WithSchema(vTAdminRetrySchemaMigrationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RetrySchemaMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		runHealthCheck: connect.NewClient[v21.RunHealthCheckRequest, v21.RunHealthCheckResponse](
 			httpClient,
 			baseURL+VTAdminRunHealthCheckProcedure,
-			connect.WithSchema(vTAdminRunHealthCheckMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("RunHealthCheck")),
 			connect.WithClientOptions(opts...),
 		),
 		setReadOnly: connect.NewClient[v21.SetReadOnlyRequest, v21.SetReadOnlyResponse](
 			httpClient,
 			baseURL+VTAdminSetReadOnlyProcedure,
-			connect.WithSchema(vTAdminSetReadOnlyMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("SetReadOnly")),
 			connect.WithClientOptions(opts...),
 		),
 		setReadWrite: connect.NewClient[v21.SetReadWriteRequest, v21.SetReadWriteResponse](
 			httpClient,
 			baseURL+VTAdminSetReadWriteProcedure,
-			connect.WithSchema(vTAdminSetReadWriteMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("SetReadWrite")),
 			connect.WithClientOptions(opts...),
 		),
 		startReplication: connect.NewClient[v21.StartReplicationRequest, v21.StartReplicationResponse](
 			httpClient,
 			baseURL+VTAdminStartReplicationProcedure,
-			connect.WithSchema(vTAdminStartReplicationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("StartReplication")),
 			connect.WithClientOptions(opts...),
 		),
 		stopReplication: connect.NewClient[v21.StopReplicationRequest, v21.StopReplicationResponse](
 			httpClient,
 			baseURL+VTAdminStopReplicationProcedure,
-			connect.WithSchema(vTAdminStopReplicationMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("StopReplication")),
 			connect.WithClientOptions(opts...),
 		),
 		tabletExternallyPromoted: connect.NewClient[v21.TabletExternallyPromotedRequest, v21.TabletExternallyPromotedResponse](
 			httpClient,
 			baseURL+VTAdminTabletExternallyPromotedProcedure,
-			connect.WithSchema(vTAdminTabletExternallyPromotedMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("TabletExternallyPromoted")),
 			connect.WithClientOptions(opts...),
 		),
 		validate: connect.NewClient[v21.ValidateRequest, v211.ValidateResponse](
 			httpClient,
 			baseURL+VTAdminValidateProcedure,
-			connect.WithSchema(vTAdminValidateMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("Validate")),
 			connect.WithClientOptions(opts...),
 		),
 		validateKeyspace: connect.NewClient[v21.ValidateKeyspaceRequest, v211.ValidateKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateKeyspaceProcedure,
-			connect.WithSchema(vTAdminValidateKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ValidateKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		validateSchemaKeyspace: connect.NewClient[v21.ValidateSchemaKeyspaceRequest, v211.ValidateSchemaKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateSchemaKeyspaceProcedure,
-			connect.WithSchema(vTAdminValidateSchemaKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ValidateSchemaKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		validateShard: connect.NewClient[v21.ValidateShardRequest, v211.ValidateShardResponse](
 			httpClient,
 			baseURL+VTAdminValidateShardProcedure,
-			connect.WithSchema(vTAdminValidateShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ValidateShard")),
 			connect.WithClientOptions(opts...),
 		),
 		validateVersionKeyspace: connect.NewClient[v21.ValidateVersionKeyspaceRequest, v211.ValidateVersionKeyspaceResponse](
 			httpClient,
 			baseURL+VTAdminValidateVersionKeyspaceProcedure,
-			connect.WithSchema(vTAdminValidateVersionKeyspaceMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ValidateVersionKeyspace")),
 			connect.WithClientOptions(opts...),
 		),
 		validateVersionShard: connect.NewClient[v21.ValidateVersionShardRequest, v211.ValidateVersionShardResponse](
 			httpClient,
 			baseURL+VTAdminValidateVersionShardProcedure,
-			connect.WithSchema(vTAdminValidateVersionShardMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("ValidateVersionShard")),
 			connect.WithClientOptions(opts...),
 		),
 		vTExplain: connect.NewClient[v21.VTExplainRequest, v21.VTExplainResponse](
 			httpClient,
 			baseURL+VTAdminVTExplainProcedure,
-			connect.WithSchema(vTAdminVTExplainMethodDescriptor),
+			connect.WithSchema(vTAdminMethods.ByName("VTExplain")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -1431,388 +1363,389 @@ type VTAdminHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewVTAdminHandler(svc VTAdminHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	vTAdminMethods := v21.File_vitess_vtadmin_v21_vtadmin_proto.Services().ByName("VTAdmin").Methods()
 	vTAdminApplySchemaHandler := connect.NewUnaryHandler(
 		VTAdminApplySchemaProcedure,
 		svc.ApplySchema,
-		connect.WithSchema(vTAdminApplySchemaMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ApplySchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminCancelSchemaMigrationHandler := connect.NewUnaryHandler(
 		VTAdminCancelSchemaMigrationProcedure,
 		svc.CancelSchemaMigration,
-		connect.WithSchema(vTAdminCancelSchemaMigrationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("CancelSchemaMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminCleanupSchemaMigrationHandler := connect.NewUnaryHandler(
 		VTAdminCleanupSchemaMigrationProcedure,
 		svc.CleanupSchemaMigration,
-		connect.WithSchema(vTAdminCleanupSchemaMigrationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("CleanupSchemaMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminCompleteSchemaMigrationHandler := connect.NewUnaryHandler(
 		VTAdminCompleteSchemaMigrationProcedure,
 		svc.CompleteSchemaMigration,
-		connect.WithSchema(vTAdminCompleteSchemaMigrationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("CompleteSchemaMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminConcludeTransactionHandler := connect.NewUnaryHandler(
 		VTAdminConcludeTransactionProcedure,
 		svc.ConcludeTransaction,
-		connect.WithSchema(vTAdminConcludeTransactionMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ConcludeTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminCreateKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminCreateKeyspaceProcedure,
 		svc.CreateKeyspace,
-		connect.WithSchema(vTAdminCreateKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("CreateKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminCreateShardHandler := connect.NewUnaryHandler(
 		VTAdminCreateShardProcedure,
 		svc.CreateShard,
-		connect.WithSchema(vTAdminCreateShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("CreateShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminDeleteKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminDeleteKeyspaceProcedure,
 		svc.DeleteKeyspace,
-		connect.WithSchema(vTAdminDeleteKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("DeleteKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminDeleteShardsHandler := connect.NewUnaryHandler(
 		VTAdminDeleteShardsProcedure,
 		svc.DeleteShards,
-		connect.WithSchema(vTAdminDeleteShardsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("DeleteShards")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminDeleteTabletHandler := connect.NewUnaryHandler(
 		VTAdminDeleteTabletProcedure,
 		svc.DeleteTablet,
-		connect.WithSchema(vTAdminDeleteTabletMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("DeleteTablet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminEmergencyFailoverShardHandler := connect.NewUnaryHandler(
 		VTAdminEmergencyFailoverShardProcedure,
 		svc.EmergencyFailoverShard,
-		connect.WithSchema(vTAdminEmergencyFailoverShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("EmergencyFailoverShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminFindSchemaHandler := connect.NewUnaryHandler(
 		VTAdminFindSchemaProcedure,
 		svc.FindSchema,
-		connect.WithSchema(vTAdminFindSchemaMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("FindSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetBackupsHandler := connect.NewUnaryHandler(
 		VTAdminGetBackupsProcedure,
 		svc.GetBackups,
-		connect.WithSchema(vTAdminGetBackupsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetBackups")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetCellInfosHandler := connect.NewUnaryHandler(
 		VTAdminGetCellInfosProcedure,
 		svc.GetCellInfos,
-		connect.WithSchema(vTAdminGetCellInfosMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetCellInfos")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetCellsAliasesHandler := connect.NewUnaryHandler(
 		VTAdminGetCellsAliasesProcedure,
 		svc.GetCellsAliases,
-		connect.WithSchema(vTAdminGetCellsAliasesMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetCellsAliases")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetClustersHandler := connect.NewUnaryHandler(
 		VTAdminGetClustersProcedure,
 		svc.GetClusters,
-		connect.WithSchema(vTAdminGetClustersMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetClusters")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetFullStatusHandler := connect.NewUnaryHandler(
 		VTAdminGetFullStatusProcedure,
 		svc.GetFullStatus,
-		connect.WithSchema(vTAdminGetFullStatusMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetFullStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetGatesHandler := connect.NewUnaryHandler(
 		VTAdminGetGatesProcedure,
 		svc.GetGates,
-		connect.WithSchema(vTAdminGetGatesMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetGates")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminGetKeyspaceProcedure,
 		svc.GetKeyspace,
-		connect.WithSchema(vTAdminGetKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetKeyspacesHandler := connect.NewUnaryHandler(
 		VTAdminGetKeyspacesProcedure,
 		svc.GetKeyspaces,
-		connect.WithSchema(vTAdminGetKeyspacesMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetKeyspaces")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetSchemaProcedure,
 		svc.GetSchema,
-		connect.WithSchema(vTAdminGetSchemaMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetSchemasProcedure,
 		svc.GetSchemas,
-		connect.WithSchema(vTAdminGetSchemasMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSchemas")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSchemaMigrationsHandler := connect.NewUnaryHandler(
 		VTAdminGetSchemaMigrationsProcedure,
 		svc.GetSchemaMigrations,
-		connect.WithSchema(vTAdminGetSchemaMigrationsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSchemaMigrations")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetShardReplicationPositionsHandler := connect.NewUnaryHandler(
 		VTAdminGetShardReplicationPositionsProcedure,
 		svc.GetShardReplicationPositions,
-		connect.WithSchema(vTAdminGetShardReplicationPositionsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetShardReplicationPositions")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSrvKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvKeyspaceProcedure,
 		svc.GetSrvKeyspace,
-		connect.WithSchema(vTAdminGetSrvKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSrvKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSrvKeyspacesHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvKeyspacesProcedure,
 		svc.GetSrvKeyspaces,
-		connect.WithSchema(vTAdminGetSrvKeyspacesMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSrvKeyspaces")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSrvVSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvVSchemaProcedure,
 		svc.GetSrvVSchema,
-		connect.WithSchema(vTAdminGetSrvVSchemaMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSrvVSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetSrvVSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetSrvVSchemasProcedure,
 		svc.GetSrvVSchemas,
-		connect.WithSchema(vTAdminGetSrvVSchemasMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetSrvVSchemas")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetTabletHandler := connect.NewUnaryHandler(
 		VTAdminGetTabletProcedure,
 		svc.GetTablet,
-		connect.WithSchema(vTAdminGetTabletMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetTablet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetTabletsHandler := connect.NewUnaryHandler(
 		VTAdminGetTabletsProcedure,
 		svc.GetTablets,
-		connect.WithSchema(vTAdminGetTabletsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetTablets")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetTopologyPathHandler := connect.NewUnaryHandler(
 		VTAdminGetTopologyPathProcedure,
 		svc.GetTopologyPath,
-		connect.WithSchema(vTAdminGetTopologyPathMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetTopologyPath")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetUnresolvedTransactionsHandler := connect.NewUnaryHandler(
 		VTAdminGetUnresolvedTransactionsProcedure,
 		svc.GetUnresolvedTransactions,
-		connect.WithSchema(vTAdminGetUnresolvedTransactionsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetUnresolvedTransactions")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetVSchemaHandler := connect.NewUnaryHandler(
 		VTAdminGetVSchemaProcedure,
 		svc.GetVSchema,
-		connect.WithSchema(vTAdminGetVSchemaMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetVSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetVSchemasHandler := connect.NewUnaryHandler(
 		VTAdminGetVSchemasProcedure,
 		svc.GetVSchemas,
-		connect.WithSchema(vTAdminGetVSchemasMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetVSchemas")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetVtctldsHandler := connect.NewUnaryHandler(
 		VTAdminGetVtctldsProcedure,
 		svc.GetVtctlds,
-		connect.WithSchema(vTAdminGetVtctldsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetVtctlds")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetWorkflowHandler := connect.NewUnaryHandler(
 		VTAdminGetWorkflowProcedure,
 		svc.GetWorkflow,
-		connect.WithSchema(vTAdminGetWorkflowMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetWorkflow")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetWorkflowsHandler := connect.NewUnaryHandler(
 		VTAdminGetWorkflowsProcedure,
 		svc.GetWorkflows,
-		connect.WithSchema(vTAdminGetWorkflowsMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetWorkflows")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminGetWorkflowStatusHandler := connect.NewUnaryHandler(
 		VTAdminGetWorkflowStatusProcedure,
 		svc.GetWorkflowStatus,
-		connect.WithSchema(vTAdminGetWorkflowStatusMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("GetWorkflowStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminStartWorkflowHandler := connect.NewUnaryHandler(
 		VTAdminStartWorkflowProcedure,
 		svc.StartWorkflow,
-		connect.WithSchema(vTAdminStartWorkflowMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("StartWorkflow")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminStopWorkflowHandler := connect.NewUnaryHandler(
 		VTAdminStopWorkflowProcedure,
 		svc.StopWorkflow,
-		connect.WithSchema(vTAdminStopWorkflowMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("StopWorkflow")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminLaunchSchemaMigrationHandler := connect.NewUnaryHandler(
 		VTAdminLaunchSchemaMigrationProcedure,
 		svc.LaunchSchemaMigration,
-		connect.WithSchema(vTAdminLaunchSchemaMigrationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("LaunchSchemaMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminMoveTablesCreateHandler := connect.NewUnaryHandler(
 		VTAdminMoveTablesCreateProcedure,
 		svc.MoveTablesCreate,
-		connect.WithSchema(vTAdminMoveTablesCreateMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("MoveTablesCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminPingTabletHandler := connect.NewUnaryHandler(
 		VTAdminPingTabletProcedure,
 		svc.PingTablet,
-		connect.WithSchema(vTAdminPingTabletMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("PingTablet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminPlannedFailoverShardHandler := connect.NewUnaryHandler(
 		VTAdminPlannedFailoverShardProcedure,
 		svc.PlannedFailoverShard,
-		connect.WithSchema(vTAdminPlannedFailoverShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("PlannedFailoverShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRebuildKeyspaceGraphHandler := connect.NewUnaryHandler(
 		VTAdminRebuildKeyspaceGraphProcedure,
 		svc.RebuildKeyspaceGraph,
-		connect.WithSchema(vTAdminRebuildKeyspaceGraphMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RebuildKeyspaceGraph")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRefreshStateHandler := connect.NewUnaryHandler(
 		VTAdminRefreshStateProcedure,
 		svc.RefreshState,
-		connect.WithSchema(vTAdminRefreshStateMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RefreshState")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRefreshTabletReplicationSourceHandler := connect.NewUnaryHandler(
 		VTAdminRefreshTabletReplicationSourceProcedure,
 		svc.RefreshTabletReplicationSource,
-		connect.WithSchema(vTAdminRefreshTabletReplicationSourceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RefreshTabletReplicationSource")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminReloadSchemasHandler := connect.NewUnaryHandler(
 		VTAdminReloadSchemasProcedure,
 		svc.ReloadSchemas,
-		connect.WithSchema(vTAdminReloadSchemasMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ReloadSchemas")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminReloadSchemaShardHandler := connect.NewUnaryHandler(
 		VTAdminReloadSchemaShardProcedure,
 		svc.ReloadSchemaShard,
-		connect.WithSchema(vTAdminReloadSchemaShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ReloadSchemaShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRemoveKeyspaceCellHandler := connect.NewUnaryHandler(
 		VTAdminRemoveKeyspaceCellProcedure,
 		svc.RemoveKeyspaceCell,
-		connect.WithSchema(vTAdminRemoveKeyspaceCellMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RemoveKeyspaceCell")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRetrySchemaMigrationHandler := connect.NewUnaryHandler(
 		VTAdminRetrySchemaMigrationProcedure,
 		svc.RetrySchemaMigration,
-		connect.WithSchema(vTAdminRetrySchemaMigrationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RetrySchemaMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminRunHealthCheckHandler := connect.NewUnaryHandler(
 		VTAdminRunHealthCheckProcedure,
 		svc.RunHealthCheck,
-		connect.WithSchema(vTAdminRunHealthCheckMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("RunHealthCheck")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminSetReadOnlyHandler := connect.NewUnaryHandler(
 		VTAdminSetReadOnlyProcedure,
 		svc.SetReadOnly,
-		connect.WithSchema(vTAdminSetReadOnlyMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("SetReadOnly")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminSetReadWriteHandler := connect.NewUnaryHandler(
 		VTAdminSetReadWriteProcedure,
 		svc.SetReadWrite,
-		connect.WithSchema(vTAdminSetReadWriteMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("SetReadWrite")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminStartReplicationHandler := connect.NewUnaryHandler(
 		VTAdminStartReplicationProcedure,
 		svc.StartReplication,
-		connect.WithSchema(vTAdminStartReplicationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("StartReplication")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminStopReplicationHandler := connect.NewUnaryHandler(
 		VTAdminStopReplicationProcedure,
 		svc.StopReplication,
-		connect.WithSchema(vTAdminStopReplicationMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("StopReplication")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminTabletExternallyPromotedHandler := connect.NewUnaryHandler(
 		VTAdminTabletExternallyPromotedProcedure,
 		svc.TabletExternallyPromoted,
-		connect.WithSchema(vTAdminTabletExternallyPromotedMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("TabletExternallyPromoted")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateHandler := connect.NewUnaryHandler(
 		VTAdminValidateProcedure,
 		svc.Validate,
-		connect.WithSchema(vTAdminValidateMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("Validate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateKeyspaceProcedure,
 		svc.ValidateKeyspace,
-		connect.WithSchema(vTAdminValidateKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ValidateKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateSchemaKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateSchemaKeyspaceProcedure,
 		svc.ValidateSchemaKeyspace,
-		connect.WithSchema(vTAdminValidateSchemaKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ValidateSchemaKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateShardHandler := connect.NewUnaryHandler(
 		VTAdminValidateShardProcedure,
 		svc.ValidateShard,
-		connect.WithSchema(vTAdminValidateShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ValidateShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateVersionKeyspaceHandler := connect.NewUnaryHandler(
 		VTAdminValidateVersionKeyspaceProcedure,
 		svc.ValidateVersionKeyspace,
-		connect.WithSchema(vTAdminValidateVersionKeyspaceMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ValidateVersionKeyspace")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminValidateVersionShardHandler := connect.NewUnaryHandler(
 		VTAdminValidateVersionShardProcedure,
 		svc.ValidateVersionShard,
-		connect.WithSchema(vTAdminValidateVersionShardMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("ValidateVersionShard")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vTAdminVTExplainHandler := connect.NewUnaryHandler(
 		VTAdminVTExplainProcedure,
 		svc.VTExplain,
-		connect.WithSchema(vTAdminVTExplainMethodDescriptor),
+		connect.WithSchema(vTAdminMethods.ByName("VTExplain")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/vtadmin.VTAdmin/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

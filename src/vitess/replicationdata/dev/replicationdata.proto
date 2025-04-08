@@ -21,6 +21,8 @@ option go_package = "github.com/planetscale/vitess-types/gen/vitess/replicationd
 
 package vitess.replicationdata.dev;
 
+import "vitess/topodata/dev/topodata.proto";
+
 // Status is the replication status for MySQL/MariaDB/File-based. Returned by a
 // flavor-specific command and parsed into a Position and fields.
 message Status {
@@ -105,4 +107,7 @@ message FullStatus {
   uint32 semi_sync_wait_for_replica_count = 20;
   bool super_read_only = 21;
   vitess.replicationdata.dev.Configuration replication_configuration = 22;
+  bool disk_stalled = 23;
+  bool semi_sync_blocked = 24;
+  vitess.topodata.dev.TabletType tablet_type = 25;
 }
