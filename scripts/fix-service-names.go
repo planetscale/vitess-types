@@ -20,7 +20,7 @@ func main() {
 	}
 }
 
-var servicePattern = regexp.MustCompile(`vitess\.([^\." ]+)\.([^\." ]+)\.`)
+var servicePattern = regexp.MustCompile(`vitess\.([^\n\." ]+)\.([^\n\." ]+)\.`)
 
 func fixFile(fname string) error {
 	b, err := os.ReadFile(fname)
