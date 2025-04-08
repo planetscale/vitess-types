@@ -24,9 +24,9 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	dev2 "github.com/planetscale/vitess-types/gen/vitess/binlogdata/dev"
-	dev1 "github.com/planetscale/vitess-types/gen/vitess/query/dev"
-	dev "github.com/planetscale/vitess-types/gen/vitess/queryservice/dev"
+	dev1 "github.com/planetscale/vitess-types/gen/vitess/binlogdata/dev"
+	dev "github.com/planetscale/vitess-types/gen/vitess/query/dev"
+	dev2 "github.com/planetscale/vitess-types/gen/vitess/queryservice/dev"
 	http "net/http"
 	strings "strings"
 )
@@ -117,105 +117,71 @@ const (
 	QueryGetSchemaProcedure = "/queryservice.Query/GetSchema"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	queryServiceDescriptor                         = dev.File_vitess_queryservice_dev_queryservice_proto.Services().ByName("Query")
-	queryExecuteMethodDescriptor                   = queryServiceDescriptor.Methods().ByName("Execute")
-	queryStreamExecuteMethodDescriptor             = queryServiceDescriptor.Methods().ByName("StreamExecute")
-	queryBeginMethodDescriptor                     = queryServiceDescriptor.Methods().ByName("Begin")
-	queryCommitMethodDescriptor                    = queryServiceDescriptor.Methods().ByName("Commit")
-	queryRollbackMethodDescriptor                  = queryServiceDescriptor.Methods().ByName("Rollback")
-	queryPrepareMethodDescriptor                   = queryServiceDescriptor.Methods().ByName("Prepare")
-	queryCommitPreparedMethodDescriptor            = queryServiceDescriptor.Methods().ByName("CommitPrepared")
-	queryRollbackPreparedMethodDescriptor          = queryServiceDescriptor.Methods().ByName("RollbackPrepared")
-	queryCreateTransactionMethodDescriptor         = queryServiceDescriptor.Methods().ByName("CreateTransaction")
-	queryStartCommitMethodDescriptor               = queryServiceDescriptor.Methods().ByName("StartCommit")
-	querySetRollbackMethodDescriptor               = queryServiceDescriptor.Methods().ByName("SetRollback")
-	queryConcludeTransactionMethodDescriptor       = queryServiceDescriptor.Methods().ByName("ConcludeTransaction")
-	queryReadTransactionMethodDescriptor           = queryServiceDescriptor.Methods().ByName("ReadTransaction")
-	queryUnresolvedTransactionsMethodDescriptor    = queryServiceDescriptor.Methods().ByName("UnresolvedTransactions")
-	queryBeginExecuteMethodDescriptor              = queryServiceDescriptor.Methods().ByName("BeginExecute")
-	queryBeginStreamExecuteMethodDescriptor        = queryServiceDescriptor.Methods().ByName("BeginStreamExecute")
-	queryMessageStreamMethodDescriptor             = queryServiceDescriptor.Methods().ByName("MessageStream")
-	queryMessageAckMethodDescriptor                = queryServiceDescriptor.Methods().ByName("MessageAck")
-	queryReserveExecuteMethodDescriptor            = queryServiceDescriptor.Methods().ByName("ReserveExecute")
-	queryReserveBeginExecuteMethodDescriptor       = queryServiceDescriptor.Methods().ByName("ReserveBeginExecute")
-	queryReserveStreamExecuteMethodDescriptor      = queryServiceDescriptor.Methods().ByName("ReserveStreamExecute")
-	queryReserveBeginStreamExecuteMethodDescriptor = queryServiceDescriptor.Methods().ByName("ReserveBeginStreamExecute")
-	queryReleaseMethodDescriptor                   = queryServiceDescriptor.Methods().ByName("Release")
-	queryStreamHealthMethodDescriptor              = queryServiceDescriptor.Methods().ByName("StreamHealth")
-	queryVStreamMethodDescriptor                   = queryServiceDescriptor.Methods().ByName("VStream")
-	queryVStreamRowsMethodDescriptor               = queryServiceDescriptor.Methods().ByName("VStreamRows")
-	queryVStreamTablesMethodDescriptor             = queryServiceDescriptor.Methods().ByName("VStreamTables")
-	queryVStreamResultsMethodDescriptor            = queryServiceDescriptor.Methods().ByName("VStreamResults")
-	queryGetSchemaMethodDescriptor                 = queryServiceDescriptor.Methods().ByName("GetSchema")
-)
-
 // QueryClient is a client for the queryservice.Query service.
 type QueryClient interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
-	Execute(context.Context, *connect.Request[dev1.ExecuteRequest]) (*connect.Response[dev1.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error)
 	// StreamExecute executes a streaming query. Use this method if the
 	// query returns a large number of rows. The first QueryResult will
 	// contain the Fields, subsequent QueryResult messages will contain
 	// the rows.
-	StreamExecute(context.Context, *connect.Request[dev1.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.StreamExecuteResponse], error)
+	StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev.StreamExecuteResponse], error)
 	// Begin a transaction.
-	Begin(context.Context, *connect.Request[dev1.BeginRequest]) (*connect.Response[dev1.BeginResponse], error)
+	Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error)
 	// Commit a transaction.
-	Commit(context.Context, *connect.Request[dev1.CommitRequest]) (*connect.Response[dev1.CommitResponse], error)
+	Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error)
 	// Rollback a transaction.
-	Rollback(context.Context, *connect.Request[dev1.RollbackRequest]) (*connect.Response[dev1.RollbackResponse], error)
+	Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error)
 	// Prepare preares a transaction.
-	Prepare(context.Context, *connect.Request[dev1.PrepareRequest]) (*connect.Response[dev1.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error)
 	// CommitPrepared commits a prepared transaction.
-	CommitPrepared(context.Context, *connect.Request[dev1.CommitPreparedRequest]) (*connect.Response[dev1.CommitPreparedResponse], error)
+	CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error)
 	// RollbackPrepared rolls back a prepared transaction.
-	RollbackPrepared(context.Context, *connect.Request[dev1.RollbackPreparedRequest]) (*connect.Response[dev1.RollbackPreparedResponse], error)
+	RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error)
 	// CreateTransaction creates the metadata for a 2pc transaction.
-	CreateTransaction(context.Context, *connect.Request[dev1.CreateTransactionRequest]) (*connect.Response[dev1.CreateTransactionResponse], error)
+	CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error)
 	// StartCommit initiates a commit for a 2pc transaction.
-	StartCommit(context.Context, *connect.Request[dev1.StartCommitRequest]) (*connect.Response[dev1.StartCommitResponse], error)
+	StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error)
 	// SetRollback marks the 2pc transaction for rollback.
-	SetRollback(context.Context, *connect.Request[dev1.SetRollbackRequest]) (*connect.Response[dev1.SetRollbackResponse], error)
+	SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error)
 	// ConcludeTransaction marks the 2pc transaction as resolved.
-	ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error)
 	// ReadTransaction returns the 2pc transaction info.
-	ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error)
 	// UnresolvedTransactions returns the 2pc transaction info.
-	UnresolvedTransactions(context.Context, *connect.Request[dev1.UnresolvedTransactionsRequest]) (*connect.Response[dev1.UnresolvedTransactionsResponse], error)
+	UnresolvedTransactions(context.Context, *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error)
 	// BeginExecute executes a begin and the specified SQL query.
-	BeginExecute(context.Context, *connect.Request[dev1.BeginExecuteRequest]) (*connect.Response[dev1.BeginExecuteResponse], error)
+	BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error)
 	// BeginStreamExecute executes a begin and the specified SQL query.
-	BeginStreamExecute(context.Context, *connect.Request[dev1.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.BeginStreamExecuteResponse], error)
+	BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.BeginStreamExecuteResponse], error)
 	// MessageStream streams messages from a message table.
-	MessageStream(context.Context, *connect.Request[dev1.MessageStreamRequest]) (*connect.ServerStreamForClient[dev1.MessageStreamResponse], error)
+	MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest]) (*connect.ServerStreamForClient[dev.MessageStreamResponse], error)
 	// MessageAck acks messages for a table.
-	MessageAck(context.Context, *connect.Request[dev1.MessageAckRequest]) (*connect.Response[dev1.MessageAckResponse], error)
+	MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error)
 	// ReserveExecute executes a query on a reserved connection
-	ReserveExecute(context.Context, *connect.Request[dev1.ReserveExecuteRequest]) (*connect.Response[dev1.ReserveExecuteResponse], error)
+	ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error)
 	// ReserveBeginExecute starts a transaction and executes a query in the transaction on a reserved connection
-	ReserveBeginExecute(context.Context, *connect.Request[dev1.ReserveBeginExecuteRequest]) (*connect.Response[dev1.ReserveBeginExecuteResponse], error)
+	ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error)
 	// ReserveStreamExecute executes a streaming query on a reserved connection
-	ReserveStreamExecute(context.Context, *connect.Request[dev1.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.ReserveStreamExecuteResponse], error)
+	ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error)
 	// ReserveBeginStreamExecute starts a transaction and executes a streaming query in the transaction on a reserved connection
-	ReserveBeginStreamExecute(context.Context, *connect.Request[dev1.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.ReserveBeginStreamExecuteResponse], error)
+	ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error)
 	// Release releases the connection
-	Release(context.Context, *connect.Request[dev1.ReleaseRequest]) (*connect.Response[dev1.ReleaseResponse], error)
+	Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error)
 	// StreamHealth runs a streaming RPC to the tablet, that returns the
 	// current health of the tablet on a regular basis.
-	StreamHealth(context.Context, *connect.Request[dev1.StreamHealthRequest]) (*connect.ServerStreamForClient[dev1.StreamHealthResponse], error)
+	StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest]) (*connect.ServerStreamForClient[dev.StreamHealthResponse], error)
 	// VStream streams vreplication events.
-	VStream(context.Context, *connect.Request[dev2.VStreamRequest]) (*connect.ServerStreamForClient[dev2.VStreamResponse], error)
+	VStream(context.Context, *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error)
 	// VStreamRows streams rows from the specified starting point.
-	VStreamRows(context.Context, *connect.Request[dev2.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev2.VStreamRowsResponse], error)
+	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error)
 	// VStreamTables streams rows from the specified starting point.
-	VStreamTables(context.Context, *connect.Request[dev2.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev2.VStreamTablesResponse], error)
+	VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev1.VStreamTablesResponse], error)
 	// VStreamResults streams results along with the gtid of the snapshot.
-	VStreamResults(context.Context, *connect.Request[dev2.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev2.VStreamResultsResponse], error)
+	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error)
 	// GetSchema returns the schema information.
-	GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest]) (*connect.ServerStreamForClient[dev1.GetSchemaResponse], error)
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error)
 }
 
 // NewQueryClient constructs a client for the queryservice.Query service. By default, it
@@ -227,179 +193,180 @@ type QueryClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) QueryClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	queryMethods := dev2.File_vitess_queryservice_dev_queryservice_proto.Services().ByName("Query").Methods()
 	return &queryClient{
-		execute: connect.NewClient[dev1.ExecuteRequest, dev1.ExecuteResponse](
+		execute: connect.NewClient[dev.ExecuteRequest, dev.ExecuteResponse](
 			httpClient,
 			baseURL+QueryExecuteProcedure,
-			connect.WithSchema(queryExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Execute")),
 			connect.WithClientOptions(opts...),
 		),
-		streamExecute: connect.NewClient[dev1.StreamExecuteRequest, dev1.StreamExecuteResponse](
+		streamExecute: connect.NewClient[dev.StreamExecuteRequest, dev.StreamExecuteResponse](
 			httpClient,
 			baseURL+QueryStreamExecuteProcedure,
-			connect.WithSchema(queryStreamExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("StreamExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		begin: connect.NewClient[dev1.BeginRequest, dev1.BeginResponse](
+		begin: connect.NewClient[dev.BeginRequest, dev.BeginResponse](
 			httpClient,
 			baseURL+QueryBeginProcedure,
-			connect.WithSchema(queryBeginMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Begin")),
 			connect.WithClientOptions(opts...),
 		),
-		commit: connect.NewClient[dev1.CommitRequest, dev1.CommitResponse](
+		commit: connect.NewClient[dev.CommitRequest, dev.CommitResponse](
 			httpClient,
 			baseURL+QueryCommitProcedure,
-			connect.WithSchema(queryCommitMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Commit")),
 			connect.WithClientOptions(opts...),
 		),
-		rollback: connect.NewClient[dev1.RollbackRequest, dev1.RollbackResponse](
+		rollback: connect.NewClient[dev.RollbackRequest, dev.RollbackResponse](
 			httpClient,
 			baseURL+QueryRollbackProcedure,
-			connect.WithSchema(queryRollbackMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Rollback")),
 			connect.WithClientOptions(opts...),
 		),
-		prepare: connect.NewClient[dev1.PrepareRequest, dev1.PrepareResponse](
+		prepare: connect.NewClient[dev.PrepareRequest, dev.PrepareResponse](
 			httpClient,
 			baseURL+QueryPrepareProcedure,
-			connect.WithSchema(queryPrepareMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Prepare")),
 			connect.WithClientOptions(opts...),
 		),
-		commitPrepared: connect.NewClient[dev1.CommitPreparedRequest, dev1.CommitPreparedResponse](
+		commitPrepared: connect.NewClient[dev.CommitPreparedRequest, dev.CommitPreparedResponse](
 			httpClient,
 			baseURL+QueryCommitPreparedProcedure,
-			connect.WithSchema(queryCommitPreparedMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("CommitPrepared")),
 			connect.WithClientOptions(opts...),
 		),
-		rollbackPrepared: connect.NewClient[dev1.RollbackPreparedRequest, dev1.RollbackPreparedResponse](
+		rollbackPrepared: connect.NewClient[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse](
 			httpClient,
 			baseURL+QueryRollbackPreparedProcedure,
-			connect.WithSchema(queryRollbackPreparedMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("RollbackPrepared")),
 			connect.WithClientOptions(opts...),
 		),
-		createTransaction: connect.NewClient[dev1.CreateTransactionRequest, dev1.CreateTransactionResponse](
+		createTransaction: connect.NewClient[dev.CreateTransactionRequest, dev.CreateTransactionResponse](
 			httpClient,
 			baseURL+QueryCreateTransactionProcedure,
-			connect.WithSchema(queryCreateTransactionMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("CreateTransaction")),
 			connect.WithClientOptions(opts...),
 		),
-		startCommit: connect.NewClient[dev1.StartCommitRequest, dev1.StartCommitResponse](
+		startCommit: connect.NewClient[dev.StartCommitRequest, dev.StartCommitResponse](
 			httpClient,
 			baseURL+QueryStartCommitProcedure,
-			connect.WithSchema(queryStartCommitMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("StartCommit")),
 			connect.WithClientOptions(opts...),
 		),
-		setRollback: connect.NewClient[dev1.SetRollbackRequest, dev1.SetRollbackResponse](
+		setRollback: connect.NewClient[dev.SetRollbackRequest, dev.SetRollbackResponse](
 			httpClient,
 			baseURL+QuerySetRollbackProcedure,
-			connect.WithSchema(querySetRollbackMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("SetRollback")),
 			connect.WithClientOptions(opts...),
 		),
-		concludeTransaction: connect.NewClient[dev1.ConcludeTransactionRequest, dev1.ConcludeTransactionResponse](
+		concludeTransaction: connect.NewClient[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse](
 			httpClient,
 			baseURL+QueryConcludeTransactionProcedure,
-			connect.WithSchema(queryConcludeTransactionMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ConcludeTransaction")),
 			connect.WithClientOptions(opts...),
 		),
-		readTransaction: connect.NewClient[dev1.ReadTransactionRequest, dev1.ReadTransactionResponse](
+		readTransaction: connect.NewClient[dev.ReadTransactionRequest, dev.ReadTransactionResponse](
 			httpClient,
 			baseURL+QueryReadTransactionProcedure,
-			connect.WithSchema(queryReadTransactionMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ReadTransaction")),
 			connect.WithClientOptions(opts...),
 		),
-		unresolvedTransactions: connect.NewClient[dev1.UnresolvedTransactionsRequest, dev1.UnresolvedTransactionsResponse](
+		unresolvedTransactions: connect.NewClient[dev.UnresolvedTransactionsRequest, dev.UnresolvedTransactionsResponse](
 			httpClient,
 			baseURL+QueryUnresolvedTransactionsProcedure,
-			connect.WithSchema(queryUnresolvedTransactionsMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("UnresolvedTransactions")),
 			connect.WithClientOptions(opts...),
 		),
-		beginExecute: connect.NewClient[dev1.BeginExecuteRequest, dev1.BeginExecuteResponse](
+		beginExecute: connect.NewClient[dev.BeginExecuteRequest, dev.BeginExecuteResponse](
 			httpClient,
 			baseURL+QueryBeginExecuteProcedure,
-			connect.WithSchema(queryBeginExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("BeginExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		beginStreamExecute: connect.NewClient[dev1.BeginStreamExecuteRequest, dev1.BeginStreamExecuteResponse](
+		beginStreamExecute: connect.NewClient[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryBeginStreamExecuteProcedure,
-			connect.WithSchema(queryBeginStreamExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("BeginStreamExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		messageStream: connect.NewClient[dev1.MessageStreamRequest, dev1.MessageStreamResponse](
+		messageStream: connect.NewClient[dev.MessageStreamRequest, dev.MessageStreamResponse](
 			httpClient,
 			baseURL+QueryMessageStreamProcedure,
-			connect.WithSchema(queryMessageStreamMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("MessageStream")),
 			connect.WithClientOptions(opts...),
 		),
-		messageAck: connect.NewClient[dev1.MessageAckRequest, dev1.MessageAckResponse](
+		messageAck: connect.NewClient[dev.MessageAckRequest, dev.MessageAckResponse](
 			httpClient,
 			baseURL+QueryMessageAckProcedure,
-			connect.WithSchema(queryMessageAckMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("MessageAck")),
 			connect.WithClientOptions(opts...),
 		),
-		reserveExecute: connect.NewClient[dev1.ReserveExecuteRequest, dev1.ReserveExecuteResponse](
+		reserveExecute: connect.NewClient[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveExecuteProcedure,
-			connect.WithSchema(queryReserveExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ReserveExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		reserveBeginExecute: connect.NewClient[dev1.ReserveBeginExecuteRequest, dev1.ReserveBeginExecuteResponse](
+		reserveBeginExecute: connect.NewClient[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveBeginExecuteProcedure,
-			connect.WithSchema(queryReserveBeginExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ReserveBeginExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		reserveStreamExecute: connect.NewClient[dev1.ReserveStreamExecuteRequest, dev1.ReserveStreamExecuteResponse](
+		reserveStreamExecute: connect.NewClient[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveStreamExecuteProcedure,
-			connect.WithSchema(queryReserveStreamExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ReserveStreamExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		reserveBeginStreamExecute: connect.NewClient[dev1.ReserveBeginStreamExecuteRequest, dev1.ReserveBeginStreamExecuteResponse](
+		reserveBeginStreamExecute: connect.NewClient[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse](
 			httpClient,
 			baseURL+QueryReserveBeginStreamExecuteProcedure,
-			connect.WithSchema(queryReserveBeginStreamExecuteMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("ReserveBeginStreamExecute")),
 			connect.WithClientOptions(opts...),
 		),
-		release: connect.NewClient[dev1.ReleaseRequest, dev1.ReleaseResponse](
+		release: connect.NewClient[dev.ReleaseRequest, dev.ReleaseResponse](
 			httpClient,
 			baseURL+QueryReleaseProcedure,
-			connect.WithSchema(queryReleaseMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("Release")),
 			connect.WithClientOptions(opts...),
 		),
-		streamHealth: connect.NewClient[dev1.StreamHealthRequest, dev1.StreamHealthResponse](
+		streamHealth: connect.NewClient[dev.StreamHealthRequest, dev.StreamHealthResponse](
 			httpClient,
 			baseURL+QueryStreamHealthProcedure,
-			connect.WithSchema(queryStreamHealthMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("StreamHealth")),
 			connect.WithClientOptions(opts...),
 		),
-		vStream: connect.NewClient[dev2.VStreamRequest, dev2.VStreamResponse](
+		vStream: connect.NewClient[dev1.VStreamRequest, dev1.VStreamResponse](
 			httpClient,
 			baseURL+QueryVStreamProcedure,
-			connect.WithSchema(queryVStreamMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("VStream")),
 			connect.WithClientOptions(opts...),
 		),
-		vStreamRows: connect.NewClient[dev2.VStreamRowsRequest, dev2.VStreamRowsResponse](
+		vStreamRows: connect.NewClient[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse](
 			httpClient,
 			baseURL+QueryVStreamRowsProcedure,
-			connect.WithSchema(queryVStreamRowsMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("VStreamRows")),
 			connect.WithClientOptions(opts...),
 		),
-		vStreamTables: connect.NewClient[dev2.VStreamTablesRequest, dev2.VStreamTablesResponse](
+		vStreamTables: connect.NewClient[dev1.VStreamTablesRequest, dev1.VStreamTablesResponse](
 			httpClient,
 			baseURL+QueryVStreamTablesProcedure,
-			connect.WithSchema(queryVStreamTablesMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("VStreamTables")),
 			connect.WithClientOptions(opts...),
 		),
-		vStreamResults: connect.NewClient[dev2.VStreamResultsRequest, dev2.VStreamResultsResponse](
+		vStreamResults: connect.NewClient[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse](
 			httpClient,
 			baseURL+QueryVStreamResultsProcedure,
-			connect.WithSchema(queryVStreamResultsMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("VStreamResults")),
 			connect.WithClientOptions(opts...),
 		),
-		getSchema: connect.NewClient[dev1.GetSchemaRequest, dev1.GetSchemaResponse](
+		getSchema: connect.NewClient[dev.GetSchemaRequest, dev.GetSchemaResponse](
 			httpClient,
 			baseURL+QueryGetSchemaProcedure,
-			connect.WithSchema(queryGetSchemaMethodDescriptor),
+			connect.WithSchema(queryMethods.ByName("GetSchema")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -407,179 +374,179 @@ func NewQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...conne
 
 // queryClient implements QueryClient.
 type queryClient struct {
-	execute                   *connect.Client[dev1.ExecuteRequest, dev1.ExecuteResponse]
-	streamExecute             *connect.Client[dev1.StreamExecuteRequest, dev1.StreamExecuteResponse]
-	begin                     *connect.Client[dev1.BeginRequest, dev1.BeginResponse]
-	commit                    *connect.Client[dev1.CommitRequest, dev1.CommitResponse]
-	rollback                  *connect.Client[dev1.RollbackRequest, dev1.RollbackResponse]
-	prepare                   *connect.Client[dev1.PrepareRequest, dev1.PrepareResponse]
-	commitPrepared            *connect.Client[dev1.CommitPreparedRequest, dev1.CommitPreparedResponse]
-	rollbackPrepared          *connect.Client[dev1.RollbackPreparedRequest, dev1.RollbackPreparedResponse]
-	createTransaction         *connect.Client[dev1.CreateTransactionRequest, dev1.CreateTransactionResponse]
-	startCommit               *connect.Client[dev1.StartCommitRequest, dev1.StartCommitResponse]
-	setRollback               *connect.Client[dev1.SetRollbackRequest, dev1.SetRollbackResponse]
-	concludeTransaction       *connect.Client[dev1.ConcludeTransactionRequest, dev1.ConcludeTransactionResponse]
-	readTransaction           *connect.Client[dev1.ReadTransactionRequest, dev1.ReadTransactionResponse]
-	unresolvedTransactions    *connect.Client[dev1.UnresolvedTransactionsRequest, dev1.UnresolvedTransactionsResponse]
-	beginExecute              *connect.Client[dev1.BeginExecuteRequest, dev1.BeginExecuteResponse]
-	beginStreamExecute        *connect.Client[dev1.BeginStreamExecuteRequest, dev1.BeginStreamExecuteResponse]
-	messageStream             *connect.Client[dev1.MessageStreamRequest, dev1.MessageStreamResponse]
-	messageAck                *connect.Client[dev1.MessageAckRequest, dev1.MessageAckResponse]
-	reserveExecute            *connect.Client[dev1.ReserveExecuteRequest, dev1.ReserveExecuteResponse]
-	reserveBeginExecute       *connect.Client[dev1.ReserveBeginExecuteRequest, dev1.ReserveBeginExecuteResponse]
-	reserveStreamExecute      *connect.Client[dev1.ReserveStreamExecuteRequest, dev1.ReserveStreamExecuteResponse]
-	reserveBeginStreamExecute *connect.Client[dev1.ReserveBeginStreamExecuteRequest, dev1.ReserveBeginStreamExecuteResponse]
-	release                   *connect.Client[dev1.ReleaseRequest, dev1.ReleaseResponse]
-	streamHealth              *connect.Client[dev1.StreamHealthRequest, dev1.StreamHealthResponse]
-	vStream                   *connect.Client[dev2.VStreamRequest, dev2.VStreamResponse]
-	vStreamRows               *connect.Client[dev2.VStreamRowsRequest, dev2.VStreamRowsResponse]
-	vStreamTables             *connect.Client[dev2.VStreamTablesRequest, dev2.VStreamTablesResponse]
-	vStreamResults            *connect.Client[dev2.VStreamResultsRequest, dev2.VStreamResultsResponse]
-	getSchema                 *connect.Client[dev1.GetSchemaRequest, dev1.GetSchemaResponse]
+	execute                   *connect.Client[dev.ExecuteRequest, dev.ExecuteResponse]
+	streamExecute             *connect.Client[dev.StreamExecuteRequest, dev.StreamExecuteResponse]
+	begin                     *connect.Client[dev.BeginRequest, dev.BeginResponse]
+	commit                    *connect.Client[dev.CommitRequest, dev.CommitResponse]
+	rollback                  *connect.Client[dev.RollbackRequest, dev.RollbackResponse]
+	prepare                   *connect.Client[dev.PrepareRequest, dev.PrepareResponse]
+	commitPrepared            *connect.Client[dev.CommitPreparedRequest, dev.CommitPreparedResponse]
+	rollbackPrepared          *connect.Client[dev.RollbackPreparedRequest, dev.RollbackPreparedResponse]
+	createTransaction         *connect.Client[dev.CreateTransactionRequest, dev.CreateTransactionResponse]
+	startCommit               *connect.Client[dev.StartCommitRequest, dev.StartCommitResponse]
+	setRollback               *connect.Client[dev.SetRollbackRequest, dev.SetRollbackResponse]
+	concludeTransaction       *connect.Client[dev.ConcludeTransactionRequest, dev.ConcludeTransactionResponse]
+	readTransaction           *connect.Client[dev.ReadTransactionRequest, dev.ReadTransactionResponse]
+	unresolvedTransactions    *connect.Client[dev.UnresolvedTransactionsRequest, dev.UnresolvedTransactionsResponse]
+	beginExecute              *connect.Client[dev.BeginExecuteRequest, dev.BeginExecuteResponse]
+	beginStreamExecute        *connect.Client[dev.BeginStreamExecuteRequest, dev.BeginStreamExecuteResponse]
+	messageStream             *connect.Client[dev.MessageStreamRequest, dev.MessageStreamResponse]
+	messageAck                *connect.Client[dev.MessageAckRequest, dev.MessageAckResponse]
+	reserveExecute            *connect.Client[dev.ReserveExecuteRequest, dev.ReserveExecuteResponse]
+	reserveBeginExecute       *connect.Client[dev.ReserveBeginExecuteRequest, dev.ReserveBeginExecuteResponse]
+	reserveStreamExecute      *connect.Client[dev.ReserveStreamExecuteRequest, dev.ReserveStreamExecuteResponse]
+	reserveBeginStreamExecute *connect.Client[dev.ReserveBeginStreamExecuteRequest, dev.ReserveBeginStreamExecuteResponse]
+	release                   *connect.Client[dev.ReleaseRequest, dev.ReleaseResponse]
+	streamHealth              *connect.Client[dev.StreamHealthRequest, dev.StreamHealthResponse]
+	vStream                   *connect.Client[dev1.VStreamRequest, dev1.VStreamResponse]
+	vStreamRows               *connect.Client[dev1.VStreamRowsRequest, dev1.VStreamRowsResponse]
+	vStreamTables             *connect.Client[dev1.VStreamTablesRequest, dev1.VStreamTablesResponse]
+	vStreamResults            *connect.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
+	getSchema                 *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
 }
 
 // Execute calls queryservice.Query.Execute.
-func (c *queryClient) Execute(ctx context.Context, req *connect.Request[dev1.ExecuteRequest]) (*connect.Response[dev1.ExecuteResponse], error) {
+func (c *queryClient) Execute(ctx context.Context, req *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
 	return c.execute.CallUnary(ctx, req)
 }
 
 // StreamExecute calls queryservice.Query.StreamExecute.
-func (c *queryClient) StreamExecute(ctx context.Context, req *connect.Request[dev1.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.StreamExecuteResponse], error) {
+func (c *queryClient) StreamExecute(ctx context.Context, req *connect.Request[dev.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev.StreamExecuteResponse], error) {
 	return c.streamExecute.CallServerStream(ctx, req)
 }
 
 // Begin calls queryservice.Query.Begin.
-func (c *queryClient) Begin(ctx context.Context, req *connect.Request[dev1.BeginRequest]) (*connect.Response[dev1.BeginResponse], error) {
+func (c *queryClient) Begin(ctx context.Context, req *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
 	return c.begin.CallUnary(ctx, req)
 }
 
 // Commit calls queryservice.Query.Commit.
-func (c *queryClient) Commit(ctx context.Context, req *connect.Request[dev1.CommitRequest]) (*connect.Response[dev1.CommitResponse], error) {
+func (c *queryClient) Commit(ctx context.Context, req *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
 	return c.commit.CallUnary(ctx, req)
 }
 
 // Rollback calls queryservice.Query.Rollback.
-func (c *queryClient) Rollback(ctx context.Context, req *connect.Request[dev1.RollbackRequest]) (*connect.Response[dev1.RollbackResponse], error) {
+func (c *queryClient) Rollback(ctx context.Context, req *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
 	return c.rollback.CallUnary(ctx, req)
 }
 
 // Prepare calls queryservice.Query.Prepare.
-func (c *queryClient) Prepare(ctx context.Context, req *connect.Request[dev1.PrepareRequest]) (*connect.Response[dev1.PrepareResponse], error) {
+func (c *queryClient) Prepare(ctx context.Context, req *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
 	return c.prepare.CallUnary(ctx, req)
 }
 
 // CommitPrepared calls queryservice.Query.CommitPrepared.
-func (c *queryClient) CommitPrepared(ctx context.Context, req *connect.Request[dev1.CommitPreparedRequest]) (*connect.Response[dev1.CommitPreparedResponse], error) {
+func (c *queryClient) CommitPrepared(ctx context.Context, req *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
 	return c.commitPrepared.CallUnary(ctx, req)
 }
 
 // RollbackPrepared calls queryservice.Query.RollbackPrepared.
-func (c *queryClient) RollbackPrepared(ctx context.Context, req *connect.Request[dev1.RollbackPreparedRequest]) (*connect.Response[dev1.RollbackPreparedResponse], error) {
+func (c *queryClient) RollbackPrepared(ctx context.Context, req *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
 	return c.rollbackPrepared.CallUnary(ctx, req)
 }
 
 // CreateTransaction calls queryservice.Query.CreateTransaction.
-func (c *queryClient) CreateTransaction(ctx context.Context, req *connect.Request[dev1.CreateTransactionRequest]) (*connect.Response[dev1.CreateTransactionResponse], error) {
+func (c *queryClient) CreateTransaction(ctx context.Context, req *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
 	return c.createTransaction.CallUnary(ctx, req)
 }
 
 // StartCommit calls queryservice.Query.StartCommit.
-func (c *queryClient) StartCommit(ctx context.Context, req *connect.Request[dev1.StartCommitRequest]) (*connect.Response[dev1.StartCommitResponse], error) {
+func (c *queryClient) StartCommit(ctx context.Context, req *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
 	return c.startCommit.CallUnary(ctx, req)
 }
 
 // SetRollback calls queryservice.Query.SetRollback.
-func (c *queryClient) SetRollback(ctx context.Context, req *connect.Request[dev1.SetRollbackRequest]) (*connect.Response[dev1.SetRollbackResponse], error) {
+func (c *queryClient) SetRollback(ctx context.Context, req *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
 	return c.setRollback.CallUnary(ctx, req)
 }
 
 // ConcludeTransaction calls queryservice.Query.ConcludeTransaction.
-func (c *queryClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error) {
+func (c *queryClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
 	return c.concludeTransaction.CallUnary(ctx, req)
 }
 
 // ReadTransaction calls queryservice.Query.ReadTransaction.
-func (c *queryClient) ReadTransaction(ctx context.Context, req *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error) {
+func (c *queryClient) ReadTransaction(ctx context.Context, req *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
 	return c.readTransaction.CallUnary(ctx, req)
 }
 
 // UnresolvedTransactions calls queryservice.Query.UnresolvedTransactions.
-func (c *queryClient) UnresolvedTransactions(ctx context.Context, req *connect.Request[dev1.UnresolvedTransactionsRequest]) (*connect.Response[dev1.UnresolvedTransactionsResponse], error) {
+func (c *queryClient) UnresolvedTransactions(ctx context.Context, req *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error) {
 	return c.unresolvedTransactions.CallUnary(ctx, req)
 }
 
 // BeginExecute calls queryservice.Query.BeginExecute.
-func (c *queryClient) BeginExecute(ctx context.Context, req *connect.Request[dev1.BeginExecuteRequest]) (*connect.Response[dev1.BeginExecuteResponse], error) {
+func (c *queryClient) BeginExecute(ctx context.Context, req *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
 	return c.beginExecute.CallUnary(ctx, req)
 }
 
 // BeginStreamExecute calls queryservice.Query.BeginStreamExecute.
-func (c *queryClient) BeginStreamExecute(ctx context.Context, req *connect.Request[dev1.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.BeginStreamExecuteResponse], error) {
+func (c *queryClient) BeginStreamExecute(ctx context.Context, req *connect.Request[dev.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.BeginStreamExecuteResponse], error) {
 	return c.beginStreamExecute.CallServerStream(ctx, req)
 }
 
 // MessageStream calls queryservice.Query.MessageStream.
-func (c *queryClient) MessageStream(ctx context.Context, req *connect.Request[dev1.MessageStreamRequest]) (*connect.ServerStreamForClient[dev1.MessageStreamResponse], error) {
+func (c *queryClient) MessageStream(ctx context.Context, req *connect.Request[dev.MessageStreamRequest]) (*connect.ServerStreamForClient[dev.MessageStreamResponse], error) {
 	return c.messageStream.CallServerStream(ctx, req)
 }
 
 // MessageAck calls queryservice.Query.MessageAck.
-func (c *queryClient) MessageAck(ctx context.Context, req *connect.Request[dev1.MessageAckRequest]) (*connect.Response[dev1.MessageAckResponse], error) {
+func (c *queryClient) MessageAck(ctx context.Context, req *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
 	return c.messageAck.CallUnary(ctx, req)
 }
 
 // ReserveExecute calls queryservice.Query.ReserveExecute.
-func (c *queryClient) ReserveExecute(ctx context.Context, req *connect.Request[dev1.ReserveExecuteRequest]) (*connect.Response[dev1.ReserveExecuteResponse], error) {
+func (c *queryClient) ReserveExecute(ctx context.Context, req *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
 	return c.reserveExecute.CallUnary(ctx, req)
 }
 
 // ReserveBeginExecute calls queryservice.Query.ReserveBeginExecute.
-func (c *queryClient) ReserveBeginExecute(ctx context.Context, req *connect.Request[dev1.ReserveBeginExecuteRequest]) (*connect.Response[dev1.ReserveBeginExecuteResponse], error) {
+func (c *queryClient) ReserveBeginExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
 	return c.reserveBeginExecute.CallUnary(ctx, req)
 }
 
 // ReserveStreamExecute calls queryservice.Query.ReserveStreamExecute.
-func (c *queryClient) ReserveStreamExecute(ctx context.Context, req *connect.Request[dev1.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.ReserveStreamExecuteResponse], error) {
+func (c *queryClient) ReserveStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error) {
 	return c.reserveStreamExecute.CallServerStream(ctx, req)
 }
 
 // ReserveBeginStreamExecute calls queryservice.Query.ReserveBeginStreamExecute.
-func (c *queryClient) ReserveBeginStreamExecute(ctx context.Context, req *connect.Request[dev1.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev1.ReserveBeginStreamExecuteResponse], error) {
+func (c *queryClient) ReserveBeginStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error) {
 	return c.reserveBeginStreamExecute.CallServerStream(ctx, req)
 }
 
 // Release calls queryservice.Query.Release.
-func (c *queryClient) Release(ctx context.Context, req *connect.Request[dev1.ReleaseRequest]) (*connect.Response[dev1.ReleaseResponse], error) {
+func (c *queryClient) Release(ctx context.Context, req *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
 	return c.release.CallUnary(ctx, req)
 }
 
 // StreamHealth calls queryservice.Query.StreamHealth.
-func (c *queryClient) StreamHealth(ctx context.Context, req *connect.Request[dev1.StreamHealthRequest]) (*connect.ServerStreamForClient[dev1.StreamHealthResponse], error) {
+func (c *queryClient) StreamHealth(ctx context.Context, req *connect.Request[dev.StreamHealthRequest]) (*connect.ServerStreamForClient[dev.StreamHealthResponse], error) {
 	return c.streamHealth.CallServerStream(ctx, req)
 }
 
 // VStream calls queryservice.Query.VStream.
-func (c *queryClient) VStream(ctx context.Context, req *connect.Request[dev2.VStreamRequest]) (*connect.ServerStreamForClient[dev2.VStreamResponse], error) {
+func (c *queryClient) VStream(ctx context.Context, req *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error) {
 	return c.vStream.CallServerStream(ctx, req)
 }
 
 // VStreamRows calls queryservice.Query.VStreamRows.
-func (c *queryClient) VStreamRows(ctx context.Context, req *connect.Request[dev2.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev2.VStreamRowsResponse], error) {
+func (c *queryClient) VStreamRows(ctx context.Context, req *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error) {
 	return c.vStreamRows.CallServerStream(ctx, req)
 }
 
 // VStreamTables calls queryservice.Query.VStreamTables.
-func (c *queryClient) VStreamTables(ctx context.Context, req *connect.Request[dev2.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev2.VStreamTablesResponse], error) {
+func (c *queryClient) VStreamTables(ctx context.Context, req *connect.Request[dev1.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev1.VStreamTablesResponse], error) {
 	return c.vStreamTables.CallServerStream(ctx, req)
 }
 
 // VStreamResults calls queryservice.Query.VStreamResults.
-func (c *queryClient) VStreamResults(ctx context.Context, req *connect.Request[dev2.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev2.VStreamResultsResponse], error) {
+func (c *queryClient) VStreamResults(ctx context.Context, req *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error) {
 	return c.vStreamResults.CallServerStream(ctx, req)
 }
 
 // GetSchema calls queryservice.Query.GetSchema.
-func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev1.GetSchemaRequest]) (*connect.ServerStreamForClient[dev1.GetSchemaResponse], error) {
+func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error) {
 	return c.getSchema.CallServerStream(ctx, req)
 }
 
@@ -587,67 +554,67 @@ func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev1.G
 type QueryHandler interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
-	Execute(context.Context, *connect.Request[dev1.ExecuteRequest]) (*connect.Response[dev1.ExecuteResponse], error)
+	Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error)
 	// StreamExecute executes a streaming query. Use this method if the
 	// query returns a large number of rows. The first QueryResult will
 	// contain the Fields, subsequent QueryResult messages will contain
 	// the rows.
-	StreamExecute(context.Context, *connect.Request[dev1.StreamExecuteRequest], *connect.ServerStream[dev1.StreamExecuteResponse]) error
+	StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest], *connect.ServerStream[dev.StreamExecuteResponse]) error
 	// Begin a transaction.
-	Begin(context.Context, *connect.Request[dev1.BeginRequest]) (*connect.Response[dev1.BeginResponse], error)
+	Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error)
 	// Commit a transaction.
-	Commit(context.Context, *connect.Request[dev1.CommitRequest]) (*connect.Response[dev1.CommitResponse], error)
+	Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error)
 	// Rollback a transaction.
-	Rollback(context.Context, *connect.Request[dev1.RollbackRequest]) (*connect.Response[dev1.RollbackResponse], error)
+	Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error)
 	// Prepare preares a transaction.
-	Prepare(context.Context, *connect.Request[dev1.PrepareRequest]) (*connect.Response[dev1.PrepareResponse], error)
+	Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error)
 	// CommitPrepared commits a prepared transaction.
-	CommitPrepared(context.Context, *connect.Request[dev1.CommitPreparedRequest]) (*connect.Response[dev1.CommitPreparedResponse], error)
+	CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error)
 	// RollbackPrepared rolls back a prepared transaction.
-	RollbackPrepared(context.Context, *connect.Request[dev1.RollbackPreparedRequest]) (*connect.Response[dev1.RollbackPreparedResponse], error)
+	RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error)
 	// CreateTransaction creates the metadata for a 2pc transaction.
-	CreateTransaction(context.Context, *connect.Request[dev1.CreateTransactionRequest]) (*connect.Response[dev1.CreateTransactionResponse], error)
+	CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error)
 	// StartCommit initiates a commit for a 2pc transaction.
-	StartCommit(context.Context, *connect.Request[dev1.StartCommitRequest]) (*connect.Response[dev1.StartCommitResponse], error)
+	StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error)
 	// SetRollback marks the 2pc transaction for rollback.
-	SetRollback(context.Context, *connect.Request[dev1.SetRollbackRequest]) (*connect.Response[dev1.SetRollbackResponse], error)
+	SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error)
 	// ConcludeTransaction marks the 2pc transaction as resolved.
-	ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error)
+	ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error)
 	// ReadTransaction returns the 2pc transaction info.
-	ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error)
+	ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error)
 	// UnresolvedTransactions returns the 2pc transaction info.
-	UnresolvedTransactions(context.Context, *connect.Request[dev1.UnresolvedTransactionsRequest]) (*connect.Response[dev1.UnresolvedTransactionsResponse], error)
+	UnresolvedTransactions(context.Context, *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error)
 	// BeginExecute executes a begin and the specified SQL query.
-	BeginExecute(context.Context, *connect.Request[dev1.BeginExecuteRequest]) (*connect.Response[dev1.BeginExecuteResponse], error)
+	BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error)
 	// BeginStreamExecute executes a begin and the specified SQL query.
-	BeginStreamExecute(context.Context, *connect.Request[dev1.BeginStreamExecuteRequest], *connect.ServerStream[dev1.BeginStreamExecuteResponse]) error
+	BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest], *connect.ServerStream[dev.BeginStreamExecuteResponse]) error
 	// MessageStream streams messages from a message table.
-	MessageStream(context.Context, *connect.Request[dev1.MessageStreamRequest], *connect.ServerStream[dev1.MessageStreamResponse]) error
+	MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest], *connect.ServerStream[dev.MessageStreamResponse]) error
 	// MessageAck acks messages for a table.
-	MessageAck(context.Context, *connect.Request[dev1.MessageAckRequest]) (*connect.Response[dev1.MessageAckResponse], error)
+	MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error)
 	// ReserveExecute executes a query on a reserved connection
-	ReserveExecute(context.Context, *connect.Request[dev1.ReserveExecuteRequest]) (*connect.Response[dev1.ReserveExecuteResponse], error)
+	ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error)
 	// ReserveBeginExecute starts a transaction and executes a query in the transaction on a reserved connection
-	ReserveBeginExecute(context.Context, *connect.Request[dev1.ReserveBeginExecuteRequest]) (*connect.Response[dev1.ReserveBeginExecuteResponse], error)
+	ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error)
 	// ReserveStreamExecute executes a streaming query on a reserved connection
-	ReserveStreamExecute(context.Context, *connect.Request[dev1.ReserveStreamExecuteRequest], *connect.ServerStream[dev1.ReserveStreamExecuteResponse]) error
+	ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest], *connect.ServerStream[dev.ReserveStreamExecuteResponse]) error
 	// ReserveBeginStreamExecute starts a transaction and executes a streaming query in the transaction on a reserved connection
-	ReserveBeginStreamExecute(context.Context, *connect.Request[dev1.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev1.ReserveBeginStreamExecuteResponse]) error
+	ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error
 	// Release releases the connection
-	Release(context.Context, *connect.Request[dev1.ReleaseRequest]) (*connect.Response[dev1.ReleaseResponse], error)
+	Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error)
 	// StreamHealth runs a streaming RPC to the tablet, that returns the
 	// current health of the tablet on a regular basis.
-	StreamHealth(context.Context, *connect.Request[dev1.StreamHealthRequest], *connect.ServerStream[dev1.StreamHealthResponse]) error
+	StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest], *connect.ServerStream[dev.StreamHealthResponse]) error
 	// VStream streams vreplication events.
-	VStream(context.Context, *connect.Request[dev2.VStreamRequest], *connect.ServerStream[dev2.VStreamResponse]) error
+	VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error
 	// VStreamRows streams rows from the specified starting point.
-	VStreamRows(context.Context, *connect.Request[dev2.VStreamRowsRequest], *connect.ServerStream[dev2.VStreamRowsResponse]) error
+	VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error
 	// VStreamTables streams rows from the specified starting point.
-	VStreamTables(context.Context, *connect.Request[dev2.VStreamTablesRequest], *connect.ServerStream[dev2.VStreamTablesResponse]) error
+	VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest], *connect.ServerStream[dev1.VStreamTablesResponse]) error
 	// VStreamResults streams results along with the gtid of the snapshot.
-	VStreamResults(context.Context, *connect.Request[dev2.VStreamResultsRequest], *connect.ServerStream[dev2.VStreamResultsResponse]) error
+	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error
 	// GetSchema returns the schema information.
-	GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest], *connect.ServerStream[dev1.GetSchemaResponse]) error
+	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error
 }
 
 // NewQueryHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -656,178 +623,179 @@ type QueryHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	queryMethods := dev2.File_vitess_queryservice_dev_queryservice_proto.Services().ByName("Query").Methods()
 	queryExecuteHandler := connect.NewUnaryHandler(
 		QueryExecuteProcedure,
 		svc.Execute,
-		connect.WithSchema(queryExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Execute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryStreamExecuteProcedure,
 		svc.StreamExecute,
-		connect.WithSchema(queryStreamExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("StreamExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryBeginHandler := connect.NewUnaryHandler(
 		QueryBeginProcedure,
 		svc.Begin,
-		connect.WithSchema(queryBeginMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Begin")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryCommitHandler := connect.NewUnaryHandler(
 		QueryCommitProcedure,
 		svc.Commit,
-		connect.WithSchema(queryCommitMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Commit")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryRollbackHandler := connect.NewUnaryHandler(
 		QueryRollbackProcedure,
 		svc.Rollback,
-		connect.WithSchema(queryRollbackMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Rollback")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryPrepareHandler := connect.NewUnaryHandler(
 		QueryPrepareProcedure,
 		svc.Prepare,
-		connect.WithSchema(queryPrepareMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Prepare")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryCommitPreparedHandler := connect.NewUnaryHandler(
 		QueryCommitPreparedProcedure,
 		svc.CommitPrepared,
-		connect.WithSchema(queryCommitPreparedMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("CommitPrepared")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryRollbackPreparedHandler := connect.NewUnaryHandler(
 		QueryRollbackPreparedProcedure,
 		svc.RollbackPrepared,
-		connect.WithSchema(queryRollbackPreparedMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("RollbackPrepared")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryCreateTransactionHandler := connect.NewUnaryHandler(
 		QueryCreateTransactionProcedure,
 		svc.CreateTransaction,
-		connect.WithSchema(queryCreateTransactionMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("CreateTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryStartCommitHandler := connect.NewUnaryHandler(
 		QueryStartCommitProcedure,
 		svc.StartCommit,
-		connect.WithSchema(queryStartCommitMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("StartCommit")),
 		connect.WithHandlerOptions(opts...),
 	)
 	querySetRollbackHandler := connect.NewUnaryHandler(
 		QuerySetRollbackProcedure,
 		svc.SetRollback,
-		connect.WithSchema(querySetRollbackMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("SetRollback")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryConcludeTransactionHandler := connect.NewUnaryHandler(
 		QueryConcludeTransactionProcedure,
 		svc.ConcludeTransaction,
-		connect.WithSchema(queryConcludeTransactionMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ConcludeTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReadTransactionHandler := connect.NewUnaryHandler(
 		QueryReadTransactionProcedure,
 		svc.ReadTransaction,
-		connect.WithSchema(queryReadTransactionMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ReadTransaction")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryUnresolvedTransactionsHandler := connect.NewUnaryHandler(
 		QueryUnresolvedTransactionsProcedure,
 		svc.UnresolvedTransactions,
-		connect.WithSchema(queryUnresolvedTransactionsMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("UnresolvedTransactions")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryBeginExecuteHandler := connect.NewUnaryHandler(
 		QueryBeginExecuteProcedure,
 		svc.BeginExecute,
-		connect.WithSchema(queryBeginExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("BeginExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryBeginStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryBeginStreamExecuteProcedure,
 		svc.BeginStreamExecute,
-		connect.WithSchema(queryBeginStreamExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("BeginStreamExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryMessageStreamHandler := connect.NewServerStreamHandler(
 		QueryMessageStreamProcedure,
 		svc.MessageStream,
-		connect.WithSchema(queryMessageStreamMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("MessageStream")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryMessageAckHandler := connect.NewUnaryHandler(
 		QueryMessageAckProcedure,
 		svc.MessageAck,
-		connect.WithSchema(queryMessageAckMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("MessageAck")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReserveExecuteHandler := connect.NewUnaryHandler(
 		QueryReserveExecuteProcedure,
 		svc.ReserveExecute,
-		connect.WithSchema(queryReserveExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ReserveExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReserveBeginExecuteHandler := connect.NewUnaryHandler(
 		QueryReserveBeginExecuteProcedure,
 		svc.ReserveBeginExecute,
-		connect.WithSchema(queryReserveBeginExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ReserveBeginExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReserveStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryReserveStreamExecuteProcedure,
 		svc.ReserveStreamExecute,
-		connect.WithSchema(queryReserveStreamExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ReserveStreamExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReserveBeginStreamExecuteHandler := connect.NewServerStreamHandler(
 		QueryReserveBeginStreamExecuteProcedure,
 		svc.ReserveBeginStreamExecute,
-		connect.WithSchema(queryReserveBeginStreamExecuteMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("ReserveBeginStreamExecute")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryReleaseHandler := connect.NewUnaryHandler(
 		QueryReleaseProcedure,
 		svc.Release,
-		connect.WithSchema(queryReleaseMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("Release")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryStreamHealthHandler := connect.NewServerStreamHandler(
 		QueryStreamHealthProcedure,
 		svc.StreamHealth,
-		connect.WithSchema(queryStreamHealthMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("StreamHealth")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryVStreamHandler := connect.NewServerStreamHandler(
 		QueryVStreamProcedure,
 		svc.VStream,
-		connect.WithSchema(queryVStreamMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("VStream")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryVStreamRowsHandler := connect.NewServerStreamHandler(
 		QueryVStreamRowsProcedure,
 		svc.VStreamRows,
-		connect.WithSchema(queryVStreamRowsMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("VStreamRows")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryVStreamTablesHandler := connect.NewServerStreamHandler(
 		QueryVStreamTablesProcedure,
 		svc.VStreamTables,
-		connect.WithSchema(queryVStreamTablesMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("VStreamTables")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryVStreamResultsHandler := connect.NewServerStreamHandler(
 		QueryVStreamResultsProcedure,
 		svc.VStreamResults,
-		connect.WithSchema(queryVStreamResultsMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("VStreamResults")),
 		connect.WithHandlerOptions(opts...),
 	)
 	queryGetSchemaHandler := connect.NewServerStreamHandler(
 		QueryGetSchemaProcedure,
 		svc.GetSchema,
-		connect.WithSchema(queryGetSchemaMethodDescriptor),
+		connect.WithSchema(queryMethods.ByName("GetSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/queryservice.Query/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -899,118 +867,118 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 // UnimplementedQueryHandler returns CodeUnimplemented from all methods.
 type UnimplementedQueryHandler struct{}
 
-func (UnimplementedQueryHandler) Execute(context.Context, *connect.Request[dev1.ExecuteRequest]) (*connect.Response[dev1.ExecuteResponse], error) {
+func (UnimplementedQueryHandler) Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Execute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StreamExecute(context.Context, *connect.Request[dev1.StreamExecuteRequest], *connect.ServerStream[dev1.StreamExecuteResponse]) error {
+func (UnimplementedQueryHandler) StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest], *connect.ServerStream[dev.StreamExecuteResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Begin(context.Context, *connect.Request[dev1.BeginRequest]) (*connect.Response[dev1.BeginResponse], error) {
+func (UnimplementedQueryHandler) Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Begin is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Commit(context.Context, *connect.Request[dev1.CommitRequest]) (*connect.Response[dev1.CommitResponse], error) {
+func (UnimplementedQueryHandler) Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Commit is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Rollback(context.Context, *connect.Request[dev1.RollbackRequest]) (*connect.Response[dev1.RollbackResponse], error) {
+func (UnimplementedQueryHandler) Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Rollback is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Prepare(context.Context, *connect.Request[dev1.PrepareRequest]) (*connect.Response[dev1.PrepareResponse], error) {
+func (UnimplementedQueryHandler) Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Prepare is not implemented"))
 }
 
-func (UnimplementedQueryHandler) CommitPrepared(context.Context, *connect.Request[dev1.CommitPreparedRequest]) (*connect.Response[dev1.CommitPreparedResponse], error) {
+func (UnimplementedQueryHandler) CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CommitPrepared is not implemented"))
 }
 
-func (UnimplementedQueryHandler) RollbackPrepared(context.Context, *connect.Request[dev1.RollbackPreparedRequest]) (*connect.Response[dev1.RollbackPreparedResponse], error) {
+func (UnimplementedQueryHandler) RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.RollbackPrepared is not implemented"))
 }
 
-func (UnimplementedQueryHandler) CreateTransaction(context.Context, *connect.Request[dev1.CreateTransactionRequest]) (*connect.Response[dev1.CreateTransactionResponse], error) {
+func (UnimplementedQueryHandler) CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CreateTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StartCommit(context.Context, *connect.Request[dev1.StartCommitRequest]) (*connect.Response[dev1.StartCommitResponse], error) {
+func (UnimplementedQueryHandler) StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StartCommit is not implemented"))
 }
 
-func (UnimplementedQueryHandler) SetRollback(context.Context, *connect.Request[dev1.SetRollbackRequest]) (*connect.Response[dev1.SetRollbackResponse], error) {
+func (UnimplementedQueryHandler) SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.SetRollback is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ConcludeTransaction(context.Context, *connect.Request[dev1.ConcludeTransactionRequest]) (*connect.Response[dev1.ConcludeTransactionResponse], error) {
+func (UnimplementedQueryHandler) ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ConcludeTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReadTransaction(context.Context, *connect.Request[dev1.ReadTransactionRequest]) (*connect.Response[dev1.ReadTransactionResponse], error) {
+func (UnimplementedQueryHandler) ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReadTransaction is not implemented"))
 }
 
-func (UnimplementedQueryHandler) UnresolvedTransactions(context.Context, *connect.Request[dev1.UnresolvedTransactionsRequest]) (*connect.Response[dev1.UnresolvedTransactionsResponse], error) {
+func (UnimplementedQueryHandler) UnresolvedTransactions(context.Context, *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.UnresolvedTransactions is not implemented"))
 }
 
-func (UnimplementedQueryHandler) BeginExecute(context.Context, *connect.Request[dev1.BeginExecuteRequest]) (*connect.Response[dev1.BeginExecuteResponse], error) {
+func (UnimplementedQueryHandler) BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) BeginStreamExecute(context.Context, *connect.Request[dev1.BeginStreamExecuteRequest], *connect.ServerStream[dev1.BeginStreamExecuteResponse]) error {
+func (UnimplementedQueryHandler) BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest], *connect.ServerStream[dev.BeginStreamExecuteResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) MessageStream(context.Context, *connect.Request[dev1.MessageStreamRequest], *connect.ServerStream[dev1.MessageStreamResponse]) error {
+func (UnimplementedQueryHandler) MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest], *connect.ServerStream[dev.MessageStreamResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageStream is not implemented"))
 }
 
-func (UnimplementedQueryHandler) MessageAck(context.Context, *connect.Request[dev1.MessageAckRequest]) (*connect.Response[dev1.MessageAckResponse], error) {
+func (UnimplementedQueryHandler) MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageAck is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveExecute(context.Context, *connect.Request[dev1.ReserveExecuteRequest]) (*connect.Response[dev1.ReserveExecuteResponse], error) {
+func (UnimplementedQueryHandler) ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveBeginExecute(context.Context, *connect.Request[dev1.ReserveBeginExecuteRequest]) (*connect.Response[dev1.ReserveBeginExecuteResponse], error) {
+func (UnimplementedQueryHandler) ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveStreamExecute(context.Context, *connect.Request[dev1.ReserveStreamExecuteRequest], *connect.ServerStream[dev1.ReserveStreamExecuteResponse]) error {
+func (UnimplementedQueryHandler) ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest], *connect.ServerStream[dev.ReserveStreamExecuteResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) ReserveBeginStreamExecute(context.Context, *connect.Request[dev1.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev1.ReserveBeginStreamExecuteResponse]) error {
+func (UnimplementedQueryHandler) ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginStreamExecute is not implemented"))
 }
 
-func (UnimplementedQueryHandler) Release(context.Context, *connect.Request[dev1.ReleaseRequest]) (*connect.Response[dev1.ReleaseResponse], error) {
+func (UnimplementedQueryHandler) Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Release is not implemented"))
 }
 
-func (UnimplementedQueryHandler) StreamHealth(context.Context, *connect.Request[dev1.StreamHealthRequest], *connect.ServerStream[dev1.StreamHealthResponse]) error {
+func (UnimplementedQueryHandler) StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest], *connect.ServerStream[dev.StreamHealthResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamHealth is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStream(context.Context, *connect.Request[dev2.VStreamRequest], *connect.ServerStream[dev2.VStreamResponse]) error {
+func (UnimplementedQueryHandler) VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStream is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect.Request[dev2.VStreamRowsRequest], *connect.ServerStream[dev2.VStreamRowsResponse]) error {
+func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamRows is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStreamTables(context.Context, *connect.Request[dev2.VStreamTablesRequest], *connect.ServerStream[dev2.VStreamTablesResponse]) error {
+func (UnimplementedQueryHandler) VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest], *connect.ServerStream[dev1.VStreamTablesResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamTables is not implemented"))
 }
 
-func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Request[dev2.VStreamResultsRequest], *connect.ServerStream[dev2.VStreamResultsResponse]) error {
+func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamResults is not implemented"))
 }
 
-func (UnimplementedQueryHandler) GetSchema(context.Context, *connect.Request[dev1.GetSchemaRequest], *connect.ServerStream[dev1.GetSchemaResponse]) error {
+func (UnimplementedQueryHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.GetSchema is not implemented"))
 }

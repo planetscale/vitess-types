@@ -25,8 +25,8 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v191 "github.com/planetscale/vitess-types/gen/vitess/throttlerdata/v19"
-	v19 "github.com/planetscale/vitess-types/gen/vitess/throttlerservice/v19"
+	v19 "github.com/planetscale/vitess-types/gen/vitess/throttlerdata/v19"
+	v191 "github.com/planetscale/vitess-types/gen/vitess/throttlerservice/v19"
 	http "net/http"
 	strings "strings"
 )
@@ -66,36 +66,26 @@ const (
 	ThrottlerResetConfigurationProcedure = "/throttlerservice.Throttler/ResetConfiguration"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	throttlerServiceDescriptor                   = v19.File_vitess_throttlerservice_v19_throttlerservice_proto.Services().ByName("Throttler")
-	throttlerMaxRatesMethodDescriptor            = throttlerServiceDescriptor.Methods().ByName("MaxRates")
-	throttlerSetMaxRateMethodDescriptor          = throttlerServiceDescriptor.Methods().ByName("SetMaxRate")
-	throttlerGetConfigurationMethodDescriptor    = throttlerServiceDescriptor.Methods().ByName("GetConfiguration")
-	throttlerUpdateConfigurationMethodDescriptor = throttlerServiceDescriptor.Methods().ByName("UpdateConfiguration")
-	throttlerResetConfigurationMethodDescriptor  = throttlerServiceDescriptor.Methods().ByName("ResetConfiguration")
-)
-
 // ThrottlerClient is a client for the throttlerservice.Throttler service.
 type ThrottlerClient interface {
 	// MaxRates returns the current max rate for each throttler of the process.
-	MaxRates(context.Context, *connect.Request[v191.MaxRatesRequest]) (*connect.Response[v191.MaxRatesResponse], error)
+	MaxRates(context.Context, *connect.Request[v19.MaxRatesRequest]) (*connect.Response[v19.MaxRatesResponse], error)
 	// SetMaxRate allows to change the current max rate for all throttlers
 	// of the process.
-	SetMaxRate(context.Context, *connect.Request[v191.SetMaxRateRequest]) (*connect.Response[v191.SetMaxRateResponse], error)
+	SetMaxRate(context.Context, *connect.Request[v19.SetMaxRateRequest]) (*connect.Response[v19.SetMaxRateResponse], error)
 	// GetConfiguration returns the configuration of the MaxReplicationlag module
 	// for the given throttler or all throttlers if "throttler_name" is empty.
-	GetConfiguration(context.Context, *connect.Request[v191.GetConfigurationRequest]) (*connect.Response[v191.GetConfigurationResponse], error)
+	GetConfiguration(context.Context, *connect.Request[v19.GetConfigurationRequest]) (*connect.Response[v19.GetConfigurationResponse], error)
 	// UpdateConfiguration (partially) updates the configuration of the
 	// MaxReplicationlag module for the given throttler or all throttlers if
 	// "throttler_name" is empty.
 	// If "copy_zero_values" is true, fields with zero values will be copied
 	// as well.
-	UpdateConfiguration(context.Context, *connect.Request[v191.UpdateConfigurationRequest]) (*connect.Response[v191.UpdateConfigurationResponse], error)
+	UpdateConfiguration(context.Context, *connect.Request[v19.UpdateConfigurationRequest]) (*connect.Response[v19.UpdateConfigurationResponse], error)
 	// ResetConfiguration resets the configuration of the MaxReplicationlag module
 	// to the initial configuration for the given throttler or all throttlers if
 	// "throttler_name" is empty.
-	ResetConfiguration(context.Context, *connect.Request[v191.ResetConfigurationRequest]) (*connect.Response[v191.ResetConfigurationResponse], error)
+	ResetConfiguration(context.Context, *connect.Request[v19.ResetConfigurationRequest]) (*connect.Response[v19.ResetConfigurationResponse], error)
 }
 
 // NewThrottlerClient constructs a client for the throttlerservice.Throttler service. By
@@ -107,35 +97,36 @@ type ThrottlerClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewThrottlerClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ThrottlerClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	throttlerMethods := v191.File_vitess_throttlerservice_v19_throttlerservice_proto.Services().ByName("Throttler").Methods()
 	return &throttlerClient{
-		maxRates: connect.NewClient[v191.MaxRatesRequest, v191.MaxRatesResponse](
+		maxRates: connect.NewClient[v19.MaxRatesRequest, v19.MaxRatesResponse](
 			httpClient,
 			baseURL+ThrottlerMaxRatesProcedure,
-			connect.WithSchema(throttlerMaxRatesMethodDescriptor),
+			connect.WithSchema(throttlerMethods.ByName("MaxRates")),
 			connect.WithClientOptions(opts...),
 		),
-		setMaxRate: connect.NewClient[v191.SetMaxRateRequest, v191.SetMaxRateResponse](
+		setMaxRate: connect.NewClient[v19.SetMaxRateRequest, v19.SetMaxRateResponse](
 			httpClient,
 			baseURL+ThrottlerSetMaxRateProcedure,
-			connect.WithSchema(throttlerSetMaxRateMethodDescriptor),
+			connect.WithSchema(throttlerMethods.ByName("SetMaxRate")),
 			connect.WithClientOptions(opts...),
 		),
-		getConfiguration: connect.NewClient[v191.GetConfigurationRequest, v191.GetConfigurationResponse](
+		getConfiguration: connect.NewClient[v19.GetConfigurationRequest, v19.GetConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerGetConfigurationProcedure,
-			connect.WithSchema(throttlerGetConfigurationMethodDescriptor),
+			connect.WithSchema(throttlerMethods.ByName("GetConfiguration")),
 			connect.WithClientOptions(opts...),
 		),
-		updateConfiguration: connect.NewClient[v191.UpdateConfigurationRequest, v191.UpdateConfigurationResponse](
+		updateConfiguration: connect.NewClient[v19.UpdateConfigurationRequest, v19.UpdateConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerUpdateConfigurationProcedure,
-			connect.WithSchema(throttlerUpdateConfigurationMethodDescriptor),
+			connect.WithSchema(throttlerMethods.ByName("UpdateConfiguration")),
 			connect.WithClientOptions(opts...),
 		),
-		resetConfiguration: connect.NewClient[v191.ResetConfigurationRequest, v191.ResetConfigurationResponse](
+		resetConfiguration: connect.NewClient[v19.ResetConfigurationRequest, v19.ResetConfigurationResponse](
 			httpClient,
 			baseURL+ThrottlerResetConfigurationProcedure,
-			connect.WithSchema(throttlerResetConfigurationMethodDescriptor),
+			connect.WithSchema(throttlerMethods.ByName("ResetConfiguration")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -143,58 +134,58 @@ func NewThrottlerClient(httpClient connect.HTTPClient, baseURL string, opts ...c
 
 // throttlerClient implements ThrottlerClient.
 type throttlerClient struct {
-	maxRates            *connect.Client[v191.MaxRatesRequest, v191.MaxRatesResponse]
-	setMaxRate          *connect.Client[v191.SetMaxRateRequest, v191.SetMaxRateResponse]
-	getConfiguration    *connect.Client[v191.GetConfigurationRequest, v191.GetConfigurationResponse]
-	updateConfiguration *connect.Client[v191.UpdateConfigurationRequest, v191.UpdateConfigurationResponse]
-	resetConfiguration  *connect.Client[v191.ResetConfigurationRequest, v191.ResetConfigurationResponse]
+	maxRates            *connect.Client[v19.MaxRatesRequest, v19.MaxRatesResponse]
+	setMaxRate          *connect.Client[v19.SetMaxRateRequest, v19.SetMaxRateResponse]
+	getConfiguration    *connect.Client[v19.GetConfigurationRequest, v19.GetConfigurationResponse]
+	updateConfiguration *connect.Client[v19.UpdateConfigurationRequest, v19.UpdateConfigurationResponse]
+	resetConfiguration  *connect.Client[v19.ResetConfigurationRequest, v19.ResetConfigurationResponse]
 }
 
 // MaxRates calls throttlerservice.Throttler.MaxRates.
-func (c *throttlerClient) MaxRates(ctx context.Context, req *connect.Request[v191.MaxRatesRequest]) (*connect.Response[v191.MaxRatesResponse], error) {
+func (c *throttlerClient) MaxRates(ctx context.Context, req *connect.Request[v19.MaxRatesRequest]) (*connect.Response[v19.MaxRatesResponse], error) {
 	return c.maxRates.CallUnary(ctx, req)
 }
 
 // SetMaxRate calls throttlerservice.Throttler.SetMaxRate.
-func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect.Request[v191.SetMaxRateRequest]) (*connect.Response[v191.SetMaxRateResponse], error) {
+func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect.Request[v19.SetMaxRateRequest]) (*connect.Response[v19.SetMaxRateResponse], error) {
 	return c.setMaxRate.CallUnary(ctx, req)
 }
 
 // GetConfiguration calls throttlerservice.Throttler.GetConfiguration.
-func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect.Request[v191.GetConfigurationRequest]) (*connect.Response[v191.GetConfigurationResponse], error) {
+func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect.Request[v19.GetConfigurationRequest]) (*connect.Response[v19.GetConfigurationResponse], error) {
 	return c.getConfiguration.CallUnary(ctx, req)
 }
 
 // UpdateConfiguration calls throttlerservice.Throttler.UpdateConfiguration.
-func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect.Request[v191.UpdateConfigurationRequest]) (*connect.Response[v191.UpdateConfigurationResponse], error) {
+func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect.Request[v19.UpdateConfigurationRequest]) (*connect.Response[v19.UpdateConfigurationResponse], error) {
 	return c.updateConfiguration.CallUnary(ctx, req)
 }
 
 // ResetConfiguration calls throttlerservice.Throttler.ResetConfiguration.
-func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect.Request[v191.ResetConfigurationRequest]) (*connect.Response[v191.ResetConfigurationResponse], error) {
+func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect.Request[v19.ResetConfigurationRequest]) (*connect.Response[v19.ResetConfigurationResponse], error) {
 	return c.resetConfiguration.CallUnary(ctx, req)
 }
 
 // ThrottlerHandler is an implementation of the throttlerservice.Throttler service.
 type ThrottlerHandler interface {
 	// MaxRates returns the current max rate for each throttler of the process.
-	MaxRates(context.Context, *connect.Request[v191.MaxRatesRequest]) (*connect.Response[v191.MaxRatesResponse], error)
+	MaxRates(context.Context, *connect.Request[v19.MaxRatesRequest]) (*connect.Response[v19.MaxRatesResponse], error)
 	// SetMaxRate allows to change the current max rate for all throttlers
 	// of the process.
-	SetMaxRate(context.Context, *connect.Request[v191.SetMaxRateRequest]) (*connect.Response[v191.SetMaxRateResponse], error)
+	SetMaxRate(context.Context, *connect.Request[v19.SetMaxRateRequest]) (*connect.Response[v19.SetMaxRateResponse], error)
 	// GetConfiguration returns the configuration of the MaxReplicationlag module
 	// for the given throttler or all throttlers if "throttler_name" is empty.
-	GetConfiguration(context.Context, *connect.Request[v191.GetConfigurationRequest]) (*connect.Response[v191.GetConfigurationResponse], error)
+	GetConfiguration(context.Context, *connect.Request[v19.GetConfigurationRequest]) (*connect.Response[v19.GetConfigurationResponse], error)
 	// UpdateConfiguration (partially) updates the configuration of the
 	// MaxReplicationlag module for the given throttler or all throttlers if
 	// "throttler_name" is empty.
 	// If "copy_zero_values" is true, fields with zero values will be copied
 	// as well.
-	UpdateConfiguration(context.Context, *connect.Request[v191.UpdateConfigurationRequest]) (*connect.Response[v191.UpdateConfigurationResponse], error)
+	UpdateConfiguration(context.Context, *connect.Request[v19.UpdateConfigurationRequest]) (*connect.Response[v19.UpdateConfigurationResponse], error)
 	// ResetConfiguration resets the configuration of the MaxReplicationlag module
 	// to the initial configuration for the given throttler or all throttlers if
 	// "throttler_name" is empty.
-	ResetConfiguration(context.Context, *connect.Request[v191.ResetConfigurationRequest]) (*connect.Response[v191.ResetConfigurationResponse], error)
+	ResetConfiguration(context.Context, *connect.Request[v19.ResetConfigurationRequest]) (*connect.Response[v19.ResetConfigurationResponse], error)
 }
 
 // NewThrottlerHandler builds an HTTP handler from the service implementation. It returns the path
@@ -203,34 +194,35 @@ type ThrottlerHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	throttlerMethods := v191.File_vitess_throttlerservice_v19_throttlerservice_proto.Services().ByName("Throttler").Methods()
 	throttlerMaxRatesHandler := connect.NewUnaryHandler(
 		ThrottlerMaxRatesProcedure,
 		svc.MaxRates,
-		connect.WithSchema(throttlerMaxRatesMethodDescriptor),
+		connect.WithSchema(throttlerMethods.ByName("MaxRates")),
 		connect.WithHandlerOptions(opts...),
 	)
 	throttlerSetMaxRateHandler := connect.NewUnaryHandler(
 		ThrottlerSetMaxRateProcedure,
 		svc.SetMaxRate,
-		connect.WithSchema(throttlerSetMaxRateMethodDescriptor),
+		connect.WithSchema(throttlerMethods.ByName("SetMaxRate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	throttlerGetConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerGetConfigurationProcedure,
 		svc.GetConfiguration,
-		connect.WithSchema(throttlerGetConfigurationMethodDescriptor),
+		connect.WithSchema(throttlerMethods.ByName("GetConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	throttlerUpdateConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerUpdateConfigurationProcedure,
 		svc.UpdateConfiguration,
-		connect.WithSchema(throttlerUpdateConfigurationMethodDescriptor),
+		connect.WithSchema(throttlerMethods.ByName("UpdateConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	throttlerResetConfigurationHandler := connect.NewUnaryHandler(
 		ThrottlerResetConfigurationProcedure,
 		svc.ResetConfiguration,
-		connect.WithSchema(throttlerResetConfigurationMethodDescriptor),
+		connect.WithSchema(throttlerMethods.ByName("ResetConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/throttlerservice.Throttler/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -254,22 +246,22 @@ func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect.HandlerOption) (s
 // UnimplementedThrottlerHandler returns CodeUnimplemented from all methods.
 type UnimplementedThrottlerHandler struct{}
 
-func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect.Request[v191.MaxRatesRequest]) (*connect.Response[v191.MaxRatesResponse], error) {
+func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect.Request[v19.MaxRatesRequest]) (*connect.Response[v19.MaxRatesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.MaxRates is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect.Request[v191.SetMaxRateRequest]) (*connect.Response[v191.SetMaxRateResponse], error) {
+func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect.Request[v19.SetMaxRateRequest]) (*connect.Response[v19.SetMaxRateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.SetMaxRate is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect.Request[v191.GetConfigurationRequest]) (*connect.Response[v191.GetConfigurationResponse], error) {
+func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect.Request[v19.GetConfigurationRequest]) (*connect.Response[v19.GetConfigurationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.GetConfiguration is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect.Request[v191.UpdateConfigurationRequest]) (*connect.Response[v191.UpdateConfigurationResponse], error) {
+func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect.Request[v19.UpdateConfigurationRequest]) (*connect.Response[v19.UpdateConfigurationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.UpdateConfiguration is not implemented"))
 }
 
-func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect.Request[v191.ResetConfigurationRequest]) (*connect.Response[v191.ResetConfigurationResponse], error) {
+func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect.Request[v19.ResetConfigurationRequest]) (*connect.Response[v19.ResetConfigurationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.ResetConfiguration is not implemented"))
 }
