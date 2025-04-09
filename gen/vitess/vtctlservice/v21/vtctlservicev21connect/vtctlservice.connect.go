@@ -718,7 +718,8 @@ type VtctldClient interface {
 	// orchestrator).
 	//
 	// See the Reparenting guide for more information:
-	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error)
+	// https://vitess.io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.
+	TabletExternallyReparented(context.Context, *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error)
 	// UpdateCellInfo updates the content of a CellInfo with the provided
 	// parameters. Empty values are ignored. If the cell does not exist, the
 	// CellInfo will be created.
@@ -2540,7 +2541,8 @@ type VtctldHandler interface {
 	// orchestrator).
 	//
 	// See the Reparenting guide for more information:
-	// https://io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.Context, *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error)
+	// https://vitess.io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.
+	TabletExternallyReparented(context.Context, *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error)
 	// UpdateCellInfo updates the content of a CellInfo with the provided
 	// parameters. Empty values are ignored. If the cell does not exist, the
 	// CellInfo will be created.
