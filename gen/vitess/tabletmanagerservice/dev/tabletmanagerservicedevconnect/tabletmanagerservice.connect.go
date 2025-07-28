@@ -40,7 +40,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// TabletManagerName is the fully-qualified name of the TabletManager service.
-	TabletManagerName = "tabletmanagerservice.TabletManager"
+	TabletManagerName = "vitess.tabletmanagerservice.dev.TabletManager"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -52,204 +52,210 @@ const (
 // period.
 const (
 	// TabletManagerPingProcedure is the fully-qualified name of the TabletManager's Ping RPC.
-	TabletManagerPingProcedure = "/tabletmanagerservice.TabletManager/Ping"
+	TabletManagerPingProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/Ping"
 	// TabletManagerSleepProcedure is the fully-qualified name of the TabletManager's Sleep RPC.
-	TabletManagerSleepProcedure = "/tabletmanagerservice.TabletManager/Sleep"
+	TabletManagerSleepProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/Sleep"
 	// TabletManagerExecuteHookProcedure is the fully-qualified name of the TabletManager's ExecuteHook
 	// RPC.
-	TabletManagerExecuteHookProcedure = "/tabletmanagerservice.TabletManager/ExecuteHook"
+	TabletManagerExecuteHookProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteHook"
 	// TabletManagerGetSchemaProcedure is the fully-qualified name of the TabletManager's GetSchema RPC.
-	TabletManagerGetSchemaProcedure = "/tabletmanagerservice.TabletManager/GetSchema"
+	TabletManagerGetSchemaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetSchema"
 	// TabletManagerGetPermissionsProcedure is the fully-qualified name of the TabletManager's
 	// GetPermissions RPC.
-	TabletManagerGetPermissionsProcedure = "/tabletmanagerservice.TabletManager/GetPermissions"
+	TabletManagerGetPermissionsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetPermissions"
 	// TabletManagerGetGlobalStatusVarsProcedure is the fully-qualified name of the TabletManager's
 	// GetGlobalStatusVars RPC.
-	TabletManagerGetGlobalStatusVarsProcedure = "/tabletmanagerservice.TabletManager/GetGlobalStatusVars"
+	TabletManagerGetGlobalStatusVarsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetGlobalStatusVars"
 	// TabletManagerSetReadOnlyProcedure is the fully-qualified name of the TabletManager's SetReadOnly
 	// RPC.
-	TabletManagerSetReadOnlyProcedure = "/tabletmanagerservice.TabletManager/SetReadOnly"
+	TabletManagerSetReadOnlyProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/SetReadOnly"
 	// TabletManagerSetReadWriteProcedure is the fully-qualified name of the TabletManager's
 	// SetReadWrite RPC.
-	TabletManagerSetReadWriteProcedure = "/tabletmanagerservice.TabletManager/SetReadWrite"
+	TabletManagerSetReadWriteProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/SetReadWrite"
 	// TabletManagerChangeTagsProcedure is the fully-qualified name of the TabletManager's ChangeTags
 	// RPC.
-	TabletManagerChangeTagsProcedure = "/tabletmanagerservice.TabletManager/ChangeTags"
+	TabletManagerChangeTagsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ChangeTags"
 	// TabletManagerChangeTypeProcedure is the fully-qualified name of the TabletManager's ChangeType
 	// RPC.
-	TabletManagerChangeTypeProcedure = "/tabletmanagerservice.TabletManager/ChangeType"
+	TabletManagerChangeTypeProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ChangeType"
 	// TabletManagerRefreshStateProcedure is the fully-qualified name of the TabletManager's
 	// RefreshState RPC.
-	TabletManagerRefreshStateProcedure = "/tabletmanagerservice.TabletManager/RefreshState"
+	TabletManagerRefreshStateProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/RefreshState"
 	// TabletManagerRunHealthCheckProcedure is the fully-qualified name of the TabletManager's
 	// RunHealthCheck RPC.
-	TabletManagerRunHealthCheckProcedure = "/tabletmanagerservice.TabletManager/RunHealthCheck"
+	TabletManagerRunHealthCheckProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/RunHealthCheck"
 	// TabletManagerReloadSchemaProcedure is the fully-qualified name of the TabletManager's
 	// ReloadSchema RPC.
-	TabletManagerReloadSchemaProcedure = "/tabletmanagerservice.TabletManager/ReloadSchema"
+	TabletManagerReloadSchemaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReloadSchema"
 	// TabletManagerPreflightSchemaProcedure is the fully-qualified name of the TabletManager's
 	// PreflightSchema RPC.
-	TabletManagerPreflightSchemaProcedure = "/tabletmanagerservice.TabletManager/PreflightSchema"
+	TabletManagerPreflightSchemaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/PreflightSchema"
 	// TabletManagerApplySchemaProcedure is the fully-qualified name of the TabletManager's ApplySchema
 	// RPC.
-	TabletManagerApplySchemaProcedure = "/tabletmanagerservice.TabletManager/ApplySchema"
+	TabletManagerApplySchemaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ApplySchema"
 	// TabletManagerResetSequencesProcedure is the fully-qualified name of the TabletManager's
 	// ResetSequences RPC.
-	TabletManagerResetSequencesProcedure = "/tabletmanagerservice.TabletManager/ResetSequences"
+	TabletManagerResetSequencesProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ResetSequences"
 	// TabletManagerLockTablesProcedure is the fully-qualified name of the TabletManager's LockTables
 	// RPC.
-	TabletManagerLockTablesProcedure = "/tabletmanagerservice.TabletManager/LockTables"
+	TabletManagerLockTablesProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/LockTables"
 	// TabletManagerUnlockTablesProcedure is the fully-qualified name of the TabletManager's
 	// UnlockTables RPC.
-	TabletManagerUnlockTablesProcedure = "/tabletmanagerservice.TabletManager/UnlockTables"
+	TabletManagerUnlockTablesProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UnlockTables"
 	// TabletManagerExecuteQueryProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteQuery RPC.
-	TabletManagerExecuteQueryProcedure = "/tabletmanagerservice.TabletManager/ExecuteQuery"
+	TabletManagerExecuteQueryProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteQuery"
 	// TabletManagerExecuteFetchAsDbaProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsDba RPC.
-	TabletManagerExecuteFetchAsDbaProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsDba"
+	TabletManagerExecuteFetchAsDbaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteFetchAsDba"
 	// TabletManagerExecuteMultiFetchAsDbaProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteMultiFetchAsDba RPC.
-	TabletManagerExecuteMultiFetchAsDbaProcedure = "/tabletmanagerservice.TabletManager/ExecuteMultiFetchAsDba"
+	TabletManagerExecuteMultiFetchAsDbaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteMultiFetchAsDba"
 	// TabletManagerExecuteFetchAsAllPrivsProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsAllPrivs RPC.
-	TabletManagerExecuteFetchAsAllPrivsProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsAllPrivs"
+	TabletManagerExecuteFetchAsAllPrivsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteFetchAsAllPrivs"
 	// TabletManagerExecuteFetchAsAppProcedure is the fully-qualified name of the TabletManager's
 	// ExecuteFetchAsApp RPC.
-	TabletManagerExecuteFetchAsAppProcedure = "/tabletmanagerservice.TabletManager/ExecuteFetchAsApp"
+	TabletManagerExecuteFetchAsAppProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ExecuteFetchAsApp"
 	// TabletManagerGetUnresolvedTransactionsProcedure is the fully-qualified name of the
 	// TabletManager's GetUnresolvedTransactions RPC.
-	TabletManagerGetUnresolvedTransactionsProcedure = "/tabletmanagerservice.TabletManager/GetUnresolvedTransactions"
+	TabletManagerGetUnresolvedTransactionsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetUnresolvedTransactions"
 	// TabletManagerReadTransactionProcedure is the fully-qualified name of the TabletManager's
 	// ReadTransaction RPC.
-	TabletManagerReadTransactionProcedure = "/tabletmanagerservice.TabletManager/ReadTransaction"
+	TabletManagerReadTransactionProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReadTransaction"
 	// TabletManagerGetTransactionInfoProcedure is the fully-qualified name of the TabletManager's
 	// GetTransactionInfo RPC.
-	TabletManagerGetTransactionInfoProcedure = "/tabletmanagerservice.TabletManager/GetTransactionInfo"
+	TabletManagerGetTransactionInfoProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetTransactionInfo"
 	// TabletManagerConcludeTransactionProcedure is the fully-qualified name of the TabletManager's
 	// ConcludeTransaction RPC.
-	TabletManagerConcludeTransactionProcedure = "/tabletmanagerservice.TabletManager/ConcludeTransaction"
+	TabletManagerConcludeTransactionProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ConcludeTransaction"
 	// TabletManagerMysqlHostMetricsProcedure is the fully-qualified name of the TabletManager's
 	// MysqlHostMetrics RPC.
-	TabletManagerMysqlHostMetricsProcedure = "/tabletmanagerservice.TabletManager/MysqlHostMetrics"
+	TabletManagerMysqlHostMetricsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/MysqlHostMetrics"
 	// TabletManagerReplicationStatusProcedure is the fully-qualified name of the TabletManager's
 	// ReplicationStatus RPC.
-	TabletManagerReplicationStatusProcedure = "/tabletmanagerservice.TabletManager/ReplicationStatus"
+	TabletManagerReplicationStatusProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReplicationStatus"
 	// TabletManagerPrimaryStatusProcedure is the fully-qualified name of the TabletManager's
 	// PrimaryStatus RPC.
-	TabletManagerPrimaryStatusProcedure = "/tabletmanagerservice.TabletManager/PrimaryStatus"
+	TabletManagerPrimaryStatusProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/PrimaryStatus"
 	// TabletManagerPrimaryPositionProcedure is the fully-qualified name of the TabletManager's
 	// PrimaryPosition RPC.
-	TabletManagerPrimaryPositionProcedure = "/tabletmanagerservice.TabletManager/PrimaryPosition"
+	TabletManagerPrimaryPositionProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/PrimaryPosition"
 	// TabletManagerWaitForPositionProcedure is the fully-qualified name of the TabletManager's
 	// WaitForPosition RPC.
-	TabletManagerWaitForPositionProcedure = "/tabletmanagerservice.TabletManager/WaitForPosition"
+	TabletManagerWaitForPositionProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/WaitForPosition"
 	// TabletManagerStopReplicationProcedure is the fully-qualified name of the TabletManager's
 	// StopReplication RPC.
-	TabletManagerStopReplicationProcedure = "/tabletmanagerservice.TabletManager/StopReplication"
+	TabletManagerStopReplicationProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/StopReplication"
 	// TabletManagerStopReplicationMinimumProcedure is the fully-qualified name of the TabletManager's
 	// StopReplicationMinimum RPC.
-	TabletManagerStopReplicationMinimumProcedure = "/tabletmanagerservice.TabletManager/StopReplicationMinimum"
+	TabletManagerStopReplicationMinimumProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/StopReplicationMinimum"
 	// TabletManagerStartReplicationProcedure is the fully-qualified name of the TabletManager's
 	// StartReplication RPC.
-	TabletManagerStartReplicationProcedure = "/tabletmanagerservice.TabletManager/StartReplication"
+	TabletManagerStartReplicationProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/StartReplication"
 	// TabletManagerStartReplicationUntilAfterProcedure is the fully-qualified name of the
 	// TabletManager's StartReplicationUntilAfter RPC.
-	TabletManagerStartReplicationUntilAfterProcedure = "/tabletmanagerservice.TabletManager/StartReplicationUntilAfter"
+	TabletManagerStartReplicationUntilAfterProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/StartReplicationUntilAfter"
 	// TabletManagerGetReplicasProcedure is the fully-qualified name of the TabletManager's GetReplicas
 	// RPC.
-	TabletManagerGetReplicasProcedure = "/tabletmanagerservice.TabletManager/GetReplicas"
+	TabletManagerGetReplicasProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetReplicas"
 	// TabletManagerCreateVReplicationWorkflowProcedure is the fully-qualified name of the
 	// TabletManager's CreateVReplicationWorkflow RPC.
-	TabletManagerCreateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/CreateVReplicationWorkflow"
+	TabletManagerCreateVReplicationWorkflowProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/CreateVReplicationWorkflow"
 	// TabletManagerDeleteTableDataProcedure is the fully-qualified name of the TabletManager's
 	// DeleteTableData RPC.
-	TabletManagerDeleteTableDataProcedure = "/tabletmanagerservice.TabletManager/DeleteTableData"
+	TabletManagerDeleteTableDataProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/DeleteTableData"
 	// TabletManagerDeleteVReplicationWorkflowProcedure is the fully-qualified name of the
 	// TabletManager's DeleteVReplicationWorkflow RPC.
-	TabletManagerDeleteVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/DeleteVReplicationWorkflow"
+	TabletManagerDeleteVReplicationWorkflowProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/DeleteVReplicationWorkflow"
 	// TabletManagerHasVReplicationWorkflowsProcedure is the fully-qualified name of the TabletManager's
 	// HasVReplicationWorkflows RPC.
-	TabletManagerHasVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/HasVReplicationWorkflows"
+	TabletManagerHasVReplicationWorkflowsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/HasVReplicationWorkflows"
 	// TabletManagerReadVReplicationWorkflowProcedure is the fully-qualified name of the TabletManager's
 	// ReadVReplicationWorkflow RPC.
-	TabletManagerReadVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/ReadVReplicationWorkflow"
+	TabletManagerReadVReplicationWorkflowProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReadVReplicationWorkflow"
 	// TabletManagerReadVReplicationWorkflowsProcedure is the fully-qualified name of the
 	// TabletManager's ReadVReplicationWorkflows RPC.
-	TabletManagerReadVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/ReadVReplicationWorkflows"
+	TabletManagerReadVReplicationWorkflowsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReadVReplicationWorkflows"
 	// TabletManagerUpdateVReplicationWorkflowProcedure is the fully-qualified name of the
 	// TabletManager's UpdateVReplicationWorkflow RPC.
-	TabletManagerUpdateVReplicationWorkflowProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflow"
+	TabletManagerUpdateVReplicationWorkflowProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UpdateVReplicationWorkflow"
 	// TabletManagerUpdateVReplicationWorkflowsProcedure is the fully-qualified name of the
 	// TabletManager's UpdateVReplicationWorkflows RPC.
-	TabletManagerUpdateVReplicationWorkflowsProcedure = "/tabletmanagerservice.TabletManager/UpdateVReplicationWorkflows"
+	TabletManagerUpdateVReplicationWorkflowsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UpdateVReplicationWorkflows"
 	// TabletManagerValidateVReplicationPermissionsProcedure is the fully-qualified name of the
 	// TabletManager's ValidateVReplicationPermissions RPC.
-	TabletManagerValidateVReplicationPermissionsProcedure = "/tabletmanagerservice.TabletManager/ValidateVReplicationPermissions"
+	TabletManagerValidateVReplicationPermissionsProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ValidateVReplicationPermissions"
 	// TabletManagerVReplicationExecProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationExec RPC.
-	TabletManagerVReplicationExecProcedure = "/tabletmanagerservice.TabletManager/VReplicationExec"
+	TabletManagerVReplicationExecProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VReplicationExec"
 	// TabletManagerVReplicationWaitForPosProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationWaitForPos RPC.
-	TabletManagerVReplicationWaitForPosProcedure = "/tabletmanagerservice.TabletManager/VReplicationWaitForPos"
+	TabletManagerVReplicationWaitForPosProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VReplicationWaitForPos"
+	// TabletManagerUpdateSequenceTablesProcedure is the fully-qualified name of the TabletManager's
+	// UpdateSequenceTables RPC.
+	TabletManagerUpdateSequenceTablesProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UpdateSequenceTables"
+	// TabletManagerGetMaxValueForSequencesProcedure is the fully-qualified name of the TabletManager's
+	// GetMaxValueForSequences RPC.
+	TabletManagerGetMaxValueForSequencesProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetMaxValueForSequences"
 	// TabletManagerVDiffProcedure is the fully-qualified name of the TabletManager's VDiff RPC.
-	TabletManagerVDiffProcedure = "/tabletmanagerservice.TabletManager/VDiff"
+	TabletManagerVDiffProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/VDiff"
 	// TabletManagerResetReplicationProcedure is the fully-qualified name of the TabletManager's
 	// ResetReplication RPC.
-	TabletManagerResetReplicationProcedure = "/tabletmanagerservice.TabletManager/ResetReplication"
+	TabletManagerResetReplicationProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ResetReplication"
 	// TabletManagerInitPrimaryProcedure is the fully-qualified name of the TabletManager's InitPrimary
 	// RPC.
-	TabletManagerInitPrimaryProcedure = "/tabletmanagerservice.TabletManager/InitPrimary"
+	TabletManagerInitPrimaryProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/InitPrimary"
 	// TabletManagerPopulateReparentJournalProcedure is the fully-qualified name of the TabletManager's
 	// PopulateReparentJournal RPC.
-	TabletManagerPopulateReparentJournalProcedure = "/tabletmanagerservice.TabletManager/PopulateReparentJournal"
+	TabletManagerPopulateReparentJournalProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/PopulateReparentJournal"
 	// TabletManagerReadReparentJournalInfoProcedure is the fully-qualified name of the TabletManager's
 	// ReadReparentJournalInfo RPC.
-	TabletManagerReadReparentJournalInfoProcedure = "/tabletmanagerservice.TabletManager/ReadReparentJournalInfo"
+	TabletManagerReadReparentJournalInfoProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReadReparentJournalInfo"
 	// TabletManagerInitReplicaProcedure is the fully-qualified name of the TabletManager's InitReplica
 	// RPC.
-	TabletManagerInitReplicaProcedure = "/tabletmanagerservice.TabletManager/InitReplica"
+	TabletManagerInitReplicaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/InitReplica"
 	// TabletManagerDemotePrimaryProcedure is the fully-qualified name of the TabletManager's
 	// DemotePrimary RPC.
-	TabletManagerDemotePrimaryProcedure = "/tabletmanagerservice.TabletManager/DemotePrimary"
+	TabletManagerDemotePrimaryProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/DemotePrimary"
 	// TabletManagerUndoDemotePrimaryProcedure is the fully-qualified name of the TabletManager's
 	// UndoDemotePrimary RPC.
-	TabletManagerUndoDemotePrimaryProcedure = "/tabletmanagerservice.TabletManager/UndoDemotePrimary"
+	TabletManagerUndoDemotePrimaryProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/UndoDemotePrimary"
 	// TabletManagerReplicaWasPromotedProcedure is the fully-qualified name of the TabletManager's
 	// ReplicaWasPromoted RPC.
-	TabletManagerReplicaWasPromotedProcedure = "/tabletmanagerservice.TabletManager/ReplicaWasPromoted"
+	TabletManagerReplicaWasPromotedProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReplicaWasPromoted"
 	// TabletManagerResetReplicationParametersProcedure is the fully-qualified name of the
 	// TabletManager's ResetReplicationParameters RPC.
-	TabletManagerResetReplicationParametersProcedure = "/tabletmanagerservice.TabletManager/ResetReplicationParameters"
+	TabletManagerResetReplicationParametersProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ResetReplicationParameters"
 	// TabletManagerFullStatusProcedure is the fully-qualified name of the TabletManager's FullStatus
 	// RPC.
-	TabletManagerFullStatusProcedure = "/tabletmanagerservice.TabletManager/FullStatus"
+	TabletManagerFullStatusProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/FullStatus"
 	// TabletManagerSetReplicationSourceProcedure is the fully-qualified name of the TabletManager's
 	// SetReplicationSource RPC.
-	TabletManagerSetReplicationSourceProcedure = "/tabletmanagerservice.TabletManager/SetReplicationSource"
+	TabletManagerSetReplicationSourceProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/SetReplicationSource"
 	// TabletManagerReplicaWasRestartedProcedure is the fully-qualified name of the TabletManager's
 	// ReplicaWasRestarted RPC.
-	TabletManagerReplicaWasRestartedProcedure = "/tabletmanagerservice.TabletManager/ReplicaWasRestarted"
+	TabletManagerReplicaWasRestartedProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/ReplicaWasRestarted"
 	// TabletManagerStopReplicationAndGetStatusProcedure is the fully-qualified name of the
 	// TabletManager's StopReplicationAndGetStatus RPC.
-	TabletManagerStopReplicationAndGetStatusProcedure = "/tabletmanagerservice.TabletManager/StopReplicationAndGetStatus"
+	TabletManagerStopReplicationAndGetStatusProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/StopReplicationAndGetStatus"
 	// TabletManagerPromoteReplicaProcedure is the fully-qualified name of the TabletManager's
 	// PromoteReplica RPC.
-	TabletManagerPromoteReplicaProcedure = "/tabletmanagerservice.TabletManager/PromoteReplica"
+	TabletManagerPromoteReplicaProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/PromoteReplica"
 	// TabletManagerBackupProcedure is the fully-qualified name of the TabletManager's Backup RPC.
-	TabletManagerBackupProcedure = "/tabletmanagerservice.TabletManager/Backup"
+	TabletManagerBackupProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/Backup"
 	// TabletManagerRestoreFromBackupProcedure is the fully-qualified name of the TabletManager's
 	// RestoreFromBackup RPC.
-	TabletManagerRestoreFromBackupProcedure = "/tabletmanagerservice.TabletManager/RestoreFromBackup"
+	TabletManagerRestoreFromBackupProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/RestoreFromBackup"
 	// TabletManagerCheckThrottlerProcedure is the fully-qualified name of the TabletManager's
 	// CheckThrottler RPC.
-	TabletManagerCheckThrottlerProcedure = "/tabletmanagerservice.TabletManager/CheckThrottler"
+	TabletManagerCheckThrottlerProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/CheckThrottler"
 	// TabletManagerGetThrottlerStatusProcedure is the fully-qualified name of the TabletManager's
 	// GetThrottlerStatus RPC.
-	TabletManagerGetThrottlerStatusProcedure = "/tabletmanagerservice.TabletManager/GetThrottlerStatus"
+	TabletManagerGetThrottlerStatusProcedure = "/vitess.tabletmanagerservice.dev.TabletManager/GetThrottlerStatus"
 )
 
-// TabletManagerClient is a client for the tabletmanagerservice.TabletManager service.
+// TabletManagerClient is a client for the vitess.tabletmanagerservice.dev.TabletManager service.
 type TabletManagerClient interface {
 	// Ping returns the input payload
 	Ping(context.Context, *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error)
@@ -320,6 +326,8 @@ type TabletManagerClient interface {
 	ValidateVReplicationPermissions(context.Context, *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error)
+	GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -361,7 +369,7 @@ type TabletManagerClient interface {
 	GetThrottlerStatus(context.Context, *connect.Request[dev.GetThrottlerStatusRequest]) (*connect.Response[dev.GetThrottlerStatusResponse], error)
 }
 
-// NewTabletManagerClient constructs a client for the tabletmanagerservice.TabletManager
+// NewTabletManagerClient constructs a client for the vitess.tabletmanagerservice.dev.TabletManager
 // service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
 // gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
 // the connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -660,6 +668,18 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(tabletManagerMethods.ByName("VReplicationWaitForPos")),
 			connect.WithClientOptions(opts...),
 		),
+		updateSequenceTables: connect.NewClient[dev.UpdateSequenceTablesRequest, dev.UpdateSequenceTablesResponse](
+			httpClient,
+			baseURL+TabletManagerUpdateSequenceTablesProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("UpdateSequenceTables")),
+			connect.WithClientOptions(opts...),
+		),
+		getMaxValueForSequences: connect.NewClient[dev.GetMaxValueForSequencesRequest, dev.GetMaxValueForSequencesResponse](
+			httpClient,
+			baseURL+TabletManagerGetMaxValueForSequencesProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("GetMaxValueForSequences")),
+			connect.WithClientOptions(opts...),
+		),
 		vDiff: connect.NewClient[dev.VDiffRequest, dev.VDiffResponse](
 			httpClient,
 			baseURL+TabletManagerVDiffProcedure,
@@ -827,6 +847,8 @@ type tabletManagerClient struct {
 	validateVReplicationPermissions *connect.Client[dev.ValidateVReplicationPermissionsRequest, dev.ValidateVReplicationPermissionsResponse]
 	vReplicationExec                *connect.Client[dev.VReplicationExecRequest, dev.VReplicationExecResponse]
 	vReplicationWaitForPos          *connect.Client[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse]
+	updateSequenceTables            *connect.Client[dev.UpdateSequenceTablesRequest, dev.UpdateSequenceTablesResponse]
+	getMaxValueForSequences         *connect.Client[dev.GetMaxValueForSequencesRequest, dev.GetMaxValueForSequencesResponse]
 	vDiff                           *connect.Client[dev.VDiffRequest, dev.VDiffResponse]
 	resetReplication                *connect.Client[dev.ResetReplicationRequest, dev.ResetReplicationResponse]
 	initPrimary                     *connect.Client[dev.InitPrimaryRequest, dev.InitPrimaryResponse]
@@ -848,360 +870,371 @@ type tabletManagerClient struct {
 	getThrottlerStatus              *connect.Client[dev.GetThrottlerStatusRequest, dev.GetThrottlerStatusResponse]
 }
 
-// Ping calls tabletmanagerservice.TabletManager.Ping.
+// Ping calls vitess.tabletmanagerservice.dev.TabletManager.Ping.
 func (c *tabletManagerClient) Ping(ctx context.Context, req *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error) {
 	return c.ping.CallUnary(ctx, req)
 }
 
-// Sleep calls tabletmanagerservice.TabletManager.Sleep.
+// Sleep calls vitess.tabletmanagerservice.dev.TabletManager.Sleep.
 func (c *tabletManagerClient) Sleep(ctx context.Context, req *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error) {
 	return c.sleep.CallUnary(ctx, req)
 }
 
-// ExecuteHook calls tabletmanagerservice.TabletManager.ExecuteHook.
+// ExecuteHook calls vitess.tabletmanagerservice.dev.TabletManager.ExecuteHook.
 func (c *tabletManagerClient) ExecuteHook(ctx context.Context, req *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error) {
 	return c.executeHook.CallUnary(ctx, req)
 }
 
-// GetSchema calls tabletmanagerservice.TabletManager.GetSchema.
+// GetSchema calls vitess.tabletmanagerservice.dev.TabletManager.GetSchema.
 func (c *tabletManagerClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
-// GetPermissions calls tabletmanagerservice.TabletManager.GetPermissions.
+// GetPermissions calls vitess.tabletmanagerservice.dev.TabletManager.GetPermissions.
 func (c *tabletManagerClient) GetPermissions(ctx context.Context, req *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error) {
 	return c.getPermissions.CallUnary(ctx, req)
 }
 
-// GetGlobalStatusVars calls tabletmanagerservice.TabletManager.GetGlobalStatusVars.
+// GetGlobalStatusVars calls vitess.tabletmanagerservice.dev.TabletManager.GetGlobalStatusVars.
 func (c *tabletManagerClient) GetGlobalStatusVars(ctx context.Context, req *connect.Request[dev.GetGlobalStatusVarsRequest]) (*connect.Response[dev.GetGlobalStatusVarsResponse], error) {
 	return c.getGlobalStatusVars.CallUnary(ctx, req)
 }
 
-// SetReadOnly calls tabletmanagerservice.TabletManager.SetReadOnly.
+// SetReadOnly calls vitess.tabletmanagerservice.dev.TabletManager.SetReadOnly.
 func (c *tabletManagerClient) SetReadOnly(ctx context.Context, req *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
 	return c.setReadOnly.CallUnary(ctx, req)
 }
 
-// SetReadWrite calls tabletmanagerservice.TabletManager.SetReadWrite.
+// SetReadWrite calls vitess.tabletmanagerservice.dev.TabletManager.SetReadWrite.
 func (c *tabletManagerClient) SetReadWrite(ctx context.Context, req *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
 	return c.setReadWrite.CallUnary(ctx, req)
 }
 
-// ChangeTags calls tabletmanagerservice.TabletManager.ChangeTags.
+// ChangeTags calls vitess.tabletmanagerservice.dev.TabletManager.ChangeTags.
 func (c *tabletManagerClient) ChangeTags(ctx context.Context, req *connect.Request[dev.ChangeTagsRequest]) (*connect.Response[dev.ChangeTagsResponse], error) {
 	return c.changeTags.CallUnary(ctx, req)
 }
 
-// ChangeType calls tabletmanagerservice.TabletManager.ChangeType.
+// ChangeType calls vitess.tabletmanagerservice.dev.TabletManager.ChangeType.
 func (c *tabletManagerClient) ChangeType(ctx context.Context, req *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error) {
 	return c.changeType.CallUnary(ctx, req)
 }
 
-// RefreshState calls tabletmanagerservice.TabletManager.RefreshState.
+// RefreshState calls vitess.tabletmanagerservice.dev.TabletManager.RefreshState.
 func (c *tabletManagerClient) RefreshState(ctx context.Context, req *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
-// RunHealthCheck calls tabletmanagerservice.TabletManager.RunHealthCheck.
+// RunHealthCheck calls vitess.tabletmanagerservice.dev.TabletManager.RunHealthCheck.
 func (c *tabletManagerClient) RunHealthCheck(ctx context.Context, req *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
-// ReloadSchema calls tabletmanagerservice.TabletManager.ReloadSchema.
+// ReloadSchema calls vitess.tabletmanagerservice.dev.TabletManager.ReloadSchema.
 func (c *tabletManagerClient) ReloadSchema(ctx context.Context, req *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error) {
 	return c.reloadSchema.CallUnary(ctx, req)
 }
 
-// PreflightSchema calls tabletmanagerservice.TabletManager.PreflightSchema.
+// PreflightSchema calls vitess.tabletmanagerservice.dev.TabletManager.PreflightSchema.
 func (c *tabletManagerClient) PreflightSchema(ctx context.Context, req *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error) {
 	return c.preflightSchema.CallUnary(ctx, req)
 }
 
-// ApplySchema calls tabletmanagerservice.TabletManager.ApplySchema.
+// ApplySchema calls vitess.tabletmanagerservice.dev.TabletManager.ApplySchema.
 func (c *tabletManagerClient) ApplySchema(ctx context.Context, req *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
 }
 
-// ResetSequences calls tabletmanagerservice.TabletManager.ResetSequences.
+// ResetSequences calls vitess.tabletmanagerservice.dev.TabletManager.ResetSequences.
 func (c *tabletManagerClient) ResetSequences(ctx context.Context, req *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
 	return c.resetSequences.CallUnary(ctx, req)
 }
 
-// LockTables calls tabletmanagerservice.TabletManager.LockTables.
+// LockTables calls vitess.tabletmanagerservice.dev.TabletManager.LockTables.
 func (c *tabletManagerClient) LockTables(ctx context.Context, req *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error) {
 	return c.lockTables.CallUnary(ctx, req)
 }
 
-// UnlockTables calls tabletmanagerservice.TabletManager.UnlockTables.
+// UnlockTables calls vitess.tabletmanagerservice.dev.TabletManager.UnlockTables.
 func (c *tabletManagerClient) UnlockTables(ctx context.Context, req *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error) {
 	return c.unlockTables.CallUnary(ctx, req)
 }
 
-// ExecuteQuery calls tabletmanagerservice.TabletManager.ExecuteQuery.
+// ExecuteQuery calls vitess.tabletmanagerservice.dev.TabletManager.ExecuteQuery.
 func (c *tabletManagerClient) ExecuteQuery(ctx context.Context, req *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error) {
 	return c.executeQuery.CallUnary(ctx, req)
 }
 
-// ExecuteFetchAsDba calls tabletmanagerservice.TabletManager.ExecuteFetchAsDba.
+// ExecuteFetchAsDba calls vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsDba.
 func (c *tabletManagerClient) ExecuteFetchAsDba(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error) {
 	return c.executeFetchAsDba.CallUnary(ctx, req)
 }
 
 // ExecuteMultiFetchAsDba calls
-// tabletmanagerservice.TabletManager.ExecuteMultiFetchAsDba.
+// vitess.tabletmanagerservice.dev.TabletManager.ExecuteMultiFetchAsDba.
 func (c *tabletManagerClient) ExecuteMultiFetchAsDba(ctx context.Context, req *connect.Request[dev.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev.ExecuteMultiFetchAsDbaResponse], error) {
 	return c.executeMultiFetchAsDba.CallUnary(ctx, req)
 }
 
 // ExecuteFetchAsAllPrivs calls
-// tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs.
+// vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsAllPrivs.
 func (c *tabletManagerClient) ExecuteFetchAsAllPrivs(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error) {
 	return c.executeFetchAsAllPrivs.CallUnary(ctx, req)
 }
 
-// ExecuteFetchAsApp calls tabletmanagerservice.TabletManager.ExecuteFetchAsApp.
+// ExecuteFetchAsApp calls vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsApp.
 func (c *tabletManagerClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error) {
 	return c.executeFetchAsApp.CallUnary(ctx, req)
 }
 
 // GetUnresolvedTransactions calls
-// tabletmanagerservice.TabletManager.GetUnresolvedTransactions.
+// vitess.tabletmanagerservice.dev.TabletManager.GetUnresolvedTransactions.
 func (c *tabletManagerClient) GetUnresolvedTransactions(ctx context.Context, req *connect.Request[dev.GetUnresolvedTransactionsRequest]) (*connect.Response[dev.GetUnresolvedTransactionsResponse], error) {
 	return c.getUnresolvedTransactions.CallUnary(ctx, req)
 }
 
-// ReadTransaction calls tabletmanagerservice.TabletManager.ReadTransaction.
+// ReadTransaction calls vitess.tabletmanagerservice.dev.TabletManager.ReadTransaction.
 func (c *tabletManagerClient) ReadTransaction(ctx context.Context, req *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
 	return c.readTransaction.CallUnary(ctx, req)
 }
 
-// GetTransactionInfo calls tabletmanagerservice.TabletManager.GetTransactionInfo.
+// GetTransactionInfo calls vitess.tabletmanagerservice.dev.TabletManager.GetTransactionInfo.
 func (c *tabletManagerClient) GetTransactionInfo(ctx context.Context, req *connect.Request[dev.GetTransactionInfoRequest]) (*connect.Response[dev.GetTransactionInfoResponse], error) {
 	return c.getTransactionInfo.CallUnary(ctx, req)
 }
 
-// ConcludeTransaction calls tabletmanagerservice.TabletManager.ConcludeTransaction.
+// ConcludeTransaction calls vitess.tabletmanagerservice.dev.TabletManager.ConcludeTransaction.
 func (c *tabletManagerClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
 	return c.concludeTransaction.CallUnary(ctx, req)
 }
 
-// MysqlHostMetrics calls tabletmanagerservice.TabletManager.MysqlHostMetrics.
+// MysqlHostMetrics calls vitess.tabletmanagerservice.dev.TabletManager.MysqlHostMetrics.
 func (c *tabletManagerClient) MysqlHostMetrics(ctx context.Context, req *connect.Request[dev.MysqlHostMetricsRequest]) (*connect.Response[dev.MysqlHostMetricsResponse], error) {
 	return c.mysqlHostMetrics.CallUnary(ctx, req)
 }
 
-// ReplicationStatus calls tabletmanagerservice.TabletManager.ReplicationStatus.
+// ReplicationStatus calls vitess.tabletmanagerservice.dev.TabletManager.ReplicationStatus.
 func (c *tabletManagerClient) ReplicationStatus(ctx context.Context, req *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error) {
 	return c.replicationStatus.CallUnary(ctx, req)
 }
 
-// PrimaryStatus calls tabletmanagerservice.TabletManager.PrimaryStatus.
+// PrimaryStatus calls vitess.tabletmanagerservice.dev.TabletManager.PrimaryStatus.
 func (c *tabletManagerClient) PrimaryStatus(ctx context.Context, req *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error) {
 	return c.primaryStatus.CallUnary(ctx, req)
 }
 
-// PrimaryPosition calls tabletmanagerservice.TabletManager.PrimaryPosition.
+// PrimaryPosition calls vitess.tabletmanagerservice.dev.TabletManager.PrimaryPosition.
 func (c *tabletManagerClient) PrimaryPosition(ctx context.Context, req *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error) {
 	return c.primaryPosition.CallUnary(ctx, req)
 }
 
-// WaitForPosition calls tabletmanagerservice.TabletManager.WaitForPosition.
+// WaitForPosition calls vitess.tabletmanagerservice.dev.TabletManager.WaitForPosition.
 func (c *tabletManagerClient) WaitForPosition(ctx context.Context, req *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error) {
 	return c.waitForPosition.CallUnary(ctx, req)
 }
 
-// StopReplication calls tabletmanagerservice.TabletManager.StopReplication.
+// StopReplication calls vitess.tabletmanagerservice.dev.TabletManager.StopReplication.
 func (c *tabletManagerClient) StopReplication(ctx context.Context, req *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
 // StopReplicationMinimum calls
-// tabletmanagerservice.TabletManager.StopReplicationMinimum.
+// vitess.tabletmanagerservice.dev.TabletManager.StopReplicationMinimum.
 func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error) {
 	return c.stopReplicationMinimum.CallUnary(ctx, req)
 }
 
-// StartReplication calls tabletmanagerservice.TabletManager.StartReplication.
+// StartReplication calls vitess.tabletmanagerservice.dev.TabletManager.StartReplication.
 func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
 // StartReplicationUntilAfter calls
-// tabletmanagerservice.TabletManager.StartReplicationUntilAfter.
+// vitess.tabletmanagerservice.dev.TabletManager.StartReplicationUntilAfter.
 func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
 	return c.startReplicationUntilAfter.CallUnary(ctx, req)
 }
 
-// GetReplicas calls tabletmanagerservice.TabletManager.GetReplicas.
+// GetReplicas calls vitess.tabletmanagerservice.dev.TabletManager.GetReplicas.
 func (c *tabletManagerClient) GetReplicas(ctx context.Context, req *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error) {
 	return c.getReplicas.CallUnary(ctx, req)
 }
 
 // CreateVReplicationWorkflow calls
-// tabletmanagerservice.TabletManager.CreateVReplicationWorkflow.
+// vitess.tabletmanagerservice.dev.TabletManager.CreateVReplicationWorkflow.
 func (c *tabletManagerClient) CreateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
 	return c.createVReplicationWorkflow.CallUnary(ctx, req)
 }
 
-// DeleteTableData calls tabletmanagerservice.TabletManager.DeleteTableData.
+// DeleteTableData calls vitess.tabletmanagerservice.dev.TabletManager.DeleteTableData.
 func (c *tabletManagerClient) DeleteTableData(ctx context.Context, req *connect.Request[dev.DeleteTableDataRequest]) (*connect.Response[dev.DeleteTableDataResponse], error) {
 	return c.deleteTableData.CallUnary(ctx, req)
 }
 
 // DeleteVReplicationWorkflow calls
-// tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow.
+// vitess.tabletmanagerservice.dev.TabletManager.DeleteVReplicationWorkflow.
 func (c *tabletManagerClient) DeleteVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
 	return c.deleteVReplicationWorkflow.CallUnary(ctx, req)
 }
 
 // HasVReplicationWorkflows calls
-// tabletmanagerservice.TabletManager.HasVReplicationWorkflows.
+// vitess.tabletmanagerservice.dev.TabletManager.HasVReplicationWorkflows.
 func (c *tabletManagerClient) HasVReplicationWorkflows(ctx context.Context, req *connect.Request[dev.HasVReplicationWorkflowsRequest]) (*connect.Response[dev.HasVReplicationWorkflowsResponse], error) {
 	return c.hasVReplicationWorkflows.CallUnary(ctx, req)
 }
 
 // ReadVReplicationWorkflow calls
-// tabletmanagerservice.TabletManager.ReadVReplicationWorkflow.
+// vitess.tabletmanagerservice.dev.TabletManager.ReadVReplicationWorkflow.
 func (c *tabletManagerClient) ReadVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
 	return c.readVReplicationWorkflow.CallUnary(ctx, req)
 }
 
 // ReadVReplicationWorkflows calls
-// tabletmanagerservice.TabletManager.ReadVReplicationWorkflows.
+// vitess.tabletmanagerservice.dev.TabletManager.ReadVReplicationWorkflows.
 func (c *tabletManagerClient) ReadVReplicationWorkflows(ctx context.Context, req *connect.Request[dev.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev.ReadVReplicationWorkflowsResponse], error) {
 	return c.readVReplicationWorkflows.CallUnary(ctx, req)
 }
 
 // UpdateVReplicationWorkflow calls
-// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow.
+// vitess.tabletmanagerservice.dev.TabletManager.UpdateVReplicationWorkflow.
 func (c *tabletManagerClient) UpdateVReplicationWorkflow(ctx context.Context, req *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
 	return c.updateVReplicationWorkflow.CallUnary(ctx, req)
 }
 
 // UpdateVReplicationWorkflows calls
-// tabletmanagerservice.TabletManager.UpdateVReplicationWorkflows.
+// vitess.tabletmanagerservice.dev.TabletManager.UpdateVReplicationWorkflows.
 func (c *tabletManagerClient) UpdateVReplicationWorkflows(ctx context.Context, req *connect.Request[dev.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowsResponse], error) {
 	return c.updateVReplicationWorkflows.CallUnary(ctx, req)
 }
 
 // ValidateVReplicationPermissions calls
-// tabletmanagerservice.TabletManager.ValidateVReplicationPermissions.
+// vitess.tabletmanagerservice.dev.TabletManager.ValidateVReplicationPermissions.
 func (c *tabletManagerClient) ValidateVReplicationPermissions(ctx context.Context, req *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error) {
 	return c.validateVReplicationPermissions.CallUnary(ctx, req)
 }
 
-// VReplicationExec calls tabletmanagerservice.TabletManager.VReplicationExec.
+// VReplicationExec calls vitess.tabletmanagerservice.dev.TabletManager.VReplicationExec.
 func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
 	return c.vReplicationExec.CallUnary(ctx, req)
 }
 
 // VReplicationWaitForPos calls
-// tabletmanagerservice.TabletManager.VReplicationWaitForPos.
+// vitess.tabletmanagerservice.dev.TabletManager.VReplicationWaitForPos.
 func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
 }
 
-// VDiff calls tabletmanagerservice.TabletManager.VDiff.
+// UpdateSequenceTables calls vitess.tabletmanagerservice.dev.TabletManager.UpdateSequenceTables.
+func (c *tabletManagerClient) UpdateSequenceTables(ctx context.Context, req *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error) {
+	return c.updateSequenceTables.CallUnary(ctx, req)
+}
+
+// GetMaxValueForSequences calls
+// vitess.tabletmanagerservice.dev.TabletManager.GetMaxValueForSequences.
+func (c *tabletManagerClient) GetMaxValueForSequences(ctx context.Context, req *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error) {
+	return c.getMaxValueForSequences.CallUnary(ctx, req)
+}
+
+// VDiff calls vitess.tabletmanagerservice.dev.TabletManager.VDiff.
 func (c *tabletManagerClient) VDiff(ctx context.Context, req *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {
 	return c.vDiff.CallUnary(ctx, req)
 }
 
-// ResetReplication calls tabletmanagerservice.TabletManager.ResetReplication.
+// ResetReplication calls vitess.tabletmanagerservice.dev.TabletManager.ResetReplication.
 func (c *tabletManagerClient) ResetReplication(ctx context.Context, req *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error) {
 	return c.resetReplication.CallUnary(ctx, req)
 }
 
-// InitPrimary calls tabletmanagerservice.TabletManager.InitPrimary.
+// InitPrimary calls vitess.tabletmanagerservice.dev.TabletManager.InitPrimary.
 func (c *tabletManagerClient) InitPrimary(ctx context.Context, req *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error) {
 	return c.initPrimary.CallUnary(ctx, req)
 }
 
 // PopulateReparentJournal calls
-// tabletmanagerservice.TabletManager.PopulateReparentJournal.
+// vitess.tabletmanagerservice.dev.TabletManager.PopulateReparentJournal.
 func (c *tabletManagerClient) PopulateReparentJournal(ctx context.Context, req *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error) {
 	return c.populateReparentJournal.CallUnary(ctx, req)
 }
 
 // ReadReparentJournalInfo calls
-// tabletmanagerservice.TabletManager.ReadReparentJournalInfo.
+// vitess.tabletmanagerservice.dev.TabletManager.ReadReparentJournalInfo.
 func (c *tabletManagerClient) ReadReparentJournalInfo(ctx context.Context, req *connect.Request[dev.ReadReparentJournalInfoRequest]) (*connect.Response[dev.ReadReparentJournalInfoResponse], error) {
 	return c.readReparentJournalInfo.CallUnary(ctx, req)
 }
 
-// InitReplica calls tabletmanagerservice.TabletManager.InitReplica.
+// InitReplica calls vitess.tabletmanagerservice.dev.TabletManager.InitReplica.
 func (c *tabletManagerClient) InitReplica(ctx context.Context, req *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error) {
 	return c.initReplica.CallUnary(ctx, req)
 }
 
-// DemotePrimary calls tabletmanagerservice.TabletManager.DemotePrimary.
+// DemotePrimary calls vitess.tabletmanagerservice.dev.TabletManager.DemotePrimary.
 func (c *tabletManagerClient) DemotePrimary(ctx context.Context, req *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error) {
 	return c.demotePrimary.CallUnary(ctx, req)
 }
 
-// UndoDemotePrimary calls tabletmanagerservice.TabletManager.UndoDemotePrimary.
+// UndoDemotePrimary calls vitess.tabletmanagerservice.dev.TabletManager.UndoDemotePrimary.
 func (c *tabletManagerClient) UndoDemotePrimary(ctx context.Context, req *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error) {
 	return c.undoDemotePrimary.CallUnary(ctx, req)
 }
 
-// ReplicaWasPromoted calls tabletmanagerservice.TabletManager.ReplicaWasPromoted.
+// ReplicaWasPromoted calls vitess.tabletmanagerservice.dev.TabletManager.ReplicaWasPromoted.
 func (c *tabletManagerClient) ReplicaWasPromoted(ctx context.Context, req *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error) {
 	return c.replicaWasPromoted.CallUnary(ctx, req)
 }
 
 // ResetReplicationParameters calls
-// tabletmanagerservice.TabletManager.ResetReplicationParameters.
+// vitess.tabletmanagerservice.dev.TabletManager.ResetReplicationParameters.
 func (c *tabletManagerClient) ResetReplicationParameters(ctx context.Context, req *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error) {
 	return c.resetReplicationParameters.CallUnary(ctx, req)
 }
 
-// FullStatus calls tabletmanagerservice.TabletManager.FullStatus.
+// FullStatus calls vitess.tabletmanagerservice.dev.TabletManager.FullStatus.
 func (c *tabletManagerClient) FullStatus(ctx context.Context, req *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error) {
 	return c.fullStatus.CallUnary(ctx, req)
 }
 
-// SetReplicationSource calls tabletmanagerservice.TabletManager.SetReplicationSource.
+// SetReplicationSource calls vitess.tabletmanagerservice.dev.TabletManager.SetReplicationSource.
 func (c *tabletManagerClient) SetReplicationSource(ctx context.Context, req *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error) {
 	return c.setReplicationSource.CallUnary(ctx, req)
 }
 
-// ReplicaWasRestarted calls tabletmanagerservice.TabletManager.ReplicaWasRestarted.
+// ReplicaWasRestarted calls vitess.tabletmanagerservice.dev.TabletManager.ReplicaWasRestarted.
 func (c *tabletManagerClient) ReplicaWasRestarted(ctx context.Context, req *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error) {
 	return c.replicaWasRestarted.CallUnary(ctx, req)
 }
 
 // StopReplicationAndGetStatus calls
-// tabletmanagerservice.TabletManager.StopReplicationAndGetStatus.
+// vitess.tabletmanagerservice.dev.TabletManager.StopReplicationAndGetStatus.
 func (c *tabletManagerClient) StopReplicationAndGetStatus(ctx context.Context, req *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error) {
 	return c.stopReplicationAndGetStatus.CallUnary(ctx, req)
 }
 
-// PromoteReplica calls tabletmanagerservice.TabletManager.PromoteReplica.
+// PromoteReplica calls vitess.tabletmanagerservice.dev.TabletManager.PromoteReplica.
 func (c *tabletManagerClient) PromoteReplica(ctx context.Context, req *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error) {
 	return c.promoteReplica.CallUnary(ctx, req)
 }
 
-// Backup calls tabletmanagerservice.TabletManager.Backup.
+// Backup calls vitess.tabletmanagerservice.dev.TabletManager.Backup.
 func (c *tabletManagerClient) Backup(ctx context.Context, req *connect.Request[dev.BackupRequest]) (*connect.ServerStreamForClient[dev.BackupResponse], error) {
 	return c.backup.CallServerStream(ctx, req)
 }
 
-// RestoreFromBackup calls tabletmanagerservice.TabletManager.RestoreFromBackup.
+// RestoreFromBackup calls vitess.tabletmanagerservice.dev.TabletManager.RestoreFromBackup.
 func (c *tabletManagerClient) RestoreFromBackup(ctx context.Context, req *connect.Request[dev.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[dev.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
-// CheckThrottler calls tabletmanagerservice.TabletManager.CheckThrottler.
+// CheckThrottler calls vitess.tabletmanagerservice.dev.TabletManager.CheckThrottler.
 func (c *tabletManagerClient) CheckThrottler(ctx context.Context, req *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
 	return c.checkThrottler.CallUnary(ctx, req)
 }
 
-// GetThrottlerStatus calls tabletmanagerservice.TabletManager.GetThrottlerStatus.
+// GetThrottlerStatus calls vitess.tabletmanagerservice.dev.TabletManager.GetThrottlerStatus.
 func (c *tabletManagerClient) GetThrottlerStatus(ctx context.Context, req *connect.Request[dev.GetThrottlerStatusRequest]) (*connect.Response[dev.GetThrottlerStatusResponse], error) {
 	return c.getThrottlerStatus.CallUnary(ctx, req)
 }
 
-// TabletManagerHandler is an implementation of the tabletmanagerservice.TabletManager
+// TabletManagerHandler is an implementation of the vitess.tabletmanagerservice.dev.TabletManager
 // service.
 type TabletManagerHandler interface {
 	// Ping returns the input payload
@@ -1273,6 +1306,8 @@ type TabletManagerHandler interface {
 	ValidateVReplicationPermissions(context.Context, *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error)
+	GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -1609,6 +1644,18 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		connect.WithSchema(tabletManagerMethods.ByName("VReplicationWaitForPos")),
 		connect.WithHandlerOptions(opts...),
 	)
+	tabletManagerUpdateSequenceTablesHandler := connect.NewUnaryHandler(
+		TabletManagerUpdateSequenceTablesProcedure,
+		svc.UpdateSequenceTables,
+		connect.WithSchema(tabletManagerMethods.ByName("UpdateSequenceTables")),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetMaxValueForSequencesHandler := connect.NewUnaryHandler(
+		TabletManagerGetMaxValueForSequencesProcedure,
+		svc.GetMaxValueForSequences,
+		connect.WithSchema(tabletManagerMethods.ByName("GetMaxValueForSequences")),
+		connect.WithHandlerOptions(opts...),
+	)
 	tabletManagerVDiffHandler := connect.NewUnaryHandler(
 		TabletManagerVDiffProcedure,
 		svc.VDiff,
@@ -1723,7 +1770,7 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		connect.WithSchema(tabletManagerMethods.ByName("GetThrottlerStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/tabletmanagerservice.TabletManager/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/vitess.tabletmanagerservice.dev.TabletManager/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TabletManagerPingProcedure:
 			tabletManagerPingHandler.ServeHTTP(w, r)
@@ -1821,6 +1868,10 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerVReplicationExecHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationWaitForPosProcedure:
 			tabletManagerVReplicationWaitForPosHandler.ServeHTTP(w, r)
+		case TabletManagerUpdateSequenceTablesProcedure:
+			tabletManagerUpdateSequenceTablesHandler.ServeHTTP(w, r)
+		case TabletManagerGetMaxValueForSequencesProcedure:
+			tabletManagerGetMaxValueForSequencesHandler.ServeHTTP(w, r)
 		case TabletManagerVDiffProcedure:
 			tabletManagerVDiffHandler.ServeHTTP(w, r)
 		case TabletManagerResetReplicationProcedure:
@@ -1869,269 +1920,277 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 type UnimplementedTabletManagerHandler struct{}
 
 func (UnimplementedTabletManagerHandler) Ping(context.Context, *connect.Request[dev.PingRequest]) (*connect.Response[dev.PingResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Ping is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.Ping is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) Sleep(context.Context, *connect.Request[dev.SleepRequest]) (*connect.Response[dev.SleepResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Sleep is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.Sleep is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteHook(context.Context, *connect.Request[dev.ExecuteHookRequest]) (*connect.Response[dev.ExecuteHookResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteHook is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteHook is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.Response[dev.GetSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetSchema is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetPermissions(context.Context, *connect.Request[dev.GetPermissionsRequest]) (*connect.Response[dev.GetPermissionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetPermissions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetPermissions is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetGlobalStatusVars(context.Context, *connect.Request[dev.GetGlobalStatusVarsRequest]) (*connect.Response[dev.GetGlobalStatusVarsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetGlobalStatusVars is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetGlobalStatusVars is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) SetReadOnly(context.Context, *connect.Request[dev.SetReadOnlyRequest]) (*connect.Response[dev.SetReadOnlyResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadOnly is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.SetReadOnly is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) SetReadWrite(context.Context, *connect.Request[dev.SetReadWriteRequest]) (*connect.Response[dev.SetReadWriteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReadWrite is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.SetReadWrite is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ChangeTags(context.Context, *connect.Request[dev.ChangeTagsRequest]) (*connect.Response[dev.ChangeTagsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeTags is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ChangeTags is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ChangeType(context.Context, *connect.Request[dev.ChangeTypeRequest]) (*connect.Response[dev.ChangeTypeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ChangeType is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ChangeType is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) RefreshState(context.Context, *connect.Request[dev.RefreshStateRequest]) (*connect.Response[dev.RefreshStateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RefreshState is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.RefreshState is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) RunHealthCheck(context.Context, *connect.Request[dev.RunHealthCheckRequest]) (*connect.Response[dev.RunHealthCheckResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RunHealthCheck is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.RunHealthCheck is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReloadSchema(context.Context, *connect.Request[dev.ReloadSchemaRequest]) (*connect.Response[dev.ReloadSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReloadSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReloadSchema is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) PreflightSchema(context.Context, *connect.Request[dev.PreflightSchemaRequest]) (*connect.Response[dev.PreflightSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PreflightSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.PreflightSchema is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ApplySchema(context.Context, *connect.Request[dev.ApplySchemaRequest]) (*connect.Response[dev.ApplySchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ApplySchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ApplySchema is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ResetSequences(context.Context, *connect.Request[dev.ResetSequencesRequest]) (*connect.Response[dev.ResetSequencesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetSequences is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ResetSequences is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) LockTables(context.Context, *connect.Request[dev.LockTablesRequest]) (*connect.Response[dev.LockTablesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.LockTables is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.LockTables is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) UnlockTables(context.Context, *connect.Request[dev.UnlockTablesRequest]) (*connect.Response[dev.UnlockTablesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UnlockTables is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UnlockTables is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteQuery(context.Context, *connect.Request[dev.ExecuteQueryRequest]) (*connect.Response[dev.ExecuteQueryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteQuery is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteQuery is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteFetchAsDba(context.Context, *connect.Request[dev.ExecuteFetchAsDbaRequest]) (*connect.Response[dev.ExecuteFetchAsDbaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsDba is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsDba is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteMultiFetchAsDba(context.Context, *connect.Request[dev.ExecuteMultiFetchAsDbaRequest]) (*connect.Response[dev.ExecuteMultiFetchAsDbaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteMultiFetchAsDba is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteMultiFetchAsDba is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteFetchAsAllPrivs(context.Context, *connect.Request[dev.ExecuteFetchAsAllPrivsRequest]) (*connect.Response[dev.ExecuteFetchAsAllPrivsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsAllPrivs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsAllPrivs is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ExecuteFetchAsApp(context.Context, *connect.Request[dev.ExecuteFetchAsAppRequest]) (*connect.Response[dev.ExecuteFetchAsAppResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ExecuteFetchAsApp is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ExecuteFetchAsApp is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetUnresolvedTransactions(context.Context, *connect.Request[dev.GetUnresolvedTransactionsRequest]) (*connect.Response[dev.GetUnresolvedTransactionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetUnresolvedTransactions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetUnresolvedTransactions is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReadTransaction is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetTransactionInfo(context.Context, *connect.Request[dev.GetTransactionInfoRequest]) (*connect.Response[dev.GetTransactionInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetTransactionInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetTransactionInfo is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ConcludeTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ConcludeTransaction is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) MysqlHostMetrics(context.Context, *connect.Request[dev.MysqlHostMetricsRequest]) (*connect.Response[dev.MysqlHostMetricsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.MysqlHostMetrics is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.MysqlHostMetrics is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReplicationStatus(context.Context, *connect.Request[dev.ReplicationStatusRequest]) (*connect.Response[dev.ReplicationStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicationStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReplicationStatus is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) PrimaryStatus(context.Context, *connect.Request[dev.PrimaryStatusRequest]) (*connect.Response[dev.PrimaryStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.PrimaryStatus is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) PrimaryPosition(context.Context, *connect.Request[dev.PrimaryPositionRequest]) (*connect.Response[dev.PrimaryPositionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PrimaryPosition is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.PrimaryPosition is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) WaitForPosition(context.Context, *connect.Request[dev.WaitForPositionRequest]) (*connect.Response[dev.WaitForPositionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.WaitForPosition is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.WaitForPosition is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StopReplication(context.Context, *connect.Request[dev.StopReplicationRequest]) (*connect.Response[dev.StopReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.StopReplication is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationMinimum is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.StopReplicationMinimum is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.StartReplication is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplicationUntilAfter is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.StartReplicationUntilAfter is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetReplicas(context.Context, *connect.Request[dev.GetReplicasRequest]) (*connect.Response[dev.GetReplicasResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetReplicas is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetReplicas is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) CreateVReplicationWorkflow(context.Context, *connect.Request[dev.CreateVReplicationWorkflowRequest]) (*connect.Response[dev.CreateVReplicationWorkflowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CreateVReplicationWorkflow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.CreateVReplicationWorkflow is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) DeleteTableData(context.Context, *connect.Request[dev.DeleteTableDataRequest]) (*connect.Response[dev.DeleteTableDataResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DeleteTableData is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.DeleteTableData is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) DeleteVReplicationWorkflow(context.Context, *connect.Request[dev.DeleteVReplicationWorkflowRequest]) (*connect.Response[dev.DeleteVReplicationWorkflowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DeleteVReplicationWorkflow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.DeleteVReplicationWorkflow is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) HasVReplicationWorkflows(context.Context, *connect.Request[dev.HasVReplicationWorkflowsRequest]) (*connect.Response[dev.HasVReplicationWorkflowsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.HasVReplicationWorkflows is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.HasVReplicationWorkflows is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflow(context.Context, *connect.Request[dev.ReadVReplicationWorkflowRequest]) (*connect.Response[dev.ReadVReplicationWorkflowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadVReplicationWorkflow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReadVReplicationWorkflow is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReadVReplicationWorkflows(context.Context, *connect.Request[dev.ReadVReplicationWorkflowsRequest]) (*connect.Response[dev.ReadVReplicationWorkflowsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadVReplicationWorkflows is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReadVReplicationWorkflows is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflow(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVReplicationWorkflow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UpdateVReplicationWorkflow is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) UpdateVReplicationWorkflows(context.Context, *connect.Request[dev.UpdateVReplicationWorkflowsRequest]) (*connect.Response[dev.UpdateVReplicationWorkflowsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateVReplicationWorkflows is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UpdateVReplicationWorkflows is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ValidateVReplicationPermissions(context.Context, *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ValidateVReplicationPermissions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ValidateVReplicationPermissions is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationExec is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VReplicationExec is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VReplicationWaitForPos is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UpdateSequenceTables is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetMaxValueForSequences is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VDiff is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.VDiff is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ResetReplication(context.Context, *connect.Request[dev.ResetReplicationRequest]) (*connect.Response[dev.ResetReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ResetReplication is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) InitPrimary(context.Context, *connect.Request[dev.InitPrimaryRequest]) (*connect.Response[dev.InitPrimaryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitPrimary is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.InitPrimary is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) PopulateReparentJournal(context.Context, *connect.Request[dev.PopulateReparentJournalRequest]) (*connect.Response[dev.PopulateReparentJournalResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PopulateReparentJournal is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.PopulateReparentJournal is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReadReparentJournalInfo(context.Context, *connect.Request[dev.ReadReparentJournalInfoRequest]) (*connect.Response[dev.ReadReparentJournalInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReadReparentJournalInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReadReparentJournalInfo is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) InitReplica(context.Context, *connect.Request[dev.InitReplicaRequest]) (*connect.Response[dev.InitReplicaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.InitReplica is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.InitReplica is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) DemotePrimary(context.Context, *connect.Request[dev.DemotePrimaryRequest]) (*connect.Response[dev.DemotePrimaryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.DemotePrimary is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.DemotePrimary is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) UndoDemotePrimary(context.Context, *connect.Request[dev.UndoDemotePrimaryRequest]) (*connect.Response[dev.UndoDemotePrimaryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UndoDemotePrimary is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.UndoDemotePrimary is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReplicaWasPromoted(context.Context, *connect.Request[dev.ReplicaWasPromotedRequest]) (*connect.Response[dev.ReplicaWasPromotedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasPromoted is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReplicaWasPromoted is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ResetReplicationParameters(context.Context, *connect.Request[dev.ResetReplicationParametersRequest]) (*connect.Response[dev.ResetReplicationParametersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ResetReplicationParameters is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ResetReplicationParameters is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) FullStatus(context.Context, *connect.Request[dev.FullStatusRequest]) (*connect.Response[dev.FullStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.FullStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.FullStatus is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) SetReplicationSource(context.Context, *connect.Request[dev.SetReplicationSourceRequest]) (*connect.Response[dev.SetReplicationSourceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.SetReplicationSource is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.SetReplicationSource is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) ReplicaWasRestarted(context.Context, *connect.Request[dev.ReplicaWasRestartedRequest]) (*connect.Response[dev.ReplicaWasRestartedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.ReplicaWasRestarted is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.ReplicaWasRestarted is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StopReplicationAndGetStatus(context.Context, *connect.Request[dev.StopReplicationAndGetStatusRequest]) (*connect.Response[dev.StopReplicationAndGetStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StopReplicationAndGetStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.StopReplicationAndGetStatus is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) PromoteReplica(context.Context, *connect.Request[dev.PromoteReplicaRequest]) (*connect.Response[dev.PromoteReplicaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.PromoteReplica is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.PromoteReplica is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) Backup(context.Context, *connect.Request[dev.BackupRequest], *connect.ServerStream[dev.BackupResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.Backup is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.Backup is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) RestoreFromBackup(context.Context, *connect.Request[dev.RestoreFromBackupRequest], *connect.ServerStream[dev.RestoreFromBackupResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestoreFromBackup is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.RestoreFromBackup is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) CheckThrottler(context.Context, *connect.Request[dev.CheckThrottlerRequest]) (*connect.Response[dev.CheckThrottlerResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.CheckThrottler is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.CheckThrottler is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) GetThrottlerStatus(context.Context, *connect.Request[dev.GetThrottlerStatusRequest]) (*connect.Response[dev.GetThrottlerStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetThrottlerStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.tabletmanagerservice.dev.TabletManager.GetThrottlerStatus is not implemented"))
 }

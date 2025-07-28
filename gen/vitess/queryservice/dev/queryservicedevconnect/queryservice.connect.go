@@ -40,7 +40,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// QueryName is the fully-qualified name of the Query service.
-	QueryName = "queryservice.Query"
+	QueryName = "vitess.queryservice.dev.Query"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -52,72 +52,72 @@ const (
 // period.
 const (
 	// QueryExecuteProcedure is the fully-qualified name of the Query's Execute RPC.
-	QueryExecuteProcedure = "/queryservice.Query/Execute"
+	QueryExecuteProcedure = "/vitess.queryservice.dev.Query/Execute"
 	// QueryStreamExecuteProcedure is the fully-qualified name of the Query's StreamExecute RPC.
-	QueryStreamExecuteProcedure = "/queryservice.Query/StreamExecute"
+	QueryStreamExecuteProcedure = "/vitess.queryservice.dev.Query/StreamExecute"
 	// QueryBeginProcedure is the fully-qualified name of the Query's Begin RPC.
-	QueryBeginProcedure = "/queryservice.Query/Begin"
+	QueryBeginProcedure = "/vitess.queryservice.dev.Query/Begin"
 	// QueryCommitProcedure is the fully-qualified name of the Query's Commit RPC.
-	QueryCommitProcedure = "/queryservice.Query/Commit"
+	QueryCommitProcedure = "/vitess.queryservice.dev.Query/Commit"
 	// QueryRollbackProcedure is the fully-qualified name of the Query's Rollback RPC.
-	QueryRollbackProcedure = "/queryservice.Query/Rollback"
+	QueryRollbackProcedure = "/vitess.queryservice.dev.Query/Rollback"
 	// QueryPrepareProcedure is the fully-qualified name of the Query's Prepare RPC.
-	QueryPrepareProcedure = "/queryservice.Query/Prepare"
+	QueryPrepareProcedure = "/vitess.queryservice.dev.Query/Prepare"
 	// QueryCommitPreparedProcedure is the fully-qualified name of the Query's CommitPrepared RPC.
-	QueryCommitPreparedProcedure = "/queryservice.Query/CommitPrepared"
+	QueryCommitPreparedProcedure = "/vitess.queryservice.dev.Query/CommitPrepared"
 	// QueryRollbackPreparedProcedure is the fully-qualified name of the Query's RollbackPrepared RPC.
-	QueryRollbackPreparedProcedure = "/queryservice.Query/RollbackPrepared"
+	QueryRollbackPreparedProcedure = "/vitess.queryservice.dev.Query/RollbackPrepared"
 	// QueryCreateTransactionProcedure is the fully-qualified name of the Query's CreateTransaction RPC.
-	QueryCreateTransactionProcedure = "/queryservice.Query/CreateTransaction"
+	QueryCreateTransactionProcedure = "/vitess.queryservice.dev.Query/CreateTransaction"
 	// QueryStartCommitProcedure is the fully-qualified name of the Query's StartCommit RPC.
-	QueryStartCommitProcedure = "/queryservice.Query/StartCommit"
+	QueryStartCommitProcedure = "/vitess.queryservice.dev.Query/StartCommit"
 	// QuerySetRollbackProcedure is the fully-qualified name of the Query's SetRollback RPC.
-	QuerySetRollbackProcedure = "/queryservice.Query/SetRollback"
+	QuerySetRollbackProcedure = "/vitess.queryservice.dev.Query/SetRollback"
 	// QueryConcludeTransactionProcedure is the fully-qualified name of the Query's ConcludeTransaction
 	// RPC.
-	QueryConcludeTransactionProcedure = "/queryservice.Query/ConcludeTransaction"
+	QueryConcludeTransactionProcedure = "/vitess.queryservice.dev.Query/ConcludeTransaction"
 	// QueryReadTransactionProcedure is the fully-qualified name of the Query's ReadTransaction RPC.
-	QueryReadTransactionProcedure = "/queryservice.Query/ReadTransaction"
+	QueryReadTransactionProcedure = "/vitess.queryservice.dev.Query/ReadTransaction"
 	// QueryUnresolvedTransactionsProcedure is the fully-qualified name of the Query's
 	// UnresolvedTransactions RPC.
-	QueryUnresolvedTransactionsProcedure = "/queryservice.Query/UnresolvedTransactions"
+	QueryUnresolvedTransactionsProcedure = "/vitess.queryservice.dev.Query/UnresolvedTransactions"
 	// QueryBeginExecuteProcedure is the fully-qualified name of the Query's BeginExecute RPC.
-	QueryBeginExecuteProcedure = "/queryservice.Query/BeginExecute"
+	QueryBeginExecuteProcedure = "/vitess.queryservice.dev.Query/BeginExecute"
 	// QueryBeginStreamExecuteProcedure is the fully-qualified name of the Query's BeginStreamExecute
 	// RPC.
-	QueryBeginStreamExecuteProcedure = "/queryservice.Query/BeginStreamExecute"
+	QueryBeginStreamExecuteProcedure = "/vitess.queryservice.dev.Query/BeginStreamExecute"
 	// QueryMessageStreamProcedure is the fully-qualified name of the Query's MessageStream RPC.
-	QueryMessageStreamProcedure = "/queryservice.Query/MessageStream"
+	QueryMessageStreamProcedure = "/vitess.queryservice.dev.Query/MessageStream"
 	// QueryMessageAckProcedure is the fully-qualified name of the Query's MessageAck RPC.
-	QueryMessageAckProcedure = "/queryservice.Query/MessageAck"
+	QueryMessageAckProcedure = "/vitess.queryservice.dev.Query/MessageAck"
 	// QueryReserveExecuteProcedure is the fully-qualified name of the Query's ReserveExecute RPC.
-	QueryReserveExecuteProcedure = "/queryservice.Query/ReserveExecute"
+	QueryReserveExecuteProcedure = "/vitess.queryservice.dev.Query/ReserveExecute"
 	// QueryReserveBeginExecuteProcedure is the fully-qualified name of the Query's ReserveBeginExecute
 	// RPC.
-	QueryReserveBeginExecuteProcedure = "/queryservice.Query/ReserveBeginExecute"
+	QueryReserveBeginExecuteProcedure = "/vitess.queryservice.dev.Query/ReserveBeginExecute"
 	// QueryReserveStreamExecuteProcedure is the fully-qualified name of the Query's
 	// ReserveStreamExecute RPC.
-	QueryReserveStreamExecuteProcedure = "/queryservice.Query/ReserveStreamExecute"
+	QueryReserveStreamExecuteProcedure = "/vitess.queryservice.dev.Query/ReserveStreamExecute"
 	// QueryReserveBeginStreamExecuteProcedure is the fully-qualified name of the Query's
 	// ReserveBeginStreamExecute RPC.
-	QueryReserveBeginStreamExecuteProcedure = "/queryservice.Query/ReserveBeginStreamExecute"
+	QueryReserveBeginStreamExecuteProcedure = "/vitess.queryservice.dev.Query/ReserveBeginStreamExecute"
 	// QueryReleaseProcedure is the fully-qualified name of the Query's Release RPC.
-	QueryReleaseProcedure = "/queryservice.Query/Release"
+	QueryReleaseProcedure = "/vitess.queryservice.dev.Query/Release"
 	// QueryStreamHealthProcedure is the fully-qualified name of the Query's StreamHealth RPC.
-	QueryStreamHealthProcedure = "/queryservice.Query/StreamHealth"
+	QueryStreamHealthProcedure = "/vitess.queryservice.dev.Query/StreamHealth"
 	// QueryVStreamProcedure is the fully-qualified name of the Query's VStream RPC.
-	QueryVStreamProcedure = "/queryservice.Query/VStream"
+	QueryVStreamProcedure = "/vitess.queryservice.dev.Query/VStream"
 	// QueryVStreamRowsProcedure is the fully-qualified name of the Query's VStreamRows RPC.
-	QueryVStreamRowsProcedure = "/queryservice.Query/VStreamRows"
+	QueryVStreamRowsProcedure = "/vitess.queryservice.dev.Query/VStreamRows"
 	// QueryVStreamTablesProcedure is the fully-qualified name of the Query's VStreamTables RPC.
-	QueryVStreamTablesProcedure = "/queryservice.Query/VStreamTables"
+	QueryVStreamTablesProcedure = "/vitess.queryservice.dev.Query/VStreamTables"
 	// QueryVStreamResultsProcedure is the fully-qualified name of the Query's VStreamResults RPC.
-	QueryVStreamResultsProcedure = "/queryservice.Query/VStreamResults"
+	QueryVStreamResultsProcedure = "/vitess.queryservice.dev.Query/VStreamResults"
 	// QueryGetSchemaProcedure is the fully-qualified name of the Query's GetSchema RPC.
-	QueryGetSchemaProcedure = "/queryservice.Query/GetSchema"
+	QueryGetSchemaProcedure = "/vitess.queryservice.dev.Query/GetSchema"
 )
 
-// QueryClient is a client for the queryservice.Query service.
+// QueryClient is a client for the vitess.queryservice.dev.Query service.
 type QueryClient interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
@@ -184,7 +184,7 @@ type QueryClient interface {
 	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error)
 }
 
-// NewQueryClient constructs a client for the queryservice.Query service. By default, it
+// NewQueryClient constructs a client for the vitess.queryservice.dev.Query service. By default, it
 // uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
 // uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
 // connect.WithGRPCWeb() options.
@@ -405,152 +405,152 @@ type queryClient struct {
 	getSchema                 *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
 }
 
-// Execute calls queryservice.Query.Execute.
+// Execute calls vitess.queryservice.dev.Query.Execute.
 func (c *queryClient) Execute(ctx context.Context, req *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
 	return c.execute.CallUnary(ctx, req)
 }
 
-// StreamExecute calls queryservice.Query.StreamExecute.
+// StreamExecute calls vitess.queryservice.dev.Query.StreamExecute.
 func (c *queryClient) StreamExecute(ctx context.Context, req *connect.Request[dev.StreamExecuteRequest]) (*connect.ServerStreamForClient[dev.StreamExecuteResponse], error) {
 	return c.streamExecute.CallServerStream(ctx, req)
 }
 
-// Begin calls queryservice.Query.Begin.
+// Begin calls vitess.queryservice.dev.Query.Begin.
 func (c *queryClient) Begin(ctx context.Context, req *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
 	return c.begin.CallUnary(ctx, req)
 }
 
-// Commit calls queryservice.Query.Commit.
+// Commit calls vitess.queryservice.dev.Query.Commit.
 func (c *queryClient) Commit(ctx context.Context, req *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
 	return c.commit.CallUnary(ctx, req)
 }
 
-// Rollback calls queryservice.Query.Rollback.
+// Rollback calls vitess.queryservice.dev.Query.Rollback.
 func (c *queryClient) Rollback(ctx context.Context, req *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
 	return c.rollback.CallUnary(ctx, req)
 }
 
-// Prepare calls queryservice.Query.Prepare.
+// Prepare calls vitess.queryservice.dev.Query.Prepare.
 func (c *queryClient) Prepare(ctx context.Context, req *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
 	return c.prepare.CallUnary(ctx, req)
 }
 
-// CommitPrepared calls queryservice.Query.CommitPrepared.
+// CommitPrepared calls vitess.queryservice.dev.Query.CommitPrepared.
 func (c *queryClient) CommitPrepared(ctx context.Context, req *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
 	return c.commitPrepared.CallUnary(ctx, req)
 }
 
-// RollbackPrepared calls queryservice.Query.RollbackPrepared.
+// RollbackPrepared calls vitess.queryservice.dev.Query.RollbackPrepared.
 func (c *queryClient) RollbackPrepared(ctx context.Context, req *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
 	return c.rollbackPrepared.CallUnary(ctx, req)
 }
 
-// CreateTransaction calls queryservice.Query.CreateTransaction.
+// CreateTransaction calls vitess.queryservice.dev.Query.CreateTransaction.
 func (c *queryClient) CreateTransaction(ctx context.Context, req *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
 	return c.createTransaction.CallUnary(ctx, req)
 }
 
-// StartCommit calls queryservice.Query.StartCommit.
+// StartCommit calls vitess.queryservice.dev.Query.StartCommit.
 func (c *queryClient) StartCommit(ctx context.Context, req *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
 	return c.startCommit.CallUnary(ctx, req)
 }
 
-// SetRollback calls queryservice.Query.SetRollback.
+// SetRollback calls vitess.queryservice.dev.Query.SetRollback.
 func (c *queryClient) SetRollback(ctx context.Context, req *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
 	return c.setRollback.CallUnary(ctx, req)
 }
 
-// ConcludeTransaction calls queryservice.Query.ConcludeTransaction.
+// ConcludeTransaction calls vitess.queryservice.dev.Query.ConcludeTransaction.
 func (c *queryClient) ConcludeTransaction(ctx context.Context, req *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
 	return c.concludeTransaction.CallUnary(ctx, req)
 }
 
-// ReadTransaction calls queryservice.Query.ReadTransaction.
+// ReadTransaction calls vitess.queryservice.dev.Query.ReadTransaction.
 func (c *queryClient) ReadTransaction(ctx context.Context, req *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
 	return c.readTransaction.CallUnary(ctx, req)
 }
 
-// UnresolvedTransactions calls queryservice.Query.UnresolvedTransactions.
+// UnresolvedTransactions calls vitess.queryservice.dev.Query.UnresolvedTransactions.
 func (c *queryClient) UnresolvedTransactions(ctx context.Context, req *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error) {
 	return c.unresolvedTransactions.CallUnary(ctx, req)
 }
 
-// BeginExecute calls queryservice.Query.BeginExecute.
+// BeginExecute calls vitess.queryservice.dev.Query.BeginExecute.
 func (c *queryClient) BeginExecute(ctx context.Context, req *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
 	return c.beginExecute.CallUnary(ctx, req)
 }
 
-// BeginStreamExecute calls queryservice.Query.BeginStreamExecute.
+// BeginStreamExecute calls vitess.queryservice.dev.Query.BeginStreamExecute.
 func (c *queryClient) BeginStreamExecute(ctx context.Context, req *connect.Request[dev.BeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.BeginStreamExecuteResponse], error) {
 	return c.beginStreamExecute.CallServerStream(ctx, req)
 }
 
-// MessageStream calls queryservice.Query.MessageStream.
+// MessageStream calls vitess.queryservice.dev.Query.MessageStream.
 func (c *queryClient) MessageStream(ctx context.Context, req *connect.Request[dev.MessageStreamRequest]) (*connect.ServerStreamForClient[dev.MessageStreamResponse], error) {
 	return c.messageStream.CallServerStream(ctx, req)
 }
 
-// MessageAck calls queryservice.Query.MessageAck.
+// MessageAck calls vitess.queryservice.dev.Query.MessageAck.
 func (c *queryClient) MessageAck(ctx context.Context, req *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
 	return c.messageAck.CallUnary(ctx, req)
 }
 
-// ReserveExecute calls queryservice.Query.ReserveExecute.
+// ReserveExecute calls vitess.queryservice.dev.Query.ReserveExecute.
 func (c *queryClient) ReserveExecute(ctx context.Context, req *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
 	return c.reserveExecute.CallUnary(ctx, req)
 }
 
-// ReserveBeginExecute calls queryservice.Query.ReserveBeginExecute.
+// ReserveBeginExecute calls vitess.queryservice.dev.Query.ReserveBeginExecute.
 func (c *queryClient) ReserveBeginExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
 	return c.reserveBeginExecute.CallUnary(ctx, req)
 }
 
-// ReserveStreamExecute calls queryservice.Query.ReserveStreamExecute.
+// ReserveStreamExecute calls vitess.queryservice.dev.Query.ReserveStreamExecute.
 func (c *queryClient) ReserveStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveStreamExecuteResponse], error) {
 	return c.reserveStreamExecute.CallServerStream(ctx, req)
 }
 
-// ReserveBeginStreamExecute calls queryservice.Query.ReserveBeginStreamExecute.
+// ReserveBeginStreamExecute calls vitess.queryservice.dev.Query.ReserveBeginStreamExecute.
 func (c *queryClient) ReserveBeginStreamExecute(ctx context.Context, req *connect.Request[dev.ReserveBeginStreamExecuteRequest]) (*connect.ServerStreamForClient[dev.ReserveBeginStreamExecuteResponse], error) {
 	return c.reserveBeginStreamExecute.CallServerStream(ctx, req)
 }
 
-// Release calls queryservice.Query.Release.
+// Release calls vitess.queryservice.dev.Query.Release.
 func (c *queryClient) Release(ctx context.Context, req *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
 	return c.release.CallUnary(ctx, req)
 }
 
-// StreamHealth calls queryservice.Query.StreamHealth.
+// StreamHealth calls vitess.queryservice.dev.Query.StreamHealth.
 func (c *queryClient) StreamHealth(ctx context.Context, req *connect.Request[dev.StreamHealthRequest]) (*connect.ServerStreamForClient[dev.StreamHealthResponse], error) {
 	return c.streamHealth.CallServerStream(ctx, req)
 }
 
-// VStream calls queryservice.Query.VStream.
+// VStream calls vitess.queryservice.dev.Query.VStream.
 func (c *queryClient) VStream(ctx context.Context, req *connect.Request[dev1.VStreamRequest]) (*connect.ServerStreamForClient[dev1.VStreamResponse], error) {
 	return c.vStream.CallServerStream(ctx, req)
 }
 
-// VStreamRows calls queryservice.Query.VStreamRows.
+// VStreamRows calls vitess.queryservice.dev.Query.VStreamRows.
 func (c *queryClient) VStreamRows(ctx context.Context, req *connect.Request[dev1.VStreamRowsRequest]) (*connect.ServerStreamForClient[dev1.VStreamRowsResponse], error) {
 	return c.vStreamRows.CallServerStream(ctx, req)
 }
 
-// VStreamTables calls queryservice.Query.VStreamTables.
+// VStreamTables calls vitess.queryservice.dev.Query.VStreamTables.
 func (c *queryClient) VStreamTables(ctx context.Context, req *connect.Request[dev1.VStreamTablesRequest]) (*connect.ServerStreamForClient[dev1.VStreamTablesResponse], error) {
 	return c.vStreamTables.CallServerStream(ctx, req)
 }
 
-// VStreamResults calls queryservice.Query.VStreamResults.
+// VStreamResults calls vitess.queryservice.dev.Query.VStreamResults.
 func (c *queryClient) VStreamResults(ctx context.Context, req *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error) {
 	return c.vStreamResults.CallServerStream(ctx, req)
 }
 
-// GetSchema calls queryservice.Query.GetSchema.
+// GetSchema calls vitess.queryservice.dev.Query.GetSchema.
 func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error) {
 	return c.getSchema.CallServerStream(ctx, req)
 }
 
-// QueryHandler is an implementation of the queryservice.Query service.
+// QueryHandler is an implementation of the vitess.queryservice.dev.Query service.
 type QueryHandler interface {
 	// Execute executes the specified SQL query (might be in a
 	// transaction context, if Query.transaction_id is set).
@@ -798,7 +798,7 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 		connect.WithSchema(queryMethods.ByName("GetSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/queryservice.Query/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/vitess.queryservice.dev.Query/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case QueryExecuteProcedure:
 			queryExecuteHandler.ServeHTTP(w, r)
@@ -868,117 +868,117 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 type UnimplementedQueryHandler struct{}
 
 func (UnimplementedQueryHandler) Execute(context.Context, *connect.Request[dev.ExecuteRequest]) (*connect.Response[dev.ExecuteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Execute is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Execute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) StreamExecute(context.Context, *connect.Request[dev.StreamExecuteRequest], *connect.ServerStream[dev.StreamExecuteResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamExecute is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.StreamExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) Begin(context.Context, *connect.Request[dev.BeginRequest]) (*connect.Response[dev.BeginResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Begin is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Begin is not implemented"))
 }
 
 func (UnimplementedQueryHandler) Commit(context.Context, *connect.Request[dev.CommitRequest]) (*connect.Response[dev.CommitResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Commit is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Commit is not implemented"))
 }
 
 func (UnimplementedQueryHandler) Rollback(context.Context, *connect.Request[dev.RollbackRequest]) (*connect.Response[dev.RollbackResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Rollback is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Rollback is not implemented"))
 }
 
 func (UnimplementedQueryHandler) Prepare(context.Context, *connect.Request[dev.PrepareRequest]) (*connect.Response[dev.PrepareResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Prepare is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Prepare is not implemented"))
 }
 
 func (UnimplementedQueryHandler) CommitPrepared(context.Context, *connect.Request[dev.CommitPreparedRequest]) (*connect.Response[dev.CommitPreparedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CommitPrepared is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.CommitPrepared is not implemented"))
 }
 
 func (UnimplementedQueryHandler) RollbackPrepared(context.Context, *connect.Request[dev.RollbackPreparedRequest]) (*connect.Response[dev.RollbackPreparedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.RollbackPrepared is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.RollbackPrepared is not implemented"))
 }
 
 func (UnimplementedQueryHandler) CreateTransaction(context.Context, *connect.Request[dev.CreateTransactionRequest]) (*connect.Response[dev.CreateTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.CreateTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.CreateTransaction is not implemented"))
 }
 
 func (UnimplementedQueryHandler) StartCommit(context.Context, *connect.Request[dev.StartCommitRequest]) (*connect.Response[dev.StartCommitResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StartCommit is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.StartCommit is not implemented"))
 }
 
 func (UnimplementedQueryHandler) SetRollback(context.Context, *connect.Request[dev.SetRollbackRequest]) (*connect.Response[dev.SetRollbackResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.SetRollback is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.SetRollback is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ConcludeTransaction(context.Context, *connect.Request[dev.ConcludeTransactionRequest]) (*connect.Response[dev.ConcludeTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ConcludeTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ConcludeTransaction is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ReadTransaction(context.Context, *connect.Request[dev.ReadTransactionRequest]) (*connect.Response[dev.ReadTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReadTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ReadTransaction is not implemented"))
 }
 
 func (UnimplementedQueryHandler) UnresolvedTransactions(context.Context, *connect.Request[dev.UnresolvedTransactionsRequest]) (*connect.Response[dev.UnresolvedTransactionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.UnresolvedTransactions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.UnresolvedTransactions is not implemented"))
 }
 
 func (UnimplementedQueryHandler) BeginExecute(context.Context, *connect.Request[dev.BeginExecuteRequest]) (*connect.Response[dev.BeginExecuteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginExecute is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.BeginExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) BeginStreamExecute(context.Context, *connect.Request[dev.BeginStreamExecuteRequest], *connect.ServerStream[dev.BeginStreamExecuteResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BeginStreamExecute is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.BeginStreamExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) MessageStream(context.Context, *connect.Request[dev.MessageStreamRequest], *connect.ServerStream[dev.MessageStreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageStream is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.MessageStream is not implemented"))
 }
 
 func (UnimplementedQueryHandler) MessageAck(context.Context, *connect.Request[dev.MessageAckRequest]) (*connect.Response[dev.MessageAckResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.MessageAck is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.MessageAck is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ReserveExecute(context.Context, *connect.Request[dev.ReserveExecuteRequest]) (*connect.Response[dev.ReserveExecuteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveExecute is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ReserveExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ReserveBeginExecute(context.Context, *connect.Request[dev.ReserveBeginExecuteRequest]) (*connect.Response[dev.ReserveBeginExecuteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginExecute is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ReserveBeginExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ReserveStreamExecute(context.Context, *connect.Request[dev.ReserveStreamExecuteRequest], *connect.ServerStream[dev.ReserveStreamExecuteResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveStreamExecute is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ReserveStreamExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) ReserveBeginStreamExecute(context.Context, *connect.Request[dev.ReserveBeginStreamExecuteRequest], *connect.ServerStream[dev.ReserveBeginStreamExecuteResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.ReserveBeginStreamExecute is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.ReserveBeginStreamExecute is not implemented"))
 }
 
 func (UnimplementedQueryHandler) Release(context.Context, *connect.Request[dev.ReleaseRequest]) (*connect.Response[dev.ReleaseResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.Release is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.Release is not implemented"))
 }
 
 func (UnimplementedQueryHandler) StreamHealth(context.Context, *connect.Request[dev.StreamHealthRequest], *connect.ServerStream[dev.StreamHealthResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.StreamHealth is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.StreamHealth is not implemented"))
 }
 
 func (UnimplementedQueryHandler) VStream(context.Context, *connect.Request[dev1.VStreamRequest], *connect.ServerStream[dev1.VStreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStream is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.VStream is not implemented"))
 }
 
 func (UnimplementedQueryHandler) VStreamRows(context.Context, *connect.Request[dev1.VStreamRowsRequest], *connect.ServerStream[dev1.VStreamRowsResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamRows is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.VStreamRows is not implemented"))
 }
 
 func (UnimplementedQueryHandler) VStreamTables(context.Context, *connect.Request[dev1.VStreamTablesRequest], *connect.ServerStream[dev1.VStreamTablesResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamTables is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.VStreamTables is not implemented"))
 }
 
 func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.VStreamResults is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.VStreamResults is not implemented"))
 }
 
 func (UnimplementedQueryHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.GetSchema is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.queryservice.dev.Query.GetSchema is not implemented"))
 }

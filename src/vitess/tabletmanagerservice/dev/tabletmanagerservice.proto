@@ -148,6 +148,8 @@ service TabletManager {
   rpc ValidateVReplicationPermissions(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsRequest) returns(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsResponse) {};
   rpc VReplicationExec(vitess.tabletmanagerdata.dev.VReplicationExecRequest) returns(vitess.tabletmanagerdata.dev.VReplicationExecResponse) {};
   rpc VReplicationWaitForPos(vitess.tabletmanagerdata.dev.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.dev.VReplicationWaitForPosResponse) {};
+  rpc UpdateSequenceTables(vitess.tabletmanagerdata.dev.UpdateSequenceTablesRequest) returns(vitess.tabletmanagerdata.dev.UpdateSequenceTablesResponse) {};
+  rpc GetMaxValueForSequences(vitess.tabletmanagerdata.dev.GetMaxValueForSequencesRequest) returns(vitess.tabletmanagerdata.dev.GetMaxValueForSequencesResponse) {};
 
   // VDiff API
   rpc VDiff(vitess.tabletmanagerdata.dev.VDiffRequest) returns(vitess.tabletmanagerdata.dev.VDiffResponse) {};

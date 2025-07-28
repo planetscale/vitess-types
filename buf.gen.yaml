@@ -14,12 +14,12 @@ plugins:
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/dev.Row
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/dev.BoundQuery
       - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/dev.VStreamRowsResponse
-      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v19.Row
-      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v19.BoundQuery
-      - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/v19.VStreamRowsResponse
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/v21.Row
       - pool=github.com/planetscale/vitess-types/gen/vitess/query/v21.BoundQuery
       - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/v21.VStreamRowsResponse
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v22.Row
+      - pool=github.com/planetscale/vitess-types/gen/vitess/query/v22.BoundQuery
+      - pool=github.com/planetscale/vitess-types/gen/vitess/binlogdata/v22.VStreamRowsResponse
   - name: connect-go
     path: bin/protoc-gen-connect-go
     out: gen

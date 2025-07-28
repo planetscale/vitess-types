@@ -1,7 +1,7 @@
 {
   "versions": {
     "dev": "refs/heads/main",
-    "v19": "refs/tags/v19.0.8",
-    "v21": "refs/tags/v21.0.3"
+    "v21": "refs/tags/v21.0.5",
+    "v22": "refs/tags/v22.0.1"
   }
 }

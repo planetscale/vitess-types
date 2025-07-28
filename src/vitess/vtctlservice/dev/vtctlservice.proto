@@ -204,6 +204,9 @@ service Vtctld {
   // from a source keyspace to a target keyspace using a provided expressions.
   rpc MaterializeCreate(vitess.vtctldata.dev.MaterializeCreateRequest) returns (vitess.vtctldata.dev.MaterializeCreateResponse) {};
 
+  // WorkflowAddTables adds tables to the existing materialize/movetables workflow.
+  rpc WorkflowAddTables(vitess.vtctldata.dev.WorkflowAddTablesRequest) returns (vitess.vtctldata.dev.WorkflowAddTablesResponse) {};
+
   // MigrateCreate creates a workflow which migrates one or more tables from an
   // external cluster into Vitess.
   rpc MigrateCreate(vitess.vtctldata.dev.MigrateCreateRequest) returns (vitess.vtctldata.dev.WorkflowStatusResponse) {};
