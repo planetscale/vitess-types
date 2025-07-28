@@ -40,9 +40,9 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VtctlName is the fully-qualified name of the Vtctl service.
-	VtctlName = "vtctlservice.Vtctl"
+	VtctlName = "vitess.vtctlservice.v21.Vtctl"
 	// VtctldName is the fully-qualified name of the Vtctld service.
-	VtctldName = "vtctlservice.Vtctld"
+	VtctldName = "vitess.vtctlservice.v21.Vtctld"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,308 +55,308 @@ const (
 const (
 	// VtctlExecuteVtctlCommandProcedure is the fully-qualified name of the Vtctl's ExecuteVtctlCommand
 	// RPC.
-	VtctlExecuteVtctlCommandProcedure = "/vtctlservice.Vtctl/ExecuteVtctlCommand"
+	VtctlExecuteVtctlCommandProcedure = "/vitess.vtctlservice.v21.Vtctl/ExecuteVtctlCommand"
 	// VtctldAddCellInfoProcedure is the fully-qualified name of the Vtctld's AddCellInfo RPC.
-	VtctldAddCellInfoProcedure = "/vtctlservice.Vtctld/AddCellInfo"
+	VtctldAddCellInfoProcedure = "/vitess.vtctlservice.v21.Vtctld/AddCellInfo"
 	// VtctldAddCellsAliasProcedure is the fully-qualified name of the Vtctld's AddCellsAlias RPC.
-	VtctldAddCellsAliasProcedure = "/vtctlservice.Vtctld/AddCellsAlias"
+	VtctldAddCellsAliasProcedure = "/vitess.vtctlservice.v21.Vtctld/AddCellsAlias"
 	// VtctldApplyRoutingRulesProcedure is the fully-qualified name of the Vtctld's ApplyRoutingRules
 	// RPC.
-	VtctldApplyRoutingRulesProcedure = "/vtctlservice.Vtctld/ApplyRoutingRules"
+	VtctldApplyRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/ApplyRoutingRules"
 	// VtctldApplySchemaProcedure is the fully-qualified name of the Vtctld's ApplySchema RPC.
-	VtctldApplySchemaProcedure = "/vtctlservice.Vtctld/ApplySchema"
+	VtctldApplySchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/ApplySchema"
 	// VtctldApplyKeyspaceRoutingRulesProcedure is the fully-qualified name of the Vtctld's
 	// ApplyKeyspaceRoutingRules RPC.
-	VtctldApplyKeyspaceRoutingRulesProcedure = "/vtctlservice.Vtctld/ApplyKeyspaceRoutingRules"
+	VtctldApplyKeyspaceRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/ApplyKeyspaceRoutingRules"
 	// VtctldApplyShardRoutingRulesProcedure is the fully-qualified name of the Vtctld's
 	// ApplyShardRoutingRules RPC.
-	VtctldApplyShardRoutingRulesProcedure = "/vtctlservice.Vtctld/ApplyShardRoutingRules"
+	VtctldApplyShardRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/ApplyShardRoutingRules"
 	// VtctldApplyVSchemaProcedure is the fully-qualified name of the Vtctld's ApplyVSchema RPC.
-	VtctldApplyVSchemaProcedure = "/vtctlservice.Vtctld/ApplyVSchema"
+	VtctldApplyVSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/ApplyVSchema"
 	// VtctldBackupProcedure is the fully-qualified name of the Vtctld's Backup RPC.
-	VtctldBackupProcedure = "/vtctlservice.Vtctld/Backup"
+	VtctldBackupProcedure = "/vitess.vtctlservice.v21.Vtctld/Backup"
 	// VtctldBackupShardProcedure is the fully-qualified name of the Vtctld's BackupShard RPC.
-	VtctldBackupShardProcedure = "/vtctlservice.Vtctld/BackupShard"
+	VtctldBackupShardProcedure = "/vitess.vtctlservice.v21.Vtctld/BackupShard"
 	// VtctldCancelSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// CancelSchemaMigration RPC.
-	VtctldCancelSchemaMigrationProcedure = "/vtctlservice.Vtctld/CancelSchemaMigration"
+	VtctldCancelSchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/CancelSchemaMigration"
 	// VtctldChangeTabletTagsProcedure is the fully-qualified name of the Vtctld's ChangeTabletTags RPC.
-	VtctldChangeTabletTagsProcedure = "/vtctlservice.Vtctld/ChangeTabletTags"
+	VtctldChangeTabletTagsProcedure = "/vitess.vtctlservice.v21.Vtctld/ChangeTabletTags"
 	// VtctldChangeTabletTypeProcedure is the fully-qualified name of the Vtctld's ChangeTabletType RPC.
-	VtctldChangeTabletTypeProcedure = "/vtctlservice.Vtctld/ChangeTabletType"
+	VtctldChangeTabletTypeProcedure = "/vitess.vtctlservice.v21.Vtctld/ChangeTabletType"
 	// VtctldCheckThrottlerProcedure is the fully-qualified name of the Vtctld's CheckThrottler RPC.
-	VtctldCheckThrottlerProcedure = "/vtctlservice.Vtctld/CheckThrottler"
+	VtctldCheckThrottlerProcedure = "/vitess.vtctlservice.v21.Vtctld/CheckThrottler"
 	// VtctldCleanupSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// CleanupSchemaMigration RPC.
-	VtctldCleanupSchemaMigrationProcedure = "/vtctlservice.Vtctld/CleanupSchemaMigration"
+	VtctldCleanupSchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/CleanupSchemaMigration"
 	// VtctldCompleteSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// CompleteSchemaMigration RPC.
-	VtctldCompleteSchemaMigrationProcedure = "/vtctlservice.Vtctld/CompleteSchemaMigration"
+	VtctldCompleteSchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/CompleteSchemaMigration"
 	// VtctldConcludeTransactionProcedure is the fully-qualified name of the Vtctld's
 	// ConcludeTransaction RPC.
-	VtctldConcludeTransactionProcedure = "/vtctlservice.Vtctld/ConcludeTransaction"
+	VtctldConcludeTransactionProcedure = "/vitess.vtctlservice.v21.Vtctld/ConcludeTransaction"
 	// VtctldCreateKeyspaceProcedure is the fully-qualified name of the Vtctld's CreateKeyspace RPC.
-	VtctldCreateKeyspaceProcedure = "/vtctlservice.Vtctld/CreateKeyspace"
+	VtctldCreateKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/CreateKeyspace"
 	// VtctldCreateShardProcedure is the fully-qualified name of the Vtctld's CreateShard RPC.
-	VtctldCreateShardProcedure = "/vtctlservice.Vtctld/CreateShard"
+	VtctldCreateShardProcedure = "/vitess.vtctlservice.v21.Vtctld/CreateShard"
 	// VtctldDeleteCellInfoProcedure is the fully-qualified name of the Vtctld's DeleteCellInfo RPC.
-	VtctldDeleteCellInfoProcedure = "/vtctlservice.Vtctld/DeleteCellInfo"
+	VtctldDeleteCellInfoProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteCellInfo"
 	// VtctldDeleteCellsAliasProcedure is the fully-qualified name of the Vtctld's DeleteCellsAlias RPC.
-	VtctldDeleteCellsAliasProcedure = "/vtctlservice.Vtctld/DeleteCellsAlias"
+	VtctldDeleteCellsAliasProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteCellsAlias"
 	// VtctldDeleteKeyspaceProcedure is the fully-qualified name of the Vtctld's DeleteKeyspace RPC.
-	VtctldDeleteKeyspaceProcedure = "/vtctlservice.Vtctld/DeleteKeyspace"
+	VtctldDeleteKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteKeyspace"
 	// VtctldDeleteShardsProcedure is the fully-qualified name of the Vtctld's DeleteShards RPC.
-	VtctldDeleteShardsProcedure = "/vtctlservice.Vtctld/DeleteShards"
+	VtctldDeleteShardsProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteShards"
 	// VtctldDeleteSrvVSchemaProcedure is the fully-qualified name of the Vtctld's DeleteSrvVSchema RPC.
-	VtctldDeleteSrvVSchemaProcedure = "/vtctlservice.Vtctld/DeleteSrvVSchema"
+	VtctldDeleteSrvVSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteSrvVSchema"
 	// VtctldDeleteTabletsProcedure is the fully-qualified name of the Vtctld's DeleteTablets RPC.
-	VtctldDeleteTabletsProcedure = "/vtctlservice.Vtctld/DeleteTablets"
+	VtctldDeleteTabletsProcedure = "/vitess.vtctlservice.v21.Vtctld/DeleteTablets"
 	// VtctldEmergencyReparentShardProcedure is the fully-qualified name of the Vtctld's
 	// EmergencyReparentShard RPC.
-	VtctldEmergencyReparentShardProcedure = "/vtctlservice.Vtctld/EmergencyReparentShard"
+	VtctldEmergencyReparentShardProcedure = "/vitess.vtctlservice.v21.Vtctld/EmergencyReparentShard"
 	// VtctldExecuteFetchAsAppProcedure is the fully-qualified name of the Vtctld's ExecuteFetchAsApp
 	// RPC.
-	VtctldExecuteFetchAsAppProcedure = "/vtctlservice.Vtctld/ExecuteFetchAsApp"
+	VtctldExecuteFetchAsAppProcedure = "/vitess.vtctlservice.v21.Vtctld/ExecuteFetchAsApp"
 	// VtctldExecuteFetchAsDBAProcedure is the fully-qualified name of the Vtctld's ExecuteFetchAsDBA
 	// RPC.
-	VtctldExecuteFetchAsDBAProcedure = "/vtctlservice.Vtctld/ExecuteFetchAsDBA"
+	VtctldExecuteFetchAsDBAProcedure = "/vitess.vtctlservice.v21.Vtctld/ExecuteFetchAsDBA"
 	// VtctldExecuteHookProcedure is the fully-qualified name of the Vtctld's ExecuteHook RPC.
-	VtctldExecuteHookProcedure = "/vtctlservice.Vtctld/ExecuteHook"
+	VtctldExecuteHookProcedure = "/vitess.vtctlservice.v21.Vtctld/ExecuteHook"
 	// VtctldExecuteMultiFetchAsDBAProcedure is the fully-qualified name of the Vtctld's
 	// ExecuteMultiFetchAsDBA RPC.
-	VtctldExecuteMultiFetchAsDBAProcedure = "/vtctlservice.Vtctld/ExecuteMultiFetchAsDBA"
+	VtctldExecuteMultiFetchAsDBAProcedure = "/vitess.vtctlservice.v21.Vtctld/ExecuteMultiFetchAsDBA"
 	// VtctldFindAllShardsInKeyspaceProcedure is the fully-qualified name of the Vtctld's
 	// FindAllShardsInKeyspace RPC.
-	VtctldFindAllShardsInKeyspaceProcedure = "/vtctlservice.Vtctld/FindAllShardsInKeyspace"
+	VtctldFindAllShardsInKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/FindAllShardsInKeyspace"
 	// VtctldForceCutOverSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// ForceCutOverSchemaMigration RPC.
-	VtctldForceCutOverSchemaMigrationProcedure = "/vtctlservice.Vtctld/ForceCutOverSchemaMigration"
+	VtctldForceCutOverSchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/ForceCutOverSchemaMigration"
 	// VtctldGetBackupsProcedure is the fully-qualified name of the Vtctld's GetBackups RPC.
-	VtctldGetBackupsProcedure = "/vtctlservice.Vtctld/GetBackups"
+	VtctldGetBackupsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetBackups"
 	// VtctldGetCellInfoProcedure is the fully-qualified name of the Vtctld's GetCellInfo RPC.
-	VtctldGetCellInfoProcedure = "/vtctlservice.Vtctld/GetCellInfo"
+	VtctldGetCellInfoProcedure = "/vitess.vtctlservice.v21.Vtctld/GetCellInfo"
 	// VtctldGetCellInfoNamesProcedure is the fully-qualified name of the Vtctld's GetCellInfoNames RPC.
-	VtctldGetCellInfoNamesProcedure = "/vtctlservice.Vtctld/GetCellInfoNames"
+	VtctldGetCellInfoNamesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetCellInfoNames"
 	// VtctldGetCellsAliasesProcedure is the fully-qualified name of the Vtctld's GetCellsAliases RPC.
-	VtctldGetCellsAliasesProcedure = "/vtctlservice.Vtctld/GetCellsAliases"
+	VtctldGetCellsAliasesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetCellsAliases"
 	// VtctldGetFullStatusProcedure is the fully-qualified name of the Vtctld's GetFullStatus RPC.
-	VtctldGetFullStatusProcedure = "/vtctlservice.Vtctld/GetFullStatus"
+	VtctldGetFullStatusProcedure = "/vitess.vtctlservice.v21.Vtctld/GetFullStatus"
 	// VtctldGetKeyspaceProcedure is the fully-qualified name of the Vtctld's GetKeyspace RPC.
-	VtctldGetKeyspaceProcedure = "/vtctlservice.Vtctld/GetKeyspace"
+	VtctldGetKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/GetKeyspace"
 	// VtctldGetKeyspacesProcedure is the fully-qualified name of the Vtctld's GetKeyspaces RPC.
-	VtctldGetKeyspacesProcedure = "/vtctlservice.Vtctld/GetKeyspaces"
+	VtctldGetKeyspacesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetKeyspaces"
 	// VtctldGetKeyspaceRoutingRulesProcedure is the fully-qualified name of the Vtctld's
 	// GetKeyspaceRoutingRules RPC.
-	VtctldGetKeyspaceRoutingRulesProcedure = "/vtctlservice.Vtctld/GetKeyspaceRoutingRules"
+	VtctldGetKeyspaceRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetKeyspaceRoutingRules"
 	// VtctldGetPermissionsProcedure is the fully-qualified name of the Vtctld's GetPermissions RPC.
-	VtctldGetPermissionsProcedure = "/vtctlservice.Vtctld/GetPermissions"
+	VtctldGetPermissionsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetPermissions"
 	// VtctldGetRoutingRulesProcedure is the fully-qualified name of the Vtctld's GetRoutingRules RPC.
-	VtctldGetRoutingRulesProcedure = "/vtctlservice.Vtctld/GetRoutingRules"
+	VtctldGetRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetRoutingRules"
 	// VtctldGetSchemaProcedure is the fully-qualified name of the Vtctld's GetSchema RPC.
-	VtctldGetSchemaProcedure = "/vtctlservice.Vtctld/GetSchema"
+	VtctldGetSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSchema"
 	// VtctldGetSchemaMigrationsProcedure is the fully-qualified name of the Vtctld's
 	// GetSchemaMigrations RPC.
-	VtctldGetSchemaMigrationsProcedure = "/vtctlservice.Vtctld/GetSchemaMigrations"
+	VtctldGetSchemaMigrationsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSchemaMigrations"
 	// VtctldGetShardReplicationProcedure is the fully-qualified name of the Vtctld's
 	// GetShardReplication RPC.
-	VtctldGetShardReplicationProcedure = "/vtctlservice.Vtctld/GetShardReplication"
+	VtctldGetShardReplicationProcedure = "/vitess.vtctlservice.v21.Vtctld/GetShardReplication"
 	// VtctldGetShardProcedure is the fully-qualified name of the Vtctld's GetShard RPC.
-	VtctldGetShardProcedure = "/vtctlservice.Vtctld/GetShard"
+	VtctldGetShardProcedure = "/vitess.vtctlservice.v21.Vtctld/GetShard"
 	// VtctldGetShardRoutingRulesProcedure is the fully-qualified name of the Vtctld's
 	// GetShardRoutingRules RPC.
-	VtctldGetShardRoutingRulesProcedure = "/vtctlservice.Vtctld/GetShardRoutingRules"
+	VtctldGetShardRoutingRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetShardRoutingRules"
 	// VtctldGetSrvKeyspaceNamesProcedure is the fully-qualified name of the Vtctld's
 	// GetSrvKeyspaceNames RPC.
-	VtctldGetSrvKeyspaceNamesProcedure = "/vtctlservice.Vtctld/GetSrvKeyspaceNames"
+	VtctldGetSrvKeyspaceNamesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSrvKeyspaceNames"
 	// VtctldGetSrvKeyspacesProcedure is the fully-qualified name of the Vtctld's GetSrvKeyspaces RPC.
-	VtctldGetSrvKeyspacesProcedure = "/vtctlservice.Vtctld/GetSrvKeyspaces"
+	VtctldGetSrvKeyspacesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSrvKeyspaces"
 	// VtctldUpdateThrottlerConfigProcedure is the fully-qualified name of the Vtctld's
 	// UpdateThrottlerConfig RPC.
-	VtctldUpdateThrottlerConfigProcedure = "/vtctlservice.Vtctld/UpdateThrottlerConfig"
+	VtctldUpdateThrottlerConfigProcedure = "/vitess.vtctlservice.v21.Vtctld/UpdateThrottlerConfig"
 	// VtctldGetSrvVSchemaProcedure is the fully-qualified name of the Vtctld's GetSrvVSchema RPC.
-	VtctldGetSrvVSchemaProcedure = "/vtctlservice.Vtctld/GetSrvVSchema"
+	VtctldGetSrvVSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSrvVSchema"
 	// VtctldGetSrvVSchemasProcedure is the fully-qualified name of the Vtctld's GetSrvVSchemas RPC.
-	VtctldGetSrvVSchemasProcedure = "/vtctlservice.Vtctld/GetSrvVSchemas"
+	VtctldGetSrvVSchemasProcedure = "/vitess.vtctlservice.v21.Vtctld/GetSrvVSchemas"
 	// VtctldGetTabletProcedure is the fully-qualified name of the Vtctld's GetTablet RPC.
-	VtctldGetTabletProcedure = "/vtctlservice.Vtctld/GetTablet"
+	VtctldGetTabletProcedure = "/vitess.vtctlservice.v21.Vtctld/GetTablet"
 	// VtctldGetTabletsProcedure is the fully-qualified name of the Vtctld's GetTablets RPC.
-	VtctldGetTabletsProcedure = "/vtctlservice.Vtctld/GetTablets"
+	VtctldGetTabletsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetTablets"
 	// VtctldGetThrottlerStatusProcedure is the fully-qualified name of the Vtctld's GetThrottlerStatus
 	// RPC.
-	VtctldGetThrottlerStatusProcedure = "/vtctlservice.Vtctld/GetThrottlerStatus"
+	VtctldGetThrottlerStatusProcedure = "/vitess.vtctlservice.v21.Vtctld/GetThrottlerStatus"
 	// VtctldGetTopologyPathProcedure is the fully-qualified name of the Vtctld's GetTopologyPath RPC.
-	VtctldGetTopologyPathProcedure = "/vtctlservice.Vtctld/GetTopologyPath"
+	VtctldGetTopologyPathProcedure = "/vitess.vtctlservice.v21.Vtctld/GetTopologyPath"
 	// VtctldGetUnresolvedTransactionsProcedure is the fully-qualified name of the Vtctld's
 	// GetUnresolvedTransactions RPC.
-	VtctldGetUnresolvedTransactionsProcedure = "/vtctlservice.Vtctld/GetUnresolvedTransactions"
+	VtctldGetUnresolvedTransactionsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetUnresolvedTransactions"
 	// VtctldGetVersionProcedure is the fully-qualified name of the Vtctld's GetVersion RPC.
-	VtctldGetVersionProcedure = "/vtctlservice.Vtctld/GetVersion"
+	VtctldGetVersionProcedure = "/vitess.vtctlservice.v21.Vtctld/GetVersion"
 	// VtctldGetVSchemaProcedure is the fully-qualified name of the Vtctld's GetVSchema RPC.
-	VtctldGetVSchemaProcedure = "/vtctlservice.Vtctld/GetVSchema"
+	VtctldGetVSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/GetVSchema"
 	// VtctldGetWorkflowsProcedure is the fully-qualified name of the Vtctld's GetWorkflows RPC.
-	VtctldGetWorkflowsProcedure = "/vtctlservice.Vtctld/GetWorkflows"
+	VtctldGetWorkflowsProcedure = "/vitess.vtctlservice.v21.Vtctld/GetWorkflows"
 	// VtctldInitShardPrimaryProcedure is the fully-qualified name of the Vtctld's InitShardPrimary RPC.
-	VtctldInitShardPrimaryProcedure = "/vtctlservice.Vtctld/InitShardPrimary"
+	VtctldInitShardPrimaryProcedure = "/vitess.vtctlservice.v21.Vtctld/InitShardPrimary"
 	// VtctldLaunchSchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// LaunchSchemaMigration RPC.
-	VtctldLaunchSchemaMigrationProcedure = "/vtctlservice.Vtctld/LaunchSchemaMigration"
+	VtctldLaunchSchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/LaunchSchemaMigration"
 	// VtctldLookupVindexCreateProcedure is the fully-qualified name of the Vtctld's LookupVindexCreate
 	// RPC.
-	VtctldLookupVindexCreateProcedure = "/vtctlservice.Vtctld/LookupVindexCreate"
+	VtctldLookupVindexCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/LookupVindexCreate"
 	// VtctldLookupVindexExternalizeProcedure is the fully-qualified name of the Vtctld's
 	// LookupVindexExternalize RPC.
-	VtctldLookupVindexExternalizeProcedure = "/vtctlservice.Vtctld/LookupVindexExternalize"
+	VtctldLookupVindexExternalizeProcedure = "/vitess.vtctlservice.v21.Vtctld/LookupVindexExternalize"
 	// VtctldMaterializeCreateProcedure is the fully-qualified name of the Vtctld's MaterializeCreate
 	// RPC.
-	VtctldMaterializeCreateProcedure = "/vtctlservice.Vtctld/MaterializeCreate"
+	VtctldMaterializeCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/MaterializeCreate"
 	// VtctldMigrateCreateProcedure is the fully-qualified name of the Vtctld's MigrateCreate RPC.
-	VtctldMigrateCreateProcedure = "/vtctlservice.Vtctld/MigrateCreate"
+	VtctldMigrateCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/MigrateCreate"
 	// VtctldMountRegisterProcedure is the fully-qualified name of the Vtctld's MountRegister RPC.
-	VtctldMountRegisterProcedure = "/vtctlservice.Vtctld/MountRegister"
+	VtctldMountRegisterProcedure = "/vitess.vtctlservice.v21.Vtctld/MountRegister"
 	// VtctldMountUnregisterProcedure is the fully-qualified name of the Vtctld's MountUnregister RPC.
-	VtctldMountUnregisterProcedure = "/vtctlservice.Vtctld/MountUnregister"
+	VtctldMountUnregisterProcedure = "/vitess.vtctlservice.v21.Vtctld/MountUnregister"
 	// VtctldMountShowProcedure is the fully-qualified name of the Vtctld's MountShow RPC.
-	VtctldMountShowProcedure = "/vtctlservice.Vtctld/MountShow"
+	VtctldMountShowProcedure = "/vitess.vtctlservice.v21.Vtctld/MountShow"
 	// VtctldMountListProcedure is the fully-qualified name of the Vtctld's MountList RPC.
-	VtctldMountListProcedure = "/vtctlservice.Vtctld/MountList"
+	VtctldMountListProcedure = "/vitess.vtctlservice.v21.Vtctld/MountList"
 	// VtctldMoveTablesCreateProcedure is the fully-qualified name of the Vtctld's MoveTablesCreate RPC.
-	VtctldMoveTablesCreateProcedure = "/vtctlservice.Vtctld/MoveTablesCreate"
+	VtctldMoveTablesCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/MoveTablesCreate"
 	// VtctldMoveTablesCompleteProcedure is the fully-qualified name of the Vtctld's MoveTablesComplete
 	// RPC.
-	VtctldMoveTablesCompleteProcedure = "/vtctlservice.Vtctld/MoveTablesComplete"
+	VtctldMoveTablesCompleteProcedure = "/vitess.vtctlservice.v21.Vtctld/MoveTablesComplete"
 	// VtctldPingTabletProcedure is the fully-qualified name of the Vtctld's PingTablet RPC.
-	VtctldPingTabletProcedure = "/vtctlservice.Vtctld/PingTablet"
+	VtctldPingTabletProcedure = "/vitess.vtctlservice.v21.Vtctld/PingTablet"
 	// VtctldPlannedReparentShardProcedure is the fully-qualified name of the Vtctld's
 	// PlannedReparentShard RPC.
-	VtctldPlannedReparentShardProcedure = "/vtctlservice.Vtctld/PlannedReparentShard"
+	VtctldPlannedReparentShardProcedure = "/vitess.vtctlservice.v21.Vtctld/PlannedReparentShard"
 	// VtctldRebuildKeyspaceGraphProcedure is the fully-qualified name of the Vtctld's
 	// RebuildKeyspaceGraph RPC.
-	VtctldRebuildKeyspaceGraphProcedure = "/vtctlservice.Vtctld/RebuildKeyspaceGraph"
+	VtctldRebuildKeyspaceGraphProcedure = "/vitess.vtctlservice.v21.Vtctld/RebuildKeyspaceGraph"
 	// VtctldRebuildVSchemaGraphProcedure is the fully-qualified name of the Vtctld's
 	// RebuildVSchemaGraph RPC.
-	VtctldRebuildVSchemaGraphProcedure = "/vtctlservice.Vtctld/RebuildVSchemaGraph"
+	VtctldRebuildVSchemaGraphProcedure = "/vitess.vtctlservice.v21.Vtctld/RebuildVSchemaGraph"
 	// VtctldRefreshStateProcedure is the fully-qualified name of the Vtctld's RefreshState RPC.
-	VtctldRefreshStateProcedure = "/vtctlservice.Vtctld/RefreshState"
+	VtctldRefreshStateProcedure = "/vitess.vtctlservice.v21.Vtctld/RefreshState"
 	// VtctldRefreshStateByShardProcedure is the fully-qualified name of the Vtctld's
 	// RefreshStateByShard RPC.
-	VtctldRefreshStateByShardProcedure = "/vtctlservice.Vtctld/RefreshStateByShard"
+	VtctldRefreshStateByShardProcedure = "/vitess.vtctlservice.v21.Vtctld/RefreshStateByShard"
 	// VtctldReloadSchemaProcedure is the fully-qualified name of the Vtctld's ReloadSchema RPC.
-	VtctldReloadSchemaProcedure = "/vtctlservice.Vtctld/ReloadSchema"
+	VtctldReloadSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/ReloadSchema"
 	// VtctldReloadSchemaKeyspaceProcedure is the fully-qualified name of the Vtctld's
 	// ReloadSchemaKeyspace RPC.
-	VtctldReloadSchemaKeyspaceProcedure = "/vtctlservice.Vtctld/ReloadSchemaKeyspace"
+	VtctldReloadSchemaKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/ReloadSchemaKeyspace"
 	// VtctldReloadSchemaShardProcedure is the fully-qualified name of the Vtctld's ReloadSchemaShard
 	// RPC.
-	VtctldReloadSchemaShardProcedure = "/vtctlservice.Vtctld/ReloadSchemaShard"
+	VtctldReloadSchemaShardProcedure = "/vitess.vtctlservice.v21.Vtctld/ReloadSchemaShard"
 	// VtctldRemoveBackupProcedure is the fully-qualified name of the Vtctld's RemoveBackup RPC.
-	VtctldRemoveBackupProcedure = "/vtctlservice.Vtctld/RemoveBackup"
+	VtctldRemoveBackupProcedure = "/vitess.vtctlservice.v21.Vtctld/RemoveBackup"
 	// VtctldRemoveKeyspaceCellProcedure is the fully-qualified name of the Vtctld's RemoveKeyspaceCell
 	// RPC.
-	VtctldRemoveKeyspaceCellProcedure = "/vtctlservice.Vtctld/RemoveKeyspaceCell"
+	VtctldRemoveKeyspaceCellProcedure = "/vitess.vtctlservice.v21.Vtctld/RemoveKeyspaceCell"
 	// VtctldRemoveShardCellProcedure is the fully-qualified name of the Vtctld's RemoveShardCell RPC.
-	VtctldRemoveShardCellProcedure = "/vtctlservice.Vtctld/RemoveShardCell"
+	VtctldRemoveShardCellProcedure = "/vitess.vtctlservice.v21.Vtctld/RemoveShardCell"
 	// VtctldReparentTabletProcedure is the fully-qualified name of the Vtctld's ReparentTablet RPC.
-	VtctldReparentTabletProcedure = "/vtctlservice.Vtctld/ReparentTablet"
+	VtctldReparentTabletProcedure = "/vitess.vtctlservice.v21.Vtctld/ReparentTablet"
 	// VtctldReshardCreateProcedure is the fully-qualified name of the Vtctld's ReshardCreate RPC.
-	VtctldReshardCreateProcedure = "/vtctlservice.Vtctld/ReshardCreate"
+	VtctldReshardCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/ReshardCreate"
 	// VtctldRestoreFromBackupProcedure is the fully-qualified name of the Vtctld's RestoreFromBackup
 	// RPC.
-	VtctldRestoreFromBackupProcedure = "/vtctlservice.Vtctld/RestoreFromBackup"
+	VtctldRestoreFromBackupProcedure = "/vitess.vtctlservice.v21.Vtctld/RestoreFromBackup"
 	// VtctldRetrySchemaMigrationProcedure is the fully-qualified name of the Vtctld's
 	// RetrySchemaMigration RPC.
-	VtctldRetrySchemaMigrationProcedure = "/vtctlservice.Vtctld/RetrySchemaMigration"
+	VtctldRetrySchemaMigrationProcedure = "/vitess.vtctlservice.v21.Vtctld/RetrySchemaMigration"
 	// VtctldRunHealthCheckProcedure is the fully-qualified name of the Vtctld's RunHealthCheck RPC.
-	VtctldRunHealthCheckProcedure = "/vtctlservice.Vtctld/RunHealthCheck"
+	VtctldRunHealthCheckProcedure = "/vitess.vtctlservice.v21.Vtctld/RunHealthCheck"
 	// VtctldSetKeyspaceDurabilityPolicyProcedure is the fully-qualified name of the Vtctld's
 	// SetKeyspaceDurabilityPolicy RPC.
-	VtctldSetKeyspaceDurabilityPolicyProcedure = "/vtctlservice.Vtctld/SetKeyspaceDurabilityPolicy"
+	VtctldSetKeyspaceDurabilityPolicyProcedure = "/vitess.vtctlservice.v21.Vtctld/SetKeyspaceDurabilityPolicy"
 	// VtctldSetShardIsPrimaryServingProcedure is the fully-qualified name of the Vtctld's
 	// SetShardIsPrimaryServing RPC.
-	VtctldSetShardIsPrimaryServingProcedure = "/vtctlservice.Vtctld/SetShardIsPrimaryServing"
+	VtctldSetShardIsPrimaryServingProcedure = "/vitess.vtctlservice.v21.Vtctld/SetShardIsPrimaryServing"
 	// VtctldSetShardTabletControlProcedure is the fully-qualified name of the Vtctld's
 	// SetShardTabletControl RPC.
-	VtctldSetShardTabletControlProcedure = "/vtctlservice.Vtctld/SetShardTabletControl"
+	VtctldSetShardTabletControlProcedure = "/vitess.vtctlservice.v21.Vtctld/SetShardTabletControl"
 	// VtctldSetWritableProcedure is the fully-qualified name of the Vtctld's SetWritable RPC.
-	VtctldSetWritableProcedure = "/vtctlservice.Vtctld/SetWritable"
+	VtctldSetWritableProcedure = "/vitess.vtctlservice.v21.Vtctld/SetWritable"
 	// VtctldShardReplicationAddProcedure is the fully-qualified name of the Vtctld's
 	// ShardReplicationAdd RPC.
-	VtctldShardReplicationAddProcedure = "/vtctlservice.Vtctld/ShardReplicationAdd"
+	VtctldShardReplicationAddProcedure = "/vitess.vtctlservice.v21.Vtctld/ShardReplicationAdd"
 	// VtctldShardReplicationFixProcedure is the fully-qualified name of the Vtctld's
 	// ShardReplicationFix RPC.
-	VtctldShardReplicationFixProcedure = "/vtctlservice.Vtctld/ShardReplicationFix"
+	VtctldShardReplicationFixProcedure = "/vitess.vtctlservice.v21.Vtctld/ShardReplicationFix"
 	// VtctldShardReplicationPositionsProcedure is the fully-qualified name of the Vtctld's
 	// ShardReplicationPositions RPC.
-	VtctldShardReplicationPositionsProcedure = "/vtctlservice.Vtctld/ShardReplicationPositions"
+	VtctldShardReplicationPositionsProcedure = "/vitess.vtctlservice.v21.Vtctld/ShardReplicationPositions"
 	// VtctldShardReplicationRemoveProcedure is the fully-qualified name of the Vtctld's
 	// ShardReplicationRemove RPC.
-	VtctldShardReplicationRemoveProcedure = "/vtctlservice.Vtctld/ShardReplicationRemove"
+	VtctldShardReplicationRemoveProcedure = "/vitess.vtctlservice.v21.Vtctld/ShardReplicationRemove"
 	// VtctldSleepTabletProcedure is the fully-qualified name of the Vtctld's SleepTablet RPC.
-	VtctldSleepTabletProcedure = "/vtctlservice.Vtctld/SleepTablet"
+	VtctldSleepTabletProcedure = "/vitess.vtctlservice.v21.Vtctld/SleepTablet"
 	// VtctldSourceShardAddProcedure is the fully-qualified name of the Vtctld's SourceShardAdd RPC.
-	VtctldSourceShardAddProcedure = "/vtctlservice.Vtctld/SourceShardAdd"
+	VtctldSourceShardAddProcedure = "/vitess.vtctlservice.v21.Vtctld/SourceShardAdd"
 	// VtctldSourceShardDeleteProcedure is the fully-qualified name of the Vtctld's SourceShardDelete
 	// RPC.
-	VtctldSourceShardDeleteProcedure = "/vtctlservice.Vtctld/SourceShardDelete"
+	VtctldSourceShardDeleteProcedure = "/vitess.vtctlservice.v21.Vtctld/SourceShardDelete"
 	// VtctldStartReplicationProcedure is the fully-qualified name of the Vtctld's StartReplication RPC.
-	VtctldStartReplicationProcedure = "/vtctlservice.Vtctld/StartReplication"
+	VtctldStartReplicationProcedure = "/vitess.vtctlservice.v21.Vtctld/StartReplication"
 	// VtctldStopReplicationProcedure is the fully-qualified name of the Vtctld's StopReplication RPC.
-	VtctldStopReplicationProcedure = "/vtctlservice.Vtctld/StopReplication"
+	VtctldStopReplicationProcedure = "/vitess.vtctlservice.v21.Vtctld/StopReplication"
 	// VtctldTabletExternallyReparentedProcedure is the fully-qualified name of the Vtctld's
 	// TabletExternallyReparented RPC.
-	VtctldTabletExternallyReparentedProcedure = "/vtctlservice.Vtctld/TabletExternallyReparented"
+	VtctldTabletExternallyReparentedProcedure = "/vitess.vtctlservice.v21.Vtctld/TabletExternallyReparented"
 	// VtctldUpdateCellInfoProcedure is the fully-qualified name of the Vtctld's UpdateCellInfo RPC.
-	VtctldUpdateCellInfoProcedure = "/vtctlservice.Vtctld/UpdateCellInfo"
+	VtctldUpdateCellInfoProcedure = "/vitess.vtctlservice.v21.Vtctld/UpdateCellInfo"
 	// VtctldUpdateCellsAliasProcedure is the fully-qualified name of the Vtctld's UpdateCellsAlias RPC.
-	VtctldUpdateCellsAliasProcedure = "/vtctlservice.Vtctld/UpdateCellsAlias"
+	VtctldUpdateCellsAliasProcedure = "/vitess.vtctlservice.v21.Vtctld/UpdateCellsAlias"
 	// VtctldValidateProcedure is the fully-qualified name of the Vtctld's Validate RPC.
-	VtctldValidateProcedure = "/vtctlservice.Vtctld/Validate"
+	VtctldValidateProcedure = "/vitess.vtctlservice.v21.Vtctld/Validate"
 	// VtctldValidateKeyspaceProcedure is the fully-qualified name of the Vtctld's ValidateKeyspace RPC.
-	VtctldValidateKeyspaceProcedure = "/vtctlservice.Vtctld/ValidateKeyspace"
+	VtctldValidateKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateKeyspace"
 	// VtctldValidateSchemaKeyspaceProcedure is the fully-qualified name of the Vtctld's
 	// ValidateSchemaKeyspace RPC.
-	VtctldValidateSchemaKeyspaceProcedure = "/vtctlservice.Vtctld/ValidateSchemaKeyspace"
+	VtctldValidateSchemaKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateSchemaKeyspace"
 	// VtctldValidateShardProcedure is the fully-qualified name of the Vtctld's ValidateShard RPC.
-	VtctldValidateShardProcedure = "/vtctlservice.Vtctld/ValidateShard"
+	VtctldValidateShardProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateShard"
 	// VtctldValidateVersionKeyspaceProcedure is the fully-qualified name of the Vtctld's
 	// ValidateVersionKeyspace RPC.
-	VtctldValidateVersionKeyspaceProcedure = "/vtctlservice.Vtctld/ValidateVersionKeyspace"
+	VtctldValidateVersionKeyspaceProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateVersionKeyspace"
 	// VtctldValidateVersionShardProcedure is the fully-qualified name of the Vtctld's
 	// ValidateVersionShard RPC.
-	VtctldValidateVersionShardProcedure = "/vtctlservice.Vtctld/ValidateVersionShard"
+	VtctldValidateVersionShardProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateVersionShard"
 	// VtctldValidateVSchemaProcedure is the fully-qualified name of the Vtctld's ValidateVSchema RPC.
-	VtctldValidateVSchemaProcedure = "/vtctlservice.Vtctld/ValidateVSchema"
+	VtctldValidateVSchemaProcedure = "/vitess.vtctlservice.v21.Vtctld/ValidateVSchema"
 	// VtctldVDiffCreateProcedure is the fully-qualified name of the Vtctld's VDiffCreate RPC.
-	VtctldVDiffCreateProcedure = "/vtctlservice.Vtctld/VDiffCreate"
+	VtctldVDiffCreateProcedure = "/vitess.vtctlservice.v21.Vtctld/VDiffCreate"
 	// VtctldVDiffDeleteProcedure is the fully-qualified name of the Vtctld's VDiffDelete RPC.
-	VtctldVDiffDeleteProcedure = "/vtctlservice.Vtctld/VDiffDelete"
+	VtctldVDiffDeleteProcedure = "/vitess.vtctlservice.v21.Vtctld/VDiffDelete"
 	// VtctldVDiffResumeProcedure is the fully-qualified name of the Vtctld's VDiffResume RPC.
-	VtctldVDiffResumeProcedure = "/vtctlservice.Vtctld/VDiffResume"
+	VtctldVDiffResumeProcedure = "/vitess.vtctlservice.v21.Vtctld/VDiffResume"
 	// VtctldVDiffShowProcedure is the fully-qualified name of the Vtctld's VDiffShow RPC.
-	VtctldVDiffShowProcedure = "/vtctlservice.Vtctld/VDiffShow"
+	VtctldVDiffShowProcedure = "/vitess.vtctlservice.v21.Vtctld/VDiffShow"
 	// VtctldVDiffStopProcedure is the fully-qualified name of the Vtctld's VDiffStop RPC.
-	VtctldVDiffStopProcedure = "/vtctlservice.Vtctld/VDiffStop"
+	VtctldVDiffStopProcedure = "/vitess.vtctlservice.v21.Vtctld/VDiffStop"
 	// VtctldWorkflowDeleteProcedure is the fully-qualified name of the Vtctld's WorkflowDelete RPC.
-	VtctldWorkflowDeleteProcedure = "/vtctlservice.Vtctld/WorkflowDelete"
+	VtctldWorkflowDeleteProcedure = "/vitess.vtctlservice.v21.Vtctld/WorkflowDelete"
 	// VtctldWorkflowStatusProcedure is the fully-qualified name of the Vtctld's WorkflowStatus RPC.
-	VtctldWorkflowStatusProcedure = "/vtctlservice.Vtctld/WorkflowStatus"
+	VtctldWorkflowStatusProcedure = "/vitess.vtctlservice.v21.Vtctld/WorkflowStatus"
 	// VtctldWorkflowSwitchTrafficProcedure is the fully-qualified name of the Vtctld's
 	// WorkflowSwitchTraffic RPC.
-	VtctldWorkflowSwitchTrafficProcedure = "/vtctlservice.Vtctld/WorkflowSwitchTraffic"
+	VtctldWorkflowSwitchTrafficProcedure = "/vitess.vtctlservice.v21.Vtctld/WorkflowSwitchTraffic"
 	// VtctldWorkflowUpdateProcedure is the fully-qualified name of the Vtctld's WorkflowUpdate RPC.
-	VtctldWorkflowUpdateProcedure = "/vtctlservice.Vtctld/WorkflowUpdate"
+	VtctldWorkflowUpdateProcedure = "/vitess.vtctlservice.v21.Vtctld/WorkflowUpdate"
 	// VtctldGetMirrorRulesProcedure is the fully-qualified name of the Vtctld's GetMirrorRules RPC.
-	VtctldGetMirrorRulesProcedure = "/vtctlservice.Vtctld/GetMirrorRules"
+	VtctldGetMirrorRulesProcedure = "/vitess.vtctlservice.v21.Vtctld/GetMirrorRules"
 	// VtctldWorkflowMirrorTrafficProcedure is the fully-qualified name of the Vtctld's
 	// WorkflowMirrorTraffic RPC.
-	VtctldWorkflowMirrorTrafficProcedure = "/vtctlservice.Vtctld/WorkflowMirrorTraffic"
+	VtctldWorkflowMirrorTrafficProcedure = "/vitess.vtctlservice.v21.Vtctld/WorkflowMirrorTraffic"
 )
 
-// VtctlClient is a client for the vtctlservice.Vtctl service.
+// VtctlClient is a client for the vitess.vtctlservice.v21.Vtctl service.
 type VtctlClient interface {
 	ExecuteVtctlCommand(context.Context, *connect.Request[v21.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v21.ExecuteVtctlCommandResponse], error)
 }
 
-// NewVtctlClient constructs a client for the vtctlservice.Vtctl service. By default, it
+// NewVtctlClient constructs a client for the vitess.vtctlservice.v21.Vtctl service. By default, it
 // uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
 // uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
 // connect.WithGRPCWeb() options.
@@ -381,12 +381,12 @@ type vtctlClient struct {
 	executeVtctlCommand *connect.Client[v21.ExecuteVtctlCommandRequest, v21.ExecuteVtctlCommandResponse]
 }
 
-// ExecuteVtctlCommand calls vtctlservice.Vtctl.ExecuteVtctlCommand.
+// ExecuteVtctlCommand calls vitess.vtctlservice.v21.Vtctl.ExecuteVtctlCommand.
 func (c *vtctlClient) ExecuteVtctlCommand(ctx context.Context, req *connect.Request[v21.ExecuteVtctlCommandRequest]) (*connect.ServerStreamForClient[v21.ExecuteVtctlCommandResponse], error) {
 	return c.executeVtctlCommand.CallServerStream(ctx, req)
 }
 
-// VtctlHandler is an implementation of the vtctlservice.Vtctl service.
+// VtctlHandler is an implementation of the vitess.vtctlservice.v21.Vtctl service.
 type VtctlHandler interface {
 	ExecuteVtctlCommand(context.Context, *connect.Request[v21.ExecuteVtctlCommandRequest], *connect.ServerStream[v21.ExecuteVtctlCommandResponse]) error
 }
@@ -404,7 +404,7 @@ func NewVtctlHandler(svc VtctlHandler, opts ...connect.HandlerOption) (string, h
 		connect.WithSchema(vtctlMethods.ByName("ExecuteVtctlCommand")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/vtctlservice.Vtctl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/vitess.vtctlservice.v21.Vtctl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VtctlExecuteVtctlCommandProcedure:
 			vtctlExecuteVtctlCommandHandler.ServeHTTP(w, r)
@@ -418,10 +418,10 @@ func NewVtctlHandler(svc VtctlHandler, opts ...connect.HandlerOption) (string, h
 type UnimplementedVtctlHandler struct{}
 
 func (UnimplementedVtctlHandler) ExecuteVtctlCommand(context.Context, *connect.Request[v21.ExecuteVtctlCommandRequest], *connect.ServerStream[v21.ExecuteVtctlCommandResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctl.ExecuteVtctlCommand is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctl.ExecuteVtctlCommand is not implemented"))
 }
 
-// VtctldClient is a client for the vtctlservice.Vtctld service.
+// VtctldClient is a client for the vitess.vtctlservice.v21.Vtctld service.
 type VtctldClient interface {
 	// AddCellInfo registers a local topology service in a new cell by creating
 	// the CellInfo with the provided parameters.
@@ -762,7 +762,7 @@ type VtctldClient interface {
 	WorkflowMirrorTraffic(context.Context, *connect.Request[v21.WorkflowMirrorTrafficRequest]) (*connect.Response[v21.WorkflowMirrorTrafficResponse], error)
 }
 
-// NewVtctldClient constructs a client for the vtctlservice.Vtctld service. By default,
+// NewVtctldClient constructs a client for the vitess.vtctlservice.v21.Vtctld service. By default,
 // it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
 // sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
 // or connect.WithGRPCWeb() options.
@@ -1634,617 +1634,617 @@ type vtctldClient struct {
 	workflowMirrorTraffic       *connect.Client[v21.WorkflowMirrorTrafficRequest, v21.WorkflowMirrorTrafficResponse]
 }
 
-// AddCellInfo calls vtctlservice.Vtctld.AddCellInfo.
+// AddCellInfo calls vitess.vtctlservice.v21.Vtctld.AddCellInfo.
 func (c *vtctldClient) AddCellInfo(ctx context.Context, req *connect.Request[v21.AddCellInfoRequest]) (*connect.Response[v21.AddCellInfoResponse], error) {
 	return c.addCellInfo.CallUnary(ctx, req)
 }
 
-// AddCellsAlias calls vtctlservice.Vtctld.AddCellsAlias.
+// AddCellsAlias calls vitess.vtctlservice.v21.Vtctld.AddCellsAlias.
 func (c *vtctldClient) AddCellsAlias(ctx context.Context, req *connect.Request[v21.AddCellsAliasRequest]) (*connect.Response[v21.AddCellsAliasResponse], error) {
 	return c.addCellsAlias.CallUnary(ctx, req)
 }
 
-// ApplyRoutingRules calls vtctlservice.Vtctld.ApplyRoutingRules.
+// ApplyRoutingRules calls vitess.vtctlservice.v21.Vtctld.ApplyRoutingRules.
 func (c *vtctldClient) ApplyRoutingRules(ctx context.Context, req *connect.Request[v21.ApplyRoutingRulesRequest]) (*connect.Response[v21.ApplyRoutingRulesResponse], error) {
 	return c.applyRoutingRules.CallUnary(ctx, req)
 }
 
-// ApplySchema calls vtctlservice.Vtctld.ApplySchema.
+// ApplySchema calls vitess.vtctlservice.v21.Vtctld.ApplySchema.
 func (c *vtctldClient) ApplySchema(ctx context.Context, req *connect.Request[v21.ApplySchemaRequest]) (*connect.Response[v21.ApplySchemaResponse], error) {
 	return c.applySchema.CallUnary(ctx, req)
 }
 
-// ApplyKeyspaceRoutingRules calls vtctlservice.Vtctld.ApplyKeyspaceRoutingRules.
+// ApplyKeyspaceRoutingRules calls vitess.vtctlservice.v21.Vtctld.ApplyKeyspaceRoutingRules.
 func (c *vtctldClient) ApplyKeyspaceRoutingRules(ctx context.Context, req *connect.Request[v21.ApplyKeyspaceRoutingRulesRequest]) (*connect.Response[v21.ApplyKeyspaceRoutingRulesResponse], error) {
 	return c.applyKeyspaceRoutingRules.CallUnary(ctx, req)
 }
 
-// ApplyShardRoutingRules calls vtctlservice.Vtctld.ApplyShardRoutingRules.
+// ApplyShardRoutingRules calls vitess.vtctlservice.v21.Vtctld.ApplyShardRoutingRules.
 func (c *vtctldClient) ApplyShardRoutingRules(ctx context.Context, req *connect.Request[v21.ApplyShardRoutingRulesRequest]) (*connect.Response[v21.ApplyShardRoutingRulesResponse], error) {
 	return c.applyShardRoutingRules.CallUnary(ctx, req)
 }
 
-// ApplyVSchema calls vtctlservice.Vtctld.ApplyVSchema.
+// ApplyVSchema calls vitess.vtctlservice.v21.Vtctld.ApplyVSchema.
 func (c *vtctldClient) ApplyVSchema(ctx context.Context, req *connect.Request[v21.ApplyVSchemaRequest]) (*connect.Response[v21.ApplyVSchemaResponse], error) {
 	return c.applyVSchema.CallUnary(ctx, req)
 }
 
-// Backup calls vtctlservice.Vtctld.Backup.
+// Backup calls vitess.vtctlservice.v21.Vtctld.Backup.
 func (c *vtctldClient) Backup(ctx context.Context, req *connect.Request[v21.BackupRequest]) (*connect.ServerStreamForClient[v21.BackupResponse], error) {
 	return c.backup.CallServerStream(ctx, req)
 }
 
-// BackupShard calls vtctlservice.Vtctld.BackupShard.
+// BackupShard calls vitess.vtctlservice.v21.Vtctld.BackupShard.
 func (c *vtctldClient) BackupShard(ctx context.Context, req *connect.Request[v21.BackupShardRequest]) (*connect.ServerStreamForClient[v21.BackupResponse], error) {
 	return c.backupShard.CallServerStream(ctx, req)
 }
 
-// CancelSchemaMigration calls vtctlservice.Vtctld.CancelSchemaMigration.
+// CancelSchemaMigration calls vitess.vtctlservice.v21.Vtctld.CancelSchemaMigration.
 func (c *vtctldClient) CancelSchemaMigration(ctx context.Context, req *connect.Request[v21.CancelSchemaMigrationRequest]) (*connect.Response[v21.CancelSchemaMigrationResponse], error) {
 	return c.cancelSchemaMigration.CallUnary(ctx, req)
 }
 
-// ChangeTabletTags calls vtctlservice.Vtctld.ChangeTabletTags.
+// ChangeTabletTags calls vitess.vtctlservice.v21.Vtctld.ChangeTabletTags.
 func (c *vtctldClient) ChangeTabletTags(ctx context.Context, req *connect.Request[v21.ChangeTabletTagsRequest]) (*connect.Response[v21.ChangeTabletTagsResponse], error) {
 	return c.changeTabletTags.CallUnary(ctx, req)
 }
 
-// ChangeTabletType calls vtctlservice.Vtctld.ChangeTabletType.
+// ChangeTabletType calls vitess.vtctlservice.v21.Vtctld.ChangeTabletType.
 func (c *vtctldClient) ChangeTabletType(ctx context.Context, req *connect.Request[v21.ChangeTabletTypeRequest]) (*connect.Response[v21.ChangeTabletTypeResponse], error) {
 	return c.changeTabletType.CallUnary(ctx, req)
 }
 
-// CheckThrottler calls vtctlservice.Vtctld.CheckThrottler.
+// CheckThrottler calls vitess.vtctlservice.v21.Vtctld.CheckThrottler.
 func (c *vtctldClient) CheckThrottler(ctx context.Context, req *connect.Request[v21.CheckThrottlerRequest]) (*connect.Response[v21.CheckThrottlerResponse], error) {
 	return c.checkThrottler.CallUnary(ctx, req)
 }
 
-// CleanupSchemaMigration calls vtctlservice.Vtctld.CleanupSchemaMigration.
+// CleanupSchemaMigration calls vitess.vtctlservice.v21.Vtctld.CleanupSchemaMigration.
 func (c *vtctldClient) CleanupSchemaMigration(ctx context.Context, req *connect.Request[v21.CleanupSchemaMigrationRequest]) (*connect.Response[v21.CleanupSchemaMigrationResponse], error) {
 	return c.cleanupSchemaMigration.CallUnary(ctx, req)
 }
 
-// CompleteSchemaMigration calls vtctlservice.Vtctld.CompleteSchemaMigration.
+// CompleteSchemaMigration calls vitess.vtctlservice.v21.Vtctld.CompleteSchemaMigration.
 func (c *vtctldClient) CompleteSchemaMigration(ctx context.Context, req *connect.Request[v21.CompleteSchemaMigrationRequest]) (*connect.Response[v21.CompleteSchemaMigrationResponse], error) {
 	return c.completeSchemaMigration.CallUnary(ctx, req)
 }
 
-// ConcludeTransaction calls vtctlservice.Vtctld.ConcludeTransaction.
+// ConcludeTransaction calls vitess.vtctlservice.v21.Vtctld.ConcludeTransaction.
 func (c *vtctldClient) ConcludeTransaction(ctx context.Context, req *connect.Request[v21.ConcludeTransactionRequest]) (*connect.Response[v21.ConcludeTransactionResponse], error) {
 	return c.concludeTransaction.CallUnary(ctx, req)
 }
 
-// CreateKeyspace calls vtctlservice.Vtctld.CreateKeyspace.
+// CreateKeyspace calls vitess.vtctlservice.v21.Vtctld.CreateKeyspace.
 func (c *vtctldClient) CreateKeyspace(ctx context.Context, req *connect.Request[v21.CreateKeyspaceRequest]) (*connect.Response[v21.CreateKeyspaceResponse], error) {
 	return c.createKeyspace.CallUnary(ctx, req)
 }
 
-// CreateShard calls vtctlservice.Vtctld.CreateShard.
+// CreateShard calls vitess.vtctlservice.v21.Vtctld.CreateShard.
 func (c *vtctldClient) CreateShard(ctx context.Context, req *connect.Request[v21.CreateShardRequest]) (*connect.Response[v21.CreateShardResponse], error) {
 	return c.createShard.CallUnary(ctx, req)
 }
 
-// DeleteCellInfo calls vtctlservice.Vtctld.DeleteCellInfo.
+// DeleteCellInfo calls vitess.vtctlservice.v21.Vtctld.DeleteCellInfo.
 func (c *vtctldClient) DeleteCellInfo(ctx context.Context, req *connect.Request[v21.DeleteCellInfoRequest]) (*connect.Response[v21.DeleteCellInfoResponse], error) {
 	return c.deleteCellInfo.CallUnary(ctx, req)
 }
 
-// DeleteCellsAlias calls vtctlservice.Vtctld.DeleteCellsAlias.
+// DeleteCellsAlias calls vitess.vtctlservice.v21.Vtctld.DeleteCellsAlias.
 func (c *vtctldClient) DeleteCellsAlias(ctx context.Context, req *connect.Request[v21.DeleteCellsAliasRequest]) (*connect.Response[v21.DeleteCellsAliasResponse], error) {
 	return c.deleteCellsAlias.CallUnary(ctx, req)
 }
 
-// DeleteKeyspace calls vtctlservice.Vtctld.DeleteKeyspace.
+// DeleteKeyspace calls vitess.vtctlservice.v21.Vtctld.DeleteKeyspace.
 func (c *vtctldClient) DeleteKeyspace(ctx context.Context, req *connect.Request[v21.DeleteKeyspaceRequest]) (*connect.Response[v21.DeleteKeyspaceResponse], error) {
 	return c.deleteKeyspace.CallUnary(ctx, req)
 }
 
-// DeleteShards calls vtctlservice.Vtctld.DeleteShards.
+// DeleteShards calls vitess.vtctlservice.v21.Vtctld.DeleteShards.
 func (c *vtctldClient) DeleteShards(ctx context.Context, req *connect.Request[v21.DeleteShardsRequest]) (*connect.Response[v21.DeleteShardsResponse], error) {
 	return c.deleteShards.CallUnary(ctx, req)
 }
 
-// DeleteSrvVSchema calls vtctlservice.Vtctld.DeleteSrvVSchema.
+// DeleteSrvVSchema calls vitess.vtctlservice.v21.Vtctld.DeleteSrvVSchema.
 func (c *vtctldClient) DeleteSrvVSchema(ctx context.Context, req *connect.Request[v21.DeleteSrvVSchemaRequest]) (*connect.Response[v21.DeleteSrvVSchemaResponse], error) {
 	return c.deleteSrvVSchema.CallUnary(ctx, req)
 }
 
-// DeleteTablets calls vtctlservice.Vtctld.DeleteTablets.
+// DeleteTablets calls vitess.vtctlservice.v21.Vtctld.DeleteTablets.
 func (c *vtctldClient) DeleteTablets(ctx context.Context, req *connect.Request[v21.DeleteTabletsRequest]) (*connect.Response[v21.DeleteTabletsResponse], error) {
 	return c.deleteTablets.CallUnary(ctx, req)
 }
 
-// EmergencyReparentShard calls vtctlservice.Vtctld.EmergencyReparentShard.
+// EmergencyReparentShard calls vitess.vtctlservice.v21.Vtctld.EmergencyReparentShard.
 func (c *vtctldClient) EmergencyReparentShard(ctx context.Context, req *connect.Request[v21.EmergencyReparentShardRequest]) (*connect.Response[v21.EmergencyReparentShardResponse], error) {
 	return c.emergencyReparentShard.CallUnary(ctx, req)
 }
 
-// ExecuteFetchAsApp calls vtctlservice.Vtctld.ExecuteFetchAsApp.
+// ExecuteFetchAsApp calls vitess.vtctlservice.v21.Vtctld.ExecuteFetchAsApp.
 func (c *vtctldClient) ExecuteFetchAsApp(ctx context.Context, req *connect.Request[v21.ExecuteFetchAsAppRequest]) (*connect.Response[v21.ExecuteFetchAsAppResponse], error) {
 	return c.executeFetchAsApp.CallUnary(ctx, req)
 }
 
-// ExecuteFetchAsDBA calls vtctlservice.Vtctld.ExecuteFetchAsDBA.
+// ExecuteFetchAsDBA calls vitess.vtctlservice.v21.Vtctld.ExecuteFetchAsDBA.
 func (c *vtctldClient) ExecuteFetchAsDBA(ctx context.Context, req *connect.Request[v21.ExecuteFetchAsDBARequest]) (*connect.Response[v21.ExecuteFetchAsDBAResponse], error) {
 	return c.executeFetchAsDBA.CallUnary(ctx, req)
 }
 
-// ExecuteHook calls vtctlservice.Vtctld.ExecuteHook.
+// ExecuteHook calls vitess.vtctlservice.v21.Vtctld.ExecuteHook.
 func (c *vtctldClient) ExecuteHook(ctx context.Context, req *connect.Request[v21.ExecuteHookRequest]) (*connect.Response[v21.ExecuteHookResponse], error) {
 	return c.executeHook.CallUnary(ctx, req)
 }
 
-// ExecuteMultiFetchAsDBA calls vtctlservice.Vtctld.ExecuteMultiFetchAsDBA.
+// ExecuteMultiFetchAsDBA calls vitess.vtctlservice.v21.Vtctld.ExecuteMultiFetchAsDBA.
 func (c *vtctldClient) ExecuteMultiFetchAsDBA(ctx context.Context, req *connect.Request[v21.ExecuteMultiFetchAsDBARequest]) (*connect.Response[v21.ExecuteMultiFetchAsDBAResponse], error) {
 	return c.executeMultiFetchAsDBA.CallUnary(ctx, req)
 }
 
-// FindAllShardsInKeyspace calls vtctlservice.Vtctld.FindAllShardsInKeyspace.
+// FindAllShardsInKeyspace calls vitess.vtctlservice.v21.Vtctld.FindAllShardsInKeyspace.
 func (c *vtctldClient) FindAllShardsInKeyspace(ctx context.Context, req *connect.Request[v21.FindAllShardsInKeyspaceRequest]) (*connect.Response[v21.FindAllShardsInKeyspaceResponse], error) {
 	return c.findAllShardsInKeyspace.CallUnary(ctx, req)
 }
 
-// ForceCutOverSchemaMigration calls vtctlservice.Vtctld.ForceCutOverSchemaMigration.
+// ForceCutOverSchemaMigration calls vitess.vtctlservice.v21.Vtctld.ForceCutOverSchemaMigration.
 func (c *vtctldClient) ForceCutOverSchemaMigration(ctx context.Context, req *connect.Request[v21.ForceCutOverSchemaMigrationRequest]) (*connect.Response[v21.ForceCutOverSchemaMigrationResponse], error) {
 	return c.forceCutOverSchemaMigration.CallUnary(ctx, req)
 }
 
-// GetBackups calls vtctlservice.Vtctld.GetBackups.
+// GetBackups calls vitess.vtctlservice.v21.Vtctld.GetBackups.
 func (c *vtctldClient) GetBackups(ctx context.Context, req *connect.Request[v21.GetBackupsRequest]) (*connect.Response[v21.GetBackupsResponse], error) {
 	return c.getBackups.CallUnary(ctx, req)
 }
 
-// GetCellInfo calls vtctlservice.Vtctld.GetCellInfo.
+// GetCellInfo calls vitess.vtctlservice.v21.Vtctld.GetCellInfo.
 func (c *vtctldClient) GetCellInfo(ctx context.Context, req *connect.Request[v21.GetCellInfoRequest]) (*connect.Response[v21.GetCellInfoResponse], error) {
 	return c.getCellInfo.CallUnary(ctx, req)
 }
 
-// GetCellInfoNames calls vtctlservice.Vtctld.GetCellInfoNames.
+// GetCellInfoNames calls vitess.vtctlservice.v21.Vtctld.GetCellInfoNames.
 func (c *vtctldClient) GetCellInfoNames(ctx context.Context, req *connect.Request[v21.GetCellInfoNamesRequest]) (*connect.Response[v21.GetCellInfoNamesResponse], error) {
 	return c.getCellInfoNames.CallUnary(ctx, req)
 }
 
-// GetCellsAliases calls vtctlservice.Vtctld.GetCellsAliases.
+// GetCellsAliases calls vitess.vtctlservice.v21.Vtctld.GetCellsAliases.
 func (c *vtctldClient) GetCellsAliases(ctx context.Context, req *connect.Request[v21.GetCellsAliasesRequest]) (*connect.Response[v21.GetCellsAliasesResponse], error) {
 	return c.getCellsAliases.CallUnary(ctx, req)
 }
 
-// GetFullStatus calls vtctlservice.Vtctld.GetFullStatus.
+// GetFullStatus calls vitess.vtctlservice.v21.Vtctld.GetFullStatus.
 func (c *vtctldClient) GetFullStatus(ctx context.Context, req *connect.Request[v21.GetFullStatusRequest]) (*connect.Response[v21.GetFullStatusResponse], error) {
 	return c.getFullStatus.CallUnary(ctx, req)
 }
 
-// GetKeyspace calls vtctlservice.Vtctld.GetKeyspace.
+// GetKeyspace calls vitess.vtctlservice.v21.Vtctld.GetKeyspace.
 func (c *vtctldClient) GetKeyspace(ctx context.Context, req *connect.Request[v21.GetKeyspaceRequest]) (*connect.Response[v21.GetKeyspaceResponse], error) {
 	return c.getKeyspace.CallUnary(ctx, req)
 }
 
-// GetKeyspaces calls vtctlservice.Vtctld.GetKeyspaces.
+// GetKeyspaces calls vitess.vtctlservice.v21.Vtctld.GetKeyspaces.
 func (c *vtctldClient) GetKeyspaces(ctx context.Context, req *connect.Request[v21.GetKeyspacesRequest]) (*connect.Response[v21.GetKeyspacesResponse], error) {
 	return c.getKeyspaces.CallUnary(ctx, req)
 }
 
-// GetKeyspaceRoutingRules calls vtctlservice.Vtctld.GetKeyspaceRoutingRules.
+// GetKeyspaceRoutingRules calls vitess.vtctlservice.v21.Vtctld.GetKeyspaceRoutingRules.
 func (c *vtctldClient) GetKeyspaceRoutingRules(ctx context.Context, req *connect.Request[v21.GetKeyspaceRoutingRulesRequest]) (*connect.Response[v21.GetKeyspaceRoutingRulesResponse], error) {
 	return c.getKeyspaceRoutingRules.CallUnary(ctx, req)
 }
 
-// GetPermissions calls vtctlservice.Vtctld.GetPermissions.
+// GetPermissions calls vitess.vtctlservice.v21.Vtctld.GetPermissions.
 func (c *vtctldClient) GetPermissions(ctx context.Context, req *connect.Request[v21.GetPermissionsRequest]) (*connect.Response[v21.GetPermissionsResponse], error) {
 	return c.getPermissions.CallUnary(ctx, req)
 }
 
-// GetRoutingRules calls vtctlservice.Vtctld.GetRoutingRules.
+// GetRoutingRules calls vitess.vtctlservice.v21.Vtctld.GetRoutingRules.
 func (c *vtctldClient) GetRoutingRules(ctx context.Context, req *connect.Request[v21.GetRoutingRulesRequest]) (*connect.Response[v21.GetRoutingRulesResponse], error) {
 	return c.getRoutingRules.CallUnary(ctx, req)
 }
 
-// GetSchema calls vtctlservice.Vtctld.GetSchema.
+// GetSchema calls vitess.vtctlservice.v21.Vtctld.GetSchema.
 func (c *vtctldClient) GetSchema(ctx context.Context, req *connect.Request[v21.GetSchemaRequest]) (*connect.Response[v21.GetSchemaResponse], error) {
 	return c.getSchema.CallUnary(ctx, req)
 }
 
-// GetSchemaMigrations calls vtctlservice.Vtctld.GetSchemaMigrations.
+// GetSchemaMigrations calls vitess.vtctlservice.v21.Vtctld.GetSchemaMigrations.
 func (c *vtctldClient) GetSchemaMigrations(ctx context.Context, req *connect.Request[v21.GetSchemaMigrationsRequest]) (*connect.Response[v21.GetSchemaMigrationsResponse], error) {
 	return c.getSchemaMigrations.CallUnary(ctx, req)
 }
 
-// GetShardReplication calls vtctlservice.Vtctld.GetShardReplication.
+// GetShardReplication calls vitess.vtctlservice.v21.Vtctld.GetShardReplication.
 func (c *vtctldClient) GetShardReplication(ctx context.Context, req *connect.Request[v21.GetShardReplicationRequest]) (*connect.Response[v21.GetShardReplicationResponse], error) {
 	return c.getShardReplication.CallUnary(ctx, req)
 }
 
-// GetShard calls vtctlservice.Vtctld.GetShard.
+// GetShard calls vitess.vtctlservice.v21.Vtctld.GetShard.
 func (c *vtctldClient) GetShard(ctx context.Context, req *connect.Request[v21.GetShardRequest]) (*connect.Response[v21.GetShardResponse], error) {
 	return c.getShard.CallUnary(ctx, req)
 }
 
-// GetShardRoutingRules calls vtctlservice.Vtctld.GetShardRoutingRules.
+// GetShardRoutingRules calls vitess.vtctlservice.v21.Vtctld.GetShardRoutingRules.
 func (c *vtctldClient) GetShardRoutingRules(ctx context.Context, req *connect.Request[v21.GetShardRoutingRulesRequest]) (*connect.Response[v21.GetShardRoutingRulesResponse], error) {
 	return c.getShardRoutingRules.CallUnary(ctx, req)
 }
 
-// GetSrvKeyspaceNames calls vtctlservice.Vtctld.GetSrvKeyspaceNames.
+// GetSrvKeyspaceNames calls vitess.vtctlservice.v21.Vtctld.GetSrvKeyspaceNames.
 func (c *vtctldClient) GetSrvKeyspaceNames(ctx context.Context, req *connect.Request[v21.GetSrvKeyspaceNamesRequest]) (*connect.Response[v21.GetSrvKeyspaceNamesResponse], error) {
 	return c.getSrvKeyspaceNames.CallUnary(ctx, req)
 }
 
-// GetSrvKeyspaces calls vtctlservice.Vtctld.GetSrvKeyspaces.
+// GetSrvKeyspaces calls vitess.vtctlservice.v21.Vtctld.GetSrvKeyspaces.
 func (c *vtctldClient) GetSrvKeyspaces(ctx context.Context, req *connect.Request[v21.GetSrvKeyspacesRequest]) (*connect.Response[v21.GetSrvKeyspacesResponse], error) {
 	return c.getSrvKeyspaces.CallUnary(ctx, req)
 }
 
-// UpdateThrottlerConfig calls vtctlservice.Vtctld.UpdateThrottlerConfig.
+// UpdateThrottlerConfig calls vitess.vtctlservice.v21.Vtctld.UpdateThrottlerConfig.
 func (c *vtctldClient) UpdateThrottlerConfig(ctx context.Context, req *connect.Request[v21.UpdateThrottlerConfigRequest]) (*connect.Response[v21.UpdateThrottlerConfigResponse], error) {
 	return c.updateThrottlerConfig.CallUnary(ctx, req)
 }
 
-// GetSrvVSchema calls vtctlservice.Vtctld.GetSrvVSchema.
+// GetSrvVSchema calls vitess.vtctlservice.v21.Vtctld.GetSrvVSchema.
 func (c *vtctldClient) GetSrvVSchema(ctx context.Context, req *connect.Request[v21.GetSrvVSchemaRequest]) (*connect.Response[v21.GetSrvVSchemaResponse], error) {
 	return c.getSrvVSchema.CallUnary(ctx, req)
 }
 
-// GetSrvVSchemas calls vtctlservice.Vtctld.GetSrvVSchemas.
+// GetSrvVSchemas calls vitess.vtctlservice.v21.Vtctld.GetSrvVSchemas.
 func (c *vtctldClient) GetSrvVSchemas(ctx context.Context, req *connect.Request[v21.GetSrvVSchemasRequest]) (*connect.Response[v21.GetSrvVSchemasResponse], error) {
 	return c.getSrvVSchemas.CallUnary(ctx, req)
 }
 
-// GetTablet calls vtctlservice.Vtctld.GetTablet.
+// GetTablet calls vitess.vtctlservice.v21.Vtctld.GetTablet.
 func (c *vtctldClient) GetTablet(ctx context.Context, req *connect.Request[v21.GetTabletRequest]) (*connect.Response[v21.GetTabletResponse], error) {
 	return c.getTablet.CallUnary(ctx, req)
 }
 
-// GetTablets calls vtctlservice.Vtctld.GetTablets.
+// GetTablets calls vitess.vtctlservice.v21.Vtctld.GetTablets.
 func (c *vtctldClient) GetTablets(ctx context.Context, req *connect.Request[v21.GetTabletsRequest]) (*connect.Response[v21.GetTabletsResponse], error) {
 	return c.getTablets.CallUnary(ctx, req)
 }
 
-// GetThrottlerStatus calls vtctlservice.Vtctld.GetThrottlerStatus.
+// GetThrottlerStatus calls vitess.vtctlservice.v21.Vtctld.GetThrottlerStatus.
 func (c *vtctldClient) GetThrottlerStatus(ctx context.Context, req *connect.Request[v21.GetThrottlerStatusRequest]) (*connect.Response[v21.GetThrottlerStatusResponse], error) {
 	return c.getThrottlerStatus.CallUnary(ctx, req)
 }
 
-// GetTopologyPath calls vtctlservice.Vtctld.GetTopologyPath.
+// GetTopologyPath calls vitess.vtctlservice.v21.Vtctld.GetTopologyPath.
 func (c *vtctldClient) GetTopologyPath(ctx context.Context, req *connect.Request[v21.GetTopologyPathRequest]) (*connect.Response[v21.GetTopologyPathResponse], error) {
 	return c.getTopologyPath.CallUnary(ctx, req)
 }
 
-// GetUnresolvedTransactions calls vtctlservice.Vtctld.GetUnresolvedTransactions.
+// GetUnresolvedTransactions calls vitess.vtctlservice.v21.Vtctld.GetUnresolvedTransactions.
 func (c *vtctldClient) GetUnresolvedTransactions(ctx context.Context, req *connect.Request[v21.GetUnresolvedTransactionsRequest]) (*connect.Response[v21.GetUnresolvedTransactionsResponse], error) {
 	return c.getUnresolvedTransactions.CallUnary(ctx, req)
 }
 
-// GetVersion calls vtctlservice.Vtctld.GetVersion.
+// GetVersion calls vitess.vtctlservice.v21.Vtctld.GetVersion.
 func (c *vtctldClient) GetVersion(ctx context.Context, req *connect.Request[v21.GetVersionRequest]) (*connect.Response[v21.GetVersionResponse], error) {
 	return c.getVersion.CallUnary(ctx, req)
 }
 
-// GetVSchema calls vtctlservice.Vtctld.GetVSchema.
+// GetVSchema calls vitess.vtctlservice.v21.Vtctld.GetVSchema.
 func (c *vtctldClient) GetVSchema(ctx context.Context, req *connect.Request[v21.GetVSchemaRequest]) (*connect.Response[v21.GetVSchemaResponse], error) {
 	return c.getVSchema.CallUnary(ctx, req)
 }
 
-// GetWorkflows calls vtctlservice.Vtctld.GetWorkflows.
+// GetWorkflows calls vitess.vtctlservice.v21.Vtctld.GetWorkflows.
 func (c *vtctldClient) GetWorkflows(ctx context.Context, req *connect.Request[v21.GetWorkflowsRequest]) (*connect.Response[v21.GetWorkflowsResponse], error) {
 	return c.getWorkflows.CallUnary(ctx, req)
 }
 
-// InitShardPrimary calls vtctlservice.Vtctld.InitShardPrimary.
+// InitShardPrimary calls vitess.vtctlservice.v21.Vtctld.InitShardPrimary.
 func (c *vtctldClient) InitShardPrimary(ctx context.Context, req *connect.Request[v21.InitShardPrimaryRequest]) (*connect.Response[v21.InitShardPrimaryResponse], error) {
 	return c.initShardPrimary.CallUnary(ctx, req)
 }
 
-// LaunchSchemaMigration calls vtctlservice.Vtctld.LaunchSchemaMigration.
+// LaunchSchemaMigration calls vitess.vtctlservice.v21.Vtctld.LaunchSchemaMigration.
 func (c *vtctldClient) LaunchSchemaMigration(ctx context.Context, req *connect.Request[v21.LaunchSchemaMigrationRequest]) (*connect.Response[v21.LaunchSchemaMigrationResponse], error) {
 	return c.launchSchemaMigration.CallUnary(ctx, req)
 }
 
-// LookupVindexCreate calls vtctlservice.Vtctld.LookupVindexCreate.
+// LookupVindexCreate calls vitess.vtctlservice.v21.Vtctld.LookupVindexCreate.
 func (c *vtctldClient) LookupVindexCreate(ctx context.Context, req *connect.Request[v21.LookupVindexCreateRequest]) (*connect.Response[v21.LookupVindexCreateResponse], error) {
 	return c.lookupVindexCreate.CallUnary(ctx, req)
 }
 
-// LookupVindexExternalize calls vtctlservice.Vtctld.LookupVindexExternalize.
+// LookupVindexExternalize calls vitess.vtctlservice.v21.Vtctld.LookupVindexExternalize.
 func (c *vtctldClient) LookupVindexExternalize(ctx context.Context, req *connect.Request[v21.LookupVindexExternalizeRequest]) (*connect.Response[v21.LookupVindexExternalizeResponse], error) {
 	return c.lookupVindexExternalize.CallUnary(ctx, req)
 }
 
-// MaterializeCreate calls vtctlservice.Vtctld.MaterializeCreate.
+// MaterializeCreate calls vitess.vtctlservice.v21.Vtctld.MaterializeCreate.
 func (c *vtctldClient) MaterializeCreate(ctx context.Context, req *connect.Request[v21.MaterializeCreateRequest]) (*connect.Response[v21.MaterializeCreateResponse], error) {
 	return c.materializeCreate.CallUnary(ctx, req)
 }
 
-// MigrateCreate calls vtctlservice.Vtctld.MigrateCreate.
+// MigrateCreate calls vitess.vtctlservice.v21.Vtctld.MigrateCreate.
 func (c *vtctldClient) MigrateCreate(ctx context.Context, req *connect.Request[v21.MigrateCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
 	return c.migrateCreate.CallUnary(ctx, req)
 }
 
-// MountRegister calls vtctlservice.Vtctld.MountRegister.
+// MountRegister calls vitess.vtctlservice.v21.Vtctld.MountRegister.
 func (c *vtctldClient) MountRegister(ctx context.Context, req *connect.Request[v21.MountRegisterRequest]) (*connect.Response[v21.MountRegisterResponse], error) {
 	return c.mountRegister.CallUnary(ctx, req)
 }
 
-// MountUnregister calls vtctlservice.Vtctld.MountUnregister.
+// MountUnregister calls vitess.vtctlservice.v21.Vtctld.MountUnregister.
 func (c *vtctldClient) MountUnregister(ctx context.Context, req *connect.Request[v21.MountUnregisterRequest]) (*connect.Response[v21.MountUnregisterResponse], error) {
 	return c.mountUnregister.CallUnary(ctx, req)
 }
 
-// MountShow calls vtctlservice.Vtctld.MountShow.
+// MountShow calls vitess.vtctlservice.v21.Vtctld.MountShow.
 func (c *vtctldClient) MountShow(ctx context.Context, req *connect.Request[v21.MountShowRequest]) (*connect.Response[v21.MountShowResponse], error) {
 	return c.mountShow.CallUnary(ctx, req)
 }
 
-// MountList calls vtctlservice.Vtctld.MountList.
+// MountList calls vitess.vtctlservice.v21.Vtctld.MountList.
 func (c *vtctldClient) MountList(ctx context.Context, req *connect.Request[v21.MountListRequest]) (*connect.Response[v21.MountListResponse], error) {
 	return c.mountList.CallUnary(ctx, req)
 }
 
-// MoveTablesCreate calls vtctlservice.Vtctld.MoveTablesCreate.
+// MoveTablesCreate calls vitess.vtctlservice.v21.Vtctld.MoveTablesCreate.
 func (c *vtctldClient) MoveTablesCreate(ctx context.Context, req *connect.Request[v21.MoveTablesCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
 	return c.moveTablesCreate.CallUnary(ctx, req)
 }
 
-// MoveTablesComplete calls vtctlservice.Vtctld.MoveTablesComplete.
+// MoveTablesComplete calls vitess.vtctlservice.v21.Vtctld.MoveTablesComplete.
 func (c *vtctldClient) MoveTablesComplete(ctx context.Context, req *connect.Request[v21.MoveTablesCompleteRequest]) (*connect.Response[v21.MoveTablesCompleteResponse], error) {
 	return c.moveTablesComplete.CallUnary(ctx, req)
 }
 
-// PingTablet calls vtctlservice.Vtctld.PingTablet.
+// PingTablet calls vitess.vtctlservice.v21.Vtctld.PingTablet.
 func (c *vtctldClient) PingTablet(ctx context.Context, req *connect.Request[v21.PingTabletRequest]) (*connect.Response[v21.PingTabletResponse], error) {
 	return c.pingTablet.CallUnary(ctx, req)
 }
 
-// PlannedReparentShard calls vtctlservice.Vtctld.PlannedReparentShard.
+// PlannedReparentShard calls vitess.vtctlservice.v21.Vtctld.PlannedReparentShard.
 func (c *vtctldClient) PlannedReparentShard(ctx context.Context, req *connect.Request[v21.PlannedReparentShardRequest]) (*connect.Response[v21.PlannedReparentShardResponse], error) {
 	return c.plannedReparentShard.CallUnary(ctx, req)
 }
 
-// RebuildKeyspaceGraph calls vtctlservice.Vtctld.RebuildKeyspaceGraph.
+// RebuildKeyspaceGraph calls vitess.vtctlservice.v21.Vtctld.RebuildKeyspaceGraph.
 func (c *vtctldClient) RebuildKeyspaceGraph(ctx context.Context, req *connect.Request[v21.RebuildKeyspaceGraphRequest]) (*connect.Response[v21.RebuildKeyspaceGraphResponse], error) {
 	return c.rebuildKeyspaceGraph.CallUnary(ctx, req)
 }
 
-// RebuildVSchemaGraph calls vtctlservice.Vtctld.RebuildVSchemaGraph.
+// RebuildVSchemaGraph calls vitess.vtctlservice.v21.Vtctld.RebuildVSchemaGraph.
 func (c *vtctldClient) RebuildVSchemaGraph(ctx context.Context, req *connect.Request[v21.RebuildVSchemaGraphRequest]) (*connect.Response[v21.RebuildVSchemaGraphResponse], error) {
 	return c.rebuildVSchemaGraph.CallUnary(ctx, req)
 }
 
-// RefreshState calls vtctlservice.Vtctld.RefreshState.
+// RefreshState calls vitess.vtctlservice.v21.Vtctld.RefreshState.
 func (c *vtctldClient) RefreshState(ctx context.Context, req *connect.Request[v21.RefreshStateRequest]) (*connect.Response[v21.RefreshStateResponse], error) {
 	return c.refreshState.CallUnary(ctx, req)
 }
 
-// RefreshStateByShard calls vtctlservice.Vtctld.RefreshStateByShard.
+// RefreshStateByShard calls vitess.vtctlservice.v21.Vtctld.RefreshStateByShard.
 func (c *vtctldClient) RefreshStateByShard(ctx context.Context, req *connect.Request[v21.RefreshStateByShardRequest]) (*connect.Response[v21.RefreshStateByShardResponse], error) {
 	return c.refreshStateByShard.CallUnary(ctx, req)
 }
 
-// ReloadSchema calls vtctlservice.Vtctld.ReloadSchema.
+// ReloadSchema calls vitess.vtctlservice.v21.Vtctld.ReloadSchema.
 func (c *vtctldClient) ReloadSchema(ctx context.Context, req *connect.Request[v21.ReloadSchemaRequest]) (*connect.Response[v21.ReloadSchemaResponse], error) {
 	return c.reloadSchema.CallUnary(ctx, req)
 }
 
-// ReloadSchemaKeyspace calls vtctlservice.Vtctld.ReloadSchemaKeyspace.
+// ReloadSchemaKeyspace calls vitess.vtctlservice.v21.Vtctld.ReloadSchemaKeyspace.
 func (c *vtctldClient) ReloadSchemaKeyspace(ctx context.Context, req *connect.Request[v21.ReloadSchemaKeyspaceRequest]) (*connect.Response[v21.ReloadSchemaKeyspaceResponse], error) {
 	return c.reloadSchemaKeyspace.CallUnary(ctx, req)
 }
 
-// ReloadSchemaShard calls vtctlservice.Vtctld.ReloadSchemaShard.
+// ReloadSchemaShard calls vitess.vtctlservice.v21.Vtctld.ReloadSchemaShard.
 func (c *vtctldClient) ReloadSchemaShard(ctx context.Context, req *connect.Request[v21.ReloadSchemaShardRequest]) (*connect.Response[v21.ReloadSchemaShardResponse], error) {
 	return c.reloadSchemaShard.CallUnary(ctx, req)
 }
 
-// RemoveBackup calls vtctlservice.Vtctld.RemoveBackup.
+// RemoveBackup calls vitess.vtctlservice.v21.Vtctld.RemoveBackup.
 func (c *vtctldClient) RemoveBackup(ctx context.Context, req *connect.Request[v21.RemoveBackupRequest]) (*connect.Response[v21.RemoveBackupResponse], error) {
 	return c.removeBackup.CallUnary(ctx, req)
 }
 
-// RemoveKeyspaceCell calls vtctlservice.Vtctld.RemoveKeyspaceCell.
+// RemoveKeyspaceCell calls vitess.vtctlservice.v21.Vtctld.RemoveKeyspaceCell.
 func (c *vtctldClient) RemoveKeyspaceCell(ctx context.Context, req *connect.Request[v21.RemoveKeyspaceCellRequest]) (*connect.Response[v21.RemoveKeyspaceCellResponse], error) {
 	return c.removeKeyspaceCell.CallUnary(ctx, req)
 }
 
-// RemoveShardCell calls vtctlservice.Vtctld.RemoveShardCell.
+// RemoveShardCell calls vitess.vtctlservice.v21.Vtctld.RemoveShardCell.
 func (c *vtctldClient) RemoveShardCell(ctx context.Context, req *connect.Request[v21.RemoveShardCellRequest]) (*connect.Response[v21.RemoveShardCellResponse], error) {
 	return c.removeShardCell.CallUnary(ctx, req)
 }
 
-// ReparentTablet calls vtctlservice.Vtctld.ReparentTablet.
+// ReparentTablet calls vitess.vtctlservice.v21.Vtctld.ReparentTablet.
 func (c *vtctldClient) ReparentTablet(ctx context.Context, req *connect.Request[v21.ReparentTabletRequest]) (*connect.Response[v21.ReparentTabletResponse], error) {
 	return c.reparentTablet.CallUnary(ctx, req)
 }
 
-// ReshardCreate calls vtctlservice.Vtctld.ReshardCreate.
+// ReshardCreate calls vitess.vtctlservice.v21.Vtctld.ReshardCreate.
 func (c *vtctldClient) ReshardCreate(ctx context.Context, req *connect.Request[v21.ReshardCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
 	return c.reshardCreate.CallUnary(ctx, req)
 }
 
-// RestoreFromBackup calls vtctlservice.Vtctld.RestoreFromBackup.
+// RestoreFromBackup calls vitess.vtctlservice.v21.Vtctld.RestoreFromBackup.
 func (c *vtctldClient) RestoreFromBackup(ctx context.Context, req *connect.Request[v21.RestoreFromBackupRequest]) (*connect.ServerStreamForClient[v21.RestoreFromBackupResponse], error) {
 	return c.restoreFromBackup.CallServerStream(ctx, req)
 }
 
-// RetrySchemaMigration calls vtctlservice.Vtctld.RetrySchemaMigration.
+// RetrySchemaMigration calls vitess.vtctlservice.v21.Vtctld.RetrySchemaMigration.
 func (c *vtctldClient) RetrySchemaMigration(ctx context.Context, req *connect.Request[v21.RetrySchemaMigrationRequest]) (*connect.Response[v21.RetrySchemaMigrationResponse], error) {
 	return c.retrySchemaMigration.CallUnary(ctx, req)
 }
 
-// RunHealthCheck calls vtctlservice.Vtctld.RunHealthCheck.
+// RunHealthCheck calls vitess.vtctlservice.v21.Vtctld.RunHealthCheck.
 func (c *vtctldClient) RunHealthCheck(ctx context.Context, req *connect.Request[v21.RunHealthCheckRequest]) (*connect.Response[v21.RunHealthCheckResponse], error) {
 	return c.runHealthCheck.CallUnary(ctx, req)
 }
 
-// SetKeyspaceDurabilityPolicy calls vtctlservice.Vtctld.SetKeyspaceDurabilityPolicy.
+// SetKeyspaceDurabilityPolicy calls vitess.vtctlservice.v21.Vtctld.SetKeyspaceDurabilityPolicy.
 func (c *vtctldClient) SetKeyspaceDurabilityPolicy(ctx context.Context, req *connect.Request[v21.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v21.SetKeyspaceDurabilityPolicyResponse], error) {
 	return c.setKeyspaceDurabilityPolicy.CallUnary(ctx, req)
 }
 
-// SetShardIsPrimaryServing calls vtctlservice.Vtctld.SetShardIsPrimaryServing.
+// SetShardIsPrimaryServing calls vitess.vtctlservice.v21.Vtctld.SetShardIsPrimaryServing.
 func (c *vtctldClient) SetShardIsPrimaryServing(ctx context.Context, req *connect.Request[v21.SetShardIsPrimaryServingRequest]) (*connect.Response[v21.SetShardIsPrimaryServingResponse], error) {
 	return c.setShardIsPrimaryServing.CallUnary(ctx, req)
 }
 
-// SetShardTabletControl calls vtctlservice.Vtctld.SetShardTabletControl.
+// SetShardTabletControl calls vitess.vtctlservice.v21.Vtctld.SetShardTabletControl.
 func (c *vtctldClient) SetShardTabletControl(ctx context.Context, req *connect.Request[v21.SetShardTabletControlRequest]) (*connect.Response[v21.SetShardTabletControlResponse], error) {
 	return c.setShardTabletControl.CallUnary(ctx, req)
 }
 
-// SetWritable calls vtctlservice.Vtctld.SetWritable.
+// SetWritable calls vitess.vtctlservice.v21.Vtctld.SetWritable.
 func (c *vtctldClient) SetWritable(ctx context.Context, req *connect.Request[v21.SetWritableRequest]) (*connect.Response[v21.SetWritableResponse], error) {
 	return c.setWritable.CallUnary(ctx, req)
 }
 
-// ShardReplicationAdd calls vtctlservice.Vtctld.ShardReplicationAdd.
+// ShardReplicationAdd calls vitess.vtctlservice.v21.Vtctld.ShardReplicationAdd.
 func (c *vtctldClient) ShardReplicationAdd(ctx context.Context, req *connect.Request[v21.ShardReplicationAddRequest]) (*connect.Response[v21.ShardReplicationAddResponse], error) {
 	return c.shardReplicationAdd.CallUnary(ctx, req)
 }
 
-// ShardReplicationFix calls vtctlservice.Vtctld.ShardReplicationFix.
+// ShardReplicationFix calls vitess.vtctlservice.v21.Vtctld.ShardReplicationFix.
 func (c *vtctldClient) ShardReplicationFix(ctx context.Context, req *connect.Request[v21.ShardReplicationFixRequest]) (*connect.Response[v21.ShardReplicationFixResponse], error) {
 	return c.shardReplicationFix.CallUnary(ctx, req)
 }
 
-// ShardReplicationPositions calls vtctlservice.Vtctld.ShardReplicationPositions.
+// ShardReplicationPositions calls vitess.vtctlservice.v21.Vtctld.ShardReplicationPositions.
 func (c *vtctldClient) ShardReplicationPositions(ctx context.Context, req *connect.Request[v21.ShardReplicationPositionsRequest]) (*connect.Response[v21.ShardReplicationPositionsResponse], error) {
 	return c.shardReplicationPositions.CallUnary(ctx, req)
 }
 
-// ShardReplicationRemove calls vtctlservice.Vtctld.ShardReplicationRemove.
+// ShardReplicationRemove calls vitess.vtctlservice.v21.Vtctld.ShardReplicationRemove.
 func (c *vtctldClient) ShardReplicationRemove(ctx context.Context, req *connect.Request[v21.ShardReplicationRemoveRequest]) (*connect.Response[v21.ShardReplicationRemoveResponse], error) {
 	return c.shardReplicationRemove.CallUnary(ctx, req)
 }
 
-// SleepTablet calls vtctlservice.Vtctld.SleepTablet.
+// SleepTablet calls vitess.vtctlservice.v21.Vtctld.SleepTablet.
 func (c *vtctldClient) SleepTablet(ctx context.Context, req *connect.Request[v21.SleepTabletRequest]) (*connect.Response[v21.SleepTabletResponse], error) {
 	return c.sleepTablet.CallUnary(ctx, req)
 }
 
-// SourceShardAdd calls vtctlservice.Vtctld.SourceShardAdd.
+// SourceShardAdd calls vitess.vtctlservice.v21.Vtctld.SourceShardAdd.
 func (c *vtctldClient) SourceShardAdd(ctx context.Context, req *connect.Request[v21.SourceShardAddRequest]) (*connect.Response[v21.SourceShardAddResponse], error) {
 	return c.sourceShardAdd.CallUnary(ctx, req)
 }
 
-// SourceShardDelete calls vtctlservice.Vtctld.SourceShardDelete.
+// SourceShardDelete calls vitess.vtctlservice.v21.Vtctld.SourceShardDelete.
 func (c *vtctldClient) SourceShardDelete(ctx context.Context, req *connect.Request[v21.SourceShardDeleteRequest]) (*connect.Response[v21.SourceShardDeleteResponse], error) {
 	return c.sourceShardDelete.CallUnary(ctx, req)
 }
 
-// StartReplication calls vtctlservice.Vtctld.StartReplication.
+// StartReplication calls vitess.vtctlservice.v21.Vtctld.StartReplication.
 func (c *vtctldClient) StartReplication(ctx context.Context, req *connect.Request[v21.StartReplicationRequest]) (*connect.Response[v21.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
 }
 
-// StopReplication calls vtctlservice.Vtctld.StopReplication.
+// StopReplication calls vitess.vtctlservice.v21.Vtctld.StopReplication.
 func (c *vtctldClient) StopReplication(ctx context.Context, req *connect.Request[v21.StopReplicationRequest]) (*connect.Response[v21.StopReplicationResponse], error) {
 	return c.stopReplication.CallUnary(ctx, req)
 }
 
-// TabletExternallyReparented calls vtctlservice.Vtctld.TabletExternallyReparented.
+// TabletExternallyReparented calls vitess.vtctlservice.v21.Vtctld.TabletExternallyReparented.
 func (c *vtctldClient) TabletExternallyReparented(ctx context.Context, req *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error) {
 	return c.tabletExternallyReparented.CallUnary(ctx, req)
 }
 
-// UpdateCellInfo calls vtctlservice.Vtctld.UpdateCellInfo.
+// UpdateCellInfo calls vitess.vtctlservice.v21.Vtctld.UpdateCellInfo.
 func (c *vtctldClient) UpdateCellInfo(ctx context.Context, req *connect.Request[v21.UpdateCellInfoRequest]) (*connect.Response[v21.UpdateCellInfoResponse], error) {
 	return c.updateCellInfo.CallUnary(ctx, req)
 }
 
-// UpdateCellsAlias calls vtctlservice.Vtctld.UpdateCellsAlias.
+// UpdateCellsAlias calls vitess.vtctlservice.v21.Vtctld.UpdateCellsAlias.
 func (c *vtctldClient) UpdateCellsAlias(ctx context.Context, req *connect.Request[v21.UpdateCellsAliasRequest]) (*connect.Response[v21.UpdateCellsAliasResponse], error) {
 	return c.updateCellsAlias.CallUnary(ctx, req)
 }
 
-// Validate calls vtctlservice.Vtctld.Validate.
+// Validate calls vitess.vtctlservice.v21.Vtctld.Validate.
 func (c *vtctldClient) Validate(ctx context.Context, req *connect.Request[v21.ValidateRequest]) (*connect.Response[v21.ValidateResponse], error) {
 	return c.validate.CallUnary(ctx, req)
 }
 
-// ValidateKeyspace calls vtctlservice.Vtctld.ValidateKeyspace.
+// ValidateKeyspace calls vitess.vtctlservice.v21.Vtctld.ValidateKeyspace.
 func (c *vtctldClient) ValidateKeyspace(ctx context.Context, req *connect.Request[v21.ValidateKeyspaceRequest]) (*connect.Response[v21.ValidateKeyspaceResponse], error) {
 	return c.validateKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateSchemaKeyspace calls vtctlservice.Vtctld.ValidateSchemaKeyspace.
+// ValidateSchemaKeyspace calls vitess.vtctlservice.v21.Vtctld.ValidateSchemaKeyspace.
 func (c *vtctldClient) ValidateSchemaKeyspace(ctx context.Context, req *connect.Request[v21.ValidateSchemaKeyspaceRequest]) (*connect.Response[v21.ValidateSchemaKeyspaceResponse], error) {
 	return c.validateSchemaKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateShard calls vtctlservice.Vtctld.ValidateShard.
+// ValidateShard calls vitess.vtctlservice.v21.Vtctld.ValidateShard.
 func (c *vtctldClient) ValidateShard(ctx context.Context, req *connect.Request[v21.ValidateShardRequest]) (*connect.Response[v21.ValidateShardResponse], error) {
 	return c.validateShard.CallUnary(ctx, req)
 }
 
-// ValidateVersionKeyspace calls vtctlservice.Vtctld.ValidateVersionKeyspace.
+// ValidateVersionKeyspace calls vitess.vtctlservice.v21.Vtctld.ValidateVersionKeyspace.
 func (c *vtctldClient) ValidateVersionKeyspace(ctx context.Context, req *connect.Request[v21.ValidateVersionKeyspaceRequest]) (*connect.Response[v21.ValidateVersionKeyspaceResponse], error) {
 	return c.validateVersionKeyspace.CallUnary(ctx, req)
 }
 
-// ValidateVersionShard calls vtctlservice.Vtctld.ValidateVersionShard.
+// ValidateVersionShard calls vitess.vtctlservice.v21.Vtctld.ValidateVersionShard.
 func (c *vtctldClient) ValidateVersionShard(ctx context.Context, req *connect.Request[v21.ValidateVersionShardRequest]) (*connect.Response[v21.ValidateVersionShardResponse], error) {
 	return c.validateVersionShard.CallUnary(ctx, req)
 }
 
-// ValidateVSchema calls vtctlservice.Vtctld.ValidateVSchema.
+// ValidateVSchema calls vitess.vtctlservice.v21.Vtctld.ValidateVSchema.
 func (c *vtctldClient) ValidateVSchema(ctx context.Context, req *connect.Request[v21.ValidateVSchemaRequest]) (*connect.Response[v21.ValidateVSchemaResponse], error) {
 	return c.validateVSchema.CallUnary(ctx, req)
 }
 
-// VDiffCreate calls vtctlservice.Vtctld.VDiffCreate.
+// VDiffCreate calls vitess.vtctlservice.v21.Vtctld.VDiffCreate.
 func (c *vtctldClient) VDiffCreate(ctx context.Context, req *connect.Request[v21.VDiffCreateRequest]) (*connect.Response[v21.VDiffCreateResponse], error) {
 	return c.vDiffCreate.CallUnary(ctx, req)
 }
 
-// VDiffDelete calls vtctlservice.Vtctld.VDiffDelete.
+// VDiffDelete calls vitess.vtctlservice.v21.Vtctld.VDiffDelete.
 func (c *vtctldClient) VDiffDelete(ctx context.Context, req *connect.Request[v21.VDiffDeleteRequest]) (*connect.Response[v21.VDiffDeleteResponse], error) {
 	return c.vDiffDelete.CallUnary(ctx, req)
 }
 
-// VDiffResume calls vtctlservice.Vtctld.VDiffResume.
+// VDiffResume calls vitess.vtctlservice.v21.Vtctld.VDiffResume.
 func (c *vtctldClient) VDiffResume(ctx context.Context, req *connect.Request[v21.VDiffResumeRequest]) (*connect.Response[v21.VDiffResumeResponse], error) {
 	return c.vDiffResume.CallUnary(ctx, req)
 }
 
-// VDiffShow calls vtctlservice.Vtctld.VDiffShow.
+// VDiffShow calls vitess.vtctlservice.v21.Vtctld.VDiffShow.
 func (c *vtctldClient) VDiffShow(ctx context.Context, req *connect.Request[v21.VDiffShowRequest]) (*connect.Response[v21.VDiffShowResponse], error) {
 	return c.vDiffShow.CallUnary(ctx, req)
 }
 
-// VDiffStop calls vtctlservice.Vtctld.VDiffStop.
+// VDiffStop calls vitess.vtctlservice.v21.Vtctld.VDiffStop.
 func (c *vtctldClient) VDiffStop(ctx context.Context, req *connect.Request[v21.VDiffStopRequest]) (*connect.Response[v21.VDiffStopResponse], error) {
 	return c.vDiffStop.CallUnary(ctx, req)
 }
 
-// WorkflowDelete calls vtctlservice.Vtctld.WorkflowDelete.
+// WorkflowDelete calls vitess.vtctlservice.v21.Vtctld.WorkflowDelete.
 func (c *vtctldClient) WorkflowDelete(ctx context.Context, req *connect.Request[v21.WorkflowDeleteRequest]) (*connect.Response[v21.WorkflowDeleteResponse], error) {
 	return c.workflowDelete.CallUnary(ctx, req)
 }
 
-// WorkflowStatus calls vtctlservice.Vtctld.WorkflowStatus.
+// WorkflowStatus calls vitess.vtctlservice.v21.Vtctld.WorkflowStatus.
 func (c *vtctldClient) WorkflowStatus(ctx context.Context, req *connect.Request[v21.WorkflowStatusRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
 	return c.workflowStatus.CallUnary(ctx, req)
 }
 
-// WorkflowSwitchTraffic calls vtctlservice.Vtctld.WorkflowSwitchTraffic.
+// WorkflowSwitchTraffic calls vitess.vtctlservice.v21.Vtctld.WorkflowSwitchTraffic.
 func (c *vtctldClient) WorkflowSwitchTraffic(ctx context.Context, req *connect.Request[v21.WorkflowSwitchTrafficRequest]) (*connect.Response[v21.WorkflowSwitchTrafficResponse], error) {
 	return c.workflowSwitchTraffic.CallUnary(ctx, req)
 }
 
-// WorkflowUpdate calls vtctlservice.Vtctld.WorkflowUpdate.
+// WorkflowUpdate calls vitess.vtctlservice.v21.Vtctld.WorkflowUpdate.
 func (c *vtctldClient) WorkflowUpdate(ctx context.Context, req *connect.Request[v21.WorkflowUpdateRequest]) (*connect.Response[v21.WorkflowUpdateResponse], error) {
 	return c.workflowUpdate.CallUnary(ctx, req)
 }
 
-// GetMirrorRules calls vtctlservice.Vtctld.GetMirrorRules.
+// GetMirrorRules calls vitess.vtctlservice.v21.Vtctld.GetMirrorRules.
 func (c *vtctldClient) GetMirrorRules(ctx context.Context, req *connect.Request[v21.GetMirrorRulesRequest]) (*connect.Response[v21.GetMirrorRulesResponse], error) {
 	return c.getMirrorRules.CallUnary(ctx, req)
 }
 
-// WorkflowMirrorTraffic calls vtctlservice.Vtctld.WorkflowMirrorTraffic.
+// WorkflowMirrorTraffic calls vitess.vtctlservice.v21.Vtctld.WorkflowMirrorTraffic.
 func (c *vtctldClient) WorkflowMirrorTraffic(ctx context.Context, req *connect.Request[v21.WorkflowMirrorTrafficRequest]) (*connect.Response[v21.WorkflowMirrorTrafficResponse], error) {
 	return c.workflowMirrorTraffic.CallUnary(ctx, req)
 }
 
-// VtctldHandler is an implementation of the vtctlservice.Vtctld service.
+// VtctldHandler is an implementation of the vitess.vtctlservice.v21.Vtctld service.
 type VtctldHandler interface {
 	// AddCellInfo registers a local topology service in a new cell by creating
 	// the CellInfo with the provided parameters.
@@ -3324,7 +3324,7 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		connect.WithSchema(vtctldMethods.ByName("WorkflowMirrorTraffic")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/vtctlservice.Vtctld/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/vitess.vtctlservice.v21.Vtctld/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VtctldAddCellInfoProcedure:
 			vtctldAddCellInfoHandler.ServeHTTP(w, r)
@@ -3580,489 +3580,489 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 type UnimplementedVtctldHandler struct{}
 
 func (UnimplementedVtctldHandler) AddCellInfo(context.Context, *connect.Request[v21.AddCellInfoRequest]) (*connect.Response[v21.AddCellInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.AddCellInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.AddCellInfo is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) AddCellsAlias(context.Context, *connect.Request[v21.AddCellsAliasRequest]) (*connect.Response[v21.AddCellsAliasResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.AddCellsAlias is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.AddCellsAlias is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ApplyRoutingRules(context.Context, *connect.Request[v21.ApplyRoutingRulesRequest]) (*connect.Response[v21.ApplyRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ApplyRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ApplySchema(context.Context, *connect.Request[v21.ApplySchemaRequest]) (*connect.Response[v21.ApplySchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplySchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ApplySchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ApplyKeyspaceRoutingRules(context.Context, *connect.Request[v21.ApplyKeyspaceRoutingRulesRequest]) (*connect.Response[v21.ApplyKeyspaceRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyKeyspaceRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ApplyKeyspaceRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ApplyShardRoutingRules(context.Context, *connect.Request[v21.ApplyShardRoutingRulesRequest]) (*connect.Response[v21.ApplyShardRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyShardRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ApplyShardRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ApplyVSchema(context.Context, *connect.Request[v21.ApplyVSchemaRequest]) (*connect.Response[v21.ApplyVSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ApplyVSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ApplyVSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) Backup(context.Context, *connect.Request[v21.BackupRequest], *connect.ServerStream[v21.BackupResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.Backup is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.Backup is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) BackupShard(context.Context, *connect.Request[v21.BackupShardRequest], *connect.ServerStream[v21.BackupResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.BackupShard is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.BackupShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CancelSchemaMigration(context.Context, *connect.Request[v21.CancelSchemaMigrationRequest]) (*connect.Response[v21.CancelSchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CancelSchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CancelSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ChangeTabletTags(context.Context, *connect.Request[v21.ChangeTabletTagsRequest]) (*connect.Response[v21.ChangeTabletTagsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ChangeTabletTags is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ChangeTabletTags is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ChangeTabletType(context.Context, *connect.Request[v21.ChangeTabletTypeRequest]) (*connect.Response[v21.ChangeTabletTypeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ChangeTabletType is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ChangeTabletType is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CheckThrottler(context.Context, *connect.Request[v21.CheckThrottlerRequest]) (*connect.Response[v21.CheckThrottlerResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CheckThrottler is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CheckThrottler is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CleanupSchemaMigration(context.Context, *connect.Request[v21.CleanupSchemaMigrationRequest]) (*connect.Response[v21.CleanupSchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CleanupSchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CleanupSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CompleteSchemaMigration(context.Context, *connect.Request[v21.CompleteSchemaMigrationRequest]) (*connect.Response[v21.CompleteSchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CompleteSchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CompleteSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ConcludeTransaction(context.Context, *connect.Request[v21.ConcludeTransactionRequest]) (*connect.Response[v21.ConcludeTransactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ConcludeTransaction is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ConcludeTransaction is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CreateKeyspace(context.Context, *connect.Request[v21.CreateKeyspaceRequest]) (*connect.Response[v21.CreateKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CreateKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CreateKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) CreateShard(context.Context, *connect.Request[v21.CreateShardRequest]) (*connect.Response[v21.CreateShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.CreateShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.CreateShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteCellInfo(context.Context, *connect.Request[v21.DeleteCellInfoRequest]) (*connect.Response[v21.DeleteCellInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteCellInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteCellInfo is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteCellsAlias(context.Context, *connect.Request[v21.DeleteCellsAliasRequest]) (*connect.Response[v21.DeleteCellsAliasResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteCellsAlias is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteCellsAlias is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteKeyspace(context.Context, *connect.Request[v21.DeleteKeyspaceRequest]) (*connect.Response[v21.DeleteKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteShards(context.Context, *connect.Request[v21.DeleteShardsRequest]) (*connect.Response[v21.DeleteShardsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteShards is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteShards is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteSrvVSchema(context.Context, *connect.Request[v21.DeleteSrvVSchemaRequest]) (*connect.Response[v21.DeleteSrvVSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteSrvVSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteSrvVSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) DeleteTablets(context.Context, *connect.Request[v21.DeleteTabletsRequest]) (*connect.Response[v21.DeleteTabletsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.DeleteTablets is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.DeleteTablets is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) EmergencyReparentShard(context.Context, *connect.Request[v21.EmergencyReparentShardRequest]) (*connect.Response[v21.EmergencyReparentShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.EmergencyReparentShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.EmergencyReparentShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ExecuteFetchAsApp(context.Context, *connect.Request[v21.ExecuteFetchAsAppRequest]) (*connect.Response[v21.ExecuteFetchAsAppResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteFetchAsApp is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ExecuteFetchAsApp is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ExecuteFetchAsDBA(context.Context, *connect.Request[v21.ExecuteFetchAsDBARequest]) (*connect.Response[v21.ExecuteFetchAsDBAResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteFetchAsDBA is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ExecuteFetchAsDBA is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ExecuteHook(context.Context, *connect.Request[v21.ExecuteHookRequest]) (*connect.Response[v21.ExecuteHookResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteHook is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ExecuteHook is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ExecuteMultiFetchAsDBA(context.Context, *connect.Request[v21.ExecuteMultiFetchAsDBARequest]) (*connect.Response[v21.ExecuteMultiFetchAsDBAResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ExecuteMultiFetchAsDBA is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ExecuteMultiFetchAsDBA is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) FindAllShardsInKeyspace(context.Context, *connect.Request[v21.FindAllShardsInKeyspaceRequest]) (*connect.Response[v21.FindAllShardsInKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.FindAllShardsInKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.FindAllShardsInKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ForceCutOverSchemaMigration(context.Context, *connect.Request[v21.ForceCutOverSchemaMigrationRequest]) (*connect.Response[v21.ForceCutOverSchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ForceCutOverSchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ForceCutOverSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetBackups(context.Context, *connect.Request[v21.GetBackupsRequest]) (*connect.Response[v21.GetBackupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetBackups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetBackups is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetCellInfo(context.Context, *connect.Request[v21.GetCellInfoRequest]) (*connect.Response[v21.GetCellInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetCellInfo is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetCellInfoNames(context.Context, *connect.Request[v21.GetCellInfoNamesRequest]) (*connect.Response[v21.GetCellInfoNamesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellInfoNames is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetCellInfoNames is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetCellsAliases(context.Context, *connect.Request[v21.GetCellsAliasesRequest]) (*connect.Response[v21.GetCellsAliasesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetCellsAliases is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetCellsAliases is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetFullStatus(context.Context, *connect.Request[v21.GetFullStatusRequest]) (*connect.Response[v21.GetFullStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetFullStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetFullStatus is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetKeyspace(context.Context, *connect.Request[v21.GetKeyspaceRequest]) (*connect.Response[v21.GetKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetKeyspaces(context.Context, *connect.Request[v21.GetKeyspacesRequest]) (*connect.Response[v21.GetKeyspacesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetKeyspaces is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetKeyspaces is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetKeyspaceRoutingRules(context.Context, *connect.Request[v21.GetKeyspaceRoutingRulesRequest]) (*connect.Response[v21.GetKeyspaceRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetKeyspaceRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetKeyspaceRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetPermissions(context.Context, *connect.Request[v21.GetPermissionsRequest]) (*connect.Response[v21.GetPermissionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetPermissions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetPermissions is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetRoutingRules(context.Context, *connect.Request[v21.GetRoutingRulesRequest]) (*connect.Response[v21.GetRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSchema(context.Context, *connect.Request[v21.GetSchemaRequest]) (*connect.Response[v21.GetSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSchemaMigrations(context.Context, *connect.Request[v21.GetSchemaMigrationsRequest]) (*connect.Response[v21.GetSchemaMigrationsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSchemaMigrations is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSchemaMigrations is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetShardReplication(context.Context, *connect.Request[v21.GetShardReplicationRequest]) (*connect.Response[v21.GetShardReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShardReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetShardReplication is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetShard(context.Context, *connect.Request[v21.GetShardRequest]) (*connect.Response[v21.GetShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetShardRoutingRules(context.Context, *connect.Request[v21.GetShardRoutingRulesRequest]) (*connect.Response[v21.GetShardRoutingRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetShardRoutingRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetShardRoutingRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSrvKeyspaceNames(context.Context, *connect.Request[v21.GetSrvKeyspaceNamesRequest]) (*connect.Response[v21.GetSrvKeyspaceNamesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvKeyspaceNames is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSrvKeyspaceNames is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSrvKeyspaces(context.Context, *connect.Request[v21.GetSrvKeyspacesRequest]) (*connect.Response[v21.GetSrvKeyspacesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvKeyspaces is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSrvKeyspaces is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) UpdateThrottlerConfig(context.Context, *connect.Request[v21.UpdateThrottlerConfigRequest]) (*connect.Response[v21.UpdateThrottlerConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateThrottlerConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.UpdateThrottlerConfig is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSrvVSchema(context.Context, *connect.Request[v21.GetSrvVSchemaRequest]) (*connect.Response[v21.GetSrvVSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvVSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSrvVSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetSrvVSchemas(context.Context, *connect.Request[v21.GetSrvVSchemasRequest]) (*connect.Response[v21.GetSrvVSchemasResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetSrvVSchemas is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetSrvVSchemas is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetTablet(context.Context, *connect.Request[v21.GetTabletRequest]) (*connect.Response[v21.GetTabletResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetTablet is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetTablets(context.Context, *connect.Request[v21.GetTabletsRequest]) (*connect.Response[v21.GetTabletsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTablets is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetTablets is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetThrottlerStatus(context.Context, *connect.Request[v21.GetThrottlerStatusRequest]) (*connect.Response[v21.GetThrottlerStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetThrottlerStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetThrottlerStatus is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetTopologyPath(context.Context, *connect.Request[v21.GetTopologyPathRequest]) (*connect.Response[v21.GetTopologyPathResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetTopologyPath is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetTopologyPath is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetUnresolvedTransactions(context.Context, *connect.Request[v21.GetUnresolvedTransactionsRequest]) (*connect.Response[v21.GetUnresolvedTransactionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetUnresolvedTransactions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetUnresolvedTransactions is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetVersion(context.Context, *connect.Request[v21.GetVersionRequest]) (*connect.Response[v21.GetVersionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetVersion is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetVersion is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetVSchema(context.Context, *connect.Request[v21.GetVSchemaRequest]) (*connect.Response[v21.GetVSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetVSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetVSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetWorkflows(context.Context, *connect.Request[v21.GetWorkflowsRequest]) (*connect.Response[v21.GetWorkflowsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetWorkflows is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetWorkflows is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) InitShardPrimary(context.Context, *connect.Request[v21.InitShardPrimaryRequest]) (*connect.Response[v21.InitShardPrimaryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.InitShardPrimary is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.InitShardPrimary is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) LaunchSchemaMigration(context.Context, *connect.Request[v21.LaunchSchemaMigrationRequest]) (*connect.Response[v21.LaunchSchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LaunchSchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.LaunchSchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) LookupVindexCreate(context.Context, *connect.Request[v21.LookupVindexCreateRequest]) (*connect.Response[v21.LookupVindexCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.LookupVindexCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) LookupVindexExternalize(context.Context, *connect.Request[v21.LookupVindexExternalizeRequest]) (*connect.Response[v21.LookupVindexExternalizeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.LookupVindexExternalize is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.LookupVindexExternalize is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MaterializeCreate(context.Context, *connect.Request[v21.MaterializeCreateRequest]) (*connect.Response[v21.MaterializeCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MaterializeCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MaterializeCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MigrateCreate(context.Context, *connect.Request[v21.MigrateCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MigrateCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MigrateCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MountRegister(context.Context, *connect.Request[v21.MountRegisterRequest]) (*connect.Response[v21.MountRegisterResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountRegister is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MountRegister is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MountUnregister(context.Context, *connect.Request[v21.MountUnregisterRequest]) (*connect.Response[v21.MountUnregisterResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountUnregister is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MountUnregister is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MountShow(context.Context, *connect.Request[v21.MountShowRequest]) (*connect.Response[v21.MountShowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountShow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MountShow is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MountList(context.Context, *connect.Request[v21.MountListRequest]) (*connect.Response[v21.MountListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MountList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MountList is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MoveTablesCreate(context.Context, *connect.Request[v21.MoveTablesCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MoveTablesCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MoveTablesCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) MoveTablesComplete(context.Context, *connect.Request[v21.MoveTablesCompleteRequest]) (*connect.Response[v21.MoveTablesCompleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MoveTablesComplete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.MoveTablesComplete is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) PingTablet(context.Context, *connect.Request[v21.PingTabletRequest]) (*connect.Response[v21.PingTabletResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.PingTablet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.PingTablet is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) PlannedReparentShard(context.Context, *connect.Request[v21.PlannedReparentShardRequest]) (*connect.Response[v21.PlannedReparentShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.PlannedReparentShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.PlannedReparentShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RebuildKeyspaceGraph(context.Context, *connect.Request[v21.RebuildKeyspaceGraphRequest]) (*connect.Response[v21.RebuildKeyspaceGraphResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RebuildKeyspaceGraph is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RebuildKeyspaceGraph is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RebuildVSchemaGraph(context.Context, *connect.Request[v21.RebuildVSchemaGraphRequest]) (*connect.Response[v21.RebuildVSchemaGraphResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RebuildVSchemaGraph is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RebuildVSchemaGraph is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RefreshState(context.Context, *connect.Request[v21.RefreshStateRequest]) (*connect.Response[v21.RefreshStateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RefreshState is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RefreshState is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RefreshStateByShard(context.Context, *connect.Request[v21.RefreshStateByShardRequest]) (*connect.Response[v21.RefreshStateByShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RefreshStateByShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RefreshStateByShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ReloadSchema(context.Context, *connect.Request[v21.ReloadSchemaRequest]) (*connect.Response[v21.ReloadSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ReloadSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ReloadSchemaKeyspace(context.Context, *connect.Request[v21.ReloadSchemaKeyspaceRequest]) (*connect.Response[v21.ReloadSchemaKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchemaKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ReloadSchemaKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ReloadSchemaShard(context.Context, *connect.Request[v21.ReloadSchemaShardRequest]) (*connect.Response[v21.ReloadSchemaShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReloadSchemaShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ReloadSchemaShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RemoveBackup(context.Context, *connect.Request[v21.RemoveBackupRequest]) (*connect.Response[v21.RemoveBackupResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveBackup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RemoveBackup is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RemoveKeyspaceCell(context.Context, *connect.Request[v21.RemoveKeyspaceCellRequest]) (*connect.Response[v21.RemoveKeyspaceCellResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveKeyspaceCell is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RemoveKeyspaceCell is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RemoveShardCell(context.Context, *connect.Request[v21.RemoveShardCellRequest]) (*connect.Response[v21.RemoveShardCellResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RemoveShardCell is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RemoveShardCell is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ReparentTablet(context.Context, *connect.Request[v21.ReparentTabletRequest]) (*connect.Response[v21.ReparentTabletResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReparentTablet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ReparentTablet is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ReshardCreate(context.Context, *connect.Request[v21.ReshardCreateRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ReshardCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ReshardCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RestoreFromBackup(context.Context, *connect.Request[v21.RestoreFromBackupRequest], *connect.ServerStream[v21.RestoreFromBackupResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RestoreFromBackup is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RestoreFromBackup is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RetrySchemaMigration(context.Context, *connect.Request[v21.RetrySchemaMigrationRequest]) (*connect.Response[v21.RetrySchemaMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RetrySchemaMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RetrySchemaMigration is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) RunHealthCheck(context.Context, *connect.Request[v21.RunHealthCheckRequest]) (*connect.Response[v21.RunHealthCheckResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.RunHealthCheck is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.RunHealthCheck is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetKeyspaceDurabilityPolicy(context.Context, *connect.Request[v21.SetKeyspaceDurabilityPolicyRequest]) (*connect.Response[v21.SetKeyspaceDurabilityPolicyResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetKeyspaceDurabilityPolicy is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SetKeyspaceDurabilityPolicy is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetShardIsPrimaryServing(context.Context, *connect.Request[v21.SetShardIsPrimaryServingRequest]) (*connect.Response[v21.SetShardIsPrimaryServingResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardIsPrimaryServing is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SetShardIsPrimaryServing is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetShardTabletControl(context.Context, *connect.Request[v21.SetShardTabletControlRequest]) (*connect.Response[v21.SetShardTabletControlResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardTabletControl is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SetShardTabletControl is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetWritable(context.Context, *connect.Request[v21.SetWritableRequest]) (*connect.Response[v21.SetWritableResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetWritable is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SetWritable is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ShardReplicationAdd(context.Context, *connect.Request[v21.ShardReplicationAddRequest]) (*connect.Response[v21.ShardReplicationAddResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationAdd is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ShardReplicationAdd is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ShardReplicationFix(context.Context, *connect.Request[v21.ShardReplicationFixRequest]) (*connect.Response[v21.ShardReplicationFixResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationFix is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ShardReplicationFix is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ShardReplicationPositions(context.Context, *connect.Request[v21.ShardReplicationPositionsRequest]) (*connect.Response[v21.ShardReplicationPositionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationPositions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ShardReplicationPositions is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ShardReplicationRemove(context.Context, *connect.Request[v21.ShardReplicationRemoveRequest]) (*connect.Response[v21.ShardReplicationRemoveResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ShardReplicationRemove is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ShardReplicationRemove is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SleepTablet(context.Context, *connect.Request[v21.SleepTabletRequest]) (*connect.Response[v21.SleepTabletResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SleepTablet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SleepTablet is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SourceShardAdd(context.Context, *connect.Request[v21.SourceShardAddRequest]) (*connect.Response[v21.SourceShardAddResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SourceShardAdd is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SourceShardAdd is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SourceShardDelete(context.Context, *connect.Request[v21.SourceShardDeleteRequest]) (*connect.Response[v21.SourceShardDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SourceShardDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.SourceShardDelete is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) StartReplication(context.Context, *connect.Request[v21.StartReplicationRequest]) (*connect.Response[v21.StartReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.StartReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.StartReplication is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) StopReplication(context.Context, *connect.Request[v21.StopReplicationRequest]) (*connect.Response[v21.StopReplicationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.StopReplication is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.StopReplication is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) TabletExternallyReparented(context.Context, *connect.Request[v21.TabletExternallyReparentedRequest]) (*connect.Response[v21.TabletExternallyReparentedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.TabletExternallyReparented is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.TabletExternallyReparented is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) UpdateCellInfo(context.Context, *connect.Request[v21.UpdateCellInfoRequest]) (*connect.Response[v21.UpdateCellInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateCellInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.UpdateCellInfo is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) UpdateCellsAlias(context.Context, *connect.Request[v21.UpdateCellsAliasRequest]) (*connect.Response[v21.UpdateCellsAliasResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.UpdateCellsAlias is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.UpdateCellsAlias is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) Validate(context.Context, *connect.Request[v21.ValidateRequest]) (*connect.Response[v21.ValidateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.Validate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.Validate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateKeyspace(context.Context, *connect.Request[v21.ValidateKeyspaceRequest]) (*connect.Response[v21.ValidateKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateSchemaKeyspace(context.Context, *connect.Request[v21.ValidateSchemaKeyspaceRequest]) (*connect.Response[v21.ValidateSchemaKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateSchemaKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateSchemaKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateShard(context.Context, *connect.Request[v21.ValidateShardRequest]) (*connect.Response[v21.ValidateShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateVersionKeyspace(context.Context, *connect.Request[v21.ValidateVersionKeyspaceRequest]) (*connect.Response[v21.ValidateVersionKeyspaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionKeyspace is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateVersionKeyspace is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateVersionShard(context.Context, *connect.Request[v21.ValidateVersionShardRequest]) (*connect.Response[v21.ValidateVersionShardResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVersionShard is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateVersionShard is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) ValidateVSchema(context.Context, *connect.Request[v21.ValidateVSchemaRequest]) (*connect.Response[v21.ValidateVSchemaResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.ValidateVSchema is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.ValidateVSchema is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) VDiffCreate(context.Context, *connect.Request[v21.VDiffCreateRequest]) (*connect.Response[v21.VDiffCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.VDiffCreate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) VDiffDelete(context.Context, *connect.Request[v21.VDiffDeleteRequest]) (*connect.Response[v21.VDiffDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.VDiffDelete is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) VDiffResume(context.Context, *connect.Request[v21.VDiffResumeRequest]) (*connect.Response[v21.VDiffResumeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffResume is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.VDiffResume is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) VDiffShow(context.Context, *connect.Request[v21.VDiffShowRequest]) (*connect.Response[v21.VDiffShowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffShow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.VDiffShow is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) VDiffStop(context.Context, *connect.Request[v21.VDiffStopRequest]) (*connect.Response[v21.VDiffStopResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.VDiffStop is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.VDiffStop is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowDelete(context.Context, *connect.Request[v21.WorkflowDeleteRequest]) (*connect.Response[v21.WorkflowDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.WorkflowDelete is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowStatus(context.Context, *connect.Request[v21.WorkflowStatusRequest]) (*connect.Response[v21.WorkflowStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.WorkflowStatus is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowSwitchTraffic(context.Context, *connect.Request[v21.WorkflowSwitchTrafficRequest]) (*connect.Response[v21.WorkflowSwitchTrafficResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowSwitchTraffic is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.WorkflowSwitchTraffic is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowUpdate(context.Context, *connect.Request[v21.WorkflowUpdateRequest]) (*connect.Response[v21.WorkflowUpdateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowUpdate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.WorkflowUpdate is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) GetMirrorRules(context.Context, *connect.Request[v21.GetMirrorRulesRequest]) (*connect.Response[v21.GetMirrorRulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.GetMirrorRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.GetMirrorRules is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) WorkflowMirrorTraffic(context.Context, *connect.Request[v21.WorkflowMirrorTrafficRequest]) (*connect.Response[v21.WorkflowMirrorTrafficResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowMirrorTraffic is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.vtctlservice.v21.Vtctld.WorkflowMirrorTraffic is not implemented"))
 }

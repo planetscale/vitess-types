@@ -1,0 +1,221 @@
+/*
+Copyright 2019 The Vitess Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// This file contains the service definition for making management API
+// calls to VtTablet.
+
+syntax = "proto3";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/tabletmanagerservice/v22;tabletmanagerservicev22";
+
+package vitess.tabletmanagerservice.v22;
+
+import "vitess/tabletmanagerdata/v22/tabletmanagerdata.proto";
+
+// TabletManager is a service definition for tabletmanagerdata.TabletManager.
+service TabletManager {
+  //
+  // Various read-only methods
+  //
+
+  // Ping returns the input payload
+  rpc Ping(vitess.tabletmanagerdata.v22.PingRequest) returns (vitess.tabletmanagerdata.v22.PingResponse) {};
+
+  // Sleep sleeps for the provided duration
+  rpc Sleep(vitess.tabletmanagerdata.v22.SleepRequest) returns (vitess.tabletmanagerdata.v22.SleepResponse) {};
+
+  // ExecuteHook executes the hook remotely
+  rpc ExecuteHook(vitess.tabletmanagerdata.v22.ExecuteHookRequest) returns (vitess.tabletmanagerdata.v22.ExecuteHookResponse) {};
+
+  // GetSchema asks the tablet for its schema
+  rpc GetSchema(vitess.tabletmanagerdata.v22.GetSchemaRequest) returns (vitess.tabletmanagerdata.v22.GetSchemaResponse) {};
+
+  // GetPermissions asks the tablet for its permissions
+  rpc GetPermissions(vitess.tabletmanagerdata.v22.GetPermissionsRequest) returns (vitess.tabletmanagerdata.v22.GetPermissionsResponse) {};
+
+  // GetGlobalStatusVars returns the server's global status variables asked for.
+  // An empty/nil variable name parameter slice means you want all of them.
+  rpc GetGlobalStatusVars(vitess.tabletmanagerdata.v22.GetGlobalStatusVarsRequest) returns (vitess.tabletmanagerdata.v22.GetGlobalStatusVarsResponse) {};
+
+  //
+  // Various read-write methods
+  //
+
+  rpc SetReadOnly(vitess.tabletmanagerdata.v22.SetReadOnlyRequest) returns (vitess.tabletmanagerdata.v22.SetReadOnlyResponse) {};
+
+  rpc SetReadWrite(vitess.tabletmanagerdata.v22.SetReadWriteRequest) returns (vitess.tabletmanagerdata.v22.SetReadWriteResponse) {};
+
+  // ChangeTags asks the remote tablet to change its tags
+  rpc ChangeTags(vitess.tabletmanagerdata.v22.ChangeTagsRequest) returns (vitess.tabletmanagerdata.v22.ChangeTagsResponse) {};
+
+  // ChangeType asks the remote tablet to change its type
+  rpc ChangeType(vitess.tabletmanagerdata.v22.ChangeTypeRequest) returns (vitess.tabletmanagerdata.v22.ChangeTypeResponse) {};
+
+  rpc RefreshState(vitess.tabletmanagerdata.v22.RefreshStateRequest) returns (vitess.tabletmanagerdata.v22.RefreshStateResponse) {};
+
+  rpc RunHealthCheck(vitess.tabletmanagerdata.v22.RunHealthCheckRequest) returns (vitess.tabletmanagerdata.v22.RunHealthCheckResponse) {};
+
+  rpc ReloadSchema(vitess.tabletmanagerdata.v22.ReloadSchemaRequest) returns (vitess.tabletmanagerdata.v22.ReloadSchemaResponse) {};
+
+  rpc PreflightSchema(vitess.tabletmanagerdata.v22.PreflightSchemaRequest) returns (vitess.tabletmanagerdata.v22.PreflightSchemaResponse) {};
+
+  rpc ApplySchema(vitess.tabletmanagerdata.v22.ApplySchemaRequest) returns (vitess.tabletmanagerdata.v22.ApplySchemaResponse) {};
+
+  rpc ResetSequences(vitess.tabletmanagerdata.v22.ResetSequencesRequest) returns (vitess.tabletmanagerdata.v22.ResetSequencesResponse) {};
+
+  rpc LockTables(vitess.tabletmanagerdata.v22.LockTablesRequest) returns (vitess.tabletmanagerdata.v22.LockTablesResponse) {};
+
+  rpc UnlockTables(vitess.tabletmanagerdata.v22.UnlockTablesRequest) returns (vitess.tabletmanagerdata.v22.UnlockTablesResponse) {};
+
+  rpc ExecuteQuery(vitess.tabletmanagerdata.v22.ExecuteQueryRequest) returns (vitess.tabletmanagerdata.v22.ExecuteQueryResponse) {};
+
+  rpc ExecuteFetchAsDba(vitess.tabletmanagerdata.v22.ExecuteFetchAsDbaRequest) returns (vitess.tabletmanagerdata.v22.ExecuteFetchAsDbaResponse) {};
+
+  rpc ExecuteMultiFetchAsDba(vitess.tabletmanagerdata.v22.ExecuteMultiFetchAsDbaRequest) returns (vitess.tabletmanagerdata.v22.ExecuteMultiFetchAsDbaResponse) {};
+
+  rpc ExecuteFetchAsAllPrivs(vitess.tabletmanagerdata.v22.ExecuteFetchAsAllPrivsRequest) returns (vitess.tabletmanagerdata.v22.ExecuteFetchAsAllPrivsResponse) {};
+
+  rpc ExecuteFetchAsApp(vitess.tabletmanagerdata.v22.ExecuteFetchAsAppRequest) returns (vitess.tabletmanagerdata.v22.ExecuteFetchAsAppResponse) {};
+
+  //
+  // Distributed Transaction related methods
+  //
+
+  rpc GetUnresolvedTransactions(vitess.tabletmanagerdata.v22.GetUnresolvedTransactionsRequest) returns (vitess.tabletmanagerdata.v22.GetUnresolvedTransactionsResponse) {};
+
+  rpc ReadTransaction(vitess.tabletmanagerdata.v22.ReadTransactionRequest) returns (vitess.tabletmanagerdata.v22.ReadTransactionResponse) {};
+
+  rpc GetTransactionInfo(vitess.tabletmanagerdata.v22.GetTransactionInfoRequest) returns (vitess.tabletmanagerdata.v22.GetTransactionInfoResponse) {};
+
+  rpc ConcludeTransaction(vitess.tabletmanagerdata.v22.ConcludeTransactionRequest) returns (vitess.tabletmanagerdata.v22.ConcludeTransactionResponse) {};
+
+  rpc MysqlHostMetrics(vitess.tabletmanagerdata.v22.MysqlHostMetricsRequest) returns (vitess.tabletmanagerdata.v22.MysqlHostMetricsResponse) {};
+
+  //
+  // Replication related methods
+  //
+
+  // ReplicationStatus returns the current replication status.
+  rpc ReplicationStatus(vitess.tabletmanagerdata.v22.ReplicationStatusRequest) returns (vitess.tabletmanagerdata.v22.ReplicationStatusResponse) {};
+
+  // PrimaryStatus returns the current primary status.
+  rpc PrimaryStatus(vitess.tabletmanagerdata.v22.PrimaryStatusRequest) returns (vitess.tabletmanagerdata.v22.PrimaryStatusResponse) {};
+
+  // PrimaryPosition returns the current primary position
+  rpc PrimaryPosition(vitess.tabletmanagerdata.v22.PrimaryPositionRequest) returns (vitess.tabletmanagerdata.v22.PrimaryPositionResponse) {};
+
+  // WaitForPosition waits for the position to be reached
+  rpc WaitForPosition(vitess.tabletmanagerdata.v22.WaitForPositionRequest) returns (vitess.tabletmanagerdata.v22.WaitForPositionResponse) {};
+
+  // StopReplication makes mysql stop its replication
+  rpc StopReplication(vitess.tabletmanagerdata.v22.StopReplicationRequest) returns (vitess.tabletmanagerdata.v22.StopReplicationResponse) {};
+
+  // StopReplicationMinimum stops the mysql replication after it reaches
+  // the provided minimum point
+  rpc StopReplicationMinimum(vitess.tabletmanagerdata.v22.StopReplicationMinimumRequest) returns (vitess.tabletmanagerdata.v22.StopReplicationMinimumResponse) {};
+
+  // StartReplication starts the mysql replication
+  rpc StartReplication(vitess.tabletmanagerdata.v22.StartReplicationRequest) returns (vitess.tabletmanagerdata.v22.StartReplicationResponse) {};
+
+  // StartReplicationUnitAfter starts the mysql replication until and including
+  // the provided position
+  rpc StartReplicationUntilAfter(vitess.tabletmanagerdata.v22.StartReplicationUntilAfterRequest) returns (vitess.tabletmanagerdata.v22.StartReplicationUntilAfterResponse) {};
+
+  // GetReplicas asks for the list of mysql replicas
+  rpc GetReplicas(vitess.tabletmanagerdata.v22.GetReplicasRequest) returns (vitess.tabletmanagerdata.v22.GetReplicasResponse) {};
+
+  // VReplication API
+  rpc CreateVReplicationWorkflow(vitess.tabletmanagerdata.v22.CreateVReplicationWorkflowRequest) returns (vitess.tabletmanagerdata.v22.CreateVReplicationWorkflowResponse) {};
+  rpc DeleteTableData(vitess.tabletmanagerdata.v22.DeleteTableDataRequest) returns(vitess.tabletmanagerdata.v22.DeleteTableDataResponse) {}
+  rpc DeleteVReplicationWorkflow(vitess.tabletmanagerdata.v22.DeleteVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.v22.DeleteVReplicationWorkflowResponse) {};
+  rpc HasVReplicationWorkflows(vitess.tabletmanagerdata.v22.HasVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.v22.HasVReplicationWorkflowsResponse) {};
+  rpc ReadVReplicationWorkflow(vitess.tabletmanagerdata.v22.ReadVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.v22.ReadVReplicationWorkflowResponse) {};
+  rpc ReadVReplicationWorkflows(vitess.tabletmanagerdata.v22.ReadVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.v22.ReadVReplicationWorkflowsResponse) {};
+  rpc UpdateVReplicationWorkflow(vitess.tabletmanagerdata.v22.UpdateVReplicationWorkflowRequest) returns(vitess.tabletmanagerdata.v22.UpdateVReplicationWorkflowResponse) {};
+  rpc UpdateVReplicationWorkflows(vitess.tabletmanagerdata.v22.UpdateVReplicationWorkflowsRequest) returns(vitess.tabletmanagerdata.v22.UpdateVReplicationWorkflowsResponse) {};
+  rpc ValidateVReplicationPermissions(vitess.tabletmanagerdata.v22.ValidateVReplicationPermissionsRequest) returns(vitess.tabletmanagerdata.v22.ValidateVReplicationPermissionsResponse) {};
+  rpc VReplicationExec(vitess.tabletmanagerdata.v22.VReplicationExecRequest) returns(vitess.tabletmanagerdata.v22.VReplicationExecResponse) {};
+  rpc VReplicationWaitForPos(vitess.tabletmanagerdata.v22.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.v22.VReplicationWaitForPosResponse) {};
+
+  // VDiff API
+  rpc VDiff(vitess.tabletmanagerdata.v22.VDiffRequest) returns(vitess.tabletmanagerdata.v22.VDiffResponse) {};
+
+  //
+  // Reparenting related functions
+  //
+
+  // ResetReplication makes the target not replicating
+  rpc ResetReplication(vitess.tabletmanagerdata.v22.ResetReplicationRequest) returns (vitess.tabletmanagerdata.v22.ResetReplicationResponse) {};
+
+  // InitPrimary initializes the tablet as a primary
+  rpc InitPrimary(vitess.tabletmanagerdata.v22.InitPrimaryRequest) returns (vitess.tabletmanagerdata.v22.InitPrimaryResponse) {};
+
+  // PopulateReparentJournal tells the tablet to add an entry to its
+  // reparent journal
+  rpc PopulateReparentJournal(vitess.tabletmanagerdata.v22.PopulateReparentJournalRequest) returns (vitess.tabletmanagerdata.v22.PopulateReparentJournalResponse) {};
+
+  // ReadReparentJournalInfo reads the information from reparent journal
+  rpc ReadReparentJournalInfo(vitess.tabletmanagerdata.v22.ReadReparentJournalInfoRequest) returns (vitess.tabletmanagerdata.v22.ReadReparentJournalInfoResponse) {};
+
+  // InitReplica tells the tablet to reparent to the primary unconditionally
+  rpc InitReplica(vitess.tabletmanagerdata.v22.InitReplicaRequest) returns (vitess.tabletmanagerdata.v22.InitReplicaResponse) {};
+
+  // DemotePrimary tells the soon-to-be-former primary it's gonna change
+  rpc DemotePrimary(vitess.tabletmanagerdata.v22.DemotePrimaryRequest) returns (vitess.tabletmanagerdata.v22.DemotePrimaryResponse) {};
+
+  // UndoDemotePrimary reverts all changes made by DemotePrimary
+  rpc UndoDemotePrimary(vitess.tabletmanagerdata.v22.UndoDemotePrimaryRequest) returns (vitess.tabletmanagerdata.v22.UndoDemotePrimaryResponse) {};
+
+  // ReplicaWasPromoted tells the remote tablet it is now the primary
+  rpc ReplicaWasPromoted(vitess.tabletmanagerdata.v22.ReplicaWasPromotedRequest) returns (vitess.tabletmanagerdata.v22.ReplicaWasPromotedResponse) {};
+
+  // ResetReplicationParameters resets the replica replication parameters
+  rpc ResetReplicationParameters(vitess.tabletmanagerdata.v22.ResetReplicationParametersRequest) returns (vitess.tabletmanagerdata.v22.ResetReplicationParametersResponse) {};
+
+  // FullStatus collects and returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
+  rpc FullStatus(vitess.tabletmanagerdata.v22.FullStatusRequest) returns (vitess.tabletmanagerdata.v22.FullStatusResponse) {};
+
+  // SetReplicationSource tells the replica to reparent
+  rpc SetReplicationSource(vitess.tabletmanagerdata.v22.SetReplicationSourceRequest) returns (vitess.tabletmanagerdata.v22.SetReplicationSourceResponse) {};
+
+  // ReplicaWasRestarted tells the remote tablet its primary has changed
+  rpc ReplicaWasRestarted(vitess.tabletmanagerdata.v22.ReplicaWasRestartedRequest) returns (vitess.tabletmanagerdata.v22.ReplicaWasRestartedResponse) {};
+
+  // StopReplicationAndGetStatus stops MySQL replication, and returns the
+  // replication status
+  rpc StopReplicationAndGetStatus(vitess.tabletmanagerdata.v22.StopReplicationAndGetStatusRequest) returns (vitess.tabletmanagerdata.v22.StopReplicationAndGetStatusResponse) {};
+
+  // PromoteReplica makes the replica the new primary
+  rpc PromoteReplica(vitess.tabletmanagerdata.v22.PromoteReplicaRequest) returns (vitess.tabletmanagerdata.v22.PromoteReplicaResponse) {};
+
+  //
+  // Backup related methods
+  //
+
+  rpc Backup(vitess.tabletmanagerdata.v22.BackupRequest) returns (stream vitess.tabletmanagerdata.v22.BackupResponse) {};
+
+  // RestoreFromBackup deletes all local data and restores it from the latest backup.
+  rpc RestoreFromBackup(vitess.tabletmanagerdata.v22.RestoreFromBackupRequest) returns (stream vitess.tabletmanagerdata.v22.RestoreFromBackupResponse) {};
+
+  //
+  // Tablet throttler related methods
+  //
+
+  // CheckThrottler issues a 'check' on a tablet's throttler
+  rpc CheckThrottler(vitess.tabletmanagerdata.v22.CheckThrottlerRequest) returns (vitess.tabletmanagerdata.v22.CheckThrottlerResponse) {};
+
+  // GetThrottlerStatus gets the status of a tablet throttler
+  rpc GetThrottlerStatus(vitess.tabletmanagerdata.v22.GetThrottlerStatusRequest) returns (vitess.tabletmanagerdata.v22.GetThrottlerStatusResponse) {};
+}

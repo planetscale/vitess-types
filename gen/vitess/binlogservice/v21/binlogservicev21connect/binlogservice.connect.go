@@ -41,7 +41,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// UpdateStreamName is the fully-qualified name of the UpdateStream service.
-	UpdateStreamName = "binlogservice.UpdateStream"
+	UpdateStreamName = "vitess.binlogservice.v21.UpdateStream"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,13 +54,13 @@ const (
 const (
 	// UpdateStreamStreamKeyRangeProcedure is the fully-qualified name of the UpdateStream's
 	// StreamKeyRange RPC.
-	UpdateStreamStreamKeyRangeProcedure = "/binlogservice.UpdateStream/StreamKeyRange"
+	UpdateStreamStreamKeyRangeProcedure = "/vitess.binlogservice.v21.UpdateStream/StreamKeyRange"
 	// UpdateStreamStreamTablesProcedure is the fully-qualified name of the UpdateStream's StreamTables
 	// RPC.
-	UpdateStreamStreamTablesProcedure = "/binlogservice.UpdateStream/StreamTables"
+	UpdateStreamStreamTablesProcedure = "/vitess.binlogservice.v21.UpdateStream/StreamTables"
 )
 
-// UpdateStreamClient is a client for the binlogservice.UpdateStream service.
+// UpdateStreamClient is a client for the vitess.binlogservice.v21.UpdateStream service.
 type UpdateStreamClient interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
@@ -70,7 +70,7 @@ type UpdateStreamClient interface {
 	StreamTables(context.Context, *connect.Request[v21.StreamTablesRequest]) (*connect.ServerStreamForClient[v21.StreamTablesResponse], error)
 }
 
-// NewUpdateStreamClient constructs a client for the binlogservice.UpdateStream service.
+// NewUpdateStreamClient constructs a client for the vitess.binlogservice.v21.UpdateStream service.
 // By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
 // responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -102,17 +102,17 @@ type updateStreamClient struct {
 	streamTables   *connect.Client[v21.StreamTablesRequest, v21.StreamTablesResponse]
 }
 
-// StreamKeyRange calls binlogservice.UpdateStream.StreamKeyRange.
+// StreamKeyRange calls vitess.binlogservice.v21.UpdateStream.StreamKeyRange.
 func (c *updateStreamClient) StreamKeyRange(ctx context.Context, req *connect.Request[v21.StreamKeyRangeRequest]) (*connect.ServerStreamForClient[v21.StreamKeyRangeResponse], error) {
 	return c.streamKeyRange.CallServerStream(ctx, req)
 }
 
-// StreamTables calls binlogservice.UpdateStream.StreamTables.
+// StreamTables calls vitess.binlogservice.v21.UpdateStream.StreamTables.
 func (c *updateStreamClient) StreamTables(ctx context.Context, req *connect.Request[v21.StreamTablesRequest]) (*connect.ServerStreamForClient[v21.StreamTablesResponse], error) {
 	return c.streamTables.CallServerStream(ctx, req)
 }
 
-// UpdateStreamHandler is an implementation of the binlogservice.UpdateStream service.
+// UpdateStreamHandler is an implementation of the vitess.binlogservice.v21.UpdateStream service.
 type UpdateStreamHandler interface {
 	// StreamKeyRange returns the binlog transactions related to
 	// the specified Keyrange.
@@ -141,7 +141,7 @@ func NewUpdateStreamHandler(svc UpdateStreamHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(updateStreamMethods.ByName("StreamTables")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/binlogservice.UpdateStream/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/vitess.binlogservice.v21.UpdateStream/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case UpdateStreamStreamKeyRangeProcedure:
 			updateStreamStreamKeyRangeHandler.ServeHTTP(w, r)
@@ -157,9 +157,9 @@ func NewUpdateStreamHandler(svc UpdateStreamHandler, opts ...connect.HandlerOpti
 type UnimplementedUpdateStreamHandler struct{}
 
 func (UnimplementedUpdateStreamHandler) StreamKeyRange(context.Context, *connect.Request[v21.StreamKeyRangeRequest], *connect.ServerStream[v21.StreamKeyRangeResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamKeyRange is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.binlogservice.v21.UpdateStream.StreamKeyRange is not implemented"))
 }
 
 func (UnimplementedUpdateStreamHandler) StreamTables(context.Context, *connect.Request[v21.StreamTablesRequest], *connect.ServerStream[v21.StreamTablesResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("binlogservice.UpdateStream.StreamTables is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vitess.binlogservice.v21.UpdateStream.StreamTables is not implemented"))
 }
