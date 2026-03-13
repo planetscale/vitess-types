@@ -39,7 +39,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// MysqlCtlName is the fully-qualified name of the MysqlCtl service.
-	MysqlCtlName = "vitess.mysqlctl.v21.MysqlCtl"
+	MysqlCtlName = "mysqlctl.MysqlCtl"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -51,29 +51,29 @@ const (
 // period.
 const (
 	// MysqlCtlStartProcedure is the fully-qualified name of the MysqlCtl's Start RPC.
-	MysqlCtlStartProcedure = "/vitess.mysqlctl.v21.MysqlCtl/Start"
+	MysqlCtlStartProcedure = "/mysqlctl.MysqlCtl/Start"
 	// MysqlCtlShutdownProcedure is the fully-qualified name of the MysqlCtl's Shutdown RPC.
-	MysqlCtlShutdownProcedure = "/vitess.mysqlctl.v21.MysqlCtl/Shutdown"
+	MysqlCtlShutdownProcedure = "/mysqlctl.MysqlCtl/Shutdown"
 	// MysqlCtlRunMysqlUpgradeProcedure is the fully-qualified name of the MysqlCtl's RunMysqlUpgrade
 	// RPC.
-	MysqlCtlRunMysqlUpgradeProcedure = "/vitess.mysqlctl.v21.MysqlCtl/RunMysqlUpgrade"
+	MysqlCtlRunMysqlUpgradeProcedure = "/mysqlctl.MysqlCtl/RunMysqlUpgrade"
 	// MysqlCtlApplyBinlogFileProcedure is the fully-qualified name of the MysqlCtl's ApplyBinlogFile
 	// RPC.
-	MysqlCtlApplyBinlogFileProcedure = "/vitess.mysqlctl.v21.MysqlCtl/ApplyBinlogFile"
+	MysqlCtlApplyBinlogFileProcedure = "/mysqlctl.MysqlCtl/ApplyBinlogFile"
 	// MysqlCtlReadBinlogFilesTimestampsProcedure is the fully-qualified name of the MysqlCtl's
 	// ReadBinlogFilesTimestamps RPC.
-	MysqlCtlReadBinlogFilesTimestampsProcedure = "/vitess.mysqlctl.v21.MysqlCtl/ReadBinlogFilesTimestamps"
+	MysqlCtlReadBinlogFilesTimestampsProcedure = "/mysqlctl.MysqlCtl/ReadBinlogFilesTimestamps"
 	// MysqlCtlReinitConfigProcedure is the fully-qualified name of the MysqlCtl's ReinitConfig RPC.
-	MysqlCtlReinitConfigProcedure = "/vitess.mysqlctl.v21.MysqlCtl/ReinitConfig"
+	MysqlCtlReinitConfigProcedure = "/mysqlctl.MysqlCtl/ReinitConfig"
 	// MysqlCtlRefreshConfigProcedure is the fully-qualified name of the MysqlCtl's RefreshConfig RPC.
-	MysqlCtlRefreshConfigProcedure = "/vitess.mysqlctl.v21.MysqlCtl/RefreshConfig"
+	MysqlCtlRefreshConfigProcedure = "/mysqlctl.MysqlCtl/RefreshConfig"
 	// MysqlCtlVersionStringProcedure is the fully-qualified name of the MysqlCtl's VersionString RPC.
-	MysqlCtlVersionStringProcedure = "/vitess.mysqlctl.v21.MysqlCtl/VersionString"
+	MysqlCtlVersionStringProcedure = "/mysqlctl.MysqlCtl/VersionString"
 	// MysqlCtlHostMetricsProcedure is the fully-qualified name of the MysqlCtl's HostMetrics RPC.
-	MysqlCtlHostMetricsProcedure = "/vitess.mysqlctl.v21.MysqlCtl/HostMetrics"
+	MysqlCtlHostMetricsProcedure = "/mysqlctl.MysqlCtl/HostMetrics"
 )
 
-// MysqlCtlClient is a client for the vitess.mysqlctl.v21.MysqlCtl service.
+// MysqlCtlClient is a client for the mysqlctl.MysqlCtl service.
 type MysqlCtlClient interface {
 	Start(context.Context, *connect.Request[v21.StartRequest]) (*connect.Response[v21.StartResponse], error)
 	Shutdown(context.Context, *connect.Request[v21.ShutdownRequest]) (*connect.Response[v21.ShutdownResponse], error)
@@ -86,7 +86,7 @@ type MysqlCtlClient interface {
 	HostMetrics(context.Context, *connect.Request[v21.HostMetricsRequest]) (*connect.Response[v21.HostMetricsResponse], error)
 }
 
-// NewMysqlCtlClient constructs a client for the vitess.mysqlctl.v21.MysqlCtl service. By default,
+// NewMysqlCtlClient constructs a client for the mysqlctl.MysqlCtl service. By default,
 // it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
 // sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
 // or connect.WithGRPCWeb() options.
@@ -167,52 +167,52 @@ type mysqlCtlClient struct {
 	hostMetrics               *connect.Client[v21.HostMetricsRequest, v21.HostMetricsResponse]
 }
 
-// Start calls vitess.mysqlctl.v21.MysqlCtl.Start.
+// Start calls mysqlctl.MysqlCtl.Start.
 func (c *mysqlCtlClient) Start(ctx context.Context, req *connect.Request[v21.StartRequest]) (*connect.Response[v21.StartResponse], error) {
 	return c.start.CallUnary(ctx, req)
 }
 
-// Shutdown calls vitess.mysqlctl.v21.MysqlCtl.Shutdown.
+// Shutdown calls mysqlctl.MysqlCtl.Shutdown.
 func (c *mysqlCtlClient) Shutdown(ctx context.Context, req *connect.Request[v21.ShutdownRequest]) (*connect.Response[v21.ShutdownResponse], error) {
 	return c.shutdown.CallUnary(ctx, req)
 }
 
-// RunMysqlUpgrade calls vitess.mysqlctl.v21.MysqlCtl.RunMysqlUpgrade.
+// RunMysqlUpgrade calls mysqlctl.MysqlCtl.RunMysqlUpgrade.
 func (c *mysqlCtlClient) RunMysqlUpgrade(ctx context.Context, req *connect.Request[v21.RunMysqlUpgradeRequest]) (*connect.Response[v21.RunMysqlUpgradeResponse], error) {
 	return c.runMysqlUpgrade.CallUnary(ctx, req)
 }
 
-// ApplyBinlogFile calls vitess.mysqlctl.v21.MysqlCtl.ApplyBinlogFile.
+// ApplyBinlogFile calls mysqlctl.MysqlCtl.ApplyBinlogFile.
 func (c *mysqlCtlClient) ApplyBinlogFile(ctx context.Context, req *connect.Request[v21.ApplyBinlogFileRequest]) (*connect.Response[v21.ApplyBinlogFileResponse], error) {
 	return c.applyBinlogFile.CallUnary(ctx, req)
 }
 
-// ReadBinlogFilesTimestamps calls vitess.mysqlctl.v21.MysqlCtl.ReadBinlogFilesTimestamps.
+// ReadBinlogFilesTimestamps calls mysqlctl.MysqlCtl.ReadBinlogFilesTimestamps.
 func (c *mysqlCtlClient) ReadBinlogFilesTimestamps(ctx context.Context, req *connect.Request[v21.ReadBinlogFilesTimestampsRequest]) (*connect.Response[v21.ReadBinlogFilesTimestampsResponse], error) {
 	return c.readBinlogFilesTimestamps.CallUnary(ctx, req)
 }
 
-// ReinitConfig calls vitess.mysqlctl.v21.MysqlCtl.ReinitConfig.
+// ReinitConfig calls mysqlctl.MysqlCtl.ReinitConfig.
 func (c *mysqlCtlClient) ReinitConfig(ctx context.Context, req *connect.Request[v21.ReinitConfigRequest]) (*connect.Response[v21.ReinitConfigResponse], error) {
 	return c.reinitConfig.CallUnary(ctx, req)
 }
 
-// RefreshConfig calls vitess.mysqlctl.v21.MysqlCtl.RefreshConfig.
+// RefreshConfig calls mysqlctl.MysqlCtl.RefreshConfig.
 func (c *mysqlCtlClient) RefreshConfig(ctx context.Context, req *connect.Request[v21.RefreshConfigRequest]) (*connect.Response[v21.RefreshConfigResponse], error) {
 	return c.refreshConfig.CallUnary(ctx, req)
 }
 
-// VersionString calls vitess.mysqlctl.v21.MysqlCtl.VersionString.
+// VersionString calls mysqlctl.MysqlCtl.VersionString.
 func (c *mysqlCtlClient) VersionString(ctx context.Context, req *connect.Request[v21.VersionStringRequest]) (*connect.Response[v21.VersionStringResponse], error) {
 	return c.versionString.CallUnary(ctx, req)
 }
 
-// HostMetrics calls vitess.mysqlctl.v21.MysqlCtl.HostMetrics.
+// HostMetrics calls mysqlctl.MysqlCtl.HostMetrics.
 func (c *mysqlCtlClient) HostMetrics(ctx context.Context, req *connect.Request[v21.HostMetricsRequest]) (*connect.Response[v21.HostMetricsResponse], error) {
 	return c.hostMetrics.CallUnary(ctx, req)
 }
 
-// MysqlCtlHandler is an implementation of the vitess.mysqlctl.v21.MysqlCtl service.
+// MysqlCtlHandler is an implementation of the mysqlctl.MysqlCtl service.
 type MysqlCtlHandler interface {
 	Start(context.Context, *connect.Request[v21.StartRequest]) (*connect.Response[v21.StartResponse], error)
 	Shutdown(context.Context, *connect.Request[v21.ShutdownRequest]) (*connect.Response[v21.ShutdownResponse], error)
@@ -286,7 +286,7 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 		connect.WithSchema(mysqlCtlMethods.ByName("HostMetrics")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/vitess.mysqlctl.v21.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/mysqlctl.MysqlCtl/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MysqlCtlStartProcedure:
 			mysqlCtlStartHandler.ServeHTTP(w, r)
@@ -316,37 +316,37 @@ func NewMysqlCtlHandler(svc MysqlCtlHandler, opts ...connect.HandlerOption) (str
 type UnimplementedMysqlCtlHandler struct{}
 
 func (UnimplementedMysqlCtlHandler) Start(context.Context, *connect.Request[v21.StartRequest]) (*connect.Response[v21.StartResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.Start is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Start is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) Shutdown(context.Context, *connect.Request[v21.ShutdownRequest]) (*connect.Response[v21.ShutdownResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.Shutdown is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.Shutdown is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) RunMysqlUpgrade(context.Context, *connect.Request[v21.RunMysqlUpgradeRequest]) (*connect.Response[v21.RunMysqlUpgradeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.RunMysqlUpgrade is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RunMysqlUpgrade is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) ApplyBinlogFile(context.Context, *connect.Request[v21.ApplyBinlogFileRequest]) (*connect.Response[v21.ApplyBinlogFileResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.ApplyBinlogFile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ApplyBinlogFile is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) ReadBinlogFilesTimestamps(context.Context, *connect.Request[v21.ReadBinlogFilesTimestampsRequest]) (*connect.Response[v21.ReadBinlogFilesTimestampsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.ReadBinlogFilesTimestamps is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReadBinlogFilesTimestamps is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) ReinitConfig(context.Context, *connect.Request[v21.ReinitConfigRequest]) (*connect.Response[v21.ReinitConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.ReinitConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.ReinitConfig is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) RefreshConfig(context.Context, *connect.Request[v21.RefreshConfigRequest]) (*connect.Response[v21.RefreshConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.RefreshConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.RefreshConfig is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) VersionString(context.Context, *connect.Request[v21.VersionStringRequest]) (*connect.Response[v21.VersionStringResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.VersionString is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.VersionString is not implemented"))
 }
 
 func (UnimplementedMysqlCtlHandler) HostMetrics(context.Context, *connect.Request[v21.HostMetricsRequest]) (*connect.Response[v21.HostMetricsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.mysqlctl.v21.MysqlCtl.HostMetrics is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("mysqlctl.MysqlCtl.HostMetrics is not implemented"))
 }
