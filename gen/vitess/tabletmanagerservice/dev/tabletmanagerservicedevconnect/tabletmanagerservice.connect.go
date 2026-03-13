@@ -153,6 +153,9 @@ const (
 	// TabletManagerStartReplicationProcedure is the fully-qualified name of the TabletManager's
 	// StartReplication RPC.
 	TabletManagerStartReplicationProcedure = "/tabletmanagerservice.TabletManager/StartReplication"
+	// TabletManagerRestartReplicationProcedure is the fully-qualified name of the TabletManager's
+	// RestartReplication RPC.
+	TabletManagerRestartReplicationProcedure = "/tabletmanagerservice.TabletManager/RestartReplication"
 	// TabletManagerStartReplicationUntilAfterProcedure is the fully-qualified name of the
 	// TabletManager's StartReplicationUntilAfter RPC.
 	TabletManagerStartReplicationUntilAfterProcedure = "/tabletmanagerservice.TabletManager/StartReplicationUntilAfter"
@@ -192,6 +195,12 @@ const (
 	// TabletManagerVReplicationWaitForPosProcedure is the fully-qualified name of the TabletManager's
 	// VReplicationWaitForPos RPC.
 	TabletManagerVReplicationWaitForPosProcedure = "/tabletmanagerservice.TabletManager/VReplicationWaitForPos"
+	// TabletManagerUpdateSequenceTablesProcedure is the fully-qualified name of the TabletManager's
+	// UpdateSequenceTables RPC.
+	TabletManagerUpdateSequenceTablesProcedure = "/tabletmanagerservice.TabletManager/UpdateSequenceTables"
+	// TabletManagerGetMaxValueForSequencesProcedure is the fully-qualified name of the TabletManager's
+	// GetMaxValueForSequences RPC.
+	TabletManagerGetMaxValueForSequencesProcedure = "/tabletmanagerservice.TabletManager/GetMaxValueForSequences"
 	// TabletManagerVDiffProcedure is the fully-qualified name of the TabletManager's VDiff RPC.
 	TabletManagerVDiffProcedure = "/tabletmanagerservice.TabletManager/VDiff"
 	// TabletManagerResetReplicationProcedure is the fully-qualified name of the TabletManager's
@@ -303,6 +312,8 @@ type TabletManagerClient interface {
 	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
 	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	// RestartReplication stops and then starts the mysql replication
+	RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
 	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
@@ -320,6 +331,8 @@ type TabletManagerClient interface {
 	ValidateVReplicationPermissions(context.Context, *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error)
+	GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -582,6 +595,12 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(tabletManagerMethods.ByName("StartReplication")),
 			connect.WithClientOptions(opts...),
 		),
+		restartReplication: connect.NewClient[dev.RestartReplicationRequest, dev.RestartReplicationResponse](
+			httpClient,
+			baseURL+TabletManagerRestartReplicationProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("RestartReplication")),
+			connect.WithClientOptions(opts...),
+		),
 		startReplicationUntilAfter: connect.NewClient[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationUntilAfterProcedure,
@@ -658,6 +677,18 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			httpClient,
 			baseURL+TabletManagerVReplicationWaitForPosProcedure,
 			connect.WithSchema(tabletManagerMethods.ByName("VReplicationWaitForPos")),
+			connect.WithClientOptions(opts...),
+		),
+		updateSequenceTables: connect.NewClient[dev.UpdateSequenceTablesRequest, dev.UpdateSequenceTablesResponse](
+			httpClient,
+			baseURL+TabletManagerUpdateSequenceTablesProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("UpdateSequenceTables")),
+			connect.WithClientOptions(opts...),
+		),
+		getMaxValueForSequences: connect.NewClient[dev.GetMaxValueForSequencesRequest, dev.GetMaxValueForSequencesResponse](
+			httpClient,
+			baseURL+TabletManagerGetMaxValueForSequencesProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("GetMaxValueForSequences")),
 			connect.WithClientOptions(opts...),
 		),
 		vDiff: connect.NewClient[dev.VDiffRequest, dev.VDiffResponse](
@@ -814,6 +845,7 @@ type tabletManagerClient struct {
 	stopReplication                 *connect.Client[dev.StopReplicationRequest, dev.StopReplicationResponse]
 	stopReplicationMinimum          *connect.Client[dev.StopReplicationMinimumRequest, dev.StopReplicationMinimumResponse]
 	startReplication                *connect.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
+	restartReplication              *connect.Client[dev.RestartReplicationRequest, dev.RestartReplicationResponse]
 	startReplicationUntilAfter      *connect.Client[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse]
 	getReplicas                     *connect.Client[dev.GetReplicasRequest, dev.GetReplicasResponse]
 	createVReplicationWorkflow      *connect.Client[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse]
@@ -827,6 +859,8 @@ type tabletManagerClient struct {
 	validateVReplicationPermissions *connect.Client[dev.ValidateVReplicationPermissionsRequest, dev.ValidateVReplicationPermissionsResponse]
 	vReplicationExec                *connect.Client[dev.VReplicationExecRequest, dev.VReplicationExecResponse]
 	vReplicationWaitForPos          *connect.Client[dev.VReplicationWaitForPosRequest, dev.VReplicationWaitForPosResponse]
+	updateSequenceTables            *connect.Client[dev.UpdateSequenceTablesRequest, dev.UpdateSequenceTablesResponse]
+	getMaxValueForSequences         *connect.Client[dev.GetMaxValueForSequencesRequest, dev.GetMaxValueForSequencesResponse]
 	vDiff                           *connect.Client[dev.VDiffRequest, dev.VDiffResponse]
 	resetReplication                *connect.Client[dev.ResetReplicationRequest, dev.ResetReplicationResponse]
 	initPrimary                     *connect.Client[dev.InitPrimaryRequest, dev.InitPrimaryResponse]
@@ -1027,6 +1061,11 @@ func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect
 	return c.startReplication.CallUnary(ctx, req)
 }
 
+// RestartReplication calls tabletmanagerservice.TabletManager.RestartReplication.
+func (c *tabletManagerClient) RestartReplication(ctx context.Context, req *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error) {
+	return c.restartReplication.CallUnary(ctx, req)
+}
+
 // StartReplicationUntilAfter calls
 // tabletmanagerservice.TabletManager.StartReplicationUntilAfter.
 func (c *tabletManagerClient) StartReplicationUntilAfter(ctx context.Context, req *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
@@ -1100,6 +1139,17 @@ func (c *tabletManagerClient) VReplicationExec(ctx context.Context, req *connect
 // tabletmanagerservice.TabletManager.VReplicationWaitForPos.
 func (c *tabletManagerClient) VReplicationWaitForPos(ctx context.Context, req *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
 	return c.vReplicationWaitForPos.CallUnary(ctx, req)
+}
+
+// UpdateSequenceTables calls tabletmanagerservice.TabletManager.UpdateSequenceTables.
+func (c *tabletManagerClient) UpdateSequenceTables(ctx context.Context, req *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error) {
+	return c.updateSequenceTables.CallUnary(ctx, req)
+}
+
+// GetMaxValueForSequences calls
+// tabletmanagerservice.TabletManager.GetMaxValueForSequences.
+func (c *tabletManagerClient) GetMaxValueForSequences(ctx context.Context, req *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error) {
+	return c.getMaxValueForSequences.CallUnary(ctx, req)
 }
 
 // VDiff calls tabletmanagerservice.TabletManager.VDiff.
@@ -1256,6 +1306,8 @@ type TabletManagerHandler interface {
 	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
 	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	// RestartReplication stops and then starts the mysql replication
+	RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
 	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
@@ -1273,6 +1325,8 @@ type TabletManagerHandler interface {
 	ValidateVReplicationPermissions(context.Context, *connect.Request[dev.ValidateVReplicationPermissionsRequest]) (*connect.Response[dev.ValidateVReplicationPermissionsResponse], error)
 	VReplicationExec(context.Context, *connect.Request[dev.VReplicationExecRequest]) (*connect.Response[dev.VReplicationExecResponse], error)
 	VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error)
+	UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error)
+	GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error)
 	// VDiff API
 	VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error)
 	// ResetReplication makes the target not replicating
@@ -1531,6 +1585,12 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		connect.WithSchema(tabletManagerMethods.ByName("StartReplication")),
 		connect.WithHandlerOptions(opts...),
 	)
+	tabletManagerRestartReplicationHandler := connect.NewUnaryHandler(
+		TabletManagerRestartReplicationProcedure,
+		svc.RestartReplication,
+		connect.WithSchema(tabletManagerMethods.ByName("RestartReplication")),
+		connect.WithHandlerOptions(opts...),
+	)
 	tabletManagerStartReplicationUntilAfterHandler := connect.NewUnaryHandler(
 		TabletManagerStartReplicationUntilAfterProcedure,
 		svc.StartReplicationUntilAfter,
@@ -1607,6 +1667,18 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		TabletManagerVReplicationWaitForPosProcedure,
 		svc.VReplicationWaitForPos,
 		connect.WithSchema(tabletManagerMethods.ByName("VReplicationWaitForPos")),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerUpdateSequenceTablesHandler := connect.NewUnaryHandler(
+		TabletManagerUpdateSequenceTablesProcedure,
+		svc.UpdateSequenceTables,
+		connect.WithSchema(tabletManagerMethods.ByName("UpdateSequenceTables")),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerGetMaxValueForSequencesHandler := connect.NewUnaryHandler(
+		TabletManagerGetMaxValueForSequencesProcedure,
+		svc.GetMaxValueForSequences,
+		connect.WithSchema(tabletManagerMethods.ByName("GetMaxValueForSequences")),
 		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerVDiffHandler := connect.NewUnaryHandler(
@@ -1795,6 +1867,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerStopReplicationMinimumHandler.ServeHTTP(w, r)
 		case TabletManagerStartReplicationProcedure:
 			tabletManagerStartReplicationHandler.ServeHTTP(w, r)
+		case TabletManagerRestartReplicationProcedure:
+			tabletManagerRestartReplicationHandler.ServeHTTP(w, r)
 		case TabletManagerStartReplicationUntilAfterProcedure:
 			tabletManagerStartReplicationUntilAfterHandler.ServeHTTP(w, r)
 		case TabletManagerGetReplicasProcedure:
@@ -1821,6 +1895,10 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerVReplicationExecHandler.ServeHTTP(w, r)
 		case TabletManagerVReplicationWaitForPosProcedure:
 			tabletManagerVReplicationWaitForPosHandler.ServeHTTP(w, r)
+		case TabletManagerUpdateSequenceTablesProcedure:
+			tabletManagerUpdateSequenceTablesHandler.ServeHTTP(w, r)
+		case TabletManagerGetMaxValueForSequencesProcedure:
+			tabletManagerGetMaxValueForSequencesHandler.ServeHTTP(w, r)
 		case TabletManagerVDiffProcedure:
 			tabletManagerVDiffHandler.ServeHTTP(w, r)
 		case TabletManagerResetReplicationProcedure:
@@ -2008,6 +2086,10 @@ func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *conn
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
 }
 
+func (UnimplementedTabletManagerHandler) RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestartReplication is not implemented"))
+}
+
 func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplicationUntilAfter is not implemented"))
 }
@@ -2058,6 +2140,14 @@ func (UnimplementedTabletManagerHandler) VReplicationExec(context.Context, *conn
 
 func (UnimplementedTabletManagerHandler) VReplicationWaitForPos(context.Context, *connect.Request[dev.VReplicationWaitForPosRequest]) (*connect.Response[dev.VReplicationWaitForPosResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.VReplicationWaitForPos is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) UpdateSequenceTables(context.Context, *connect.Request[dev.UpdateSequenceTablesRequest]) (*connect.Response[dev.UpdateSequenceTablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.UpdateSequenceTables is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) GetMaxValueForSequences(context.Context, *connect.Request[dev.GetMaxValueForSequencesRequest]) (*connect.Response[dev.GetMaxValueForSequencesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.GetMaxValueForSequences is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) VDiff(context.Context, *connect.Request[dev.VDiffRequest]) (*connect.Response[dev.VDiffResponse], error) {

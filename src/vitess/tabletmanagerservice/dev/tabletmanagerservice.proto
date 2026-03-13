@@ -129,6 +129,9 @@ service TabletManager {
   // StartReplication starts the mysql replication
   rpc StartReplication(vitess.tabletmanagerdata.dev.StartReplicationRequest) returns (vitess.tabletmanagerdata.dev.StartReplicationResponse) {};
 
+  // RestartReplication stops and then starts the mysql replication
+  rpc RestartReplication(vitess.tabletmanagerdata.dev.RestartReplicationRequest) returns (vitess.tabletmanagerdata.dev.RestartReplicationResponse) {};
+
   // StartReplicationUnitAfter starts the mysql replication until and including
   // the provided position
   rpc StartReplicationUntilAfter(vitess.tabletmanagerdata.dev.StartReplicationUntilAfterRequest) returns (vitess.tabletmanagerdata.dev.StartReplicationUntilAfterResponse) {};
@@ -148,6 +151,8 @@ service TabletManager {
   rpc ValidateVReplicationPermissions(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsRequest) returns(vitess.tabletmanagerdata.dev.ValidateVReplicationPermissionsResponse) {};
   rpc VReplicationExec(vitess.tabletmanagerdata.dev.VReplicationExecRequest) returns(vitess.tabletmanagerdata.dev.VReplicationExecResponse) {};
   rpc VReplicationWaitForPos(vitess.tabletmanagerdata.dev.VReplicationWaitForPosRequest) returns(vitess.tabletmanagerdata.dev.VReplicationWaitForPosResponse) {};
+  rpc UpdateSequenceTables(vitess.tabletmanagerdata.dev.UpdateSequenceTablesRequest) returns(vitess.tabletmanagerdata.dev.UpdateSequenceTablesResponse) {};
+  rpc GetMaxValueForSequences(vitess.tabletmanagerdata.dev.GetMaxValueForSequencesRequest) returns(vitess.tabletmanagerdata.dev.GetMaxValueForSequencesResponse) {};
 
   // VDiff API
   rpc VDiff(vitess.tabletmanagerdata.dev.VDiffRequest) returns(vitess.tabletmanagerdata.dev.VDiffResponse) {};

@@ -220,6 +220,9 @@ const (
 	// VtctldMaterializeCreateProcedure is the fully-qualified name of the Vtctld's MaterializeCreate
 	// RPC.
 	VtctldMaterializeCreateProcedure = "/vtctlservice.Vtctld/MaterializeCreate"
+	// VtctldWorkflowAddTablesProcedure is the fully-qualified name of the Vtctld's WorkflowAddTables
+	// RPC.
+	VtctldWorkflowAddTablesProcedure = "/vtctlservice.Vtctld/WorkflowAddTables"
 	// VtctldMigrateCreateProcedure is the fully-qualified name of the Vtctld's MigrateCreate RPC.
 	VtctldMigrateCreateProcedure = "/vtctlservice.Vtctld/MigrateCreate"
 	// VtctldMountRegisterProcedure is the fully-qualified name of the Vtctld's MountRegister RPC.
@@ -287,6 +290,9 @@ const (
 	// VtctldSetShardTabletControlProcedure is the fully-qualified name of the Vtctld's
 	// SetShardTabletControl RPC.
 	VtctldSetShardTabletControlProcedure = "/vtctlservice.Vtctld/SetShardTabletControl"
+	// VtctldSetVtorcEmergencyReparentProcedure is the fully-qualified name of the Vtctld's
+	// SetVtorcEmergencyReparent RPC.
+	VtctldSetVtorcEmergencyReparentProcedure = "/vtctlservice.Vtctld/SetVtorcEmergencyReparent"
 	// VtctldSetWritableProcedure is the fully-qualified name of the Vtctld's SetWritable RPC.
 	VtctldSetWritableProcedure = "/vtctlservice.Vtctld/SetWritable"
 	// VtctldShardReplicationAddProcedure is the fully-qualified name of the Vtctld's
@@ -607,6 +613,8 @@ type VtctldClient interface {
 	// MaterializeCreate creates a workflow to materialize one or more tables
 	// from a source keyspace to a target keyspace using a provided expressions.
 	MaterializeCreate(context.Context, *connect.Request[dev.MaterializeCreateRequest]) (*connect.Response[dev.MaterializeCreateResponse], error)
+	// WorkflowAddTables adds tables to the existing materialize/movetables workflow.
+	WorkflowAddTables(context.Context, *connect.Request[dev.WorkflowAddTablesRequest]) (*connect.Response[dev.WorkflowAddTablesResponse], error)
 	// MigrateCreate creates a workflow which migrates one or more tables from an
 	// external cluster into Vitess.
 	MigrateCreate(context.Context, *connect.Request[dev.MigrateCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -693,6 +701,8 @@ type VtctldClient interface {
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
 	SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error)
+	// SetVtorcEmergencyReparent enables or disables the use of EmergencyReparentShard in VTOrc recoveries for a given keyspace or keyspace/shard.
+	SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
 	SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
@@ -1203,6 +1213,12 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			connect.WithSchema(vtctldMethods.ByName("MaterializeCreate")),
 			connect.WithClientOptions(opts...),
 		),
+		workflowAddTables: connect.NewClient[dev.WorkflowAddTablesRequest, dev.WorkflowAddTablesResponse](
+			httpClient,
+			baseURL+VtctldWorkflowAddTablesProcedure,
+			connect.WithSchema(vtctldMethods.ByName("WorkflowAddTables")),
+			connect.WithClientOptions(opts...),
+		),
 		migrateCreate: connect.NewClient[dev.MigrateCreateRequest, dev.WorkflowStatusResponse](
 			httpClient,
 			baseURL+VtctldMigrateCreateProcedure,
@@ -1363,6 +1379,12 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			httpClient,
 			baseURL+VtctldSetShardTabletControlProcedure,
 			connect.WithSchema(vtctldMethods.ByName("SetShardTabletControl")),
+			connect.WithClientOptions(opts...),
+		),
+		setVtorcEmergencyReparent: connect.NewClient[dev.SetVtorcEmergencyReparentRequest, dev.SetVtorcEmergencyReparentResponse](
+			httpClient,
+			baseURL+VtctldSetVtorcEmergencyReparentProcedure,
+			connect.WithSchema(vtctldMethods.ByName("SetVtorcEmergencyReparent")),
 			connect.WithClientOptions(opts...),
 		),
 		setWritable: connect.NewClient[dev.SetWritableRequest, dev.SetWritableResponse](
@@ -1630,6 +1652,7 @@ type vtctldClient struct {
 	lookupVindexExternalize     *connect.Client[dev.LookupVindexExternalizeRequest, dev.LookupVindexExternalizeResponse]
 	lookupVindexInternalize     *connect.Client[dev.LookupVindexInternalizeRequest, dev.LookupVindexInternalizeResponse]
 	materializeCreate           *connect.Client[dev.MaterializeCreateRequest, dev.MaterializeCreateResponse]
+	workflowAddTables           *connect.Client[dev.WorkflowAddTablesRequest, dev.WorkflowAddTablesResponse]
 	migrateCreate               *connect.Client[dev.MigrateCreateRequest, dev.WorkflowStatusResponse]
 	mountRegister               *connect.Client[dev.MountRegisterRequest, dev.MountRegisterResponse]
 	mountUnregister             *connect.Client[dev.MountUnregisterRequest, dev.MountUnregisterResponse]
@@ -1657,6 +1680,7 @@ type vtctldClient struct {
 	setKeyspaceDurabilityPolicy *connect.Client[dev.SetKeyspaceDurabilityPolicyRequest, dev.SetKeyspaceDurabilityPolicyResponse]
 	setShardIsPrimaryServing    *connect.Client[dev.SetShardIsPrimaryServingRequest, dev.SetShardIsPrimaryServingResponse]
 	setShardTabletControl       *connect.Client[dev.SetShardTabletControlRequest, dev.SetShardTabletControlResponse]
+	setVtorcEmergencyReparent   *connect.Client[dev.SetVtorcEmergencyReparentRequest, dev.SetVtorcEmergencyReparentResponse]
 	setWritable                 *connect.Client[dev.SetWritableRequest, dev.SetWritableResponse]
 	shardReplicationAdd         *connect.Client[dev.ShardReplicationAddRequest, dev.ShardReplicationAddResponse]
 	shardReplicationFix         *connect.Client[dev.ShardReplicationFixRequest, dev.ShardReplicationFixResponse]
@@ -2031,6 +2055,11 @@ func (c *vtctldClient) MaterializeCreate(ctx context.Context, req *connect.Reque
 	return c.materializeCreate.CallUnary(ctx, req)
 }
 
+// WorkflowAddTables calls vtctlservice.Vtctld.WorkflowAddTables.
+func (c *vtctldClient) WorkflowAddTables(ctx context.Context, req *connect.Request[dev.WorkflowAddTablesRequest]) (*connect.Response[dev.WorkflowAddTablesResponse], error) {
+	return c.workflowAddTables.CallUnary(ctx, req)
+}
+
 // MigrateCreate calls vtctlservice.Vtctld.MigrateCreate.
 func (c *vtctldClient) MigrateCreate(ctx context.Context, req *connect.Request[dev.MigrateCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
 	return c.migrateCreate.CallUnary(ctx, req)
@@ -2164,6 +2193,11 @@ func (c *vtctldClient) SetShardIsPrimaryServing(ctx context.Context, req *connec
 // SetShardTabletControl calls vtctlservice.Vtctld.SetShardTabletControl.
 func (c *vtctldClient) SetShardTabletControl(ctx context.Context, req *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error) {
 	return c.setShardTabletControl.CallUnary(ctx, req)
+}
+
+// SetVtorcEmergencyReparent calls vtctlservice.Vtctld.SetVtorcEmergencyReparent.
+func (c *vtctldClient) SetVtorcEmergencyReparent(ctx context.Context, req *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error) {
+	return c.setVtorcEmergencyReparent.CallUnary(ctx, req)
 }
 
 // SetWritable calls vtctlservice.Vtctld.SetWritable.
@@ -2498,6 +2532,8 @@ type VtctldHandler interface {
 	// MaterializeCreate creates a workflow to materialize one or more tables
 	// from a source keyspace to a target keyspace using a provided expressions.
 	MaterializeCreate(context.Context, *connect.Request[dev.MaterializeCreateRequest]) (*connect.Response[dev.MaterializeCreateResponse], error)
+	// WorkflowAddTables adds tables to the existing materialize/movetables workflow.
+	WorkflowAddTables(context.Context, *connect.Request[dev.WorkflowAddTablesRequest]) (*connect.Response[dev.WorkflowAddTablesResponse], error)
 	// MigrateCreate creates a workflow which migrates one or more tables from an
 	// external cluster into Vitess.
 	MigrateCreate(context.Context, *connect.Request[dev.MigrateCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error)
@@ -2584,6 +2620,8 @@ type VtctldHandler interface {
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
 	SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error)
+	// SetVtorcEmergencyReparent enables or disables the use of EmergencyReparentShard in VTOrc recoveries for a given keyspace or keyspace/shard.
+	SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
 	SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
@@ -3090,6 +3128,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		connect.WithSchema(vtctldMethods.ByName("MaterializeCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vtctldWorkflowAddTablesHandler := connect.NewUnaryHandler(
+		VtctldWorkflowAddTablesProcedure,
+		svc.WorkflowAddTables,
+		connect.WithSchema(vtctldMethods.ByName("WorkflowAddTables")),
+		connect.WithHandlerOptions(opts...),
+	)
 	vtctldMigrateCreateHandler := connect.NewUnaryHandler(
 		VtctldMigrateCreateProcedure,
 		svc.MigrateCreate,
@@ -3250,6 +3294,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		VtctldSetShardTabletControlProcedure,
 		svc.SetShardTabletControl,
 		connect.WithSchema(vtctldMethods.ByName("SetShardTabletControl")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vtctldSetVtorcEmergencyReparentHandler := connect.NewUnaryHandler(
+		VtctldSetVtorcEmergencyReparentProcedure,
+		svc.SetVtorcEmergencyReparent,
+		connect.WithSchema(vtctldMethods.ByName("SetVtorcEmergencyReparent")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vtctldSetWritableHandler := connect.NewUnaryHandler(
@@ -3582,6 +3632,8 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldLookupVindexInternalizeHandler.ServeHTTP(w, r)
 		case VtctldMaterializeCreateProcedure:
 			vtctldMaterializeCreateHandler.ServeHTTP(w, r)
+		case VtctldWorkflowAddTablesProcedure:
+			vtctldWorkflowAddTablesHandler.ServeHTTP(w, r)
 		case VtctldMigrateCreateProcedure:
 			vtctldMigrateCreateHandler.ServeHTTP(w, r)
 		case VtctldMountRegisterProcedure:
@@ -3636,6 +3688,8 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldSetShardIsPrimaryServingHandler.ServeHTTP(w, r)
 		case VtctldSetShardTabletControlProcedure:
 			vtctldSetShardTabletControlHandler.ServeHTTP(w, r)
+		case VtctldSetVtorcEmergencyReparentProcedure:
+			vtctldSetVtorcEmergencyReparentHandler.ServeHTTP(w, r)
 		case VtctldSetWritableProcedure:
 			vtctldSetWritableHandler.ServeHTTP(w, r)
 		case VtctldShardReplicationAddProcedure:
@@ -3981,6 +4035,10 @@ func (UnimplementedVtctldHandler) MaterializeCreate(context.Context, *connect.Re
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MaterializeCreate is not implemented"))
 }
 
+func (UnimplementedVtctldHandler) WorkflowAddTables(context.Context, *connect.Request[dev.WorkflowAddTablesRequest]) (*connect.Response[dev.WorkflowAddTablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.WorkflowAddTables is not implemented"))
+}
+
 func (UnimplementedVtctldHandler) MigrateCreate(context.Context, *connect.Request[dev.MigrateCreateRequest]) (*connect.Response[dev.WorkflowStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.MigrateCreate is not implemented"))
 }
@@ -4087,6 +4145,10 @@ func (UnimplementedVtctldHandler) SetShardIsPrimaryServing(context.Context, *con
 
 func (UnimplementedVtctldHandler) SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardTabletControl is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetVtorcEmergencyReparent is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error) {
