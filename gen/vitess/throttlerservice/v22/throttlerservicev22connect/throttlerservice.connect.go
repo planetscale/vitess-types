@@ -40,7 +40,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ThrottlerName is the fully-qualified name of the Throttler service.
-	ThrottlerName = "vitess.throttlerservice.v22.Throttler"
+	ThrottlerName = "throttlerservice.Throttler"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -52,21 +52,21 @@ const (
 // period.
 const (
 	// ThrottlerMaxRatesProcedure is the fully-qualified name of the Throttler's MaxRates RPC.
-	ThrottlerMaxRatesProcedure = "/vitess.throttlerservice.v22.Throttler/MaxRates"
+	ThrottlerMaxRatesProcedure = "/throttlerservice.Throttler/MaxRates"
 	// ThrottlerSetMaxRateProcedure is the fully-qualified name of the Throttler's SetMaxRate RPC.
-	ThrottlerSetMaxRateProcedure = "/vitess.throttlerservice.v22.Throttler/SetMaxRate"
+	ThrottlerSetMaxRateProcedure = "/throttlerservice.Throttler/SetMaxRate"
 	// ThrottlerGetConfigurationProcedure is the fully-qualified name of the Throttler's
 	// GetConfiguration RPC.
-	ThrottlerGetConfigurationProcedure = "/vitess.throttlerservice.v22.Throttler/GetConfiguration"
+	ThrottlerGetConfigurationProcedure = "/throttlerservice.Throttler/GetConfiguration"
 	// ThrottlerUpdateConfigurationProcedure is the fully-qualified name of the Throttler's
 	// UpdateConfiguration RPC.
-	ThrottlerUpdateConfigurationProcedure = "/vitess.throttlerservice.v22.Throttler/UpdateConfiguration"
+	ThrottlerUpdateConfigurationProcedure = "/throttlerservice.Throttler/UpdateConfiguration"
 	// ThrottlerResetConfigurationProcedure is the fully-qualified name of the Throttler's
 	// ResetConfiguration RPC.
-	ThrottlerResetConfigurationProcedure = "/vitess.throttlerservice.v22.Throttler/ResetConfiguration"
+	ThrottlerResetConfigurationProcedure = "/throttlerservice.Throttler/ResetConfiguration"
 )
 
-// ThrottlerClient is a client for the vitess.throttlerservice.v22.Throttler service.
+// ThrottlerClient is a client for the throttlerservice.Throttler service.
 type ThrottlerClient interface {
 	// MaxRates returns the current max rate for each throttler of the process.
 	MaxRates(context.Context, *connect.Request[v22.MaxRatesRequest]) (*connect.Response[v22.MaxRatesResponse], error)
@@ -88,7 +88,7 @@ type ThrottlerClient interface {
 	ResetConfiguration(context.Context, *connect.Request[v22.ResetConfigurationRequest]) (*connect.Response[v22.ResetConfigurationResponse], error)
 }
 
-// NewThrottlerClient constructs a client for the vitess.throttlerservice.v22.Throttler service. By
+// NewThrottlerClient constructs a client for the throttlerservice.Throttler service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -141,32 +141,32 @@ type throttlerClient struct {
 	resetConfiguration  *connect.Client[v22.ResetConfigurationRequest, v22.ResetConfigurationResponse]
 }
 
-// MaxRates calls vitess.throttlerservice.v22.Throttler.MaxRates.
+// MaxRates calls throttlerservice.Throttler.MaxRates.
 func (c *throttlerClient) MaxRates(ctx context.Context, req *connect.Request[v22.MaxRatesRequest]) (*connect.Response[v22.MaxRatesResponse], error) {
 	return c.maxRates.CallUnary(ctx, req)
 }
 
-// SetMaxRate calls vitess.throttlerservice.v22.Throttler.SetMaxRate.
+// SetMaxRate calls throttlerservice.Throttler.SetMaxRate.
 func (c *throttlerClient) SetMaxRate(ctx context.Context, req *connect.Request[v22.SetMaxRateRequest]) (*connect.Response[v22.SetMaxRateResponse], error) {
 	return c.setMaxRate.CallUnary(ctx, req)
 }
 
-// GetConfiguration calls vitess.throttlerservice.v22.Throttler.GetConfiguration.
+// GetConfiguration calls throttlerservice.Throttler.GetConfiguration.
 func (c *throttlerClient) GetConfiguration(ctx context.Context, req *connect.Request[v22.GetConfigurationRequest]) (*connect.Response[v22.GetConfigurationResponse], error) {
 	return c.getConfiguration.CallUnary(ctx, req)
 }
 
-// UpdateConfiguration calls vitess.throttlerservice.v22.Throttler.UpdateConfiguration.
+// UpdateConfiguration calls throttlerservice.Throttler.UpdateConfiguration.
 func (c *throttlerClient) UpdateConfiguration(ctx context.Context, req *connect.Request[v22.UpdateConfigurationRequest]) (*connect.Response[v22.UpdateConfigurationResponse], error) {
 	return c.updateConfiguration.CallUnary(ctx, req)
 }
 
-// ResetConfiguration calls vitess.throttlerservice.v22.Throttler.ResetConfiguration.
+// ResetConfiguration calls throttlerservice.Throttler.ResetConfiguration.
 func (c *throttlerClient) ResetConfiguration(ctx context.Context, req *connect.Request[v22.ResetConfigurationRequest]) (*connect.Response[v22.ResetConfigurationResponse], error) {
 	return c.resetConfiguration.CallUnary(ctx, req)
 }
 
-// ThrottlerHandler is an implementation of the vitess.throttlerservice.v22.Throttler service.
+// ThrottlerHandler is an implementation of the throttlerservice.Throttler service.
 type ThrottlerHandler interface {
 	// MaxRates returns the current max rate for each throttler of the process.
 	MaxRates(context.Context, *connect.Request[v22.MaxRatesRequest]) (*connect.Response[v22.MaxRatesResponse], error)
@@ -225,7 +225,7 @@ func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect.HandlerOption) (s
 		connect.WithSchema(throttlerMethods.ByName("ResetConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/vitess.throttlerservice.v22.Throttler/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/throttlerservice.Throttler/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ThrottlerMaxRatesProcedure:
 			throttlerMaxRatesHandler.ServeHTTP(w, r)
@@ -247,21 +247,21 @@ func NewThrottlerHandler(svc ThrottlerHandler, opts ...connect.HandlerOption) (s
 type UnimplementedThrottlerHandler struct{}
 
 func (UnimplementedThrottlerHandler) MaxRates(context.Context, *connect.Request[v22.MaxRatesRequest]) (*connect.Response[v22.MaxRatesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.throttlerservice.v22.Throttler.MaxRates is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.MaxRates is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) SetMaxRate(context.Context, *connect.Request[v22.SetMaxRateRequest]) (*connect.Response[v22.SetMaxRateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.throttlerservice.v22.Throttler.SetMaxRate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.SetMaxRate is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) GetConfiguration(context.Context, *connect.Request[v22.GetConfigurationRequest]) (*connect.Response[v22.GetConfigurationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.throttlerservice.v22.Throttler.GetConfiguration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.GetConfiguration is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) UpdateConfiguration(context.Context, *connect.Request[v22.UpdateConfigurationRequest]) (*connect.Response[v22.UpdateConfigurationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.throttlerservice.v22.Throttler.UpdateConfiguration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.UpdateConfiguration is not implemented"))
 }
 
 func (UnimplementedThrottlerHandler) ResetConfiguration(context.Context, *connect.Request[v22.ResetConfigurationRequest]) (*connect.Response[v22.ResetConfigurationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vitess.throttlerservice.v22.Throttler.ResetConfiguration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("throttlerservice.Throttler.ResetConfiguration is not implemented"))
 }
