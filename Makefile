@@ -28,7 +28,7 @@ $(BIN)/protoc-gen-go: go.mod | $(BIN)
 	$(TOOL_INSTALL) google.golang.org/protobuf/cmd/protoc-gen-go
 
 $(BIN)/protoc-gen-go-vtproto: Makefile | $(BIN)
-	$(TOOL_INSTALL) github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@v0.6.0
+	$(TOOL_INSTALL) github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@v0.6.1-0.20241121165744-79df5c4772f2
 
 $(BIN)/protoc-gen-connect-go: go.mod | $(BIN)
 	$(TOOL_INSTALL) connectrpc.com/connect/cmd/protoc-gen-connect-go
