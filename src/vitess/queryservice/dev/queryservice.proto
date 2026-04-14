@@ -117,4 +117,7 @@ service Query {
 
   // GetSchema returns the schema information.
   rpc GetSchema(vitess.query.dev.GetSchemaRequest) returns (stream vitess.query.dev.GetSchemaResponse) {};
+
+  // BinlogDumpGTID streams raw binlog events from MySQL using COM_BINLOG_DUMP_GTID (GTID-based).
+  rpc BinlogDumpGTID(vitess.binlogdata.dev.BinlogDumpGTIDRequest) returns (stream vitess.binlogdata.dev.BinlogDumpResponse) {};
 }

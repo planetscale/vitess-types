@@ -1,0 +1,389 @@
+/*
+Copyright 2019 The Vitess Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// This package contains a service allowing you to use vtctld as a
+// proxy for vt commands.
+
+syntax = "proto3";
+option go_package = "github.com/planetscale/vitess-types/gen/vitess/vtctlservice/v24;vtctlservicev24";
+
+package vitess.vtctlservice.v24;
+
+import "vitess/vtctldata/v24/vtctldata.proto";
+
+// Service Vtctl allows you to call vt commands through gRPC.
+service Vtctl {
+  rpc ExecuteVtctlCommand (vitess.vtctldata.v24.ExecuteVtctlCommandRequest) returns (stream vitess.vtctldata.v24.ExecuteVtctlCommandResponse) {};
+}
+
+// Service Vtctld exposes gRPC endpoints for each vt command.
+service Vtctld {
+  // AddCellInfo registers a local topology service in a new cell by creating
+  // the CellInfo with the provided parameters.
+  rpc AddCellInfo(vitess.vtctldata.v24.AddCellInfoRequest) returns (vitess.vtctldata.v24.AddCellInfoResponse) {};
+  // AddCellsAlias defines a group of cells that can be referenced by a single
+  // name (the alias).
+  //
+  // When routing query traffic, replica/rdonly traffic can be routed across
+  // cells within the group (alias). Only primary traffic can be routed across
+  // cells not in the same group (alias).
+  rpc AddCellsAlias(vitess.vtctldata.v24.AddCellsAliasRequest) returns (vitess.vtctldata.v24.AddCellsAliasResponse) {}; 
+  // ApplyRoutingRules applies the VSchema routing rules.
+  rpc ApplyRoutingRules(vitess.vtctldata.v24.ApplyRoutingRulesRequest) returns (vitess.vtctldata.v24.ApplyRoutingRulesResponse) {};
+  // ApplySchema applies a schema to a keyspace.
+  rpc ApplySchema(vitess.vtctldata.v24.ApplySchemaRequest) returns (vitess.vtctldata.v24.ApplySchemaResponse) {};
+  // ApplyKeyspaceRoutingRules applies the VSchema keyspace routing rules.
+  rpc ApplyKeyspaceRoutingRules(vitess.vtctldata.v24.ApplyKeyspaceRoutingRulesRequest) returns (vitess.vtctldata.v24.ApplyKeyspaceRoutingRulesResponse) {};
+  // ApplyShardRoutingRules applies the VSchema shard routing rules.
+  rpc ApplyShardRoutingRules(vitess.vtctldata.v24.ApplyShardRoutingRulesRequest) returns (vitess.vtctldata.v24.ApplyShardRoutingRulesResponse) {};
+  // ApplyVSchema applies a vschema to a keyspace.
+  rpc ApplyVSchema(vitess.vtctldata.v24.ApplyVSchemaRequest) returns (vitess.vtctldata.v24.ApplyVSchemaResponse) {};
+  // Backup uses the BackupEngine and BackupStorage services on the specified
+  // tablet to create and store a new backup.
+  rpc Backup(vitess.vtctldata.v24.BackupRequest) returns (stream vitess.vtctldata.v24.BackupResponse) {};
+  // BackupShard chooses a tablet in the shard and uses it to create a backup.
+  rpc BackupShard(vitess.vtctldata.v24.BackupShardRequest) returns (stream vitess.vtctldata.v24.BackupResponse) {};
+  // CancelSchemaMigration cancels one or all migrations, terminating any running ones as needed.
+  rpc CancelSchemaMigration(vitess.vtctldata.v24.CancelSchemaMigrationRequest) returns (vitess.vtctldata.v24.CancelSchemaMigrationResponse) {};
+  // ChangeTabletTags changes the tags of the specified tablet, if possible.
+  rpc ChangeTabletTags(vitess.vtctldata.v24.ChangeTabletTagsRequest) returns (vitess.vtctldata.v24.ChangeTabletTagsResponse) {};
+  // ChangeTabletType changes the db type for the specified tablet, if possible.
+  // This is used primarily to arrange replicas, and it will not convert a
+  // primary. For that, use InitShardPrimary.
+  //
+  // NOTE: This command automatically updates the serving graph.
+  rpc ChangeTabletType(vitess.vtctldata.v24.ChangeTabletTypeRequest) returns (vitess.vtctldata.v24.ChangeTabletTypeResponse) {};
+  // CheckThrottler issues a 'check' on a tablet's throttler
+  rpc CheckThrottler(vitess.vtctldata.v24.CheckThrottlerRequest) returns (vitess.vtctldata.v24.CheckThrottlerResponse) {};
+  // CleanupSchemaMigration marks a schema migration as ready for artifact cleanup.
+  rpc CleanupSchemaMigration(vitess.vtctldata.v24.CleanupSchemaMigrationRequest) returns (vitess.vtctldata.v24.CleanupSchemaMigrationResponse) {};
+  // CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
+  rpc CompleteSchemaMigration(vitess.vtctldata.v24.CompleteSchemaMigrationRequest) returns (vitess.vtctldata.v24.CompleteSchemaMigrationResponse) {};
+  // CompleteSchemaMigration completes one or all migrations executed with --postpone-completion.
+  rpc ConcludeTransaction(vitess.vtctldata.v24.ConcludeTransactionRequest) returns (vitess.vtctldata.v24.ConcludeTransactionResponse) {};
+  // CopySchemaShard copies the schema from a source tablet to all tablets in a keyspace/shard.
+  rpc CopySchemaShard(vitess.vtctldata.v24.CopySchemaShardRequest) returns (vitess.vtctldata.v24.CopySchemaShardResponse) {};
+  // CreateKeyspace creates the specified keyspace in the topology. For a
+  // SNAPSHOT keyspace, the request must specify the name of a base keyspace,
+  // as well as a snapshot time.
+  rpc CreateKeyspace(vitess.vtctldata.v24.CreateKeyspaceRequest) returns (vitess.vtctldata.v24.CreateKeyspaceResponse) {};
+  // CreateShard creates the specified shard in the topology.
+  rpc CreateShard(vitess.vtctldata.v24.CreateShardRequest) returns (vitess.vtctldata.v24.CreateShardResponse) {};
+  // DeleteCellInfo deletes the CellInfo for the provided cell. The cell cannot
+  // be referenced by any Shard record in the topology.
+  rpc DeleteCellInfo(vitess.vtctldata.v24.DeleteCellInfoRequest) returns (vitess.vtctldata.v24.DeleteCellInfoResponse) {};
+  // DeleteCellsAlias deletes the CellsAlias for the provided alias.
+  rpc DeleteCellsAlias(vitess.vtctldata.v24.DeleteCellsAliasRequest) returns (vitess.vtctldata.v24.DeleteCellsAliasResponse) {};
+  // DeleteKeyspace deletes the specified keyspace from the topology. In
+  // recursive mode, it also recursively deletes all shards in the keyspace.
+  // Otherwise, the keyspace must be empty (have no shards), or DeleteKeyspace
+  // returns an error.
+  rpc DeleteKeyspace(vitess.vtctldata.v24.DeleteKeyspaceRequest) returns (vitess.vtctldata.v24.DeleteKeyspaceResponse) {};
+  // DeleteShards deletes the specified shards from the topology. In recursive
+  // mode, it also deletes all tablets belonging to the shard. Otherwise, the
+  // shard must be empty (have no tablets) or DeleteShards returns an error for
+  // that shard.
+  rpc DeleteShards(vitess.vtctldata.v24.DeleteShardsRequest) returns (vitess.vtctldata.v24.DeleteShardsResponse) {};
+  // DeleteSrvVSchema deletes the SrvVSchema object in the specified cell.
+  rpc DeleteSrvVSchema(vitess.vtctldata.v24.DeleteSrvVSchemaRequest) returns (vitess.vtctldata.v24.DeleteSrvVSchemaResponse) {};
+  // DeleteTablets deletes one or more tablets from the topology.
+  rpc DeleteTablets(vitess.vtctldata.v24.DeleteTabletsRequest) returns (vitess.vtctldata.v24.DeleteTabletsResponse) {};
+  // EmergencyReparentShard reparents the shard to the new primary. It assumes
+  // the old primary is dead or otherwise not responding.
+  rpc EmergencyReparentShard(vitess.vtctldata.v24.EmergencyReparentShardRequest) returns (vitess.vtctldata.v24.EmergencyReparentShardResponse) {};
+  // ExecuteFetchAsApp executes a SQL query on the remote tablet as the App user.
+  rpc ExecuteFetchAsApp(vitess.vtctldata.v24.ExecuteFetchAsAppRequest) returns (vitess.vtctldata.v24.ExecuteFetchAsAppResponse) {};
+  // ExecuteFetchAsDBA executes a SQL query on the remote tablet as the DBA user.
+  rpc ExecuteFetchAsDBA(vitess.vtctldata.v24.ExecuteFetchAsDBARequest) returns (vitess.vtctldata.v24.ExecuteFetchAsDBAResponse) {};
+  // ExecuteHook runs the hook on the tablet.
+  rpc ExecuteHook(vitess.vtctldata.v24.ExecuteHookRequest) returns (vitess.vtctldata.v24.ExecuteHookResponse);
+  // ExecuteMultiFetchAsDBA executes one or more SQL queries on the remote tablet as the DBA user.
+  rpc ExecuteMultiFetchAsDBA(vitess.vtctldata.v24.ExecuteMultiFetchAsDBARequest) returns (vitess.vtctldata.v24.ExecuteMultiFetchAsDBAResponse) {};
+  // FindAllShardsInKeyspace returns a map of shard names to shard references
+  // for a given keyspace.
+  rpc FindAllShardsInKeyspace(vitess.vtctldata.v24.FindAllShardsInKeyspaceRequest) returns (vitess.vtctldata.v24.FindAllShardsInKeyspaceResponse) {};
+  // ForceCutOverSchemaMigration marks a schema migration for forced cut-over.
+  rpc ForceCutOverSchemaMigration(vitess.vtctldata.v24.ForceCutOverSchemaMigrationRequest) returns (vitess.vtctldata.v24.ForceCutOverSchemaMigrationResponse) {};
+  // GetBackups returns all the backups for a shard.
+  rpc GetBackups(vitess.vtctldata.v24.GetBackupsRequest) returns (vitess.vtctldata.v24.GetBackupsResponse) {};
+  // GetCellInfo returns the information for a cell.
+  rpc GetCellInfo(vitess.vtctldata.v24.GetCellInfoRequest) returns (vitess.vtctldata.v24.GetCellInfoResponse) {};
+  // GetCellInfoNames returns all the cells for which we have a CellInfo object,
+  // meaning we have a topology service registered.
+  rpc GetCellInfoNames(vitess.vtctldata.v24.GetCellInfoNamesRequest) returns (vitess.vtctldata.v24.GetCellInfoNamesResponse) {};
+  // GetCellsAliases returns a mapping of cell alias to cells identified by that
+  // alias.
+  rpc GetCellsAliases(vitess.vtctldata.v24.GetCellsAliasesRequest) returns (vitess.vtctldata.v24.GetCellsAliasesResponse) {};
+  // GetFullStatus returns the full status of MySQL including the replication information, semi-sync information, GTID information among others
+  rpc GetFullStatus(vitess.vtctldata.v24.GetFullStatusRequest) returns (vitess.vtctldata.v24.GetFullStatusResponse) {};
+  // GetKeyspace reads the given keyspace from the topo and returns it.
+  rpc GetKeyspace(vitess.vtctldata.v24.GetKeyspaceRequest) returns (vitess.vtctldata.v24.GetKeyspaceResponse) {};
+  // GetKeyspaces returns the keyspace struct of all keyspaces in the topo.
+  rpc GetKeyspaces(vitess.vtctldata.v24.GetKeyspacesRequest) returns (vitess.vtctldata.v24.GetKeyspacesResponse) {};
+  // GetKeyspaceRoutingRules returns the VSchema keyspace routing rules.
+  rpc GetKeyspaceRoutingRules(vitess.vtctldata.v24.GetKeyspaceRoutingRulesRequest) returns (vitess.vtctldata.v24.GetKeyspaceRoutingRulesResponse) {};
+  // GetPermissions returns the permissions set on the remote tablet.
+  rpc GetPermissions(vitess.vtctldata.v24.GetPermissionsRequest) returns (vitess.vtctldata.v24.GetPermissionsResponse) {};
+  // GetRoutingRules returns the VSchema routing rules.
+  rpc GetRoutingRules(vitess.vtctldata.v24.GetRoutingRulesRequest) returns (vitess.vtctldata.v24.GetRoutingRulesResponse) {};
+  // GetSchema returns the schema for a tablet, or just the schema for the
+  // specified tables in that tablet.
+  rpc GetSchema(vitess.vtctldata.v24.GetSchemaRequest) returns (vitess.vtctldata.v24.GetSchemaResponse) {};
+  // GetSchemaMigrations returns one or more online schema migrations for the
+  // specified keyspace, analagous to `SHOW VITESS_MIGRATIONS`.
+  //
+  // Different fields in the request message result in different filtering
+  // behaviors. See the documentation on GetSchemaMigrationsRequest for details.
+  rpc GetSchemaMigrations(vitess.vtctldata.v24.GetSchemaMigrationsRequest) returns (vitess.vtctldata.v24.GetSchemaMigrationsResponse) {};
+  // GetShardReplication returns the replication graph for a shard in a cell.
+  rpc GetShardReplication(vitess.vtctldata.v24.GetShardReplicationRequest) returns (vitess.vtctldata.v24.GetShardReplicationResponse) {};
+  // GetShard returns information about a shard in the topology.
+  rpc GetShard(vitess.vtctldata.v24.GetShardRequest) returns (vitess.vtctldata.v24.GetShardResponse) {};
+  // GetShardRoutingRules returns the VSchema shard routing rules.
+  rpc GetShardRoutingRules(vitess.vtctldata.v24.GetShardRoutingRulesRequest) returns (vitess.vtctldata.v24.GetShardRoutingRulesResponse) {};
+  // GetSrvKeyspaceNames returns a mapping of cell name to the keyspaces served
+  // in that cell.
+  rpc GetSrvKeyspaceNames(vitess.vtctldata.v24.GetSrvKeyspaceNamesRequest) returns (vitess.vtctldata.v24.GetSrvKeyspaceNamesResponse) {};
+  // GetSrvKeyspaces returns the SrvKeyspaces for a keyspace in one or more
+  // cells.
+  rpc GetSrvKeyspaces (vitess.vtctldata.v24.GetSrvKeyspacesRequest) returns (vitess.vtctldata.v24.GetSrvKeyspacesResponse) {};
+  // UpdateThrottlerConfig updates the tablet throttler configuration
+  rpc UpdateThrottlerConfig(vitess.vtctldata.v24.UpdateThrottlerConfigRequest) returns (vitess.vtctldata.v24.UpdateThrottlerConfigResponse) {};
+  // GetSrvVSchema returns the SrvVSchema for a cell.
+  rpc GetSrvVSchema(vitess.vtctldata.v24.GetSrvVSchemaRequest) returns (vitess.vtctldata.v24.GetSrvVSchemaResponse) {};
+  // GetSrvVSchemas returns a mapping from cell name to SrvVSchema for all cells,
+  // optionally filtered by cell name.
+  rpc GetSrvVSchemas(vitess.vtctldata.v24.GetSrvVSchemasRequest) returns (vitess.vtctldata.v24.GetSrvVSchemasResponse) {};
+  // GetTablet returns information about a tablet.
+  rpc GetTablet(vitess.vtctldata.v24.GetTabletRequest) returns (vitess.vtctldata.v24.GetTabletResponse) {};
+  // GetTablets returns tablets, optionally filtered by keyspace and shard.
+  rpc GetTablets(vitess.vtctldata.v24.GetTabletsRequest) returns (vitess.vtctldata.v24.GetTabletsResponse) {};
+  // GetThrottlerStatus gets the status of a tablet throttler
+  rpc GetThrottlerStatus(vitess.vtctldata.v24.GetThrottlerStatusRequest) returns (vitess.vtctldata.v24.GetThrottlerStatusResponse) {};
+  // GetTopologyPath returns the topology cell at a given path.
+  rpc GetTopologyPath(vitess.vtctldata.v24.GetTopologyPathRequest) returns (vitess.vtctldata.v24.GetTopologyPathResponse) {};
+  // GetTransactionInfo reads a given transactions information.
+  rpc GetTransactionInfo(vitess.vtctldata.v24.GetTransactionInfoRequest) returns (vitess.vtctldata.v24.GetTransactionInfoResponse) {};
+  // GetTransactions returns the unresolved transactions for the request.
+  rpc GetUnresolvedTransactions(vitess.vtctldata.v24.GetUnresolvedTransactionsRequest) returns (vitess.vtctldata.v24.GetUnresolvedTransactionsResponse) {};
+  // GetVersion returns the version of a tablet from its debug vars.
+  rpc GetVersion(vitess.vtctldata.v24.GetVersionRequest) returns (vitess.vtctldata.v24.GetVersionResponse) {};
+  // GetVSchema returns the vschema for a keyspace.
+  rpc GetVSchema(vitess.vtctldata.v24.GetVSchemaRequest) returns (vitess.vtctldata.v24.GetVSchemaResponse) {};
+  // GetWorkflows returns a list of workflows for the given keyspace.
+  rpc GetWorkflows(vitess.vtctldata.v24.GetWorkflowsRequest) returns (vitess.vtctldata.v24.GetWorkflowsResponse) {};
+  // InitShardPrimary sets the initial primary for a shard. Will make all other
+  // tablets in the shard replicas of the provided primary.
+  //
+  // WARNING: This could cause data loss on an already replicating shard.
+  // PlannedReparentShard or EmergencyReparentShard should be used in those
+  // cases instead.
+  rpc InitShardPrimary(vitess.vtctldata.v24.InitShardPrimaryRequest) returns (vitess.vtctldata.v24.InitShardPrimaryResponse) {};
+  // LaunchSchemaMigration launches one or all migrations executed with --postpone-launch.
+  rpc LaunchSchemaMigration(vitess.vtctldata.v24.LaunchSchemaMigrationRequest) returns (vitess.vtctldata.v24.LaunchSchemaMigrationResponse) {};
+
+  rpc LookupVindexComplete(vitess.vtctldata.v24.LookupVindexCompleteRequest) returns (vitess.vtctldata.v24.LookupVindexCompleteResponse) {};
+  rpc LookupVindexCreate(vitess.vtctldata.v24.LookupVindexCreateRequest) returns (vitess.vtctldata.v24.LookupVindexCreateResponse) {};
+  rpc LookupVindexExternalize(vitess.vtctldata.v24.LookupVindexExternalizeRequest) returns (vitess.vtctldata.v24.LookupVindexExternalizeResponse) {};
+  rpc LookupVindexInternalize(vitess.vtctldata.v24.LookupVindexInternalizeRequest) returns (vitess.vtctldata.v24.LookupVindexInternalizeResponse) {};
+
+  // MaterializeCreate creates a workflow to materialize one or more tables
+  // from a source keyspace to a target keyspace using a provided expressions.
+  rpc MaterializeCreate(vitess.vtctldata.v24.MaterializeCreateRequest) returns (vitess.vtctldata.v24.MaterializeCreateResponse) {};
+
+  // WorkflowAddTables adds tables to the existing materialize/movetables workflow.
+  rpc WorkflowAddTables(vitess.vtctldata.v24.WorkflowAddTablesRequest) returns (vitess.vtctldata.v24.WorkflowAddTablesResponse) {};
+
+  // MigrateCreate creates a workflow which migrates one or more tables from an
+  // external cluster into Vitess.
+  rpc MigrateCreate(vitess.vtctldata.v24.MigrateCreateRequest) returns (vitess.vtctldata.v24.WorkflowStatusResponse) {};
+
+  // MountRegister registers a new external Vitess cluster.
+  rpc MountRegister(vitess.vtctldata.v24.MountRegisterRequest) returns (vitess.vtctldata.v24.MountRegisterResponse) {};
+  // MountUnregister unregisters an external Vitess cluster.
+  rpc MountUnregister(vitess.vtctldata.v24.MountUnregisterRequest) returns (vitess.vtctldata.v24.MountUnregisterResponse) {};
+  // MountShow returns information about an external Vitess cluster.
+  rpc MountShow(vitess.vtctldata.v24.MountShowRequest) returns (vitess.vtctldata.v24.MountShowResponse) {};
+  // MountList lists all registered external Vitess clusters.
+  rpc MountList(vitess.vtctldata.v24.MountListRequest) returns (vitess.vtctldata.v24.MountListResponse) {};
+
+  // MoveTablesCreate creates a workflow which moves one or more tables from a
+  // source keyspace to a target keyspace.
+  rpc MoveTablesCreate(vitess.vtctldata.v24.MoveTablesCreateRequest) returns (vitess.vtctldata.v24.WorkflowStatusResponse) {};
+  // MoveTablesComplete completes the move and cleans up the workflow and
+  // its related artifacts.
+  rpc MoveTablesComplete(vitess.vtctldata.v24.MoveTablesCompleteRequest) returns (vitess.vtctldata.v24.MoveTablesCompleteResponse) {};
+  // PingTablet checks that the specified tablet is awake and responding to RPCs.
+  // This command can be blocked by other in-flight operations.
+  rpc PingTablet(vitess.vtctldata.v24.PingTabletRequest) returns (vitess.vtctldata.v24.PingTabletResponse) {};
+  // PlannedReparentShard reparents the shard to the new primary, or away from
+  // an old primary. Both the old and new primaries need to be reachable and
+  // running.
+  //
+  // **NOTE**: The vtctld will not consider any replicas outside the cell the
+  // current shard primary is in for promotion unless NewPrimary is explicitly
+  // provided in the request.
+  rpc PlannedReparentShard(vitess.vtctldata.v24.PlannedReparentShardRequest) returns (vitess.vtctldata.v24.PlannedReparentShardResponse) {};
+  // RebuildKeyspaceGraph rebuilds the serving data for a keyspace.
+  //
+  // This may trigger an update to all connected clients.
+  rpc RebuildKeyspaceGraph(vitess.vtctldata.v24.RebuildKeyspaceGraphRequest) returns (vitess.vtctldata.v24.RebuildKeyspaceGraphResponse) {};
+  // RebuildVSchemaGraph rebuilds the per-cell SrvVSchema from the global
+  // VSchema objects in the provided cells (or all cells in the topo none
+  // provided).
+  rpc RebuildVSchemaGraph(vitess.vtctldata.v24.RebuildVSchemaGraphRequest) returns (vitess.vtctldata.v24.RebuildVSchemaGraphResponse) {};
+  // RefreshState reloads the tablet record on the specified tablet.
+  rpc RefreshState(vitess.vtctldata.v24.RefreshStateRequest) returns (vitess.vtctldata.v24.RefreshStateResponse) {};
+  // RefreshStateByShard calls RefreshState on all the tablets in the given shard.
+  rpc RefreshStateByShard(vitess.vtctldata.v24.RefreshStateByShardRequest) returns (vitess.vtctldata.v24.RefreshStateByShardResponse) {};
+  // ReloadSchema instructs the remote tablet to reload its schema.
+  rpc ReloadSchema(vitess.vtctldata.v24.ReloadSchemaRequest) returns (vitess.vtctldata.v24.ReloadSchemaResponse) {};
+  // ReloadSchemaKeyspace reloads the schema on all tablets in a keyspace.
+  rpc ReloadSchemaKeyspace(vitess.vtctldata.v24.ReloadSchemaKeyspaceRequest) returns (vitess.vtctldata.v24.ReloadSchemaKeyspaceResponse) {};
+  // ReloadSchemaShard reloads the schema on all tablets in a shard.
+  //
+  // In general, we don't always expect all replicas to be ready to reload, and
+  // the periodic schema reload makes them self-healing anyway. So, we do this
+  // on a best-effort basis, and log warnings for any tablets that fail to
+  // reload within the context deadline.
+  rpc ReloadSchemaShard(vitess.vtctldata.v24.ReloadSchemaShardRequest) returns (vitess.vtctldata.v24.ReloadSchemaShardResponse) {};
+  // RemoveBackup removes a backup from the BackupStorage used by vtctld.
+  rpc RemoveBackup(vitess.vtctldata.v24.RemoveBackupRequest) returns (vitess.vtctldata.v24.RemoveBackupResponse) {};
+  // RemoveKeyspaceCell removes the specified cell from the Cells list for all
+  // shards in the specified keyspace (by calling RemoveShardCell on every
+  // shard). It also removes the SrvKeyspace for that keyspace in that cell.
+  rpc RemoveKeyspaceCell(vitess.vtctldata.v24.RemoveKeyspaceCellRequest) returns (vitess.vtctldata.v24.RemoveKeyspaceCellResponse) {};
+  // RemoveShardCell removes the specified cell from the specified shard's Cells
+  // list.
+  rpc RemoveShardCell(vitess.vtctldata.v24.RemoveShardCellRequest) returns (vitess.vtctldata.v24.RemoveShardCellResponse) {};
+  // ReparentTablet reparents a tablet to the current primary in the shard. This
+  // only works if the current replica position matches the last known reparent
+  // action.
+  rpc ReparentTablet(vitess.vtctldata.v24.ReparentTabletRequest) returns (vitess.vtctldata.v24.ReparentTabletResponse) {};
+  // ReshardCreate creates a workflow to reshard a keyspace.
+  rpc ReshardCreate(vitess.vtctldata.v24.ReshardCreateRequest) returns (vitess.vtctldata.v24.WorkflowStatusResponse) {};
+  // RestoreFromBackup stops mysqld for the given tablet and restores a backup.
+  rpc RestoreFromBackup(vitess.vtctldata.v24.RestoreFromBackupRequest) returns (stream vitess.vtctldata.v24.RestoreFromBackupResponse) {};
+  // RetrySchemaMigration marks a given schema migration for retry.
+  rpc RetrySchemaMigration(vitess.vtctldata.v24.RetrySchemaMigrationRequest) returns (vitess.vtctldata.v24.RetrySchemaMigrationResponse) {};
+  // RunHealthCheck runs a healthcheck on the remote tablet.
+  rpc RunHealthCheck(vitess.vtctldata.v24.RunHealthCheckRequest) returns (vitess.vtctldata.v24.RunHealthCheckResponse) {};
+  // SetKeyspaceDurabilityPolicy updates the DurabilityPolicy for a keyspace.
+  rpc SetKeyspaceDurabilityPolicy(vitess.vtctldata.v24.SetKeyspaceDurabilityPolicyRequest) returns (vitess.vtctldata.v24.SetKeyspaceDurabilityPolicyResponse) {};
+  // SetShardIsPrimaryServing adds or removes a shard from serving.
+  //
+  // This is meant as an emergency function. It does not rebuild any serving
+  // graph (i.e. it does not run RebuildKeyspaceGraph).
+  rpc SetShardIsPrimaryServing(vitess.vtctldata.v24.SetShardIsPrimaryServingRequest) returns (vitess.vtctldata.v24.SetShardIsPrimaryServingResponse) {};
+  // SetShardTabletControl updates the TabletControl topo record for a shard and
+  // tablet type.
+  //
+  // This should only be used for an emergency fix, or after a finished
+  // Reshard. See the documentation on SetShardTabletControlRequest for more
+  // information about the different update modes.
+  rpc SetShardTabletControl(vitess.vtctldata.v24.SetShardTabletControlRequest) returns (vitess.vtctldata.v24.SetShardTabletControlResponse) {};
+  // SetVtorcEmergencyReparent enables or disables the use of EmergencyReparentShard in VTOrc recoveries for a given keyspace or keyspace/shard.
+  rpc SetVtorcEmergencyReparent(vitess.vtctldata.v24.SetVtorcEmergencyReparentRequest) returns (vitess.vtctldata.v24.SetVtorcEmergencyReparentResponse) {};
+  // SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
+  rpc SetWritable(vitess.vtctldata.v24.SetWritableRequest) returns (vitess.vtctldata.v24.SetWritableResponse) {};
+  // ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
+  //
+  // It is a low-level function and should generally not be called.
+  rpc ShardReplicationAdd(vitess.vtctldata.v24.ShardReplicationAddRequest) returns (vitess.vtctldata.v24.ShardReplicationAddResponse) {};
+  // ShardReplicationFix walks the replication graph for a shard in a cell and
+  // attempts to fix the first problem encountered, returning information about
+  // the problem fixed, if any.
+  rpc ShardReplicationFix(vitess.vtctldata.v24.ShardReplicationFixRequest) returns (vitess.vtctldata.v24.ShardReplicationFixResponse) {};
+  // ShardReplicationPositions returns the replication position of each tablet
+  // in a shard. This RPC makes a best-effort to return partial results. For
+  // example, if one tablet in the shard graph is unreachable, then
+  // ShardReplicationPositions will return non-error, and include valid results
+  // for the reachable tablets.
+  rpc ShardReplicationPositions(vitess.vtctldata.v24.ShardReplicationPositionsRequest) returns (vitess.vtctldata.v24.ShardReplicationPositionsResponse) {};
+  // ShardReplicationRemove removes an entry from a topodata.ShardReplication
+  // object.
+  //
+  // It is a low-level function and should generally not be called.
+  rpc ShardReplicationRemove(vitess.vtctldata.v24.ShardReplicationRemoveRequest) returns (vitess.vtctldata.v24.ShardReplicationRemoveResponse) {};
+  // SleepTablet blocks the aciton queue on the specified tablet for the
+  // specified duration.
+  //
+  // This is typically used for testing.
+  rpc SleepTablet(vitess.vtctldata.v24.SleepTabletRequest) returns (vitess.vtctldata.v24.SleepTabletResponse) {};
+  // SourceShardAdd adds the SourceShard record with the provided index. This
+  // should be used only as an emergency function.
+  //
+  // It does not call RefreshState for the shard primary.
+  rpc SourceShardAdd(vitess.vtctldata.v24.SourceShardAddRequest) returns (vitess.vtctldata.v24.SourceShardAddResponse) {};
+  // SourceShardDelete deletes the SourceShard record with the provided index.
+  // This should be used only as an emergency cleanup function.
+  //
+  // It does not call RefreshState for the shard primary.
+  rpc SourceShardDelete(vitess.vtctldata.v24.SourceShardDeleteRequest) returns (vitess.vtctldata.v24.SourceShardDeleteResponse) {};
+  // StartReplication starts replication on the specified tablet.
+  rpc StartReplication(vitess.vtctldata.v24.StartReplicationRequest) returns (vitess.vtctldata.v24.StartReplicationResponse) {};
+  // StopReplication stops replication on the specified tablet.
+  rpc StopReplication(vitess.vtctldata.v24.StopReplicationRequest) returns (vitess.vtctldata.v24.StopReplicationResponse) {};
+  // TabletExternallyReparented changes metadata in the topology server to
+  // acknowledge a shard primary change performed by an external tool (e.g.
+  // orchestrator).
+  //
+  // See the Reparenting guide for more information:
+  // https://vitess.io/docs/user-guides/configuration-advanced/reparenting/#external-reparenting.
+  rpc TabletExternallyReparented(vitess.vtctldata.v24.TabletExternallyReparentedRequest) returns (vitess.vtctldata.v24.TabletExternallyReparentedResponse) {};
+  // UpdateCellInfo updates the content of a CellInfo with the provided
+  // parameters. Empty values are ignored. If the cell does not exist, the
+  // CellInfo will be created.
+  rpc UpdateCellInfo(vitess.vtctldata.v24.UpdateCellInfoRequest) returns (vitess.vtctldata.v24.UpdateCellInfoResponse) {};
+  // UpdateCellsAlias updates the content of a CellsAlias with the provided
+  // parameters. Empty values are ignored. If the alias does not exist, the
+  // CellsAlias will be created.
+  rpc UpdateCellsAlias(vitess.vtctldata.v24.UpdateCellsAliasRequest) returns (vitess.vtctldata.v24.UpdateCellsAliasResponse) {};
+  // Validate validates that all nodes from the global replication graph are
+  // reachable, and that all tablets in discoverable cells are consistent.
+  rpc Validate(vitess.vtctldata.v24.ValidateRequest) returns (vitess.vtctldata.v24.ValidateResponse) {};
+  // ValidateKeyspace validates that all nodes reachable from the specified
+  // keyspace are consistent.
+  rpc ValidateKeyspace(vitess.vtctldata.v24.ValidateKeyspaceRequest) returns (vitess.vtctldata.v24.ValidateKeyspaceResponse) {};
+  // ValidatePermissionsKeyspace validates that all the permissions are the same in a keyspace.
+  rpc ValidatePermissionsKeyspace(vitess.vtctldata.v24.ValidatePermissionsKeyspaceRequest) returns (vitess.vtctldata.v24.ValidatePermissionsKeyspaceResponse) {};
+  // ValidateSchemaKeyspace validates that the schema on the primary tablet for shard 0 matches the schema on all of the other tablets in the keyspace.
+  rpc ValidateSchemaKeyspace(vitess.vtctldata.v24.ValidateSchemaKeyspaceRequest) returns (vitess.vtctldata.v24.ValidateSchemaKeyspaceResponse) {};
+  // ValidateShard validates that all nodes reachable from the specified shard
+  // are consistent.
+  rpc ValidateShard(vitess.vtctldata.v24.ValidateShardRequest) returns (vitess.vtctldata.v24.ValidateShardResponse) {};
+  // ValidateVersionKeyspace validates that the version on the primary of shard 0 matches all of the other tablets in the keyspace.
+  rpc ValidateVersionKeyspace(vitess.vtctldata.v24.ValidateVersionKeyspaceRequest) returns (vitess.vtctldata.v24.ValidateVersionKeyspaceResponse) {};
+  // ValidateVersionShard validates that the version on the primary matches all of the replicas.
+  rpc ValidateVersionShard(vitess.vtctldata.v24.ValidateVersionShardRequest) returns (vitess.vtctldata.v24.ValidateVersionShardResponse) {};
+  // ValidateVSchema compares the schema of each primary tablet in "keyspace/shards..." to the vschema and errs if there are differences.
+  rpc ValidateVSchema(vitess.vtctldata.v24.ValidateVSchemaRequest) returns (vitess.vtctldata.v24.ValidateVSchemaResponse) {};
+  rpc VDiffCreate(vitess.vtctldata.v24.VDiffCreateRequest) returns (vitess.vtctldata.v24.VDiffCreateResponse) {};
+  rpc VDiffDelete(vitess.vtctldata.v24.VDiffDeleteRequest) returns (vitess.vtctldata.v24.VDiffDeleteResponse) {};
+  rpc VDiffResume(vitess.vtctldata.v24.VDiffResumeRequest) returns (vitess.vtctldata.v24.VDiffResumeResponse) {};
+  rpc VDiffShow(vitess.vtctldata.v24.VDiffShowRequest) returns (vitess.vtctldata.v24.VDiffShowResponse) {};
+  rpc VDiffStop(vitess.vtctldata.v24.VDiffStopRequest) returns (vitess.vtctldata.v24.VDiffStopResponse) {};
+  // WorkflowDelete deletes a vreplication workflow.
+  rpc WorkflowDelete(vitess.vtctldata.v24.WorkflowDeleteRequest) returns (vitess.vtctldata.v24.WorkflowDeleteResponse) {};
+  rpc WorkflowStatus(vitess.vtctldata.v24.WorkflowStatusRequest) returns (vitess.vtctldata.v24.WorkflowStatusResponse) {};
+  rpc WorkflowSwitchTraffic(vitess.vtctldata.v24.WorkflowSwitchTrafficRequest) returns (vitess.vtctldata.v24.WorkflowSwitchTrafficResponse) {};
+  // WorkflowUpdate updates the configuration of a vreplication workflow
+  // using the provided updated parameters.
+  rpc WorkflowUpdate(vitess.vtctldata.v24.WorkflowUpdateRequest) returns (vitess.vtctldata.v24.WorkflowUpdateResponse) {};
+  // GetMirrorRules returns the VSchema routing rules.
+  rpc GetMirrorRules(vitess.vtctldata.v24.GetMirrorRulesRequest) returns (vitess.vtctldata.v24.GetMirrorRulesResponse) {};
+  rpc WorkflowMirrorTraffic(vitess.vtctldata.v24.WorkflowMirrorTrafficRequest) returns (vitess.vtctldata.v24.WorkflowMirrorTrafficResponse) {};
+}
