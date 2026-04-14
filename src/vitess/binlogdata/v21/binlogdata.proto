@@ -574,3 +574,35 @@ message VStreamResultsResponse {
   string gtid = 3;
   repeated vitess.query.v21.Row rows = 4;
 }
+
+// BinlogDumpGTIDRequest is the payload for COM_BINLOG_DUMP_GTID (GTID-based replication).
+// Used by the vtgateservice BinlogDumpGTID RPC.
+message BinlogDumpGTIDRequest {
+  vitess.vtrpc.v21.CallerID effective_caller_id = 1;
+  vitess.query.v21.VTGateCallerID immediate_caller_id = 2;
+  vitess.query.v21.Target target = 3;
+
+  // binlog_filename and binlog_position are passed through to MySQL COM_BINLOG_DUMP_GTID.
+  // Binlog file/position-based replication is not supported through vtgate routing.
+  string binlog_filename = 4;
+  uint64 binlog_position = 5;
+
+  // gtid_set is the GTID set to start streaming from.
+  string gtid_set = 6;
+
+  // flags is the raw 2-byte flags field from COM_BINLOG_DUMP_GTID, passed through to MySQL.
+  // Known flags:
+  //   0x01 = BINLOG_DUMP_NON_BLOCK
+  //   0x02 = BINLOG_THROUGH_GTID
+  uint32 flags = 7;
+}
+
+// BinlogDumpResponse streams raw MySQL packet data.
+// Used by the vtgateservice BinlogDumpGTID RPC.
+message BinlogDumpResponse {
+  // raw contains raw MySQL binlog packet data as received from the server,
+  // including the MySQL packet header (4 bytes). Packets may be
+  // split across multiple BinlogDumpResponse messages, but MySQL
+  // protocol packet boundaries within the payload are preserved.
+  bytes raw = 1;
+}

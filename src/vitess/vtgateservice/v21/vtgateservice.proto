@@ -24,6 +24,7 @@ option go_package = "github.com/planetscale/vitess-types/gen/vitess/vtgateservic
 
 package vitess.vtgateservice.v21;
 
+import "vitess/binlogdata/v21/binlogdata.proto";
 import "vitess/vtgate/v21/vtgate.proto";
 
 // Vitess is the main service to access a Vitess cluster. It is the API that vtgate
@@ -58,4 +59,8 @@ service Vitess {
   // This has the same effect as if a "rollback" statement was executed,
   // but does not affect the query statistics.
   rpc CloseSession(vitess.vtgate.v21.CloseSessionRequest) returns (vitess.vtgate.v21.CloseSessionResponse) {};
+
+  // BinlogDumpGTID streams raw MySQL binlog packets from the requested keyspace/shard target,
+  // proxying the MySQL COM_BINLOG_DUMP_GTID command through vtgate.
+  rpc BinlogDumpGTID(vitess.binlogdata.v21.BinlogDumpGTIDRequest) returns (stream vitess.binlogdata.v21.BinlogDumpResponse) {};
 }
