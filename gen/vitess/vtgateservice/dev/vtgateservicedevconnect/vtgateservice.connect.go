@@ -70,6 +70,8 @@ const (
 	VitessPrepareProcedure = "/vtgateservice.Vitess/Prepare"
 	// VitessCloseSessionProcedure is the fully-qualified name of the Vitess's CloseSession RPC.
 	VitessCloseSessionProcedure = "/vtgateservice.Vitess/CloseSession"
+	// VitessBinlogDumpGTIDProcedure is the fully-qualified name of the Vitess's BinlogDumpGTID RPC.
+	VitessBinlogDumpGTIDProcedure = "/vtgateservice.Vitess/BinlogDumpGTID"
 )
 
 // VitessClient is a client for the vtgateservice.Vitess service.
@@ -102,6 +104,10 @@ type VitessClient interface {
 	// This has the same effect as if a "rollback" statement was executed,
 	// but does not affect the query statistics.
 	CloseSession(context.Context, *connect.Request[dev.CloseSessionRequest]) (*connect.Response[dev.CloseSessionResponse], error)
+	// BinlogDumpGTID streams raw binlog events from a specific keyspace/shard
+	// using GTID-based replication. This is the vtgate-level gRPC equivalent
+	// of COM_BINLOG_DUMP_GTID.
+	BinlogDumpGTID(context.Context, *connect.Request[dev.BinlogDumpGTIDRequest]) (*connect.ServerStreamForClient[dev.BinlogDumpResponse], error)
 }
 
 // NewVitessClient constructs a client for the vtgateservice.Vitess service. By default,
@@ -163,6 +169,12 @@ func NewVitessClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			connect.WithSchema(vitessMethods.ByName("CloseSession")),
 			connect.WithClientOptions(opts...),
 		),
+		binlogDumpGTID: connect.NewClient[dev.BinlogDumpGTIDRequest, dev.BinlogDumpResponse](
+			httpClient,
+			baseURL+VitessBinlogDumpGTIDProcedure,
+			connect.WithSchema(vitessMethods.ByName("BinlogDumpGTID")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -176,6 +188,7 @@ type vitessClient struct {
 	vStream            *connect.Client[dev.VStreamRequest, dev.VStreamResponse]
 	prepare            *connect.Client[dev.PrepareRequest, dev.PrepareResponse]
 	closeSession       *connect.Client[dev.CloseSessionRequest, dev.CloseSessionResponse]
+	binlogDumpGTID     *connect.Client[dev.BinlogDumpGTIDRequest, dev.BinlogDumpResponse]
 }
 
 // Execute calls vtgateservice.Vitess.Execute.
@@ -218,6 +231,11 @@ func (c *vitessClient) CloseSession(ctx context.Context, req *connect.Request[de
 	return c.closeSession.CallUnary(ctx, req)
 }
 
+// BinlogDumpGTID calls vtgateservice.Vitess.BinlogDumpGTID.
+func (c *vitessClient) BinlogDumpGTID(ctx context.Context, req *connect.Request[dev.BinlogDumpGTIDRequest]) (*connect.ServerStreamForClient[dev.BinlogDumpResponse], error) {
+	return c.binlogDumpGTID.CallServerStream(ctx, req)
+}
+
 // VitessHandler is an implementation of the vtgateservice.Vitess service.
 type VitessHandler interface {
 	// Execute tries to route the query to the right shard.
@@ -248,6 +266,10 @@ type VitessHandler interface {
 	// This has the same effect as if a "rollback" statement was executed,
 	// but does not affect the query statistics.
 	CloseSession(context.Context, *connect.Request[dev.CloseSessionRequest]) (*connect.Response[dev.CloseSessionResponse], error)
+	// BinlogDumpGTID streams raw binlog events from a specific keyspace/shard
+	// using GTID-based replication. This is the vtgate-level gRPC equivalent
+	// of COM_BINLOG_DUMP_GTID.
+	BinlogDumpGTID(context.Context, *connect.Request[dev.BinlogDumpGTIDRequest], *connect.ServerStream[dev.BinlogDumpResponse]) error
 }
 
 // NewVitessHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -305,6 +327,12 @@ func NewVitessHandler(svc VitessHandler, opts ...connect.HandlerOption) (string,
 		connect.WithSchema(vitessMethods.ByName("CloseSession")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vitessBinlogDumpGTIDHandler := connect.NewServerStreamHandler(
+		VitessBinlogDumpGTIDProcedure,
+		svc.BinlogDumpGTID,
+		connect.WithSchema(vitessMethods.ByName("BinlogDumpGTID")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/vtgateservice.Vitess/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VitessExecuteProcedure:
@@ -323,6 +351,8 @@ func NewVitessHandler(svc VitessHandler, opts ...connect.HandlerOption) (string,
 			vitessPrepareHandler.ServeHTTP(w, r)
 		case VitessCloseSessionProcedure:
 			vitessCloseSessionHandler.ServeHTTP(w, r)
+		case VitessBinlogDumpGTIDProcedure:
+			vitessBinlogDumpGTIDHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -362,4 +392,8 @@ func (UnimplementedVitessHandler) Prepare(context.Context, *connect.Request[dev.
 
 func (UnimplementedVitessHandler) CloseSession(context.Context, *connect.Request[dev.CloseSessionRequest]) (*connect.Response[dev.CloseSessionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.CloseSession is not implemented"))
+}
+
+func (UnimplementedVitessHandler) BinlogDumpGTID(context.Context, *connect.Request[dev.BinlogDumpGTIDRequest], *connect.ServerStream[dev.BinlogDumpResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("vtgateservice.Vitess.BinlogDumpGTID is not implemented"))
 }

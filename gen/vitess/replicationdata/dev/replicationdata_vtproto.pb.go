@@ -51,6 +51,54 @@ func (m *Status) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.SemiSyncReplicaStatus {
+		i--
+		if m.SemiSyncReplicaStatus {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xe8
+	}
+	if m.SemiSyncPrimaryStatus {
+		i--
+		if m.SemiSyncPrimaryStatus {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xe0
+	}
+	if m.SemiSyncReplicaEnabled {
+		i--
+		if m.SemiSyncReplicaEnabled {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xd8
+	}
+	if m.SemiSyncPrimaryEnabled {
+		i--
+		if m.SemiSyncPrimaryEnabled {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xd0
+	}
 	if m.BackupRunning {
 		i--
 		if m.BackupRunning {
@@ -730,6 +778,18 @@ func (m *Status) SizeVT() (n int) {
 		n += 3
 	}
 	if m.BackupRunning {
+		n += 3
+	}
+	if m.SemiSyncPrimaryEnabled {
+		n += 3
+	}
+	if m.SemiSyncReplicaEnabled {
+		n += 3
+	}
+	if m.SemiSyncPrimaryStatus {
+		n += 3
+	}
+	if m.SemiSyncReplicaStatus {
 		n += 3
 	}
 	n += len(m.unknownFields)
@@ -1489,6 +1549,86 @@ func (m *Status) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.BackupRunning = bool(v != 0)
+		case 26:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SemiSyncPrimaryEnabled", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.SemiSyncPrimaryEnabled = bool(v != 0)
+		case 27:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SemiSyncReplicaEnabled", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.SemiSyncReplicaEnabled = bool(v != 0)
+		case 28:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SemiSyncPrimaryStatus", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.SemiSyncPrimaryStatus = bool(v != 0)
+		case 29:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SemiSyncReplicaStatus", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.SemiSyncReplicaStatus = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])

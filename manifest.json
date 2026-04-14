@@ -2,6 +2,8 @@
   "versions": {
     "dev": "refs/heads/main",
     "v21": "refs/tags/v21.0.5",
-    "v22": "refs/tags/v22.0.4"
+    "v22": "refs/tags/v22.0.4",
+    "v23": "refs/tags/v23.0.3",
+    "v24": "refs/tags/v24.0.0-rc1"
   }
 }

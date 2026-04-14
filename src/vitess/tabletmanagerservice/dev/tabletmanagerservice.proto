@@ -129,6 +129,9 @@ service TabletManager {
   // StartReplication starts the mysql replication
   rpc StartReplication(vitess.tabletmanagerdata.dev.StartReplicationRequest) returns (vitess.tabletmanagerdata.dev.StartReplicationResponse) {};
 
+  // RestartReplication stops and then starts the mysql replication
+  rpc RestartReplication(vitess.tabletmanagerdata.dev.RestartReplicationRequest) returns (vitess.tabletmanagerdata.dev.RestartReplicationResponse) {};
+
   // StartReplicationUnitAfter starts the mysql replication until and including
   // the provided position
   rpc StartReplicationUntilAfter(vitess.tabletmanagerdata.dev.StartReplicationUntilAfterRequest) returns (vitess.tabletmanagerdata.dev.StartReplicationUntilAfterResponse) {};

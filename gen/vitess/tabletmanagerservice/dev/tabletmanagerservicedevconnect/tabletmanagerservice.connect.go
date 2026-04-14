@@ -153,6 +153,9 @@ const (
 	// TabletManagerStartReplicationProcedure is the fully-qualified name of the TabletManager's
 	// StartReplication RPC.
 	TabletManagerStartReplicationProcedure = "/tabletmanagerservice.TabletManager/StartReplication"
+	// TabletManagerRestartReplicationProcedure is the fully-qualified name of the TabletManager's
+	// RestartReplication RPC.
+	TabletManagerRestartReplicationProcedure = "/tabletmanagerservice.TabletManager/RestartReplication"
 	// TabletManagerStartReplicationUntilAfterProcedure is the fully-qualified name of the
 	// TabletManager's StartReplicationUntilAfter RPC.
 	TabletManagerStartReplicationUntilAfterProcedure = "/tabletmanagerservice.TabletManager/StartReplicationUntilAfter"
@@ -309,6 +312,8 @@ type TabletManagerClient interface {
 	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
 	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	// RestartReplication stops and then starts the mysql replication
+	RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
 	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
@@ -590,6 +595,12 @@ func NewTabletManagerClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(tabletManagerMethods.ByName("StartReplication")),
 			connect.WithClientOptions(opts...),
 		),
+		restartReplication: connect.NewClient[dev.RestartReplicationRequest, dev.RestartReplicationResponse](
+			httpClient,
+			baseURL+TabletManagerRestartReplicationProcedure,
+			connect.WithSchema(tabletManagerMethods.ByName("RestartReplication")),
+			connect.WithClientOptions(opts...),
+		),
 		startReplicationUntilAfter: connect.NewClient[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse](
 			httpClient,
 			baseURL+TabletManagerStartReplicationUntilAfterProcedure,
@@ -834,6 +845,7 @@ type tabletManagerClient struct {
 	stopReplication                 *connect.Client[dev.StopReplicationRequest, dev.StopReplicationResponse]
 	stopReplicationMinimum          *connect.Client[dev.StopReplicationMinimumRequest, dev.StopReplicationMinimumResponse]
 	startReplication                *connect.Client[dev.StartReplicationRequest, dev.StartReplicationResponse]
+	restartReplication              *connect.Client[dev.RestartReplicationRequest, dev.RestartReplicationResponse]
 	startReplicationUntilAfter      *connect.Client[dev.StartReplicationUntilAfterRequest, dev.StartReplicationUntilAfterResponse]
 	getReplicas                     *connect.Client[dev.GetReplicasRequest, dev.GetReplicasResponse]
 	createVReplicationWorkflow      *connect.Client[dev.CreateVReplicationWorkflowRequest, dev.CreateVReplicationWorkflowResponse]
@@ -1047,6 +1059,11 @@ func (c *tabletManagerClient) StopReplicationMinimum(ctx context.Context, req *c
 // StartReplication calls tabletmanagerservice.TabletManager.StartReplication.
 func (c *tabletManagerClient) StartReplication(ctx context.Context, req *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
 	return c.startReplication.CallUnary(ctx, req)
+}
+
+// RestartReplication calls tabletmanagerservice.TabletManager.RestartReplication.
+func (c *tabletManagerClient) RestartReplication(ctx context.Context, req *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error) {
+	return c.restartReplication.CallUnary(ctx, req)
 }
 
 // StartReplicationUntilAfter calls
@@ -1289,6 +1306,8 @@ type TabletManagerHandler interface {
 	StopReplicationMinimum(context.Context, *connect.Request[dev.StopReplicationMinimumRequest]) (*connect.Response[dev.StopReplicationMinimumResponse], error)
 	// StartReplication starts the mysql replication
 	StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error)
+	// RestartReplication stops and then starts the mysql replication
+	RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error)
 	// StartReplicationUnitAfter starts the mysql replication until and including
 	// the provided position
 	StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error)
@@ -1564,6 +1583,12 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 		TabletManagerStartReplicationProcedure,
 		svc.StartReplication,
 		connect.WithSchema(tabletManagerMethods.ByName("StartReplication")),
+		connect.WithHandlerOptions(opts...),
+	)
+	tabletManagerRestartReplicationHandler := connect.NewUnaryHandler(
+		TabletManagerRestartReplicationProcedure,
+		svc.RestartReplication,
+		connect.WithSchema(tabletManagerMethods.ByName("RestartReplication")),
 		connect.WithHandlerOptions(opts...),
 	)
 	tabletManagerStartReplicationUntilAfterHandler := connect.NewUnaryHandler(
@@ -1842,6 +1867,8 @@ func NewTabletManagerHandler(svc TabletManagerHandler, opts ...connect.HandlerOp
 			tabletManagerStopReplicationMinimumHandler.ServeHTTP(w, r)
 		case TabletManagerStartReplicationProcedure:
 			tabletManagerStartReplicationHandler.ServeHTTP(w, r)
+		case TabletManagerRestartReplicationProcedure:
+			tabletManagerRestartReplicationHandler.ServeHTTP(w, r)
 		case TabletManagerStartReplicationUntilAfterProcedure:
 			tabletManagerStartReplicationUntilAfterHandler.ServeHTTP(w, r)
 		case TabletManagerGetReplicasProcedure:
@@ -2057,6 +2084,10 @@ func (UnimplementedTabletManagerHandler) StopReplicationMinimum(context.Context,
 
 func (UnimplementedTabletManagerHandler) StartReplication(context.Context, *connect.Request[dev.StartReplicationRequest]) (*connect.Response[dev.StartReplicationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.StartReplication is not implemented"))
+}
+
+func (UnimplementedTabletManagerHandler) RestartReplication(context.Context, *connect.Request[dev.RestartReplicationRequest]) (*connect.Response[dev.RestartReplicationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tabletmanagerservice.TabletManager.RestartReplication is not implemented"))
 }
 
 func (UnimplementedTabletManagerHandler) StartReplicationUntilAfter(context.Context, *connect.Request[dev.StartReplicationUntilAfterRequest]) (*connect.Response[dev.StartReplicationUntilAfterResponse], error) {

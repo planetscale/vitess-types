@@ -115,6 +115,8 @@ const (
 	QueryVStreamResultsProcedure = "/queryservice.Query/VStreamResults"
 	// QueryGetSchemaProcedure is the fully-qualified name of the Query's GetSchema RPC.
 	QueryGetSchemaProcedure = "/queryservice.Query/GetSchema"
+	// QueryBinlogDumpGTIDProcedure is the fully-qualified name of the Query's BinlogDumpGTID RPC.
+	QueryBinlogDumpGTIDProcedure = "/queryservice.Query/BinlogDumpGTID"
 )
 
 // QueryClient is a client for the queryservice.Query service.
@@ -182,6 +184,8 @@ type QueryClient interface {
 	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest]) (*connect.ServerStreamForClient[dev1.VStreamResultsResponse], error)
 	// GetSchema returns the schema information.
 	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest]) (*connect.ServerStreamForClient[dev.GetSchemaResponse], error)
+	// BinlogDumpGTID streams raw binlog events from MySQL using COM_BINLOG_DUMP_GTID (GTID-based).
+	BinlogDumpGTID(context.Context, *connect.Request[dev1.BinlogDumpGTIDRequest]) (*connect.ServerStreamForClient[dev1.BinlogDumpResponse], error)
 }
 
 // NewQueryClient constructs a client for the queryservice.Query service. By default, it
@@ -369,6 +373,12 @@ func NewQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...conne
 			connect.WithSchema(queryMethods.ByName("GetSchema")),
 			connect.WithClientOptions(opts...),
 		),
+		binlogDumpGTID: connect.NewClient[dev1.BinlogDumpGTIDRequest, dev1.BinlogDumpResponse](
+			httpClient,
+			baseURL+QueryBinlogDumpGTIDProcedure,
+			connect.WithSchema(queryMethods.ByName("BinlogDumpGTID")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -403,6 +413,7 @@ type queryClient struct {
 	vStreamTables             *connect.Client[dev1.VStreamTablesRequest, dev1.VStreamTablesResponse]
 	vStreamResults            *connect.Client[dev1.VStreamResultsRequest, dev1.VStreamResultsResponse]
 	getSchema                 *connect.Client[dev.GetSchemaRequest, dev.GetSchemaResponse]
+	binlogDumpGTID            *connect.Client[dev1.BinlogDumpGTIDRequest, dev1.BinlogDumpResponse]
 }
 
 // Execute calls queryservice.Query.Execute.
@@ -550,6 +561,11 @@ func (c *queryClient) GetSchema(ctx context.Context, req *connect.Request[dev.Ge
 	return c.getSchema.CallServerStream(ctx, req)
 }
 
+// BinlogDumpGTID calls queryservice.Query.BinlogDumpGTID.
+func (c *queryClient) BinlogDumpGTID(ctx context.Context, req *connect.Request[dev1.BinlogDumpGTIDRequest]) (*connect.ServerStreamForClient[dev1.BinlogDumpResponse], error) {
+	return c.binlogDumpGTID.CallServerStream(ctx, req)
+}
+
 // QueryHandler is an implementation of the queryservice.Query service.
 type QueryHandler interface {
 	// Execute executes the specified SQL query (might be in a
@@ -615,6 +631,8 @@ type QueryHandler interface {
 	VStreamResults(context.Context, *connect.Request[dev1.VStreamResultsRequest], *connect.ServerStream[dev1.VStreamResultsResponse]) error
 	// GetSchema returns the schema information.
 	GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error
+	// BinlogDumpGTID streams raw binlog events from MySQL using COM_BINLOG_DUMP_GTID (GTID-based).
+	BinlogDumpGTID(context.Context, *connect.Request[dev1.BinlogDumpGTIDRequest], *connect.ServerStream[dev1.BinlogDumpResponse]) error
 }
 
 // NewQueryHandler builds an HTTP handler from the service implementation. It returns the path on
@@ -798,6 +816,12 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 		connect.WithSchema(queryMethods.ByName("GetSchema")),
 		connect.WithHandlerOptions(opts...),
 	)
+	queryBinlogDumpGTIDHandler := connect.NewServerStreamHandler(
+		QueryBinlogDumpGTIDProcedure,
+		svc.BinlogDumpGTID,
+		connect.WithSchema(queryMethods.ByName("BinlogDumpGTID")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/queryservice.Query/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case QueryExecuteProcedure:
@@ -858,6 +882,8 @@ func NewQueryHandler(svc QueryHandler, opts ...connect.HandlerOption) (string, h
 			queryVStreamResultsHandler.ServeHTTP(w, r)
 		case QueryGetSchemaProcedure:
 			queryGetSchemaHandler.ServeHTTP(w, r)
+		case QueryBinlogDumpGTIDProcedure:
+			queryBinlogDumpGTIDHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -981,4 +1007,8 @@ func (UnimplementedQueryHandler) VStreamResults(context.Context, *connect.Reques
 
 func (UnimplementedQueryHandler) GetSchema(context.Context, *connect.Request[dev.GetSchemaRequest], *connect.ServerStream[dev.GetSchemaResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.GetSchema is not implemented"))
+}
+
+func (UnimplementedQueryHandler) BinlogDumpGTID(context.Context, *connect.Request[dev1.BinlogDumpGTIDRequest], *connect.ServerStream[dev1.BinlogDumpResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("queryservice.Query.BinlogDumpGTID is not implemented"))
 }

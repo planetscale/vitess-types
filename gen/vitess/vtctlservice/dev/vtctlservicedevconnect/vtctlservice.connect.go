@@ -290,6 +290,9 @@ const (
 	// VtctldSetShardTabletControlProcedure is the fully-qualified name of the Vtctld's
 	// SetShardTabletControl RPC.
 	VtctldSetShardTabletControlProcedure = "/vtctlservice.Vtctld/SetShardTabletControl"
+	// VtctldSetVtorcEmergencyReparentProcedure is the fully-qualified name of the Vtctld's
+	// SetVtorcEmergencyReparent RPC.
+	VtctldSetVtorcEmergencyReparentProcedure = "/vtctlservice.Vtctld/SetVtorcEmergencyReparent"
 	// VtctldSetWritableProcedure is the fully-qualified name of the Vtctld's SetWritable RPC.
 	VtctldSetWritableProcedure = "/vtctlservice.Vtctld/SetWritable"
 	// VtctldShardReplicationAddProcedure is the fully-qualified name of the Vtctld's
@@ -698,6 +701,8 @@ type VtctldClient interface {
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
 	SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error)
+	// SetVtorcEmergencyReparent enables or disables the use of EmergencyReparentShard in VTOrc recoveries for a given keyspace or keyspace/shard.
+	SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
 	SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
@@ -1376,6 +1381,12 @@ func NewVtctldClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 			connect.WithSchema(vtctldMethods.ByName("SetShardTabletControl")),
 			connect.WithClientOptions(opts...),
 		),
+		setVtorcEmergencyReparent: connect.NewClient[dev.SetVtorcEmergencyReparentRequest, dev.SetVtorcEmergencyReparentResponse](
+			httpClient,
+			baseURL+VtctldSetVtorcEmergencyReparentProcedure,
+			connect.WithSchema(vtctldMethods.ByName("SetVtorcEmergencyReparent")),
+			connect.WithClientOptions(opts...),
+		),
 		setWritable: connect.NewClient[dev.SetWritableRequest, dev.SetWritableResponse](
 			httpClient,
 			baseURL+VtctldSetWritableProcedure,
@@ -1669,6 +1680,7 @@ type vtctldClient struct {
 	setKeyspaceDurabilityPolicy *connect.Client[dev.SetKeyspaceDurabilityPolicyRequest, dev.SetKeyspaceDurabilityPolicyResponse]
 	setShardIsPrimaryServing    *connect.Client[dev.SetShardIsPrimaryServingRequest, dev.SetShardIsPrimaryServingResponse]
 	setShardTabletControl       *connect.Client[dev.SetShardTabletControlRequest, dev.SetShardTabletControlResponse]
+	setVtorcEmergencyReparent   *connect.Client[dev.SetVtorcEmergencyReparentRequest, dev.SetVtorcEmergencyReparentResponse]
 	setWritable                 *connect.Client[dev.SetWritableRequest, dev.SetWritableResponse]
 	shardReplicationAdd         *connect.Client[dev.ShardReplicationAddRequest, dev.ShardReplicationAddResponse]
 	shardReplicationFix         *connect.Client[dev.ShardReplicationFixRequest, dev.ShardReplicationFixResponse]
@@ -2183,6 +2195,11 @@ func (c *vtctldClient) SetShardTabletControl(ctx context.Context, req *connect.R
 	return c.setShardTabletControl.CallUnary(ctx, req)
 }
 
+// SetVtorcEmergencyReparent calls vtctlservice.Vtctld.SetVtorcEmergencyReparent.
+func (c *vtctldClient) SetVtorcEmergencyReparent(ctx context.Context, req *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error) {
+	return c.setVtorcEmergencyReparent.CallUnary(ctx, req)
+}
+
 // SetWritable calls vtctlservice.Vtctld.SetWritable.
 func (c *vtctldClient) SetWritable(ctx context.Context, req *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error) {
 	return c.setWritable.CallUnary(ctx, req)
@@ -2603,6 +2620,8 @@ type VtctldHandler interface {
 	// Reshard. See the documentation on SetShardTabletControlRequest for more
 	// information about the different update modes.
 	SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error)
+	// SetVtorcEmergencyReparent enables or disables the use of EmergencyReparentShard in VTOrc recoveries for a given keyspace or keyspace/shard.
+	SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error)
 	// SetWritable sets a tablet as read-write (writable=true) or read-only (writable=false).
 	SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error)
 	// ShardReplicationAdd adds an entry to a topodata.ShardReplication object.
@@ -3277,6 +3296,12 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 		connect.WithSchema(vtctldMethods.ByName("SetShardTabletControl")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vtctldSetVtorcEmergencyReparentHandler := connect.NewUnaryHandler(
+		VtctldSetVtorcEmergencyReparentProcedure,
+		svc.SetVtorcEmergencyReparent,
+		connect.WithSchema(vtctldMethods.ByName("SetVtorcEmergencyReparent")),
+		connect.WithHandlerOptions(opts...),
+	)
 	vtctldSetWritableHandler := connect.NewUnaryHandler(
 		VtctldSetWritableProcedure,
 		svc.SetWritable,
@@ -3663,6 +3688,8 @@ func NewVtctldHandler(svc VtctldHandler, opts ...connect.HandlerOption) (string,
 			vtctldSetShardIsPrimaryServingHandler.ServeHTTP(w, r)
 		case VtctldSetShardTabletControlProcedure:
 			vtctldSetShardTabletControlHandler.ServeHTTP(w, r)
+		case VtctldSetVtorcEmergencyReparentProcedure:
+			vtctldSetVtorcEmergencyReparentHandler.ServeHTTP(w, r)
 		case VtctldSetWritableProcedure:
 			vtctldSetWritableHandler.ServeHTTP(w, r)
 		case VtctldShardReplicationAddProcedure:
@@ -4118,6 +4145,10 @@ func (UnimplementedVtctldHandler) SetShardIsPrimaryServing(context.Context, *con
 
 func (UnimplementedVtctldHandler) SetShardTabletControl(context.Context, *connect.Request[dev.SetShardTabletControlRequest]) (*connect.Response[dev.SetShardTabletControlResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetShardTabletControl is not implemented"))
+}
+
+func (UnimplementedVtctldHandler) SetVtorcEmergencyReparent(context.Context, *connect.Request[dev.SetVtorcEmergencyReparentRequest]) (*connect.Response[dev.SetVtorcEmergencyReparentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("vtctlservice.Vtctld.SetVtorcEmergencyReparent is not implemented"))
 }
 
 func (UnimplementedVtctldHandler) SetWritable(context.Context, *connect.Request[dev.SetWritableRequest]) (*connect.Response[dev.SetWritableResponse], error) {
